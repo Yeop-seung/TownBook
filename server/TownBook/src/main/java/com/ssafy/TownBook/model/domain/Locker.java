@@ -1,5 +1,6 @@
 package com.ssafy.TownBook.model.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -36,7 +37,7 @@ public class Locker {
     private Integer lockerBookCnt;
 
     @OneToMany(mappedBy = "locker")
-    private List<DetailLocker> detailLocker;
+    private List<DetailLocker> detailLocker = new ArrayList<>();
 
     @Builder
     public Locker(Long lockerNo, String lockerRegion, Integer lockerWeight, Integer lockerBookCnt,

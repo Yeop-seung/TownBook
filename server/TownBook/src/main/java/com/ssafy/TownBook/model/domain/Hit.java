@@ -1,9 +1,6 @@
 package com.ssafy.TownBook.model.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
@@ -23,13 +20,13 @@ public class Hit {
     private Long hitNo;
 
     @NotNull
-    @Column(name = "fk-hit-board")
     @ManyToOne
+    @JoinColumn(name = "`fk-hit-board`")
     private Board board;
 
     @NotNull
-    @Column(name = "fk-account-hit")
     @ManyToOne
+    @JoinColumn(name = "`fk-account-hit`")
     private Account account;
 
     @Builder

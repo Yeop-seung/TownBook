@@ -1,10 +1,6 @@
 package com.ssafy.TownBook.model.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
@@ -21,12 +17,14 @@ public class DetailLocker {
 
     @Id
     @Column(name = "detail_locker_no")
-    @OneToOne(mappedBy = "detaillocker")
     private Long detailLockerNo;
 
+    @OneToOne(mappedBy = "detailLocker")
+    private Book book;
+
     @NotNull
-    @Column(name = "fk-locker-detail_locker")
     @ManyToOne
+    @JoinColumn(name = "`fk-locker-detail_locker`")
     private Locker locker;
 
     @Builder

@@ -1,11 +1,7 @@
 package com.ssafy.TownBook.model.domain;
 
 import java.time.LocalDateTime;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
@@ -31,18 +27,18 @@ public class Comment {
     @Column(name = "comment_content")
     private String commentContent;
 
-    @Column(name = "fk-comment-comment")
-    @OneToOne(mappedBy = "comment")
+    @OneToOne
+    @JoinColumn(name = "`fk-comment-comment`")
     private Comment comment;
 
     @NotNull
-    @Column(name = "fk-board-comment")
     @ManyToOne
+    @JoinColumn(name = "`fk-board-comment`")
     private Board board;
 
     @NotNull
-    @Column(name = "fk-account-comment")
     @ManyToOne
+    @JoinColumn(name = "`fk-account-comment`")
     private Account account;
 
     @Builder
