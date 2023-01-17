@@ -5,67 +5,99 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-
+import lombok.ToString;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@ToString
 @Entity
 public class Account {
 
     @Id
-    Long no;
+    @Column(name = "account_no")
+    private Long accountNo;
 
     @NotNull
-    @Column
-    String id;
+    @Column(name = "account_id")
+    private String accountId;
 
     @NotNull
-    String pw;
+    @Column(name = "account_pw")
+    private String accountPw;
 
     @NotNull
-    String name;
+    @Column(name = "account_name")
+    private String accountName;
 
     @NotNull
-    String address;
+    @Column(name = "account_address")
+    private String accountAddress;
 
     @NotNull
-    @Column
-    String phone_number;
+    @Column(name = "account_phone_number")
+    private String accountPhoneNumber;
 
     @NotNull
-    String email;
-
-    @Column(columnDefinition = "integer default 0")
-    Integer point;
-
-    @Column(columnDefinition = "integer default 0")
-    Integer book_cnt;
+    @Column(name = "account_email")
+    private String accountEmail;
 
     @NotNull
-    Integer type;
+    @Column(name = "account_point", columnDefinition = "integer default 0")
+    private Integer accountPoint;
 
     @NotNull
-    String nickname;
+    @Column(name = "account_book_cnt", columnDefinition = "integer default 0")
+    private Integer accountBookCnt;
 
     @NotNull
-    String birthday;
+    @Column(name = "account_nickname")
+    private String accountNickname;
 
-//    @OneToOne
-//    Book book;
+    @NotNull
+    @Column(name = "account_birthday")
+    private String accountBirthday;
 
-//    @OneToMany(mappedBy = "account")
-//    List<Hit> hit = new ArrayList<>();
+    @OneToOne(mappedBy = "account")
+    private Book book;
 
     @OneToMany(mappedBy = "account")
-    List<Board> board = new ArrayList<>();
+    private List<Hit> hit = new ArrayList<>();
 
-//    @OneToMany(mappedBy = "account")
-//    List<Comment> comment = new ArrayList<>();
+    @OneToMany(mappedBy = "account")
+    private List<Board> board = new ArrayList<>();
 
+    @OneToMany(mappedBy = "account")
+    private List<Comment> comment = new ArrayList<>();
+
+    @Builder
+    public Account(Long accountNo, String accountId, String accountPw, String accountName,
+            String accountAddress, String accountPhoneNumber, String accountEmail,
+            Integer accountPoint,
+            Integer accountBookCnt, String accountNickname, String accountBirthday, Book book,
+            List<Hit> hit, List<Board> board, List<Comment> comment) {
+        this.accountNo = accountNo;
+        this.accountId = accountId;
+        this.accountPw = accountPw;
+        this.accountName = accountName;
+        this.accountAddress = accountAddress;
+        this.accountPhoneNumber = accountPhoneNumber;
+        this.accountEmail = accountEmail;
+        this.accountPoint = accountPoint;
+        this.accountBookCnt = accountBookCnt;
+        this.accountNickname = accountNickname;
+        this.accountBirthday = accountBirthday;
+        this.book = book;
+        this.hit = hit;
+        this.board = board;
+        this.comment = comment;
+    }
 }
