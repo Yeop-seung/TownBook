@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -63,6 +64,10 @@ public class Account {
     private String accountNickname;
 
     @NotNull
+    @Column(name = "account_type", columnDefinition = "Boolean default false")
+    private Boolean accountType;
+
+    @NotNull
     @Column(name = "account_birthday")
     private String accountBirthday;
 
@@ -79,11 +84,7 @@ public class Account {
     private List<Comment> comment = new ArrayList<>();
 
     @Builder
-    public Account(Long accountNo, String accountId, String accountPw, String accountName,
-            String accountAddress, String accountPhoneNumber, String accountEmail,
-            Integer accountPoint,
-            Integer accountBookCnt, String accountNickname, String accountBirthday, Book book,
-            List<Hit> hit, List<Board> board, List<Comment> comment) {
+    public Account(Long accountNo, String accountId, String accountPw, String accountName, String accountAddress, String accountPhoneNumber, String accountEmail, Integer accountPoint, Integer accountBookCnt, String accountNickname, Boolean accountType, String accountBirthday, Book book, List<Hit> hit, List<Board> board, List<Comment> comment) {
         this.accountNo = accountNo;
         this.accountId = accountId;
         this.accountPw = accountPw;
@@ -94,6 +95,7 @@ public class Account {
         this.accountPoint = accountPoint;
         this.accountBookCnt = accountBookCnt;
         this.accountNickname = accountNickname;
+        this.accountType = accountType;
         this.accountBirthday = accountBirthday;
         this.book = book;
         this.hit = hit;
