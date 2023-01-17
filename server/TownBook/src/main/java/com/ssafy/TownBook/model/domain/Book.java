@@ -4,11 +4,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -62,7 +60,7 @@ public class Book {
     @Column(name = "book_title_url")
     private String bookTitleURL;
 
-    @Column(name = "book_photo", columnDefinition = "String default null.png")
+    @Column(name = "book_photo")
     private String bookPhoto;
 
     @Column(name = "book_review")
@@ -78,21 +76,20 @@ public class Book {
     @Column(name = "book_receive_date")
     private LocalDate bookReceiveDate;
 
-    @Column(name = "fk-detail_locker-book-1")
-    private List<Locker> locker = new ArrayList<>();
+    @OneToOne
+    @JoinColumn(name = "`fk-detail_locker-book-1`")
+    private Locker locker;
 
-    @Column(name = "fk-detail_locker-book-2")
-    private List<DetailLocker> detailLocker = new ArrayList<>();
+    @OneToOne
+    @JoinColumn(name = "`fk-detail_locker-book-2`")
+    private DetailLocker detailLocker;
 
-    @Column(name = "fk-account-book")
-    private List<Account> account = new ArrayList<>();
+    @OneToOne
+    @JoinColumn(name = "`fk-account-book`")
+    private Account account;
 
     @Builder
-    public Book(Long bookNo, String bookIsbn, Integer bookCnt, String bookSubject, String bookTitle,
-            Integer bookVol, String bookAuthor, String bookPublisher, LocalDate bookPublishPredate,
-            String bookIntroductionURL, String bookTitleURL, String bookPhoto, String bookReview,
-            String bookReceiverId, LocalDateTime donateDate, LocalDate bookReceiveDate,
-            List<Locker> locker, List<DetailLocker> detailLocker, List<Account> account) {
+    public Book(Long bookNo, String bookIsbn, Integer bookCnt, String bookSubject, String bookTitle, Integer bookVol, String bookAuthor, String bookPublisher, LocalDate bookPublishPredate, String bookIntroductionURL, String bookTitleURL, String bookPhoto, String bookReview, String bookReceiverId, LocalDateTime donateDate, LocalDate bookReceiveDate, Account account) {
         this.bookNo = bookNo;
         this.bookIsbn = bookIsbn;
         this.bookCnt = bookCnt;
@@ -109,8 +106,6 @@ public class Book {
         this.bookReceiverId = bookReceiverId;
         this.donateDate = donateDate;
         this.bookReceiveDate = bookReceiveDate;
-        this.locker = locker;
-        this.detailLocker = detailLocker;
         this.account = account;
     }
 }
