@@ -34,7 +34,7 @@ public class AccountController {
         return ResponseEntity.ok(accountSerivce.getMyUserWithAuthorities());
     }
 
-    @GetMapping("/user/{username}")
+    @GetMapping("/user/{accountId}")
     @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<AccountDto> getUserInfo(@PathVariable String accountId) {
         return ResponseEntity.ok(accountSerivce.getUserWithAuthorities(accountId));

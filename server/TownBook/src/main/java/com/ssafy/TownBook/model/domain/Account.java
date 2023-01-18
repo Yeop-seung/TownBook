@@ -71,7 +71,7 @@ public class Account {
     private String accountNickname;
 
     @Column(name = "account_type")
-    @ColumnDefault("0")
+    @ColumnDefault("false")
     private Boolean accountType;
 
     @Column(name = "account_birthday")

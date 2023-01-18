@@ -64,6 +64,7 @@ public class Book {
     private String bookPhoto;
 
     @Column(name = "book_review")
+    @Lob
     private String bookReview;
 
     @Column(name = "book_receiver_id")

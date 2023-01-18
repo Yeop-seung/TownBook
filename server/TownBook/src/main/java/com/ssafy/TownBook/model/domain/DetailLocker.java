@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.ColumnDefault;
 
 @Getter
 @Setter
@@ -26,6 +27,10 @@ public class DetailLocker {
     @ManyToOne
     @JoinColumn(name = "`fk-locker-detail_locker`")
     private Locker locker;
+
+    @Column(name = "detail_locker_isEmpty")
+    @ColumnDefault("false")
+    private Boolean detailLockerIsEmpty;
 
     @Builder
     public DetailLocker(Long detailLockerNo, Locker locker) {
