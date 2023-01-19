@@ -1,13 +1,7 @@
 package com.ssafy.TownBook.model.dto;
 
 
-import com.ssafy.TownBook.model.domain.Account;
-import com.ssafy.TownBook.model.domain.Board;
-import com.ssafy.TownBook.model.domain.Book;
-import com.ssafy.TownBook.model.domain.Comment;
-import com.ssafy.TownBook.model.domain.Hit;
-import java.util.ArrayList;
-import java.util.List;
+import com.ssafy.TownBook.model.Entity.Account;
 import java.util.Set;
 import java.util.stream.Collectors;
 import javax.validation.constraints.NotNull;

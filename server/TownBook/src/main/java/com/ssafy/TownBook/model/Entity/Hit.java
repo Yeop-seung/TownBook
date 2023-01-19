@@ -1,4 +1,4 @@
-package com.ssafy.TownBook.model.domain;
+package com.ssafy.TownBook.model.Entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

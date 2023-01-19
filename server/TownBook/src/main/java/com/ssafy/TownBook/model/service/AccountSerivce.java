@@ -2,8 +2,8 @@ package com.ssafy.TownBook.model.service;
 
 import com.ssafy.TownBook.exception.DuplicateMemberException;
 import com.ssafy.TownBook.exception.NotFoundMemberException;
-import com.ssafy.TownBook.model.domain.Account;
-import com.ssafy.TownBook.model.domain.Authority;
+import com.ssafy.TownBook.model.Entity.Account;
+import com.ssafy.TownBook.model.Entity.Authority;
 import com.ssafy.TownBook.model.dto.AccountDto;
 import com.ssafy.TownBook.model.repository.AccountRepository;
 import com.ssafy.TownBook.util.SecurityUtil;

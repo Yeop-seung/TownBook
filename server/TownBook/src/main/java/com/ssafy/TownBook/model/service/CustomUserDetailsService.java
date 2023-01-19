@@ -1,6 +1,6 @@
 package com.ssafy.TownBook.model.service;
 
-import com.ssafy.TownBook.model.domain.Account;
+import com.ssafy.TownBook.model.Entity.Account;
 import com.ssafy.TownBook.model.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;

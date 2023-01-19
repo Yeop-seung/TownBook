@@ -1,4 +1,4 @@
-package com.ssafy.TownBook.model.domain;
+package com.ssafy.TownBook.model.Entity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +12,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.ColumnDefault;
 
 @Getter
 @Setter
@@ -29,22 +30,18 @@ public class Locker {
     private String lockerRegion;
 
     @NotNull
-    @Column(name = "locker_weight", columnDefinition = "Integer default 0")
-    private Integer lockerWeight;
-
-    @NotNull
-    @Column(name = "locker_book_cnt", columnDefinition = "Integer default 0")
+    @Column(name = "locker_book_cnt")
+    @ColumnDefault("0")
     private Integer lockerBookCnt;
 
     @OneToMany(mappedBy = "locker")
     private List<DetailLocker> detailLocker = new ArrayList<>();
 
     @Builder
-    public Locker(Long lockerNo, String lockerRegion, Integer lockerWeight, Integer lockerBookCnt,
+    public Locker(Long lockerNo, String lockerRegion, Integer lockerBookCnt,
             List<DetailLocker> detailLocker) {
         this.lockerNo = lockerNo;
         this.lockerRegion = lockerRegion;
-        this.lockerWeight = lockerWeight;
         this.lockerBookCnt = lockerBookCnt;
         this.detailLocker = detailLocker;
     }

@@ -1,8 +1,8 @@
 package com.ssafy.TownBook.model.service;
 
-import com.ssafy.TownBook.model.domain.Book;
-import com.ssafy.TownBook.model.domain.DetailLocker;
-import com.ssafy.TownBook.model.domain.Locker;
+import com.ssafy.TownBook.model.Entity.Book;
+import com.ssafy.TownBook.model.Entity.DetailLocker;
+import com.ssafy.TownBook.model.Entity.Locker;
 import com.ssafy.TownBook.model.repository.BookRepository;
 import com.ssafy.TownBook.model.repository.DetailLockerRepository;
 import com.ssafy.TownBook.model.repository.LockerRepository;

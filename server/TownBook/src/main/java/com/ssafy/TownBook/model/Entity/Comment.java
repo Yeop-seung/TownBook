@@ -1,4 +1,4 @@
-package com.ssafy.TownBook.model.domain;
+package com.ssafy.TownBook.model.Entity;
 
 import java.time.LocalDateTime;
 import javax.persistence.*;
@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.ColumnDefault;
 
 @Getter
 @Setter
@@ -27,6 +28,10 @@ public class Comment {
     @Column(name = "comment_content")
     private String commentContent;
 
+    @Column(name = "comment_state")
+    @ColumnDefault("true")
+    private Boolean commentState;
+
     @OneToOne
     @JoinColumn(name = "`fk-comment-comment`")
     private Comment comment;
@@ -43,11 +48,11 @@ public class Comment {
 
     @Builder
     public Comment(Long commentNo, LocalDateTime commentDate, String commentContent,
-            Comment comment,
-            Board board, Account account) {
+            Boolean commentState, Comment comment, Board board, Account account) {
         this.commentNo = commentNo;
         this.commentDate = commentDate;
         this.commentContent = commentContent;
+        this.commentState = commentState;
         this.comment = comment;
         this.board = board;
         this.account = account;

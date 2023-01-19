@@ -1,4 +1,4 @@
-package com.ssafy.TownBook.model.domain;
+package com.ssafy.TownBook.model.Entity;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -12,6 +12,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.ColumnDefault;
 
 @Getter
 @Setter
@@ -29,8 +30,9 @@ public class Book {
     private String bookIsbn;
 
     @NotNull
-    @Column(name = "book_cnt", columnDefinition = "Integer default 1")
-    private Integer bookCnt;
+    @Column(name = "book_exists")
+    @ColumnDefault("true")
+    private Boolean bookExists;
 
     @NotNull
     @Column(name = "book_subject")
@@ -60,8 +62,9 @@ public class Book {
     @Column(name = "book_title_url")
     private String bookTitleURL;
 
-    @Column(name = "book_photo")
-    private String bookPhoto;
+    @Column(name = "book_state")
+    @ColumnDefault("true")
+    private Boolean bookState;
 
     @Column(name = "book_review")
     @Lob
@@ -77,6 +80,7 @@ public class Book {
     @Column(name = "book_receive_date")
     private LocalDate bookReceiveDate;
 
+
     @OneToOne
     @JoinColumn(name = "`fk-detail_locker-book-1`")
     private Locker locker;
@@ -89,11 +93,19 @@ public class Book {
     @JoinColumn(name = "`fk-account-book`")
     private Account account;
 
+    @OneToMany(mappedBy = "book")
+    private List<WishList> wishLists = new ArrayList<>();
     @Builder
-    public Book(Long bookNo, String bookIsbn, Integer bookCnt, String bookSubject, String bookTitle, Integer bookVol, String bookAuthor, String bookPublisher, LocalDate bookPublishPredate, String bookIntroductionURL, String bookTitleURL, String bookPhoto, String bookReview, String bookReceiverId, LocalDateTime donateDate, LocalDate bookReceiveDate, Account account) {
+    public Book(Long bookNo, String bookIsbn, Boolean bookExists, String bookSubject,
+            String bookTitle,
+            Integer bookVol, String bookAuthor, String bookPublisher, LocalDate bookPublishPredate,
+            String bookIntroductionURL, String bookTitleURL, Boolean bookState, String bookReview,
+            String bookReceiverId, LocalDateTime donateDate, LocalDate bookReceiveDate,
+            Locker locker,
+            DetailLocker detailLocker, Account account, List<WishList> wishLists) {
         this.bookNo = bookNo;
         this.bookIsbn = bookIsbn;
-        this.bookCnt = bookCnt;
+        this.bookExists = bookExists;
         this.bookSubject = bookSubject;
         this.bookTitle = bookTitle;
         this.bookVol = bookVol;
@@ -102,11 +114,14 @@ public class Book {
         this.bookPublishPredate = bookPublishPredate;
         this.bookIntroductionURL = bookIntroductionURL;
         this.bookTitleURL = bookTitleURL;
-        this.bookPhoto = bookPhoto;
+        this.bookState = bookState;
         this.bookReview = bookReview;
         this.bookReceiverId = bookReceiverId;
         this.donateDate = donateDate;
         this.bookReceiveDate = bookReceiveDate;
+        this.locker = locker;
+        this.detailLocker = detailLocker;
         this.account = account;
+        this.wishLists = wishLists;
     }
 }

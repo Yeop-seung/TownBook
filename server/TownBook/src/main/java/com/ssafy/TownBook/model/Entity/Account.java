@@ -1,8 +1,7 @@
-package com.ssafy.TownBook.model.domain;
+package com.ssafy.TownBook.model.Entity;
 
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import javax.persistence.Column;
@@ -31,7 +30,6 @@ import org.hibernate.annotations.DynamicInsert;
 @NoArgsConstructor
 @ToString
 @Entity
-@Builder
 @Table(name = "`account`")
 public class Account {
 
@@ -59,6 +57,8 @@ public class Account {
     @Column(name = "account_email")
     private String accountEmail;
 
+    @Column(name = "account_gender")
+    private Integer accountGender;
     @Column(name = "account_point")
     @ColumnDefault("0")
     private Integer accountPoint;
@@ -70,9 +70,9 @@ public class Account {
     @Column(name = "account_nickname")
     private String accountNickname;
 
-    @Column(name = "account_type")
-    @ColumnDefault("false")
-    private Boolean accountType;
+    @Column(name = "account_state")
+    @ColumnDefault("true")
+    private Boolean accountState;
 
     @Column(name = "account_birthday")
     private String accountBirthday;
@@ -91,6 +91,11 @@ public class Account {
     @Column(name = "activated")
     private boolean activated;
 
+    @OneToMany(mappedBy = "account")
+    private List<WishList> wishLis = new ArrayList<>();
+
+    @OneToMany(mappedBy = "account")
+    private List<File> files = new ArrayList<>();
     @ManyToMany
     @JoinTable(
             name = "account_authority",
@@ -102,10 +107,11 @@ public class Account {
     @Builder
     public Account(Long accountNo, String accountId, String accountPw, String accountName,
             String accountAddress, String accountPhoneNumber, String accountEmail,
-            Integer accountPoint,
-            Integer accountBookCnt, String accountNickname, Boolean accountType,
-            String accountBirthday,
-            Book book, List<Hit> hit, List<Board> board, List<Comment> comment, boolean activated,
+            Integer accountGender, Integer accountPoint, Integer accountBookCnt,
+            String accountNickname,
+            Boolean accountState, String accountBirthday, Book book, List<Hit> hits,
+            List<Board> boards,
+            List<Comment> comments, boolean activated, List<WishList> wishLis, List<File> files,
             Set<Authority> authorities) {
         this.accountNo = accountNo;
         this.accountId = accountId;
@@ -114,16 +120,19 @@ public class Account {
         this.accountAddress = accountAddress;
         this.accountPhoneNumber = accountPhoneNumber;
         this.accountEmail = accountEmail;
+        this.accountGender = accountGender;
         this.accountPoint = accountPoint;
         this.accountBookCnt = accountBookCnt;
         this.accountNickname = accountNickname;
-        this.accountType = accountType;
+        this.accountState = accountState;
         this.accountBirthday = accountBirthday;
         this.book = book;
-        this.hits = hit;
-        this.boards = board;
-        this.comments = comment;
+        this.hits = hits;
+        this.boards = boards;
+        this.comments = comments;
         this.activated = activated;
+        this.wishLis = wishLis;
+        this.files = files;
         this.authorities = authorities;
     }
 }

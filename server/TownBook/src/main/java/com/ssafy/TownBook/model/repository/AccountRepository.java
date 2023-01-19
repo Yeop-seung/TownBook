@@ -1,6 +1,6 @@
 package com.ssafy.TownBook.model.repository;
 
-import com.ssafy.TownBook.model.domain.Account;
+import com.ssafy.TownBook.model.Entity.Account;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;

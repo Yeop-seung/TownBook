@@ -1,4 +1,4 @@
-package com.ssafy.TownBook.model.domain;
+package com.ssafy.TownBook.model.Entity;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -15,6 +15,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.ColumnDefault;
 
 @Getter
 @Setter
@@ -48,6 +49,9 @@ public class Board {
     @Column(name = "board_views", columnDefinition = "Integer default 0")
     private Integer boardViews;
 
+    @Column(name = "board_state")
+    @ColumnDefault("true")
+    private Boolean boardState;
     @OneToMany(mappedBy = "board")
     List<Hit> hit = new ArrayList<>();
 
@@ -59,14 +63,15 @@ public class Board {
 
     @Builder
     public Board(Long boardNo, String boardTitle, String boardCategory, String boardContent,
-            LocalDateTime boardWriteDate, Integer boardViews, List<Hit> hit, List<Comment> comment,
-            Account account) {
+            LocalDateTime boardWriteDate, Integer boardViews, Boolean boardState, List<Hit> hit,
+            List<Comment> comment, Account account) {
         this.boardNo = boardNo;
         this.boardTitle = boardTitle;
         this.boardCategory = boardCategory;
         this.boardContent = boardContent;
         this.boardWriteDate = boardWriteDate;
         this.boardViews = boardViews;
+        this.boardState = boardState;
         this.hit = hit;
         this.comment = comment;
         this.account = account;
