@@ -15,24 +15,24 @@ import org.springframework.web.bind.annotation.*;
 public class AccountController {
 
     @Autowired
-    private AccountService accountSerivce;
+    private AccountService accountService;
 
     @PostMapping("/signup")
     public ResponseEntity<AccountDto> signup(
             @Valid @RequestBody AccountDto accountDto
     ) {
-        return ResponseEntity.ok(accountSerivce.signup(accountDto));
+        return ResponseEntity.ok(accountService.signup(accountDto));
     }
 
     @GetMapping("/user")
     @PreAuthorize("hasAnyRole('USER','ADMIN')")
     public ResponseEntity<AccountDto> getMyUserInfo(HttpServletRequest request) {
-        return ResponseEntity.ok(accountSerivce.getMyUserWithAuthorities());
+        return ResponseEntity.ok(accountService.getMyUserWithAuthorities());
     }
 
-    @GetMapping("/user/{accountId}")
+    @GetMapping("/user/{accountEmail}")
     @PreAuthorize("hasAnyRole('ADMIN')")
-    public ResponseEntity<AccountDto> getUserInfo(@PathVariable String accountId) {
-        return ResponseEntity.ok(accountSerivce.getUserWithAuthorities(accountId));
+    public ResponseEntity<AccountDto> getUserInfo(@PathVariable String accountEmail) {
+        return ResponseEntity.ok(accountService.getUserWithAuthorities(accountEmail));
     }
 }
