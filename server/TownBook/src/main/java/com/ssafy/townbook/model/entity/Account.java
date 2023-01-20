@@ -15,6 +15,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,33 +33,35 @@ import org.hibernate.annotations.DynamicInsert;
 @Entity
 @Table(name = "`account`")
 public class Account {
-
-
     @Id
     @Column(name = "account_no")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long accountNo;
 
-    @Column(name = "account_id", length = 50, unique = true)
-    private String accountId;
+    @Column(name = "account_email", length = 50, unique = true)
+    @NotNull
+    private String accountEmail;
 
     @Column(name = "account_pw", length = 100, unique = true)
+    @NotNull
     private String accountPw;
 
     @Column(name = "account_name", length = 50)
+    @NotNull
     String accountName;
 
     @Column(name = "account_address")
+    @NotNull
     private String accountAddress;
 
     @Column(name = "account_phone_number")
+    @NotNull
     private String accountPhoneNumber;
 
-    @Column(name = "account_email")
-    private String accountEmail;
-
     @Column(name = "account_gender")
+    @NotNull
     private Integer accountGender;
+
     @Column(name = "account_point")
     @ColumnDefault("0")
     private Integer accountPoint;
@@ -68,13 +71,11 @@ public class Account {
     private Integer accountBookCnt;
 
     @Column(name = "account_nickname")
+    @NotNull
     private String accountNickname;
 
-    @Column(name = "account_state")
-    @ColumnDefault("true")
-    private Boolean accountState;
-
     @Column(name = "account_birthday")
+    @NotNull
     private String accountBirthday;
 
     @OneToOne(mappedBy = "account")
@@ -92,7 +93,7 @@ public class Account {
     private boolean activated;
 
     @OneToMany(mappedBy = "account")
-    private List<WishList> wishLis = new ArrayList<>();
+    private List<WishList> wishLists = new ArrayList<>();
 
     @OneToMany(mappedBy = "account")
     private List<File> files = new ArrayList<>();
@@ -105,33 +106,29 @@ public class Account {
 
 
     @Builder
-    public Account(Long accountNo, String accountId, String accountPw, String accountName,
-            String accountAddress, String accountPhoneNumber, String accountEmail,
-            Integer accountGender, Integer accountPoint, Integer accountBookCnt,
-            String accountNickname,
-            Boolean accountState, String accountBirthday, Book book, List<Hit> hits,
-            List<Board> boards,
-            List<Comment> comments, boolean activated, List<WishList> wishLis, List<File> files,
+    public Account(Long accountNo, String accountEmail, String accountPw, String accountName,
+            String accountAddress, String accountPhoneNumber, Integer accountGender,
+            Integer accountPoint, Integer accountBookCnt, String accountNickname,
+            String accountBirthday, Book book, List<Hit> hits, List<Board> boards,
+            List<Comment> comments, boolean activated, List<WishList> wishLists, List<File> files,
             Set<Authority> authorities) {
         this.accountNo = accountNo;
-        this.accountId = accountId;
+        this.accountEmail = accountEmail;
         this.accountPw = accountPw;
         this.accountName = accountName;
         this.accountAddress = accountAddress;
         this.accountPhoneNumber = accountPhoneNumber;
-        this.accountEmail = accountEmail;
         this.accountGender = accountGender;
         this.accountPoint = accountPoint;
         this.accountBookCnt = accountBookCnt;
         this.accountNickname = accountNickname;
-        this.accountState = accountState;
         this.accountBirthday = accountBirthday;
         this.book = book;
         this.hits = hits;
         this.boards = boards;
         this.comments = comments;
         this.activated = activated;
-        this.wishLis = wishLis;
+        this.wishLists = wishLists;
         this.files = files;
         this.authorities = authorities;
     }

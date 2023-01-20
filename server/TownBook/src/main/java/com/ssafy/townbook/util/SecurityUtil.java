@@ -21,6 +21,7 @@ public class SecurityUtil {
    // ThreadLocal에 보관되며, SecurityContextHolder를 통해 접근할 수 있다.
 
    // SecurityContextHolder.getContext().getAuthentication() 처럼 현재 사용자 정보를 가져와 사용할 수 있다.
+   // 현재 아이디 가져오기 메소드
    public static Optional<String> getCurrentUsername() {
       final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
@@ -32,6 +33,8 @@ public class SecurityUtil {
       String username = null;
 
       // UserDetails = 사용자의 정보를 담는 인터페이스
+      // principal --> ID정보만 가져다 사용할 수 있다 --> getUseranme-->ID가 들어있다.
+      
       if (authentication.getPrincipal() instanceof UserDetails) {
          UserDetails springSecurityUser = (UserDetails) authentication.getPrincipal();
          username = springSecurityUser.getUsername();
@@ -39,6 +42,7 @@ public class SecurityUtil {
          username = (String) authentication.getPrincipal();
       }
 
+      // 인증된 유저 아이디 리턴
       return Optional.ofNullable(username);
    }
 }

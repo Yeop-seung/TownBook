@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class AccountSerivce {
+public class AccountServiceImpl implements AccountService{
 
     @Autowired
     private AccountRepository accountRepository;
@@ -22,9 +22,10 @@ public class AccountSerivce {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Override
     @Transactional
     public AccountDto signup(AccountDto accountDto) {
-        if (accountRepository.findOneWithAuthoritiesByAccountId(accountDto.getAccountId()).orElse(null) != null) {
+        if (accountRepository.findOneWithAuthoritiesByAccountEmail(accountDto.getAccountEmail()).orElse(null) != null) {
             throw new DuplicateMemberException("이미 가입되어 있는 유저입니다.");
         }
 
@@ -33,7 +34,6 @@ public class AccountSerivce {
                 .build();
 
         Account account = Account.builder()
-                .accountId(accountDto.getAccountId())
                 .accountPw(passwordEncoder.encode(accountDto.getAccountPw()))
                 .accountName(accountDto.getAccountName())
                 .accountPhoneNumber(accountDto.getAccountPhoneNumber())
@@ -41,6 +41,7 @@ public class AccountSerivce {
                 .accountBirthday(accountDto.getAccountBirthDay())
                 .accountNickname(accountDto.getAccountNickname())
                 .accountEmail(accountDto.getAccountEmail())
+                .accountGender(accountDto.getAccountGender())
                 .authorities(Collections.singleton(authority))
                 .activated(true)
                 .build();
@@ -48,17 +49,21 @@ public class AccountSerivce {
         return AccountDto.from(accountRepository.save(account));
     }
 
+    @Override
     @Transactional(readOnly = true)
-    public AccountDto getUserWithAuthorities(String accountId) {
-        return AccountDto.from(accountRepository.findOneWithAuthoritiesByAccountId(accountId).orElse(null));
+    public AccountDto getUserWithAuthorities(String accountEmail) {
+        return AccountDto.from(accountRepository.findOneWithAuthoritiesByAccountEmail(accountEmail).orElse(null));
     }
 
+    @Override
     @Transactional(readOnly = true)
     public AccountDto getMyUserWithAuthorities() {
         return AccountDto.from(
                 SecurityUtil.getCurrentUsername()
-                        .flatMap(accountRepository::findOneWithAuthoritiesByAccountId)
+                        .flatMap(accountRepository::findOneWithAuthoritiesByAccountEmail)
                         .orElseThrow(() -> new NotFoundMemberException("Member not found"))
         );
     }
+
+
 }
