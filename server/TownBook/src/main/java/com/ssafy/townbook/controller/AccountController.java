@@ -2,7 +2,7 @@ package com.ssafy.townbook.controller;
 
 
 import com.ssafy.townbook.model.dto.AccountDto;
-import com.ssafy.townbook.model.service.AccountSerivce;
+import com.ssafy.townbook.model.service.AccountService;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 public class AccountController {
 
     @Autowired
-    private AccountSerivce accountSerivce;
+    private AccountService accountSerivce;
 
     @PostMapping("/signup")
     public ResponseEntity<AccountDto> signup(

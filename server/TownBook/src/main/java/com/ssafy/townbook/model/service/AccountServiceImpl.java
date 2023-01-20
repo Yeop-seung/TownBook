@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class AccountSerivce {
+public class AccountServiceImpl implements AccountService{
 
     @Autowired
     private AccountRepository accountRepository;
@@ -22,6 +22,7 @@ public class AccountSerivce {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Override
     @Transactional
     public AccountDto signup(AccountDto accountDto) {
         if (accountRepository.findOneWithAuthoritiesByAccountId(accountDto.getAccountId()).orElse(null) != null) {
@@ -48,11 +49,13 @@ public class AccountSerivce {
         return AccountDto.from(accountRepository.save(account));
     }
 
+    @Override
     @Transactional(readOnly = true)
     public AccountDto getUserWithAuthorities(String accountId) {
         return AccountDto.from(accountRepository.findOneWithAuthoritiesByAccountId(accountId).orElse(null));
     }
 
+    @Override
     @Transactional(readOnly = true)
     public AccountDto getMyUserWithAuthorities() {
         return AccountDto.from(
@@ -61,4 +64,6 @@ public class AccountSerivce {
                         .orElseThrow(() -> new NotFoundMemberException("Member not found"))
         );
     }
+
+
 }
