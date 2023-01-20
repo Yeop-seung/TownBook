@@ -24,24 +24,24 @@ public class CustomUserDetailsService implements UserDetailsService {
    // 찾은 권한이 활성화 되어있다면
    @Override
    @Transactional
-   public UserDetails loadUserByUsername(final String accountId) {
-      return accountRepository.findOneWithAuthoritiesByAccountId(accountId)
-         .map(account -> createUser(accountId, account))
-         .orElseThrow(() -> new UsernameNotFoundException(accountId + " -> 데이터베이스에서 찾을 수 없습니다."));
+   public UserDetails loadUserByUsername(final String accountEmail) {
+      return accountRepository.findOneWithAuthoritiesByAccountEmail(accountEmail)
+         .map(account -> createUser(accountEmail, account))
+         .orElseThrow(() -> new UsernameNotFoundException(accountEmail + " -> 데이터베이스에서 찾을 수 없습니다."));
    }
 
    // accountId를 가지고 활성화되어있지 않다면 exception
    // account로 부터
-   private org.springframework.security.core.userdetails.User createUser(String accountId, Account account) {
+   private org.springframework.security.core.userdetails.User createUser(String accountEmail, Account account) {
       if (!account.isActivated()) {
-         throw new RuntimeException(accountId + " -> 활성화되어 있지 않습니다.");
+         throw new RuntimeException(accountEmail + " -> 활성화되어 있지 않습니다.");
       }
 
       List<GrantedAuthority> grantedAuthorities = account.getAuthorities().stream()
               .map(authority -> new SimpleGrantedAuthority(authority.getAuthorityName()))
               .collect(Collectors.toList());
 
-      return new org.springframework.security.core.userdetails.User(account.getAccountId(),
+      return new org.springframework.security.core.userdetails.User(account.getAccountEmail(),
               account.getAccountPw(),
               grantedAuthorities);
    }
