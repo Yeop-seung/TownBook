@@ -16,6 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -79,7 +80,7 @@ public class Account {
     private String accountBirthday;
 
     @OneToOne(mappedBy = "account")
-    private Book book;
+    private BookLog bookLog;
 
     @OneToMany(mappedBy = "account")
     private List<Hit> hits = new ArrayList<>();
@@ -98,8 +99,6 @@ public class Account {
     @OneToMany(mappedBy = "account")
     private List<File> files = new ArrayList<>();
 
-    @OneToMany(mappedBy = "account")
-    private List<Notice> notices = new ArrayList<>();
     @ManyToMany
     @JoinTable(
             name = "account_authority",
@@ -110,12 +109,11 @@ public class Account {
 
     @Builder
     public Account(Long accountNo, String accountEmail, String accountPw, String accountName,
-            String accountAddress, String accountPhoneNumber, Integer accountGender,
-            Integer accountPoint, Integer accountBookCnt, String accountNickname,
-            String accountBirthday, Book book, List<Hit> hits, List<Board> boards,
-            List<Comment> comments, boolean activated, List<WishList> wishLists, List<File> files,
-            List<Notice> notices,
-            Set<Authority> authorities) {
+                   String accountAddress, String accountPhoneNumber, Integer accountGender,
+                   Integer accountPoint, Integer accountBookCnt, String accountNickname,
+                   String accountBirthday, BookLog bookLog, List<Hit> hits, List<Board> boards,
+                   List<Comment> comments, boolean activated, List<WishList> wishLists, List<File> files,
+                   Set<Authority> authorities) {
         this.accountNo = accountNo;
         this.accountEmail = accountEmail;
         this.accountPw = accountPw;
@@ -127,7 +125,7 @@ public class Account {
         this.accountBookCnt = accountBookCnt;
         this.accountNickname = accountNickname;
         this.accountBirthday = accountBirthday;
-        this.book = book;
+        this.bookLog = bookLog;
         this.hits = hits;
         this.boards = boards;
         this.comments = comments;
@@ -135,6 +133,5 @@ public class Account {
         this.wishLists = wishLists;
         this.files = files;
         this.authorities = authorities;
-        this.notices = notices;
     }
 }

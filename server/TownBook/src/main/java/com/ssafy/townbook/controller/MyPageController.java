@@ -5,31 +5,49 @@ import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
+import com.ssafy.townbook.model.entity.BookLog;
+import com.ssafy.townbook.model.service.MyPageService;
+import com.ssafy.townbook.model.service.MyPageServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/qr")
-public class QrController {
+@RequestMapping("/myPage")
+public class MyPageController {
 
-    @GetMapping
-    public Object createQr(@RequestParam String url) throws WriterException, IOException {
-        int width = 200;
-        int height = 200;
-        BitMatrix matrix = new MultiFormatWriter().encode(url, BarcodeFormat.QR_CODE, width, height);
+    @Autowired
+    private MyPageServiceImpl myPageService;
 
-        try (ByteArrayOutputStream out = new ByteArrayOutputStream();) {
-            MatrixToImageWriter.writeToStream(matrix, "PNG", out);
-            return ResponseEntity.ok()
-                    .contentType(MediaType.IMAGE_PNG)
-                    .body(out.toByteArray());
-        }
+    @GetMapping("/qr/{accountEmail}")
+    public ResponseEntity<?> createQr(@PathVariable String accountEmail) throws WriterException, IOException {
+        return new ResponseEntity<>(myPageService.getQrCode(accountEmail), HttpStatus.OK);
     }
+
+    @GetMapping("/myPoint/{accountNo}")
+    public ResponseEntity<?> getPoint(@PathVariable Long accountNo) throws Exception{
+        return new ResponseEntity<>(myPageService.getPoint(accountNo),HttpStatus.OK);
+    }
+
+    @GetMapping("/allLog/{accountNo}")
+    public ResponseEntity<Optional<List<BookLog>>> getAllLog(@PathVariable Long accountNo) throws Exception{
+        return new ResponseEntity<>(myPageService.getAllLog(accountNo),HttpStatus.OK);
+    }
+
+//    @GetMapping("/donate/{accountNo}")
+//    public ResponseEntity<?> getDonateLog(@PathVariable Long accountNo) throws Exception{
+//        return new ResponseEntity<>(null,HttpStatus.OK);
+//    }
+//
+//    @GetMapping("/receive/{accountNo}")
+//    public ResponseEntity<?> getReceiveLog(@PathVariable Long accountNo) throws Exception{
+//        return new ResponseEntity<>(null,HttpStatus.OK);
+//    }
 }

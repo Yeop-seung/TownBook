@@ -7,7 +7,9 @@ import com.ssafy.townbook.model.repository.BookRepository;
 import com.ssafy.townbook.model.repository.DetailLockerRepository;
 import com.ssafy.townbook.model.repository.LockerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class BookServiceImpl implements BookService {
 
     @Autowired
@@ -27,13 +29,13 @@ public class BookServiceImpl implements BookService {
     public void giveBook(Book book){
         bookRepository.save(book);
 
-        DetailLocker detailLocker = book.getDetailLocker();
-        detailLocker.setDetailLockerIsEmpty(false);
-        detailLockerRepository.save(detailLocker);
-
-        Locker locker = detailLocker.getLocker();
-        locker.setLockerBookCnt(locker.getLockerBookCnt() + 1);
-        lockerRepository.save(locker);
+//        DetailLocker detailLocker = book.getDetailLocker();
+//        detailLocker.setDetailLockerIsEmpty(false);
+//        detailLockerRepository.save(detailLocker);
+//
+//        Locker locker = detailLocker.getLocker();
+//        locker.setLockerBookCnt(locker.getLockerBookCnt() + 1);
+//        lockerRepository.save(locker);
     }
 
     /**
@@ -42,16 +44,16 @@ public class BookServiceImpl implements BookService {
      */
     @Override
     public void takeBook(Book book){
-        book.setBookState(false);
-        bookRepository.save(book);
-
-        DetailLocker detailLocker = book.getDetailLocker();
-        detailLocker.setDetailLockerIsEmpty(true);
-        detailLockerRepository.save(detailLocker);
-
-        Locker locker = detailLocker.getLocker();
-        locker.setLockerBookCnt(locker.getLockerBookCnt() - 1);
-        lockerRepository.save(locker);
+//        book.setBookState(false);
+//        bookRepository.save(book);
+//
+//        DetailLocker detailLocker = book.getDetailLocker();
+//        detailLocker.setDetailLockerIsEmpty(true);
+//        detailLockerRepository.save(detailLocker);
+//
+//        Locker locker = detailLocker.getLocker();
+//        locker.setLockerBookCnt(locker.getLockerBookCnt() - 1);
+//        lockerRepository.save(locker);
     }
 
     /**
