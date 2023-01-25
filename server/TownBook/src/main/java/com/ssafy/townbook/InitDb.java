@@ -1,10 +1,7 @@
 package com.ssafy.townbook;
 
 import com.ssafy.townbook.model.entity.Book;
-import com.ssafy.townbook.model.entity.DetailLocker;
-import com.ssafy.townbook.model.entity.Locker;
 import java.time.LocalDate;
-import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
