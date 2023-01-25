@@ -1,64 +1,29 @@
 package com.ssafy.townbook.model.service;
 
+import com.ssafy.townbook.model.dto.BookDto;
 import com.ssafy.townbook.model.entity.Book;
-import com.ssafy.townbook.model.entity.DetailLocker;
-import com.ssafy.townbook.model.entity.Locker;
 import com.ssafy.townbook.model.repository.BookRepository;
-import com.ssafy.townbook.model.repository.DetailLockerRepository;
-import com.ssafy.townbook.model.repository.LockerRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
+import java.util.stream.Collectors;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+@Service
+@Transactional(readOnly = true)
+@RequiredArgsConstructor
 public class BookServiceImpl implements BookService {
-
-    @Autowired
-    private BookRepository bookRepository;
-
-    @Autowired
-    private DetailLockerRepository detailLockerRepository;
-
-    @Autowired
-    private LockerRepository lockerRepository;
-
-    /**
-     * 책을 기부했을 때
-     * @param book
-     */
-    @Override
-    public void giveBook(Book book){
-        bookRepository.save(book);
-
-        DetailLocker detailLocker = book.getDetailLocker();
-        detailLocker.setDetailLockerIsEmpty(false);
-        detailLockerRepository.save(detailLocker);
-
-        Locker locker = detailLocker.getLocker();
-        locker.setLockerBookCnt(locker.getLockerBookCnt() + 1);
-        lockerRepository.save(locker);
+    
+    private final BookRepository bookRepository;
+    
+    public List<BookDto> findAll() {
+        return bookRepository.findAll().stream()
+                .map(BookDto::new)
+                .collect(Collectors.toList());
     }
-
-    /**
-     * 책을 가져갔을 때
-     * @param book
-     */
-    @Override
-    public void takeBook(Book book){
-        book.setBookState(false);
-        bookRepository.save(book);
-
-        DetailLocker detailLocker = book.getDetailLocker();
-        detailLocker.setDetailLockerIsEmpty(true);
-        detailLockerRepository.save(detailLocker);
-
-        Locker locker = detailLocker.getLocker();
-        locker.setLockerBookCnt(locker.getLockerBookCnt() - 1);
-        lockerRepository.save(locker);
-    }
-
-    /**
-     *
-     * @param lockerNo
-     */
-    public void searchAllBook(Long lockerNo){
-
+    
+    public BookDto findBookByBookIsbn(String bookIsbn) {
+        Book book = bookRepository.findBookByBookIsbn(bookIsbn);
+        return new BookDto(book);
     }
 }
