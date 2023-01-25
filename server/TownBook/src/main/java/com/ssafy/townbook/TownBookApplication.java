@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @SpringBootApplication
 @RequestMapping("/")
 public class TownBookApplication {
-	public static void main(String[] args) {
-		SpringApplication.run(TownBookApplication.class, args);
-	}
-
+    
+    public static void main(String[] args) {
+        SpringApplication.run(TownBookApplication.class, args);
+    }
 }

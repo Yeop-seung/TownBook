@@ -1,9 +1,11 @@
 package com.ssafy.townbook.model.service;
 
-import com.ssafy.townbook.model.entity.Book;
+import com.ssafy.townbook.model.dto.BookDto;
+import java.util.List;
 
 public interface BookService {
-    void giveBook(Book book);
-    void takeBook(Book book);
-
+    
+    List<BookDto> findAll();
+    
+    BookDto findBookByBookIsbn(String bookIsbn);
 }
