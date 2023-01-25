@@ -21,8 +21,6 @@ import org.hibernate.annotations.ColumnDefault;
 @Entity
 public class Book {
 
-
-
     @Id
     @NotNull
     @Column(name = "book_isbn")
@@ -58,7 +56,18 @@ public class Book {
     private String bookTitleURL;
 
 
-    @OneToMany(mappedBy = "book")
-    private List<WishList> wishLists = new ArrayList<>();
-
+    @Builder
+    public Book(String bookIsbn, String bookSubject, String bookTitle, Integer bookVol,
+            String bookAuthor, String bookPublisher, LocalDate bookPublishPredate,
+            String bookIntroductionURL, String bookTitleURL) {
+        this.bookIsbn = bookIsbn;
+        this.bookSubject = bookSubject;
+        this.bookTitle = bookTitle;
+        this.bookVol = bookVol;
+        this.bookAuthor = bookAuthor;
+        this.bookPublisher = bookPublisher;
+        this.bookPublishPredate = bookPublishPredate;
+        this.bookIntroductionURL = bookIntroductionURL;
+        this.bookTitleURL = bookTitleURL;
+    }
 }
