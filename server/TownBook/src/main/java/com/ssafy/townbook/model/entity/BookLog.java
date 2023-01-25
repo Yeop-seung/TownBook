@@ -3,11 +3,14 @@ package com.ssafy.townbook.model.entity;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 import lombok.Builder;
@@ -61,6 +64,9 @@ public class BookLog {
     @OneToOne
     @JoinColumn(name = "`fk-account-book`")
     private Account account;
+
+    @OneToMany(mappedBy = "bookLog")
+    private List<WishList> wishLists = new ArrayList<>();
 
     @Builder
     public BookLog(Long bookNo, Boolean bookState, String bookReview, String bookReceiverId,
