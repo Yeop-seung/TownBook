@@ -26,4 +26,8 @@ public class BookServiceImpl implements BookService {
         Book book = bookRepository.findBookByBookIsbn(bookIsbn);
         return new BookDto(book);
     }
+    
+    public void addBook(Book book) {
+        bookRepository.save(book);
+    }
 }
