@@ -21,10 +21,9 @@ import org.hibernate.annotations.ColumnDefault;
 @Entity
 public class Book {
 
-    @Id
-    @Column(name = "book_no")
-    private Long bookNo;
 
+
+    @Id
     @NotNull
     @Column(name = "book_isbn")
     private String bookIsbn;
@@ -58,65 +57,8 @@ public class Book {
     @Column(name = "book_title_url")
     private String bookTitleURL;
 
-    @Column(name = "book_state")
-    @ColumnDefault("true")
-    private Boolean bookState;
-
-    @Column(name = "book_review")
-    @Lob
-    private String bookReview;
-
-    @Column(name = "book_receiver_id")
-    private String bookReceiverId;
-
-    @NotNull
-    @Column(name = "book_donate_date")
-    private LocalDateTime donateDate;
-
-    @Column(name = "book_receive_date")
-    private LocalDate bookReceiveDate;
-
-
-    @OneToOne
-    @JoinColumn(name = "`fk-detail_locker-book-1`")
-    private Locker locker;
-
-    @OneToOne
-    @JoinColumn(name = "`fk-detail_locker-book-2`")
-    private DetailLocker detailLocker;
-
-    @OneToOne
-    @JoinColumn(name = "`fk-account-book`")
-    private Account account;
 
     @OneToMany(mappedBy = "book")
     private List<WishList> wishLists = new ArrayList<>();
-    @Builder
-    public Book(Long bookNo, String bookIsbn, String bookSubject,
-            String bookTitle,
-            Integer bookVol, String bookAuthor, String bookPublisher, LocalDate bookPublishPredate,
-            String bookIntroductionURL, String bookTitleURL, Boolean bookState, String bookReview,
-            String bookReceiverId, LocalDateTime donateDate, LocalDate bookReceiveDate,
-            Locker locker,
-            DetailLocker detailLocker, Account account, List<WishList> wishLists) {
-        this.bookNo = bookNo;
-        this.bookIsbn = bookIsbn;
-        this.bookSubject = bookSubject;
-        this.bookTitle = bookTitle;
-        this.bookVol = bookVol;
-        this.bookAuthor = bookAuthor;
-        this.bookPublisher = bookPublisher;
-        this.bookPublishPredate = bookPublishPredate;
-        this.bookIntroductionURL = bookIntroductionURL;
-        this.bookTitleURL = bookTitleURL;
-        this.bookState = bookState;
-        this.bookReview = bookReview;
-        this.bookReceiverId = bookReceiverId;
-        this.donateDate = donateDate;
-        this.bookReceiveDate = bookReceiveDate;
-        this.locker = locker;
-        this.detailLocker = detailLocker;
-        this.account = account;
-        this.wishLists = wishLists;
-    }
+
 }

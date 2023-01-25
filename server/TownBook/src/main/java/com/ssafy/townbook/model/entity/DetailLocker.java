@@ -21,7 +21,7 @@ public class DetailLocker {
     private Long detailLockerNo;
 
     @OneToOne(mappedBy = "detailLocker")
-    private Book book;
+    private BookLog bookLog;
 
     @NotNull
     @ManyToOne
