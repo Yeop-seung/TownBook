@@ -97,6 +97,9 @@ public class Account {
 
     @OneToMany(mappedBy = "account")
     private List<File> files = new ArrayList<>();
+
+    @OneToMany(mappedBy = "account")
+    private List<Notice> notices = new ArrayList<>();
     @ManyToMany
     @JoinTable(
             name = "account_authority",
@@ -111,6 +114,7 @@ public class Account {
             Integer accountPoint, Integer accountBookCnt, String accountNickname,
             String accountBirthday, Book book, List<Hit> hits, List<Board> boards,
             List<Comment> comments, boolean activated, List<WishList> wishLists, List<File> files,
+            List<Notice> notices,
             Set<Authority> authorities) {
         this.accountNo = accountNo;
         this.accountEmail = accountEmail;
@@ -131,5 +135,6 @@ public class Account {
         this.wishLists = wishLists;
         this.files = files;
         this.authorities = authorities;
+        this.notices = notices;
     }
 }

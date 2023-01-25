@@ -33,10 +33,6 @@ public class Board {
     private String boardTitle;
 
     @NotNull
-    @Column(name = "board_category")
-    private String boardCategory;
-
-    @NotNull
     @Column(name = "board_content")
     @Lob
     private String boardContent;
@@ -62,12 +58,11 @@ public class Board {
     Account account;
 
     @Builder
-    public Board(Long boardNo, String boardTitle, String boardCategory, String boardContent,
+    public Board(Long boardNo, String boardTitle, String boardContent,
             LocalDateTime boardWriteDate, Integer boardViews, Boolean boardState, List<Hit> hit,
             List<Comment> comment, Account account) {
         this.boardNo = boardNo;
         this.boardTitle = boardTitle;
-        this.boardCategory = boardCategory;
         this.boardContent = boardContent;
         this.boardWriteDate = boardWriteDate;
         this.boardViews = boardViews;
