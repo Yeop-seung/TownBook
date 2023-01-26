@@ -1,6 +1,8 @@
 package com.ssafy.townbook.controller;
 
+import com.ssafy.townbook.model.dto.BookDto;
 import com.ssafy.townbook.model.service.BookService;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,8 +33,8 @@ public class BookController {
      */
     @GetMapping("")
 //    @PreAuthorize("hasAnyRole('ADMIN')")
-    public ResponseEntity<?> books() {
-        return new ResponseEntity<>(bookService.findAll(), HttpStatus.OK);
+    public List<BookDto> books() {
+        return bookService.findAll();
     }
     
     /**
@@ -43,8 +45,8 @@ public class BookController {
      * @return Book
      */
     @GetMapping("/{bookIsbn}")
-    public ResponseEntity<?> findBookByBookIsbn(@PathVariable String bookIsbn) {
-        return new ResponseEntity<>(bookService.findBookByBookIsbn(bookIsbn), HttpStatus.OK);
+    public BookDto findBookByBookIsbn(@PathVariable String bookIsbn) {
+        return bookService.findBookByBookIsbn(bookIsbn);
     }
     
     /**
