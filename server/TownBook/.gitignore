@@ -3,6 +3,7 @@ application.properties
 application-API-KEY.properties
 application.yml
 email.properties
+generated
 
 HELP.md
 .gradle
@@ -10,6 +11,8 @@ build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
+
+generated
 
 ### STS ###
 .apt_generated
