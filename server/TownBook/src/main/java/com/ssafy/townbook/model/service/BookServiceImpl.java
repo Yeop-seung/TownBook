@@ -31,15 +31,16 @@ public class BookServiceImpl implements BookService {
     
     @Override
     public List<BookDto> findAll() {
-        return bookRepository.findAll().stream()
+        List<Book> findBooks = bookRepository.findAll();
+        return findBooks.stream()
                 .map(BookDto::new)
                 .collect(Collectors.toList());
     }
     
     @Override
     public BookDto findBookByBookIsbn(String bookIsbn) {
-        Book book = bookRepository.findBookByBookIsbn(bookIsbn);
-        return new BookDto(book);
+        Book findBook = bookRepository.findBookByBookIsbn(bookIsbn);
+        return new BookDto(findBook);
     }
     
     @Override
@@ -75,7 +76,7 @@ public class BookServiceImpl implements BookService {
             System.out.println(book);
             bookRepository.save(book);
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("정보가 없는 도서입니다");
         }
     }
 }
