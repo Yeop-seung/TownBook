@@ -3,7 +3,9 @@ package com.ssafy.townbook.model.entity;
 import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
@@ -52,11 +54,12 @@ public class Book {
     @Column(name = "book_title_url")
     private String bookTitleURL;
     
+    @OneToOne(mappedBy = "book", fetch = FetchType.LAZY)
+    private BookLog bookLog;
     
-    @Builder
-    public Book(String bookIsbn, String bookSubject, String bookTitle, Integer bookVol,
-            String bookAuthor, String bookPublisher, LocalDate bookPublishPredate,
-            String bookIntroductionURL, String bookTitleURL) {
+    public Book(String bookIsbn, String bookSubject, String bookTitle, Integer bookVol, String bookAuthor,
+            String bookPublisher, LocalDate bookPublishPredate, String bookIntroductionURL, String bookTitleURL,
+            BookLog bookLog) {
         this.bookIsbn = bookIsbn;
         this.bookSubject = bookSubject;
         this.bookTitle = bookTitle;
@@ -66,5 +69,6 @@ public class Book {
         this.bookPublishPredate = bookPublishPredate;
         this.bookIntroductionURL = bookIntroductionURL;
         this.bookTitleURL = bookTitleURL;
+        this.bookLog = bookLog;
     }
 }

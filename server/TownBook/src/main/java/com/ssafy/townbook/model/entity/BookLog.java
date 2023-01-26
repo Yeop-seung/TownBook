@@ -28,50 +28,53 @@ import org.hibernate.annotations.DynamicInsert;
 @ToString
 @Entity
 public class BookLog {
-
+    
     @Id
     @Column(name = "book_no")
     private Long bookNo;
-
-
+    
+    
     @Column(name = "book_state")
     @ColumnDefault("true")
     private Boolean bookState;
-
+    
     @Column(name = "book_review")
     @Lob
     private String bookReview;
-
+    
     @Column(name = "book_receiver_id")
     private String bookReceiverId;
-
+    
     @NotNull
     @Column(name = "book_donate_date")
     private LocalDateTime donateDate;
-
+    
     @Column(name = "book_receive_date")
     private LocalDate bookReceiveDate;
-
-
+    
+    
     @OneToOne
-    @JoinColumn(name = "`fk-detail_locker-book-1`")
+    @JoinColumn(name = "fk-detail_locker-bookLog-1")
     private Locker locker;
-
+    
     @OneToOne
-    @JoinColumn(name = "`fk-detail_locker-book-2`")
+    @JoinColumn(name = "`fk-detail_locker-bookLog-2`")
     private DetailLocker detailLocker;
-
+    
     @OneToOne
-    @JoinColumn(name = "`fk-account-book`")
+    @JoinColumn(name = "`fk-account-bookLog`")
     private Account account;
-
+    
+    @OneToOne
+    @JoinColumn(name = "`fk-book-bookLog`")
+    private Book book;
+    
     @OneToMany(mappedBy = "bookLog")
     private List<WishList> wishLists = new ArrayList<>();
-
-    @Builder
-    public BookLog(Long bookNo, Boolean bookState, String bookReview, String bookReceiverId,
-            LocalDateTime donateDate, LocalDate bookReceiveDate, Locker locker,
-            DetailLocker detailLocker, Account account) {
+    
+    public BookLog(Long bookNo, Boolean bookState, String bookReview, String bookReceiverId, LocalDateTime donateDate,
+            LocalDate bookReceiveDate, Locker locker, DetailLocker detailLocker, Account account, Book book,
+            List<WishList> wishLists) {
         this.bookNo = bookNo;
         this.bookState = bookState;
         this.bookReview = bookReview;
@@ -81,5 +84,7 @@ public class BookLog {
         this.locker = locker;
         this.detailLocker = detailLocker;
         this.account = account;
+        this.book = book;
+        this.wishLists = wishLists;
     }
 }
