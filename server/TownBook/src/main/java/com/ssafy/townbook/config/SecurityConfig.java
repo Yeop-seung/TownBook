@@ -69,7 +69,7 @@ public class SecurityConfig {
                 
                 .and()
                 .authorizeHttpRequests()
-                .antMatchers("/api/hello", "/api/authenticate", "/api/signup", "/", "/qr/**").permitAll()
+                .antMatchers("/api/hello", "/api/authenticate", "/api/signup", "/**", "/qr/**").permitAll()
                 .antMatchers("/api/book/**").permitAll()
                 .antMatchers("/v2/api-docs",
                         "/swagger-resources",

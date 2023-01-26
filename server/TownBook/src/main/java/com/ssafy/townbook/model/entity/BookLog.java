@@ -5,13 +5,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
@@ -30,54 +24,54 @@ import org.hibernate.annotations.DynamicInsert;
 public class BookLog {
     
     @Id
-    @Column(name = "book_no")
+    @Column(name = "book_log_no")
     private Long bookNo;
     
     
-    @Column(name = "book_state")
+    @Column(name = "book_log_state")
     @ColumnDefault("true")
     private Boolean bookState;
     
-    @Column(name = "book_review")
+    @Column(name = "book_log_review")
     @Lob
     private String bookReview;
     
-    @Column(name = "book_receiver_id")
+    @Column(name = "book_log_receiver_id")
     private String bookReceiverId;
     
     @NotNull
-    @Column(name = "book_donate_date")
-    private LocalDateTime donateDate;
+    @Column(name = "book_log_donate_date")
+    private LocalDateTime bookDonateDate;
     
-    @Column(name = "book_receive_date")
+    @Column(name = "book_log_receive_date")
     private LocalDate bookReceiveDate;
     
     
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "`fk-detail_locker-book_log-1`")
     private Locker locker;
     
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "`fk-detail_locker-book_log-2`")
     private DetailLocker detailLocker;
     
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "`fk-account-book_log`")
     private Account account;
     
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "`fk-book-book_log`")
     private Book book;
     
     @OneToMany(mappedBy = "bookLog")
     private List<WishList> wishLists = new ArrayList<>();
 
-    public BookLog(Long bookNo, Boolean bookState, String bookReview, String bookReceiverId, LocalDateTime donateDate, LocalDate bookReceiveDate, Locker locker, DetailLocker detailLocker, Account account, Book book, List<WishList> wishLists) {
+    public BookLog(Long bookNo, Boolean bookState, String bookReview, String bookReceiverId, LocalDateTime bookDonateDate, LocalDate bookReceiveDate, Locker locker, DetailLocker detailLocker, Account account, Book book, List<WishList> wishLists) {
         this.bookNo = bookNo;
         this.bookState = bookState;
         this.bookReview = bookReview;
         this.bookReceiverId = bookReceiverId;
-        this.donateDate = donateDate;
+        this.bookDonateDate = bookDonateDate;
         this.bookReceiveDate = bookReceiveDate;
         this.locker = locker;
         this.detailLocker = detailLocker;
