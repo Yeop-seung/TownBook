@@ -168,6 +168,7 @@ public class MyPageServiceImpl implements MyPageService {
             jsonObject.put("bookLogState", bookLog.getBookLogState());
 
             jsonArray.add(jsonObject);
+
         }
         return Optional.ofNullable(jsonArray);
     }
