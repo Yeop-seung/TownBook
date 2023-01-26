@@ -49,7 +49,7 @@ public class BookController {
      * ISBN으로 국립도서관의 도서 정보 불러온 후 DB에 추가
      */
     @PostMapping("/add/{bookIsbn}")
-    public void add(@PathVariable String bookIsbn) {
-        bookService.addBook(bookIsbn);
+    public BookDto add(@PathVariable String bookIsbn) {
+        return bookService.addBook(bookIsbn);
     }
 }
