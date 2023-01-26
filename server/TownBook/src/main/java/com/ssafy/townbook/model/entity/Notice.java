@@ -3,6 +3,7 @@ package com.ssafy.townbook.model.entity;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
@@ -26,41 +27,41 @@ import org.hibernate.annotations.DynamicInsert;
 @Entity
 @Table(name = "`notice`")
 public class Notice {
-    
+
     @Id
     @Column(name = "notice_no")
     private Long noticeNo;
-    
+
     @NotNull
     @Column(name = "notice_title")
     private String noticeTitle;
-    
+
     @NotNull
     @Column(name = "notice_content")
     @Lob
     private String noticeContent;
-    
-    
+
+
     @NotNull
     @Column(name = "notice_write_time")
     private LocalDateTime noticeWriteTime;
-    
+
     @NotNull
     @Column(name = "notice_state")
     @ColumnDefault("true")
     private Boolean noticeState;
-    
+
     @NotNull
     @Column(name = "notice_vies")
     @ColumnDefault("0")
     private Integer noticeViews;
-    
-    
-    @ManyToOne
-    @JoinColumn(name = "'fk-account-board'")
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "`fk-account-notice`")
     private Account account;
-    
-    
+
+
     @Builder
     public Notice(Long noticeNo, String noticeTitle, String noticeContent,
             LocalDateTime noticeWriteTime, Boolean noticeState, Integer noticeViews,

@@ -59,7 +59,7 @@ public class TokenProvider implements InitializingBean {
       // 유효 기간 --> 현재 날짜,시간 + tokenValidityInMilliseconds 에서 정한 시간 으로 정한다.
       Date validity = new Date(now + this.tokenValidityInMilliseconds);
 
-      // 토큰 생성해서 반환 --> 유저 아이디 / 권한(ROLL USER인지 뭔지 / 키는 HS512 해쉬 코드로 / 기간 설정
+      // 토큰 생성해서 반환 --> 유저 아이디 / 권한(ROLL USER, ROLL ADMIN) / 키는 HS512 해쉬 코드로 / 기간 설정
       return Jwts.builder()
          .setSubject(authentication.getName())
          .claim(AUTHORITIES_KEY, authorities)

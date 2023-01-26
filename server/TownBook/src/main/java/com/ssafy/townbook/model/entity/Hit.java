@@ -20,12 +20,12 @@ public class Hit {
     private Long hitNo;
 
     @NotNull
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "`fk-hit-board`")
     private Board board;
 
     @NotNull
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "`fk-account-hit`")
     private Account account;
 
