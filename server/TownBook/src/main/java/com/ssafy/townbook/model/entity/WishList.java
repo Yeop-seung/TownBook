@@ -27,6 +27,6 @@ public class WishList {
 
 
     @ManyToOne
-    @JoinColumn(name = "`fk-book-wish_list`")
+    @JoinColumn(name = "`fk-book_log-wish_list`")
     private BookLog bookLog;
 }
