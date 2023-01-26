@@ -9,5 +9,5 @@ public interface BookService {
     
     BookDto findBookByBookIsbn(String bookIsbn);
     
-    void addBook(String bookIsbn);
+    BookDto addBook(String bookIsbn);
 }
