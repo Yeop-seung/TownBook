@@ -1,6 +1,7 @@
 ### API Key ###
 application.properties
 application-API-KEY.properties
+application.yml
 
 HELP.md
 .gradle

@@ -69,7 +69,7 @@ public class BookServiceImpl implements BookService {
      * 2. 불러온 정보를 Book 테이블에 맞게 가공해서 DB에 저장한다.
      * 3. 국립중앙도서관에 없는 도서라면 Exception e
      * TODO
-     *  1. API 키 외부로 이동
+     *  1. API 키 외부로 이동 *
      *  2. VOL 정수로 변환
      *  3. 날짜 문자열 -> LocalDate 변환
      *
@@ -83,10 +83,7 @@ public class BookServiceImpl implements BookService {
 //            String APIKey = "728b82e7aa453ba85bfe1dfa1680c4fd825c92d97e380b2ceb360d127020afe7";
             URL url = new URL("https://www.nl.go.kr/seoji/SearchApi.do?cert_key=" +
                     APIKey + "&result_style=json&page_no=1&page_size=10&isbn=" + bookIsbn);
-    
-            System.out.println(url);
             
-            // 도서 정보를 담은 jsonObject 가공
             BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"));
             String result = br.readLine();
             JSONParser jsonParser = new JSONParser();
@@ -94,7 +91,6 @@ public class BookServiceImpl implements BookService {
             JSONArray jsonArray = (JSONArray) jsonObject.get("docs");
             jsonObject = (JSONObject) jsonArray.get(0);
             
-            // 도서 저장 - VOL 정수 처리, 6자리 날짜 localDate 변환
             Book book = new Book();
             book.setBookIsbn((String) jsonObject.get("EA_ISBN"));
             book.setBookSubject((String) jsonObject.get("SUBJECT"));
