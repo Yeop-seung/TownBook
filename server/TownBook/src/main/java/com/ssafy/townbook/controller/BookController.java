@@ -5,8 +5,6 @@ import com.ssafy.townbook.model.service.BookService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,22 +25,19 @@ public class BookController {
     
     /**
      * 전체 책 조회
-     * ADMIN 권한 확인 후 작동 해야함
      *
-     * @return List
+     * @return List BookDto
      */
     @GetMapping("")
-//    @PreAuthorize("hasAnyRole('ADMIN')")
     public List<BookDto> books() {
         return bookService.findAll();
     }
     
     /**
-     * 도서의 ISBN 으로 도서 조회
-     * 권한은 아무나? 일단 보류
+     * ISBN 으로 도서 조회
      *
      * @param bookIsbn
-     * @return Book
+     * @return BookDto
      */
     @GetMapping("/{bookIsbn}")
     public BookDto findBookByBookIsbn(@PathVariable String bookIsbn) {
