@@ -2,6 +2,7 @@ package com.ssafy.townbook.model.service;
 
 import com.google.zxing.WriterException;
 import com.ssafy.townbook.model.entity.BookLog;
+import net.minidev.json.JSONArray;
 
 import java.io.IOException;
 import java.util.List;
@@ -13,7 +14,7 @@ public interface MyPageService {
 
     int getPoint(Long accountNo) throws Exception;
 
-    Optional<List<BookLog>> getAllLog(Long accountNo) throws Exception;
+    Optional<JSONArray> getAllLog(Long accountNo) throws Exception;
 //
 //    List<BookLog> getDonateLog(Long accountNo) throws Exception;
 //
