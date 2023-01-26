@@ -17,10 +17,10 @@ public class InitDb {
     
     private final InitService initService;
     
-    @PostConstruct
-    public void init() {
-        initService.dbInit();
-    }
+//    @PostConstruct
+//    public void init() {
+//        initService.dbInit();
+//    }
     
     @Component
     @Transactional
@@ -33,7 +33,7 @@ public class InitDb {
             Book book1 = createBook("8984993751", "8", "토지", "박경리", "커뮤니케이션 북스", LocalDate.now(),
                     null, null);
             em.persist(book1);
-            
+
             Book book2 = createBook("9788960777330", "0",
                     "자바 ORM 표준 JPA 프로그래밍(스프링 데이터 예제 프로젝트로 배우는 전자정부 표준 데이터베이스 프레임워크)",
                     "김영한", "에이콘출판", LocalDate.now(),

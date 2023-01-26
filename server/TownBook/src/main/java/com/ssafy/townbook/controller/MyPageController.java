@@ -8,6 +8,7 @@ import com.google.zxing.common.BitMatrix;
 import com.ssafy.townbook.model.entity.BookLog;
 import com.ssafy.townbook.model.service.MyPageService;
 import com.ssafy.townbook.model.service.MyPageServiceImpl;
+import net.minidev.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -37,7 +38,7 @@ public class MyPageController {
     }
 
     @GetMapping("/allLog/{accountNo}")
-    public ResponseEntity<Optional<List<BookLog>>> getAllLog(@PathVariable Long accountNo) throws Exception{
+    public ResponseEntity<Optional<JSONArray>> getAllLog(@PathVariable Long accountNo) throws Exception{
         return new ResponseEntity<>(myPageService.getAllLog(accountNo),HttpStatus.OK);
     }
 
