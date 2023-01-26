@@ -10,4 +10,11 @@ public interface AccountService {
 
     AccountDto getMyUserWithAuthorities();
 
+    String findEmail(String accountPhoneNumber);
+
+    Boolean accountModify(AccountDto accountDto);
+
+    Boolean accountRemove(String accountEmail, String accountPw);
+
+    Boolean updatePassword(String accountEmail, String tmpPassword);
 }

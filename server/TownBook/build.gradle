@@ -19,6 +19,15 @@ repositories {
 }
 
 dependencies {
+	// QR
+	// https://mvnrepository.com/artifact/com.google.zxing/core
+	implementation group: 'com.google.zxing', name: 'core', version: '3.5.1'
+	// https://mvnrepository.com/artifact/com.google.zxing/javase
+	implementation group: 'com.google.zxing', name: 'javase', version: '3.5.1'
+
+	// 회원가입 이메일 인증용
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
+
 	// swagger
 	implementation group: 'io.springfox', name: 'springfox-boot-starter', version: '3.0.0'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'

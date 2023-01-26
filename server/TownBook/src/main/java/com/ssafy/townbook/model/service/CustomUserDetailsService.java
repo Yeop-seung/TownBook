@@ -33,7 +33,7 @@ public class CustomUserDetailsService implements UserDetailsService {
    // accountId를 가지고 활성화되어있지 않다면 exception
    // account로 부터
    private org.springframework.security.core.userdetails.User createUser(String accountEmail, Account account) {
-      if (!account.isActivated()) {
+      if (!account.getAccountActivated()) {
          throw new RuntimeException(accountEmail + " -> 활성화되어 있지 않습니다.");
       }
 

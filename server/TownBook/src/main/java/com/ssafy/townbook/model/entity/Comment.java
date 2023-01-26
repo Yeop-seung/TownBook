@@ -37,12 +37,12 @@ public class Comment {
     private Comment comment;
 
     @NotNull
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "`fk-board-comment`")
     private Board board;
 
     @NotNull
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "`fk-account-comment`")
     private Account account;
 

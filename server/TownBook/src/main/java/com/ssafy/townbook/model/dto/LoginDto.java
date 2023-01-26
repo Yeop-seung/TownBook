@@ -6,23 +6,25 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @NoArgsConstructor
+@ToString
 public class LoginDto {
 
     @NotNull
     @Size(min = 3, max = 50)
-    private String account;
+    private String accountEmail;
 
     @NotNull
     @Size(min = 3, max = 100)
-    private String password;
+    private String accountPw;
 
     @Builder
-    public LoginDto(String account, String password) {
-        this.account = account;
-        this.password = password;
+    public LoginDto(String accountEmail, String accountPw) {
+        this.accountEmail = accountEmail;
+        this.accountPw = accountPw;
     }
 }

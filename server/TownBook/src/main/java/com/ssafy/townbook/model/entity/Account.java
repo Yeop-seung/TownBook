@@ -78,8 +78,13 @@ public class Account {
     @NotNull
     private String accountBirthday;
 
+    @Column(name = "account_activated")
+    @NotNull
+    @ColumnDefault("true")
+    private Boolean accountActivated;
+
     @OneToOne(mappedBy = "account")
-    private Book book;
+    private BookLog bookLog;
 
     @OneToMany(mappedBy = "account")
     private List<Hit> hits = new ArrayList<>();
@@ -89,8 +94,7 @@ public class Account {
 
     @OneToMany(mappedBy = "account")
     private List<Comment> comments = new ArrayList<>();
-    @Column(name = "activated")
-    private boolean activated;
+
 
     @OneToMany(mappedBy = "account")
     private List<WishList> wishLists = new ArrayList<>();
@@ -112,8 +116,8 @@ public class Account {
     public Account(Long accountNo, String accountEmail, String accountPw, String accountName,
             String accountAddress, String accountPhoneNumber, Integer accountGender,
             Integer accountPoint, Integer accountBookCnt, String accountNickname,
-            String accountBirthday, Book book, List<Hit> hits, List<Board> boards,
-            List<Comment> comments, boolean activated, List<WishList> wishLists, List<File> files,
+            String accountBirthday, BookLog bookLog, List<Hit> hits, List<Board> boards,
+            List<Comment> comments, Boolean accountActivated, List<WishList> wishLists, List<File> files,
             List<Notice> notices,
             Set<Authority> authorities) {
         this.accountNo = accountNo;
@@ -127,11 +131,11 @@ public class Account {
         this.accountBookCnt = accountBookCnt;
         this.accountNickname = accountNickname;
         this.accountBirthday = accountBirthday;
-        this.book = book;
+        this.bookLog = bookLog;
         this.hits = hits;
         this.boards = boards;
         this.comments = comments;
-        this.activated = activated;
+        this.accountActivated = accountActivated;
         this.wishLists = wishLists;
         this.files = files;
         this.authorities = authorities;

@@ -2,6 +2,7 @@ package com.ssafy.townbook.model.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -21,12 +22,12 @@ public class WishList {
     @Column(name = "wish_list_no")
     private Long wishListNo;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "`fk-account-wish_list`")
     private Account account;
 
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "`fk-book-wish_list`")
     private BookLog bookLog;
 }

@@ -24,7 +24,7 @@ public class DetailLocker {
     private BookLog bookLog;
 
     @NotNull
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "`fk-locker-detail_locker`")
     private Locker locker;
 
