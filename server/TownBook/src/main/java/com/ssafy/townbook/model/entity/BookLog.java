@@ -54,27 +54,25 @@ public class BookLog {
     
     
     @OneToOne
-    @JoinColumn(name = "fk-detail_locker-bookLog-1")
+    @JoinColumn(name = "`fk-detail_locker-book_log-1`")
     private Locker locker;
     
     @OneToOne
-    @JoinColumn(name = "`fk-detail_locker-bookLog-2`")
+    @JoinColumn(name = "`fk-detail_locker-book_log-2`")
     private DetailLocker detailLocker;
     
     @OneToOne
-    @JoinColumn(name = "`fk-account-bookLog`")
+    @JoinColumn(name = "`fk-account-book_log`")
     private Account account;
     
     @OneToOne
-    @JoinColumn(name = "`fk-book-bookLog`")
+    @JoinColumn(name = "`fk-book-book_log`")
     private Book book;
     
     @OneToMany(mappedBy = "bookLog")
     private List<WishList> wishLists = new ArrayList<>();
-    
-    public BookLog(Long bookNo, Boolean bookState, String bookReview, String bookReceiverId, LocalDateTime donateDate,
-            LocalDate bookReceiveDate, Locker locker, DetailLocker detailLocker, Account account, Book book,
-            List<WishList> wishLists) {
+
+    public BookLog(Long bookNo, Boolean bookState, String bookReview, String bookReceiverId, LocalDateTime donateDate, LocalDate bookReceiveDate, Locker locker, DetailLocker detailLocker, Account account, Book book, List<WishList> wishLists) {
         this.bookNo = bookNo;
         this.bookState = bookState;
         this.bookReview = bookReview;
