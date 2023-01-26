@@ -4,18 +4,9 @@ package com.ssafy.townbook.model.entity;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,6 +24,7 @@ import org.hibernate.annotations.DynamicInsert;
 @Entity
 @Table(name = "`account`")
 public class Account {
+
     @Id
     @Column(name = "account_no")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -78,8 +70,8 @@ public class Account {
     @NotNull
     private String accountBirthday;
 
-    @OneToOne(mappedBy = "account")
-    private Book book;
+    @OneToOne(mappedBy = "account", fetch = FetchType.LAZY)
+    private BookLog bookLog;
 
     @OneToMany(mappedBy = "account")
     private List<Hit> hits = new ArrayList<>();
@@ -100,6 +92,7 @@ public class Account {
 
     @OneToMany(mappedBy = "account")
     private List<Notice> notices = new ArrayList<>();
+
     @ManyToMany
     @JoinTable(
             name = "account_authority",
@@ -110,12 +103,12 @@ public class Account {
 
     @Builder
     public Account(Long accountNo, String accountEmail, String accountPw, String accountName,
-            String accountAddress, String accountPhoneNumber, Integer accountGender,
-            Integer accountPoint, Integer accountBookCnt, String accountNickname,
-            String accountBirthday, Book book, List<Hit> hits, List<Board> boards,
-            List<Comment> comments, boolean activated, List<WishList> wishLists, List<File> files,
-            List<Notice> notices,
-            Set<Authority> authorities) {
+                   String accountAddress, String accountPhoneNumber, Integer accountGender,
+                   Integer accountPoint, Integer accountBookCnt, String accountNickname,
+                   String accountBirthday, BookLog bookLog, List<Hit> hits, List<Board> boards,
+                   List<Comment> comments, boolean activated, List<WishList> wishLists, List<File> files,
+                   List<Notice> notices,
+                   Set<Authority> authorities) {
         this.accountNo = accountNo;
         this.accountEmail = accountEmail;
         this.accountPw = accountPw;
@@ -127,7 +120,7 @@ public class Account {
         this.accountBookCnt = accountBookCnt;
         this.accountNickname = accountNickname;
         this.accountBirthday = accountBirthday;
-        this.book = book;
+        this.bookLog = bookLog;
         this.hits = hits;
         this.boards = boards;
         this.comments = comments;
