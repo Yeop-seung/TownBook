@@ -5,6 +5,7 @@ import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
+import com.ssafy.townbook.model.entity.Board;
 import com.ssafy.townbook.model.entity.Book;
 import com.ssafy.townbook.model.entity.BookLog;
 import com.ssafy.townbook.model.entity.WishList;
@@ -30,21 +31,21 @@ public class MyPageServiceImpl implements MyPageService {
      * qr 코드 생성 및 반환
      *
      * @param accountEmail
-     * @return Object
+     * @return Optional<Object>
      * @throws WriterException
      * @throws IOException
      */
     @Override
-    public Object getQrCode(String accountEmail) throws WriterException, IOException {
+    public Optional<Object> getQrCode(String accountEmail) throws WriterException, IOException {
         int width = 200;
         int height = 200;
         BitMatrix matrix = new MultiFormatWriter().encode(accountEmail, BarcodeFormat.QR_CODE, width, height);
 
         try (ByteArrayOutputStream out = new ByteArrayOutputStream();) {
             MatrixToImageWriter.writeToStream(matrix, "PNG", out);
-            return ResponseEntity.ok()
+            return Optional.ofNullable(ResponseEntity.ok()
                     .contentType(MediaType.IMAGE_PNG)
-                    .body(out.toByteArray());
+                    .body(out.toByteArray()));
         }
     }
 
@@ -52,12 +53,12 @@ public class MyPageServiceImpl implements MyPageService {
      * 유저 번호를 통해 유저의 포인트 반환
      *
      * @param accountNo
-     * @return int
+     * @return Optional<Integer>
      * @throws Exception
      */
     @Override
-    public int getPoint(Long accountNo) throws Exception {
-        return myPageQueryRepository.findByName(accountNo).get(0).getAccountPoint();
+    public Optional<Integer> getPoint(Long accountNo) throws Exception {
+        return Optional.of(myPageQueryRepository.findAccount(accountNo).get().get(0).getAccountPoint());
     }
 
     /**
@@ -72,8 +73,8 @@ public class MyPageServiceImpl implements MyPageService {
         JSONArray jsonArray = new JSONArray();
 
         for (BookLog bookLog :
-                myPageQueryRepository.getBookLogByAccountNo(accountNo).get()) {
-            Book book = myPageQueryRepository.getBook(bookLog.getBook().getBookIsbn()).get();
+                myPageQueryRepository.findBookLogByAccountNo(accountNo).get()) {
+            Book book = myPageQueryRepository.findBook(bookLog.getBook().getBookIsbn()).get();
 
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("bookTitle", book.getBookTitle());
@@ -84,8 +85,8 @@ public class MyPageServiceImpl implements MyPageService {
         }
 
         for (BookLog bookLog :
-                myPageQueryRepository.getReceiveBookLog(accountNo).get()) {
-            Book book = myPageQueryRepository.getBook(bookLog.getBook().getBookIsbn()).get();
+                myPageQueryRepository.findReceiveBookLog(accountNo).get()) {
+            Book book = myPageQueryRepository.findBook(bookLog.getBook().getBookIsbn()).get();
 
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("bookTitle", book.getBookTitle());
@@ -108,8 +109,8 @@ public class MyPageServiceImpl implements MyPageService {
     public Optional<JSONArray> getDonateLog(Long accountNo) throws Exception {
         JSONArray jsonArray = new JSONArray();
         for (BookLog bookLog :
-                myPageQueryRepository.getBookLogByAccountNo(accountNo).get()) {
-            Book book = myPageQueryRepository.getBook(bookLog.getBook().getBookIsbn()).get();
+                myPageQueryRepository.findBookLogByAccountNo(accountNo).get()) {
+            Book book = myPageQueryRepository.findBook(bookLog.getBook().getBookIsbn()).get();
 
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("bookTitle", book.getBookTitle());
@@ -133,8 +134,8 @@ public class MyPageServiceImpl implements MyPageService {
     public Optional<JSONArray> getReceiveLog(Long receiverNo) throws Exception {
         JSONArray jsonArray = new JSONArray();
         for (BookLog bookLog :
-                myPageQueryRepository.getReceiveBookLog(receiverNo).get()) {
-            Book book = myPageQueryRepository.getBook(bookLog.getBook().getBookIsbn()).get();
+                myPageQueryRepository.findReceiveBookLog(receiverNo).get()) {
+            Book book = myPageQueryRepository.findBook(bookLog.getBook().getBookIsbn()).get();
 
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("bookTitle", book.getBookTitle());
@@ -156,10 +157,10 @@ public class MyPageServiceImpl implements MyPageService {
     @Override
     public Optional<JSONArray> getWishList(Long accountNo) throws Exception {
         JSONArray jsonArray = new JSONArray();
-        for (WishList wishList : myPageQueryRepository.getWishList(accountNo).get()
+        for (WishList wishList : myPageQueryRepository.findWishList(accountNo).get()
         ) {
-            BookLog bookLog = myPageQueryRepository.getBookLogByBookLogNo(wishList.getBookLog().getBookLogNo()).get();
-            Book book = myPageQueryRepository.getBook(bookLog.getBook().getBookIsbn()).get();
+            BookLog bookLog = myPageQueryRepository.findBookLogByBookLogNo(wishList.getBookLog().getBookLogNo()).get();
+            Book book = myPageQueryRepository.findBook(bookLog.getBook().getBookIsbn()).get();
 
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("bookLogNo", bookLog.getBookLogNo());
@@ -169,6 +170,29 @@ public class MyPageServiceImpl implements MyPageService {
 
             jsonArray.add(jsonObject);
 
+        }
+        return Optional.ofNullable(jsonArray);
+    }
+
+    /**
+     * 로그인 유저의 작성 게시글 목록 반환
+     *
+     * @param accountNo
+     * @return Optional<JSONArray>
+     * @throws Exception
+     */
+    @Override
+    public Optional<JSONArray> getBoardList(Long accountNo) throws Exception {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Board board : myPageQueryRepository.findBoard(accountNo).get()
+        ) {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("boardNo",board.getBoardNo());
+            jsonObject.put("boardTitle",board.getBoardTitle());
+            jsonObject.put("boardWriteDate",board.getBoardWriteDate());
+
+            jsonArray.add(jsonObject);
         }
         return Optional.ofNullable(jsonArray);
     }

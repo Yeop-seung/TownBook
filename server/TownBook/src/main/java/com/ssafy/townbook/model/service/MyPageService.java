@@ -8,9 +8,9 @@ import java.util.Optional;
 
 public interface MyPageService {
 
-    Object getQrCode(String accountEmail) throws WriterException, IOException;
+    Optional<Object> getQrCode(String accountEmail) throws WriterException, IOException;
 
-    int getPoint(Long accountNo) throws Exception;
+    Optional<Integer> getPoint(Long accountNo) throws Exception;
 
     Optional<JSONArray> getAllLog(Long accountNo) throws Exception;
 
@@ -19,4 +19,6 @@ public interface MyPageService {
     Optional<JSONArray> getReceiveLog(Long receiverNo) throws Exception;
 
     Optional<JSONArray> getWishList(Long accountNo) throws Exception;
+
+    Optional<JSONArray> getBoardList(Long accountNo) throws Exception;
 }
