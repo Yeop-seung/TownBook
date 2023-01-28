@@ -36,16 +36,16 @@ function Tables() {
           <Col md="12">
             <Card>
               <CardHeader>
-                <CardTitle tag="h4">Simple Table</CardTitle>
+                <CardTitle tag="h4">랭킹</CardTitle>
               </CardHeader>
               <CardBody>
                 <Table className="tablesorter" responsive>
                   <thead className="text-primary">
                     <tr>
-                      <th>Name</th>
-                      <th>Country</th>
-                      <th>City</th>
-                      <th className="text-center">Salary</th>
+                      <th>이름</th>
+                      <th>시</th>
+                      <th>동</th>
+                      <th className="text-center">포인트</th>
                     </tr>
                   </thead>
                   <tbody>
