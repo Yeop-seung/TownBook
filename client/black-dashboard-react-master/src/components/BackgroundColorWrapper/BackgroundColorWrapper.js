@@ -14,7 +14,9 @@ export default function BackgroundColorWrapper(props) {
   return (
     <BackgroundColorContext.Provider
       value={{ color: color, changeColor: changeColor }}
+      
     >
+      {console.log(props)}
       {props.children}
     </BackgroundColorContext.Provider>
   );

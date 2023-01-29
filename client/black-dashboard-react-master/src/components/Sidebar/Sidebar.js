@@ -34,6 +34,7 @@ import {
 var ps;
 
 function Sidebar(props) {
+  
   const location = useLocation();
   const sidebarRef = React.useRef(null);
   // verifies if routeName is the one active (in browser input)
@@ -91,6 +92,7 @@ function Sidebar(props) {
           className="simple-text logo-mini"
           onClick={props.toggleSidebar}
         >
+        
           <div className="logo-img">
             <img src={logo.imgSrc} alt="react-logo" />
           </div>
@@ -118,6 +120,7 @@ function Sidebar(props) {
                 {logoText}
               </div>
             ) : null}
+            {console.log(props)}
             <Nav>
               {routes.map((prop, key) => {
                 if (prop.redirect) return null;
