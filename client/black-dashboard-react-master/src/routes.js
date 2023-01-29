@@ -15,7 +15,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import Dashboard from "views/Dashboard.js";
+import Book from "views/Book.js";
 import Icons from "views/Icons.js";
 import Map from "views/Map.js";
 import Notifications from "views/Notifications.js";
@@ -27,15 +27,15 @@ import UserProfile from "views/UserProfile.js";
 var routes = [
   {
     path: "/dashboard",
-    name: "Dashboard",
+    name: "메인페이지",
     rtlName: "لوحة القيادة",
     icon: "tim-icons icon-chart-pie-36",
-    component: Dashboard,
+    component: Book,
     layout: "/admin"
   },
   {
     path: "/icons",
-    name: "Icons",
+    name: "커뮤니티",
     rtlName: "الرموز",
     icon: "tim-icons icon-atom",
     component: Icons,
@@ -43,7 +43,7 @@ var routes = [
   },
   {
     path: "/map",
-    name: "Map",
+    name: "도서검색",
     rtlName: "خرائط",
     icon: "tim-icons icon-pin",
     component: Map,
@@ -51,7 +51,7 @@ var routes = [
   },
   {
     path: "/notifications",
-    name: "Notifications",
+    name: "공지사항",
     rtlName: "إخطارات",
     icon: "tim-icons icon-bell-55",
     component: Notifications,
@@ -59,7 +59,7 @@ var routes = [
   },
   {
     path: "/user-profile",
-    name: "User Profile",
+    name: "마이페이지",
     rtlName: "ملف تعريفي للمستخدم",
     icon: "tim-icons icon-single-02",
     component: UserProfile,
@@ -67,7 +67,7 @@ var routes = [
   },
   {
     path: "/tables",
-    name: "Table List",
+    name: "랭킹",
     rtlName: "قائمة الجدول",
     icon: "tim-icons icon-puzzle-10",
     component: TableList,

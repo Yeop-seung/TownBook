@@ -50,7 +50,7 @@ import {
   chartExample4
 } from "variables/charts.js";
 
-function Dashboard(props) {
+function Book(props) {
   const [bigChartData, setbigChartData] = React.useState("data1");
   const setBgChartData = (name) => {
     setbigChartData(name);
@@ -532,4 +532,4 @@ function Dashboard(props) {
   );
 }
 
-export default Dashboard;
+export default Book;

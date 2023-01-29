@@ -106,11 +106,13 @@ function Admin(props) {
       {({ color, changeColor }) => (
         <React.Fragment>
           <div className="wrapper">
-            {/* 사이드바! */}
+            {/* 사이드바 상단 로고! */}
             <Sidebar
               routes={routes}
               logo={{
                 outterLink: "https://www.creative-tim.com/",
+                innerLink: "/admin/dashboard",
+
                 text: "동네북",
                 imgSrc: logo
               }}
