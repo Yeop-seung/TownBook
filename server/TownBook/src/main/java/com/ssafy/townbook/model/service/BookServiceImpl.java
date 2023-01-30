@@ -59,7 +59,7 @@ public class BookServiceImpl implements BookService {
      */
     @Override
     public BookDto findBookByBookIsbn(String bookIsbn) {
-        Book findBook = bookRepository.findBookByBookIsbn(bookIsbn);
+        Book findBook = bookRepository.findBookByBookIsbn(bookIsbn).get();
         return new BookDto(findBook);
     }
     
