@@ -29,10 +29,10 @@ public class AdminServiceImpl implements AdminService {
                 .map(AdminDto::new)
                 .collect(Collectors.toList());
     }
-    
+
     @Override
     public AdminDto findAccountByAccountNo(Long accountNo) {
-        Account findAccount = adminRepository.findAccountByAccountNo(accountNo);
+        Account findAccount = adminRepository.findAccountByAccountNo(accountNo).get();
         return new AdminDto(findAccount);
     }
 }

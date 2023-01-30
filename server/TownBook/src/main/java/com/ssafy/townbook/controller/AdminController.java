@@ -1,8 +1,8 @@
 package com.ssafy.townbook.controller;
 
-import com.ssafy.townbook.model.dto.AdminDto;
 import com.ssafy.townbook.model.service.AdminService;
-import java.util.List;
+
+import com.ssafy.townbook.model.service.MyPageServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,21 +14,28 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/admin")
 public class AdminController {
-    
-    private final AdminService adminService;
-    
+
     @Autowired
-    public AdminController(AdminService adminService) {
-        this.adminService = adminService;
-    }
-    
+    private AdminService adminService;
+    @Autowired
+    private MyPageServiceImpl myPageService;
+
     @GetMapping("")
-    public ResponseEntity<?> accounts() {
+    public ResponseEntity<?> findAccounts() {
         return new ResponseEntity<>(adminService.findAll(), HttpStatus.OK);
     }
-    
+
     @GetMapping("/{accountNo}")
     public ResponseEntity<?> findAccountByAccountNo(@PathVariable Long accountNo) {
         return new ResponseEntity<>(adminService.findAccountByAccountNo(accountNo), HttpStatus.OK);
     }
+
+    @GetMapping("/detail/{accountNo}/log")
+    public ResponseEntity<?> findBookLogByAccountNo(@PathVariable Long accountNo) throws Exception {
+        return new ResponseEntity<>(myPageService.findBookLogByAccountNo(accountNo), HttpStatus.OK);
+    }
+
+
+
+
 }

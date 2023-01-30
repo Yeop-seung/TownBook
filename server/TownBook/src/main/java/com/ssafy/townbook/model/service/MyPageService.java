@@ -10,15 +10,15 @@ public interface MyPageService {
 
     Optional<Object> getQrCode(String accountEmail) throws WriterException, IOException;
 
-    Integer getPoint(Long accountNo) throws Exception;
+    Integer findPointByAccountNo(Long accountNo) throws Exception;
 
-    JSONArray getAllLog(Long accountNo) throws Exception;
+    JSONArray findBookLogByAccountNo(Long accountNo) throws Exception;
 
-    JSONArray getDonateLog(Long accountNo) throws Exception;
+    JSONArray findBookLogDonateByAccountNo(Long accountNo) throws Exception;
 
-    JSONArray getReceiveLog(Long receiverNo) throws Exception;
+    JSONArray findBookLogReceiverByReceiverNo(Long receiverNo) throws Exception;
 
-    JSONArray getWishList(Long accountNo) throws Exception;
+    JSONArray findWishListByAccountNo(Long accountNo) throws Exception;
 
-    JSONArray getBoardList(Long accountNo) throws Exception;
+    JSONArray findBoardByAccountNo(Long accountNo) throws Exception;
 }
