@@ -8,30 +8,33 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @ToString
 @Entity
+@DynamicInsert
 public class DetailLocker {
-
+    
     @Id
     @Column(name = "detail_locker_no")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long detailLockerNo;
 
-    @OneToOne(mappedBy = "detailLocker")
-    private BookLog bookLog;
-
+//    @OneToOne(mappedBy = "detailLocker")
+//    private BookLog bookLog;
+    
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "`fk-locker-detail_locker`")
     private Locker locker;
-
+    
     @Column(name = "detail_locker_isEmpty")
     @ColumnDefault("false")
     private Boolean detailLockerIsEmpty;
-
+    
     @Builder
     public DetailLocker(Long detailLockerNo, Locker locker) {
         this.detailLockerNo = detailLockerNo;
