@@ -57,9 +57,7 @@ public class AccountDto {
         this.accountBirthDay = accountBirthDay;
         this.authorityDtoSet = authorityDtoSet;
     }
-
-
-
+    
     @Builder
     public static AccountDto from(Account account) {
         if (account == null) {
