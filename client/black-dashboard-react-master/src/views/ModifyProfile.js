@@ -79,16 +79,16 @@ function UserProfile() {
                   <Row>
                     <Col className="pr-md-1" md="6">
                       <FormGroup>
-                        <label>이름</label>
+                        <label>성</label>
                         <Input
                           defaultValue="Mike"
-                          placeholder="이름"
+                          placeholder="Company"
                           type="text"
                         />
                       </FormGroup>
                     </Col>
 
-                    {/* <Col className="pl-md-1" md="6">
+                    <Col className="pl-md-1" md="6">
                       <FormGroup>
                         <label>이름</label>
                         <Input
@@ -97,7 +97,7 @@ function UserProfile() {
                           type="text"
                         />
                       </FormGroup>
-                    </Col> */}
+                    </Col>
                   </Row>
 
                   <Row>

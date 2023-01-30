@@ -23,6 +23,8 @@ import Rtl from "views/Rtl.js";
 import TableList from "views/TableList.js";
 import Typography from "views/Typography.js";
 import UserProfile from "views/UserProfile.js";
+import SignUp from "views/SignUp";
+
 
 var routes = [
   {
@@ -73,21 +75,22 @@ var routes = [
     component: TableList,
     layout: "/admin"
   },
+  // {
+  //   path: "/typography",
+  //   name: "Typography",
+  //   rtlName: "طباعة",
+  //   icon: "tim-icons icon-align-center",
+  //   component: Typography,
+  //   layout: "/admin"
+  // },
   {
-    path: "/typography",
-    name: "Typography",
-    rtlName: "طباعة",
+    path: "/sign-up",
+    name: "회원가입",
+    // rtlName: "طباعة",
     icon: "tim-icons icon-align-center",
-    component: Typography,
+    component: SignUp,
     layout: "/admin"
-  },
-  {
-    path: "/rtl-support",
-    name: "RTL Support",
-    rtlName: "ار تي ال",
-    icon: "tim-icons icon-world",
-    component: Rtl,
-    layout: "/rtl"
   }
+ 
 ];
 export default routes;

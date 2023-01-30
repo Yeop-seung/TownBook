@@ -1,20 +1,4 @@
-/*!
 
-=========================================================
-* Black Dashboard React v1.2.1
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/black-dashboard-react
-* Copyright 2022 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/black-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React from "react";
 
 // reactstrap components
@@ -32,7 +16,7 @@ import {
   Col,
 } from "reactstrap";
 
-function UserProfile() {
+function SignUp() {
   return (
     <>
       <div className="content">
@@ -40,12 +24,12 @@ function UserProfile() {
           <Col md="8">
             <Card>
               <CardHeader>
-                <h5 className="title">마이페이지</h5>
+                <h5 className="title">회원가입</h5>
               </CardHeader>
               <CardBody>
                 <Form>
-                  <Row>
-                    <Col className="pr-md-1" md="5">
+                  
+                    {/* <Col className="pr-md-1" md="5">
                       <FormGroup>
                         <label>Company (disabled)</label>
                         <Input
@@ -55,57 +39,57 @@ function UserProfile() {
                           type="text"
                         />
                       </FormGroup>
-                    </Col>
-                    <Col className="px-md-1" md="3">
+                    </Col> */}
+                    <Col className="pr-md-1" md="5">
                       <FormGroup>
-                        <label>Username</label>
+                        <label>이름</label>
                         <Input
-                          defaultValue="michael23"
-                          placeholder="Username"
+                        //   defaultValue="이름을 입력해주세요"
+                          placeholder="이름을 입력해주세요"
                           type="text"
                         />
                       </FormGroup>
                     </Col>
-                    <Col className="pl-md-1" md="4">
+                    <Col className="pl-md-1" md="5">
                       <FormGroup>
                         <label htmlFor="exampleInputEmail1">
-                          Email address
+                          이메일
                         </label>
                         <Input placeholder="mike@email.com" type="email" />
                       </FormGroup>
                     </Col>
-                  </Row>
+                  
 
-                  <Row>
-                    <Col className="pr-md-1" md="6">
+                  
+                    <Col className="pr-md-1" md="5">
                       <FormGroup>
-                        <label>이름</label>
+                        <label>비밀번호</label>
                         <Input
-                          defaultValue="Mike"
-                          placeholder="이름"
+                        //   defaultValue="Mike"
+                          placeholder="비밀번호를 입력해주세요"
                           type="text"
                         />
                       </FormGroup>
                     </Col>
 
-                    {/* <Col className="pl-md-1" md="6">
+                    <Col className="pl-md-1" md="5">
                       <FormGroup>
-                        <label>이름</label>
+                        <label>비밀번호 확인</label>
                         <Input
-                          defaultValue="Andrew"
-                          placeholder="Last Name"
+                        //   defaultValue="Andrew"
+                          placeholder="비밀번호를 다시 입력해주세요"
                           type="text"
                         />
                       </FormGroup>
-                    </Col> */}
-                  </Row>
+                    </Col>
+                  
 
                   <Row>
                     <Col md="12">
                       <FormGroup>
                         <label>주소</label>
                         <Input
-                          defaultValue="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
+                        //   defaultValue="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
                           placeholder="Home Address"
                           type="text"
                         />
@@ -116,9 +100,9 @@ function UserProfile() {
                   <Row>
                     <Col className="pr-md-1" md="4">
                       <FormGroup>
-                        <label>City</label>
+                        <label>닉네임</label>
                         <Input
-                          defaultValue="Mike"
+                        //   defaultValue="Mike"
                           placeholder="City"
                           type="text"
                         />
@@ -127,7 +111,7 @@ function UserProfile() {
 
                     <Col className="px-md-1" md="4">
                       <FormGroup>
-                        <label>Country</label>
+                        <label>생년월일</label>
                         <Input
                           defaultValue="Andrew"
                           placeholder="Country"
@@ -136,12 +120,7 @@ function UserProfile() {
                       </FormGroup>
                     </Col>
 
-                    <Col className="pl-md-1" md="4">
-                      <FormGroup>
-                        <label>QR 코드</label>
-                        {/* <Input placeholder="QR Code" type="number" /> */}
-                      </FormGroup>
-                    </Col>
+                    
                   </Row>
 
                   <Row>
@@ -158,35 +137,25 @@ function UserProfile() {
                         />
                       </FormGroup>
                     </Col>
-                    <Col md="4">
-                      <Card className="card-user">
-                        <CardBody>
-                          {/* <CardText /> */}
-                          <div className="author">
-                            <a
-                              href="#pablo"
-                              onClick={(e) => e.preventDefault()}
-                            >
-                              <img
-                                alt="..."
-                                className="avatar"
-                                src={require("assets/img/qrcode.png")}
-                              />
-                            </a>
-                          </div>
-                        </CardBody>
-                      </Card>
-                    </Col>
+                    
                   </Row>
                 </Form>
               </CardBody>
               <CardFooter>
                 <Button className="btn-fill" color="primary" type="submit">
-                  Save
+                  가입완료
                 </Button>
               </CardFooter>
             </Card>
           </Col>
+
+
+
+
+
+
+
+
           <Col md="4">
             <Card className="card-user">
               <CardBody>
@@ -233,4 +202,4 @@ function UserProfile() {
   );
 }
 
-export default UserProfile;
+export default SignUp;

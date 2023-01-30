@@ -82,7 +82,7 @@ function AdminNavbar(props) {
   };
   // this function is to open the Search modal
 
-  // Search창 열고닫기
+  // QR창 열고닫기
   const toggleModalSearch = () => {
     setmodalSearch(!modalSearch);
   };
@@ -148,8 +148,8 @@ function AdminNavbar(props) {
             <Nav className="ml-auto" navbar>
               {/* QR 아이콘*/}
               <InputGroup className="search-bar">
-                <Button color="link" onClick={toggleModalSearch}>
-                  <FontAwesomeIcon icon={faQrcode} size="xl" />
+                <Button onClick={toggleModalSearch} color="link">
+                  <FontAwesomeIcon icon={faQrcode} size="xl"/>
                   <span className="d-lg-none d-md-block">QRcode</span>
                 </Button>
               </InputGroup>
