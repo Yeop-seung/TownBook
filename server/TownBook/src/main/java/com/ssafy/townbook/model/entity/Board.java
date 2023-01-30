@@ -42,8 +42,8 @@ public class Board {
     private String boardContent;
 
     @NotNull
-    @Column(name = "board_write_date")
-    private LocalDateTime boardWriteDate;
+    @Column(name = "board_write_date_time")
+    private LocalDateTime boardWriteDateTime;
 
     @NotNull
     @Column(name = "board_views", columnDefinition = "Integer default 0")
@@ -64,12 +64,12 @@ public class Board {
 
     @Builder
     public Board(Long boardNo, String boardTitle, String boardContent,
-            LocalDateTime boardWriteDate, Integer boardViews, Boolean boardState, List<Hit> hit,
+            LocalDateTime boardWriteDateTime, Integer boardViews, Boolean boardState, List<Hit> hit,
             List<Comment> comment, Account account) {
         this.boardNo = boardNo;
         this.boardTitle = boardTitle;
         this.boardContent = boardContent;
-        this.boardWriteDate = boardWriteDate;
+        this.boardWriteDateTime = boardWriteDateTime;
         this.boardViews = boardViews;
         this.boardState = boardState;
         this.hit = hit;

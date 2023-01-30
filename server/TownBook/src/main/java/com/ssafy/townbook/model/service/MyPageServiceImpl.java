@@ -87,7 +87,7 @@ public class MyPageServiceImpl implements MyPageService {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("bookTitle", book.getBookTitle());
             jsonObject.put("bookVol", book.getBookVol());
-            jsonObject.put("bookLogDonateDate", bookLog.getBookLogDonateDate());
+            jsonObject.put("bookLogDonateDateTime", bookLog.getBookLogDonateDateTime());
 
             jsonArray.add(jsonObject);
         }
@@ -99,7 +99,7 @@ public class MyPageServiceImpl implements MyPageService {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("bookTitle", book.getBookTitle());
             jsonObject.put("bookVol", book.getBookVol());
-            jsonObject.put("bookLogReceiveDate", bookLog.getBookLogReceiveDate());
+            jsonObject.put("bookLogReceiveDateTime", bookLog.getBookLogReceiveDateTime());
 
             jsonArray.add(jsonObject);
         }
@@ -123,7 +123,7 @@ public class MyPageServiceImpl implements MyPageService {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("bookTitle", book.getBookTitle());
             jsonObject.put("bookVol", book.getBookVol());
-            jsonObject.put("bookLogDonateDate", bookLog.getBookLogDonateDate());
+            jsonObject.put("bookLogDonateDateTime", bookLog.getBookLogDonateDateTime());
 
             jsonArray.add(jsonObject);
         }
@@ -147,7 +147,7 @@ public class MyPageServiceImpl implements MyPageService {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("bookTitle", book.getBookTitle());
             jsonObject.put("bookVol", book.getBookVol());
-            jsonObject.put("bookLogReceiveDate", bookLog.getBookLogReceiveDate());
+            jsonObject.put("bookLogReceiveDateTime", bookLog.getBookLogReceiveDateTime());
 
             jsonArray.add(jsonObject);
         }
@@ -197,7 +197,7 @@ public class MyPageServiceImpl implements MyPageService {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("boardNo", board.getBoardNo());
             jsonObject.put("boardTitle", board.getBoardTitle());
-            jsonObject.put("boardWriteDate", board.getBoardWriteDate());
+            jsonObject.put("boardWriteDateTime", board.getBoardWriteDateTime());
 
             jsonArray.add(jsonObject);
         }

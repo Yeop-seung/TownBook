@@ -40,11 +40,11 @@ public class BookLog {
     private Long bookLogReceiverNo;
     
     @NotNull
-    @Column(name = "book_log_donate_date")
-    private LocalDateTime bookLogDonateDate;
+    @Column(name = "book_log_donate_date_time")
+    private LocalDateTime bookLogDonateDateTime;
     
-    @Column(name = "book_log_receive_date")
-    private LocalDate bookLogReceiveDate;
+    @Column(name = "book_log_receive_date_time")
+    private LocalDateTime bookLogReceiveDateTime;
     
     
     @OneToOne(fetch = FetchType.LAZY)
@@ -66,13 +66,13 @@ public class BookLog {
     @OneToMany(mappedBy = "bookLog")
     private List<WishList> wishLists = new ArrayList<>();
 
-    public BookLog(Long bookLogNo, Boolean bookLogState, String bookLogReview, Long bookReceiverNo, LocalDateTime bookLogDonateDate, LocalDate bookLogReceiveDate, Locker locker, DetailLocker detailLocker, Account account, Book book, List<WishList> wishLists) {
+    public BookLog(Long bookLogNo, Boolean bookLogState, String bookLogReview, Long bookLogReceiverNo, LocalDateTime bookLogDonateDateTime, LocalDateTime bookLogReceiveDateTime, Locker locker, DetailLocker detailLocker, Account account, Book book, List<WishList> wishLists) {
         this.bookLogNo = bookLogNo;
         this.bookLogState = bookLogState;
         this.bookLogReview = bookLogReview;
         this.bookLogReceiverNo = bookLogReceiverNo;
-        this.bookLogDonateDate = bookLogDonateDate;
-        this.bookLogReceiveDate = bookLogReceiveDate;
+        this.bookLogDonateDateTime = bookLogDonateDateTime;
+        this.bookLogReceiveDateTime = bookLogReceiveDateTime;
         this.locker = locker;
         this.detailLocker = detailLocker;
         this.account = account;
