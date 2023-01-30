@@ -1,6 +1,7 @@
 package com.ssafy.townbook.controller;
 
 import com.ssafy.townbook.model.service.AdminService;
+import com.ssafy.townbook.model.service.MyPageServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,7 @@ public class AdminController {
     }
     
     private AdminService adminService;
+    
     @Autowired
     private MyPageServiceImpl myPageService;
     
