@@ -8,15 +8,17 @@ import java.util.Optional;
 
 public interface MyPageService {
 
-    Object getQrCode(String accountEmail) throws WriterException, IOException;
+    Optional<Object> getQrCode(String accountEmail) throws WriterException, IOException;
 
-    int getPoint(Long accountNo) throws Exception;
+    Integer getPoint(Long accountNo) throws Exception;
 
-    Optional<JSONArray> getAllLog(Long accountNo) throws Exception;
+    JSONArray getAllLog(Long accountNo) throws Exception;
 
-    Optional<JSONArray> getDonateLog(Long accountNo) throws Exception;
+    JSONArray getDonateLog(Long accountNo) throws Exception;
 
-    Optional<JSONArray> getReceiveLog(Long receiverNo) throws Exception;
+    JSONArray getReceiveLog(Long receiverNo) throws Exception;
 
-    Optional<JSONArray> getWishList(Long accountNo) throws Exception;
+    JSONArray getWishList(Long accountNo) throws Exception;
+
+    JSONArray getBoardList(Long accountNo) throws Exception;
 }

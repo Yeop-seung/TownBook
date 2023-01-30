@@ -1,7 +1,9 @@
 package com.ssafy.townbook.model.repository;
 
 import com.ssafy.townbook.model.entity.Account;
+
 import java.util.Optional;
+
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -12,16 +14,25 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
 
     /**
      * 핸드폰 번호로 account 가져오기
+     *
      * @param accountPhoneNumber
-     * @return
+     * @return Optional<Account>
      */
-    Account findByAccountPhoneNumber (String accountPhoneNumber);
+    Optional<Account> findByAccountPhoneNumber(String accountPhoneNumber);
 
     /**
      * 이메일로 account 가져오기
+     *
      * @param accountEmail
-     * @return
+     * @return Optional<Account>
      */
-    Optional<Account> findByAccountEmail (String accountEmail);
+    Optional<Account> findByAccountEmail(String accountEmail);
 
+    /**
+     * 회원 넘버로 account 가져오기
+     *
+     * @param accountNo
+     * @return Optional<Account>
+     */
+    Optional<Account> findByAccountNo(Long accountNo);
 }

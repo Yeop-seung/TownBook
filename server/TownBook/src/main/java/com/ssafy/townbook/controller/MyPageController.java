@@ -25,7 +25,7 @@ public class MyPageController {
      * 로그인 유저의 이메일로 만든 QR코드 반환
      *
      * @param accountEmail
-     * @return Object
+     * @return Optional<Object>
      * @throws WriterException
      * @throws IOException
      */
@@ -39,7 +39,7 @@ public class MyPageController {
      * 로그인 유저의 포인트 반환
      *
      * @param accountNo
-     * @return int
+     * @return Optional<Integer>
      * @throws Exception
      */
     @GetMapping("/myPoint/{accountNo}")
@@ -93,5 +93,17 @@ public class MyPageController {
     @GetMapping("/wishList/{accountNo}")
     public ResponseEntity<?> getWishList(@PathVariable Long accountNo) throws Exception{
         return new ResponseEntity<>(myPageService.getWishList(accountNo),HttpStatus.OK);
+    }
+
+    /**
+     * 로그인 유저의 작성 게시글 목록 반환
+     *
+     * @param accountNo
+     * @return Optional<JSONArray>
+     * @throws Exception
+     */
+    @GetMapping("/myWrite/{accountNo}")
+    public ResponseEntity<?> getBoardList(@PathVariable Long accountNo) throws Exception{
+        return new ResponseEntity<>(myPageService.getBoardList(accountNo), HttpStatus.OK);
     }
 }
