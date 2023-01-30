@@ -11,19 +11,20 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.DynamicInsert;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @ToString
 @Entity
+@DynamicInsert
 public class Book {
     
     @Id
     @NotNull
     @Column(name = "book_isbn")
     private String bookIsbn;
-    
     
     @NotNull
     @Column(name = "book_subject")

@@ -1,8 +1,6 @@
 package com.ssafy.townbook.controller;
 
-import com.ssafy.townbook.model.dto.BookDto;
 import com.ssafy.townbook.model.service.BookService;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

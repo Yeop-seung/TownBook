@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
-
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,15 +19,18 @@ import org.hibernate.annotations.ColumnDefault;
 @NoArgsConstructor
 @ToString
 @Entity
+@DynamicInsert
 public class Locker {
 
     @Id
     @Column(name = "locker_no")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long lockerNo;
 
     @NotNull
     @Column(name = "locker_region")
     private String lockerRegion;
+    
 
     @NotNull
     @Column(name = "locker_latitude")
@@ -53,5 +55,10 @@ public class Locker {
         this.lockerLongitude = lockerLongitude;
         this.lockerBookCnt = lockerBookCnt;
         this.detailLocker = detailLocker;
+    }
+    
+    public void addDetailLocker(DetailLocker detailLocker) {
+        this.getDetailLocker().add(detailLocker);
+        detailLocker.setLocker(this);
     }
 }
