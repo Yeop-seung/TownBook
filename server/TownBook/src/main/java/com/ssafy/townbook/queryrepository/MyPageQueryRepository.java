@@ -34,6 +34,6 @@ public class MyPageQueryRepository {
     }
 
     public Optional<List<Board>> findBoard(Long accountNo) throws Exception{
-        return Optional.ofNullable(queryFactory.selectFrom(board).where(board.account.accountNo.eq(accountNo)).fetch());
+        return Optional.ofNullable(queryFactory.selectFrom(board).where(board.boardState.eq(true).and(board.account.accountNo.eq(accountNo))).fetch());
     }
 }

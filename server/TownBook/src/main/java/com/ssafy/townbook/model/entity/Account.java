@@ -4,17 +4,7 @@ package com.ssafy.townbook.model.entity;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
@@ -48,7 +38,7 @@ public class Account {
 
     @Column(name = "account_name", length = 50)
     @NotNull
-    String accountName;
+    private String accountName;
 
     @Column(name = "account_address")
     @NotNull
@@ -88,7 +78,7 @@ public class Account {
     @OneToMany(mappedBy = "account")
     private List<Hit> hits = new ArrayList<>();
 
-    @OneToMany(mappedBy = "account")
+    @OneToMany(mappedBy = "account",fetch = FetchType.LAZY)
     private List<Board> boards = new ArrayList<>();
 
     @OneToMany(mappedBy = "account")
