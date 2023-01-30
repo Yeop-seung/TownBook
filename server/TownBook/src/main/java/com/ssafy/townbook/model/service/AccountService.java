@@ -2,6 +2,9 @@ package com.ssafy.townbook.model.service;
 
 import com.ssafy.townbook.model.dto.AccountDto;
 import com.ssafy.townbook.model.entity.Account;
+import net.minidev.json.JSONArray;
+
+import java.util.List;
 
 public interface AccountService {
     AccountDto signup(AccountDto accountDto);
@@ -17,4 +20,6 @@ public interface AccountService {
     Boolean accountRemove(String accountEmail, String accountPw);
 
     Boolean updatePassword(String accountEmail, String tmpPassword);
+
+    JSONArray findAccountBookCnt(Long accountNo) throws Exception;
 }

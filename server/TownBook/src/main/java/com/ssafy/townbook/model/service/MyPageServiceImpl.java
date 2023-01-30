@@ -65,7 +65,7 @@ public class MyPageServiceImpl implements MyPageService {
      * @throws Exception
      */
     @Override
-    public Integer getPoint(Long accountNo) throws Exception {
+    public Integer findPointByAccountNo(Long accountNo) throws Exception {
         return accountRepository.findByAccountNo(accountNo).get().getAccountPoint();
     }
 
@@ -77,7 +77,7 @@ public class MyPageServiceImpl implements MyPageService {
      * @throws Exception
      */
     @Override
-    public JSONArray getAllLog(Long accountNo) throws Exception {
+    public JSONArray findBookLogByAccountNo(Long accountNo) throws Exception {
         JSONArray jsonArray = new JSONArray();
 
         for (BookLog bookLog :
@@ -114,7 +114,7 @@ public class MyPageServiceImpl implements MyPageService {
      * @throws Exception
      */
     @Override
-    public JSONArray getDonateLog(Long accountNo) throws Exception {
+    public JSONArray findBookLogDonateByAccountNo(Long accountNo) throws Exception {
         JSONArray jsonArray = new JSONArray();
         for (BookLog bookLog :
                 myPageQueryRepository.findBookLogByAccountNo(accountNo).get()) {
@@ -138,7 +138,7 @@ public class MyPageServiceImpl implements MyPageService {
      * @throws Exception
      */
     @Override
-    public JSONArray getReceiveLog(Long receiverNo) throws Exception {
+    public JSONArray findBookLogReceiverByReceiverNo(Long receiverNo) throws Exception {
         JSONArray jsonArray = new JSONArray();
         for (BookLog bookLog :
                 myPageQueryRepository.findReceiveBookLog(receiverNo).get()) {
@@ -162,7 +162,7 @@ public class MyPageServiceImpl implements MyPageService {
      * @throws Exception
      */
     @Override
-    public JSONArray getWishList(Long accountNo) throws Exception {
+    public JSONArray findWishListByAccountNo(Long accountNo) throws Exception {
         JSONArray jsonArray = new JSONArray();
         for (WishList wishList : myPageQueryRepository.findWishList(accountNo).get()
         ) {
@@ -189,7 +189,7 @@ public class MyPageServiceImpl implements MyPageService {
      * @throws Exception
      */
     @Override
-    public JSONArray getBoardList(Long accountNo) throws Exception {
+    public JSONArray findBoardByAccountNo(Long accountNo) throws Exception {
         JSONArray jsonArray = new JSONArray();
 
         for (Board board : myPageQueryRepository.findBoard(accountNo).get()
