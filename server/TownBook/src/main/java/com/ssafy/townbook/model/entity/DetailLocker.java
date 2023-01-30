@@ -1,5 +1,6 @@
 package com.ssafy.townbook.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import lombok.Builder;
@@ -27,6 +28,7 @@ public class DetailLocker {
 //    private BookLog bookLog;
     
     @NotNull
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "`fk-locker-detail_locker`")
     private Locker locker;
@@ -36,8 +38,9 @@ public class DetailLocker {
     private Boolean detailLockerIsEmpty;
     
     @Builder
-    public DetailLocker(Long detailLockerNo, Locker locker) {
+    public DetailLocker(Long detailLockerNo, Locker locker, Boolean detailLockerIsEmpty) {
         this.detailLockerNo = detailLockerNo;
         this.locker = locker;
+        this.detailLockerIsEmpty = detailLockerIsEmpty;
     }
 }

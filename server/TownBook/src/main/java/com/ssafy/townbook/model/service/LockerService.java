@@ -9,5 +9,5 @@ public interface LockerService {
     
     LockerDto findLockerByLockerNo(Long lockerNo);
     
-    LockerDto addLocker(String lockerRegion);
+    LockerDto addLocker(String lockerRegion, int detailLockerCount);
 }

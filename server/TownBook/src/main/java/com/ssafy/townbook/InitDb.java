@@ -1,20 +1,16 @@
 package com.ssafy.townbook;
 
-import com.ssafy.townbook.model.dto.AdminDto;
-import com.ssafy.townbook.model.dto.BookDto;
 import com.ssafy.townbook.model.entity.Account;
 import com.ssafy.townbook.model.entity.Authority;
 import com.ssafy.townbook.model.entity.Book;
 import com.ssafy.townbook.model.entity.DetailLocker;
 import com.ssafy.townbook.model.entity.Locker;
-import com.ssafy.townbook.model.repository.DetailLockerRepository;
 import com.ssafy.townbook.model.repository.LockerRepository;
 import com.ssafy.townbook.model.service.AdminService;
 import com.ssafy.townbook.model.service.BookService;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Collections;
-import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
@@ -42,7 +38,6 @@ public class InitDb {
         initService.bookInit();
         initService.accountInit();
         initService.lockerInit();
-        initService.bookLogInit();
     }
     
     @Component
@@ -54,7 +49,6 @@ public class InitDb {
         public final BookService bookService;
         public final AdminService adminService;
         public final LockerRepository lockerRepository;
-        public final DetailLockerRepository detailLockerRepository;
         
         public void bookInit() {
             Book book1 = createBook("8984993751", "8", "토지", "박경리", "커뮤니케이션 북스", convertDate("20051103"),
@@ -133,24 +127,6 @@ public class InitDb {
                 locker.addDetailLocker(detailLocker);
                 em.persist(detailLocker);
             }
-        }
-        
-        public void bookLogInit() {
-            List<BookDto> books = bookService.findAll();
-            List<AdminDto> accounts = adminService.findAll();
-//            List<Locker> lockers = lockerRepository.findAll();
-//            List<DetailLocker> detailLockers = detailLockerRepository.findAll();
-            
-            checkAllElement(books);
-            checkAllElement(accounts);
-//            checkAllElement(lockers);
-//            checkAllElement(detailLockers);
-        }
-    }
-    
-    static void checkAllElement(List list) {
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println("list.get(i) = " + list.get(i));
         }
     }
     

@@ -33,8 +33,8 @@ public class LockerController {
         return new ResponseEntity<>(lockerService.findLockerByLockerNo(lockerNo), HttpStatus.OK);
     }
     
-    @PostMapping("/add/{lockerRegion}")
-    public ResponseEntity<?> addLocker(@PathVariable String lockerRegion) {
-        return new ResponseEntity<>(lockerService.addLocker(lockerRegion), HttpStatus.OK);
+    @PostMapping("/add/{lockerRegion}/{detailLockerCount}")
+    public ResponseEntity<?> addLocker(@PathVariable String lockerRegion, @PathVariable int detailLockerCount) {
+        return new ResponseEntity<>(lockerService.addLocker(lockerRegion, detailLockerCount), HttpStatus.OK);
     }
 }
