@@ -26,6 +26,12 @@ public class LockerServiceImpl implements LockerService {
         this.detailLockerRepository = detailLockerRepository;
     }
     
+    /**
+     * 전체 보관함 및 보관함에 할당된 세부 보관함 조회
+     * 보관함 DTO로 변환하여 반환
+     *
+     * @return List
+     */
     @Override
     public List<LockerDto> findAll() {
         List<Locker> findLockers = lockerRepository.findAll();
@@ -34,12 +40,27 @@ public class LockerServiceImpl implements LockerService {
                 .collect(Collectors.toList());
     }
     
+    /**
+     * 단일 보관함 및 보관함에 할당된 세부 보관함 조회
+     * 보관함 DTO로 변환하여 반환
+     *
+     * @param lockerNo
+     * @return LockerDto
+     */
     @Override
     public LockerDto findLockerByLockerNo(Long lockerNo) {
         Locker findLocker = lockerRepository.findLockerByLockerNo(lockerNo);
         return new LockerDto(findLocker);
     }
     
+    /**
+     * 보관함 및 세부 보관함을 생성한다.
+     * 보관함 이름, 세부 보관함 개수 PathVariable
+     *
+     * @param lockerRegion
+     * @param detailLockerCount
+     * @return LockerDto
+     */
     @Override
     @Transactional
     public LockerDto addLocker(String lockerRegion, int detailLockerCount) {

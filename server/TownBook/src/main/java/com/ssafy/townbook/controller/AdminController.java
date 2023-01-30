@@ -20,11 +20,24 @@ public class AdminController {
         this.adminService = adminService;
     }
     
+    /**
+     * 전체 회원 조회
+     * DTO로 변환하여 반환한다.
+     *
+     * @return List
+     */
     @GetMapping("")
     public ResponseEntity<?> accounts() {
         return new ResponseEntity<>(adminService.findAll(), HttpStatus.OK);
     }
     
+    /**
+     * 회원번호로 단일 회원을 조회
+     * DTO로 변환하여 반환한다.
+     *
+     * @param accountNo
+     * @return AdminDto
+     */
     @GetMapping("/{accountNo}")
     public ResponseEntity<?> findAccountByAccountNo(@PathVariable Long accountNo) {
         return new ResponseEntity<>(adminService.findAccountByAccountNo(accountNo), HttpStatus.OK);

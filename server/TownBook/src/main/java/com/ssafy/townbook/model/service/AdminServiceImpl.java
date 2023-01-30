@@ -22,6 +22,12 @@ public class AdminServiceImpl implements AdminService {
         this.adminRepository = adminRepository;
     }
     
+    /**
+     * 전체 회원 조회
+     * DTO로 변환하여 반환한다.
+     *
+     * @return List
+     */
     @Override
     public List<AdminDto> findAll() {
         List<Account> findAccounts = adminRepository.findAll();
@@ -30,6 +36,13 @@ public class AdminServiceImpl implements AdminService {
                 .collect(Collectors.toList());
     }
     
+    /**
+     * 회원번호로 단일 회원을 조회
+     * DTO로 변환하여 반환한다.
+     *
+     * @param accountNo
+     * @return AdminDto
+     */
     @Override
     public AdminDto findAccountByAccountNo(Long accountNo) {
         Account findAccount = adminRepository.findAccountByAccountNo(accountNo);

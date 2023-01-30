@@ -23,16 +23,37 @@ public class LockerController {
         this.lockerService = lockerService;
     }
     
+    /**
+     * 전체 보관함 및 보관함에 할당된 세부 보관함 조회
+     * 보관함 DTO로 변환하여 반환
+     *
+     * @return List
+     */
     @GetMapping("")
-    public ResponseEntity<?> lockers() throws Exception {
+    public ResponseEntity<?> lockers() {
         return new ResponseEntity<>(lockerService.findAll(), HttpStatus.OK);
     }
     
+    /**
+     * 단일 보관함 및 보관함에 할당된 세부 보관함 조회
+     * 보관함 DTO로 변환하여 반환
+     *
+     * @param lockerNo
+     * @return LockerDto
+     */
     @GetMapping("/{lockerNo}")
     public ResponseEntity<?> findLockerByLockerNo(@PathVariable Long lockerNo) {
         return new ResponseEntity<>(lockerService.findLockerByLockerNo(lockerNo), HttpStatus.OK);
     }
     
+    /**
+     * 보관함 및 세부 보관함을 생성한다.
+     * 보관함 이름, 세부 보관함 개수 PathVariable
+     *
+     * @param lockerRegion
+     * @param detailLockerCount
+     * @return LockerDto
+     */
     @PostMapping("/add/{lockerRegion}/{detailLockerCount}")
     public ResponseEntity<?> addLocker(@PathVariable String lockerRegion, @PathVariable int detailLockerCount) {
         return new ResponseEntity<>(lockerService.addLocker(lockerRegion, detailLockerCount), HttpStatus.OK);
