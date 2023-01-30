@@ -9,6 +9,8 @@ import com.ssafy.townbook.model.entity.Board;
 import com.ssafy.townbook.model.entity.Book;
 import com.ssafy.townbook.model.entity.BookLog;
 import com.ssafy.townbook.model.entity.WishList;
+import com.ssafy.townbook.model.repository.AccountRepository;
+import com.ssafy.townbook.model.repository.BookRepository;
 import com.ssafy.townbook.queryrepository.MyPageQueryRepository;
 import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
@@ -26,6 +28,12 @@ import java.util.*;
 public class MyPageServiceImpl implements MyPageService {
     @Autowired
     private MyPageQueryRepository myPageQueryRepository;
+
+    @Autowired
+    private AccountRepository accountRepository;
+
+    @Autowired
+    private BookRepository bookRepository;
 
     /**
      * qr 코드 생성 및 반환
@@ -57,24 +65,24 @@ public class MyPageServiceImpl implements MyPageService {
      * @throws Exception
      */
     @Override
-    public Optional<Integer> getPoint(Long accountNo) throws Exception {
-        return Optional.of(myPageQueryRepository.findAccount(accountNo).get().get(0).getAccountPoint());
+    public Integer getPoint(Long accountNo) throws Exception {
+        return accountRepository.findByAccountNo(accountNo).get().getAccountPoint();
     }
 
     /**
      * 로그인 유저의 책 기부/수령 전체 로그와 책 정보 반환
      *
      * @param accountNo
-     * @return Optional<JSONArray>
+     * @return JSONArray
      * @throws Exception
      */
     @Override
-    public Optional<JSONArray> getAllLog(Long accountNo) throws Exception {
+    public JSONArray getAllLog(Long accountNo) throws Exception {
         JSONArray jsonArray = new JSONArray();
 
         for (BookLog bookLog :
                 myPageQueryRepository.findBookLogByAccountNo(accountNo).get()) {
-            Book book = myPageQueryRepository.findBook(bookLog.getBook().getBookIsbn()).get();
+            Book book = bookRepository.findBookByBookIsbn(bookLog.getBook().getBookIsbn()).get();
 
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("bookTitle", book.getBookTitle());
@@ -86,7 +94,7 @@ public class MyPageServiceImpl implements MyPageService {
 
         for (BookLog bookLog :
                 myPageQueryRepository.findReceiveBookLog(accountNo).get()) {
-            Book book = myPageQueryRepository.findBook(bookLog.getBook().getBookIsbn()).get();
+            Book book = bookRepository.findBookByBookIsbn(bookLog.getBook().getBookIsbn()).get();
 
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("bookTitle", book.getBookTitle());
@@ -95,22 +103,22 @@ public class MyPageServiceImpl implements MyPageService {
 
             jsonArray.add(jsonObject);
         }
-        return Optional.ofNullable(jsonArray);
+        return jsonArray;
     }
 
     /**
      * 로그인 유저의 기부 목록 반환
      *
      * @param accountNo
-     * @return Optional<JSONArray>
+     * @return JSONArray
      * @throws Exception
      */
     @Override
-    public Optional<JSONArray> getDonateLog(Long accountNo) throws Exception {
+    public JSONArray getDonateLog(Long accountNo) throws Exception {
         JSONArray jsonArray = new JSONArray();
         for (BookLog bookLog :
                 myPageQueryRepository.findBookLogByAccountNo(accountNo).get()) {
-            Book book = myPageQueryRepository.findBook(bookLog.getBook().getBookIsbn()).get();
+            Book book = bookRepository.findBookByBookIsbn(bookLog.getBook().getBookIsbn()).get();
 
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("bookTitle", book.getBookTitle());
@@ -119,23 +127,22 @@ public class MyPageServiceImpl implements MyPageService {
 
             jsonArray.add(jsonObject);
         }
-        return Optional.ofNullable(jsonArray);
+        return jsonArray;
     }
 
     /**
      * 로그인 유저의 수령 목록 반환
      *
      * @param receiverNo
-     * @return Optional<JSONArray>
-     * @throws Exception
+     * @return JSONArray
      * @throws Exception
      */
     @Override
-    public Optional<JSONArray> getReceiveLog(Long receiverNo) throws Exception {
+    public JSONArray getReceiveLog(Long receiverNo) throws Exception {
         JSONArray jsonArray = new JSONArray();
         for (BookLog bookLog :
                 myPageQueryRepository.findReceiveBookLog(receiverNo).get()) {
-            Book book = myPageQueryRepository.findBook(bookLog.getBook().getBookIsbn()).get();
+            Book book = bookRepository.findBookByBookIsbn(bookLog.getBook().getBookIsbn()).get();
 
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("bookTitle", book.getBookTitle());
@@ -144,23 +151,23 @@ public class MyPageServiceImpl implements MyPageService {
 
             jsonArray.add(jsonObject);
         }
-        return Optional.ofNullable(jsonArray);
+        return jsonArray;
     }
 
     /**
      * 로그인 유저의 책 찜 목록 반환
      *
      * @param accountNo
-     * @return Optional<JSONArray>
+     * @return JSONArray
      * @throws Exception
      */
     @Override
-    public Optional<JSONArray> getWishList(Long accountNo) throws Exception {
+    public JSONArray getWishList(Long accountNo) throws Exception {
         JSONArray jsonArray = new JSONArray();
         for (WishList wishList : myPageQueryRepository.findWishList(accountNo).get()
         ) {
             BookLog bookLog = myPageQueryRepository.findBookLogByBookLogNo(wishList.getBookLog().getBookLogNo()).get();
-            Book book = myPageQueryRepository.findBook(bookLog.getBook().getBookIsbn()).get();
+            Book book = bookRepository.findBookByBookIsbn(bookLog.getBook().getBookIsbn()).get();
 
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("bookLogNo", bookLog.getBookLogNo());
@@ -171,29 +178,29 @@ public class MyPageServiceImpl implements MyPageService {
             jsonArray.add(jsonObject);
 
         }
-        return Optional.ofNullable(jsonArray);
+        return jsonArray;
     }
 
     /**
      * 로그인 유저의 작성 게시글 목록 반환
      *
      * @param accountNo
-     * @return Optional<JSONArray>
+     * @return JSONArray
      * @throws Exception
      */
     @Override
-    public Optional<JSONArray> getBoardList(Long accountNo) throws Exception {
+    public JSONArray getBoardList(Long accountNo) throws Exception {
         JSONArray jsonArray = new JSONArray();
 
         for (Board board : myPageQueryRepository.findBoard(accountNo).get()
         ) {
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("boardNo",board.getBoardNo());
-            jsonObject.put("boardTitle",board.getBoardTitle());
-            jsonObject.put("boardWriteDate",board.getBoardWriteDate());
+            jsonObject.put("boardNo", board.getBoardNo());
+            jsonObject.put("boardTitle", board.getBoardTitle());
+            jsonObject.put("boardWriteDate", board.getBoardWriteDate());
 
             jsonArray.add(jsonObject);
         }
-        return Optional.ofNullable(jsonArray);
+        return jsonArray;
     }
 }
