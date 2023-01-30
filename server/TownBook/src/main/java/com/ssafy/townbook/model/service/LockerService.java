@@ -30,5 +30,5 @@ public interface LockerService {
      * @param detailLockerCount
      * @return LockerDto
      */
-    LockerDto addLocker(String lockerRegion, int detailLockerCount);
+    LockerDto addLocker(String lockerRegion, int detailLockerCount, String lockerLatitude, String lockerLongitude);
 }

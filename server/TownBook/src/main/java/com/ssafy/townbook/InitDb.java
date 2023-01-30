@@ -112,14 +112,17 @@ public class InitDb {
         }
         
         public void lockerInit() {
-            createLocker("어은동", 1);
-            createLocker("덕명동", 3);
-            createLocker("봉명동", 5);
+            createLocker("어은동", 1, "12312312", "12312312");
+            createLocker("덕명동", 3, "32132132", "12312312");
+            createLocker("봉명동", 5, "12345678", "12312312");
         }
         
-        public void createLocker(String lockerRegion, int detailLockerCount) {
+        public void createLocker(String lockerRegion, int detailLockerCount, String lockerLatitude,
+                String lockerLongitude) {
             Locker locker = new Locker();
             locker.setLockerRegion(lockerRegion);
+            locker.setLockerLatitude(lockerLatitude);
+            locker.setLockerLongitude(lockerLongitude);
             em.persist(locker);
             
             while (detailLockerCount-- > 0) {

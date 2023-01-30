@@ -63,9 +63,11 @@ public class LockerServiceImpl implements LockerService {
      */
     @Override
     @Transactional
-    public LockerDto addLocker(String lockerRegion, int detailLockerCount) {
+    public LockerDto addLocker(String lockerRegion, int detailLockerCount, String lockerLatitude, String lockerLongitude) {
         Locker locker = new Locker();
         locker.setLockerRegion(lockerRegion);
+        locker.setLockerLatitude(lockerLatitude);
+        locker.setLockerLongitude(lockerLongitude);
         lockerRepository.save(locker);
         while (detailLockerCount-- > 0) {
             DetailLocker detailLocker = new DetailLocker();

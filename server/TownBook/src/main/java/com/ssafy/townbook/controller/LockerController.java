@@ -54,8 +54,10 @@ public class LockerController {
      * @param detailLockerCount
      * @return LockerDto
      */
-    @PostMapping("/add/{lockerRegion}/{detailLockerCount}")
-    public ResponseEntity<?> addLocker(@PathVariable String lockerRegion, @PathVariable int detailLockerCount) {
-        return new ResponseEntity<>(lockerService.addLocker(lockerRegion, detailLockerCount), HttpStatus.OK);
+    @PostMapping("/add/{lockerRegion}/{detailLockerCount}/{lockerLatitude}/{lockerLongitude}")
+    public ResponseEntity<?> addLocker(
+            @PathVariable String lockerRegion, @PathVariable int detailLockerCount,
+            @PathVariable String lockerLatitude, @PathVariable String lockerLongitude) {
+        return new ResponseEntity<>(lockerService.addLocker(lockerRegion, detailLockerCount, lockerLatitude, lockerLongitude), HttpStatus.OK);
     }
 }
