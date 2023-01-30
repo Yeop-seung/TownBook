@@ -80,7 +80,7 @@ public class AccountServiceImpl implements AccountService{
     public String findEmail(String accountPhoneNumber) {
 
         try {
-            Account account = accountRepository.findByAccountPhoneNumber(accountPhoneNumber);
+            Account account = accountRepository.findByAccountPhoneNumber(accountPhoneNumber).get();
             return account.getAccountEmail();
 
         }catch (Exception e){
