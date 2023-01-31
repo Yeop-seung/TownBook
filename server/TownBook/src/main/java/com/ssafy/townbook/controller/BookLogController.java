@@ -43,6 +43,14 @@ public class BookLogController {
         return new ResponseEntity<>(bookLogService.findBookLogByBookLogNo(bookLogNo), HttpStatus.OK);
     }
     
-//    // 보관함 번호로 해당 보관함에 보관중인 도서 전부 조회
-//    @GetMapping("/locker/{lockerNo}")
+    /**
+     * 단일 보관함에 보관중인 도서 전부 조회
+     *
+     * @param lockerNo
+     * @return List
+     */
+    @GetMapping("/locker/{lockerNo}")
+    public ResponseEntity<?> findBookByLockerNo(@PathVariable Long lockerNo) {
+        return new ResponseEntity<>(bookLogService.findBookByLockerNo(lockerNo), HttpStatus.OK);
+    }
 }

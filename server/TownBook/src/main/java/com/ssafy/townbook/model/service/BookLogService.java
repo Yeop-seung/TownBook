@@ -1,5 +1,6 @@
 package com.ssafy.townbook.model.service;
 
+import com.ssafy.townbook.model.dto.BookDto;
 import com.ssafy.townbook.model.dto.BookLogDto;
 import java.util.List;
 
@@ -19,4 +20,12 @@ public interface BookLogService {
      * @return BookLogDto
      */
     BookLogDto findBookLogByBookLogNo(Long bookLogNo);
+    
+    /**
+     * 단일 보관함에 보관중인 도서 전부 조회
+     *
+     * @param lockerNo
+     * @return List
+     */
+    List<BookDto> findBookByLockerNo(Long lockerNo);
 }
