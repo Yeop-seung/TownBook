@@ -5,7 +5,6 @@ import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
-import com.ssafy.townbook.model.entity.Board;
 import com.ssafy.townbook.model.entity.Book;
 import com.ssafy.townbook.model.entity.BookLog;
 import com.ssafy.townbook.model.entity.WishList;
@@ -177,29 +176,6 @@ public class MyPageServiceImpl implements MyPageService {
 
             jsonArray.add(jsonObject);
 
-        }
-        return jsonArray;
-    }
-
-    /**
-     * 로그인 유저의 작성 게시글 목록 반환
-     *
-     * @param accountNo
-     * @return JSONArray
-     * @throws Exception
-     */
-    @Override
-    public JSONArray findBoardByAccountNo(Long accountNo) throws Exception {
-        JSONArray jsonArray = new JSONArray();
-
-        for (Board board : myPageQueryRepository.findBoard(accountNo).get()
-        ) {
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("boardNo", board.getBoardNo());
-            jsonObject.put("boardTitle", board.getBoardTitle());
-            jsonObject.put("boardWriteDateTime", board.getBoardWriteDateTime());
-
-            jsonArray.add(jsonObject);
         }
         return jsonArray;
     }
