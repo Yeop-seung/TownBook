@@ -4,6 +4,7 @@ import com.ssafy.townbook.model.entity.DetailLocker;
 import com.ssafy.townbook.model.entity.Locker;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -16,7 +17,7 @@ public class LockerDto {
     private String lockerRegion;
     private String lockerLatitude;
     private String lockerLongitude;
-    private List<DetailLocker> detailLocker = new ArrayList<>();
+    private List<DetailLockerDto> detailLocker = new ArrayList<>();
     
     public LockerDto(Locker locker) {
         this.lockerNo = locker.getLockerNo();
@@ -24,6 +25,11 @@ public class LockerDto {
         this.lockerRegion = locker.getLockerRegion();
         this.lockerLatitude = locker.getLockerLatitude();
         this.lockerLongitude = locker.getLockerLongitude();
-        this.detailLocker =locker.getDetailLocker();
+        
+        // 연관 관계의 무한 참조를 방지하기 위해 DetailLockerDto 사용
+        List<DetailLocker> findDetailLockers = locker.getDetailLocker();
+        this.detailLocker = findDetailLockers.stream()
+                .map(DetailLockerDto::new)
+                .collect(Collectors.toList());
     }
 }

@@ -24,11 +24,10 @@ public class DetailLocker {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long detailLockerNo;
 
-//    @OneToOne(mappedBy = "detailLocker")
-//    private BookLog bookLog;
+    @OneToOne(mappedBy = "detailLocker")
+    private BookLog bookLog;
     
     @NotNull
-    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "`fk-locker-detail_locker`")
     private Locker locker;
