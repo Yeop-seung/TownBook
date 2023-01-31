@@ -37,7 +37,7 @@ public class BookLog {
     @Column(name = "book_log_receiver_no")
     private Long bookLogReceiverNo;
     
-//    @NotNull
+    @NotNull
     @Column(name = "book_log_donate_date_time")
     private LocalDateTime bookLogDonateDateTime;
     

@@ -4,7 +4,6 @@ import com.ssafy.townbook.model.dto.BookLogDto;
 import com.ssafy.townbook.model.entity.BookLog;
 import com.ssafy.townbook.model.repository.BookLogRepository;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +22,11 @@ public class BookLogServiceImpl implements BookLogService {
         this.bookLogRepository = bookLogRepository;
     }
     
+    /**
+     * 전체 북로그 조회
+     *
+     * @return List
+     */
     @Override
     public List<BookLogDto> findAll() {
         List<BookLog> findBookLogs = bookLogRepository.findAll();
@@ -31,6 +35,12 @@ public class BookLogServiceImpl implements BookLogService {
                 .collect(Collectors.toList());
     }
     
+    /**
+     * 단일 북로그 조회
+     *
+     * @param bookLogNo
+     * @return BookLogDto
+     */
     @Override
     public BookLogDto findBookLogByBookLogNo(Long bookLogNo) {
         return new BookLogDto(bookLogRepository.findBookLogByBookLogNo(bookLogNo));

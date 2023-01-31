@@ -22,13 +22,27 @@ public class BookLogController {
         this.bookLogService = bookLogService;
     }
     
+    /**
+     * 전체 북로그 조회
+     *
+     * @return List
+     */
     @GetMapping("")
-    public ResponseEntity<?> bookLogs() throws Exception {
+    public ResponseEntity<?> bookLogs()   {
         return new ResponseEntity<>(bookLogService.findAll(), HttpStatus.OK);
     }
     
+    /**
+     * 단일 북로그 조회
+     *
+     * @param bookLogNo
+     * @return BookLogDto
+     */
     @GetMapping("/{bookLogNo}")
     public ResponseEntity<?> findBookLogByBookLog(@PathVariable Long bookLogNo) {
         return new ResponseEntity<>(bookLogService.findBookLogByBookLogNo(bookLogNo), HttpStatus.OK);
     }
+    
+//    // 보관함 번호로 해당 보관함에 보관중인 도서 전부 조회
+//    @GetMapping("/locker/{lockerNo}")
 }
