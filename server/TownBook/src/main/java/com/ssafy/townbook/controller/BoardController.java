@@ -16,8 +16,4 @@ public class BoardController {
     @Autowired
     private BoardServiceImpl boardService;
 
-    @GetMapping("/{word}")
-    public ResponseEntity<?> findBoardByBoardStateAndBoardTitleLike(@PathVariable String word) throws Exception {
-        return new ResponseEntity<>(boardService.findBoardByBoardStateAndBoardTitleLike(word), HttpStatus.OK);
-    }
 }

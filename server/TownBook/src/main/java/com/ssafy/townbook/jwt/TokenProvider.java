@@ -34,7 +34,8 @@ public class TokenProvider implements InitializingBean {
       @Value("${jwt.secret}") String secret,
       @Value("${jwt.token-validity-in-seconds}") long tokenValidityInSeconds) {
       this.secret = secret;
-      this.tokenValidityInMilliseconds = tokenValidityInSeconds * 1000;
+      // 토큰 유효시간 30분 tokenValidityInSeconds = 1분
+      this.tokenValidityInMilliseconds = tokenValidityInSeconds * 30;
    }
 
    // 의존성 주입 까지 받은 후에 secret 값을 base 64 decode해서 key 변수에 할당하기 위해

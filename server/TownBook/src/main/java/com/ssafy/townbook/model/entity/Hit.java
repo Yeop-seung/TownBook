@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import net.minidev.json.annotate.JsonIgnore;
 
 @Getter
 @Setter
@@ -27,6 +28,7 @@ public class Hit {
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "`fk-account-hit`")
+    @JsonIgnore
     private Account account;
 
     @Builder

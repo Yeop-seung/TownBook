@@ -78,12 +78,11 @@ public class Account {
     @OneToMany(mappedBy = "account")
     private List<Hit> hits = new ArrayList<>();
 
-    @OneToMany(mappedBy = "account",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "account")
     private List<Board> boards = new ArrayList<>();
 
     @OneToMany(mappedBy = "account")
     private List<Comment> comments = new ArrayList<>();
-
 
     @OneToMany(mappedBy = "account")
     private List<WishList> wishLists = new ArrayList<>();

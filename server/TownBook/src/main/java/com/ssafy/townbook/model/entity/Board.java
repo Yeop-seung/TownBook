@@ -53,14 +53,14 @@ public class Board {
     @ColumnDefault("true")
     private Boolean boardState;
     @OneToMany(mappedBy = "board")
-    List<Hit> hit = new ArrayList<>();
+    private List<Hit> hit = new ArrayList<>();
 
     @OneToMany(mappedBy = "board")
-    List<Comment> comment = new ArrayList<>();
+    private List<Comment> comment = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "`fk-account-board`")
-    Account account;
+    private Account account;
 
     @Builder
     public Board(Long boardNo, String boardTitle, String boardContent,

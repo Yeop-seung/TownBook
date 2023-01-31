@@ -13,8 +13,5 @@ public class BoardServiceImpl implements BoardService {
     @Autowired
     private BoardRepository boardRepository;
 
-    @Override
-    public List<Board> findBoardByBoardStateAndBoardTitleLike(String word) throws Exception {
-        return boardRepository.findBoardByBoardStateAndBoardTitleLike(true, word).get();
-    }
+
 }

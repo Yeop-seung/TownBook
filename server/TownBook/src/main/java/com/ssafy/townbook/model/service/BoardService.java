@@ -7,5 +7,4 @@ import java.util.List;
 
 public interface BoardService {
 
-    List<Board> findBoardByBoardStateAndBoardTitleLike(String word) throws Exception;
 }

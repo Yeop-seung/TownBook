@@ -12,6 +12,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import net.minidev.json.annotate.JsonIgnore;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 
@@ -45,8 +46,7 @@ public class BookLog {
     
     @Column(name = "book_log_receive_date_time")
     private LocalDateTime bookLogReceiveDateTime;
-    
-    
+
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "`fk-detail_locker-book_log-1`")
     private Locker locker;
@@ -56,6 +56,7 @@ public class BookLog {
     private DetailLocker detailLocker;
     
     @OneToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
     @JoinColumn(name = "`fk-account-book_log`")
     private Account account;
     
