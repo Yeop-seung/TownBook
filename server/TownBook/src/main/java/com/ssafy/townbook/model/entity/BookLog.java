@@ -12,7 +12,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import net.minidev.json.annotate.JsonIgnore;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 
@@ -26,6 +25,7 @@ public class BookLog {
     
     @Id
     @Column(name = "book_log_no")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long bookLogNo;
     
     
@@ -46,7 +46,7 @@ public class BookLog {
     
     @Column(name = "book_log_receive_date_time")
     private LocalDateTime bookLogReceiveDateTime;
-
+    
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "`fk-detail_locker-book_log-1`")
     private Locker locker;
@@ -56,7 +56,6 @@ public class BookLog {
     private DetailLocker detailLocker;
     
     @OneToOne(fetch = FetchType.LAZY)
-    @JsonIgnore
     @JoinColumn(name = "`fk-account-book_log`")
     private Account account;
     
@@ -66,8 +65,10 @@ public class BookLog {
     
     @OneToMany(mappedBy = "bookLog")
     private List<WishList> wishLists = new ArrayList<>();
-
-    public BookLog(Long bookLogNo, Boolean bookLogState, String bookLogReview, Long bookLogReceiverNo, LocalDateTime bookLogDonateDateTime, LocalDateTime bookLogReceiveDateTime, Locker locker, DetailLocker detailLocker, Account account, Book book, List<WishList> wishLists) {
+    
+    public BookLog(Long bookLogNo, Boolean bookLogState, String bookLogReview, Long bookLogReceiverNo,
+            LocalDateTime bookLogDonateDateTime, LocalDateTime bookLogReceiveDateTime, Locker locker,
+            DetailLocker detailLocker, Account account, Book book, List<WishList> wishLists) {
         this.bookLogNo = bookLogNo;
         this.bookLogState = bookLogState;
         this.bookLogReview = bookLogReview;

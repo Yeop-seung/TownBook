@@ -3,14 +3,19 @@ package com.ssafy.townbook;
 import com.ssafy.townbook.model.entity.Account;
 import com.ssafy.townbook.model.entity.Authority;
 import com.ssafy.townbook.model.entity.Book;
+import com.ssafy.townbook.model.entity.BookLog;
 import com.ssafy.townbook.model.entity.DetailLocker;
 import com.ssafy.townbook.model.entity.Locker;
+import com.ssafy.townbook.model.repository.AccountRepository;
+import com.ssafy.townbook.model.repository.BookLogRepository;
+import com.ssafy.townbook.model.repository.BookRepository;
 import com.ssafy.townbook.model.repository.LockerRepository;
-import com.ssafy.townbook.model.service.AdminService;
 import com.ssafy.townbook.model.service.BookService;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Collections;
+import java.util.Optional;
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
@@ -38,6 +43,7 @@ public class InitDb {
         initService.bookInit();
 //        initService.accountInit();
         initService.lockerInit();
+        initService.bookLogInit();
     }
     
     @Component
@@ -47,8 +53,10 @@ public class InitDb {
         
         public final EntityManager em;
         public final BookService bookService;
-        public final AdminService adminService;
         public final LockerRepository lockerRepository;
+        private final AccountRepository accountRepository;
+        private final BookRepository bookRepository;
+        private final BookLogRepository bookLogRepository;
         
         public void bookInit() {
             Book book1 = createBook("8984993751", "8", "토지", "박경리", "커뮤니케이션 북스", convertDate("20051103"),
@@ -130,6 +138,43 @@ public class InitDb {
                 locker.addDetailLocker(detailLocker);
                 em.persist(detailLocker);
             }
+        }
+        
+        public void bookLogInit() {
+            Locker locker1 = lockerRepository.findLockerByLockerNo(1L);
+            DetailLocker detailLocker1 = locker1.getDetailLocker().get(0);
+            Optional<Account> account1 = accountRepository.findByAccountNo(1L);
+            Optional<Book> book1 = bookRepository.findBookByBookIsbn("8984993751");
+            donateBook("재밌어요", locker1, detailLocker1, account1, book1);
+            
+            Locker locker2 = lockerRepository.findLockerByLockerNo(2L);
+            DetailLocker detailLocker2 = locker2.getDetailLocker().get(0);
+            Optional<Account> account2 = accountRepository.findByAccountNo(2L);
+            Optional<Book> book2 = bookRepository.findBookByBookIsbn("9788960777330");
+            donateBook("재미 없어요", locker2, detailLocker2, account2, book2);
+            
+            BookLog bookLog1 = bookLogRepository.findBookLogByBookLogNo(2L);
+            receiveBook(bookLog1, account1);
+        }
+        
+        public void donateBook(
+                String bookLogReview, Locker locker, DetailLocker detailLocker,
+                Optional<Account> account, Optional<Book> book) {
+            BookLog bookLog = new BookLog();
+            bookLog.setBookLogReview(bookLogReview);
+            bookLog.setBookLogDonateDateTime(LocalDateTime.now());
+            bookLog.setLocker(locker);
+            bookLog.setDetailLocker(detailLocker);
+            bookLog.setAccount(account.get());
+            bookLog.setBook(book.get());
+            em.persist(bookLog);
+        }
+        
+        public void receiveBook(BookLog bookLog, Optional<Account> account) {
+            bookLog.setBookLogState(false);
+            bookLog.setBookLogReceiverNo(account.get().getAccountNo());
+            bookLog.setBookLogReceiveDateTime(LocalDateTime.now());
+            em.persist(bookLog);
         }
     }
     
