@@ -1,13 +1,11 @@
 package com.ssafy.townbook.model.entity;
 
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -25,8 +23,8 @@ public class BookLog {
     
     @Id
     @Column(name = "book_log_no")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long bookLogNo;
-    
     
     @Column(name = "book_log_state")
     @ColumnDefault("true")
@@ -39,13 +37,12 @@ public class BookLog {
     @Column(name = "book_log_receiver_no")
     private Long bookLogReceiverNo;
     
-    @NotNull
+//    @NotNull
     @Column(name = "book_log_donate_date_time")
     private LocalDateTime bookLogDonateDateTime;
     
     @Column(name = "book_log_receive_date_time")
     private LocalDateTime bookLogReceiveDateTime;
-    
     
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "`fk-detail_locker-book_log-1`")
@@ -65,8 +62,10 @@ public class BookLog {
     
     @OneToMany(mappedBy = "bookLog")
     private List<WishList> wishLists = new ArrayList<>();
-
-    public BookLog(Long bookLogNo, Boolean bookLogState, String bookLogReview, Long bookLogReceiverNo, LocalDateTime bookLogDonateDateTime, LocalDateTime bookLogReceiveDateTime, Locker locker, DetailLocker detailLocker, Account account, Book book, List<WishList> wishLists) {
+    
+    public BookLog(Long bookLogNo, Boolean bookLogState, String bookLogReview, Long bookLogReceiverNo,
+            LocalDateTime bookLogDonateDateTime, LocalDateTime bookLogReceiveDateTime, Locker locker,
+            DetailLocker detailLocker, Account account, Book book, List<WishList> wishLists) {
         this.bookLogNo = bookLogNo;
         this.bookLogState = bookLogState;
         this.bookLogReview = bookLogReview;
