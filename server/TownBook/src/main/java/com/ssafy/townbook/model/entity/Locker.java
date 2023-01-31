@@ -1,34 +1,40 @@
 package com.ssafy.townbook.model.entity;
 
+import com.ssafy.townbook.model.dto.DetailLockerDto;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
-
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @ToString
 @Entity
+@DynamicInsert
 public class Locker {
 
     @Id
     @Column(name = "locker_no")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long lockerNo;
 
     @NotNull
     @Column(name = "locker_region")
     private String lockerRegion;
+    
 
     @NotNull
     @Column(name = "locker_latitude")
@@ -53,5 +59,10 @@ public class Locker {
         this.lockerLongitude = lockerLongitude;
         this.lockerBookCnt = lockerBookCnt;
         this.detailLocker = detailLocker;
+    }
+    
+    public void addDetailLocker(DetailLocker detailLocker) {
+        this.getDetailLocker().add(detailLocker);
+        detailLocker.setLocker(this);
     }
 }
