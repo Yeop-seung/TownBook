@@ -7,6 +7,7 @@ import com.ssafy.townbook.model.entity.BookLog;
 import com.ssafy.townbook.model.entity.DetailLocker;
 import com.ssafy.townbook.model.entity.Locker;
 import com.ssafy.townbook.model.repository.AccountRepository;
+import com.ssafy.townbook.model.repository.BookLogRepository;
 import com.ssafy.townbook.model.repository.BookRepository;
 import com.ssafy.townbook.model.repository.LockerRepository;
 import com.ssafy.townbook.model.service.BookService;
@@ -55,6 +56,7 @@ public class InitDb {
         public final LockerRepository lockerRepository;
         private final AccountRepository accountRepository;
         private final BookRepository bookRepository;
+        private final BookLogRepository bookLogRepository;
         
         public void bookInit() {
             Book book1 = createBook("8984993751", "8", "토지", "박경리", "커뮤니케이션 북스", convertDate("20051103"),
@@ -150,6 +152,9 @@ public class InitDb {
             Optional<Account> account2 = accountRepository.findByAccountNo(2L);
             Optional<Book> book2 = bookRepository.findBookByBookIsbn("9788960777330");
             donateBook("재미 없어요", locker2, detailLocker2, account2, book2);
+            
+            BookLog bookLog1 = bookLogRepository.findBookLogByBookLogNo(2L);
+            receiveBook(bookLog1, account1);
         }
         
         public void donateBook(
@@ -162,6 +167,13 @@ public class InitDb {
             bookLog.setDetailLocker(detailLocker);
             bookLog.setAccount(account.get());
             bookLog.setBook(book.get());
+            em.persist(bookLog);
+        }
+        
+        public void receiveBook(BookLog bookLog, Optional<Account> account) {
+            bookLog.setBookLogState(false);
+            bookLog.setBookLogReceiverNo(account.get().getAccountNo());
+            bookLog.setBookLogReceiveDateTime(LocalDateTime.now());
             em.persist(bookLog);
         }
     }
