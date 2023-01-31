@@ -34,4 +34,19 @@ public class BookLogQueryRepository {
                 .fetch();
         return result;
     }
+    
+    /**
+     * 단일 도서의 모든 리뷰 조회
+     *
+     * @param bookIsbn
+     * @return List
+     */
+    public List<String> findBookLogReviewByBookIsbn(String bookIsbn) {
+        List<String> result = jpaQueryFactory
+                .select(bookLog.bookLogReview)
+                .from(bookLog)
+                .where(bookLog.book.bookIsbn.eq(bookIsbn))
+                .fetch();
+        return result;
+    }
 }

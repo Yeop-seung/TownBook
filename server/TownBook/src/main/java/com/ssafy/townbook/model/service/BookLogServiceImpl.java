@@ -65,4 +65,16 @@ public class BookLogServiceImpl implements BookLogService {
                 .map(BookDto::new)
                 .collect(Collectors.toList());
     }
+    
+    /**
+     * 단일 도서의 모든 리뷰 조회
+     *
+     * @param bookIsbn
+     * @return List
+     */
+    @Override
+    public List<String> findBookLogReviewByBookIsbn(String bookIsbn) {
+        List<String> findReviews = bookLogQueryRepository.findBookLogReviewByBookIsbn(bookIsbn);
+        return findReviews;
+    }
 }

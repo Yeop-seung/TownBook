@@ -53,4 +53,15 @@ public class BookLogController {
     public ResponseEntity<?> findBookByLockerNo(@PathVariable Long lockerNo) {
         return new ResponseEntity<>(bookLogService.findBookByLockerNo(lockerNo), HttpStatus.OK);
     }
+    
+    /**
+     * 단일 도서의 모든 리뷰 조회
+     *
+     * @param bookIsbn
+     * @return List
+     */
+    @GetMapping("/review/{bookIsbn}")
+    public ResponseEntity<?> findBookLogReviewByBookIsbn(@PathVariable String bookIsbn) {
+        return new ResponseEntity<>(bookLogService.findBookLogReviewByBookIsbn(bookIsbn), HttpStatus.OK);
+    }
 }
