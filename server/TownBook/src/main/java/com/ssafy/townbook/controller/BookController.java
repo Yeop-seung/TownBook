@@ -15,14 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/book")
 @RequiredArgsConstructor
 public class BookController {
-    
-    private BookService bookService;
-    
+
     @Autowired
-    public BookController(BookService bookService) {
-        this.bookService = bookService;
-    }
-    
+    private BookService bookService;
+
     /**
      * 전체 책 조회
      *

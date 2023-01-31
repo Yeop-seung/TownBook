@@ -25,11 +25,6 @@ public class AccountController {
     @Autowired
     private EmailService emailService;
 
-    @PostMapping("/signup")
-    public ResponseEntity<AccountDto> signup(@Valid @RequestBody AccountDto accountDto) {
-        return ResponseEntity.ok(accountService.signup(accountDto));
-    }
-
     @GetMapping("/user")
     @PreAuthorize("hasAnyRole('USER','ADMIN')")
     public ResponseEntity<AccountDto> getMyUserInfo(HttpServletRequest request) {
@@ -43,13 +38,24 @@ public class AccountController {
     }
 
     /**
+     * 회원가입
+     *
+     * @param accountDto
+     * @return Boolean
+     */
+    @PostMapping("/signup")
+    public ResponseEntity signup(@Valid @RequestBody AccountDto accountDto) {
+        return ResponseEntity.ok(accountService.signup(accountDto));
+    }
+
+    /**
      * 핸드폰 번호를 가지고 이메일 찾기
      *
      * @param phoneNumber
-     * @return
+     * @return String
      */
     @GetMapping("/findEmail/{phoneNumber}")
-    public ResponseEntity<String> findEmail(@PathVariable String phoneNumber) {
+    public ResponseEntity<?> findEmail(@PathVariable String phoneNumber) {
 
         return new ResponseEntity<>(accountService.findEmail(phoneNumber), HttpStatus.OK);
     }
@@ -58,10 +64,10 @@ public class AccountController {
      * 계정 수정
      *
      * @param accountDto
-     * @return
+     * @return Boolean
      */
     @PutMapping("/modify")
-    public ResponseEntity accountModify(@RequestBody AccountDto accountDto) {
+    public ResponseEntity<?> accountModify(@RequestBody AccountDto accountDto) {
         return new ResponseEntity(accountService.accountModify(accountDto), HttpStatus.OK);
 
     }
@@ -71,11 +77,10 @@ public class AccountController {
      * 계정 비활성화
      *
      * @param leaveInfo
-     * @return
+     * @return Boolean
      */
     @PutMapping("/leave")
-    public ResponseEntity accountRemove(@RequestBody Map<String, String> leaveInfo) {
-        System.out.println(leaveInfo.get("accountEmail"));
+    public ResponseEntity<?> accountRemove(@RequestBody Map<String, String> leaveInfo) {
         return new ResponseEntity(accountService.accountRemove(leaveInfo.get("accountEmail"), leaveInfo.get("accountPw")), HttpStatus.OK);
 
     }
@@ -84,7 +89,7 @@ public class AccountController {
      * 이메일 인증 --> front로 보낸 인증 값과 비교해서 확인한다.
      *
      * @param email
-     * @return
+     * @return String
      * @throws Exception
      */
     @PostMapping("/emailConfirm")
@@ -102,7 +107,7 @@ public class AccountController {
      * @throws Exception
      */
     @PostMapping("/tempPassword")
-    public ResponseEntity tempPassword(@RequestBody Map<String, String> accountEmail) throws Exception {
+    public ResponseEntity<?> tempPassword(@RequestBody Map<String, String> accountEmail) throws Exception {
         String tempPassword = emailService.getTmpPassword();
         String Email = accountEmail.get("accountEmail");
 
@@ -116,10 +121,10 @@ public class AccountController {
      * 비밀번호 변경
      *
      * @param AccountInfo
-     * @return
+     * @return Boolean
      */
     @PostMapping("/changePassword")
-    public ResponseEntity changePassword(@RequestBody Map<String, String> AccountInfo) {
+    public ResponseEntity<?> changePassword(@RequestBody Map<String, String> AccountInfo) {
         String email = AccountInfo.get("accountEmail");
         String pw = AccountInfo.get("accountPw");
 

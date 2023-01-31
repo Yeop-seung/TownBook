@@ -15,10 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class AdminController {
 
     @Autowired
-    public AdminController(AdminService adminService) {
-        this.adminService = adminService;
-    }
-    
     private AdminService adminService;
     
     @Autowired
@@ -47,6 +43,13 @@ public class AdminController {
         return new ResponseEntity<>(adminService.findAccountByAccountNo(accountNo), HttpStatus.OK);
     }
 
+    /**
+     * 로그인 유저의 책 기부/수령 전체 로그와 책 정보 반환
+     *
+     * @param accountNo
+     * @return JSONArray
+     * @throws Exception
+     */
     @GetMapping("/detail/{accountNo}/log")
     public ResponseEntity<?> findBookLogByAccountNo(@PathVariable Long accountNo) throws Exception {
         return new ResponseEntity<>(myPageService.findBookLogByAccountNo(accountNo), HttpStatus.OK);

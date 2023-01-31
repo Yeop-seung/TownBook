@@ -36,29 +36,36 @@ public class AccountServiceImpl implements AccountService {
      */
     @Override
     @Transactional
-    public AccountDto signup(AccountDto accountDto) {
+    public Boolean signup(AccountDto accountDto) {
         if (accountRepository.findOneWithAuthoritiesByAccountEmail(accountDto.getAccountEmail()).orElse(null) != null) {
             throw new DuplicateMemberException("이미 가입되어 있는 유저입니다.");
         }
 
-        Authority authority = Authority.builder()
-                .authorityName("ROLE_USER")
-                .build();
+        try {
+            Authority authority = Authority.builder()
+                    .authorityName("ROLE_USER")
+                    .build();
 
-        Account account = Account.builder()
-                .accountPw(passwordEncoder.encode(accountDto.getAccountPw()))
-                .accountName(accountDto.getAccountName())
-                .accountPhoneNumber(accountDto.getAccountPhoneNumber())
-                .accountAddress(accountDto.getAccountAddress())
-                .accountBirthday(accountDto.getAccountBirthDay())
-                .accountNickname(accountDto.getAccountNickname())
-                .accountEmail(accountDto.getAccountEmail())
-                .accountGender(accountDto.getAccountGender())
-                .authorities(Collections.singleton(authority))
-                .accountActivated(true)
-                .build();
+            Account account = Account.builder()
+                    .accountPw(passwordEncoder.encode(accountDto.getAccountPw()))
+                    .accountName(accountDto.getAccountName())
+                    .accountPhoneNumber(accountDto.getAccountPhoneNumber())
+                    .accountAddress(accountDto.getAccountAddress())
+                    .accountBirthDay(accountDto.getAccountBirthDay())
+                    .accountNickname(accountDto.getAccountNickname())
+                    .accountEmail(accountDto.getAccountEmail())
+                    .accountGender(accountDto.getAccountGender())
+                    .authorities(Collections.singleton(authority))
+                    .accountActivated(true)
+                    .build();
 
-        return AccountDto.from(accountRepository.save(account));
+            accountRepository.save(account);
+        }
+        catch (Exception e){
+            e.getMessage();
+            return false;
+        }
+        return true;
     }
 
     @Override
@@ -87,7 +94,7 @@ public class AccountServiceImpl implements AccountService {
     public String findEmail(String accountPhoneNumber) {
 
         try {
-            Account account = accountRepository.findByAccountPhoneNumber(accountPhoneNumber).get();
+            AccountDto account = AccountDto.from(accountRepository.findByAccountPhoneNumber(accountPhoneNumber).get());
             return account.getAccountEmail();
 
         } catch (Exception e) {
@@ -108,7 +115,7 @@ public class AccountServiceImpl implements AccountService {
             Account account = accountRepository.findByAccountEmail(accountDto.getAccountEmail()).orElseThrow(() ->
                     new IllegalArgumentException("해당 사용자가 존재하지 않습니다."));
             account.setAccountAddress(accountDto.getAccountAddress());
-            account.setAccountBirthday(accountDto.getAccountBirthDay());
+            account.setAccountBirthDay(accountDto.getAccountBirthDay());
             account.setAccountName(accountDto.getAccountName());
             account.setAccountGender(accountDto.getAccountGender());
             account.setAccountNickname(accountDto.getAccountNickname());
