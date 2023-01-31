@@ -79,7 +79,6 @@ public class Account {
     private String accountBirthday;
 
     @Column(name = "account_activated")
-    @NotNull
     @ColumnDefault("true")
     private Boolean accountActivated;
 

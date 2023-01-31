@@ -82,6 +82,7 @@ public class InitDb {
             account.setAccountGender(accountGender);
             account.setAccountNickname(accountNickname);
             account.setAccountBirthday(accountBirthDay);
+
             return account;
         }
     }

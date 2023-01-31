@@ -1,6 +1,8 @@
 package com.ssafy.townbook.model.entity;
 
+import com.beust.ah.A;
 import java.time.LocalDateTime;
+import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import lombok.Builder;
@@ -9,12 +11,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @ToString
 @Entity
+@DynamicInsert
 public class Comment {
 
     @Id
@@ -32,9 +36,12 @@ public class Comment {
     @ColumnDefault("true")
     private Boolean commentState;
 
-    @OneToOne
-    @JoinColumn(name = "`fk-comment-comment`")
-    private Comment comment;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "comment_parent_no")
+    private Comment commentParent;
+
+    @OneToMany(mappedBy = "commentParent", fetch = FetchType.LAZY)
+    private List<Comment> childComment;
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
@@ -48,13 +55,13 @@ public class Comment {
 
     @Builder
     public Comment(Long commentNo, LocalDateTime commentDate, String commentContent,
-            Boolean commentState, Comment comment, Board board, Account account) {
+            Boolean commentState, Comment commentParent, Board board, Account account) {
         this.commentNo = commentNo;
         this.commentDate = commentDate;
         this.commentContent = commentContent;
         this.commentState = commentState;
-        this.comment = comment;
         this.board = board;
         this.account = account;
+        this.commentParent = commentParent;
     }
 }
