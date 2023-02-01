@@ -1,0 +1,37 @@
+.button{
+    display: flex;
+    flex-direction: row;
+    border-radius: 12px;
+    align-items: center;
+    position: absolute;
+    margin:auto;
+    left: 9vw;
+    top: 8vh;
+}
+.button-one{
+    text-align: center;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid #ffffff;
+    width: 80vw;
+    height: 85vh;
+    font-weight: 800;
+    border-radius: 12px;
+}
+/* 글씨 쓰는 부분 */
+.text-align{
+    position: absolute;
+    color: #2a2a2a;
+    text-align: center;
+    font-size: 8vmax;
+    top: 10vh;
+    left: 9vw;
+}
+.text-align-one{
+    position: absolute;
+    color: #2a2a2a;
+    text-align: center;
+    font-size: 8vmax;
+    top: 28vh;
+    left: 20vw;
+}
+/* 텍스트 정렬 */

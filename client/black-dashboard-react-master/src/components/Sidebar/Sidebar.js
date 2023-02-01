@@ -127,7 +127,6 @@ function Sidebar(props) {
                 {logoText}
               </div>
             ) : null}
-            {console.log(props)}
             <Nav>
               {routes.map((prop, key) => {
                 if (prop.redirect) return null;

@@ -17,30 +17,26 @@
 */
 import React from "react";
 import ReactDOM from "react-dom/client";
-// import Main from "Kiosk/Main";
-// import DonateUse from "Kiosk/Login";
-// import DonateComplete from "Kiosk/DonateComplete";
-// import MemberSelect from "Kiosk/MemberSelect";
-// import Finish from "Kiosk/Finish";
-import DonateThanksNon from "Kiosk/Non-Member/DonateThankNon";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
-// import DonateThanks from "Kiosk/DonateThanks";
-// import 'react-app-polyfill/ie11';
-// import 'react-app-polyfill/stable';
+import 'react-app-polyfill/ie11';
+import 'react-app-polyfill/stable';
 
 
-// import AdminLayout from "layouts/Admin/Admin.js";
+import AdminLayout from "layouts/Admin/Admin.js";
 
 
-// import "assets/scss/black-dashboard-react.scss";
-// import "assets/demo/demo.css";
-// import "assets/css/nucleo-icons.css";
-// import "@fortawesome/fontawesome-free/css/all.min.css";
+import "assets/scss/black-dashboard-react.scss";
+import "assets/demo/demo.css";
+import "assets/css/nucleo-icons.css";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
       <BrowserRouter>
-            <DonateThanksNon />
+        <Switch>
+          <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
+          <Redirect from="/" to="/admin/dashboard" />
+        </Switch>
       </BrowserRouter>
 );

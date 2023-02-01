@@ -1,0 +1,73 @@
+.button{
+    display: flex;
+    flex-direction: row;
+    border-radius: 12px;
+    align-items: center;
+    position: absolute;
+    margin:auto;
+    left: 98px;
+    top: 100px;
+}
+.button-one{
+    text-align: center;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid #ffffff;
+    width: 828px;
+    height: 388px;
+    font-weight: 800;
+    border-radius: 12px;
+}
+.button-three{
+    text-align: center;
+    background-color: rgb(255, 255, 255);
+    position: absolute;
+    width: 180px;
+    height: 160px;
+    font-size: 70px;
+    font-weight: 800;
+    border-radius: 12px;
+    left : 31vw;
+    top: 33vh ;
+    box-shadow: 5px 5px 5px 5px gray;
+}
+/* 글씨 쓰는 부분 */
+.text-align{
+    position: absolute;
+    color: #2a2a2a;
+    text-align: center;
+    margin: 0%;
+    font-size: 52px;
+    vertical-align: bottom;
+    top: 8vh;
+    left: 18vw;
+}
+.text-align-one{
+    position: absolute;
+    text-align: center;
+    color: #fd5454;
+    font-size: 72px;
+    vertical-align: bottom;
+    margin: 0%;
+    top: 18vh;
+    left: 14vw;
+}
+.text-align-two{
+    position: absolute;
+    color: #2a2a2a;
+    text-align: center;
+    font-size: 52px;
+    vertical-align: bottom;
+    margin: 0%;
+    top: 20vh;
+    left: 28vw;
+}
+.text-align-three{
+    position: relative;
+    color: #2a2a2a;
+    text-align: center;
+    margin: 0%;
+    font-size: 64px;
+    top: 35px;
+    
+}
+/* 텍스트 정렬 */
