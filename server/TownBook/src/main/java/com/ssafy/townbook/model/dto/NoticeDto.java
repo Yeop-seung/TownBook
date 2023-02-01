@@ -1,5 +1,8 @@
 package com.ssafy.townbook.model.dto;
 
+import com.beust.ah.A;
+import com.ssafy.townbook.model.entity.Account;
+import com.ssafy.townbook.model.entity.Notice;
 import java.time.LocalDateTime;
 import javax.validation.constraints.NotNull;
 import lombok.Builder;
@@ -31,16 +34,29 @@ public class NoticeDto {
     @NotNull
     private Integer noticeViews;
 
-    private AccountDto accountDto;
+    @NotNull
+    private AdminDto adminDto;
 
     @Builder
     public NoticeDto(String noticeTitle, String noticeContent, Integer noticeCategory,
-            LocalDateTime noticeWriteDateTime, Boolean noticeState, Integer noticeViews) {
+            LocalDateTime noticeWriteDateTime, Boolean noticeState, Integer noticeViews,AdminDto adminDto) {
         this.noticeTitle = noticeTitle;
         this.noticeContent = noticeContent;
         this.noticeCategory = noticeCategory;
         this.noticeWriteDateTime = noticeWriteDateTime;
         this.noticeState = noticeState;
         this.noticeViews = noticeViews;
+        this.adminDto = adminDto;
+    }
+
+    @Builder
+    public NoticeDto(Notice notice) {
+        this.noticeTitle = notice.getNoticeTitle();
+        this.noticeContent = notice.getNoticeContent();
+        this.noticeCategory = notice.getNoticeCategory();
+        this.noticeState = notice.getNoticeState();
+        this.noticeViews = notice.getNoticeViews();
+        this.noticeWriteDateTime = notice.getNoticeWriteDateTime();
+        this.adminDto = new AdminDto(notice.getAccount());
     }
 }

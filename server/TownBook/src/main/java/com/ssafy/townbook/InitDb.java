@@ -141,13 +141,13 @@ public class InitDb {
         }
         
         public void bookLogInit() {
-            Locker locker1 = lockerRepository.findLockerByLockerNo(1L);
+            Locker locker1 = lockerRepository.findLockerByLockerNo(1L).get();
             DetailLocker detailLocker1 = locker1.getDetailLocker().get(0);
             Optional<Account> account1 = accountRepository.findByAccountNo(1L);
             Optional<Book> book1 = bookRepository.findBookByBookIsbn("8984993751");
             donateBook("재밌어요", locker1, detailLocker1, account1, book1);
             
-            Locker locker2 = lockerRepository.findLockerByLockerNo(2L);
+            Locker locker2 = lockerRepository.findLockerByLockerNo(2L).get();
             DetailLocker detailLocker2 = locker2.getDetailLocker().get(0);
             Optional<Account> account2 = accountRepository.findByAccountNo(2L);
             Optional<Book> book2 = bookRepository.findBookByBookIsbn("9788960777330");

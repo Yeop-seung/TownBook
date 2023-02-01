@@ -8,9 +8,9 @@ import java.util.List;
 public interface NoticeService {
     Boolean modifyNotice(Notice notice);
 
-    Boolean writeNotice(NoticeDto noticeDto);
+    Boolean writeNotice(Notice notice);
 
-    List<NoticeDto> getNoticeList();
+    List<NoticeDto> getNoticeList(Integer category);
 
     NoticeDto getNotice(Long noticeNo);
 

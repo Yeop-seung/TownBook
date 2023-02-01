@@ -39,4 +39,5 @@ public class BookLogDto {
         this.detailLockerDto = new DetailLockerDto(bookLog.getDetailLocker());
         this.lockerDto = new LockerDto(bookLog.getLocker());
     }
+
 }
