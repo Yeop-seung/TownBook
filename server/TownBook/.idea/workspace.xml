@@ -5,98 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6eeaf81d-6435-4e66-b58d-67a96882855c" name="Changes" comment="0126 정현석 도서 조회, 추가 마무리">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/API/Account/단일 회원 조회.http" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/API/Account/전체 회원 조회.http" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/API/Book/단일 도서 조회.http" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/API/Book/도서 추가.http" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/API/Book/전체 도서 조회.http" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/API/BookLog/단일 도서의 전체 리뷰 조회.http" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/API/BookLog/단일 보관함의 전체 보관 도서 조회.http" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/API/BookLog/단일 북로그 조회.http" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/API/BookLog/전체 북로그 조회.http" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/API/Locker/단일 보관함 조회.http" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/API/Locker/보관함 추가.http" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/API/Locker/전체 보관함 조회.http" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/InitDb.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/TownBookApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/config/CorsConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/config/EmailConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/config/QuerydslConfiguration.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/config/SecurityConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/config/SwaggerConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/controller/AccountController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/controller/AdminController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/controller/AuthController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/controller/BookController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/controller/BookLogController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/controller/LockerController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/controller/MyPageController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/exception/DuplicateMemberException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/exception/NotFoundMemberException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/handler/MethodArgumentNotValidExceptionHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/handler/RestResponseExceptionHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/jwt/JwtAccessDeniedHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/jwt/JwtAuthenticationEntryPoint.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/jwt/JwtFilter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/jwt/JwtSecurityConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/jwt/TokenProvider.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/model/dto/AccountDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/model/dto/AdminDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/model/dto/AuthorityDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/model/dto/BookDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/model/dto/BookLogDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/model/dto/DetailLockerDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/model/dto/ErrorDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/model/dto/LockerDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/model/dto/LoginDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/model/dto/TokenDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/model/entity/Account.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/model/entity/Authority.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/model/entity/Board.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/model/entity/Book.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/model/entity/BookLog.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/model/entity/Comment.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/model/entity/DetailLocker.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/model/entity/File.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/model/entity/Hit.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/model/entity/Locker.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/model/entity/Notice.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/model/entity/WishList.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/model/repository/AccountRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/model/repository/AdminRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/model/repository/AuthorityRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/model/repository/BookLogRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/model/repository/BookRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/model/repository/DetailLockerRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/model/repository/LockerRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/model/service/AccountService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/model/service/AccountServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/model/service/AdminService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/model/service/AdminServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/model/service/BookLogService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/model/service/BookLogServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/model/service/BookService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/model/service/BookServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/model/service/CustomUserDetailsService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/model/service/EmailService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/model/service/EmailServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/model/service/LockerService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/model/service/LockerServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/model/service/MyPageService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/model/service/MyPageServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/queryrepository/BookLogQueryRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/queryrepository/MyPageQueryRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/townbook/util/SecurityUtil.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/ssafy/townbook/TownBookApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -278,6 +187,12 @@
     <configuration name="단일 북로그 조회 | #1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/main/API/BookLog/단일 북로그 조회.http" requestIdentifier="#1" runType="Run single request">
       <method v="2" />
     </configuration>
+    <configuration name="단일 도서 조회 | #1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/main/API/단일 도서 조회.http" requestIdentifier="#1" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="전체 북로그 조회 | #1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/main/API/BookLog/전체 북로그 조회.http" requestIdentifier="#1" runType="Run single request">
+      <method v="2" />
+    </configuration>
     <configuration name="세부 보관함 추가 | #1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/main/API/DetailLocker/세부 보관함 추가.http" requestIdentifier="#1" runType="Run single request">
       <method v="2" />
     </configuration>
@@ -300,12 +215,6 @@
       <method v="2" />
     </configuration>
     <configuration name="단일 도서 조회 | #1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/main/API/단일 도서 조회.http" requestIdentifier="#1" runType="단일 요청 실행">
-      <method v="2" />
-    </configuration>
-    <configuration name="단일 도서 조회 | #1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/main/API/단일 도서 조회.http" requestIdentifier="#1" runType="Run single request">
-      <method v="2" />
-    </configuration>
-    <configuration name="전체 북로그 조회 | #1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/main/API/BookLog/전체 북로그 조회.http" requestIdentifier="#1" runType="Run single request">
       <method v="2" />
     </configuration>
     <configuration name="TownBookApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
