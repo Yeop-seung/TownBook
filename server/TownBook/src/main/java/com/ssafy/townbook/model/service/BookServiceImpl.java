@@ -9,6 +9,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import net.minidev.json.JSONArray;
@@ -35,24 +36,20 @@ public class BookServiceImpl implements BookService {
     }
     
     /**
-     * 전체 도서를 조회해서
-     * BookDto로 변환하여
-     * 배열에 담아 반환
+     * 전체 책 조회
      *
-     * @return List BookDto
+     * @return List<BookDto>
      */
     @Override
     public List<BookDto> findAll() {
-        List<Book> findBooks = bookRepository.findAll();
-        return findBooks.stream()
+        Optional<List<Book>> findBooks = Optional.ofNullable(bookRepository.findAll());
+        return findBooks.get().stream()
                 .map(BookDto::new)
                 .collect(Collectors.toList());
     }
     
     /**
-     * ISBN
-     * 도서 한권을 조회해서
-     * BookDto 반환
+     * ISBN 으로 도서 조회
      *
      * @param bookIsbn
      * @return BookDto
@@ -62,18 +59,18 @@ public class BookServiceImpl implements BookService {
         Book findBook = bookRepository.findBookByBookIsbn(bookIsbn).get();
         return new BookDto(findBook);
     }
-
+    
+    
     /**
-     * ISBN
-     * 1. 국립중앙도서관에 ISBN으로 도서 1권 정보를 불러온다.
-     * 2. 불러온 정보를 Book 테이블에 맞게 가공해서 DB에 저장한다.
-     * 3. 국립중앙도서관에 없는 도서라면 Exception e
+     * 도서 추가
+     * ISBN으로 국립도서관의 도서 정보 불러온 후 DB에 추가
      *
      * @param bookIsbn
+     * @return Boolean
      */
     @Override
     @Transactional
-    public BookDto addBook(String bookIsbn) {
+    public boolean addBook(String bookIsbn) {
         Book book = new Book();
         try {
             // API 호출
@@ -104,9 +101,9 @@ public class BookServiceImpl implements BookService {
         } catch (Exception e) {
             // 예외 처리
             System.out.println("정보가 없는 도서입니다");
+            return false;
         }
-        // Book -> DTO 변환해서 반환
-        return new BookDto(book);
+        return true;
     }
     
     /**

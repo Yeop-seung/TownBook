@@ -7,7 +7,7 @@ import net.minidev.json.JSONArray;
 import java.util.List;
 
 public interface AccountService {
-    Boolean signup(AccountDto accountDto);
+    AccountDto signup(AccountDto accountDto);
 
     AccountDto getUserWithAuthorities(String accountId);
 

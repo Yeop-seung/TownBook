@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class EmailServiceImpl implements EmailService{
 
+
     @Autowired
     JavaMailSender emailSender;
 
@@ -126,6 +127,7 @@ public class EmailServiceImpl implements EmailService{
 
         return message;
     }
+
 
     /**
      * 임시 비밀번호 만들기

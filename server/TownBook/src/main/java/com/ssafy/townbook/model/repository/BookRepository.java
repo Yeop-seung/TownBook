@@ -7,9 +7,9 @@ import java.util.Optional;
 
 public interface BookRepository extends JpaRepository<Book, String> { // Long -> String
     
-
+    
     /**
-     * ISBN 으로 책 조회
+     * ISBN 으로 도서 조회
      *
      * @param bookIsbn
      * @return Optional<Book>

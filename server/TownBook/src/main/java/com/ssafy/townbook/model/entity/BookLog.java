@@ -1,13 +1,11 @@
 package com.ssafy.townbook.model.entity;
 
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -27,7 +25,6 @@ public class BookLog {
     @Column(name = "book_log_no")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long bookLogNo;
-    
     
     @Column(name = "book_log_state")
     @ColumnDefault("true")

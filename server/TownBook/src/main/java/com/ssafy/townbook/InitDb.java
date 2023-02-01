@@ -41,7 +41,7 @@ public class InitDb {
     @PostConstruct
     public void init() {
         initService.bookInit();
-//        initService.accountInit();
+        initService.accountInit();
         initService.lockerInit();
         initService.bookLogInit();
     }
@@ -88,10 +88,8 @@ public class InitDb {
         
         
         public void accountInit() {
-            Authority authorityRoleUser = new Authority();
-            authorityRoleUser.setAuthorityName("ROLE_USER");
-            Authority authorityRoleAdmin = new Authority();
-            authorityRoleAdmin.setAuthorityName("ROLE_ADMIN");
+            Authority authorityRoleUser = createAuthority("ROLE_USER");
+            Authority authorityRoleAdmin = createAuthority("ROLE_ADMIN");
             em.persist(authorityRoleUser);
             em.persist(authorityRoleAdmin);
             
@@ -101,6 +99,12 @@ public class InitDb {
             Account account2 = createAccount("admin@test.com", "adminPassword", "최어드", "대전시 유성구 어드동", "010-5678-1234",
                     1, "내가 바로 최어드", "111111", authorityRoleAdmin);
             em.persist(account2);
+        }
+        
+        public Authority createAuthority(String authorityName) {
+            Authority authority = new Authority();
+            authority.setAuthorityName(authorityName);
+            return authority;
         }
         
         public Account createAccount(String accountEmail, String accountPw, String accountName, String accountAddress,
@@ -114,7 +118,7 @@ public class InitDb {
             account.setAccountPhoneNumber(accountPhoneNumber);
             account.setAccountGender(accountGender);
             account.setAccountNickname(accountNickname);
-            account.setAccountBirthDay(accountBirthDay);
+            account.setAccountBirthday(accountBirthDay);
             account.setAuthorities(Collections.singleton(authority));
             return account;
         }
@@ -153,7 +157,7 @@ public class InitDb {
             Optional<Book> book2 = bookRepository.findBookByBookIsbn("9788960777330");
             donateBook("재미 없어요", locker2, detailLocker2, account2, book2);
             
-            BookLog bookLog1 = bookLogRepository.findBookLogByBookLogNo(2L);
+            BookLog bookLog1 = bookLogRepository.findBookLogByBookLogNo(2L).get();
             receiveBook(bookLog1, account1);
         }
         
@@ -165,6 +169,7 @@ public class InitDb {
             bookLog.setBookLogDonateDateTime(LocalDateTime.now());
             bookLog.setLocker(locker);
             bookLog.setDetailLocker(detailLocker);
+            bookLog.getDetailLocker().setDetailLockerIsEmpty(false);
             bookLog.setAccount(account.get());
             bookLog.setBook(book.get());
             em.persist(bookLog);
@@ -172,6 +177,7 @@ public class InitDb {
         
         public void receiveBook(BookLog bookLog, Optional<Account> account) {
             bookLog.setBookLogState(false);
+            bookLog.getDetailLocker().setDetailLockerIsEmpty(true);
             bookLog.setBookLogReceiverNo(account.get().getAccountNo());
             bookLog.setBookLogReceiveDateTime(LocalDateTime.now());
             em.persist(bookLog);
@@ -183,3 +189,4 @@ public class InitDb {
         return localDate;
     }
 }
+// test

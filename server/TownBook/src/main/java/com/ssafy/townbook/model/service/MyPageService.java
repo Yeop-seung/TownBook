@@ -20,4 +20,5 @@ public interface MyPageService {
 
     JSONArray findWishListByAccountNo(Long accountNo) throws Exception;
 
+    JSONArray findBoardByAccountNo(Long accountNo) throws Exception;
 }

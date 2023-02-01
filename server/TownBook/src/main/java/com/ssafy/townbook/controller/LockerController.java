@@ -15,24 +15,26 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/locker")
 @RequiredArgsConstructor
 public class LockerController {
-
-    @Autowired
+    
     private LockerService lockerService;
-
+    
+    @Autowired
+    public LockerController(LockerService lockerService) {
+        this.lockerService = lockerService;
+    }
+    
     /**
      * 전체 보관함 및 보관함에 할당된 세부 보관함 조회
-     * 보관함 DTO로 변환하여 반환
      *
      * @return List<LockerDto>
      */
     @GetMapping("")
-    public ResponseEntity<?> findLockers() {
+    public ResponseEntity<?> lockers() {
         return new ResponseEntity<>(lockerService.findAll(), HttpStatus.OK);
     }
     
     /**
      * 단일 보관함 및 보관함에 할당된 세부 보관함 조회
-     * 보관함 DTO로 변환하여 반환
      *
      * @param lockerNo
      * @return LockerDto
@@ -44,15 +46,12 @@ public class LockerController {
     
     /**
      * 보관함 및 세부 보관함을 생성한다.
-     * 보관함 이름, 세부 보관함 개수 PathVariable
      *
      * @param lockerRegion
      * @param detailLockerCount
-     * @return LockerDto
+     * @return Boolean
      */
     @PostMapping("/add/{lockerRegion}/{detailLockerCount}/{lockerLatitude}/{lockerLongitude}")
-    // RequestBody 활용하기 lockerinfo or lockerDto 만들기
-    // lockerDto 반환이유는?
     public ResponseEntity<?> addLocker(
             @PathVariable String lockerRegion, @PathVariable int detailLockerCount,
             @PathVariable String lockerLatitude, @PathVariable String lockerLongitude) {
