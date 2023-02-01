@@ -4,6 +4,7 @@ import com.ssafy.townbook.model.dto.AdminDto;
 import com.ssafy.townbook.model.entity.Account;
 import com.ssafy.townbook.model.repository.AdminRepository;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,24 +25,22 @@ public class AdminServiceImpl implements AdminService {
     
     /**
      * 전체 회원 조회
-     * DTO로 변환하여 반환한다.
      *
-     * @return List
+     * @return List<AccountDto>
      */
     @Override
     public List<AdminDto> findAll() {
-        List<Account> findAccounts = adminRepository.findAll();
-        return findAccounts.stream()
+        Optional<List<Account>> findAccounts = Optional.ofNullable(adminRepository.findAll());
+        return findAccounts.get().stream()
                 .map(AdminDto::new)
                 .collect(Collectors.toList());
     }
     
     /**
      * 회원번호로 단일 회원을 조회
-     * DTO로 변환하여 반환한다.
      *
      * @param accountNo
-     * @return AdminDto
+     * @return AccountDto
      */
     @Override
     public AdminDto findAccountByAccountNo(Long accountNo) {

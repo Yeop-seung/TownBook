@@ -26,7 +26,7 @@ public class BookController {
     /**
      * 전체 책 조회
      *
-     * @return List BookDto
+     * @return List<BookDto>
      */
     @GetMapping("")
     public ResponseEntity<?> books() throws Exception {
@@ -49,7 +49,7 @@ public class BookController {
      * ISBN으로 국립도서관의 도서 정보 불러온 후 DB에 추가
      *
      * @param bookIsbn
-     * @return
+     * @return Boolean
      */
     @PostMapping("/add/{bookIsbn}")
     public ResponseEntity<?> addBook(@PathVariable String bookIsbn) {

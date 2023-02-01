@@ -25,7 +25,7 @@ public class BookLogController {
     /**
      * 전체 북로그 조회
      *
-     * @return List
+     * @return List<BookLogDto>
      */
     @GetMapping("")
     public ResponseEntity<?> bookLogs()   {
@@ -47,7 +47,7 @@ public class BookLogController {
      * 단일 보관함에 보관중인 도서 전부 조회
      *
      * @param lockerNo
-     * @return List
+     * @return List<BookDto>
      */
     @GetMapping("/locker/{lockerNo}")
     public ResponseEntity<?> findBookByLockerNo(@PathVariable Long lockerNo) {
@@ -58,7 +58,7 @@ public class BookLogController {
      * 단일 도서의 모든 리뷰 조회
      *
      * @param bookIsbn
-     * @return List
+     * @return List<BookLogDto.bookLogReview>
      */
     @GetMapping("/review/{bookIsbn}")
     public ResponseEntity<?> findBookLogReviewByBookIsbn(@PathVariable String bookIsbn) {

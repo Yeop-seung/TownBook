@@ -7,6 +7,7 @@ import com.ssafy.townbook.model.entity.BookLog;
 import com.ssafy.townbook.model.repository.BookLogRepository;
 import com.ssafy.townbook.queryrepository.BookLogQueryRepository;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,12 +32,12 @@ public class BookLogServiceImpl implements BookLogService {
     /**
      * 전체 북로그 조회
      *
-     * @return List
+     * @return List<BookLogDto>
      */
     @Override
     public List<BookLogDto> findAll() {
-        List<BookLog> findBookLogs = bookLogRepository.findAll();
-        return findBookLogs.stream()
+        Optional<List<BookLog>> findBookLogs = Optional.ofNullable(bookLogRepository.findAll());
+        return findBookLogs.get().stream()
                 .map(BookLogDto::new)
                 .collect(Collectors.toList());
     }
@@ -49,18 +50,18 @@ public class BookLogServiceImpl implements BookLogService {
      */
     @Override
     public BookLogDto findBookLogByBookLogNo(Long bookLogNo) {
-        return new BookLogDto(bookLogRepository.findBookLogByBookLogNo(bookLogNo));
+        return new BookLogDto(bookLogRepository.findBookLogByBookLogNo(bookLogNo).get());
     }
     
     /**
      * 단일 보관함에 보관중인 도서 전부 조회
      *
      * @param lockerNo
-     * @return List
+     * @return List<BookDto>
      */
     @Override
     public List<BookDto> findBookByLockerNo(Long lockerNo) {
-        List<Book> findBooks = bookLogQueryRepository.findBookByLockerNo(lockerNo);
+        List<Book> findBooks = bookLogQueryRepository.findBookByLockerNo(lockerNo).get();
         return findBooks.stream()
                 .map(BookDto::new)
                 .collect(Collectors.toList());
@@ -70,11 +71,10 @@ public class BookLogServiceImpl implements BookLogService {
      * 단일 도서의 모든 리뷰 조회
      *
      * @param bookIsbn
-     * @return List
+     * @return List<BookLogDto.bookLogReview>
      */
-    @Override
     public List<String> findBookLogReviewByBookIsbn(String bookIsbn) {
-        List<String> findReviews = bookLogQueryRepository.findBookLogReviewByBookIsbn(bookIsbn);
+        List<String> findReviews = bookLogQueryRepository.findBookLogReviewByBookIsbn(bookIsbn).get();
         return findReviews;
     }
 }

@@ -9,7 +9,6 @@ public interface AdminRepository extends JpaRepository<Account, Long> {
     
     /**
      * 회원번호로 단일 회원을 조회
-     * DTO로 변환하여 반환한다.
      *
      * @param accountNo
      * @return Optional<Account>
