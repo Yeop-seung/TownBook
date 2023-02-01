@@ -43,8 +43,13 @@ public class Notice {
 
 
     @NotNull
+    @Column(name = "notice_category")
+    private Integer noticeCategory;
+
+
+    @NotNull
     @Column(name = "notice_write_time")
-    private LocalDateTime noticeWriteTime;
+    private LocalDateTime noticeWriteDateTime;
 
     @NotNull
     @Column(name = "notice_state")
@@ -64,12 +69,14 @@ public class Notice {
 
     @Builder
     public Notice(Long noticeNo, String noticeTitle, String noticeContent,
-            LocalDateTime noticeWriteTime, Boolean noticeState, Integer noticeViews,
+            LocalDateTime noticeWriteDateTime, Boolean noticeState, Integer noticeViews,
+            Integer noticeCategory,
             Account account) {
         this.noticeNo = noticeNo;
         this.noticeTitle = noticeTitle;
         this.noticeContent = noticeContent;
-        this.noticeWriteTime = noticeWriteTime;
+        this.noticeWriteDateTime = noticeWriteDateTime;
+        this.noticeCategory = noticeCategory;
         this.noticeState = noticeState;
         this.noticeViews = noticeViews;
         this.account = account;
