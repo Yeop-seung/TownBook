@@ -88,10 +88,8 @@ public class InitDb {
         
         
         public void accountInit() {
-            Authority authorityRoleUser = new Authority();
-            authorityRoleUser.setAuthorityName("ROLE_USER");
-            Authority authorityRoleAdmin = new Authority();
-            authorityRoleAdmin.setAuthorityName("ROLE_ADMIN");
+            Authority authorityRoleUser = createAuthority("ROLE_USER");
+            Authority authorityRoleAdmin = createAuthority("ROLE_ADMIN");
             em.persist(authorityRoleUser);
             em.persist(authorityRoleAdmin);
             
@@ -101,6 +99,12 @@ public class InitDb {
             Account account2 = createAccount("admin@test.com", "adminPassword", "최어드", "대전시 유성구 어드동", "010-5678-1234",
                     1, "내가 바로 최어드", "111111", authorityRoleAdmin);
             em.persist(account2);
+        }
+        
+        public Authority createAuthority(String authorityName) {
+            Authority authority = new Authority();
+            authority.setAuthorityName(authorityName);
+            return authority;
         }
         
         public Account createAccount(String accountEmail, String accountPw, String accountName, String accountAddress,
@@ -141,19 +145,19 @@ public class InitDb {
         }
         
         public void bookLogInit() {
-            Locker locker1 = lockerRepository.findLockerByLockerNo(1L);
+            Locker locker1 = lockerRepository.findLockerByLockerNo(1L).get();
             DetailLocker detailLocker1 = locker1.getDetailLocker().get(0);
             Optional<Account> account1 = accountRepository.findByAccountNo(1L);
             Optional<Book> book1 = bookRepository.findBookByBookIsbn("8984993751");
             donateBook("재밌어요", locker1, detailLocker1, account1, book1);
             
-            Locker locker2 = lockerRepository.findLockerByLockerNo(2L);
+            Locker locker2 = lockerRepository.findLockerByLockerNo(2L).get();
             DetailLocker detailLocker2 = locker2.getDetailLocker().get(0);
             Optional<Account> account2 = accountRepository.findByAccountNo(2L);
             Optional<Book> book2 = bookRepository.findBookByBookIsbn("9788960777330");
             donateBook("재미 없어요", locker2, detailLocker2, account2, book2);
             
-            BookLog bookLog1 = bookLogRepository.findBookLogByBookLogNo(2L);
+            BookLog bookLog1 = bookLogRepository.findBookLogByBookLogNo(2L).get();
             receiveBook(bookLog1, account1);
         }
         

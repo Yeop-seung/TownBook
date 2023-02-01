@@ -111,7 +111,7 @@
     </favorite-branches>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$/../.." value="cheong" />
+        <entry key="$PROJECT_DIR$/../.." value="BE" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
@@ -182,34 +182,22 @@
     </key>
   </component>
   <component name="RunManager" selected="Spring Boot.TownBookApplication">
-    <configuration name="TownBook [compileQuerydsl]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="compileQuerydsl" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
+    <configuration name="전체 도서 조회 | #1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/main/API/Book/전체 도서 조회.http" requestIdentifier="#1" runType="Run single request">
       <method v="2" />
     </configuration>
-    <configuration name="단일 보관함의 전체 보관 도서 조회 | #1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/main/API/BookLog/단일 보관함의 전체 보관 도서 조회.http" requestIdentifier="#1" runType="Run single request">
+    <configuration name="전체 회원 조회 | #1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/main/API/Account/전체 회원 조회.http" requestIdentifier="#1" runType="Run single request">
       <method v="2" />
     </configuration>
-    <configuration name="단일 도서의 전체 리뷰 조회 | #1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/main/API/BookLog/단일 도서의 전체 리뷰 조회.http" requestIdentifier="#1" runType="Run single request">
+    <configuration name="단일 회원 조회 | #1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/main/API/Account/단일 회원 조회.http" requestIdentifier="#1" runType="Run single request">
       <method v="2" />
     </configuration>
-    <configuration name="단일 북로그 조회 | #1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/main/API/BookLog/단일 북로그 조회.http" requestIdentifier="#1" runType="Run single request">
+    <configuration name="단일 도서 조회 | #1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/main/API/Book/단일 도서 조회.http" requestIdentifier="#1" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="세부 보관함 추가 | #1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/main/API/DetailLocker/세부 보관함 추가.http" requestIdentifier="#1" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="전체 보관함 조회 | #1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/main/API/Locker/전체 보관함 조회.http" requestIdentifier="#1" runType="Run single request">
       <method v="2" />
     </configuration>
     <configuration name="세부 보관함 추가 | #1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/main/API/DetailLocker/세부 보관함 추가.http" requestIdentifier="#1" runType="Run single request">
@@ -242,6 +230,9 @@
     <configuration name="전체 북로그 조회 | #1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/main/API/BookLog/전체 북로그 조회.http" requestIdentifier="#1" runType="Run single request">
       <method v="2" />
     </configuration>
+    <configuration name="도서 추가 | #1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/main/API/Book/도서 추가.http" requestIdentifier="#1" runType="Run single request">
+      <method v="2" />
+    </configuration>
     <configuration name="TownBookApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="TownBook.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.ssafy.townbook.TownBookApplication" />
@@ -251,11 +242,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="HTTP Request.단일 북로그 조회 | #1" />
-        <item itemvalue="HTTP Request.단일 보관함의 전체 보관 도서 조회 | #1" />
-        <item itemvalue="HTTP Request.단일 도서의 전체 리뷰 조회 | #1" />
-        <item itemvalue="Gradle.TownBook [compileQuerydsl]" />
-        <item itemvalue="HTTP Request.단일 북로그 조회 | #1" />
+        <item itemvalue="HTTP Request.전체 도서 조회 | #1" />
+        <item itemvalue="HTTP Request.도서 추가 | #1" />
+        <item itemvalue="HTTP Request.단일 도서 조회 | #1" />
+        <item itemvalue="HTTP Request.단일 회원 조회 | #1" />
+        <item itemvalue="HTTP Request.전체 회원 조회 | #1" />
       </list>
     </recent_temporary>
   </component>
