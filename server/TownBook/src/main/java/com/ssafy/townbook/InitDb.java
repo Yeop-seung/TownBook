@@ -100,13 +100,13 @@ public class InitDb {
                     1, "내가 바로 최어드", "111111", authorityRoleAdmin);
             em.persist(account2);
         }
-        
+
         public Authority createAuthority(String authorityName) {
             Authority authority = new Authority();
             authority.setAuthorityName(authorityName);
             return authority;
         }
-        
+
         public Account createAccount(String accountEmail, String accountPw, String accountName, String accountAddress,
                 String accountPhoneNumber, Integer accountGender, String accountNickname, String accountBirthDay,
                 Authority authority) {
@@ -118,7 +118,7 @@ public class InitDb {
             account.setAccountPhoneNumber(accountPhoneNumber);
             account.setAccountGender(accountGender);
             account.setAccountNickname(accountNickname);
-            account.setAccountBirthday(accountBirthDay);
+            account.setAccountBirthDay(accountBirthDay);
             account.setAuthorities(Collections.singleton(authority));
             return account;
         }
@@ -165,6 +165,7 @@ public class InitDb {
                 String bookLogReview, Locker locker, DetailLocker detailLocker,
                 Optional<Account> account, Optional<Book> book) {
             BookLog bookLog = new BookLog();
+            System.out.println("테스트");
             bookLog.setBookLogReview(bookLogReview);
             bookLog.setBookLogDonateDateTime(LocalDateTime.now());
             bookLog.setLocker(locker);
@@ -187,4 +188,3 @@ public class InitDb {
         return localDate;
     }
 }
-// test

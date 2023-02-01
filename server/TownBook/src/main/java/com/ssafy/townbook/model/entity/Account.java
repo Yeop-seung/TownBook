@@ -66,7 +66,7 @@ public class Account {
     
     @Column(name = "account_birthday")
     @NotNull
-    private String accountBirthday;
+    private String accountBirthDay;
     
     @Column(name = "account_activated")
     @ColumnDefault("true")
@@ -99,17 +99,12 @@ public class Account {
             joinColumns = {@JoinColumn(name = "account_no", referencedColumnName = "account_no")},
             inverseJoinColumns = {@JoinColumn(name = "authority_name", referencedColumnName = "authority_name")})
     private Set<Authority> authorities;
-
-//    public void addAuthorities(String authorityName) {
-//        Authority authority = new Authority(authorityName);
-//        this.getAuthorities().add(authority);
-//    }
     
     @Builder
     public Account(Long accountNo, String accountEmail, String accountPw, String accountName,
             String accountAddress, String accountPhoneNumber, Integer accountGender,
             Integer accountPoint, Integer accountBookCnt, String accountNickname,
-            String accountBirthday, BookLog bookLog, List<Hit> hits, List<Board> boards,
+            String accountBirthDay, BookLog bookLog, List<Hit> hits, List<Board> boards,
             List<Comment> comments, Boolean accountActivated, List<WishList> wishLists, List<File> files,
             List<Notice> notices,
             Set<Authority> authorities) {
@@ -123,7 +118,7 @@ public class Account {
         this.accountPoint = accountPoint;
         this.accountBookCnt = accountBookCnt;
         this.accountNickname = accountNickname;
-        this.accountBirthday = accountBirthday;
+        this.accountBirthDay = accountBirthDay;
         this.bookLog = bookLog;
         this.hits = hits;
         this.boards = boards;
