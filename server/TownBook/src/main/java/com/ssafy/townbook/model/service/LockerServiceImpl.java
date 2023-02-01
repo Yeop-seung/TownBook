@@ -49,7 +49,7 @@ public class LockerServiceImpl implements LockerService {
      */
     @Override
     public LockerDto findLockerByLockerNo(Long lockerNo) {
-        Locker findLocker = lockerRepository.findLockerByLockerNo(lockerNo).get();
+        Locker findLocker = lockerRepository.findLockerByLockerNo(lockerNo);
         return new LockerDto(findLocker);
     }
     

@@ -92,4 +92,16 @@ public class MyPageController {
     public ResponseEntity<?> findWishListByAccountNo(@PathVariable Long accountNo) throws Exception{
         return new ResponseEntity<>(myPageService.findWishListByAccountNo(accountNo),HttpStatus.OK);
     }
+
+    /**
+     * 로그인 유저의 작성 게시글 목록 반환
+     *
+     * @param accountNo
+     * @return Optional<JSONArray>
+     * @throws Exception
+     */
+    @GetMapping("/myWrite/{accountNo}")
+    public ResponseEntity<?> findBoardByAccountNo(@PathVariable Long accountNo) throws Exception{
+        return new ResponseEntity<>(myPageService.findBoardByAccountNo(accountNo), HttpStatus.OK);
+    }
 }

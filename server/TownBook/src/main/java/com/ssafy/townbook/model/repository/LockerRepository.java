@@ -3,8 +3,6 @@ package com.ssafy.townbook.model.repository;
 import com.ssafy.townbook.model.entity.Locker;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.Optional;
-
 public interface LockerRepository extends JpaRepository<Locker, Long> {
     
     /**
@@ -14,5 +12,5 @@ public interface LockerRepository extends JpaRepository<Locker, Long> {
      * @param lockerNo
      * @return LockerDto
      */
-    Optional<Locker> findLockerByLockerNo(Long lockerNo);
+    Locker findLockerByLockerNo(Long lockerNo);
 }

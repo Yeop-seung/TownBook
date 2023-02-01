@@ -30,14 +30,9 @@ public class AuthController {
     private AuthenticationManagerBuilder authenticationManagerBuilder;
 
 
-    /**
-     *
-     *
-     * @param loginDto
-     * @return TokenDto
-     */
+
     @PostMapping("/login")
-    public ResponseEntity<?> authorize(@Valid @RequestBody LoginDto loginDto) {
+    public ResponseEntity<TokenDto> authorize(@Valid @RequestBody LoginDto loginDto) {
 
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(loginDto.getAccountEmail(), loginDto.getAccountPw());

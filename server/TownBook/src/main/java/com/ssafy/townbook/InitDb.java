@@ -41,7 +41,7 @@ public class InitDb {
     @PostConstruct
     public void init() {
         initService.bookInit();
-//        initService.accountInit();
+        initService.accountInit();
         initService.lockerInit();
         initService.bookLogInit();
     }
@@ -114,7 +114,7 @@ public class InitDb {
             account.setAccountPhoneNumber(accountPhoneNumber);
             account.setAccountGender(accountGender);
             account.setAccountNickname(accountNickname);
-            account.setAccountBirthDay(accountBirthDay);
+            account.setAccountBirthday(accountBirthDay);
             account.setAuthorities(Collections.singleton(authority));
             return account;
         }
