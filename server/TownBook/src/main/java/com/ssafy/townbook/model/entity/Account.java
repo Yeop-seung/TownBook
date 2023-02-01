@@ -21,7 +21,6 @@ import org.hibernate.annotations.DynamicInsert;
 @NoArgsConstructor
 @ToString
 @Entity
-@Table(name = "`account`")
 public class Account {
     
     @Id
@@ -39,7 +38,7 @@ public class Account {
     
     @Column(name = "account_name", length = 50)
     @NotNull
-    String accountName;
+    private String accountName;
     
     @Column(name = "account_address")
     @NotNull
