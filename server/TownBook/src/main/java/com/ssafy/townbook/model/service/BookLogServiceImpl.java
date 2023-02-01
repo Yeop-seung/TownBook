@@ -77,4 +77,17 @@ public class BookLogServiceImpl implements BookLogService {
         List<String> findReviews = bookLogQueryRepository.findBookLogReviewByBookIsbn(bookIsbn).get();
         return findReviews;
     }
+    
+    /**
+     * 단일 회원의 모든 북로그 조회
+     *
+     * @param accountNo
+     * @return List<BookLog>
+     */
+    public List<BookLogDto> findBookLogByAccountNo(Long accountNo) {
+        List<BookLog> findBookLogs = bookLogQueryRepository.findBookLogByAccountNo(accountNo).get();
+        return findBookLogs.stream()
+                .map(BookLogDto::new)
+                .collect(Collectors.toList());
+    }
 }
