@@ -4,7 +4,6 @@ import com.ssafy.townbook.model.dto.AdminDto;
 import com.ssafy.townbook.model.entity.Account;
 import com.ssafy.townbook.model.repository.AdminRepository;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +30,8 @@ public class AdminServiceImpl implements AdminService {
      */
     @Override
     public List<AdminDto> findAll() {
-        Optional<List<Account>> findAccounts =Optional.ofNullable(adminRepository.findAll());
-        return findAccounts.get().stream()
+        List<Account> findAccounts = adminRepository.findAll();
+        return findAccounts.stream()
                 .map(AdminDto::new)
                 .collect(Collectors.toList());
     }

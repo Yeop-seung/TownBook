@@ -1,6 +1,5 @@
 package com.ssafy.townbook.queryrepository;
 
-import static com.ssafy.townbook.model.entity.QBook.book;
 import static com.ssafy.townbook.model.entity.QBookLog.bookLog;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -25,11 +24,11 @@ public class BookLogQueryRepository {
      * 단일 보관함에 보관중인 도서 전부 조회
      *
      * @param lockerNo
-     * @return List<Book>
+     * @return List
      */
     public List<Book> findBookByLockerNo(Long lockerNo) {
         List<Book> result = jpaQueryFactory
-                .select(book)
+                .select(bookLog.book)
                 .from(bookLog)
                 .where(bookLog.bookLogState.eq(true).and(bookLog.locker.lockerNo.eq(lockerNo)))
                 .fetch();
