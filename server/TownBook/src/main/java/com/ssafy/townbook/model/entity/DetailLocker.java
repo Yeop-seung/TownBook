@@ -33,7 +33,7 @@ public class DetailLocker {
     private Locker locker;
     
     @Column(name = "detail_locker_isEmpty")
-    @ColumnDefault("false")
+    @ColumnDefault("true")
     private Boolean detailLockerIsEmpty;
     
     @Builder

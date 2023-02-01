@@ -59,11 +59,10 @@ public class BookServiceImpl implements BookService {
      */
     @Override
     public BookDto findBookByBookIsbn(String bookIsbn) {
-        Book findBook = bookRepository.findBookByBookIsbn(bookIsbn);
+        Book findBook = bookRepository.findBookByBookIsbn(bookIsbn).get();
         return new BookDto(findBook);
     }
-    
-    
+
     /**
      * ISBN
      * 1. 국립중앙도서관에 ISBN으로 도서 1권 정보를 불러온다.
