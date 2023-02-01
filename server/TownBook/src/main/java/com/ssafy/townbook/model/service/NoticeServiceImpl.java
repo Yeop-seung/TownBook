@@ -66,7 +66,7 @@ public class NoticeServiceImpl implements NoticeService{
      */
     @Override
     public List<NoticeDto> getNoticeList(Integer category) {
-        List<Notice> noticeList = noticeRepository.findTop8ByNoticeStatusAndNoticeCategory(true, category).get();
+        List<Notice> noticeList = noticeRepository.findTop8ByNoticeStateAndNoticeCategory(true, category).get();
         return noticeList.stream()
                 .map(NoticeDto::new)
                 .collect(Collectors.toList());

@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface NoticeRepository extends JpaRepository<Notice, Long> {
 
-    Optional<List<Notice>> findTop8ByNoticeStatusAndNoticeCategory(Boolean noticeStatus,Integer category);
+    Optional<List<Notice>> findTop8ByNoticeStateAndNoticeCategory(Boolean noticeState,Integer category);
 
 }
