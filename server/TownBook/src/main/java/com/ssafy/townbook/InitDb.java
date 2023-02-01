@@ -165,7 +165,6 @@ public class InitDb {
                 String bookLogReview, Locker locker, DetailLocker detailLocker,
                 Optional<Account> account, Optional<Book> book) {
             BookLog bookLog = new BookLog();
-            System.out.println("테스트");
             bookLog.setBookLogReview(bookLogReview);
             bookLog.setBookLogDonateDateTime(LocalDateTime.now());
             bookLog.setLocker(locker);
