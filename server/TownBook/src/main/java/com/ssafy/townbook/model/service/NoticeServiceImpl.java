@@ -4,10 +4,8 @@ import com.ssafy.townbook.model.dto.NoticeDto;
 import com.ssafy.townbook.model.entity.Notice;
 import com.ssafy.townbook.model.repository.NoticeRepository;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import javax.persistence.criteria.CriteriaBuilder.In;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -66,7 +64,7 @@ public class NoticeServiceImpl implements NoticeService{
      */
     @Override
     public List<NoticeDto> getNoticeList(Integer category) {
-        List<Notice> noticeList = noticeRepository.findTop8ByNoticeStatusAndNoticeCategory(true, category).get();
+        List<Notice> noticeList = noticeRepository.findTop8ByNoticeStateAndNoticeCategory(true, category).get();
         return noticeList.stream()
                 .map(NoticeDto::new)
                 .collect(Collectors.toList());
