@@ -2,10 +2,16 @@ package com.ssafy.townbook.model.service;
 
 import com.ssafy.townbook.model.dto.BookDto;
 import com.ssafy.townbook.model.dto.BookLogDto;
+import com.ssafy.townbook.model.dto.request.DonateBookRequestDto;
 import com.ssafy.townbook.model.entity.Book;
 import com.ssafy.townbook.model.entity.BookLog;
+import com.ssafy.townbook.model.repository.AdminRepository;
 import com.ssafy.townbook.model.repository.BookLogRepository;
+import com.ssafy.townbook.model.repository.BookRepository;
+import com.ssafy.townbook.model.repository.DetailLockerRepository;
+import com.ssafy.townbook.model.repository.LockerRepository;
 import com.ssafy.townbook.queryrepository.BookLogQueryRepository;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -21,12 +27,22 @@ public class BookLogServiceImpl implements BookLogService {
     
     private BookLogRepository bookLogRepository;
     private BookLogQueryRepository bookLogQueryRepository;
+    private LockerRepository lockerRepository;
+    private DetailLockerRepository detailLockerRepository;
+    private AdminRepository adminRepository;
+    private BookRepository bookRepository;
     
     @Autowired
     public BookLogServiceImpl(
-            BookLogRepository bookLogRepository, BookLogQueryRepository bookLogQueryRepository) {
+            BookLogRepository bookLogRepository, BookLogQueryRepository bookLogQueryRepository,
+            LockerRepository lockerRepository, DetailLockerRepository detailLockerRepository,
+            AdminRepository adminRepository, BookRepository bookRepository) {
         this.bookLogRepository = bookLogRepository;
         this.bookLogQueryRepository = bookLogQueryRepository;
+        this.lockerRepository = lockerRepository;
+        this.detailLockerRepository = detailLockerRepository;
+        this.adminRepository = adminRepository;
+        this.bookRepository = bookRepository;
     }
     
     /**
@@ -89,5 +105,27 @@ public class BookLogServiceImpl implements BookLogService {
         return findBookLogs.stream()
                 .map(BookLogDto::new)
                 .collect(Collectors.toList());
+    }
+    
+    @Override
+    @Transactional
+    public boolean donateBook(DonateBookRequestDto donateBookRequestDto) {
+        try {
+            BookLog bookLog = new BookLog();
+            bookLog.setBookLogDonateDateTime(LocalDateTime.now());
+            bookLog.setLocker(lockerRepository.findLockerByLockerNo(donateBookRequestDto.getLockerNo()).get());
+            bookLog.setDetailLocker(detailLockerRepository.findDetailLockerByDetailLockerNo(
+                    donateBookRequestDto.getDetailLockerNo()).get());
+            detailLockerRepository.findDetailLockerByDetailLockerNo(donateBookRequestDto.getDetailLockerNo()).get()
+                    .setDetailLockerIsEmpty(false);
+            bookLog.setAccount(adminRepository.findAccountByAccountNo(donateBookRequestDto.getAccountNo()).get());
+            bookLog.setBook(bookRepository.findBookByBookIsbn(donateBookRequestDto.getBookIsbn()).get());
+            bookLogRepository.save(bookLog);
+            return true;
+        } catch (Exception e) {
+            e.getMessage();
+            System.out.println(e.getMessage());
+            return false;
+        }
     }
 }

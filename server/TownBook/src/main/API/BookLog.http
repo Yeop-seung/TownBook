@@ -1,0 +1,10 @@
+### 1.
+POST http://localhost:8081/bookLog/donateBook
+Content-Type: application/json
+
+{
+  "lockerNo" : 1,
+  "detailLockerNo" : 1,
+  "accountNo" : 1,
+  "bookIsbn" : "9788960777330"
+}

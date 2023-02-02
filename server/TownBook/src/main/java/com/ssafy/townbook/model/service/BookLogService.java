@@ -2,6 +2,7 @@ package com.ssafy.townbook.model.service;
 
 import com.ssafy.townbook.model.dto.BookDto;
 import com.ssafy.townbook.model.dto.BookLogDto;
+import com.ssafy.townbook.model.dto.request.DonateBookRequestDto;
 import com.ssafy.townbook.model.entity.BookLog;
 import java.util.List;
 
@@ -45,4 +46,6 @@ public interface BookLogService {
      * @return List<BookLog>
      */
     List<BookLogDto> findBookLogByAccountNo(Long accountNo);
+    
+    boolean donateBook(DonateBookRequestDto donateBookRequestDto);
 }
