@@ -57,4 +57,9 @@ public class LockerController {
             @PathVariable String lockerLatitude, @PathVariable String lockerLongitude) {
         return new ResponseEntity<>(lockerService.addLocker(lockerRegion, detailLockerCount, lockerLatitude, lockerLongitude), HttpStatus.OK);
     }
+    
+//    @PostMapping("/checkLockerStorage/{lockerNo}")
+//    public ResponseEntity<?> checkLockerStorage(@PathVariable Long lockerNo){
+//        return
+//    }
 }

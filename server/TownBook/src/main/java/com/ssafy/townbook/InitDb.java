@@ -118,7 +118,7 @@ public class InitDb {
             account.setAccountPhoneNumber(accountPhoneNumber);
             account.setAccountGender(accountGender);
             account.setAccountNickname(accountNickname);
-            account.setAccountBirthday(accountBirthDay);
+            account.setAccountBirthDay(accountBirthDay);
             account.setAuthorities(Collections.singleton(authority));
             return account;
         }
@@ -170,7 +170,6 @@ public class InitDb {
             bookLog.setBookLogDonateDateTime(LocalDateTime.now());
             bookLog.setLocker(locker);
             bookLog.setDetailLocker(detailLocker);
-            bookLog.getDetailLocker().setDetailLockerIsEmpty(false);
             bookLog.setAccount(account.get());
             bookLog.setBook(book.get());
             em.persist(bookLog);
@@ -178,7 +177,6 @@ public class InitDb {
 
         public void receiveBook(BookLog bookLog, Optional<Account> account) {
             bookLog.setBookLogState(false);
-            bookLog.getDetailLocker().setDetailLockerIsEmpty(true);
             bookLog.setBookLogReceiverNo(account.get().getAccountNo());
             bookLog.setBookLogReceiveDateTime(LocalDateTime.now());
             em.persist(bookLog);
@@ -190,4 +188,3 @@ public class InitDb {
         return localDate;
     }
 }
-// test
