@@ -100,13 +100,13 @@ public class InitDb {
                     1, "내가 바로 최어드", "111111", authorityRoleAdmin);
             em.persist(account2);
         }
-        
+
         public Authority createAuthority(String authorityName) {
             Authority authority = new Authority();
             authority.setAuthorityName(authorityName);
             return authority;
         }
-        
+
         public Account createAccount(String accountEmail, String accountPw, String accountName, String accountAddress,
                 String accountPhoneNumber, Integer accountGender, String accountNickname, String accountBirthDay,
                 Authority authority) {
@@ -118,7 +118,7 @@ public class InitDb {
             account.setAccountPhoneNumber(accountPhoneNumber);
             account.setAccountGender(accountGender);
             account.setAccountNickname(accountNickname);
-            account.setAccountBirthday(accountBirthDay);
+            account.setAccountBirthDay(accountBirthDay);
             account.setAuthorities(Collections.singleton(authority));
             return account;
         }
@@ -169,7 +169,6 @@ public class InitDb {
             bookLog.setBookLogDonateDateTime(LocalDateTime.now());
             bookLog.setLocker(locker);
             bookLog.setDetailLocker(detailLocker);
-            bookLog.getDetailLocker().setDetailLockerIsEmpty(false);
             bookLog.setAccount(account.get());
             bookLog.setBook(book.get());
             em.persist(bookLog);
@@ -177,7 +176,6 @@ public class InitDb {
         
         public void receiveBook(BookLog bookLog, Optional<Account> account) {
             bookLog.setBookLogState(false);
-            bookLog.getDetailLocker().setDetailLockerIsEmpty(true);
             bookLog.setBookLogReceiverNo(account.get().getAccountNo());
             bookLog.setBookLogReceiveDateTime(LocalDateTime.now());
             em.persist(bookLog);

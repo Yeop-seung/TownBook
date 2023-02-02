@@ -25,6 +25,6 @@ public class AdminDto {
         this.accountPhoneNumber = account.getAccountPhoneNumber();
         this.accountGender = account.getAccountGender();
         this.accountNickname = account.getAccountNickname();
-        this.accountBirthDay = account.getAccountBirthday();
+        this.accountBirthDay = account.getAccountBirthDay();
     }
 }
