@@ -1,9 +1,4 @@
-### API Key ###
-application.properties
-application-API-KEY.properties
-application.yml
-email.properties
-generated
+
 
 HELP.md
 .gradle
