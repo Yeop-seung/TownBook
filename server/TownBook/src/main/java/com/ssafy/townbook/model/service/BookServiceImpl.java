@@ -93,7 +93,10 @@ public class BookServiceImpl implements BookService {
             book.setBookAuthor((String) jsonObject.get("AUTHOR"));
             book.setBookPublisher((String) jsonObject.get("PUBLISHER"));
             book.setBookPublishPredate(convertDate((String) jsonObject.get("PUBLISH_PREDATE")));
-            book.setBookIntroductionURL((String) jsonObject.get("BOOK_INTRODUCTION_URL"));
+            
+            book.setBookIntroductionURL(jsonObject.get("BOOK_INTRODUCTION_URL").equals("") ? "null.png"
+                    : (String) jsonObject.get("BOOK_INTRODUCTION_URL"));
+            
             book.setBookTitleURL((String) jsonObject.get("TITLE_URL"));
             
             // book 저장

@@ -2,6 +2,7 @@ package com.ssafy.townbook.model.service;
 
 import com.ssafy.townbook.model.dto.BookDto;
 import com.ssafy.townbook.model.dto.BookLogDto;
+import com.ssafy.townbook.model.entity.BookLog;
 import java.util.List;
 
 public interface BookLogService {
@@ -36,4 +37,12 @@ public interface BookLogService {
      * @return List<BookLogDto.bookLogReview>
      */
     List<String> findBookLogReviewByBookIsbn(String bookIsbn);
+    
+    /**
+     * 단일 회원의 모든 북로그 조회
+     *
+     * @param accountNo
+     * @return List<BookLog>
+     */
+    List<BookLogDto> findBookLogByAccountNo(Long accountNo);
 }

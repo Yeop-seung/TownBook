@@ -39,8 +39,6 @@ dependencies {
     implementation group: 'com.google.zxing', name: 'javase', version: '3.5.1'
     // swagger
     implementation group: 'io.springfox', name: 'springfox-boot-starter', version: '3.0.0'
-    // WebClient : 쓸지 말지 고민중
-    // implementation 'org.springframework.boot:spring-boot-starter-webflux'
 
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-hateoas'

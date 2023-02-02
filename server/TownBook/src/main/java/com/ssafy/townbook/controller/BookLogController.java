@@ -44,6 +44,17 @@ public class BookLogController {
     }
     
     /**
+     * 단일 회원의 모든 북로그 조회
+     *
+     * @param accountNo
+     * @return List<BookLog>
+     */
+    @GetMapping("/account/{accountNo}")
+    public ResponseEntity<?> findBookLogByAccountNo(@PathVariable Long accountNo) {
+        return new ResponseEntity<>(bookLogService.findBookLogByAccountNo(accountNo), HttpStatus.OK);
+    }
+    
+    /**
      * 단일 보관함에 보관중인 도서 전부 조회
      *
      * @param lockerNo
@@ -64,4 +75,6 @@ public class BookLogController {
     public ResponseEntity<?> findBookLogReviewByBookIsbn(@PathVariable String bookIsbn) {
         return new ResponseEntity<>(bookLogService.findBookLogReviewByBookIsbn(bookIsbn), HttpStatus.OK);
     }
+    
+    
 }
