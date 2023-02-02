@@ -1,5 +1,6 @@
 package com.ssafy.townbook.controller;
 
+import com.ssafy.townbook.model.dto.request.DonateBookRequestDto;
 import com.ssafy.townbook.model.service.BookLogService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,7 +31,7 @@ public class BookLogController {
      * @return List<BookLogDto>
      */
     @GetMapping("")
-    public ResponseEntity<?> bookLogs()   {
+    public ResponseEntity<?> bookLogs() {
         return new ResponseEntity<>(bookLogService.findAll(), HttpStatus.OK);
     }
     
@@ -76,5 +79,14 @@ public class BookLogController {
         return new ResponseEntity<>(bookLogService.findBookLogReviewByBookIsbn(bookIsbn), HttpStatus.OK);
     }
     
-    
+    /**
+     * 도서 기부
+     *
+     * @param donateBookRequestDto
+     * @return boolean
+     */
+    @PostMapping("/donateBook")
+    public ResponseEntity<?> donateBook(@RequestBody DonateBookRequestDto donateBookRequestDto) {
+        return new ResponseEntity<>(bookLogService.donateBook(donateBookRequestDto), HttpStatus.OK);
+    }
 }
