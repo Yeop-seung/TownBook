@@ -62,15 +62,13 @@ public class BookServiceImpl implements BookService {
     
     
     /**
-     * 도서 추가
-     * ISBN으로 국립도서관의 도서 정보 불러온 후 DB에 추가
+     * ISBN으로 국립도서관의 도서 정보 조회
      *
      * @param bookIsbn
-     * @return Boolean
+     * @return BookDto
      */
     @Override
-    @Transactional
-    public boolean addBook(String bookIsbn) {
+    public BookDto addBook(String bookIsbn) {
         Book book = new Book();
         try {
             // API 호출
@@ -93,20 +91,14 @@ public class BookServiceImpl implements BookService {
             book.setBookAuthor((String) jsonObject.get("AUTHOR"));
             book.setBookPublisher((String) jsonObject.get("PUBLISHER"));
             book.setBookPublishPredate(convertDate((String) jsonObject.get("PUBLISH_PREDATE")));
-            
             book.setBookIntroductionURL(jsonObject.get("BOOK_INTRODUCTION_URL").equals("") ? "null.png"
                     : (String) jsonObject.get("BOOK_INTRODUCTION_URL"));
-            
             book.setBookTitleURL((String) jsonObject.get("TITLE_URL"));
-            
-            // book 저장
-            bookRepository.save(book);
+            return new BookDto(book);
         } catch (Exception e) {
-            // 예외 처리
             System.out.println("정보가 없는 도서입니다");
-            return false;
+            return null;
         }
-        return true;
     }
     
     /**

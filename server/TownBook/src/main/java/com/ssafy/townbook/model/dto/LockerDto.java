@@ -18,6 +18,7 @@ public class LockerDto {
     private String lockerLatitude;
     private String lockerLongitude;
     private List<DetailLockerDto> detailLocker = new ArrayList<>();
+    private int lockerStorage;
     
     public LockerDto(Locker locker) {
         this.lockerNo = locker.getLockerNo();
@@ -31,5 +32,13 @@ public class LockerDto {
         this.detailLocker = findDetailLockers.stream()
                 .map(DetailLockerDto::new)
                 .collect(Collectors.toList());
+        
+        // 보관함 저장 공간
+        this.lockerStorage = 0;
+        for (int i = 0; i < findDetailLockers.size(); i++) {
+            if (findDetailLockers.get(i).getDetailLockerIsEmpty()) {
+                this.lockerStorage++;
+            }
+        }
     }
 }

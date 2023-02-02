@@ -45,13 +45,12 @@ public class BookController {
     }
     
     /**
-     * 도서 추가
-     * ISBN으로 국립도서관의 도서 정보 불러온 후 DB에 추가
+     * ISBN으로 국립도서관의 도서 정보 조회
      *
      * @param bookIsbn
-     * @return Boolean
+     * @return BookDto
      */
-    @PostMapping("/add/{bookIsbn}")
+    @GetMapping("/find/{bookIsbn}")
     public ResponseEntity<?> addBook(@PathVariable String bookIsbn) {
         return new ResponseEntity<>(bookService.addBook(bookIsbn), HttpStatus.OK);
     }
