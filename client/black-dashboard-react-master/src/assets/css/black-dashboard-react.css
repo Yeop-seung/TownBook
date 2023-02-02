@@ -2459,8 +2459,9 @@ fieldset:disabled a.btn {
   padding: 15px 48px;
   font-size: 1em;
   line-height: 1.35;
-  border-radius: 0.4285rem; }
-
+  border-radius: 0.4285rem; 
+}
+  
 .btn-sm, .btn-group-sm > .btn {
   padding: 5px 15px;
   font-size: 0.75rem;
@@ -4493,6 +4494,7 @@ input[type="button"].btn-block {
     background-color: #101420;
     border-color: #101420; }
 
+
 .close {
   float: right;
   font-size: 1.3125rem;
@@ -5118,6 +5120,10 @@ button.bg-default:hover,
 button.bg-default:focus {
   background-color: #243152 !important; }
 
+
+.bg-collapse {
+  background-color: #c1b5a9 !important;
+}
 .bg-white {
   background-color: #ffffff !important; }
 
@@ -8685,7 +8691,7 @@ a.text-darker:hover, a.text-darker:focus {
         box-shadow: none; }
   .btn.btn-link,
   .navbar .navbar-nav > a.btn.btn-link {
-    color: #344675; }
+    color: #ffffff; }
     .btn.btn-link:hover, .btn.btn-link:focus, .btn.btn-link:active,
     .navbar .navbar-nav > a.btn.btn-link:hover,
     .navbar .navbar-nav > a.btn.btn-link:focus,
@@ -10787,7 +10793,7 @@ img {
     color: #344675; }
   .navbar button.navbar-toggler[data-target="#navigation"] {
     padding-top: 0; }
-  .navbar .navbar-toggler-bar {
+   .navbar .navbar-toggler-bar {
     display: block;
     position: relative;
     width: 22px;
@@ -10824,7 +10830,7 @@ img {
     outline: 1px solid transparent; }
   .bar1 {
     top: 0px;
-    -webkit-animation: topbar-back 500ms linear 0s;
+    -webkit-animation: topbar-back500ms linear 0s;
     -moz-animation: topbar-back 500ms linear 0s;
     animation: topbar-back 500ms 0s;
     -webkit-animation-fill-mode: forwards;
@@ -11445,8 +11451,8 @@ hr {
   position: fixed;
   right: 0;
   width: 64px;
-  background: rgba(0, 0, 0, 0.3);
-  z-index: 1031;
+  background: rgba(0, 0, 0, 0.1);
+  z-index: 1050;
   border-radius: 8px 0 0 8px;
   text-align: center;
   top: 130px; }

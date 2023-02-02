@@ -1,20 +1,3 @@
-/*!
-
-=========================================================
-* Black Dashboard React v1.2.1
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/black-dashboard-react
-* Copyright 2022 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/black-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React from "react";
 import { Route, Switch, Redirect, useLocation } from "react-router-dom";
 // javascript plugin used to create scrollbars on windows
@@ -44,7 +27,7 @@ function Admin(props) {
       document.documentElement.className += " perfect-scrollbar-on";
       document.documentElement.classList.remove("perfect-scrollbar-off");
       ps = new PerfectScrollbar(mainPanelRef.current, {
-        suppressScrollX: true
+        suppressScrollX: true,
       });
       let tables = document.querySelectorAll(".table-responsive");
       for (let i = 0; i < tables.length; i++) {
@@ -74,19 +57,20 @@ function Admin(props) {
     }
   }, [location]);
   // this function opens and closes the sidebar on small devices
-  const toggleSidebar = () => {
-    document.documentElement.classList.toggle("nav-open");
-    setsidebarOpened(!sidebarOpened);
-  };
+  // const toggleSidebar = () => {
+  //   document.documentElement.classList.toggle("nav-open");
+  //   setsidebarOpened(!sidebarOpened);
+  // };
   const getRoutes = (routes) => {
     return routes.map((prop, key) => {
-      if (prop.layout === "/admin") {
+      if (prop.layout === "/") {
         return (
           <Route
-            path={prop.layout + prop.path}
+            path={(prop.path)}
             component={prop.component}
             key={key}
           />
+          
         );
       } else {
         return null;
@@ -95,45 +79,47 @@ function Admin(props) {
   };
   const getBrandText = (path) => {
     for (let i = 0; i < routes.length; i++) {
-      if (location.pathname.indexOf(routes[i].layout + routes[i].path) !== -1) {
+      if (location.pathname.indexOf(routes[i].path) !== -1) {
         return routes[i].name;
       }
     }
     return "Brand";
   };
+
   return (
     <BackgroundColorContext.Consumer>
       {({ color, changeColor }) => (
         <React.Fragment>
           <div className="wrapper">
             {/* 사이드바 상단 로고! */}
-            <Sidebar
+            {/* <Sidebar
               routes={routes}
-              logo={{
-                outterLink: "https://www.creative-tim.com/",
-                innerLink: "/admin/dashboard",
+              // toggleSidebar={toggleSidebar}
+            /> */}
 
-                text: "동네북",
-                imgSrc: logo
-              }}
-              toggleSidebar={toggleSidebar}
-            />
-            
             <div className="main-panel" ref={mainPanelRef} data={color}>
               {/* 네브바! */}
               <AdminNavbar
+                logo={{
+                  // outterLink: "https://www.creative-tim.com/",
+                  innerLink: "/dashboard",
+
+                  text: "동네북",
+                  imgSrc: logo,
+                }}
+                // toggleSidebar={toggleSidebar}
                 brandText={getBrandText(location.pathname)}
-                toggleSidebar={toggleSidebar}
+                // toggleSidebar={toggleSidebar}
                 sidebarOpened={sidebarOpened}
               />
 
               <Switch>
                 {getRoutes(routes)}
-                <Redirect from="*" to="/admin/dashboard" />
+                <Redirect from="*" to="/" />
               </Switch>
               {
                 // we don't want the Footer to be rendered on map page
-                location.pathname === "/admin/maps" ? null : <Footer fluid />
+                location.pathname === "/maps" ? null : <Footer fluid />
               }
             </div>
           </div>

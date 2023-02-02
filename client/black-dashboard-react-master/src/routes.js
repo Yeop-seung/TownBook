@@ -18,12 +18,17 @@
 import Book from "views/Book.js";
 import Icons from "views/Icons.js";
 import Map from "views/Map.js";
-import Notifications from "views/Notifications.js";
-import Rtl from "views/Rtl.js";
+import Notice from "views/Notice.js";
+// import Rtl from "views/Rtl.js";
 import TableList from "views/TableList.js";
-import Typography from "views/Typography.js";
+// import Typography from "views/Typography.js";
 import UserProfile from "views/UserProfile.js";
-import SignUp from "views/SignUp";
+// import SignUp from "views/SignUp";
+import SignUpForm from "views/SignUpForm.js";
+import Login from "views/Login.js";
+import NoticeWrite from "views/NoticeWrite.js";
+import IdFind from "views/IdFind.js";
+// import First from "views/First.js";
 
 
 var routes = [
@@ -33,7 +38,7 @@ var routes = [
     rtlName: "لوحة القيادة",
     icon: "tim-icons icon-chart-pie-36",
     component: Book,
-    layout: "/admin"
+    layout: "/"
   },
   {
     path: "/icons",
@@ -41,7 +46,7 @@ var routes = [
     rtlName: "الرموز",
     icon: "tim-icons icon-atom",
     component: Icons,
-    layout: "/admin"
+    layout: "/"
   },
   {
     path: "/map",
@@ -49,15 +54,15 @@ var routes = [
     rtlName: "خرائط",
     icon: "tim-icons icon-pin",
     component: Map,
-    layout: "/admin"
+    layout: "/"
   },
   {
-    path: "/notifications",
+    path: "/notice",
     name: "공지사항",
     rtlName: "إخطارات",
     icon: "tim-icons icon-bell-55",
-    component: Notifications,
-    layout: "/admin"
+    component: Notice,
+    layout: "/"
   },
   {
     path: "/user-profile",
@@ -65,7 +70,7 @@ var routes = [
     rtlName: "ملف تعريفي للمستخدم",
     icon: "tim-icons icon-single-02",
     component: UserProfile,
-    layout: "/admin"
+    layout: "/"
   },
   {
     path: "/tables",
@@ -73,7 +78,7 @@ var routes = [
     rtlName: "قائمة الجدول",
     icon: "tim-icons icon-puzzle-10",
     component: TableList,
-    layout: "/admin"
+    layout: "/"
   },
   // {
   //   path: "/typography",
@@ -88,9 +93,40 @@ var routes = [
     name: "회원가입",
     // rtlName: "طباعة",
     icon: "tim-icons icon-align-center",
-    component: SignUp,
-    layout: "/admin"
-  }
- 
+    component: SignUpForm,
+    layout: "/"
+  },
+  {
+    path: "/login",
+    name: "로그인",
+    // rtlName: "طباعة",
+    icon: "tim-icons icon-align-center",
+    component: Login,
+    layout: "/"
+  },
+  {
+    path: "/noticewrite",
+    name: "공지작성",
+    // rtlName: "طباعة",
+    icon: "tim-icons icon-align-center",
+    component: NoticeWrite,
+    layout: "/"
+  },
+  {
+    path: "/idfind",
+    name: "아이디/비밀번호 찾기",
+    // rtlName: "طباعة",
+    icon: "tim-icons icon-align-center",
+    component: IdFind,
+    layout: "/"
+  },
+  // {
+  //   path: "/first",
+  //   name: "퍼스트",
+  //   // rtlName: "طباعة",
+  //   icon: "tim-icons icon-align-center",
+  //   component: First,
+  //   layout: "/kiosk"
+  // },
 ];
 export default routes;

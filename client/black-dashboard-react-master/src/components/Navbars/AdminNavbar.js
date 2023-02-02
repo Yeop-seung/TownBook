@@ -1,25 +1,12 @@
-/*!
-
-=========================================================
-* Black Dashboard React v1.2.1
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/black-dashboard-react
-* Copyright 2022 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/black-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-import React from "react";
+import React, { useState } from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // import classes from './black-dashboard-react.css';
-
+import Sidebar from "components/Sidebar/Sidebar.js";
+import routes from "routes.js";
+import logo from "assets/img/react-logo.png";
+import { PropTypes } from "prop-types";
+import { useMediaQuery } from "react-responsive";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHeadset,
@@ -27,6 +14,7 @@ import {
   faSearch,
   faComments,
   faBullhorn,
+  faKey,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 // reactstrap components
@@ -51,41 +39,129 @@ import {
 
 function AdminNavbar(props) {
   const [collapseOpen, setcollapseOpen] = React.useState(false);
+  // const [hiddenpic, sethiddenpic] = React.useState(false);
+  const isPc = useMediaQuery({
+    query: "(max-width:993px)",
+  });
   const [modalSearch, setmodalSearch] = React.useState(false);
   const [color, setcolor] = React.useState("navbar-transparent");
-  React.useEffect(() => {
-    window.addEventListener("resize", updateColor);
-    // Specify how to clean up after this effect:
-    return function cleanup() {
-      window.removeEventListener("resize", updateColor);
-    };
-  });
+  const [sidebarOpened, setsidebarOpened] = React.useState(
+    document.documentElement.className.indexOf("nav-open") !== -1
+  );
+
+  const toggleSidebar = () => {
+    document.documentElement.classList.toggle("nav-open");
+    setsidebarOpened(!sidebarOpened);
+  };
+  // React.useEffect(() => {
+  //   window.addEventListener("resize", updateColor);
+  //   // Specify how to clean up after this effect:
+  //   return function cleanup() {
+  //     window.removeEventListener("resize", updateColor);
+  //   };
+  // });
   // function that adds color white/transparent to the navbar on resize (this is for the collapse)
 
   //네브바 반응형 색깔 변경!! //collapse는 화면 줄인다음 오른쪽 ... 클릭하면 나오는거
-  const updateColor = () => {
-    if (window.innerWidth < 993 && collapseOpen) {
-      setcolor("bg-white");
-    } else {
-      setcolor("navbar-transparent");
+  // const updateColor = () => {
+  //   if (window.innerWidth < 993 && collapseOpen) {
+  //     setcolor("bg-white");
+  //   } else {
+  //     setcolor("navbar-transparent");
+  //   }
+  // };
+  // const hiddenPicture = () => {
+  //   if (window.innerWidth < 993) {
+  //     sethiddenpic(false);
+  //   }
+  // };
+
+  //화면 크기 테스트
+
+  // const ResizedComponent = () => {
+  //   const [windowSize, setWindowSize] = useState({
+  //     width: window.innerWidth,
+  //     height: window.innerHeight,
+  //   });
+  //   const handleResize = () => {
+  //     console.log(
+  //       `브라우저 화면 사이즈 x: ${window.innerWidth}, y: ${window.innerHeight}`
+  //     );
+  //     setWindowSize({
+  //       width: window.innerWidth,
+  //       height: window.innerHeight,
+  //     });
+  //   };
+  //   React.useEffect(() => {
+  //     window.addEventListener("resize", handleResize);
+  //     return () => {
+  //       window.removeEventListener("resize", handleResize);
+  //     };
+  //   }, []);
+  //   return (
+  //     <div>
+  //       브라우저 화면 사이즈 x:{window.innerWidth}, y:{window.innerHeight}
+  //     </div>
+  //   );
+  // };
+
+  const verify2 = () => {
+    if (window.innerWidth < 993) {
+      console.log(window.innerWidth);
     }
   };
+  //네브바 로고 설정
+  const { logo } = props;
 
-  // this function opens and closes the collapse on small devices
+  let logoImg = (
+    <Link
+      to={logo.innerLink}
+      className="simple-text logo-mini"
+      onClick={props.toggleSidebar}
+    >
+      <div className="logo-img">
+        <img src={logo.imgSrc} alt="react-logo" />
+      </div>
+    </Link>
+  );
+  let logoText = (
+    <Link
+      to={logo.innerLink}
+      className="simple-text logo-normal"
+      onClick={props.toggleSidebar}
+    >
+      {logo.text}
+    </Link>
+  );
+
+  // 모바일에서 화면 상단 오른쪽 바
   const toggleCollapse = () => {
     if (collapseOpen) {
       setcolor("navbar-transparent");
     } else {
-      setcolor("bg-white");
+      setcolor("bg-collapse");
     }
     setcollapseOpen(!collapseOpen);
   };
-  // this function is to open the Search modal
 
+  const verify = () => {
+    if (collapseOpen) {
+      setcollapseOpen(!collapseOpen);
+    }
+  };
+
+  // const sethiddenpic = () => {
+  //   if (window.innerWidth < 993) {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // };
   // QR창 열고닫기
   const toggleModalSearch = () => {
     setmodalSearch(!modalSearch);
   };
+
   return (
     <>
       <Navbar className={classNames("navbar-absolute", color)} expand="lg">
@@ -96,17 +172,25 @@ function AdminNavbar(props) {
                 toggled: props.sidebarOpened,
               })}
             >
-              <NavbarToggler onClick={props.toggleSidebar}>
+              {/* 화면 왼쪽위 토글 */}
+              <NavbarToggler
+                // onClick={props.toggleSidebar}
+                style={{ padding: 0 }}
+              >
                 {/* 각각 짝대기 */}
-                <span className="navbar-toggler-bar bar1" />
-                <span className="navbar-toggler-bar bar2" />
-                <span className="navbar-toggler-bar bar3" />
+                <div className="logo">{logoImg}</div>
               </NavbarToggler>
             </div>
-
-            {/* 왼쪽 상단 이름 */}
           </div>
 
+          <div className="d-lg-none">
+            <FontAwesomeIcon
+              icon={faQrcode}
+              size="xl"
+              color="white"
+              onClick={toggleModalSearch}
+            />
+          </div>
           {/* 화면 줄였을때 오른쪽  ... 바 */}
           <NavbarToggler onClick={toggleCollapse}>
             <span className="navbar-toggler-bar navbar-kebab" />
@@ -114,6 +198,7 @@ function AdminNavbar(props) {
             <span className="navbar-toggler-bar navbar-kebab" />
           </NavbarToggler>
 
+          {/* 이 Collapse 안에 있으면 모바일 시 상단 오른쪽으로 감 */}
           <Collapse navbar isOpen={collapseOpen}>
             <Nav className="mr-auto" navbar>
               {/* 로고자리 */}
@@ -122,83 +207,145 @@ function AdminNavbar(props) {
                 {props.brandText}
               </NavbarBrand>
               </li> */}
-              
+
               {/* 인풋그룹 왜하는지? */}
               {/* 도서검색 */}
               {/* <InputGroup className="search-bar">  */}
-              <li>
-                <Link to="/admin/map" className="{classes.}">
+
+              {/* <Sidebar
+                  routes={routes}
+                  logo={{
+                    // outterLink: "https://www.creative-tim.com/",
+                    innerLink: "/admin/dashboard",
+
+                    text: "동네북",
+                    imgSrc: logo,
+                  }}
+                  toggleSidebar={toggleSidebar}
+                /> */}
+              {/* <Link to="/admin/dashboard" className="{classes.}">
+                <div className="photo">
+                    <img alt="..." src={require("assets/img/anime3.png")} />
+                  </div>
+                </Link> */}
+              <div className="logo" hidden={collapseOpen}>
+                {logoImg}
+              </div>
+
+              <Link
+                to="/map"
+                onClick={verify}
+                style={{ paddingTop: 10, paddingInline: 20 }}
+              >
+                {/* 로고 scss 분석하기 */}
+                <div className="logo">
                   <FontAwesomeIcon icon={faSearch} size="xl" color="white" />
-                </Link>
-              </li>
+                  <p className="d-lg-none">도서검색</p>
+                </div>
+              </Link>
 
               {/* </InputGroup> */}
-              <li>
-                <Link to="/admin/icons">
-                  <FontAwesomeIcon icon={faComments} size="xl" color="white" />
-                </Link>
-              </li>
 
-              <li>
-                <Link to="/admin/notifications">
+              <Link
+                to="/icons"
+                onClick={verify}
+                style={{ paddingTop: 10, paddingInline: 20 }}
+              >
+                <div className="logo">
+                  <FontAwesomeIcon icon={faComments} size="xl" color="white" />
+                  <p className="d-lg-none">커뮤니티</p>
+                </div>
+              </Link>
+
+              <Link
+                to="/notice"
+                onClick={verify}
+                style={{ paddingTop: 10, paddingInline: 20 }}
+              >
+                <div className="logo">
                   <FontAwesomeIcon icon={faBullhorn} size="xl" color="white" />
-                </Link>
-              </li>
+                  <p className="d-lg-none">공지사항</p>
+                </div>
+              </Link>
             </Nav>
             <Nav className="ml-auto" navbar>
               {/* QR 아이콘*/}
-              <InputGroup className="search-bar">
-                <Button onClick={toggleModalSearch} color="link">
+
+              {/* 시간되면 버튼형식으로 바꾸기! */}
+
+              {/* <InputGroup className="search-bar"> */}
+              {/* <Button onClick={toggleModalSearch} className={'btn-link'}>
                   <FontAwesomeIcon icon={faQrcode} size="xl"/>
                   <span className="d-lg-none d-md-block">QRcode</span>
-                </Button>
-              </InputGroup>
+                </Button> */}
 
-              <UncontrolledDropdown nav>
-                {/* 고객센터 */}
-                <DropdownToggle
+              {/* </InputGroup> */}
+
+              {/* 고객센터 */}
+              {/* <DropdownToggle
                   caret
                   color="default"
                   data-toggle="dropdown"
                   nav
-                >
-                  <div className="notification d-none d-lg-block d-xl-block" />
-                  {/* <i className="tim-icons icon-spaceship" /> */}
-                  {/* <FontAwesomeIcon icon={faSearch}/> */}
-                  <FontAwesomeIcon icon={faHeadset} size="xl" />
+                > */}
+
+              {/* <div className="notification d-none d-lg-block d-xl-block" /> */}
+              {/* <i className="tim-icons icon-spaceship" /> */}  
+              {/* <FontAwesomeIcon icon={faSearch}/> */}
+
+              <div
+                hidden={collapseOpen}
+                style={{ paddingTop: 10, paddingInline: 20 }}
+              >
+                <FontAwesomeIcon
+                  icon={faQrcode}
+                  size="xl"
+                  color="white"
+                  onClick={toggleModalSearch}
+                />
+              </div>
+
+              <Link
+                to="/tables"
+                onClick={verify}
+                style={{ paddingTop: 10, paddingInline: 20 }}
+              >
+                <div className="logo">
+                  <FontAwesomeIcon icon={faHeadset} size="xl" color="white" />
                   <p className="d-lg-none">고객센터</p>
-                </DropdownToggle>
+                </div>
+              </Link>
 
-                <DropdownMenu className="dropdown-navbar" right tag="ul">
-                  <NavLink tag="li">
+              {/* </DropdownToggle> */}
+
+              {/* <DropdownMenu className="dropdown-navbar" right tag="ul"> */}
+
+              {/* <NavLink tag="li">
                     <DropdownItem className="nav-item">고객센터</DropdownItem>
-                  </NavLink>
+                  </NavLink> */}
 
-                  {/* <NavLink tag="li">
+              {/* <NavLink tag="li">
                     <DropdownItem className="nav-item">
                       You have 5 more tasks
                     </DropdownItem>
                   </NavLink>
 
-                  <NavLink tag="li">
-                    <DropdownItem className="nav-item">
-                      Your friend Michael is in town
-                    </DropdownItem>
-                  </NavLink>
+                  
+                {/* </DropdownMenu> */}
 
-                  <NavLink tag="li">
-                    <DropdownItem className="nav-item">
-                      Another notification
-                    </DropdownItem>
-                  </NavLink>
+              {/* 로그인 안돼있을때만 보이는 */}
 
-                  <NavLink tag="li">
-                    <DropdownItem className="nav-item">
-                      Another one
-                    </DropdownItem>
-                  </NavLink> */}
-                </DropdownMenu>
-              </UncontrolledDropdown>
+              <Link
+                to="/login"
+                onClick={verify}
+                style={{ paddingTop: 10, paddingInline: 20 }}
+              >
+                <div className="logo">
+                  <FontAwesomeIcon icon={faKey} size="xl" color="white" />
+                  <p className="d-lg-none">로그인</p>
+                </div>
+              </Link>
+              {/* <ResizedComponent /> */}
               <UncontrolledDropdown nav>
                 {/* 프로필이미지 칸 */}
                 <DropdownToggle
@@ -216,7 +363,7 @@ function AdminNavbar(props) {
 
                 {/* 프로필이미지 누르면 나오는 드랍다운 */}
                 <DropdownMenu className="dropdown-navbar" right tag="ul">
-                  <Link to="/admin/user-profile">
+                  <Link to="/user-profile">
                     <DropdownItem className="nav-item">마이페이지</DropdownItem>
                   </Link>
                   {/* <NavLink tag="li">
@@ -234,6 +381,22 @@ function AdminNavbar(props) {
             </Nav>
           </Collapse>
         </Container>
+      </Navbar>
+      <Navbar
+        className={"navbar-abs"}
+        expand="lg"
+        style={{ padding: 0 }}
+        hidden={isPc}
+      >
+        <img
+          alt="..."
+          // className="avatar"
+          src={require("assets/img/backimg6.png")}
+          className={"image"}
+        />
+        <Navbar className="navbar-abs2">
+          <div className="navbar-abs2">{props.brandText}</div>
+        </Navbar>
       </Navbar>
 
       {/* QR 모달! */}
@@ -262,5 +425,22 @@ function AdminNavbar(props) {
     </>
   );
 }
+
+AdminNavbar.propTypes = {
+  // if true, then instead of the routes[i].name, routes[i].rtlName will be rendered
+  // insde the links of this component
+  logo: PropTypes.shape({
+    // innerLink is for links that will direct the user within the app
+    // it will be rendered as <Link to="...">...</Link> tag
+    innerLink: PropTypes.string,
+    // outterLink is for links that will direct the user outside the app
+    // it will be rendered as simple <a href="...">...</a> tag
+    outterLink: PropTypes.string,
+    // the text of the logo
+    text: PropTypes.node,
+    // the image src of the logo
+    imgSrc: PropTypes.string,
+  }),
+};
 
 export default AdminNavbar;

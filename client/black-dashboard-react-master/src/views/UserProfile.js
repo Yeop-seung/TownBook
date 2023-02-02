@@ -30,205 +30,200 @@ import {
   Input,
   Row,
   Col,
+  
+  CardTitle,
+  Table,
 } from "reactstrap";
 
 function UserProfile() {
   return (
     <>
-      <div className="content">
+      
+        
+          <div className="content">
         <Row>
-          <Col md="8">
+          <Col md="12">
             <Card>
               <CardHeader>
-                <h5 className="title">마이페이지</h5>
+                <CardTitle tag="h4">내가 쓴 글</CardTitle>
               </CardHeader>
               <CardBody>
-                <Form>
-                  <Row>
-                    <Col className="pr-md-1" md="5">
-                      <FormGroup>
-                        <label>Company (disabled)</label>
-                        <Input
-                          defaultValue="Creative Code Inc."
-                          disabled
-                          placeholder="Company"
-                          type="text"
-                        />
-                      </FormGroup>
-                    </Col>
-                    <Col className="px-md-1" md="3">
-                      <FormGroup>
-                        <label>Username</label>
-                        <Input
-                          defaultValue="michael23"
-                          placeholder="Username"
-                          type="text"
-                        />
-                      </FormGroup>
-                    </Col>
-                    <Col className="pl-md-1" md="4">
-                      <FormGroup>
-                        <label htmlFor="exampleInputEmail1">
-                          Email address
-                        </label>
-                        <Input placeholder="mike@email.com" type="email" />
-                      </FormGroup>
-                    </Col>
-                  </Row>
-
-                  <Row>
-                    <Col className="pr-md-1" md="6">
-                      <FormGroup>
-                        <label>이름</label>
-                        <Input
-                          defaultValue="Mike"
-                          placeholder="이름"
-                          type="text"
-                        />
-                      </FormGroup>
-                    </Col>
-
-                    {/* <Col className="pl-md-1" md="6">
-                      <FormGroup>
-                        <label>이름</label>
-                        <Input
-                          defaultValue="Andrew"
-                          placeholder="Last Name"
-                          type="text"
-                        />
-                      </FormGroup>
-                    </Col> */}
-                  </Row>
-
-                  <Row>
-                    <Col md="12">
-                      <FormGroup>
-                        <label>주소</label>
-                        <Input
-                          defaultValue="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
-                          placeholder="Home Address"
-                          type="text"
-                        />
-                      </FormGroup>
-                    </Col>
-                  </Row>
-
-                  <Row>
-                    <Col className="pr-md-1" md="4">
-                      <FormGroup>
-                        <label>City</label>
-                        <Input
-                          defaultValue="Mike"
-                          placeholder="City"
-                          type="text"
-                        />
-                      </FormGroup>
-                    </Col>
-
-                    <Col className="px-md-1" md="4">
-                      <FormGroup>
-                        <label>Country</label>
-                        <Input
-                          defaultValue="Andrew"
-                          placeholder="Country"
-                          type="text"
-                        />
-                      </FormGroup>
-                    </Col>
-
-                    <Col className="pl-md-1" md="4">
-                      <FormGroup>
-                        <label>QR 코드</label>
-                        {/* <Input placeholder="QR Code" type="number" /> */}
-                      </FormGroup>
-                    </Col>
-                  </Row>
-
-                  <Row>
-                    <Col md="8">
-                      <FormGroup>
-                        <label>About Me</label>
-                        <Input
-                          cols="80"
-                          defaultValue="Lamborghini Mercy, Your chick she so thirsty, I'm in
-                            that two seat Lambo."
-                          placeholder="Here can be your description"
-                          rows="4"
-                          type="textarea"
-                        />
-                      </FormGroup>
-                    </Col>
-                    <Col md="4">
-                      <Card className="card-user">
-                        <CardBody>
-                          {/* <CardText /> */}
-                          <div className="author">
-                            <a
-                              href="#pablo"
-                              onClick={(e) => e.preventDefault()}
-                            >
-                              <img
-                                alt="..."
-                                className="avatar"
-                                src={require("assets/img/qrcode.png")}
-                              />
-                            </a>
-                          </div>
-                        </CardBody>
-                      </Card>
-                    </Col>
-                  </Row>
-                </Form>
+                <Table className="tablesorter" responsive>
+                  <thead className="text-primary">
+                    <tr>
+                      <th>번호</th>
+                      <th>제목</th>
+                      <th>작성일자</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Dakota Rice</td>
+                      <td>Niger</td>
+                      <td>Oud-Turnhout</td>
+                    </tr>
+                    <tr>
+                      <td>Minerva Hooper</td>
+                      <td>Curaçao</td>
+                      <td>Sinaai-Waas</td>
+                    </tr>
+                    <tr>
+                      <td>Sage Rodriguez</td>
+                      <td>Netherlands</td>
+                      <td>Baileux</td>
+                    </tr>
+                    <tr>
+                      <td>Philip Chaney</td>
+                      <td>Korea, South</td>
+                      <td>Overland Park</td>
+                    </tr>
+                    <tr>
+                      <td>Doris Greene</td>
+                      <td>Malawi</td>
+                      <td>Feldkirchen in Kärnten</td>
+                    </tr>
+                    <tr>
+                      <td>Mason Porter</td>
+                      <td>Chile</td>
+                      <td>Gloucester</td>
+                    </tr>
+                    <tr>
+                      <td>Jon Porter</td>
+                      <td>Portugal</td>
+                      <td>Gloucester</td>
+                    </tr>
+                  </tbody>
+                </Table>
               </CardBody>
-              <CardFooter>
-                <Button className="btn-fill" color="primary" type="submit">
-                  Save
-                </Button>
-              </CardFooter>
             </Card>
           </Col>
-          <Col md="4">
-            <Card className="card-user">
+          <Col md="12">
+          <Card>
+              <CardHeader>
+                <CardTitle tag="h4">나의 기부/수령 목록</CardTitle>
+              </CardHeader>
               <CardBody>
-                <CardText />
-                <div className="author">
-                  <div className="block block-one" />
-                  <div className="block block-two" />
-                  <div className="block block-three" />
-                  <div className="block block-four" />
-                  <a href="#pablo" onClick={(e) => e.preventDefault()}>
-                    <img
-                      alt="..."
-                      className="avatar"
-                      src={require("assets/img/anime3.png")} />
-                      
-                    <h5 className="title">이영재</h5>
-                  </a>
-                  <p className="description">Ceo/Co-Founder</p>
-                </div>
-                <div className="card-description">
-                  Do not be scared of the truth because we need to restart the
-                  human foundation in truth And I love you like Kanye loves
-                  Kanye I love Rick Owens’ bed design but the back is...
-                </div>
+                <Table className="tablesorter" responsive>
+                  <thead className="text-primary">
+                    <tr>
+                      <th>이름</th>
+                      <th>시</th>
+                      <th>동</th>
+                      <th className="text-center">포인트</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Dakota Rice</td>
+                      <td>Niger</td>
+                      <td>Oud-Turnhout</td>
+                      <td className="text-center">$36,738</td>
+                    </tr>
+                    <tr>
+                      <td>Minerva Hooper</td>
+                      <td>Curaçao</td>
+                      <td>Sinaai-Waas</td>
+                      <td className="text-center">$23,789</td>
+                    </tr>
+                    <tr>
+                      <td>Sage Rodriguez</td>
+                      <td>Netherlands</td>
+                      <td>Baileux</td>
+                      <td className="text-center">$56,142</td>
+                    </tr>
+                    <tr>
+                      <td>Philip Chaney</td>
+                      <td>Korea, South</td>
+                      <td>Overland Park</td>
+                      <td className="text-center">$38,735</td>
+                    </tr>
+                    <tr>
+                      <td>Doris Greene</td>
+                      <td>Malawi</td>
+                      <td>Feldkirchen in Kärnten</td>
+                      <td className="text-center">$63,542</td>
+                    </tr>
+                    <tr>
+                      <td>Mason Porter</td>
+                      <td>Chile</td>
+                      <td>Gloucester</td>
+                      <td className="text-center">$78,615</td>
+                    </tr>
+                    <tr>
+                      <td>Jon Porter</td>
+                      <td>Portugal</td>
+                      <td>Gloucester</td>
+                      <td className="text-center">$98,615</td>
+                    </tr>
+                  </tbody>
+                </Table>
               </CardBody>
-              <CardFooter>
-                <div className="button-container">
-                  <Button className="btn-icon btn-round" color="facebook">
-                    <i className="fab fa-facebook" />
-                  </Button>
-                  <Button className="btn-icon btn-round" color="twitter">
-                    <i className="fab fa-twitter" />
-                  </Button>
-                  <Button className="btn-icon btn-round" color="google">
-                    <i className="fab fa-google-plus" />
-                  </Button>
-                </div>
-              </CardFooter>
+            </Card>
+            
+          </Col>
+          <Col md="12">
+            <Card>
+              <CardHeader>
+                <h5 className="title">찜목록</h5>
+                {/* <p className="category">
+                  Handcrafted by our friends from{" "}
+                  <a href="https://nucleoapp.com/?ref=1712">NucleoApp</a>
+                </p> */}
+              </CardHeader>
+              <CardBody className="all-icons">
+                <Row>
+                  <Col
+                    className="font-icon-list col-xs-6 col-xs-6"
+                    lg="2"
+                    md="3"
+                    sm="4"
+                  >
+                    <div className="font-icon-detail">
+                      <i className="tim-icons icon-alert-circle-exc" />
+                      <p>icon-alert-circle-exc</p>
+                    </div>
+                  </Col>
+                  <Col
+                    className="font-icon-list col-xs-6 col-xs-6"
+                    lg="2"
+                    md="3"
+                    sm="4"
+                  >
+                    <div className="font-icon-detail">
+                      <i className="tim-icons icon-align-center" />
+                      <p>icon-align-center</p>
+                    </div>
+                  </Col>
+                  <Col
+                    className="font-icon-list col-xs-6 col-xs-6"
+                    lg="2"
+                    md="3"
+                    sm="4"
+                  >
+                    <div className="font-icon-detail">
+                      <i className="tim-icons icon-align-left-2" />
+                      <p>icon-align-left-2</p>
+                    </div>
+                  </Col>
+                  <Col
+                    className="font-icon-list col-xs-6 col-xs-6"
+                    lg="2"
+                    md="3"
+                    sm="4"
+                  >
+                    <div className="font-icon-detail">
+                      <i className="tim-icons icon-app" />
+                      <p>icon-app</p>
+                    </div>
+                  </Col>
+                  </Row>
+              </CardBody>
             </Card>
           </Col>
         </Row>
       </div>
+          
+        
     </>
   );
 }

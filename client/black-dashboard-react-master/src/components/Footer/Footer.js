@@ -28,7 +28,7 @@ function Footer() {
         <Nav>
           <NavItem>
             <NavLink href="https://www.creative-tim.com/?ref=bdr-user-archive-footer">
-              Creative Tim
+              UI TEAM
             </NavLink>
           </NavItem>
           <NavItem>
@@ -38,7 +38,7 @@ function Footer() {
           </NavItem>
           <NavItem>
             <NavLink href="https://www.creative-tim.com/blog?ref=bdr-user-archive-footer">
-              Blog
+              HOMEPAGE
             </NavLink>
           </NavItem>
         </Nav>
@@ -49,7 +49,7 @@ function Footer() {
             href="https://www.creative-tim.com/?ref=bdr-user-archive-footer"
             target="_blank"
           >
-            Creative Tim
+            UI TEAM
           </a>{" "}
           for a better web.
         </div>

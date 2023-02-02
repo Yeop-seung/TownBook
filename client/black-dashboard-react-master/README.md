@@ -1,3 +1,69 @@
+Ctrl + Shift + F 누르면 전체검색
+
+.main-panel 이 배경
+
+.content로 카드 위치 변경가능
+
+모바일 크기로 줄이면 사진 밑에 페이지이름 나오ㄱ
+
+
+
+
+유저 프로필 qr 임시보관
+<Col md="4">
+            <Card className="card-user">
+              <CardBody>
+                <CardText />
+                <div className="author">
+                  {/* <div className="block block-one" />
+                  <div className="block block-two" />
+                  <div className="block block-three" />
+                  <div className="block block-four" /> */}
+                  <a href="#pablo" onClick={(e) => e.preventDefault()}>
+                    <img
+                      alt="..."
+                      className="avatar"
+                      src={require("assets/img/qrcode.png")} />
+                      
+                    <h5 className="title">이영재</h5>
+                  </a>
+                  <p className="description">Front-end</p>
+                </div>
+                <div className="card-description">
+                  .
+                </div>
+              </CardBody>
+              {/* <CardFooter>
+                <div className="button-container">
+                  <Button className="btn-icon btn-round" color="facebook">
+                    <i className="fab fa-facebook" />
+                  </Button>
+                  <Button className="btn-icon btn-round" color="twitter">
+                    <i className="fab fa-twitter" />
+                  </Button>
+                  <Button className="btn-icon btn-round" color="google">
+                    <i className="fab fa-google-plus" />
+                  </Button>
+                </div>
+              </CardFooter> */}
+            </Card>
+          </Col>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # [Black Dashboard React](https://demos.creative-tim.com/black-dashboard-react/#/dashboard) [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social&logo=twitter)](https://twitter.com/intent/tweet?url=https%3A%2F%2Fdemos.creative-tim.com%2Fblack-dashboard-react%2F%23%2Fadmin%2Fdashboard&text=Black%20Dashboard%20React%20by%20Creative%20Tim%20%7C%20Free%20React%20Admin%20Template&original_referer=https%3A%2F%2Fdemos.creative-tim.com%2Fblack-dashboard-react%2F&via=creativetim&hashtags=react%2Ccreativetim%2Cdark%2Cdashboard%2Cbootstrap%2Creactstrap%2Creactjs)
 
 ![version](https://img.shields.io/badge/version-1.2.1-blue.svg) ![license](https://img.shields.io/badge/license-MIT-blue.svg) [![GitHub issues open](https://img.shields.io/github/issues/creativetimofficial/black-dashboard-react.svg?maxAge=2592000)]() [![GitHub issues closed](https://img.shields.io/github/issues-closed-raw/creativetimofficial/black-dashboard-react.svg?maxAge=2592000)]() [![Chat](https://img.shields.io/badge/chat-on%20discord-7289da.svg)](https://discord.gg/E4aHAQy)

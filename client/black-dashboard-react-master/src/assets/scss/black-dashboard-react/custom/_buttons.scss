@@ -58,7 +58,6 @@
             height: $icon-size-lg;
             min-width: $icon-size-lg;
             width: $icon-size-lg;
-
             .fa,
             .far,
             .fas,
@@ -100,6 +99,25 @@
     margin-left: 30px !important;
   }
 }
+
+.btn-login {
+  background-color: rgba(193, 181, 169, 1);
+  // border-color: white;
+  display: inline-block;
+  font-weight: 600;
+  // color: #525f7f;
+  text-align: center;
+  color : white;
+  vertical-align: middle;
+  user-select: none;
+  // background-color: transparent;
+  border: 1px solid transparent;
+  padding: 11px 20px;
+  font-size: 0.875rem;
+  line-height: 1.35em;
+  border-radius: 0.25rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; }
+
 
 // Apply the mixin to the buttons
 // .btn-default { @include btn-styles($default-color, $default-states-color); }
@@ -159,7 +177,7 @@
   box-shadow: 2px 2px 6px rgba(0,0,0,.4);
 }
 .btn-link{
-    border: $none;
+    border: $dark-gray;
     box-shadow: none;
     padding: $padding-base-vertical $padding-base-horizontal;
     background: $transparent-bg;

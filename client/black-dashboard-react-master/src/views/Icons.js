@@ -21,6 +21,7 @@ import React from "react";
 import { Card, CardHeader, CardBody, Row, Col } from "reactstrap";
 
 function Icons() {
+  
   return (
     <>
       <div className="content">
@@ -28,11 +29,11 @@ function Icons() {
           <Col md="12">
             <Card>
               <CardHeader>
-                <h5 className="title">100 Awesome Nucleo Icons</h5>
-                <p className="category">
+                <h5 className="title">수다방</h5>
+                {/* <p className="category">
                   Handcrafted by our friends from{" "}
                   <a href="https://nucleoapp.com/?ref=1712">NucleoApp</a>
-                </p>
+                </p> */}
               </CardHeader>
               <CardBody className="all-icons">
                 <Row>

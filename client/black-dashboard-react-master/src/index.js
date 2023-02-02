@@ -40,8 +40,8 @@ root.render(
     <BackgroundColorWrapper>
       <BrowserRouter>
         <Switch>
-          <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
-          <Redirect from="/" to="/admin/dashboard" />
+          <Route path="/" render={(props) => <AdminLayout {...props} />} />
+          <Redirect from="/" to="/dashboard" />
         </Switch>
       </BrowserRouter>
     </BackgroundColorWrapper>

@@ -39,7 +39,8 @@ import {
   Table,
   Row,
   Col,
-  UncontrolledTooltip
+  UncontrolledTooltip,
+  Box
 } from "reactstrap";
 
 // core components
@@ -50,14 +51,21 @@ import {
   chartExample4
 } from "variables/charts.js";
 
+
+
 function Book(props) {
   const [bigChartData, setbigChartData] = React.useState("data1");
   const setBgChartData = (name) => {
     setbigChartData(name);
   };
+  
   return (
+    // classNames("content")
+    // {window.innerWidth > 993 ? "content" : "content2"}
     <>
+    {/* //동적으로 바꾸기 */}
       <div className="content">
+      
         <Row>
           <Col xs="12">
             <Card className="card-chart">
