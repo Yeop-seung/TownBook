@@ -79,6 +79,12 @@ public class BookLogController {
         return new ResponseEntity<>(bookLogService.findBookLogReviewByBookIsbn(bookIsbn), HttpStatus.OK);
     }
     
+    /**
+     * 도서 기부
+     *
+     * @param donateBookRequestDto
+     * @return boolean
+     */
     @PostMapping("/donateBook")
     public ResponseEntity<?> donateBook(@RequestBody DonateBookRequestDto donateBookRequestDto) {
         return new ResponseEntity<>(bookLogService.donateBook(donateBookRequestDto), HttpStatus.OK);
