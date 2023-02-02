@@ -68,7 +68,7 @@ public class AccountDto {
                 .accountName(account.getAccountName())
                 .accountPw(account.getAccountPw())
                 .accountPhoneNumber(account.getAccountPhoneNumber())
-                .accountBirthDay(account.getAccountBirthday())
+                .accountBirthDay(account.getAccountBirthDay())
                 .accountAddress(account.getAccountAddress())
                 .accountEmail(account.getAccountEmail())
                 .accountGender(account.getAccountGender())

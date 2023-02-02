@@ -50,7 +50,7 @@ public class AccountServiceImpl implements AccountService {
                 .accountName(accountDto.getAccountName())
                 .accountPhoneNumber(accountDto.getAccountPhoneNumber())
                 .accountAddress(accountDto.getAccountAddress())
-                .accountBirthday(accountDto.getAccountBirthDay())
+                .accountBirthDay(accountDto.getAccountBirthDay())
                 .accountNickname(accountDto.getAccountNickname())
                 .accountEmail(accountDto.getAccountEmail())
                 .accountGender(accountDto.getAccountGender())
@@ -108,7 +108,7 @@ public class AccountServiceImpl implements AccountService {
             Account account = accountRepository.findByAccountEmail(accountDto.getAccountEmail()).orElseThrow(() ->
                     new IllegalArgumentException("해당 사용자가 존재하지 않습니다."));
             account.setAccountAddress(accountDto.getAccountAddress());
-            account.setAccountBirthday(accountDto.getAccountBirthDay());
+            account.setAccountBirthDay(accountDto.getAccountBirthDay());
             account.setAccountName(accountDto.getAccountName());
             account.setAccountGender(accountDto.getAccountGender());
             account.setAccountNickname(accountDto.getAccountNickname());
