@@ -1,5 +1,5 @@
 ### 1. 전체 회원 조회
-GET http://localhost:8080/admin
+GET http://localhost:8081/admin
 
 ### 2. 단일 회원 조회
-GET http://localhost:8080/admin/1
+GET http://localhost:8081/admin/1
