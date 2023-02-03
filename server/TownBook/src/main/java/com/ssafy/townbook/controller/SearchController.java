@@ -1,8 +1,13 @@
 package com.ssafy.townbook.controller;
 
+import com.ssafy.townbook.model.dto.LockerDto;
+import com.ssafy.townbook.model.dto.response.ReceiveBookLogResponseDto;
 import com.ssafy.townbook.model.service.BookLogService;
-import com.ssafy.townbook.model.service.BookService;
+import com.ssafy.townbook.model.service.LockerService;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
+import net.minidev.json.JSONArray;
+import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,12 +22,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class SearchController {
     
     private BookLogService bookLogService;
-    private BookService bookService;
+    private LockerService lockerService;
     
     @Autowired
-    public SearchController(BookLogService bookLogService, BookService bookService) {
+    public SearchController(BookLogService bookLogService, LockerService lockerService) {
         this.bookLogService = bookLogService;
-        this.bookService = bookService;
+        this.lockerService = lockerService;
     }
     
     /**
@@ -34,6 +39,28 @@ public class SearchController {
     @GetMapping("/searchTitle/{bookTitle}")
     public ResponseEntity<?> findBookLogByBookTitle(@PathVariable String bookTitle) {
         return new ResponseEntity<>(bookLogService.findBookLogByBookTitle(bookTitle), HttpStatus.OK);
+    }
+    
+    @GetMapping("/searchLocker/{lockerNo}")
+    public ResponseEntity<?> findLockerByLockerNo(@PathVariable Long lockerNo) {
+        LockerDto findLockerDto = lockerService.findLockerByLockerNo(lockerNo);
+        List<ReceiveBookLogResponseDto> findReceiveBookLogResponseDtos = bookLogService.findBookLogByLockerNo(lockerNo);
+        
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("Locker", findLockerDto);
+        
+        JSONArray jsonArray = new JSONArray();
+        for (ReceiveBookLogResponseDto bookLogDto : findReceiveBookLogResponseDtos) {
+            JSONObject jsonObject1 = new JSONObject();
+            jsonObject1.put("bookTitle", bookLogDto.getBookTitle());
+            jsonObject1.put("detailLockerNo", bookLogDto.getDetailLockerNo());
+            jsonObject1.put("detailLockerNoInLocker", bookLogDto.getDetailLockerNoInLocker());
+            jsonObject1.put("bookIntroductionURL", bookLogDto.getBookIntroductionURL());
+            jsonObject1.put("bookTitleURL", bookLogDto.getBookTitleURL());
+            jsonArray.add(jsonObject1);
+        }
+        jsonObject.put("BookLogDtos", jsonArray);
+        return new ResponseEntity<>(jsonObject, HttpStatus.OK);
     }
 //    @GetMapping("/searchTitle")
 //    public ResponseEntity<?> findLockerByBookTitleAndDist(SearchTitleRequestDto searchTitleRequestDto)
