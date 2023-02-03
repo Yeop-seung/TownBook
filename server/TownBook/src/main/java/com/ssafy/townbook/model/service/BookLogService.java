@@ -1,9 +1,11 @@
 package com.ssafy.townbook.model.service;
 
+import com.ssafy.townbook.model.dto.AdminDto;
 import com.ssafy.townbook.model.dto.BookDto;
 import com.ssafy.townbook.model.dto.BookLogDto;
 import com.ssafy.townbook.model.dto.request.DonateBookRequestDto;
-import com.ssafy.townbook.model.entity.BookLog;
+import com.ssafy.townbook.model.dto.request.ReceiveBookRequestDto;
+import com.ssafy.townbook.model.dto.response.ReceiveBookLogDto;
 import java.util.List;
 
 public interface BookLogService {
@@ -29,7 +31,7 @@ public interface BookLogService {
      * @param lockerNo
      * @return List<BookDto>
      */
-    List<BookDto> findBookByLockerNo(Long lockerNo);
+    List<ReceiveBookLogDto> findBookLogByLockerNo(Long lockerNo);
     
     /**
      * 단일 도서의 모든 리뷰 조회
@@ -47,5 +49,13 @@ public interface BookLogService {
      */
     List<BookLogDto> findBookLogByAccountNo(Long accountNo);
     
-    boolean donateBook(DonateBookRequestDto donateBookRequestDto);
+    /**
+     * 도서 기부
+     *
+     * @param donateBookRequestDto
+     * @return AccountDto
+     */
+    AdminDto donateBook(DonateBookRequestDto donateBookRequestDto) throws Exception;
+    
+    boolean receiveBook(ReceiveBookRequestDto receiveBookRequestDto) throws Exception;
 }
