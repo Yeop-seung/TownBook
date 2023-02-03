@@ -28,9 +28,9 @@ public class BookLogQueryRepository {
      * @param lockerNo
      * @return Optional<List < Book>>
      */
-    public Optional<List<Book>> findBookByLockerNo(Long lockerNo) {
-        List<Book> result = jpaQueryFactory
-                .select(bookLog.book)
+    public Optional<List<BookLog>> findBookLogByLockerNo(Long lockerNo) {
+        List<BookLog> result = jpaQueryFactory
+                .select(bookLog)
                 .from(bookLog)
                 .where(bookLog.bookLogState.eq(true).and(bookLog.locker.lockerNo.eq(lockerNo)))
                 .fetch();

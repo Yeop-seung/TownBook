@@ -165,19 +165,29 @@ public class InitDb {
                 String bookLogReview, Locker locker, DetailLocker detailLocker,
                 Optional<Account> account, Optional<Book> book) {
             BookLog bookLog = new BookLog();
-            System.out.println(bookLogReview);
             bookLog.setBookLogReview(bookLogReview);
             bookLog.setBookLogDonateDateTime(LocalDateTime.now());
             bookLog.setLocker(locker);
+            detailLocker.setDetailLockerIsEmpty(false);
             bookLog.setDetailLocker(detailLocker);
+            
+            // account
+            account.get().setAccountBookCnt(account.get().getAccountBookCnt() + 1);
+            account.get().setAccountPoint(account.get().getAccountPoint() + 100);
             bookLog.setAccount(account.get());
+            
             bookLog.setBook(book.get());
             em.persist(bookLog);
         }
 
         public void receiveBook(BookLog bookLog, Optional<Account> account) {
+            bookLog.getDetailLocker().setDetailLockerIsEmpty(true);
             bookLog.setBookLogState(false);
+            
+            // account
+            account.get().setAccountPoint(account.get().getAccountPoint() - 200);
             bookLog.setBookLogReceiverNo(account.get().getAccountNo());
+            
             bookLog.setBookLogReceiveDateTime(LocalDateTime.now());
             em.persist(bookLog);
         }
