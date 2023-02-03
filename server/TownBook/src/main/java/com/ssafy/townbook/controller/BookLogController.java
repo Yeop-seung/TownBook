@@ -93,6 +93,6 @@ public class BookLogController {
 
     @PostMapping("/receiveBook")
     public ResponseEntity<?> receiveBook(@RequestBody ReceiveBookRequestDto receiveBookRequestDto) throws Exception {
-        return null;
+        return new ResponseEntity<>(bookLogService.receiveBook(receiveBookRequestDto), HttpStatus.OK);
     }
 }

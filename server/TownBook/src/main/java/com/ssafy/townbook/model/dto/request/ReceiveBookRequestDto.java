@@ -1,8 +1,5 @@
 package com.ssafy.townbook.model.dto.request;
 
-import com.ssafy.townbook.model.entity.Account;
-import com.ssafy.townbook.model.entity.BookLog;
-import com.ssafy.townbook.model.entity.DetailLocker;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,13 +7,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ReceiveBookRequestDto {
     
-    private BookLog bookLog;
-    private DetailLocker detailLocker;
-    private Account account;
+    private Long detailLockerNo;
+    private Long accountNo;
     
-    public ReceiveBookRequestDto(BookLog bookLog, DetailLocker detailLocker, Account account) {
-        this.bookLog = bookLog;
-        this.detailLocker = detailLocker;
-        this.account = account;
+    public ReceiveBookRequestDto(Long detailLockerNo, Long accountNo) {
+        this.detailLockerNo = detailLockerNo;
+        this.accountNo = accountNo;
     }
 }
