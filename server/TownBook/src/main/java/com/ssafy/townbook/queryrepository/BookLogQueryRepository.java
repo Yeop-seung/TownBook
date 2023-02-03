@@ -64,6 +64,12 @@ public class BookLogQueryRepository {
                 .fetch());
     }
     
+    /**
+     * 세부 보관함 번호로 단일 북로그 조회
+     *
+     * @param detailLockerNo
+     * @return Optional<List < BookLog>>
+     */
     public Optional<List<BookLog>> findBookLogByDetailLockerNo(Long detailLockerNo) {
         return Optional.ofNullable(jpaQueryFactory
                 .select(bookLog)

@@ -16,16 +16,16 @@ import lombok.ToString;
 @ToString
 @Entity
 public class WishList {
-
+    
     @Id
     @Column(name = "wish_list_no")
     private Long wishListNo;
-
+    
     @ManyToOne
     @JoinColumn(name = "`fk-account-wish_list`")
     private Account account;
-
-
+    
+    
     @ManyToOne
     @JoinColumn(name = "`fk-book_log-wish_list`")
     private BookLog bookLog;

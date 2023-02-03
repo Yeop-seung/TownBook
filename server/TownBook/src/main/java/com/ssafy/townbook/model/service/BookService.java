@@ -1,7 +1,6 @@
 package com.ssafy.townbook.model.service;
 
 import com.ssafy.townbook.model.dto.BookDto;
-import com.ssafy.townbook.model.dto.BookLogDto;
 import java.util.List;
 
 public interface BookService {

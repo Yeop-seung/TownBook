@@ -1,9 +1,8 @@
 package com.ssafy.townbook.model.repository;
 
 import com.ssafy.townbook.model.entity.Account;
-import org.springframework.data.jpa.repository.JpaRepository;
-
 import java.util.Optional;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AdminRepository extends JpaRepository<Account, Long> {
     

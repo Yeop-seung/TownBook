@@ -1,9 +1,9 @@
 package com.ssafy.townbook.model.service;
 
-import com.ssafy.townbook.model.dto.AdminDto;
 import com.ssafy.townbook.model.dto.BookLogDto;
 import com.ssafy.townbook.model.dto.request.DonateBookRequestDto;
 import com.ssafy.townbook.model.dto.request.ReceiveBookRequestDto;
+import com.ssafy.townbook.model.dto.response.DonateBookLogResponseDto;
 import com.ssafy.townbook.model.dto.response.ReceiveBookLogResponseDto;
 import java.util.List;
 
@@ -54,7 +54,14 @@ public interface BookLogService {
      * @param donateBookRequestDto
      * @return AccountDto
      */
-    AdminDto donateBook(DonateBookRequestDto donateBookRequestDto) throws Exception;
+    DonateBookLogResponseDto donateBook(DonateBookRequestDto donateBookRequestDto) throws Exception;
     
+    /**
+     * 도서 수령
+     *
+     * @param receiveBookRequestDto
+     * @return Boolean
+     * @throws Exception
+     */
     boolean receiveBook(ReceiveBookRequestDto receiveBookRequestDto) throws Exception;
 }

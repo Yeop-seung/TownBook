@@ -92,8 +92,6 @@ public class InitDb {
             Authority authorityRoleAdmin = createAuthority("ROLE_ADMIN");
             em.persist(authorityRoleUser);
             em.persist(authorityRoleAdmin);
-            System.out.println(authorityRoleUser);
-            System.out.println(authorityRoleAdmin);
 
             Account account1 = createAccount("test@test.com", "password", "김싸피", "대전시 유성구 덕명동", "010-1234-5678", 0,
                     "내가 바로 김싸피", "220222", authorityRoleUser);

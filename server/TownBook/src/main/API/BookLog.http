@@ -20,3 +20,18 @@ Content-Type: application/json
     "detailLockerNo": 1,
     "accountNo": 1
 }
+
+### 4. 단일 도서의 전체 리뷰 조회
+GET http://localhost:8081/bookLog/review/8984993751
+
+### 5. 단일 보관함의 전체 도서 조회
+GET http://localhost:8081/bookLog/locker/1
+
+### 6. 단일 북로그 조회
+GET http://localhost:8081/bookLog/1
+
+### 7. 단일 회원의 전체 북로그 조회
+GET http://localhost:8081/bookLog/account/1
+
+### 8. 전체 북로그 조회
+GET http://localhost:8081/bookLog

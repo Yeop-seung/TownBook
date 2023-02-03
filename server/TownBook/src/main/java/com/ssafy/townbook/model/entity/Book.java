@@ -7,6 +7,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -57,6 +58,7 @@ public class Book {
     @OneToOne(mappedBy = "book", fetch = FetchType.LAZY)
     private BookLog bookLog;
     
+    @Builder
     public Book(String bookIsbn, String bookSubject, String bookTitle, Integer bookVol, String bookAuthor,
             String bookPublisher, LocalDate bookPublishPredate, String bookIntroductionURL, String bookTitleURL,
             BookLog bookLog) {

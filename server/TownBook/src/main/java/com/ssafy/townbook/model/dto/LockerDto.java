@@ -5,11 +5,12 @@ import com.ssafy.townbook.model.entity.Locker;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
-@NoArgsConstructor
+@Getter
+@Setter
 public class LockerDto {
     
     private Long lockerNo;
@@ -20,6 +21,7 @@ public class LockerDto {
     private List<DetailLockerDto> detailLocker = new ArrayList<>();
     private int lockerStorage;
     
+    @Builder
     public LockerDto(Locker locker) {
         this.lockerNo = locker.getLockerNo();
         this.lockerBookCnt = locker.getLockerBookCnt();

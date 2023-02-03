@@ -1,16 +1,18 @@
 package com.ssafy.townbook.model.dto;
 
 import com.ssafy.townbook.model.entity.DetailLocker;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
-@NoArgsConstructor
+@Getter
+@Setter
 public class DetailLockerDto {
     
     private Long detailLockerNo;
     private Boolean detailLockerIsEmpty;
     
+    @Builder
     public DetailLockerDto(DetailLocker detailLocker) {
         
         this.detailLockerNo = detailLocker.getDetailLockerNo();

@@ -1,9 +1,9 @@
 package com.ssafy.townbook.model.service;
 
-import com.ssafy.townbook.model.dto.AdminDto;
 import com.ssafy.townbook.model.dto.BookLogDto;
 import com.ssafy.townbook.model.dto.request.DonateBookRequestDto;
 import com.ssafy.townbook.model.dto.request.ReceiveBookRequestDto;
+import com.ssafy.townbook.model.dto.response.DonateBookLogResponseDto;
 import com.ssafy.townbook.model.dto.response.ReceiveBookLogResponseDto;
 import com.ssafy.townbook.model.entity.Account;
 import com.ssafy.townbook.model.entity.BookLog;
@@ -121,7 +121,7 @@ public class BookLogServiceImpl implements BookLogService {
      */
     @Override
     @Transactional
-    public AdminDto donateBook(DonateBookRequestDto donateBookRequestDto) throws Exception {
+    public DonateBookLogResponseDto donateBook(DonateBookRequestDto donateBookRequestDto) throws Exception {
         BookLog bookLog = new BookLog();
         
         // account : point 100++, bookCnt++
@@ -150,10 +150,17 @@ public class BookLogServiceImpl implements BookLogService {
         bookLogRepository.save(bookLog);
         
         // return AdminDto
-        AdminDto adminDto = new AdminDto(account);
-        return adminDto;
+        DonateBookLogResponseDto donateBookLogResponseDto = new DonateBookLogResponseDto(account.getAccountPoint());
+        return donateBookLogResponseDto;
     }
     
+    /**
+     * 도서 수령
+     *
+     * @param receiveBookRequestDto
+     * @return Boolean
+     * @throws Exception
+     */
     @Override
     @Transactional
     public boolean receiveBook(ReceiveBookRequestDto receiveBookRequestDto) throws Exception {
