@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.ColumnDefault;
@@ -19,6 +20,7 @@ import org.hibernate.annotations.DynamicInsert;
 @Setter
 @ToString
 @Entity
+@NoArgsConstructor
 public class Account {
     
     @Id
