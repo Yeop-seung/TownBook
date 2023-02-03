@@ -38,7 +38,7 @@ public class AccountDto {
     private String accountNickname;
 
     @NotNull
-    private String accountBirthDay;
+    private String accountbirthDay;
 
     private Set<AuthorityDto> authorityDtoSet;
 
@@ -46,7 +46,7 @@ public class AccountDto {
     public AccountDto(String accountEmail, String accountPw, String accountName,
             String accountAddress,
             String accountPhoneNumber, Integer accountGender, String accountNickname,
-            String accountBirthDay, Set<AuthorityDto> authorityDtoSet) {
+            String accountbirthDay, Set<AuthorityDto> authorityDtoSet) {
         this.accountEmail = accountEmail;
         this.accountPw = accountPw;
         this.accountName = accountName;
@@ -54,7 +54,7 @@ public class AccountDto {
         this.accountPhoneNumber = accountPhoneNumber;
         this.accountGender = accountGender;
         this.accountNickname = accountNickname;
-        this.accountBirthDay = accountBirthDay;
+        this.accountbirthDay = accountbirthDay;
         this.authorityDtoSet = authorityDtoSet;
     }
     
@@ -68,7 +68,7 @@ public class AccountDto {
                 .accountName(account.getAccountName())
                 .accountPw(account.getAccountPw())
                 .accountPhoneNumber(account.getAccountPhoneNumber())
-                .accountBirthDay(account.getAccountBirthDay())
+                .accountbirthDay(account.getAccountbirthDay())
                 .accountAddress(account.getAccountAddress())
                 .accountEmail(account.getAccountEmail())
                 .accountGender(account.getAccountGender())

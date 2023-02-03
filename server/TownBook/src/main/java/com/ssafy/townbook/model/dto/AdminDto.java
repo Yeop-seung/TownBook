@@ -15,7 +15,7 @@ public class AdminDto {
     private String accountPhoneNumber;
     private Integer accountGender;
     private String accountNickname;
-    private String accountBirthDay;
+    private String accountbirthDay;
     
     public AdminDto(Account account) {
         this.accountEmail = account.getAccountEmail();
@@ -25,6 +25,6 @@ public class AdminDto {
         this.accountPhoneNumber = account.getAccountPhoneNumber();
         this.accountGender = account.getAccountGender();
         this.accountNickname = account.getAccountNickname();
-        this.accountBirthDay = account.getAccountBirthDay();
+        this.accountbirthDay = account.getAccountbirthDay();
     }
 }
