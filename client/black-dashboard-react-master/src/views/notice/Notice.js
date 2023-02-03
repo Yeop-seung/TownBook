@@ -98,7 +98,7 @@ function Notice() {
               <CardHeader>
                 <Row style={{ justifyContent: "space-between", paddingInline : 15}}>
                   <CardTitle tag="h4">공지사항</CardTitle>
-                  <Link to={"/noticewrite"}>
+                  <Link to={"/notice/write"}>
                   <FontAwesomeIcon
                     icon={faPlus}
                     size="xl"

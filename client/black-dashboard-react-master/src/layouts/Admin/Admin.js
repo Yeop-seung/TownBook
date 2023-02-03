@@ -8,11 +8,13 @@ import AdminNavbar from "components/Navbars/AdminNavbar.js";
 import Footer from "components/Footer/Footer.js";
 import Sidebar from "components/Sidebar/Sidebar.js";
 import FixedPlugin from "components/FixedPlugin/FixedPlugin.js";
-
+import NoticeWrite from "views/notice/NoticeWrite";
 import routes from "routes.js";
-
+import Notice from "views/notice/Notice";
 import logo from "assets/img/react-logo.png";
 import { BackgroundColorContext } from "contexts/BackgroundColorContext";
+import SignUp from "views/account/SignUp";
+import IdFind from "views/account/IdFind.js";
 
 var ps;
 
@@ -65,11 +67,14 @@ function Admin(props) {
     return routes.map((prop, key) => {
       if (prop.layout === "/") {
         return (
+          
           <Route
             path={(prop.path)}
             component={prop.component}
             key={key}
           />
+          
+          
           
         );
       } else {
@@ -102,7 +107,7 @@ function Admin(props) {
               <AdminNavbar
                 logo={{
                   // outterLink: "https://www.creative-tim.com/",
-                  innerLink: "/dashboard",
+                  innerLink: "/",
 
                   text: "동네북",
                   imgSrc: logo,
@@ -115,7 +120,13 @@ function Admin(props) {
 
               <Switch>
                 {getRoutes(routes)}
-                <Redirect from="*" to="/" />
+                {<Route path='/notice/write' component={NoticeWrite}/>}
+                {<Route path='/notice' component={Notice}/>}
+                {<Route path='/account/signup' component={SignUp}/>}
+                {<Route path='/account/idfind' component={IdFind}/>}
+
+
+                {/* <Redirect from="*" to="/" /> */}
               </Switch>
               {
                 // we don't want the Footer to be rendered on map page

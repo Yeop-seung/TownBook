@@ -35,7 +35,7 @@ import {
   Table,
 } from "reactstrap";
 
-function UserProfile() {
+function MyPage() {
   return (
     <>
       
@@ -228,4 +228,4 @@ function UserProfile() {
   );
 }
 
-export default UserProfile;
+export default MyPage;

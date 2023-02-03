@@ -134,7 +134,7 @@ function Login(props) {
                   type="submit"
                   // onClick={submitHandler}
                   // className={classes.style}
-                  to={"/sign-up"}
+                  to={"/account/signup"}
                 >
                   회원가입
                 </Link>
@@ -143,7 +143,7 @@ function Login(props) {
                   className="btn-sm"
                   // color="black"
                   type="submit"
-                  to={"/IdFind/"}
+                  to={"account/idfind/"}
                 >
                   아이디/비밀번호 찾기
                 </Link>

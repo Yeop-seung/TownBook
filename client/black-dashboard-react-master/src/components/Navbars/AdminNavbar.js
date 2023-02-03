@@ -363,7 +363,7 @@ function AdminNavbar(props) {
 
                 {/* 프로필이미지 누르면 나오는 드랍다운 */}
                 <DropdownMenu className="dropdown-navbar" right tag="ul">
-                  <Link to="/user-profile">
+                  <Link to="/myPage">
                     <DropdownItem className="nav-item">마이페이지</DropdownItem>
                   </Link>
                   {/* <NavLink tag="li">

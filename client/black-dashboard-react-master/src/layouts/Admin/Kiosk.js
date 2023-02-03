@@ -90,7 +90,7 @@ function Kiosk(props) {
 
               <Switch>
                 {getRoutes(routes)}
-                <Route path="*" element={() => <Navigate replace to="/" />} />
+                {/* <Route path="*" element={() => <Navigate replace to="/" />} /> */}
 
               </Switch>
               

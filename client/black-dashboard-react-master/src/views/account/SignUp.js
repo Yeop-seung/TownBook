@@ -2,7 +2,8 @@ import axios from "axios";
 import React from "react";
 import { useRef } from "react";
 import { useHistory } from "react-router-dom";
-
+import classes from "./Login.module.css";
+import { Helmet } from "react-helmet";
 // reactstrap components
 import {
   Button,
@@ -16,10 +17,42 @@ import {
   Input,
   Row,
   Col,
+  Modal,
+  ModalHeader,
 } from "reactstrap";
+import DaumPostcode from "react-daum-postcode";
+import { data } from "jquery";
 // import { isPropertySignature } from "typescript";
 
-function SignUpForm(props) {
+function SignUp(props) {
+  const [modalSearch, setmodalSearch] = React.useState(false);
+  const toggleModalSearch = () => {
+    setmodalSearch(!modalSearch);
+  };
+  /**
+   * useState
+   */
+  const [openPostcode, setOpenPostcode] = React.useState(false);
+
+  /**
+   * handler
+   */
+  const handle = {
+    // 버튼 클릭 이벤트
+    clickButton: () => {
+      setOpenPostcode(true);
+    },
+
+    // 주소 선택 이벤트
+    selectAddress: (data: any) => {
+      console.log(`
+                주소: ${data.address},
+                우편번호: ${data.zonecode}
+            `);
+    },
+  //  console.log(data)
+  };
+  
   const emailInputRef = useRef();
   const pwInputRef = useRef();
   const nameInputRef = useRef();
@@ -54,7 +87,7 @@ function SignUpForm(props) {
     };
     console.log(userInfo);
     // props.onAddInfo(userInfo);
-    
+
     // fetch(
     //   "https://react-getting-started-9d228-default-rtdb.firebaseio.com/meetups.json",
     //   {
@@ -69,36 +102,38 @@ function SignUpForm(props) {
     //   //then 대신에 asynce나 await가능
     //   history.replace("/");
     // });
-  
-   
+
     // console.log(context);
     axios
-      .post("https://react-getting-started-9d228-default-rtdb.firebaseio.com/meetups.json", userInfo)
+      .post(
+        "https://react-getting-started-9d228-default-rtdb.firebaseio.com/meetups.json",
+        userInfo
+      )
       // .get("https:///townbook/myPage/receive/${receiverNo}")
       .then((response) => {
         // if(response=="true"){
         alert("회원가입에 성공하였습니다.");
         history.replace("/");
-      // }
-      // else{
-      //   alert("회원가입에 실패하였습니다.");
-      // }
+        // }
+        // else{
+        //   alert("회원가입에 실패하였습니다.");
+        // }
       })
       .catch((error) => {
         alert("회원가입에 실패하였습니다.");
       });
-   }
+  }
   return (
     <>
       <div className="content">
-        <Row>
+        <Row style={{ justifyContent: "center" }}>
           <Col md="8">
             <Card>
               <CardHeader>
                 <h5 className="title">회원가입</h5>
               </CardHeader>
               <CardBody>
-                <Form>
+                <Col>
                   {/* <Col className="pr-md-1" md="5">
                       <FormGroup>
                         <label>Company (disabled)</label>
@@ -118,6 +153,7 @@ function SignUpForm(props) {
                         placeholder="이름을 입력해주세요"
                         type="text"
                         ref={nameInputRef}
+                        className={classes.style}
                       />
                     </FormGroup>
                   </Col>
@@ -128,6 +164,7 @@ function SignUpForm(props) {
                         placeholder="mike@email.com"
                         type="email"
                         ref={emailInputRef}
+                        className={classes.style}
                       />
                     </FormGroup>
                   </Col>
@@ -140,6 +177,7 @@ function SignUpForm(props) {
                         placeholder="비밀번호를 입력해주세요"
                         type="text"
                         ref={pwInputRef}
+                        className={classes.style}
                       />
                     </FormGroup>
                   </Col>
@@ -147,81 +185,91 @@ function SignUpForm(props) {
                   <Col className="pr-md-1" md="5">
                     <FormGroup>
                       <label>비밀번호 확인</label>
-                      <Input
+                      <input
                         //   defaultValue="Andrew"
                         placeholder="비밀번호를 다시 입력해주세요"
                         type="text"
+                        className={classes.style}
                       />
                     </FormGroup>
                   </Col>
 
-                  <Row>
-                    <Col md="12">
-                      <FormGroup>
-                        <label>주소</label>
-                        <input
-                          //   defaultValue="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
-                          placeholder="Home Address"
-                          type="text"
-                          ref={addressInputRef}
-                        />
-                      </FormGroup>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col md="12">
-                      <FormGroup>
-                        <label>성별</label>
-                        <input
-                          //   defaultValue="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
-                          placeholder="성별"
-                          type="text"
-                          ref={genderInputRef}
-                        />
-                      </FormGroup>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col md="12">
-                      <FormGroup>
-                        <label>핸드폰번호</label>
-                        <input
-                          //   defaultValue="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
-                          placeholder="Home Address"
-                          type="text"
-                          ref={phonenumberInputRef}
-                        />
-                      </FormGroup>
-                    </Col>
-                  </Row>
+                  <Col className="pr-md-1" md="8">
+                    <FormGroup>
+                      <label>주소</label>
+                      <button
+                        onClick={() => {
+                          toggleModalSearch();
+                          handle.clickButton();
+                        }}
+                      >
+                        주소검색
+                      </button>
+                      
+                      {handle.data}
+                      <input
+                        //   defaultValue="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
+                        placeholder={data.address}
+                        type="text"
+                        ref={addressInputRef}
+                        className={classes.style}
+                      />
+                    </FormGroup>
+                  </Col>
 
-                  <Row>
-                    <Col className="pr-md-1" md="4">
-                      <FormGroup>
-                        <label>닉네임</label>
-                        <input
-                          //   defaultValue="Mike"
-                          placeholder="City"
-                          type="text"
-                          ref={nicknameInputRef}
-                        />
-                      </FormGroup>
-                    </Col>
+                  <Col className="pr-md-1" md="8">
+                    <FormGroup>
+                      <label>성별</label>
+                      <input
+                        //   defaultValue="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
+                        placeholder="성별"
+                        type="text"
+                        ref={genderInputRef}
+                        className={classes.style}
+                      />
+                    </FormGroup>
+                  </Col>
 
-                    <Col className="px-md-1" md="4">
-                      <FormGroup>
-                        <label>생년월일</label>
-                        <input
-                          defaultValue="Andrew"
-                          placeholder="Country"
-                          type="text"
-                          ref={birthdayInputRef}
-                        />
-                      </FormGroup>
-                    </Col>
-                  </Row>
+                  <Col className="pr-md-1" md="8">
+                    <FormGroup>
+                      <label>핸드폰번호</label>
+                      <input
+                        //   defaultValue="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
+                        placeholder="Home Address"
+                        type="text"
+                        ref={phonenumberInputRef}
+                        className={classes.style}
+                      />
+                    </FormGroup>
+                  </Col>
 
-                  <Row>
+                  <Col className="pr-md-1" md="4">
+                    <FormGroup>
+                      <label>닉네임</label>
+                      <input
+                        //   defaultValue="Mike"
+                        placeholder="City"
+                        type="text"
+                        ref={nicknameInputRef}
+                        className={classes.style}
+                      />
+                    </FormGroup>
+                  </Col>
+
+                  <Col className="px-md-1" md="4">
+                    <FormGroup>
+                      <label>생년월일</label>
+                      <input
+                        defaultValue="Andrew"
+                        placeholder="Country"
+                        type="text"
+                        ref={birthdayInputRef}
+                        className={classes.style}
+                      />
+                    </FormGroup>
+                  </Col>
+
+                  {/* <Row>
                     <Col md="8">
                       <FormGroup>
                         <label>About Me</label>
@@ -235,8 +283,8 @@ function SignUpForm(props) {
                         />
                       </FormGroup>
                     </Col>
-                  </Row>
-                </Form>
+                  </Row> */}
+                </Col>
               </CardBody>
               <CardFooter>
                 <button
@@ -246,6 +294,7 @@ function SignUpForm(props) {
                 >
                   가입완료
                 </button>
+                <div></div>
               </CardFooter>
             </Card>
           </Col>
@@ -292,9 +341,37 @@ function SignUpForm(props) {
             </Card>
           </Col> */}
         </Row>
+        <Modal
+          modalClassName="modal-search"
+          isOpen={modalSearch}
+          toggle={toggleModalSearch}
+        >
+          <ModalHeader>
+            {/* <Input placeholder="QR이미지" type="text" /> */}
+            <div>
+              {openPostcode && (
+                <DaumPostcode
+                  onComplete={handle.selectAddress} // 값을 선택할 경우 실행되는 이벤트
+                  autoClose={true} // 값을 선택할 경우 사용되는 DOM을 제거하여 자동 닫힘 설정
+                  defaultQuery="판교역로 235" // 팝업을 열때 기본적으로 입력되는 검색어
+                />
+              )}
+            </div>
+            <button
+              aria-label="Close"
+              className="close"
+              onClick={() => {
+                toggleModalSearch();
+                handle.clickButton();
+              }}
+            >
+              <i className="tim-icons icon-simple-remove" />
+            </button>
+          </ModalHeader>
+        </Modal>
       </div>
     </>
   );
 }
 
-export default SignUpForm;
+export default SignUp;
