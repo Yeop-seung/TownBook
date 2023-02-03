@@ -37,11 +37,11 @@ public class Locker {
     
     @NotNull
     @Column(name = "locker_latitude")
-    private String lockerLatitude;
+    private Double lockerLatitude;
     
     @NotNull
     @Column(name = "locker_longitude")
-    private String lockerLongitude;
+    private Double lockerLongitude;
     
     @Column(name = "locker_book_cnt")
     @ColumnDefault("0")
@@ -51,7 +51,7 @@ public class Locker {
     private List<DetailLocker> detailLocker = new ArrayList<>();
     
     @Builder
-    public Locker(Long lockerNo, String lockerRegion, String lockerLatitude, String lockerLongitude,
+    public Locker(Long lockerNo, String lockerRegion, Double lockerLatitude, Double lockerLongitude,
             Integer lockerBookCnt, List<DetailLocker> detailLocker) {
         this.lockerNo = lockerNo;
         this.lockerRegion = lockerRegion;

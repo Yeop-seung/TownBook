@@ -188,4 +188,45 @@ public class BookLogServiceImpl implements BookLogService {
         bookLogRepository.save(bookLog);
         return true;
     }
+    
+    /**
+     * 제목 검색해서 북로그 반환
+     *
+     * @param bookTitle
+     * @return List<BookLogDto>
+     */
+    @Override
+    public List<BookLogDto> findBookLogByBookTitle(String bookTitle) {
+        List<BookLog> findBookLogByBookTitle = bookLogQueryRepository.findBookLogByBookTitle(bookTitle).get();
+        return findBookLogByBookTitle.stream()
+                .map(BookLogDto::new)
+                .collect(Collectors.toList());
+    }
+
+//    @Override
+//    public LockerDto findLockerByBookTitleAndDist(SearchTitleRequestDto searchTitleRequestDto)
+//            throws Exception {
+//        List<BookLog> findBookLogs = bookLogQueryRepository.findLockerByBookTitleAndDist(
+//                        searchTitleRequestDto.getBookTitle())
+//                .get();
+//
+//        Double curLatitude = searchTitleRequestDto.getLockerLatitude();
+//        Double curLongitude = searchTitleRequestDto.getLockerLongitude();
+//        Double minDistance = Double.MAX_VALUE;
+//        Long minDistLockerNo = null;
+//
+//        for (int i = 0; i < findBookLogs.size(); i++) {
+//            Double tempLatitude = findBookLogs.get(i).getLocker().getLockerLatitude();
+//            Double tempLongitude = findBookLogs.get(i).getLocker().getLockerLongitude();
+//            Double curDist = Math.abs(curLatitude - tempLatitude) + Math.abs(curLongitude - tempLongitude);
+//
+//            if (minDistance > curDist) {
+//                minDistance = curDist;
+//                minDistLockerNo = findBookLogs.get(i).getLocker().getLockerNo();
+//            }
+//        }
+//
+//        Locker locker = lockerRepository.findLockerByLockerNo(minDistLockerNo).get();
+//        return new LockerDto(locker);
+//    }
 }

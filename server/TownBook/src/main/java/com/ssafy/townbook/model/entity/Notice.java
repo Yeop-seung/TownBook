@@ -1,14 +1,7 @@
 package com.ssafy.townbook.model.entity;
 
 import java.time.LocalDateTime;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
@@ -30,6 +23,7 @@ public class Notice {
     
     @Id
     @Column(name = "notice_no")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long noticeNo;
     
     @NotNull
@@ -41,31 +35,25 @@ public class Notice {
     @Lob
     private String noticeContent;
     
-    
     @NotNull
     @Column(name = "notice_category")
     private Integer noticeCategory;
-    
     
     @NotNull
     @Column(name = "notice_write_time")
     private LocalDateTime noticeWriteDateTime;
     
-    @NotNull
     @Column(name = "notice_state")
     @ColumnDefault("true")
     private Boolean noticeState;
     
-    @NotNull
-    @Column(name = "notice_vies")
+    @Column(name = "notice_views")
     @ColumnDefault("0")
     private Integer noticeViews;
-    
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "`fk-account-notice`")
     private Account account;
-    
     
     @Builder
     public Notice(Long noticeNo, String noticeTitle, String noticeContent,

@@ -5,15 +5,15 @@ import com.ssafy.townbook.model.service.NoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@Controller
-@RestController("/notice")
+@RestController
+@RequestMapping("/notice")
 public class NoticeController {
     
     @Autowired
@@ -57,8 +57,8 @@ public class NoticeController {
      * @return List<NoticeDto>
      */
     @GetMapping("/list/{category}")
-    public ResponseEntity<?> getNoticeList(@PathVariable Integer category) {
-        return new ResponseEntity(noticeService.getNoticeList(category), HttpStatus.OK);
+    public ResponseEntity<?> findTop8ByNoticeStateAndNoticeCategoryOrderByNoticeNo(@PathVariable Integer category) {
+        return new ResponseEntity(noticeService.findTop8ByNoticeStateAndNoticeCategoryOrderByNoticeNo(category), HttpStatus.OK);
     }
     
     /**
