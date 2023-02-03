@@ -65,9 +65,9 @@ public class Account {
     @NotNull
     private String accountNickname;
     
-    @Column(name = "account_birthDay")
+    @Column(name = "account_BirthDay")
     @NotNull
-    private String accountbirthDay;
+    private String accountBirthDay;
     
     @Column(name = "account_activated")
     @ColumnDefault("true")
@@ -100,7 +100,7 @@ public class Account {
     public Account(Long accountNo, String accountEmail, String accountPw, String accountName,
             String accountAddress, String accountPhoneNumber, Integer accountGender,
             Integer accountPoint, Integer accountBookCnt, String accountNickname,
-            String accountbirthDay, BookLog bookLog, Boolean accountActivated, List<WishList> wishLists,
+            String accountBirthDay, BookLog bookLog, Boolean accountActivated, List<WishList> wishLists,
             List<File> files,
             List<Notice> notices,
             Set<Authority> authorities) {
@@ -114,7 +114,7 @@ public class Account {
         this.accountPoint = accountPoint;
         this.accountBookCnt = accountBookCnt;
         this.accountNickname = accountNickname;
-        this.accountbirthDay = accountbirthDay;
+        this.accountBirthDay = accountBirthDay;
         this.bookLog = bookLog;
         this.accountActivated = accountActivated;
         this.wishLists = wishLists;

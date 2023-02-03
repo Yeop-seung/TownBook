@@ -108,7 +108,7 @@ public class InitDb {
         }
 
         public Account createAccount(String accountEmail, String accountPw, String accountName, String accountAddress,
-                String accountPhoneNumber, Integer accountGender, String accountNickname, String accountbirthDay,
+                String accountPhoneNumber, Integer accountGender, String accountNickname, String accountBirthDay,
                 Authority authority) {
             Account account = new Account();
             account.setAccountEmail(accountEmail);
@@ -118,7 +118,7 @@ public class InitDb {
             account.setAccountPhoneNumber(accountPhoneNumber);
             account.setAccountGender(accountGender);
             account.setAccountNickname(accountNickname);
-            account.setAccountbirthDay(accountbirthDay);
+            account.setAccountBirthDay(accountBirthDay);
             account.setAuthorities(Collections.singleton(authority));
             return account;
         }
