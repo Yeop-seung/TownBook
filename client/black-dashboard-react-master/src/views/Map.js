@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import './Map.css'
-
+import { Card } from "reactstrap";
 
 const { kakao } = window;
 
@@ -58,7 +58,9 @@ function Kakao() {
     )}, [] )
 
     return(
-        <div id="map" style={{width:'95%',height:"70vh"}}></div>
+      <div className="content"><Card><div id="map" style={{width:'100%',height:"70vh"}}></div></Card></div>
+      
+        
     )
 }
 

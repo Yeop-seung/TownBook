@@ -71,7 +71,8 @@ function IdFind(props) {
                 >
                   찾기
                 </button>
-
+                </Col>
+                <Col >
                 <button
                   // color="black"
                   type="submit"
