@@ -13,6 +13,8 @@ public class ReceiveBookLogResponseDto {
     private String bookTitle;
     private Long detailLockerNo;
     private Long detailLockerNoInLocker;
+    private String bookIntroductionURL;
+    private String bookTitleURL;
     
     @Builder
     public ReceiveBookLogResponseDto(BookLog bookLog) {
@@ -22,5 +24,7 @@ public class ReceiveBookLogResponseDto {
         
         Long idx = bookLogDto.getLockerDto().getDetailLocker().get(0).getDetailLockerNo();
         this.detailLockerNoInLocker = bookLogDto.getDetailLockerDto().getDetailLockerNo() - idx + 1;
+        this.bookIntroductionURL = bookLogDto.getBookDto().getBookIntroductionURL();
+        this.bookTitleURL = bookLogDto.getBookDto().getBookTitleURL();
     }
 }
