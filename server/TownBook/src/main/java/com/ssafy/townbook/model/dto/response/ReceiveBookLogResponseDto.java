@@ -1,7 +1,6 @@
 package com.ssafy.townbook.model.dto.response;
 
 import com.ssafy.townbook.model.dto.BookLogDto;
-import com.ssafy.townbook.model.dto.DetailLockerDto;
 import com.ssafy.townbook.model.entity.BookLog;
 import lombok.Builder;
 import lombok.Getter;
@@ -11,15 +10,19 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class ReceiveBookLogDto {
+public class ReceiveBookLogResponseDto {
     
     private String bookTitle;
-    private DetailLockerDto detailLockerDto;
+    private Long detailLockerNo;
+    private Long tempNo;
     
     @Builder
-    public ReceiveBookLogDto(BookLog bookLog) {
+    public ReceiveBookLogResponseDto(BookLog bookLog) {
         BookLogDto bookLogDto = new BookLogDto(bookLog);
         this.bookTitle = bookLogDto.getBookDto().getBookTitle();
-        this.detailLockerDto = bookLogDto.getDetailLockerDto();
+        this.detailLockerNo = bookLogDto.getDetailLockerDto().getDetailLockerNo();
+        
+        Long idx = bookLogDto.getLockerDto().getDetailLocker().get(0).getDetailLockerNo();
+        this.tempNo = bookLogDto.getDetailLockerDto().getDetailLockerNo() - idx + 1;
     }
 }
