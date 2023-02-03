@@ -1,37 +1,39 @@
-.button{
+.myImg {
+    margin: 0%;
+    height : 100vh;
+    width: 100vw;
+    background-image : url('./img/Gradient.png');
+    background-size : cover;
+    background-position : center;
+    background-repeat : no-repeat;
+    background-attachment: fixed;
+    filter: brightness(100%);
+}
+/* 뒷배경 */
+.buttonOne{
     display: flex;
     flex-direction: row;
     border-radius: 12px;
     align-items: center;
     position: absolute;
     margin:auto;
-    left: 9vw;
-    top: 8vh;
-}
-.button-one{
+    left: 11vw;
+    top: 16vh;
     text-align: center;
     background-color: rgb(255, 255, 255);
     border: 1px solid #ffffff;
-    width: 80vw;
-    height: 85vh;
+    width: 78vw;
+    height: 70vh;
     font-weight: 800;
     border-radius: 12px;
 }
 /* 글씨 쓰는 부분 */
-.text-align{
+.textAlign{
     position: absolute;
     color: #2a2a2a;
     text-align: center;
     font-size: 8vmax;
-    top: 10vh;
+    top: 2vh;
     left: 9vw;
-}
-.text-align-one{
-    position: absolute;
-    color: #2a2a2a;
-    text-align: center;
-    font-size: 8vmax;
-    top: 28vh;
-    left: 20vw;
 }
 /* 텍스트 정렬 */

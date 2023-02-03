@@ -1,28 +1,32 @@
 import React from "react";
-import "./DonateThanks.css"
-import "../Base.css"
+import styles from "./DonateThanks.module.css"
+import { useNavigate } from "react-router-dom";
+
 // import { Route } from "react-router-dom";
 // import {BsFillArrowRightCircleFill} from "react-icons/bs"
 
 function DonateThanks(props) {
+    const navigate = useNavigate()
+
+    const onClickHandlerFinish = () => {
+        navigate('/Finish')
+    }
+    const onClickHandlerConfirm = () => {
+        navigate('/DonateConfirm')
+    }
+
     return (
         <div>
-            <div className="my-img">
-                <div className="button">
-                    <div className="button-one">
-                        <p className="text-align">기부해 주셔서 감사합니다</p>
-                        <p className="text-align-one">포인트가 적립 되었습니다</p>
-                        <p className="text-align-two">책을 추가 기부하시겠습니까?</p>
-                        <div>
-                            <div className="button-three">
-                                <p className="text-align-three">추가기부</p>
-                            </div>
-                            <div className="button-two">
-                                <p className="text-align-three">처음화면</p>
-                            </div>
-                        </div>
+            <div className={styles.myImg}>
+                    <div className={styles.buttonOne}>
+                        <p className={styles.textAlign}>기부해 주셔서 감사합니다<br />포인트가 적립 되었습니다<br /><br />책을 추가 기부하시겠습니까?</p>
+                        <button className={styles.buttonTwo} onClick={onClickHandlerFinish} >
+                            <p className={styles.textAlignOne}>처음화면</p>
+                        </button>
+                        <button className={styles.buttonThree} onClick={onClickHandlerConfirm}>
+                            <p className={styles.textAlignOne}>추가기부</p>
+                        </button>
                     </div>
-                </div>
             </div>
         </div>
         )

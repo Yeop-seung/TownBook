@@ -1,23 +1,33 @@
-.button{
+.myImg {
+    margin: 0%;
+    height : 100vh;
+    width: 100vw;
+    background-image : url('../img/Gradient.png');
+    background-size : cover;
+    background-position : center;
+    background-repeat : no-repeat;
+    background-attachment: fixed;
+    filter: brightness(100%);
+}
+/* 뒷배경 */
+.buttonOne{
     display: flex;
     flex-direction: row;
     border-radius: 12px;
     align-items: center;
     position: absolute;
     margin:auto;
-    left: 9vw;
-    top: 8vh;
-}
-.button-one{
+    left: 11vw;
+    top: 16vh;
     text-align: center;
     background-color: rgb(255, 255, 255);
     border: 1px solid #ffffff;
-    width: 80vw;
-    height: 85vh;
+    width: 78vw;
+    height: 70vh;
     font-weight: 800;
     border-radius: 12px;
 }
-.button-two{
+.buttonTwo{
     text-align: center;
     background-color: rgb(255, 255, 255);
     position: absolute;
@@ -26,11 +36,11 @@
     font-size: 70px;
     font-weight: 800;
     border-radius: 12px;
-    left : 18vw;
-    top: 50vh ;
+    left : 16vw;
+    top: 40vh ;
     box-shadow: 5px 5px 5px 5px gray;
 }
-.button-three{
+.buttonThree{
     text-align: center;
     background-color: rgb(255, 255, 255);
     position: absolute;
@@ -39,48 +49,25 @@
     font-size: 60px;
     font-weight: 800;
     border-radius: 12px;
-    left : 46vw;
-    top: 50vh ;
+    left : 44vw;
+    top: 40vh ;
     box-shadow: 5px 5px 5px 5px gray;
 }
 /* 글씨 쓰는 부분 */
-.text-align{
+.textAlign{
     position: absolute;
     color: #2a2a2a;
     text-align: center;
     margin: 0%;
     font-size: 40px;
-    vertical-align: bottom;
     top: 3vh;
-    left: 18vw;
+    left: 12vw;
 }
-.text-align-one{
-    position: absolute;
-    text-align: center;
-    color: #2a2a2a;
-    font-size: 40px;
-    vertical-align: bottom;
-    margin: 0%;
-    top: 12vh;
-    left: 18vw;
-}
-.text-align-two{
-    position: absolute;
-    color: #2a2a2a;
-    text-align: center;
-    font-size: 40px;
-    vertical-align: bottom;
-    margin: 0%;
-    top: 28vh;
-    left: 16vw;
-}
-.text-align-three{
+.textAlignOne{
     position: relative;
     color: #2a2a2a;
     text-align: center;
-    margin: 4%;
+    justify-content: center;
     font-size: 40px;
-    top: 45px;
-    
 }
 /* 텍스트 정렬 */

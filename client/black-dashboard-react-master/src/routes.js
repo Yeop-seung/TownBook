@@ -1,20 +1,3 @@
-/*!
-
-=========================================================
-* Black Dashboard React v1.2.1
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/black-dashboard-react
-* Copyright 2022 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/black-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import Book from "views/Book.js";
 import Icons from "views/Icons.js";
 import Map from "views/Map.js";
@@ -23,6 +6,7 @@ import TableList from "views/TableList.js";
 import Typography from "views/Typography.js";
 import UserProfile from "views/UserProfile.js";
 import Main from "Kiosk/Main.js";
+import Finish from "Kiosk/Finish.js";
 
 var routes = [
   {
@@ -79,15 +63,14 @@ var routes = [
     name: "kiosk",
     icon: "tim-icons icon-align-center",
     component: Main,
-    layout: "/kiosk"
+    layout: "/"
   },
-  // {
-  //   path: "/kiosk",
-  //   name: "kiosk",
-  //   icon: "tim-icons icon-align-center",
-  //   component: Main,
-  //   layout: "/kiosk"
-  // },
+  {
+    path: "/black-dashboard-react/finish",
+    name: "Finish",
+    component: Finish,
+    layout: "/KioskAdminLayout"
+  },
   
 ];
 export default routes;

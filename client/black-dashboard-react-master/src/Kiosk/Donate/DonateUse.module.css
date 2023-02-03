@@ -1,0 +1,100 @@
+.myImg {
+    margin: 0%;
+    height : 100vh;
+    width: 100vw;
+    background-image : url('../img/Gradient.png');
+    background-size : cover;
+    background-position : center;
+    background-repeat : no-repeat;
+    background-attachment: fixed;
+    filter: brightness(100%);
+}
+/* 뒷배경 */
+.circle {
+    width : 8vw;
+    height : 12vh;
+    border-radius: 50%;
+    background-color: rgb(255, 255, 255);
+    position: absolute;
+    left: 24px;
+    top: 24px;
+    border: #ffffff;
+}
+/* 뒤로가기 */
+.homeCircle {
+    width : 8vw;
+    height : 12vh;
+    border-radius: 50%;
+    background-color: rgb(255, 255, 255);
+    position: absolute;
+    right: 24px;
+    bottom: 24px;
+    border: #ffffff;
+}
+/* 홈버튼 */
+.iconStyle{
+    font-size: 70px;
+    color: #90C6FE;
+}
+/* 아이콘 스타일*/
+.buttonOne{
+    display: flex;
+    flex-direction: row;
+    color: #2a2a2a;
+    border-radius: 12px;
+    align-items: center;
+    position: absolute;
+    margin:auto;
+    left: 11vw;
+    top: 16vh;
+    width: 78vw;
+    height: 70vh;
+    text-align: center;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid #ececec;
+    font-weight: 800;
+}
+.buttonTwo{
+    border-radius: 12px;
+}
+/* 글씨 쓰는 부분 */
+.h3Align{
+    position: absolute;
+    text-align:start;
+    margin: 0%;
+    font-size: 80px;
+    top: 5vh;
+    left: 7vw;
+}
+.h3AlignOne{
+    position: absolute;
+    text-align: center;
+    margin: 0%;
+    font-size: 80px;
+    top: 5vh;
+    left: 48vw;
+}
+.textAlignOne{
+    position: absolute;
+    text-align: center;
+    font-size: 46px;
+    vertical-align: bottom;
+    top: 20vh;
+    left: 1vw;
+}
+.textAlignTwo{
+    position: absolute;
+    text-align: center;
+    font-size: 46px;
+    vertical-align: bottom;
+    top: 20vh;
+    left: 44vw;
+}
+/* 텍스트 정렬 */
+.arrowRight{
+    position: absolute;
+    justify-self: center;
+    top: 28vh;
+    left: 35vw
+}
+/* 오른쪽 화살표 */

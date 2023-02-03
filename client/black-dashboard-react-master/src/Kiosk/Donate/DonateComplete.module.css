@@ -1,23 +1,60 @@
-.button{
+.myImg {
+    margin: 0%;
+    height : 100vh;
+    width: 100vw;
+    background-image : url('../img/Gradient.png');
+    background-size : cover;
+    background-position : center;
+    background-repeat : no-repeat;
+    background-attachment: fixed;
+    filter: brightness(100%);
+}
+/* 뒷배경 */
+.circle {
+    width : 8vw;
+    height : 12vh;
+    border-radius: 50%;
+    background-color: rgb(255, 255, 255);
+    position: absolute;
+    left: 24px;
+    top: 24px;
+    border: #ffffff;
+}
+/* 뒤로가기 */
+.homeCircle {
+    width : 8vw;
+    height : 12vh;
+    border-radius: 50%;
+    background-color: rgb(255, 255, 255);
+    position: absolute;
+    right: 24px;
+    bottom: 24px;
+    border: #ffffff;
+}
+/* 홈버튼 */
+.iconStyle{
+    font-size: 70px;
+    color: #90C6FE;
+}
+/* 아이콘 스타일*/
+.buttonOne{
     display: flex;
     flex-direction: row;
     border-radius: 12px;
     align-items: center;
     position: absolute;
     margin:auto;
-    left: 98px;
-    top: 100px;
-}
-.button-one{
+    left: 11vw;
+    top: 16vh;
     text-align: center;
     background-color: rgb(255, 255, 255);
     border: 1px solid #ffffff;
-    width: 828px;
-    height: 388px;
+    width: 78vw;
+    height: 70vh;
     font-weight: 800;
     border-radius: 12px;
 }
-.button-three{
+.buttonTwo{
     text-align: center;
     background-color: rgb(255, 255, 255);
     position: absolute;
@@ -27,11 +64,11 @@
     font-weight: 800;
     border-radius: 12px;
     left : 31vw;
-    top: 33vh ;
+    top: 36vh ;
     box-shadow: 5px 5px 5px 5px gray;
 }
 /* 글씨 쓰는 부분 */
-.text-align{
+.textAlign{
     position: absolute;
     color: #2a2a2a;
     text-align: center;
@@ -41,17 +78,17 @@
     top: 8vh;
     left: 18vw;
 }
-.text-align-one{
+.textAlignOne{
     position: absolute;
     text-align: center;
     color: #fd5454;
-    font-size: 72px;
+    font-size: 64px;
     vertical-align: bottom;
     margin: 0%;
     top: 18vh;
     left: 14vw;
 }
-.text-align-two{
+.textAlignTwo{
     position: absolute;
     color: #2a2a2a;
     text-align: center;
@@ -61,7 +98,7 @@
     top: 20vh;
     left: 28vw;
 }
-.text-align-three{
+.textAlignThree{
     position: relative;
     color: #2a2a2a;
     text-align: center;
