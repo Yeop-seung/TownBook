@@ -3,18 +3,18 @@ import React from "react";
 import { useRef } from "react";
 import { useHistory } from "react-router-dom";
 import classes from "./Login.module.css";
-import { Helmet } from "react-helmet";
+// import { Helmet } from "react-helmet";
 // reactstrap components
 import {
-  Button,
+  // Button,
   Card,
   CardHeader,
   CardBody,
   CardFooter,
-  CardText,
+  // CardText,
   FormGroup,
-  Form,
-  Input,
+  // Form,
+  // Input,
   Row,
   Col,
   Modal,
@@ -22,6 +22,7 @@ import {
 } from "reactstrap";
 import DaumPostcode from "react-daum-postcode";
 import { data } from "jquery";
+
 // import { isPropertySignature } from "typescript";
 
 function SignUp(props) {
@@ -45,10 +46,13 @@ function SignUp(props) {
 
     // 주소 선택 이벤트
     selectAddress: (data: any) => {
+      addressInputRef.current.value=data.address;
+      toggleModalSearch();
       console.log(`
                 주소: ${data.address},
                 우편번호: ${data.zonecode}
             `);
+    
     },
   //  console.log(data)
   };

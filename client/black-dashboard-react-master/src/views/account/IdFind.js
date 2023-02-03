@@ -1,21 +1,21 @@
-import { faAlignCenter } from "@fortawesome/free-solid-svg-icons";
+// import { faAlignCenter } from "@fortawesome/free-solid-svg-icons";
 import React from "react";
 import { useRef } from "react";
 import { useHistory } from "react-router-dom";
-import  classes  from "./Login.module.css";
-import { Link } from "react-router-dom";
+import classes from "./Login.module.css";
+// import { Link } from "react-router-dom";
 
 // reactstrap components
 import {
-  Button,
+  // Button,
   Card,
-  CardHeader,
+  // CardHeader,
   CardBody,
   CardFooter,
-  CardText,
+  // CardText,
   FormGroup,
   Form,
-  Input,
+  // Input,
   Row,
   Col,
 } from "reactstrap";
@@ -58,21 +58,12 @@ function IdFind(props) {
   return (
     <>
       <div className="content">
-        <Row  style={{ justifyContent : "center"}}>
+        <Row style={{ justifyContent: "center" }}>
           <Col lg="7">
             <Card>
-                <Row>
-            <button
-                  className="btn-login"
-                  // color="black"
-                  type="submit"
-                  onClick={submitHandler}
-                  className={classes.style}
-                >
-                  찾기
-                </button>
+              <Col >
+
                 <button
-                  className="btn-login"
                   // color="black"
                   type="submit"
                   onClick={submitHandler}
@@ -80,18 +71,26 @@ function IdFind(props) {
                 >
                   찾기
                 </button>
-                </Row>
+
+                <button
+                  // color="black"
+                  type="submit"
+                  onClick={submitHandler}
+                  className={classes.style}
+                >
+                  찾기
+                </button>
+              </Col>
             </Card>
 
-
-            <Card >
+            <Card>
               {/* <CardHeader>
                 <h5 className="card-header">로그인</h5>
               </CardHeader> */}
-              <CardBody >
+              <CardBody>
                 <Form>
                   <Col>
-                    <FormGroup style={{ marginTop:20}}>
+                    <FormGroup style={{ marginTop: 20 }}>
                       {/* <div>
                         <label htmlFor="exampleInputEmail1">이메일</label>
                       </div> */}
@@ -101,13 +100,12 @@ function IdFind(props) {
                           type="name"
                           ref={emailInputRef}
                           className={classes.style}
-                          
                         />
                       </div>
                     </FormGroup>
                   </Col>
 
-                  <Col >
+                  <Col>
                     <FormGroup>
                       {/* <label>비밀번호</label> */}
                       <div>
@@ -121,39 +119,32 @@ function IdFind(props) {
                       </div>
                     </FormGroup>
                   </Col>
-
-                 
                 </Form>
               </CardBody>
-              
-              <CardFooter >
-              <Row  style={{justifyContent : "center", paddingInline : 30 }}>
-                <button
-                  className="btn-login"
-                  // color="black"
-                  type="submit"
-                  onClick={submitHandler}
-                  className={classes.style}
-                >
-                  찾기
-                </button>
-                </Row >
+
+              <CardFooter>
+                <Row style={{ justifyContent: "center", paddingInline: 30 }}>
+                  <button
+                    // className="btn-login"
+                    // color="black"
+                    type="submit"
+                    onClick={submitHandler}
+                    className={classes.style}
+                  >
+                    찾기
+                  </button>
+                </Row>
               </CardFooter>
             </Card>
 
-
-
-
-
-
-            <Card >
+            <Card>
               {/* <CardHeader>
                 <h5 className="card-header">로그인</h5>
               </CardHeader> */}
-              <CardBody >
+              <CardBody>
                 <Form>
                   <Col>
-                    <FormGroup style={{ marginTop:20}}>
+                    <FormGroup style={{ marginTop: 20 }}>
                       {/* <div>
                         <label htmlFor="exampleInputEmail1">이메일</label>
                       </div> */}
@@ -163,13 +154,12 @@ function IdFind(props) {
                           type="email"
                           ref={emailInputRef}
                           className={classes.style}
-                          
                         />
                       </div>
                     </FormGroup>
                   </Col>
 
-                  <Col >
+                  <Col>
                     <FormGroup>
                       {/* <label>비밀번호</label> */}
                       <div>
@@ -183,25 +173,20 @@ function IdFind(props) {
                       </div>
                     </FormGroup>
                   </Col>
-
-                 
                 </Form>
               </CardBody>
-              <CardFooter >
-              <Row  style={{justifyContent : "center", paddingInline : 30 }}>
-                <button
-                  className="btn-login"
-                  // color="black"
-                  type="submit"
-                  onClick={submitHandler}
-                  className={classes.style}
-                >
-                  찾기
-                </button>
-                </Row >
-                
-                
-                
+              <CardFooter>
+                <Row style={{ justifyContent: "center", paddingInline: 30 }}>
+                  <button
+                    // className="btn-login"
+                    // color="black"
+                    type="submit"
+                    onClick={submitHandler}
+                    className={classes.style}
+                  >
+                    찾기
+                  </button>
+                </Row>
               </CardFooter>
             </Card>
           </Col>
