@@ -1,15 +1,17 @@
 package com.ssafy.townbook.model.dto.request;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
-@NoArgsConstructor
+@Getter
+@Setter
 public class ReceiveBookRequestDto {
     
     private Long detailLockerNo;
     private Long accountNo;
     
+    @Builder
     public ReceiveBookRequestDto(Long detailLockerNo, Long accountNo) {
         this.detailLockerNo = detailLockerNo;
         this.accountNo = accountNo;

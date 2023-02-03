@@ -55,6 +55,8 @@ public class LockerController {
     public ResponseEntity<?> addLocker(
             @PathVariable String lockerRegion, @PathVariable int detailLockerCount,
             @PathVariable String lockerLatitude, @PathVariable String lockerLongitude) {
-        return new ResponseEntity<>(lockerService.addLocker(lockerRegion, detailLockerCount, lockerLatitude, lockerLongitude), HttpStatus.OK);
+        return new ResponseEntity<>(
+                lockerService.addLocker(lockerRegion, detailLockerCount, lockerLatitude, lockerLongitude),
+                HttpStatus.OK);
     }
 }

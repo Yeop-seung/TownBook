@@ -17,17 +17,17 @@ import lombok.ToString;
 @ToString
 @Entity
 public class File {
-
+    
     @Id
     @Column(name = "file_no")
     private Long fileNo;
-
+    
     @Column(name = "file_name")
     private String fileName;
-
+    
     @Column(name = "file_path")
     private String filePath;
-
+    
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "`fk-account-file`")
     private Account account;

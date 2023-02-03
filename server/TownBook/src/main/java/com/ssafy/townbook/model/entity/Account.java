@@ -6,10 +6,8 @@ import java.util.List;
 import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.ColumnDefault;
@@ -19,7 +17,6 @@ import org.hibernate.annotations.DynamicInsert;
 @DynamicInsert
 @Getter
 @Setter
-@NoArgsConstructor
 @ToString
 @Entity
 public class Account {
@@ -90,11 +87,6 @@ public class Account {
             joinColumns = {@JoinColumn(name = "account_no", referencedColumnName = "account_no")},
             inverseJoinColumns = {@JoinColumn(name = "authority_name", referencedColumnName = "authority_name")})
     private Set<Authority> authorities;
-
-//    public void addAuthorities(String authorityName) {
-//        Authority authority = new Authority(authorityName);
-//        this.getAuthorities().add(authority);
-//    }
     
     @Builder
     public Account(Long accountNo, String accountEmail, String accountPw, String accountName,

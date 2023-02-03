@@ -12,11 +12,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 @Transactional
-public class NoticeServiceImpl implements NoticeService{
-
+public class NoticeServiceImpl implements NoticeService {
+    
     @Autowired
     private NoticeRepository noticeRepository;
-
+    
     /**
      * 공지사항 수정
      *
@@ -25,21 +25,21 @@ public class NoticeServiceImpl implements NoticeService{
      */
     @Override
     public Boolean modifyNotice(Notice notice) {
-        try{
+        try {
             Notice modifyNotice = noticeRepository.findById(notice.getNoticeNo()).get();
             modifyNotice.setNoticeContent(notice.getNoticeContent());
             modifyNotice.setNoticeTitle(notice.getNoticeTitle());
             LocalDateTime currDateTime = LocalDateTime.now();
             modifyNotice.setNoticeWriteDateTime(currDateTime);
             noticeRepository.save(modifyNotice);
-
+            
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             e.getMessage();
             return false;
         }
     }
-
+    
     /**
      * 공지사항 작성
      *
@@ -48,18 +48,18 @@ public class NoticeServiceImpl implements NoticeService{
      */
     @Override
     public Boolean writeNotice(Notice notice) {
-        try{
+        try {
             noticeRepository.save(notice);
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             e.getMessage();
             return false;
         }
     }
-
+    
     /**
      * 공지사항 or 이용안내 가져오기
-     * 
+     *
      * @return List<NoticeDto>
      */
     @Override
@@ -69,22 +69,22 @@ public class NoticeServiceImpl implements NoticeService{
                 .map(NoticeDto::new)
                 .collect(Collectors.toList());
     }
-
+    
     /**
      * 공지 하나 가져오기
-     * 
+     *
      * @param noticeNo
      * @return NoticeDto
      */
     @Override
-    public NoticeDto getNotice(Long noticeNo){
+    public NoticeDto getNotice(Long noticeNo) {
         Notice notice = noticeRepository.findById(noticeNo).get();
         return new NoticeDto(notice);
     }
-
+    
     /**
      * 공지사항 삭제
-     * 
+     *
      * @param noticeNo
      * @return Boolean
      */
@@ -95,7 +95,7 @@ public class NoticeServiceImpl implements NoticeService{
             notice.setNoticeState(false);
             noticeRepository.save(notice);
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
     }

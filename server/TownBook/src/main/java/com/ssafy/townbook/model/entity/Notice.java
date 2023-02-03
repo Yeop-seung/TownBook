@@ -27,46 +27,46 @@ import org.hibernate.annotations.DynamicInsert;
 @Entity
 @Table(name = "`notice`")
 public class Notice {
-
+    
     @Id
     @Column(name = "notice_no")
     private Long noticeNo;
-
+    
     @NotNull
     @Column(name = "notice_title")
     private String noticeTitle;
-
+    
     @NotNull
     @Column(name = "notice_content")
     @Lob
     private String noticeContent;
-
-
+    
+    
     @NotNull
     @Column(name = "notice_category")
     private Integer noticeCategory;
-
-
+    
+    
     @NotNull
     @Column(name = "notice_write_time")
     private LocalDateTime noticeWriteDateTime;
-
+    
     @NotNull
     @Column(name = "notice_state")
     @ColumnDefault("true")
     private Boolean noticeState;
-
+    
     @NotNull
     @Column(name = "notice_vies")
     @ColumnDefault("0")
     private Integer noticeViews;
-
-
+    
+    
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "`fk-account-notice`")
     private Account account;
-
-
+    
+    
     @Builder
     public Notice(Long noticeNo, String noticeTitle, String noticeContent,
             LocalDateTime noticeWriteDateTime, Boolean noticeState, Integer noticeViews,

@@ -90,7 +90,14 @@ public class BookLogController {
     public ResponseEntity<?> donateBook(@RequestBody DonateBookRequestDto donateBookRequestDto) throws Exception {
         return new ResponseEntity<>(bookLogService.donateBook(donateBookRequestDto), HttpStatus.OK);
     }
-
+    
+    /**
+     * 도서 수령
+     *
+     * @param receiveBookRequestDto
+     * @return Boolean
+     * @throws Exception
+     */
     @PostMapping("/receiveBook")
     public ResponseEntity<?> receiveBook(@RequestBody ReceiveBookRequestDto receiveBookRequestDto) throws Exception {
         return new ResponseEntity<>(bookLogService.receiveBook(receiveBookRequestDto), HttpStatus.OK);

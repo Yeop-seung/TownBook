@@ -4,17 +4,15 @@ import com.ssafy.townbook.model.dto.BookLogDto;
 import com.ssafy.townbook.model.entity.BookLog;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor
 public class ReceiveBookLogResponseDto {
     
     private String bookTitle;
     private Long detailLockerNo;
-    private Long tempNo;
+    private Long detailLockerNoInLocker;
     
     @Builder
     public ReceiveBookLogResponseDto(BookLog bookLog) {
@@ -23,6 +21,6 @@ public class ReceiveBookLogResponseDto {
         this.detailLockerNo = bookLogDto.getDetailLockerDto().getDetailLockerNo();
         
         Long idx = bookLogDto.getLockerDto().getDetailLocker().get(0).getDetailLockerNo();
-        this.tempNo = bookLogDto.getDetailLockerDto().getDetailLockerNo() - idx + 1;
+        this.detailLockerNoInLocker = bookLogDto.getDetailLockerDto().getDetailLockerNo() - idx + 1;
     }
 }

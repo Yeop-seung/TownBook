@@ -1,10 +1,11 @@
 package com.ssafy.townbook.model.dto.request;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
-@NoArgsConstructor
+@Getter
+@Setter
 public class DonateBookRequestDto {
     
     private Long lockerNo;
@@ -12,6 +13,7 @@ public class DonateBookRequestDto {
     private Long accountNo;
     private String bookIsbn;
     
+    @Builder
     public DonateBookRequestDto(Long lockerNo, Long detailLockerNo, Long accountNo, String bookIsbn) {
         this.lockerNo = lockerNo;
         this.detailLockerNo = detailLockerNo;
