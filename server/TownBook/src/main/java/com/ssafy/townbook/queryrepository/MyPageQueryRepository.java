@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
-import static com.ssafy.townbook.model.entity.QBoard.board;
 import static com.ssafy.townbook.model.entity.QBookLog.bookLog;
 import static com.ssafy.townbook.model.entity.QWishList.wishList;
 
@@ -31,9 +30,5 @@ public class MyPageQueryRepository {
 
     public Optional<List<WishList>> findWishList(Long accountNo) throws Exception {
         return Optional.ofNullable(queryFactory.selectFrom(wishList).where(wishList.account.accountNo.eq(accountNo)).fetch());
-    }
-
-    public Optional<List<Board>> findBoard(Long accountNo) throws Exception{
-        return Optional.ofNullable(queryFactory.selectFrom(board).where(board.boardState.eq(true).and(board.account.accountNo.eq(accountNo))).fetch());
     }
 }

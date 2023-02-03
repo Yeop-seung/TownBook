@@ -19,6 +19,4 @@ public interface MyPageService {
     JSONArray findBookLogReceiverByReceiverNo(Long receiverNo) throws Exception;
 
     JSONArray findWishListByAccountNo(Long accountNo) throws Exception;
-
-    JSONArray findBoardByAccountNo(Long accountNo) throws Exception;
 }
