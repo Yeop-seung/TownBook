@@ -27,5 +27,5 @@ public interface LockerService {
      * @param detailLockerCount
      * @return Boolean
      */
-    boolean addLocker(String lockerRegion, int detailLockerCount, String lockerLatitude, String lockerLongitude);
+    boolean addLocker(String lockerRegion, int detailLockerCount, Double lockerLatitude, Double lockerLongitude);
 }

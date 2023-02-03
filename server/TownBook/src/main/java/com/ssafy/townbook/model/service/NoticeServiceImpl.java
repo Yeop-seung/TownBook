@@ -14,8 +14,12 @@ import org.springframework.stereotype.Service;
 @Transactional
 public class NoticeServiceImpl implements NoticeService {
     
-    @Autowired
     private NoticeRepository noticeRepository;
+    
+    @Autowired
+    public NoticeServiceImpl(NoticeRepository noticeRepository) {
+        this.noticeRepository = noticeRepository;
+    }
     
     /**
      * 공지사항 수정
@@ -63,8 +67,9 @@ public class NoticeServiceImpl implements NoticeService {
      * @return List<NoticeDto>
      */
     @Override
-    public List<NoticeDto> getNoticeList(Integer category) {
-        List<Notice> noticeList = noticeRepository.findTop8ByNoticeStateAndNoticeCategory(true, category).get();
+    public List<NoticeDto> findTop8ByNoticeStateAndNoticeCategoryOrderByNoticeNo(Integer category) {
+        List<Notice> noticeList = noticeRepository.findTop8ByNoticeStateAndNoticeCategoryOrderByNoticeNo(true, category)
+                .get();
         return noticeList.stream()
                 .map(NoticeDto::new)
                 .collect(Collectors.toList());

@@ -6,6 +6,7 @@ import com.ssafy.townbook.model.entity.Book;
 import com.ssafy.townbook.model.entity.BookLog;
 import com.ssafy.townbook.model.entity.DetailLocker;
 import com.ssafy.townbook.model.entity.Locker;
+import com.ssafy.townbook.model.entity.Notice;
 import com.ssafy.townbook.model.repository.AccountRepository;
 import com.ssafy.townbook.model.repository.BookLogRepository;
 import com.ssafy.townbook.model.repository.BookRepository;
@@ -44,6 +45,7 @@ public class InitDb {
         initService.accountInit();
         initService.lockerInit();
         initService.bookLogInit();
+        initService.noticeInit();
     }
     
     @Component
@@ -124,13 +126,13 @@ public class InitDb {
         }
         
         public void lockerInit() {
-            createLocker("어은동", 1, "12312312", "12312312");
-            createLocker("덕명동", 3, "32132132", "12312312");
-            createLocker("봉명동", 5, "12345678", "12312312");
+            createLocker("어은동", 1, 12312312D, 123123123D);
+            createLocker("덕명동", 3, 87654321D, 87654321D);
+            createLocker("봉명동", 5, 123D, 456D);
         }
         
-        public void createLocker(String lockerRegion, int detailLockerCount, String lockerLatitude,
-                String lockerLongitude) {
+        public void createLocker(String lockerRegion, int detailLockerCount, Double lockerLatitude,
+                Double lockerLongitude) {
             Locker locker = new Locker();
             locker.setLockerRegion(lockerRegion);
             locker.setLockerLatitude(lockerLatitude);
@@ -190,6 +192,51 @@ public class InitDb {
             
             bookLog.setBookLogReceiveDateTime(LocalDateTime.now());
             em.persist(bookLog);
+        }
+        
+        public void noticeInit() {
+            Account account = accountRepository.findByAccountNo(1L).get();
+            createNotice("제목1", "내용1", account);
+            createNotice("제목1", "내용1", account);
+            createNotice("제목1", "내용1", account);
+            createNotice("제목1", "내용1", account);
+            createNotice("제목1", "내용1", account);
+            createNotice("제목1", "내용1", account);
+            createNotice("제목1", "내용1", account);
+            createNotice("제목1", "내용1", account);
+            createNotice("제목1", "내용1", account);
+            createNotice("제목1", "내용1", account);
+            
+            createGuide("제목1", "내용1", account);
+            createGuide("제목1", "내용1", account);
+            createGuide("제목1", "내용1", account);
+            createGuide("제목1", "내용1", account);
+            createGuide("제목1", "내용1", account);
+            createGuide("제목1", "내용1", account);
+            createGuide("제목1", "내용1", account);
+            createGuide("제목1", "내용1", account);
+            createGuide("제목1", "내용1", account);
+            createGuide("제목1", "내용1", account);
+        }
+        
+        public void createNotice(String noticeTitle, String noticeContent, Account account) {
+            Notice notice = new Notice();
+            notice.setNoticeTitle(noticeTitle);
+            notice.setNoticeContent(noticeContent);
+            notice.setNoticeWriteDateTime(LocalDateTime.now());
+            notice.setNoticeCategory(0);
+            notice.setAccount(account);
+            em.persist(notice);
+        }
+        
+        public void createGuide(String noticeTitle, String noticeContent, Account account) {
+            Notice notice = new Notice();
+            notice.setNoticeTitle(noticeTitle);
+            notice.setNoticeContent(noticeContent);
+            notice.setNoticeWriteDateTime(LocalDateTime.now());
+            notice.setNoticeCategory(1);
+            notice.setAccount(account);
+            em.persist(notice);
         }
     }
     

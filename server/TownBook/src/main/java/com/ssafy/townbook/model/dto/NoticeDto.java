@@ -34,18 +34,6 @@ public class NoticeDto {
     private AdminDto adminDto;
     
     @Builder
-    public NoticeDto(String noticeTitle, String noticeContent, Integer noticeCategory,
-            LocalDateTime noticeWriteDateTime, Boolean noticeState, Integer noticeViews, AdminDto adminDto) {
-        this.noticeTitle = noticeTitle;
-        this.noticeContent = noticeContent;
-        this.noticeCategory = noticeCategory;
-        this.noticeWriteDateTime = noticeWriteDateTime;
-        this.noticeState = noticeState;
-        this.noticeViews = noticeViews;
-        this.adminDto = adminDto;
-    }
-    
-    @Builder
     public NoticeDto(Notice notice) {
         this.noticeTitle = notice.getNoticeTitle();
         this.noticeContent = notice.getNoticeContent();
