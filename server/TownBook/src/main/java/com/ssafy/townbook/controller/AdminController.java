@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/admin")
 public class AdminController {
-
+    
     @Autowired
     public AdminController(AdminService adminService) {
         this.adminService = adminService;

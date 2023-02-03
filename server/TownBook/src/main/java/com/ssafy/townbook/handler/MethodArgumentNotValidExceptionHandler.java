@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @Order(Ordered.HIGHEST_PRECEDENCE)
 @ControllerAdvice
 public class MethodArgumentNotValidExceptionHandler {
-
+    
     @ResponseStatus(BAD_REQUEST)
     @ResponseBody
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -25,10 +25,10 @@ public class MethodArgumentNotValidExceptionHandler {
         List<org.springframework.validation.FieldError> fieldErrors = result.getFieldErrors();
         return processFieldErrors(fieldErrors);
     }
-
+    
     private ErrorDto processFieldErrors(List<org.springframework.validation.FieldError> fieldErrors) {
         ErrorDto errorDTO = new ErrorDto(BAD_REQUEST.value(), "@Valid Error");
-        for (org.springframework.validation.FieldError fieldError: fieldErrors) {
+        for (org.springframework.validation.FieldError fieldError : fieldErrors) {
             errorDTO.addFieldError(fieldError.getObjectName(), fieldError.getField(), fieldError.getDefaultMessage());
         }
         return errorDTO;

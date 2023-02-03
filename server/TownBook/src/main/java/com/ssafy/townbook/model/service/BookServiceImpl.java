@@ -1,7 +1,6 @@
 package com.ssafy.townbook.model.service;
 
 import com.ssafy.townbook.model.dto.BookDto;
-import com.ssafy.townbook.model.dto.BookLogDto;
 import com.ssafy.townbook.model.entity.Book;
 import com.ssafy.townbook.model.repository.BookRepository;
 import java.io.BufferedReader;
@@ -12,7 +11,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import javax.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;

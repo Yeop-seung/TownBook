@@ -1,13 +1,12 @@
 package com.ssafy.townbook.model.dto;
 
 import com.ssafy.townbook.model.entity.Account;
-import javax.persistence.Column;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.hibernate.annotations.ColumnDefault;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
-@NoArgsConstructor
+@Getter
+@Setter
 public class AdminDto {
     
     private String accountEmail;
@@ -20,6 +19,7 @@ public class AdminDto {
     private Integer accountPoint;
     private Integer accountBookCnt;
     
+    @Builder
     public AdminDto(Account account) {
         this.accountEmail = account.getAccountEmail();
         this.accountName = account.getAccountName();

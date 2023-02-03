@@ -15,11 +15,11 @@ import lombok.ToString;
 @ToString
 @Entity
 public class Authority {
-
+    
     @Id
     @Column(name = "authority_name")
     private String authorityName;
-
+    
     @Builder
     public Authority(String authorityName) {
         this.authorityName = authorityName;
