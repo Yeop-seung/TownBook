@@ -1,81 +1,65 @@
-import { useState, useEffect } from 'react';
+import React, { useEffect } from "react";
+import './Map.css'
 
-// const DUMMY_DATA = [
-//     {
-//       id: 'm1',
-//       title: 'This is a first meetup',
-//       image:
-//         'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Stadtbild_M%C3%BCnchen.jpg/2560px-Stadtbild_M%C3%BCnchen.jpg',
-//       address: 'Meetupstreet 5, 12345 Meetup City',
-//       description:
-//         'This is a first, amazing meetup which you definitely should not miss. It will be a lot of fun!',
-//     },
-//     {
-//       id: 'm2',
-//       title: 'This is a second meetup',
-//       image:
-//         'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Stadtbild_M%C3%BCnchen.jpg/2560px-Stadtbild_M%C3%BCnchen.jpg',
-//       address: 'Meetupstreet 5, 12345 Meetup City',
-//       description:
-//         'This is a first, amazing meetup which you definitely should not miss. It will be a lot of fun!',
-//     },
-//   ];
-//jsx에서는 jsx 배열로 렌더링가능 {[]}
-//key={}해야 경고사라짐
-//이 부분 조금 어렵다 화살표함수
-function AllMeetupsPage() {
-    const [isLoading, setIsLoading] = useState(true);
-    const [loadedMeetups, setLoadedMeetups] = useState([]);
 
-    //화면에 표시되지 않는 부수효과들을 정의할때도 사용됨
+const { kakao } = window;
+
+function Kakao() {
     useEffect(() => {
-      setIsLoading(true); //여기선뭐 안해도됨 useeffect가 실행될때 true로 초기화
-      fetch(
-        'http://192.168.140.1/servo1/90',
-        {}
-      ).then(response => {
-        return response.json();
-      }).then(data => {
-        const meetups = [];
+        
 
-        for (const key in data) {
-          const meetup = {
-          id: key,
-          ...data[key]
-        };
-          meetups.push(meetup);
-        };
-
-
-
-        setIsLoading(false);
-        setLoadedMeetups(meetups);
-      });
-  
-    }, []);
-
-    
-    if (isLoading) {
-      <section>
-        <p>Loading...</p>
-      </section>
+    const container = document.getElementById('map')    //찾으려는 id 
+    const options = {
+        center : new kakao.maps.LatLng(37.49676871972202, 127.02474726969814),
+        level : 3
     }
 
+    const map = new kakao.maps.Map(container, options)
 
-    return <div>
-        <h1>All AllMeetups Page</h1>
-        {/* {[<li>Item1</li>,<li>Item2</li>]} */}
-        {/* 이것들은 MeetupList.js 에서 만들어서 주기로 */}
-        {/* {DUMMY_DATA.map((meetup) => {
-            return <li key={meetup.id}>{meetup.title}</li>
-        })} */}
-        <button onClick={loadedMeetups
+    const imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png', // 마커이미지의 주소입니다    
+          imageSize = new kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
+          imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
 
-        }>
-          신호
-        </button>
-     
-        </div>
-        
+    // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+    const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
+          markerPosition = new kakao.maps.LatLng(37.49676871972202, 127.02474726969814); // 마커가 표시될 위치입니다
+
+
+    // const markerPosition  = new kakao.maps.LatLng(37.49676871972202, 127.02474726969814); 
+
+    // 마커를 생성합니다
+    const marker = new kakao.maps.Marker({
+        position: markerPosition,
+        image : markerImage
+    });
+
+    // 마커가 지도 위에 표시되도록 설정합니다
+    marker.setMap(map);
+
+    const iwContent = '<div style=width:"95%",height:"70vh"">여기다가 책 넣어야 된다. <div/>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+    iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
+
+    // 인포윈도우를 생성합니다
+    const infowindow = new kakao.maps.InfoWindow({
+    content : iwContent,
+    removable : iwRemoveable
+    });
+    // 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
+    const zoomControl = new kakao.maps.ZoomControl();
+
+    map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+
+    // 마커에 클릭이벤트를 등록합니다
+    kakao.maps.event.addListener(marker, 'click', function() {
+    // 마커 위에 인포윈도우를 표시합니다
+        infowindow.open(map, marker)
+    }
+    
+    )}, [] )
+
+    return(
+        <div id="map" style={{width:'95%',height:"70vh"}}></div>
+    )
 }
-export default AllMeetupsPage;
+
+export default Kakao

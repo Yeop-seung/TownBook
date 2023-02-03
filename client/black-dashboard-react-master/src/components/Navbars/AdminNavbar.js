@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // import classes from './black-dashboard-react.css';
-import Sidebar from "components/Sidebar/Sidebar.js";
-import routes from "routes.js";
-import logo from "assets/img/react-logo.png";
+// import Sidebar from "components/Sidebar/Sidebar.js";
+// import routes from "routes.js";
+// import logo from "assets/img/react-logo.png";
 import { PropTypes } from "prop-types";
 import { useMediaQuery } from "react-responsive";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -19,15 +19,15 @@ import {
 import { Link } from "react-router-dom";
 // reactstrap components
 import {
-  Button,
+  // Button,
   Collapse,
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
   UncontrolledDropdown,
-  Input,
-  InputGroup,
-  NavbarBrand,
+  // Input,
+  // InputGroup,
+  // NavbarBrand,
   Navbar,
   NavLink,
   Nav,
@@ -49,10 +49,10 @@ function AdminNavbar(props) {
     document.documentElement.className.indexOf("nav-open") !== -1
   );
 
-  const toggleSidebar = () => {
-    document.documentElement.classList.toggle("nav-open");
-    setsidebarOpened(!sidebarOpened);
-  };
+  // const toggleSidebar = () => {
+  //   document.documentElement.classList.toggle("nav-open");
+  //   setsidebarOpened(!sidebarOpened);
+  // };
   // React.useEffect(() => {
   //   window.addEventListener("resize", updateColor);
   //   // Specify how to clean up after this effect:
@@ -105,11 +105,11 @@ function AdminNavbar(props) {
   //   );
   // };
 
-  const verify2 = () => {
-    if (window.innerWidth < 993) {
-      console.log(window.innerWidth);
-    }
-  };
+  // const verify2 = () => {
+  //   if (window.innerWidth < 993) {
+  //     console.log(window.innerWidth);
+  //   }
+  // };
   //네브바 로고 설정
   const { logo } = props;
 

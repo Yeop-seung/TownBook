@@ -20,7 +20,7 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import "react-app-polyfill/ie11";
 import "react-app-polyfill/stable";
-import Admin from "layouts/Admin/Admin";
+// import Admin from "layouts/Admin/Admin";
 
 import AdminLayout from "layouts/Admin/Admin.js";
 // import RTLLayout from "layouts/RTL/RTL.js";
@@ -32,7 +32,7 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 
 import ThemeContextWrapper from "./components/ThemeWrapper/ThemeWrapper";
 import BackgroundColorWrapper from "./components/BackgroundColorWrapper/BackgroundColorWrapper";
-import AdminNavbar from "components/Navbars/AdminNavbar";
+// import AdminNavbar from "components/Navbars/AdminNavbar";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
