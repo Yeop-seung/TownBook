@@ -1,10 +1,14 @@
 package com.ssafy.townbook.model.service;
 
-import com.ssafy.townbook.model.dto.BookDto;
+import com.ssafy.townbook.model.dto.AdminDto;
 import com.ssafy.townbook.model.dto.BookLogDto;
 import com.ssafy.townbook.model.dto.request.DonateBookRequestDto;
-import com.ssafy.townbook.model.entity.Book;
+import com.ssafy.townbook.model.dto.request.ReceiveBookRequestDto;
+import com.ssafy.townbook.model.dto.response.ReceiveBookLogResponseDto;
+import com.ssafy.townbook.model.entity.Account;
 import com.ssafy.townbook.model.entity.BookLog;
+import com.ssafy.townbook.model.entity.DetailLocker;
+import com.ssafy.townbook.model.repository.AccountRepository;
 import com.ssafy.townbook.model.repository.AdminRepository;
 import com.ssafy.townbook.model.repository.BookLogRepository;
 import com.ssafy.townbook.model.repository.BookRepository;
@@ -31,18 +35,20 @@ public class BookLogServiceImpl implements BookLogService {
     private DetailLockerRepository detailLockerRepository;
     private AdminRepository adminRepository;
     private BookRepository bookRepository;
+    private AccountRepository accountRepository;
     
     @Autowired
     public BookLogServiceImpl(
             BookLogRepository bookLogRepository, BookLogQueryRepository bookLogQueryRepository,
             LockerRepository lockerRepository, DetailLockerRepository detailLockerRepository,
-            AdminRepository adminRepository, BookRepository bookRepository) {
+            AdminRepository adminRepository, BookRepository bookRepository, AccountRepository accountRepository) {
         this.bookLogRepository = bookLogRepository;
         this.bookLogQueryRepository = bookLogQueryRepository;
         this.lockerRepository = lockerRepository;
         this.detailLockerRepository = detailLockerRepository;
         this.adminRepository = adminRepository;
         this.bookRepository = bookRepository;
+        this.accountRepository = accountRepository;
     }
     
     /**
@@ -76,10 +82,10 @@ public class BookLogServiceImpl implements BookLogService {
      * @return List<BookDto>
      */
     @Override
-    public List<BookDto> findBookByLockerNo(Long lockerNo) {
-        List<Book> findBooks = bookLogQueryRepository.findBookByLockerNo(lockerNo).get();
-        return findBooks.stream()
-                .map(BookDto::new)
+    public List<ReceiveBookLogResponseDto> findBookLogByLockerNo(Long lockerNo) {
+        List<BookLog> findBookLogs = bookLogQueryRepository.findBookLogByLockerNo(lockerNo).get();
+        return findBookLogs.stream()
+                .map(ReceiveBookLogResponseDto::new)
                 .collect(Collectors.toList());
     }
     
@@ -107,25 +113,72 @@ public class BookLogServiceImpl implements BookLogService {
                 .collect(Collectors.toList());
     }
     
+    /**
+     * 도서 기부
+     *
+     * @param donateBookRequestDto
+     * @return AdminDto
+     */
     @Override
     @Transactional
-    public boolean donateBook(DonateBookRequestDto donateBookRequestDto) {
-        try {
-            BookLog bookLog = new BookLog();
-            bookLog.setBookLogDonateDateTime(LocalDateTime.now());
-            bookLog.setLocker(lockerRepository.findLockerByLockerNo(donateBookRequestDto.getLockerNo()).get());
-            bookLog.setDetailLocker(detailLockerRepository.findDetailLockerByDetailLockerNo(
-                    donateBookRequestDto.getDetailLockerNo()).get());
-            detailLockerRepository.findDetailLockerByDetailLockerNo(donateBookRequestDto.getDetailLockerNo()).get()
-                    .setDetailLockerIsEmpty(false);
-            bookLog.setAccount(adminRepository.findAccountByAccountNo(donateBookRequestDto.getAccountNo()).get());
-            bookLog.setBook(bookRepository.findBookByBookIsbn(donateBookRequestDto.getBookIsbn()).get());
-            bookLogRepository.save(bookLog);
-            return true;
-        } catch (Exception e) {
-            e.getMessage();
-            System.out.println(e.getMessage());
+    public AdminDto donateBook(DonateBookRequestDto donateBookRequestDto) throws Exception {
+        BookLog bookLog = new BookLog();
+        
+        // account : point 100++, bookCnt++
+        // point 100 + cnt 1
+        Account account = adminRepository.findAccountByAccountNo(donateBookRequestDto.getAccountNo()).get();
+        account.setAccountPoint(account.getAccountPoint() + 100);
+        account.setAccountBookCnt(account.getAccountBookCnt() + 1);
+        accountRepository.save(account);
+        
+        // locker
+        bookLog.setLocker(lockerRepository.findLockerByLockerNo(donateBookRequestDto.getLockerNo()).get());
+        
+        // book
+        bookLog.setBook(bookRepository.findBookByBookIsbn(donateBookRequestDto.getBookIsbn()).get());
+        
+        // bookLog
+        bookLog.setBookLogDonateDateTime(LocalDateTime.now());
+        
+        // detailLocker : isEmpty false
+        DetailLocker findDetailLocker = detailLockerRepository.findDetailLockerByDetailLockerNo(
+                donateBookRequestDto.getDetailLockerNo()).get();
+        findDetailLocker.setDetailLockerIsEmpty(false);
+        
+        bookLog.setDetailLocker(findDetailLocker);
+        bookLog.setAccount(account);
+        bookLogRepository.save(bookLog);
+        
+        // return AdminDto
+        AdminDto adminDto = new AdminDto(account);
+        return adminDto;
+    }
+    
+    @Override
+    @Transactional
+    public boolean receiveBook(ReceiveBookRequestDto receiveBookRequestDto) throws Exception {
+        // detailLocker
+        Long detailLockerNo = receiveBookRequestDto.getDetailLockerNo();
+        DetailLocker detailLocker = detailLockerRepository.findDetailLockerByDetailLockerNo(detailLockerNo).get();
+        detailLocker.setDetailLockerIsEmpty(true);
+        detailLockerRepository.save(detailLocker);
+        
+        // account
+        Account account = accountRepository.findByAccountNo(receiveBookRequestDto.getAccountNo()).get();
+        if (account.getAccountPoint() < 200) {
+            System.out.println("포인트가 부족합니다");
             return false;
         }
+        account.setAccountPoint(account.getAccountPoint() - 200);
+        accountRepository.save(account);
+        
+        // bookLog
+        BookLog bookLog = bookLogQueryRepository.findBookLogByDetailLockerNo(detailLockerNo).get().get(0);
+        bookLog.setBookLogState(false);
+        bookLog.setBookLogReceiveDateTime(LocalDateTime.now());
+        bookLog.setBookLogReceiverNo(receiveBookRequestDto.getAccountNo());
+        
+        bookLogRepository.save(bookLog);
+        return true;
     }
 }

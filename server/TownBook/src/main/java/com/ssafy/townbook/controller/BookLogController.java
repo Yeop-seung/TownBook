@@ -1,6 +1,7 @@
 package com.ssafy.townbook.controller;
 
 import com.ssafy.townbook.model.dto.request.DonateBookRequestDto;
+import com.ssafy.townbook.model.dto.request.ReceiveBookRequestDto;
 import com.ssafy.townbook.model.service.BookLogService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,8 +65,8 @@ public class BookLogController {
      * @return List<BookDto>
      */
     @GetMapping("/locker/{lockerNo}")
-    public ResponseEntity<?> findBookByLockerNo(@PathVariable Long lockerNo) {
-        return new ResponseEntity<>(bookLogService.findBookByLockerNo(lockerNo), HttpStatus.OK);
+    public ResponseEntity<?> findBookLogByLockerNo(@PathVariable Long lockerNo) {
+        return new ResponseEntity<>(bookLogService.findBookLogByLockerNo(lockerNo), HttpStatus.OK);
     }
     
     /**
@@ -83,10 +84,15 @@ public class BookLogController {
      * 도서 기부
      *
      * @param donateBookRequestDto
-     * @return boolean
+     * @return AdminDto
      */
     @PostMapping("/donateBook")
-    public ResponseEntity<?> donateBook(@RequestBody DonateBookRequestDto donateBookRequestDto) {
+    public ResponseEntity<?> donateBook(@RequestBody DonateBookRequestDto donateBookRequestDto) throws Exception {
         return new ResponseEntity<>(bookLogService.donateBook(donateBookRequestDto), HttpStatus.OK);
+    }
+
+    @PostMapping("/receiveBook")
+    public ResponseEntity<?> receiveBook(@RequestBody ReceiveBookRequestDto receiveBookRequestDto) throws Exception {
+        return new ResponseEntity<>(bookLogService.receiveBook(receiveBookRequestDto), HttpStatus.OK);
     }
 }

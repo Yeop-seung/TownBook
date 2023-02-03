@@ -8,3 +8,15 @@ Content-Type: application/json
     "accountNo": 1,
     "bookIsbn": "9788960777330"
 }
+
+### 2. 해당 보관함의 ture 모든 북로그 조회
+GET http://localhost:8081/bookLog/locker/1
+
+### 3. 북로그 (도서 수령)
+POST http://localhost:8081/bookLog/receiveBook
+Content-Type: application/json
+
+{
+    "detailLockerNo": 1,
+    "accountNo": 1
+}
