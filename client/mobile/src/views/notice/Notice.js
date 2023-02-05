@@ -1,26 +1,15 @@
-/*!
 
-=========================================================
-* Black Dashboard React v1.2.1
-=========================================================
+import axios from "axios";
 
-* Product Page: https://www.creative-tim.com/product/black-dashboard-react
-* Copyright 2022 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/black-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-import React from "react";
+import { React, useState, useEffect, useRef } from "react";
 // react plugin for creating notifications over the dashboard
 import NotificationAlert from "react-notification-alert";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
-
+import NoticeList from "views/notice/NoticeList";
+import {
+  faArrowLeft
+} from "@fortawesome/free-solid-svg-icons";
 import {
   faHeadset,
   faQrcode,
@@ -43,8 +32,10 @@ import {
   Col,
 } from "reactstrap";
 
-function Notice() {
-  const notificationAlertRef = React.useRef(null);
+function Notice(props) {
+  const [isLoading, setIsLoading] = useState(true);
+  const [loadedMeetups, setLoadedMeetups] = useState([]);
+  const notificationAlertRef = useRef(null);
   const notify = (place) => {
     var color = Math.floor(Math.random() * 5 + 1);
     var type;
@@ -85,7 +76,48 @@ function Notice() {
     notificationAlertRef.current.notificationAlert(options);
   };
 
-  
+  useEffect(() => {
+  axios
+    .get(
+      "https://react-getting-started-9d228-default-rtdb.firebaseio.com/notices.json"
+
+    )
+    // .get("https:///townbook/myPage/receive/${receiverNo}")
+    .then((response) => {
+      const notices = [];
+      console.log(response)
+      for (const key in response.data) {
+        const notice = {
+        id: key,
+        ...response.data[key]
+      };
+        notices.push(notice);
+      };
+      // if(response=="true"){
+      // alert("회원가입에 성공하였습니다.");
+      // history.replace("/");
+      // }
+      // else{
+
+      //   alert("회원가입에 실패하였습니다.");
+      // }
+      setIsLoading(false);
+      setLoadedMeetups(notices);
+      console.log(notices)
+    })
+    .catch((error) => {
+      alert("글로딩에 실패하였습니다.");
+    });
+  }, []);
+
+
+  if (isLoading) {
+    <section>
+      <p>Loading...</p>
+    </section>
+  }
+
+
   return (
     <>
       <div className="content">
@@ -96,30 +128,39 @@ function Notice() {
           <Col md="6">
             <Card>
               <CardHeader>
-                <Row style={{ justifyContent: "space-between", paddingInline : 15}}>
+                <Row
+                  style={{ justifyContent: "space-between", paddingInline: 15 }}
+                >
+                  <Link to={"/map"}>
+                    <FontAwesomeIcon icon={faArrowLeft} size="xl" color="black"/>
+                  </Link>
                   <CardTitle tag="h4">공지사항</CardTitle>
                   <Link to={"/notice/write"}>
-                  <FontAwesomeIcon
-                    icon={faPlus}
-                    size="xl"
-                    color="black"
-                  />
+                    <FontAwesomeIcon icon={faPlus} size="xl" color="black" />
                   </Link>
                 </Row>
               </CardHeader>
               <CardBody>
-                <Alert color="info">
+                {/* <Alert color="info">
                   <span>This is a plain notification</span>
                 </Alert>
+
                 <UncontrolledAlert color="info">
                   <span>This is a notification with close button.</span>
-                </UncontrolledAlert>
+                </UncontrolledAlert> */}
+
+                
+                <NoticeList notices={loadedMeetups}/>
+
+                
+                {/* 
                 <UncontrolledAlert className="alert-with-icon" color="info">
                   <span className="tim-icons icon-bell-55" data-notify="icon" />
                   <span data-notify="message">
                     This is a notification with close button and icon.
                   </span>
                 </UncontrolledAlert>
+
                 <UncontrolledAlert className="alert-with-icon" color="info">
                   <span className="tim-icons icon-bell-55" data-notify="icon" />
                   <span data-notify="message">
@@ -128,11 +169,13 @@ function Notice() {
                     are always vertically aligned. This is a beautiful
                     notification. So you don't have to worry about the style.
                   </span>
-                </UncontrolledAlert>
+                </UncontrolledAlert> */}
+
+                {/* <NoticeList/> */}
               </CardBody>
             </Card>
           </Col>
-          <Col md="6">
+          {/* <Col md="6">
             <Card>
               <CardHeader>
                 <CardTitle tag="h4">이용방법</CardTitle>
@@ -252,7 +295,7 @@ function Notice() {
                 </div>
               </CardBody>
             </Card>
-          </Col>
+          </Col> */}
         </Row>
       </div>
     </>

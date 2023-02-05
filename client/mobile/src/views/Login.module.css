@@ -12,3 +12,7 @@
 .margin {
     margin-inline: 20%;
 }
+
+.fontcolor {
+  color : rgba(193,181,169,0.3);
+}

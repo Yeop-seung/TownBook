@@ -19,7 +19,7 @@ import {
 import axios from "axios";
 // import { isPropertySignature } from "typescript";
 
-function NoticeWrite(props) {
+function NoticeUpdate(props) {
   const titleInputRef = useRef();
   const contentInputRef = useRef();
   // const [Id, setId] = useState(0)
@@ -28,7 +28,7 @@ function NoticeWrite(props) {
     
   //   setId(Id + 1);
   // };
-
+console.log(props)
   const history = useHistory();
 
   function submitHandler(event) {
@@ -49,8 +49,8 @@ function NoticeWrite(props) {
     // props.onAddInfo(userInfo);
 
     axios
-      .post(
-        "https://react-getting-started-9d228-default-rtdb.firebaseio.com/notices.json",userInfo
+      .put(
+        `https://react-getting-started-9d228-default-rtdb.firebaseio.com/notices/${props.location.state.id}.json`,userInfo
       )
       // console.log("성공")
         //replace는 뒤로가기 버튼 비활성 이미 양식 제출했으므로
@@ -80,7 +80,7 @@ function NoticeWrite(props) {
                       </div>
                       <div>
                         <textarea
-                          placeholder="제목을 입력해주세요."
+                            defaultValue={props.location.state.noticeTitle}
                           type="email"
                           ref={titleInputRef}
                           className={classes.titlestyle}
@@ -93,8 +93,8 @@ function NoticeWrite(props) {
                       <label>내용</label>
                       <div>
                         <textarea
-                          //   defaultValue="Mike"
-                          placeholder="글을 입력해주세요"
+                            defaultValue={props.location.state.noticeContent}
+                            placeholder="글을 입력해주세요"
                           type="text"
                           ref={contentInputRef}
                           className={classes.contentstyle}
@@ -142,4 +142,4 @@ function NoticeWrite(props) {
   );
 }
 
-export default NoticeWrite;
+export default NoticeUpdate;

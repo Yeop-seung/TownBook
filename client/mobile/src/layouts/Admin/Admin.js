@@ -15,7 +15,8 @@ import logo from "assets/img/react-logo.png";
 import { BackgroundColorContext } from "contexts/BackgroundColorContext";
 import SignUp from "views/account/SignUp";
 import IdFind from "views/account/IdFind.js";
-
+import NoticeDetail from "views/notice/NoticeDetail";
+import NoticeUpdate from "views/notice/NoticeUpdate";
 var ps;
 
 function Admin(props) {
@@ -107,7 +108,7 @@ function Admin(props) {
               <AdminNavbar
                 logo={{
                   // outterLink: "https://www.creative-tim.com/",
-                  innerLink: "/",
+                  innerLink: "/map",
 
                   text: "동네북",
                   imgSrc: logo,
@@ -121,16 +122,21 @@ function Admin(props) {
               <Switch>
                 {getRoutes(routes)}
                 {<Route path='/notice/write' component={NoticeWrite}/>}
-                {<Route path='/notice' component={Notice}/>}
+                {<Route exact path='/notice' component={Notice}/>}
                 {<Route path='/account/signup' component={SignUp}/>}
                 {<Route path='/account/idfind' component={IdFind}/>}
+                {<Route exact path='/notice/:id' component={NoticeDetail}/>}
+                {<Route path='/notice/modify/:id' component={NoticeUpdate}/>}
+
+                {/* {<Route path='/notice' component={IdFind}/>} */}
+                
 
 
                 {/* <Redirect from="*" to="/" /> */}
               </Switch>
               {
                 // we don't want the Footer to be rendered on map page
-                location.pathname === "/maps" ? null : <Footer fluid />
+                location.pathname === "/map" ? null : <Footer fluid />
               }
             </div>
           </div>

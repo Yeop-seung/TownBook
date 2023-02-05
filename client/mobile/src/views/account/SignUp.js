@@ -3,6 +3,9 @@ import React from "react";
 import { useRef } from "react";
 import { useHistory } from "react-router-dom";
 import classes from "./Login.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 // import { Helmet } from "react-helmet";
 // reactstrap components
 import {
@@ -110,13 +113,13 @@ function SignUp(props) {
     // console.log(context);
     axios
       .post(
-        "https://react-getting-started-9d228-default-rtdb.firebaseio.com/meetups.json",
+        "https://react-getting-started-9d228-default-rtdb.firebaseio.com/account/signup.json",
         userInfo
       )
       // .get("https:///townbook/myPage/receive/${receiverNo}")
       .then((response) => {
         // if(response=="true"){
-        alert("회원가입에 성공하였습니다.");
+        alert("회원가입에 성공하였습니다.");  
         history.replace("/");
         // }
         // else{
@@ -134,7 +137,12 @@ function SignUp(props) {
           <Col md="8">
             <Card>
               <CardHeader>
+                <Row style={{ justifyContent: "space-between", paddingInline: 15 }}>
+              <Link to={"/login"}>
+                  <FontAwesomeIcon icon={faArrowLeft} size="xl" color="#C1B5A9"/>
+                </Link>
                 <h5 className="title">회원가입</h5>
+                </Row>
               </CardHeader>
               <CardBody>
                 <Col>
@@ -239,7 +247,7 @@ function SignUp(props) {
                       <label>핸드폰번호</label>
                       <input
                         //   defaultValue="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
-                        placeholder="Home Address"
+                        placeholder="-를 제외하고 입력해주세요"
                         type="text"
                         ref={phonenumberInputRef}
                         className={classes.style}

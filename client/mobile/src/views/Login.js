@@ -2,9 +2,10 @@ import { faAlignCenter } from "@fortawesome/free-solid-svg-icons";
 import React from "react";
 import { useRef } from "react";
 import { useHistory } from "react-router-dom";
-import  classes  from "./Login.module.css";
+import classes from "./Login.module.css";
 import { Link } from "react-router-dom";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 // reactstrap components
 import {
   Button,
@@ -19,6 +20,7 @@ import {
   Row,
   Col,
 } from "reactstrap";
+import axios from "axios";
 // import { isPropertySignature } from "typescript";
 
 function Login(props) {
@@ -30,44 +32,53 @@ function Login(props) {
   function submitHandler(event) {
     event.preventDefault();
 
-    const enteredEmail = emailInputRef.current.value;
-    const enteredPw = pwInputRef.current.value;
+    const accountEmail = emailInputRef.current.value;
+    const accountPw = pwInputRef.current.value;
 
-    const userInfo = {
-      accountEmail: enteredEmail,
-      accountPw: enteredPw,
-    };
-    console.log(userInfo);
+    // console.log(userInfo);
     // props.onAddInfo(userInfo);
 
-    fetch(
-      "https://react-getting-started-9d228-default-rtdb.firebaseio.com/meetups.json",
-      {
-        method: "POST",
-        body: JSON.stringify(userInfo),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-      //replace는 뒤로가기 버튼 비활성 이미 양식 제출했으므로
-    ).then(() => {
-      //then 대신에 asynce나 await가능
-      history.replace("/");
-    });
+    axios
+      .post(
+        "https://react-getting-started-9d228-default-rtdb.firebaseio.com/account/signup.json",
+        { accountEmail, accountPw }
+        // {
+        //   method: "POST",
+        //   body: JSON.stringify(userInfo),
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //   },
+        // }
+        //replace는 뒤로가기 버튼 비활성 이미 양식 제출했으므로
+      )
+      .then((res) => {
+        history.replace("/map");
+        // if (res.TOKEN) {
+        //   localStorage.clear()
+        //   localStorage.setItem("TOKEN", res.TOKEN)
+        //   history.replace("/map");
+
+        // }
+        console.log(res);
+        console.log(res.data);
+        //then 대신에 asynce나 await가능
+      });
   }
   return (
     <>
       <div className="content">
-        <Row  style={{ justifyContent : "center"}}>
+        <Row style={{ justifyContent: "center" }}>
           <Col lg="7">
-            <Card >
-              {/* <CardHeader>
-                <h5 className="card-header">로그인</h5>
-              </CardHeader> */}
-              <CardBody >
+            <Card>
+              <CardHeader>
+                <Link to={"/map"}>
+                  <FontAwesomeIcon icon={faArrowLeft} size="xl" color="#C1B5A9"/>
+                </Link>
+              </CardHeader>
+              <CardBody>
                 <Form>
                   <Col>
-                    <FormGroup style={{ marginTop:20}}>
+                    <FormGroup style={{ marginTop: 20 }}>
                       {/* <div>
                         <label htmlFor="exampleInputEmail1">이메일</label>
                       </div> */}
@@ -77,13 +88,12 @@ function Login(props) {
                           type="email"
                           ref={emailInputRef}
                           className={classes.style}
-                          
                         />
                       </div>
                     </FormGroup>
                   </Col>
 
-                  <Col >
+                  <Col>
                     <FormGroup>
                       {/* <label>비밀번호</label> */}
                       <div>
@@ -115,41 +125,45 @@ function Login(props) {
                   </Row> */}
                 </Form>
               </CardBody>
-              <CardFooter >
-              <Row  style={{justifyContent : "center", paddingInline : 30 }}>
-                <button
-                  className="btn-login"
-                  // color="black"
-                  type="submit"
-                  onClick={submitHandler}
-                  className={classes.style}
+              <CardFooter>
+                <Row style={{ justifyContent: "center", paddingInline: 30 }}>
+                  <button
+                    className="btn-login"
+                    // color="black"
+                    type="submit"
+                    onClick={submitHandler}
+                    className={classes.style}
+                  >
+                    로그인
+                  </button>
+                </Row>
+                <Row
+                  style={{
+                    justifyContent: "space-evenly",
+                    paddingInline: 30,
+                    paddingTop: 10,
+                  }}
                 >
-                  로그인
-                </button>
-                </Row >
-                <Row style={{justifyContent : "space-evenly", paddingInline : 30, paddingTop:10}}>
-                <Link
-                  className="btn-sm" 
-                  // color="black"
-                  type="submit"
-                  // onClick={submitHandler}
-                  // className={classes.style}
-                  to={"/account/signup"}
-                >
-                  회원가입
-                </Link>
+                  <Link
+                    className="btn-sm"
+                    // color="black"
+                    type="submit"
+                    // onClick={submitHandler}
+                    // className={classes.style}
+                    to={"/account/signup"}
+                  >
+                    회원가입
+                  </Link>
 
-                <Link
-                  className="btn-sm"
-                  // color="black"
-                  type="submit"
-                  to={"account/idfind/"}
-                >
-                  아이디/비밀번호 찾기
-                </Link>
-                </Row >
-                
-                
+                  <Link
+                    className="btn-sm"
+                    // color="black"
+                    type="submit"
+                    to={"account/idfind/"}
+                  >
+                    아이디/비밀번호 찾기
+                  </Link>
+                </Row>
               </CardFooter>
             </Card>
           </Col>

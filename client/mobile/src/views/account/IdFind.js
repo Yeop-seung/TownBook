@@ -1,9 +1,11 @@
 // import { faAlignCenter } from "@fortawesome/free-solid-svg-icons";
 import React from "react";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
 import classes from "./Login.module.css";
-// import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 // reactstrap components
 import {
@@ -18,6 +20,7 @@ import {
   // Input,
   Row,
   Col,
+  CardHeader,
 } from "reactstrap";
 // import { isPropertySignature } from "typescript";
 
@@ -26,6 +29,24 @@ function IdFind(props) {
   const pwInputRef = useRef();
 
   const history = useHistory();
+  const [hiddenpassword, sethiddenpassword] = React.useState(true);
+  const [hiddenid, sethiddenid] = React.useState(false);
+  // const [clicked, setClicked] = useState(false);
+
+  // const handleClick = () => {
+    
+  // };
+  const showid = () => {
+      sethiddenpassword(true);
+      sethiddenid(false);
+      // setClicked(true);;
+  };
+
+  const showpassword = () => {
+      sethiddenid(true);
+      sethiddenpassword(false)
+      // setClicked(true);
+  };
 
   function submitHandler(event) {
     event.preventDefault();
@@ -60,14 +81,21 @@ function IdFind(props) {
       <div className="content">
         <Row style={{ justifyContent: "center" }}>
           <Col lg="7">
+            <Card>
+            <CardHeader>
+            <Link to={"/login"}>
+                  <FontAwesomeIcon icon={faArrowLeft} size="xl" color="#C1B5A9"/>
+                </Link>
+            </CardHeader>
             <CardBody>
               <Row style={{ justifyContent: "center" }}>
                 <div>
-                  <button
+                  <button 
                     // color="black"
                     type="submit"
-                    onClick={submitHandler}
+                    onClick={showid}
                     // className={classes.style}
+                    style={{ backgroundColor: hiddenid ? "black" : "white" }}
                   >
                     아이디 찾기
                   </button>
@@ -77,8 +105,9 @@ function IdFind(props) {
                   <button
                     // color="black"
                     type="submit"
-                    onClick={submitHandler}
+                    onClick={showpassword}
                     // className={classes.style}
+                    style={{ backgroundColor: hiddenpassword ? "black" : "white" }}
                   >
                     비밀번호 찾기
                   </button>
@@ -86,7 +115,7 @@ function IdFind(props) {
               </Row>
             </CardBody>
 
-            <Card>
+            <Card hidden={hiddenid}>
               {/* <CardHeader>
                 <h5 className="card-header">로그인</h5>
               </CardHeader> */}
@@ -140,7 +169,7 @@ function IdFind(props) {
               </CardFooter>
             </Card>
 
-            <Card>
+            <Card hidden={hiddenpassword}>
               {/* <CardHeader>
                 <h5 className="card-header">로그인</h5>
               </CardHeader> */}
@@ -191,6 +220,7 @@ function IdFind(props) {
                   </button>
                 </Row>
               </CardFooter>
+            </Card>
             </Card>
           </Col>
         </Row>

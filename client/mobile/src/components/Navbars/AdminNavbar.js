@@ -246,7 +246,7 @@ function AdminNavbar(props) {
 
               {/* </InputGroup> */}
 
-              <Link
+              {/* <Link
                 to="/icons"
                 onClick={verify}
                 style={{ paddingTop: 10, paddingInline: 20 }}
@@ -255,7 +255,7 @@ function AdminNavbar(props) {
                   <FontAwesomeIcon icon={faComments} size="xl" color="white" />
                   <p className="d-lg-none">커뮤니티</p>
                 </div>
-              </Link>
+              </Link> */}
 
               <Link
                 to="/notice"
