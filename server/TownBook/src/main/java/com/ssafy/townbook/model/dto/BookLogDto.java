@@ -39,7 +39,6 @@ public class BookLogDto {
         this.bookLogDonateDateTime  = bookLog.getBookLogDonateDateTime();
         this.bookLogReceiveDateTime = bookLog.getBookLogReceiveDateTime();
         this.wishLists              = bookLog.getWishLists();
-        
         this.accountNo      = bookLog.getAccountNo();
         this.bookIsbn       = bookLog.getBookIsbn();
         //this.lockerNo       = bookLog.getLockerNo();
