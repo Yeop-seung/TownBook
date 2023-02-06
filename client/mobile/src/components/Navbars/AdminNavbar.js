@@ -350,7 +350,7 @@ axios
                   icon={faQrcode}
                   size="xl"
                   color="white"
-                  onClick={toggleModalSearch}
+                  onClick={getQr}
                 />
               </div>
 
