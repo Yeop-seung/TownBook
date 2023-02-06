@@ -7,9 +7,21 @@ import { useNavigate } from "react-router-dom";
 
 function ReceiptThanks(props) {
     
+    const UrlMainClose = "http://192.168.140.1/mainServo/90 " //메인 보관함 닫기
+
     const navigate = useNavigate()
 
     const onClickHandlerFinish = () => {
+        // axios.get(UrlMainClose, {
+        // })
+        // .then((response) => {
+        //     // console.log('eeeee', e.target.value) // 값을 보내준다
+        //     navigate('/DonateThanks')
+        // })
+        
+        // .catch(function (error) {
+        //     console.log(error)
+        // })
         navigate('/Finish')
     }
     const onClickHandlerReceiptConfirm = () => {

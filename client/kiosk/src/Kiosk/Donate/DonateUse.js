@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "./DonateUse.module.css"
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { BiHomeAlt } from 'react-icons/bi';
 import {BsFillArrowRightCircleFill} from "react-icons/bs"
@@ -10,26 +10,56 @@ function DonateUse(props) {
     
     const navigate = useNavigate()
     // 페이지 이동
-    // const Url = "http://localhost:3000/"
+    const Url = "http://localhost:3000/"
 
     const [inputs, setInputs] = useState({
         barcode : ""
     })
-    
+
+    const location = useLocation()
+
+    const isnavigate = location.state
+
+    console.log(isnavigate)
 
     function barcodeInput(e) {
         let event=window.event || e;
-        axios.get(`/server/account/user/${e.target.value}`, {
-        })
-        .then((response) => {
-            console.log('ffff', e.target.value) // 값을 보내준다
-            onClickHandlerReceiptConfirm()
-        })
-        
-        .catch(function (error) {
-            console.log(error)
-        })
+        // console.log(e.target.value)
+        if(isnavigate === true) {
+            // axios.get(`/server/account/user/${e.target.value}`, {
+            // })
+            axios.get(Url, {
+            })
+            .then((response) => {
+                // console.log('eeeee', e.target.value) // 값을 보내준다
+                const onClickHandlerBarcodeRead =() => {
+                    navigate('/BarcodeRead', {state: isnavigate})
+                }
+                onClickHandlerBarcodeRead()
+            })
+            
+            .catch(function (error) {
+                console.log(error)
+            })
+        } else {
+            // axios.get(`/server/account/user/${e.target.value}`, {
+            // })
+            axios.get(Url, {
+            })
+            .then((response) => {
+                // 수령 페이지로 이동
+                const onClickHandlerReceiptConfirm =() => {
+                    navigate('/ReceiptConfirm', {state: isnavigate})
+                }
+                onClickHandlerReceiptConfirm()
+            })
+            .catch(function (error) {
+                console.log(error)
+            })
+            }
+
         }
+        
         // setInputs({
         //     ...inputs,
         //     [e.target.name]: e.target.value
@@ -39,14 +69,8 @@ function DonateUse(props) {
     const onClickHandlerHome = () => {
         navigate('/')
     }
-    // const onClickHandlerBarcodeRead =() => {
-    //     navigate('/BarcodeRead')
-    // }
-
-    const onClickHandlerReceiptConfirm =() => {
-        navigate('/ReceiptConfirm')
-    }
-
+    
+    
     //수령일때랑 기부일때랑 바꿔서 처리 if로 해서
     return (
         // <div>
@@ -55,7 +79,9 @@ function DonateUse(props) {
                     <button className={styles.circle} onClick={onClickHandlerHome}>
                         <AiOutlineArrowLeft className={styles.iconStyle}/>
                     </button>
+                    
                         {/* <div className={styles.buttonOne} onClick={onClickHandlerBarcodeRead}> */}
+                        
                         <div className={styles.buttonOne}>
                             <h3 className={styles.h3Align}>STEP1</h3>
                             <p className={styles.textAlignOne}>

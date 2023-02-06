@@ -5,27 +5,42 @@ import List from "../../ui/List"
 import book from "../img/book.jpg"
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { BiHomeAlt } from 'react-icons/bi';
+import axios from "axios";
 
 function DonateConfirm(props) {
-        
+    // 빈보관함이 무엇인지 확인하고 if로 하기  
+    const UrlOneOpen = "http://192.168.140.1/servo1/0"   //1번 보관함 열기
+
+    const UrlTwoOpen = "http://192.168.140.1/servo2/0"   //1번 보관함 열기
+    
+    const UrlMainOpen = "http://192.168.140.1/mainServo/0 "   //메인 보관함 열기
+    
 
     const navigate = useNavigate()
 
-    const location = useLocation();
+    const location = useLocation()
     
-    console.log(location.state)
+    // console.log(location.state)
     
     const title = location.state.bookTitle
     let bookURL = location.state.bookIntroductionURL
     if (bookURL === "null.png") {
-        console.log(bookURL)
         bookURL = book
-        console.log(bookURL)
-    }
+        }
     const onClickHandlerHome = () => {
         navigate('/')
     }
     const onClickHandlerComplete =() => {
+        // axios.get(UrlOneOpen, {
+        // })
+        // .then((response) => {
+        //     // console.log('eeeee', e.target.value) // 값을 보내준다
+        //     navigate('/DonateComplete')
+        // })
+        
+        // .catch(function (error) {
+        //     console.log(error)
+        // })
         navigate('/DonateComplete')
     }
     const onClickHandlerBarcodeRead =() => {

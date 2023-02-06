@@ -1,13 +1,18 @@
 import React from "react";
 import styles from "./DonateReceipt.module.css"
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { BiHomeAlt } from 'react-icons/bi';
 // import {BsFillArrowRightCircleFill} from "react-icons/bs"
 
 function DonateReceipt(props){
     const navigate = useNavigate()
+
+    const location = useLocation()
+
+    const isnavigate = location.state
+    console.log(isnavigate)
 
     function barcodeInput(e) {
         let event=window.event || e;

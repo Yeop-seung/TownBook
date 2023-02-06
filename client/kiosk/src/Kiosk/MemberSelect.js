@@ -3,19 +3,24 @@ import styles from "./MemberSelect.module.css"
 // import { Route } from "react-router-dom";
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { BiHomeAlt } from 'react-icons/bi';
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function MemberSelect(props) {
     const navigate = useNavigate()
+
+    const location = useLocation()
+
+    const isnavigate = location.state
+    console.log(isnavigate)
 
     const onClickHandlerHome = () => {
         navigate('/')
     }
     const onClickHandlerUse = () => {
-        navigate('/DonateUse')
+        navigate('/DonateUse', {state: isnavigate})
     }
     const onClickHandlerBarcodeRead =() => {
-        navigate('/BarcodeRead')
+        navigate('/BarcodeRead', {state: isnavigate})
     }
 
     return (

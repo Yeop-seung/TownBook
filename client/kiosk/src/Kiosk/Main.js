@@ -12,16 +12,18 @@ function Main(props) {
     const navigate = useNavigate()
     const [modalOpen, setModalOpen] = useState(false);
 
+    let isnavigate = true //true 기부 false 
     // 모달창 노출
     const showModal = () => {
         setModalOpen(true);
     };
 
     const onClickHandler = () => {
-        navigate('/MemberSelect')
+        navigate('/MemberSelect', {state: isnavigate})
         } 
     const onClickHandlerUse = () => {
-        navigate('/DonateUse')
+        isnavigate = false
+        navigate('/DonateUse', {state: isnavigate})
     }
     return (
             <div className={styles.myImg}>

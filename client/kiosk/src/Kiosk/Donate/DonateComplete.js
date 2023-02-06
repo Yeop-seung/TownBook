@@ -9,6 +9,9 @@ import { BiHomeAlt } from 'react-icons/bi';
 function DonateComplete(props) {
     const navigate = useNavigate()
 
+    const UrlTOneClose = "http://192.168.140.1/servo1/90" //1번 보관함 닫기
+    const UrlTwoClose = "http://192.168.140.1/servo2/90 " //2번 보관함 닫기
+
     const onClickHandlerHome = () => {
         navigate('/')
     }
@@ -16,6 +19,16 @@ function DonateComplete(props) {
         navigate('/DonateConfirm')
     }
     const onClickHandlerThanks = () => {
+        // axios.get(UrlOneClose, {
+        // })
+        // .then((response) => {
+        //     // console.log('eeeee', e.target.value) // 값을 보내준다
+        //     navigate('/DonateThanks')
+        // })
+        
+        // .catch(function (error) {
+        //     console.log(error)
+        // })
         navigate('/DonateThanks')
     }
 // 회원정보를 지금 여기서도 가지고 있어야 된다
