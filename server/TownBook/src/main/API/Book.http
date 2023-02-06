@@ -2,7 +2,7 @@
 GET http://localhost:8081/book
 
 ### 2. 단일 도서 도회 (DB)
-GET http://localhost:8081/book/9788960777330
+GET http://localhost:8081/book/8998139766
 
 ### 3. 도서관에서 도서 조회 (DB X)
-GET http://localhost:8081/book/find/9788960777330
+GET http://localhost:8081/book/find/8998139766

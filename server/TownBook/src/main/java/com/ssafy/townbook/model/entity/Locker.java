@@ -52,13 +52,13 @@ public class Locker {
     
     @Builder
     public Locker(Long lockerNo, String lockerRegion, Double lockerLatitude, Double lockerLongitude,
-            Integer lockerBookCnt, List<DetailLocker> detailLocker) {
-        this.lockerNo = lockerNo;
-        this.lockerRegion = lockerRegion;
-        this.lockerLatitude = lockerLatitude;
+                  Integer lockerBookCnt, List<DetailLocker> detailLocker) {
+        this.lockerNo        = lockerNo;
+        this.lockerRegion    = lockerRegion;
+        this.lockerLatitude  = lockerLatitude;
         this.lockerLongitude = lockerLongitude;
-        this.lockerBookCnt = lockerBookCnt;
-        this.detailLocker = detailLocker;
+        this.lockerBookCnt   = lockerBookCnt;
+        this.detailLocker    = detailLocker;
     }
     
     public void addDetailLocker(DetailLocker detailLocker) {

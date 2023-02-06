@@ -68,22 +68,23 @@ public class BookServiceImpl implements BookService {
      * @return BookDto
      */
     @Override
+    @Transactional
     public BookDto addBook(String bookIsbn) {
-        Book book = new Book();
         try {
             // API 호출
             URL url = new URL("https://www.nl.go.kr/seoji/SearchApi.do?cert_key=" +
                     APIKey + "&result_style=json&page_no=1&page_size=10&isbn=" + bookIsbn);
             
             // Json 가공
-            BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"));
-            String result = br.readLine();
-            JSONParser jsonParser = new JSONParser();
-            JSONObject jsonObject = (JSONObject) jsonParser.parse(result);
-            JSONArray jsonArray = (JSONArray) jsonObject.get("docs");
+            BufferedReader br         = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"));
+            String         result     = br.readLine();
+            JSONParser     jsonParser = new JSONParser();
+            JSONObject     jsonObject = (JSONObject) jsonParser.parse(result);
+            JSONArray      jsonArray  = (JSONArray) jsonObject.get("docs");
             jsonObject = (JSONObject) jsonArray.get(0);
             
             // Json -> Book 주입
+            Book book = new Book();
             book.setBookIsbn((String) jsonObject.get("EA_ISBN"));
             book.setBookSubject((String) jsonObject.get("SUBJECT"));
             book.setBookTitle((String) jsonObject.get("TITLE"));
@@ -95,7 +96,10 @@ public class BookServiceImpl implements BookService {
                     : (String) jsonObject.get("BOOK_INTRODUCTION_URL"));
             book.setBookTitleURL((String) jsonObject.get("TITLE_URL"));
             
+            System.out.println("저장 전");
+            System.out.println("book = " + book);
             bookRepository.save(book);
+            System.out.println("저장 후");
             return new BookDto(book);
         } catch (Exception e) {
             System.out.println("정보가 없는 도서입니다");

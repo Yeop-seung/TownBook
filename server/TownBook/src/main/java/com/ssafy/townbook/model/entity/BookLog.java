@@ -64,20 +64,19 @@ public class BookLog {
     @OneToMany(mappedBy = "bookLog")
     private List<WishList> wishLists = new ArrayList<>();
     
-    @Builder
     public BookLog(Long bookLogNo, Boolean bookLogState, String bookLogReview, Long bookLogReceiverNo,
-            LocalDateTime bookLogDonateDateTime, LocalDateTime bookLogReceiveDateTime, Locker locker,
-            DetailLocker detailLocker, Account account, Book book, List<WishList> wishLists) {
-        this.bookLogNo = bookLogNo;
-        this.bookLogState = bookLogState;
-        this.bookLogReview = bookLogReview;
-        this.bookLogReceiverNo = bookLogReceiverNo;
-        this.bookLogDonateDateTime = bookLogDonateDateTime;
+                   LocalDateTime bookLogDonateDateTime, LocalDateTime bookLogReceiveDateTime, Locker locker,
+                   DetailLocker detailLocker, Account account, Book book, List<WishList> wishLists) {
+        this.bookLogNo              = bookLogNo;
+        this.bookLogState           = bookLogState;
+        this.bookLogReview          = bookLogReview;
+        this.bookLogReceiverNo      = bookLogReceiverNo;
+        this.bookLogDonateDateTime  = bookLogDonateDateTime;
         this.bookLogReceiveDateTime = bookLogReceiveDateTime;
-        this.locker = locker;
-        this.detailLocker = detailLocker;
-        this.account = account;
-        this.book = book;
-        this.wishLists = wishLists;
+        this.locker                 = locker;
+        this.detailLocker           = detailLocker;
+        this.account                = account;
+        this.book                   = book;
+        this.wishLists              = wishLists;
     }
 }
