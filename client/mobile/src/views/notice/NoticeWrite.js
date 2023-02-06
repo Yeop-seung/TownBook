@@ -43,6 +43,9 @@ function NoticeWrite(props) {
     const userInfo = {
       noticeTitle: enteredTitle,
       noticeContent: enteredContent,
+      noticeWriteDateTime: "10",
+      notcieViews:"20",
+      noticestate: true,
       // noticeId: Id,
     };
     console.log(userInfo);

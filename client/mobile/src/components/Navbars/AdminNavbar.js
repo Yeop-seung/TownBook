@@ -17,6 +17,7 @@ import {
   faKey,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import axios from "axios";
 // reactstrap components
 import {
   // Button,
@@ -175,6 +176,41 @@ function AdminNavbar(props) {
     localStorage.clear()
     window.location.replace('/map')
 }
+function getQr(params) {
+  
+
+axios
+    .get(
+      `server/myPage/qr/${localStorage.getItem('accountEmail')}`
+    )
+    // .get("https:///townbook/myPage/receive/${receiverNo}")
+    .then((res) => {
+      console.log(res)
+      // const notices = [];
+      // console.log(response)
+      // for (const key in response.data) {
+      //   const notice = {
+      //   id: key,
+      //   ...response.data[key]
+      // };
+      //   notices.push(notice);
+      // };
+      // if(response=="true"){
+      // alert("회원가입에 성공하였습니다.");
+      // history.replace("/");
+      // }
+      // else{
+
+      //   alert("회원가입에 실패하였습니다.");
+      // }
+      // setIsLoading(false);
+      // setLoadedMeetups(notices);
+      // console.log(notices)
+    })
+    .catch((error) => {
+      alert("qr로딩에 실패하였습니다.");
+    });
+  }
   return (
     <>
       <Navbar className={classNames("navbar-absolute", color)} expand="lg">
@@ -427,6 +463,7 @@ function AdminNavbar(props) {
             className="avatar"
             src={require("assets/img/qrcode.png")}
           />
+          
 
           <button
             aria-label="Close"
