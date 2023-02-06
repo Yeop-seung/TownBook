@@ -40,7 +40,7 @@ function Login(props) {
 
     axios
       .post(
-        "/server/auth/login",
+        "https://i8b201.p.ssafy.io/backend/auth/login",
         { accountEmail, accountPw }
         // {
         //   method: "POST",
@@ -65,6 +65,8 @@ function Login(props) {
         // console.log(res);
         // console.log(res.data);
         //then 대신에 asynce나 await가능
+      }).catch((error) => {
+        alert("이메일 또는 비밀번호를 확인해주세요.");
       });
   }
   return (

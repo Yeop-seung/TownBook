@@ -182,7 +182,7 @@ function AdminNavbar(props) {
   let test;
   function getQr(params) {
     axios
-      .get(`server/myPage/qr/${localStorage.getItem("accountEmail")}`, {
+      .get(`https://i8b201.p.ssafy.io/backend/myPage/qr/${localStorage.getItem("accountEmail")}`, {
         responseType: "arraybuffer",
       })
       // .get("https:///townbook/myPage/receive/${receiverNo}")
