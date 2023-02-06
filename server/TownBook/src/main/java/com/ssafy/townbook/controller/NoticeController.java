@@ -1,5 +1,8 @@
 package com.ssafy.townbook.controller;
 
+import com.ssafy.townbook.model.dto.NoticeDto;
+import com.ssafy.townbook.model.dto.request.ModifyNoticeRequestDto;
+import com.ssafy.townbook.model.dto.request.WriteNoticeRequestDto;
 import com.ssafy.townbook.model.entity.Notice;
 import com.ssafy.townbook.model.service.NoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +19,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/notice")
 public class NoticeController {
     
+    private NoticeService noticeService;
+    
     @Autowired
-    NoticeService noticeService;
+    public NoticeController(NoticeService noticeService) {
+        this.noticeService = noticeService;
+    }
     
     /**
      * 공지사항 하나 가져오기
@@ -37,8 +44,8 @@ public class NoticeController {
      * @return Boolean
      */
     @PutMapping("/modify")
-    public ResponseEntity modifyNotice(Notice notice) {
-        return new ResponseEntity(noticeService.modifyNotice(notice), HttpStatus.OK);
+    public ResponseEntity<?> modifyNotice(ModifyNoticeRequestDto modifyNoticeRequestDto) {
+        return new ResponseEntity<>(noticeService.modifyNotice(modifyNoticeRequestDto), HttpStatus.OK);
     }
     
     /**
@@ -46,8 +53,8 @@ public class NoticeController {
      * @return Boolean
      */
     @PostMapping("/write")
-    public ResponseEntity writeNotice(Notice notice) {
-        return new ResponseEntity(noticeService.writeNotice(notice), HttpStatus.OK);
+    public ResponseEntity<?> writeNotice(WriteNoticeRequestDto writeNoticeRequestDto) {
+        return new ResponseEntity<>(noticeService.writeNotice(writeNoticeRequestDto), HttpStatus.OK);
     }
     
     /**
@@ -58,7 +65,8 @@ public class NoticeController {
      */
     @GetMapping("/list/{category}")
     public ResponseEntity<?> findTop8ByNoticeStateAndNoticeCategoryOrderByNoticeNo(@PathVariable Integer category) {
-        return new ResponseEntity(noticeService.findTop8ByNoticeStateAndNoticeCategoryOrderByNoticeNo(category), HttpStatus.OK);
+        return new ResponseEntity(noticeService.findTop8ByNoticeStateAndNoticeCategoryOrderByNoticeNo(category),
+                HttpStatus.OK);
     }
     
     /**

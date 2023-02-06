@@ -1,6 +1,8 @@
 package com.ssafy.townbook.model.service;
 
 import com.ssafy.townbook.model.dto.NoticeDto;
+import com.ssafy.townbook.model.dto.request.ModifyNoticeRequestDto;
+import com.ssafy.townbook.model.dto.request.WriteNoticeRequestDto;
 import com.ssafy.townbook.model.entity.Notice;
 import com.ssafy.townbook.model.repository.NoticeRepository;
 import java.time.LocalDateTime;
@@ -28,15 +30,14 @@ public class NoticeServiceImpl implements NoticeService {
      * @return Boolean
      */
     @Override
-    public Boolean modifyNotice(Notice notice) {
+    public Boolean modifyNotice(ModifyNoticeRequestDto modifyNoticeRequestDto) {
+        
         try {
+            Notice notice       = new Notice(modifyNoticeRequestDto);
             Notice modifyNotice = noticeRepository.findById(notice.getNoticeNo()).get();
             modifyNotice.setNoticeContent(notice.getNoticeContent());
             modifyNotice.setNoticeTitle(notice.getNoticeTitle());
-            LocalDateTime currDateTime = LocalDateTime.now();
-            modifyNotice.setNoticeWriteDateTime(currDateTime);
             noticeRepository.save(modifyNotice);
-            
             return true;
         } catch (Exception e) {
             e.getMessage();
@@ -51,8 +52,9 @@ public class NoticeServiceImpl implements NoticeService {
      * @return Boolean
      */
     @Override
-    public Boolean writeNotice(Notice notice) {
+    public Boolean writeNotice(WriteNoticeRequestDto writeNoticeRequestDto) {
         try {
+            Notice notice = new Notice(writeNoticeRequestDto);
             noticeRepository.save(notice);
             return true;
         } catch (Exception e) {

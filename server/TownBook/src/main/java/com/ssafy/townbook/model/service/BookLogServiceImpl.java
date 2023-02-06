@@ -122,31 +122,25 @@ public class BookLogServiceImpl implements BookLogService {
     @Override
     @Transactional
     public DonateBookLogResponseDto donateBook(DonateBookRequestDto donateBookRequestDto) throws Exception {
-        BookLog bookLog = new BookLog();
+        BookLog bookLog = new BookLog(donateBookRequestDto.getAccountNo(), donateBookRequestDto.getBookIsbn());
         
         // account : point 100++, bookCnt++
         // point 100 + cnt 1
         Account account = adminRepository.findAccountByAccountNo(donateBookRequestDto.getAccountNo()).get();
         account.setAccountPoint(account.getAccountPoint() + 100);
         account.setAccountBookCnt(account.getAccountBookCnt() + 1);
-        bookLog.setAccount(account);
-        
-        // locker
-        bookLog.setLocker(lockerRepository.findLockerByLockerNo(donateBookRequestDto.getLockerNo()).get());
-        
-        // book
-        bookLog.setBook(bookRepository.findBookByBookIsbn(donateBookRequestDto.getBookIsbn()).get());
-        
-        // bookLog
-        bookLog.setBookLogDonateDateTime(LocalDateTime.now());
+        accountRepository.save(account);
         
         // detailLocker : isEmpty false
         DetailLocker findDetailLocker = detailLockerRepository.findDetailLockerByDetailLockerNo(
                 donateBookRequestDto.getDetailLockerNo()).get();
         findDetailLocker.setDetailLockerIsEmpty(false);
+        detailLockerRepository.save(findDetailLocker);
         
-        bookLog.setDetailLocker(findDetailLocker);
-        accountRepository.save(account);
+        bookLog.setLocker(lockerRepository.findLockerByLockerNo(donateBookRequestDto.getLockerNo()).get());
+        bookLog.setDetailLocker(detailLockerRepository.findDetailLockerByDetailLockerNo(
+                donateBookRequestDto.getDetailLockerNo()).get());
+        bookLog.setBookLogDonateDateTime(LocalDateTime.now());
         bookLogRepository.save(bookLog);
         
         // return AdminDto

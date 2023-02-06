@@ -83,6 +83,7 @@ public class Account {
     
     @OneToMany(mappedBy = "account")
     private List<Notice> notices = new ArrayList<>();
+    
     @ManyToMany
     @JoinTable(
             name = "account_authority",

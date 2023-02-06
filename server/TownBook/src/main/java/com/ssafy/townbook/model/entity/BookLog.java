@@ -53,16 +53,28 @@ public class BookLog {
     @JoinColumn(name = "`fk-detail_locker-book_log`")
     private DetailLocker detailLocker;
     
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "`fk-account-book_log`")
-    private Account account;
-    
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "`fk-book-book_log`")
-    private Book book;
-    
     @OneToMany(mappedBy = "bookLog")
     private List<WishList> wishLists = new ArrayList<>();
+    
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "`fk-account-book_log`", insertable = false, updatable = false)
+    private Account account;
+    
+    @Column(name = "`fk-account-book_log`")
+    private Long accountNo;
+    
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "`fk-book-book_log`", insertable = false, updatable = false)
+    private Book book;
+    
+    @Column(name = "`fk-book-book_log`")
+    private String bookIsbn;
+    
+    public BookLog(Long accountNo, String bookIsbn) {
+        this.accountNo = accountNo;
+        this.bookIsbn  = bookIsbn;
+    }
+    
     
     public BookLog(Long bookLogNo, Boolean bookLogState, String bookLogReview, Long bookLogReceiverNo,
                    LocalDateTime bookLogDonateDateTime, LocalDateTime bookLogReceiveDateTime, Locker locker,
