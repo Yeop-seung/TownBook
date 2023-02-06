@@ -75,6 +75,7 @@ public class BookServiceImpl implements BookService {
             URL url = new URL("https://www.nl.go.kr/seoji/SearchApi.do?cert_key=" +
                     APIKey + "&result_style=json&page_no=1&page_size=10&isbn=" + bookIsbn);
             
+            System.out.println("url = " + url);
             // Json 가공
             BufferedReader br         = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"));
             String         result     = br.readLine();
@@ -96,10 +97,7 @@ public class BookServiceImpl implements BookService {
                     : (String) jsonObject.get("BOOK_INTRODUCTION_URL"));
             book.setBookTitleURL((String) jsonObject.get("TITLE_URL"));
             
-            System.out.println("저장 전");
-            System.out.println("book = " + book);
             bookRepository.save(book);
-            System.out.println("저장 후");
             return new BookDto(book);
         } catch (Exception e) {
             System.out.println("정보가 없는 도서입니다");
