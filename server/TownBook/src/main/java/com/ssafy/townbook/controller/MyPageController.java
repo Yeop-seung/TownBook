@@ -31,9 +31,9 @@ public class MyPageController {
      */
     @GetMapping("/qr/{accountEmail}")
     public ResponseEntity<?> createQr(@PathVariable String accountEmail) throws WriterException, IOException {
-        return new ResponseEntity<>(myPageService.getQrCode(accountEmail), HttpStatus.OK);
+        return new ResponseEntity<>(myPageService.getQrCode(accountEmail).get(), HttpStatus.OK);
     }
-    
+
     
     /**
      * 로그인 유저의 포인트 반환
