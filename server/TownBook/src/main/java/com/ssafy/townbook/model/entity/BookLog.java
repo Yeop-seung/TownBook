@@ -46,11 +46,11 @@ public class BookLog {
     private LocalDateTime bookLogReceiveDateTime;
     
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "`fk-detail_locker-book_log-1`")
+    @JoinColumn(name = "`fk-locker-book_log`")
     private Locker locker;
     
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "`fk-detail_locker-book_log-2`")
+    @JoinColumn(name = "`fk-detail_locker-book_log`")
     private DetailLocker detailLocker;
     
     @OneToOne(fetch = FetchType.LAZY)
