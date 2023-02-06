@@ -36,6 +36,7 @@ import {
   Modal,
   NavbarToggler,
   ModalHeader,
+  ModalBody
 } from "reactstrap";
 
 function AdminNavbar(props) {
@@ -44,13 +45,15 @@ function AdminNavbar(props) {
   const isPc = useMediaQuery({
     query: "(max-width:993px)",
   });
-  const [isToken, setisToken] = React.useState(true)
+  const [isToken, setisToken] = React.useState(true);
   const [modalSearch, setmodalSearch] = React.useState(false);
   const [color, setcolor] = React.useState("navbar-transparent");
   const [sidebarOpened, setsidebarOpened] = React.useState(
     document.documentElement.className.indexOf("nav-open") !== -1
   );
-  let srcValue;
+  const [imageUrl, setImageUrl] = React.useState('') 
+
+  // let imgurl;
   // const toggleSidebar = () => {
   //   document.documentElement.classList.toggle("nav-open");
   //   setsidebarOpened(!sidebarOpened);
@@ -151,13 +154,13 @@ function AdminNavbar(props) {
       setcollapseOpen(!collapseOpen);
     }
   };
-  console.log(localStorage.getItem('TOKEN')) 
+  // console.log(localStorage.getItem("TOKEN"));
   useEffect(() => {
-    if (localStorage.getItem('TOKEN') === null) {
+    if (localStorage.getItem("TOKEN") === null) {
       setisToken(!isToken);
-    } 
-  },[]);
-  console.log(isToken)
+    }
+  }, []);
+  // console.log(isToken);
   // const sethiddenpic = () => {
   //   if (window.innerWidth < 993) {
   //     return true;
@@ -171,48 +174,60 @@ function AdminNavbar(props) {
   };
 
   const logout = () => {
-    let token = localStorage.getItem('TOKEN')
+    let token = localStorage.getItem("TOKEN");
 
-    localStorage.clear()
-    window.location.replace('/map')
-}
-function getQr(params) {
-  
+    localStorage.clear();
+    window.location.replace("/map");
+  };
+  let test;
+  function getQr(params) {
+    axios
+      .get(`server/myPage/qr/${localStorage.getItem("accountEmail")}`, {
+        responseType: "arraybuffer",
+      })
+      // .get("https:///townbook/myPage/receive/${receiverNo}")
+      .then((res) => {
+        // console.log(res);
+        // const notices = [];
+        // console.log(response)
+        // for (const key in response.data) {
+        //   const notice = {
+        //   id: key,
+        //   ...response.data[key]
+        // };
+        //   notices.push(notice);
+        // };
+        // if(response=="true"){
+        // alert("회원가입에 성공하였습니다.");
+        // history.replace("/");
+        // }
+        // else{
 
-axios
-    .get(
-      `server/myPage/qr/${localStorage.getItem('accountEmail')}`,{responseType :'arraybuffer'}
-    )
-    // .get("https:///townbook/myPage/receive/${receiverNo}")
-    .then((res) => {
-      console.log(res)
-      // const notices = [];
-      // console.log(response)
-      // for (const key in response.data) {
-      //   const notice = {
-      //   id: key,
-      //   ...response.data[key]
-      // };
-      //   notices.push(notice);
-      // };
-      // if(response=="true"){
-      // alert("회원가입에 성공하였습니다.");
-      // history.replace("/");
-      // }
-      // else{
-
-      //   alert("회원가입에 실패하였습니다.");
-      // }
-      // setIsLoading(false);
-      // setLoadedMeetups(notices);
-      // console.log(notices)
-      let base64ImageString = Buffer.from(res.data, 'binary').toString('base64')
-      srcValue = "data:image/png;base64,"+base64ImageString
-
-    })
-    .catch((error) => {
-      alert("qr로딩에 실패하였습니다.");
-    });
+        //   alert("회원가입에 실패하였습니다.");
+        // }
+        // setIsLoading(false);
+        // setLoadedMeetups(notices);
+        // console.log(notices)
+        // console.log(res.data);
+        // const base64ImageString = Buffer.from(res.data, 'binary').toString('base64')
+        const base64 = btoa(
+          new Uint8Array(res.data).reduce(
+            (data, byte) => data + String.fromCharCode(byte),
+            ""
+          )
+        );
+        setImageUrl(`data:${res.headers["content-type"]};base64,${base64}`)
+        // console.log(`data:${res.headers["content-type"]};base64,${base64}`);
+        // return `data:${res.headers["content-type"]};base64,${base64}`;
+        // var imgurl = `data:${res.headers["content-type"]};base64,${base64}`;
+        // test = `data:${res.headers["content-type"]};base64,${base64}`;
+        // console.log(test)
+        // console.log(base64ImageString)
+        // let srcValue = "data:image/png;base64,"+base64ImageString
+      })
+      .catch((error) => {
+        alert("qr로딩에 실패하였습니다.");
+      });
   }
   return (
     <>
@@ -342,7 +357,7 @@ axios
                 > */}
 
               {/* <div className="notification d-none d-lg-block d-xl-block" /> */}
-              {/* <i className="tim-icons icon-spaceship" /> */}  
+              {/* <i className="tim-icons icon-spaceship" /> */}
               {/* <FontAwesomeIcon icon={faSearch}/> */}
 
               <div
@@ -353,7 +368,7 @@ axios
                   icon={faQrcode}
                   size="xl"
                   color="white"
-                  onClick={getQr}
+                  onClick={()=> {toggleModalSearch();getQr(); }}
                 />
               </div>
 
@@ -392,7 +407,6 @@ axios
                 to="/login"
                 onClick={verify}
                 style={{ paddingTop: 10, paddingInline: 20 }}
-                
               >
                 <div className="logo" hidden={isToken}>
                   <FontAwesomeIcon icon={faKey} size="xl" color="white" />
@@ -400,7 +414,7 @@ axios
                 </div>
               </Link>
               {/* <ResizedComponent /> */}
-              <UncontrolledDropdown nav  hidden={!isToken}>
+              <UncontrolledDropdown nav hidden={!isToken}>
                 {/* 프로필이미지 칸 */}
                 <DropdownToggle
                   caret
@@ -427,7 +441,9 @@ axios
                   <DropdownItem divider tag="li" />
 
                   <NavLink tag="li">
-                    <DropdownItem className="nav-item" onClick={logout}>로그아웃</DropdownItem>
+                    <DropdownItem className="nav-item" onClick={logout}>
+                      로그아웃
+                    </DropdownItem>
                   </NavLink>
                 </DropdownMenu>
               </UncontrolledDropdown>
@@ -459,15 +475,10 @@ axios
         isOpen={modalSearch}
         toggle={toggleModalSearch}
       >
-        <ModalHeader>
+        <ModalBody>
           {/* <Input placeholder="QR이미지" type="text" /> */}
-          <img
-            alt="..."
-            className="avatar"
-            src={require("assets/img/qrcode.png")}
-          />
-          {srcValue}
-
+          <img alt="..." className="avatar" src={imageUrl} />
+               
           <button
             aria-label="Close"
             className="close"
@@ -475,7 +486,7 @@ axios
           >
             <i className="tim-icons icon-simple-remove" />
           </button>
-        </ModalHeader>
+        </ModalBody>
       </Modal>
     </>
   );

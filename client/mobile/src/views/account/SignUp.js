@@ -120,7 +120,7 @@ function SignUp(props) {
       .then((response) => {
         // if(response=="true"){
         alert("회원가입에 성공하였습니다.");  
-        history.replace("/");
+        history.replace("/login");
         // }
         // else{
         //   alert("회원가입에 실패하였습니다.");
