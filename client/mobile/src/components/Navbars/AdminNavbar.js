@@ -50,7 +50,7 @@ function AdminNavbar(props) {
   const [sidebarOpened, setsidebarOpened] = React.useState(
     document.documentElement.className.indexOf("nav-open") !== -1
   );
-
+  let srcValue;
   // const toggleSidebar = () => {
   //   document.documentElement.classList.toggle("nav-open");
   //   setsidebarOpened(!sidebarOpened);
@@ -181,7 +181,7 @@ function getQr(params) {
 
 axios
     .get(
-      `server/myPage/qr/${localStorage.getItem('accountEmail')}`
+      `server/myPage/qr/${localStorage.getItem('accountEmail')}`,{responseType :'arraybuffer'}
     )
     // .get("https:///townbook/myPage/receive/${receiverNo}")
     .then((res) => {
@@ -206,6 +206,9 @@ axios
       // setIsLoading(false);
       // setLoadedMeetups(notices);
       // console.log(notices)
+      let base64ImageString = Buffer.from(res.data, 'binary').toString('base64')
+      srcValue = "data:image/png;base64,"+base64ImageString
+
     })
     .catch((error) => {
       alert("qr로딩에 실패하였습니다.");
@@ -463,7 +466,7 @@ axios
             className="avatar"
             src={require("assets/img/qrcode.png")}
           />
-          
+          {srcValue}
 
           <button
             aria-label="Close"
