@@ -1,9 +1,18 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import './Map.css'
-import { Card } from "reactstrap";
-
+import { Card,CardBody,CardHeader,CardTitle,UncontrolledAlert } from "reactstrap";
+import axios from "axios";
 const { kakao } = window;
+function submitHandler(event) {
+    event.preventDefault();
 
+   
+    // console.log(context);
+    axios.get('/naver/search.naver?where=nexearch&sm=top_hty&fbm=0&ie=utf8&query=%EC%BD%94%EC%8A%A4%ED%94%BC')
+    .then(data => {
+      console.log(data)
+    })
+  }
 function Kakao() {
     useEffect(() => {
         
@@ -58,7 +67,31 @@ function Kakao() {
     )}, [] )
 
     return(
-      <div className="content"><Card><div id="map" style={{width:'100%',height:"70vh"}}></div></Card></div>
+        <div className="content">
+            <div>
+                <form>
+                    <input type='text' maxLength='20' className='search_input' name='search' placeholder='검색어를 입력해주세요.'/>
+                    <button
+                        className="btn-search"
+                        type="submit"
+                        onClick={submitHandler}
+                    >
+                      검색
+                    </button>
+                </form>
+            </div>
+            <Card>
+                <div id="map" style={{width:'100%',height:"70vh"}}></div>
+            </Card>
+            <Card>
+            <CardHeader>
+                <CardTitle tag="h4">검색결과</CardTitle>
+              </CardHeader>
+              <CardBody>
+                
+              </CardBody>
+            </Card>
+        </div>
       
         
     )
