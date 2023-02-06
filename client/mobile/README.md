@@ -140,10 +140,100 @@ export default AllMeetupsPage;
 
 
 
+// const notices = [];
+        // console.log(response)
+        // for (const key in response.data) {
+        //   const notice = {
+        //   id: key,
+        //   ...response.data[key]
+        // };
+        //   notices.push(notice);
+        // };
+        // if(response=="true"){
+        // alert("회원가입에 성공하였습니다.");
+        // history.replace("/");
+        // }
+        // else{
 
+        //   alert("회원가입에 실패하였습니다.");
+        // }
+        // setIsLoading(false);
+        // setLoadedMeetups(notices);
+        // console.log(notices)
+        // console.log(res.data);
+        // const base64ImageString = Buffer.from(res.data, 'binary').toString('base64')
 
+ // console.log(`data:${res.headers["content-type"]};base64,${base64}`);
+        // return `data:${res.headers["content-type"]};base64,${base64}`;
+        // var imgurl = `data:${res.headers["content-type"]};base64,${base64}`;
+        // test = `data:${res.headers["content-type"]};base64,${base64}`;
+        // console.log(test)
+        // console.log(base64ImageString)
+        // let srcValue = "data:image/png;base64,"+base64ImageString
 
+  // let imgurl;
+  // const toggleSidebar = () => {
+  //   document.documentElement.classList.toggle("nav-open");
+  //   setsidebarOpened(!sidebarOpened);
+  // };
+  // React.useEffect(() => {
+  //   window.addEventListener("resize", updateColor);
+  //   // Specify how to clean up after this effect:
+  //   return function cleanup() {
+  //     window.removeEventListener("resize", updateColor);
+  //   };
+  // });
+  // function that adds color white/transparent to the navbar on resize (this is for the collapse)
 
+  //네브바 반응형 색깔 변경!! //collapse는 화면 줄인다음 오른쪽 ... 클릭하면 나오는거
+  // const updateColor = () => {
+  //   if (window.innerWidth < 993 && collapseOpen) {
+  //     setcolor("bg-white");
+  //   } else {
+  //     setcolor("navbar-transparent");
+  //   }
+  // };
+  // const hiddenPicture = () => {
+  //   if (window.innerWidth < 993) {
+  //     sethiddenpic(false);
+  //   }
+  // };
+
+  //화면 크기 테스트
+
+  // const ResizedComponent = () => {
+  //   const [windowSize, setWindowSize] = useState({
+  //     width: window.innerWidth,
+  //     height: window.innerHeight,
+  //   });
+  //   const handleResize = () => {
+  //     console.log(
+  //       `브라우저 화면 사이즈 x: ${window.innerWidth}, y: ${window.innerHeight}`
+  //     );
+  //     setWindowSize({
+  //       width: window.innerWidth,
+  //       height: window.innerHeight,
+  //     });
+  //   };
+  //   React.useEffect(() => {
+  //     window.addEventListener("resize", handleResize);
+  //     return () => {
+  //       window.removeEventListener("resize", handleResize);
+  //     };
+  //   }, []);
+  //   return (
+  //     <div>
+  //       브라우저 화면 사이즈 x:{window.innerWidth}, y:{window.innerHeight}
+  //     </div>
+  //   );
+  // };
+
+  // const verify2 = () => {
+  //   if (window.innerWidth < 993) {
+  //     console.log(window.innerWidth);
+  //   }
+  // };
+  //네브바 로고 설정
 # [Black Dashboard React](https://demos.creative-tim.com/black-dashboard-react/#/dashboard) [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social&logo=twitter)](https://twitter.com/intent/tweet?url=https%3A%2F%2Fdemos.creative-tim.com%2Fblack-dashboard-react%2F%23%2Fadmin%2Fdashboard&text=Black%20Dashboard%20React%20by%20Creative%20Tim%20%7C%20Free%20React%20Admin%20Template&original_referer=https%3A%2F%2Fdemos.creative-tim.com%2Fblack-dashboard-react%2F&via=creativetim&hashtags=react%2Ccreativetim%2Cdark%2Cdashboard%2Cbootstrap%2Creactstrap%2Creactjs)
 
 ![version](https://img.shields.io/badge/version-1.2.1-blue.svg) ![license](https://img.shields.io/badge/license-MIT-blue.svg) [![GitHub issues open](https://img.shields.io/github/issues/creativetimofficial/black-dashboard-react.svg?maxAge=2592000)]() [![GitHub issues closed](https://img.shields.io/github/issues-closed-raw/creativetimofficial/black-dashboard-react.svg?maxAge=2592000)]() [![Chat](https://img.shields.io/badge/chat-on%20discord-7289da.svg)](https://discord.gg/E4aHAQy)

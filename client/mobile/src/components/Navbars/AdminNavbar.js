@@ -53,69 +53,7 @@ function AdminNavbar(props) {
   );
   const [imageUrl, setImageUrl] = React.useState('') 
 
-  // let imgurl;
-  // const toggleSidebar = () => {
-  //   document.documentElement.classList.toggle("nav-open");
-  //   setsidebarOpened(!sidebarOpened);
-  // };
-  // React.useEffect(() => {
-  //   window.addEventListener("resize", updateColor);
-  //   // Specify how to clean up after this effect:
-  //   return function cleanup() {
-  //     window.removeEventListener("resize", updateColor);
-  //   };
-  // });
-  // function that adds color white/transparent to the navbar on resize (this is for the collapse)
 
-  //네브바 반응형 색깔 변경!! //collapse는 화면 줄인다음 오른쪽 ... 클릭하면 나오는거
-  // const updateColor = () => {
-  //   if (window.innerWidth < 993 && collapseOpen) {
-  //     setcolor("bg-white");
-  //   } else {
-  //     setcolor("navbar-transparent");
-  //   }
-  // };
-  // const hiddenPicture = () => {
-  //   if (window.innerWidth < 993) {
-  //     sethiddenpic(false);
-  //   }
-  // };
-
-  //화면 크기 테스트
-
-  // const ResizedComponent = () => {
-  //   const [windowSize, setWindowSize] = useState({
-  //     width: window.innerWidth,
-  //     height: window.innerHeight,
-  //   });
-  //   const handleResize = () => {
-  //     console.log(
-  //       `브라우저 화면 사이즈 x: ${window.innerWidth}, y: ${window.innerHeight}`
-  //     );
-  //     setWindowSize({
-  //       width: window.innerWidth,
-  //       height: window.innerHeight,
-  //     });
-  //   };
-  //   React.useEffect(() => {
-  //     window.addEventListener("resize", handleResize);
-  //     return () => {
-  //       window.removeEventListener("resize", handleResize);
-  //     };
-  //   }, []);
-  //   return (
-  //     <div>
-  //       브라우저 화면 사이즈 x:{window.innerWidth}, y:{window.innerHeight}
-  //     </div>
-  //   );
-  // };
-
-  // const verify2 = () => {
-  //   if (window.innerWidth < 993) {
-  //     console.log(window.innerWidth);
-  //   }
-  // };
-  //네브바 로고 설정
   const { logo } = props;
 
   let logoImg = (
@@ -171,6 +109,26 @@ function AdminNavbar(props) {
   // QR창 열고닫기
   const toggleModalSearch = () => {
     setmodalSearch(!modalSearch);
+    axios
+    .get(`https://i8b201.p.ssafy.io/backend/myPage/qr/${localStorage.getItem("accountEmail")}`, {
+      responseType: "arraybuffer",
+    })
+    // .get("https:///townbook/myPage/receive/${receiverNo}")
+    .then((res) => {
+      console.log(res);
+      
+      const base64 = btoa(
+        new Uint8Array(res.data).reduce(
+          (data, byte) => data + String.fromCharCode(byte),
+          ""
+        )
+      );
+      setImageUrl(`data:${res.headers["content-type"]};base64,${base64}`)
+     
+    })
+    .catch((error) => {
+      alert("qr로딩에 실패하였습니다.");
+    });
   };
 
   const logout = () => {
@@ -180,55 +138,10 @@ function AdminNavbar(props) {
     window.location.replace("/map");
   };
   let test;
-  function getQr(params) {
-    axios
-      .get(`https://i8b201.p.ssafy.io/backend/myPage/qr/${localStorage.getItem("accountEmail")}`, {
-        responseType: "arraybuffer",
-      })
-      // .get("https:///townbook/myPage/receive/${receiverNo}")
-      .then((res) => {
-        // console.log(res);
-        // const notices = [];
-        // console.log(response)
-        // for (const key in response.data) {
-        //   const notice = {
-        //   id: key,
-        //   ...response.data[key]
-        // };
-        //   notices.push(notice);
-        // };
-        // if(response=="true"){
-        // alert("회원가입에 성공하였습니다.");
-        // history.replace("/");
-        // }
-        // else{
-
-        //   alert("회원가입에 실패하였습니다.");
-        // }
-        // setIsLoading(false);
-        // setLoadedMeetups(notices);
-        // console.log(notices)
-        // console.log(res.data);
-        // const base64ImageString = Buffer.from(res.data, 'binary').toString('base64')
-        const base64 = btoa(
-          new Uint8Array(res.data).reduce(
-            (data, byte) => data + String.fromCharCode(byte),
-            ""
-          )
-        );
-        setImageUrl(`data:${res.headers["content-type"]};base64,${base64}`)
-        // console.log(`data:${res.headers["content-type"]};base64,${base64}`);
-        // return `data:${res.headers["content-type"]};base64,${base64}`;
-        // var imgurl = `data:${res.headers["content-type"]};base64,${base64}`;
-        // test = `data:${res.headers["content-type"]};base64,${base64}`;
-        // console.log(test)
-        // console.log(base64ImageString)
-        // let srcValue = "data:image/png;base64,"+base64ImageString
-      })
-      .catch((error) => {
-        alert("qr로딩에 실패하였습니다.");
-      });
-  }
+  // function getQr(params) {
+  //   console.log("getqr")
+   
+  // }
   return (
     <>
       <Navbar className={classNames("navbar-absolute", color)} expand="lg">
@@ -368,7 +281,7 @@ function AdminNavbar(props) {
                   icon={faQrcode}
                   size="xl"
                   color="white"
-                  onClick={()=> {toggleModalSearch();getQr(); }}
+                  onClick={toggleModalSearch}
                 />
               </div>
 

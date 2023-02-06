@@ -173,7 +173,7 @@ function SignUp(props) {
                     <FormGroup>
                       <label htmlFor="exampleInputEmail1">이메일</label>
                       <input
-                        placeholder="mike@email.com"
+                        placeholder="ssafy@email.com"
                         type="email"
                         ref={emailInputRef}
                         className={classes.style}
