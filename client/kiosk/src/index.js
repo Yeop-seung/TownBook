@@ -8,11 +8,13 @@ import DonateConfirm from "./Kiosk/Donate/DonateConfirm";
 import DonateConfirmError from "./Kiosk/Donate/DonateConfirmError";
 import DonateComplete from "./Kiosk/Donate/DonateComplete";
 import DonateThanks from "./Kiosk/Member/DonateThanks";
-// import DonateThanksNon from "Kiosk/Non-Member/DonateThankNon";
-// import ReceiptThanks from "Kiosk/Member/ReceiptThanks";
-// import DonateReceipt from "Kiosk/Donate/DonateReceipt";
-// import ReceiptConfirm from "Kiosk/Receipt/ReceiptConfirm";
-// import ReceiptComplete from "Kiosk/Receipt/ReceiptComplete";
+import BarcodeRead from "./Kiosk/Donate/BarcodeRead"
+import BarcodeReadError from "./Kiosk/Donate/BarcodeReadError"
+import ReceiptConfirm from "./Kiosk/Receipt/ReceiptConfirm";
+import ReceiptComplete from "./Kiosk/Receipt/ReceiptComplete";
+import DonateReceipt from "./Kiosk/Receipt/DonateReceipt";
+import ReceiptThanks from "./Kiosk/Member/ReceiptThanks";
+// import DonateThanksNon from "./Kiosk/Non-Member/DonateThankNon";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 // import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -29,11 +31,14 @@ root.render(
       <Route path='/DonateConfirmError' element={<DonateConfirmError />}/>
       <Route path='/DonateComplete' element={<DonateComplete />}/>
       <Route path='/DonateThanks' element={<DonateThanks />}/>
-      {/* <Route path='/DonateThanksNon' element={<DonateThanksNon />}/>
-      <Route path='/ReceiptThanks' element={<ReceiptThanks />}/>
-      <Route path='/DonateReceipt' element={<DonateReceipt />}/>
+      <Route path='/BarcodeRead' element={<BarcodeRead />}/>
+      <Route path='/BarcodeReadError' element={<BarcodeReadError />}/>
       <Route path='/ReceiptConfirm' element={<ReceiptConfirm />}/>
-      <Route path='/ReceiptComplete' element={<ReceiptComplete />}/> */}
+      <Route path='/ReceiptComplete' element={<ReceiptComplete />}/>
+      <Route path='/DonateReceipt' element={<DonateReceipt />}/>
+      <Route path='/ReceiptThanks' element={<ReceiptThanks />}/>
+      {/* <Route path='/DonateThanksNon' element={<DonateThanksNon />}/> */}
+      
     </Routes>
   </BrowserRouter>
 );

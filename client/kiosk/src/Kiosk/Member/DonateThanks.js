@@ -11,8 +11,8 @@ function DonateThanks(props) {
     const onClickHandlerFinish = () => {
         navigate('/Finish')
     }
-    const onClickHandlerConfirm = () => {
-        navigate('/DonateConfirm')
+    const onClickHandlerBarcodeRead =() => {
+        navigate('/BarcodeRead')
     }
 
     return (
@@ -23,7 +23,7 @@ function DonateThanks(props) {
                         <button className={styles.buttonTwo} onClick={onClickHandlerFinish} >
                             <p className={styles.textAlignOne}>처음화면</p>
                         </button>
-                        <button className={styles.buttonThree} onClick={onClickHandlerConfirm}>
+                        <button className={styles.buttonThree} onClick={onClickHandlerBarcodeRead}>
                             <p className={styles.textAlignOne}>추가기부</p>
                         </button>
                     </div>

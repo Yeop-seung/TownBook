@@ -1,12 +1,14 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import styles from "./Main.module.css"
 import Modal from "../ui/Modal.js"
 // import axios from "axios"
 import { useNavigate } from 'react-router-dom';
-// import { apis } from "./Api.js"
-// import { Route } from "react-router-dom";
 
 function Main(props) {
+    // useEffect(()=>{
+    //     axios.get().then().catch();
+    // });
+    // 페이지 방문하자마자 Ajax요청
     const navigate = useNavigate()
     const [modalOpen, setModalOpen] = useState(false);
 

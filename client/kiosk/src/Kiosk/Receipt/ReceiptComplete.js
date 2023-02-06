@@ -2,7 +2,6 @@ import React from "react";
 import styles from "./ReceiptComplete.module.css"
 import List from "../../ui/List"
 import { useNavigate } from "react-router-dom";
-// import { Route } from "react-router-dom";
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { BiHomeAlt } from 'react-icons/bi';
 
@@ -15,32 +14,38 @@ function ReceiptComplete(props) {
     const onClickHandlerHome = () => {
         navigate('/')
     }
+    const onClickHandlerReceiptConfirm = () => {
+        navigate('/ReceiptConfirm')
+    }
+    const onClickHandlerDonateReceipt = () => {
+        navigate('/DonateReceipt')
+    }
 
     return (
         // <div>
             <div>
-                <div className="my-img">
-                    <button className="circle">
-                        <AiOutlineArrowLeft className="icon-style"/>
+                <div className={styles.myImg}>
+                    <button className={styles.circle} onClick={onClickHandlerReceiptConfirm}>
+                        <AiOutlineArrowLeft className={styles.iconStyle }/>
                     </button>
-                    <div className="button">
-                        <div className="button-one">
-                            <List />
-                            {/* 책 리스트 */}
-                            <p className="text-align">수령하실 책이 맞습니까?<br></br>
-                            예를 누르시면 포인트가 <br></br>차감되고 보관함이 열립니다</p>
-                            <div>
-                                <div className="button-three">
-                                    <p className="text-align-one">아니오</p>
-                                </div>
-                                <div className="button-two">
-                                    <p className="text-align-one">예</p>
-                                </div>
+                    <div className={styles.buttonOne}>
+                        <List />
+                        {/* 책 리스트 */}
+                        <p className={styles.textAlign}>수령하실 책이 맞습니까?
+                        <br/>
+                        예를 누르시면 포인트가
+                        <br/>차감되고 보관함이 열립니다</p>
+                        <div>
+                            <div className={styles.buttonTwo} onClick={onClickHandlerDonateReceipt}>
+                                <p className={styles.textAlignOne}>예</p>
+                            </div>
+                            <div className={styles.buttonThree} onClick={onClickHandlerReceiptConfirm}>
+                                <p className={styles.textAlignOne}>아니오</p>
                             </div>
                         </div>
                     </div>
-                    <button className="home-circle" onClick={onClickHandlerHome}>
-                        <BiHomeAlt className="icon-style"/>
+                    <button className={styles.homeCircle} onClick={onClickHandlerHome}>
+                        <BiHomeAlt className={styles.iconStyle}/>
                     </button>
                 </div>
             </div>

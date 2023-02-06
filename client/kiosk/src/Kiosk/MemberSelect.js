@@ -14,8 +14,8 @@ function MemberSelect(props) {
     const onClickHandlerUse = () => {
         navigate('/DonateUse')
     }
-    const onClickHandlerConfirm =() => {
-        navigate('/DonateConfirm')
+    const onClickHandlerBarcodeRead =() => {
+        navigate('/BarcodeRead')
     }
 
     return (
@@ -28,7 +28,7 @@ function MemberSelect(props) {
                 <button className={styles.buttonLeft} onClick={onClickHandlerUse}>
                     <p>회원</p>
                 </button>
-                <button className={styles.buttonRight} onClick={onClickHandlerConfirm}>
+                <button className={styles.buttonRight} onClick={onClickHandlerBarcodeRead}>
                     <p>비회원</p>
                 </button>
                 <button className={styles.homeCircle} onClick={onClickHandlerHome}>

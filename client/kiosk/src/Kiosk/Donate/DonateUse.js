@@ -1,62 +1,51 @@
-import React from "react";
-// , { useRef, useState }
+import React, { useState } from "react";
 import styles from "./DonateUse.module.css"
 import { useNavigate } from "react-router-dom";
-// import { Route } from "react-router-dom";
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { BiHomeAlt } from 'react-icons/bi';
 import {BsFillArrowRightCircleFill} from "react-icons/bs"
+import axios from 'axios'
 
 function DonateUse(props) {
-    // function submitHandler(event) {
-    //     event.preventDefault()
-    // }
+    
     const navigate = useNavigate()
     // 페이지 이동
-    // const inputs = barcodeValue
-    // const [inputs, setInputs] = useState('')
-    // const barcodeInput = useRef()
+    // const Url = "http://localhost:3000/"
+
+    const [inputs, setInputs] = useState({
+        barcode : ""
+    })
     
-    // const onChangeHandler = e =>{
-    //     const { value, barcode } = e.target
-    //     setInputs({
-    //         ...inputs,
-    //         [barcode]: value
-    //     })
-    // }
 
-    // const onReset = () => {
-    //     setInputs({
-    //     barcode: '',
-    //     });
-    //     barcodeInput.current.focus();
-    // };
-
-    function barcode(e){
+    function barcodeInput(e) {
         let event=window.event || e;
-        // console.log(event)
-        console.log('fffff', event.target.value.length)
-        // console.log(inputs)
-        if(event.target.value.length === "12"){
-            // axios.get()
-            console.log('123123',event.value)
-        } 
-        else if (event.target.value.length > "12") {
-            // alert('다시 한번 바코드를 찍어주세요')
+        axios.get(`/server/account/user/${e.target.value}`, {
+        })
+        .then((response) => {
+            console.log('ffff', e.target.value) // 값을 보내준다
+            onClickHandlerReceiptConfirm()
+        })
+        
+        .catch(function (error) {
+            console.log(error)
+        })
         }
-    }
+        // setInputs({
+        //     ...inputs,
+        //     [e.target.name]: e.target.value
+        // })
+        
     
-    
-    // // 바코드 받아오기
-    // const barcodeInput = useRef()
-
     const onClickHandlerHome = () => {
         navigate('/')
     }
-    const onClickHandlerConfirm =() => {
-        navigate('/DonateConfirm')
+    // const onClickHandlerBarcodeRead =() => {
+    //     navigate('/BarcodeRead')
+    // }
+
+    const onClickHandlerReceiptConfirm =() => {
+        navigate('/ReceiptConfirm')
     }
-    
 
     //수령일때랑 기부일때랑 바꿔서 처리 if로 해서
     return (
@@ -66,7 +55,8 @@ function DonateUse(props) {
                     <button className={styles.circle} onClick={onClickHandlerHome}>
                         <AiOutlineArrowLeft className={styles.iconStyle}/>
                     </button>
-                        <div className={styles.buttonOne} onClick={onClickHandlerConfirm}>
+                        {/* <div className={styles.buttonOne} onClick={onClickHandlerBarcodeRead}> */}
+                        <div className={styles.buttonOne}>
                             <h3 className={styles.h3Align}>STEP1</h3>
                             <p className={styles.textAlignOne}>
                             마이페이지에서
@@ -83,7 +73,7 @@ function DonateUse(props) {
                             <br />
                             찍어주세요</p>
                         </div>
-                        <input className={styles.barcode} type="text" onKeyDown={barcode} autoFocus />
+                        <input className={styles.barcode} type="text" onChange={barcodeInput} autoFocus/>
                         {/* onChange={onChangeHandler} value={barcode}  */}
                     <button className={styles.homeCircle} onClick={onClickHandlerHome} >
                         <BiHomeAlt className={styles.iconStyle}/>

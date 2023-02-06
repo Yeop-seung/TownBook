@@ -1,4 +1,4 @@
-import React  from 'react';
+import React, { useEffect }  from 'react';
 // , { useEffect, useRef }
 import styles from "./Modal.module.css"
 import { AiOutlineClose } from "react-icons/ai";
@@ -9,7 +9,7 @@ function Modal( { setModalOpen, id, title, content, writer }) {
     const closeModal = () => {
         setModalOpen(false);
     };
-
+    
     // 모달 외부 클릭시 끄기 처리
     // Modal 창을 useRef로 취득
     // const modalRef = useRef< HTMLDivElement >(null);
@@ -33,7 +33,19 @@ function Modal( { setModalOpen, id, title, content, writer }) {
     //         // document.removeEventListener('touchstart', handler); // 모바일 대응
     //     };
     // });
-
+    const timeout = () => {
+        setTimeout(() => {
+        closeModal()
+        }, 10000);
+    };
+      // 컴포넌트가 화면에 다 나타나면 timeout 함수 실행
+    useEffect(() => {
+        timeout();
+        return () => {
+          // clear 해줌
+        clearTimeout(timeout);
+        };
+    });
     return (
         <div  className={styles.container}>
         {/* ref={modalRef} */}
