@@ -12,6 +12,7 @@ function DonateReceipt(props){
     const location = useLocation()
 
     const isnavigate = location.state
+    
     console.log(isnavigate)
 
     function barcodeInput(e) {
