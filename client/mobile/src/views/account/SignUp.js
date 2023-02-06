@@ -113,7 +113,7 @@ function SignUp(props) {
     // console.log(context);
     axios
       .post(
-        "/server/account/signup",
+        "https://i8b201.p.ssafy.io/backend/account/signup",
         userInfo
       )
       // .get("https:///townbook/myPage/receive/${receiverNo}")
