@@ -168,7 +168,7 @@ public class InitDb {
         public void donateBook(
                 String bookLogReview, Locker locker, DetailLocker detailLocker,
                 Optional<Account> account, Optional<Book> book) {
-            BookLog bookLog = new BookLog();
+            BookLog bookLog = new BookLog(account.get().getAccountNo(), book.get().getBookIsbn());
             bookLog.setBookLogReview(bookLogReview);
             bookLog.setBookLogDonateDateTime(LocalDateTime.now());
             bookLog.setLocker(locker);
