@@ -1,2 +1,2 @@
 ### 1. 공지사항, 이용안내 조회
-GET http://localhost:8081/notice/list/0
+GET http://localhost:8081/backend/notice/list/0
