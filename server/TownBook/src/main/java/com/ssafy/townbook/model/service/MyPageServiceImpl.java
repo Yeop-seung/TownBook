@@ -43,7 +43,7 @@ public class MyPageServiceImpl implements MyPageService {
      * @throws IOException
      */
     @Override
-    public Optional<Object> getQrCode(String accountEmail) throws WriterException, IOException {
+        public Optional<Object> getQrCode(String accountEmail) throws WriterException, IOException {
         int width = 200;
         int height = 200;
         BitMatrix matrix = new MultiFormatWriter().encode(accountEmail, BarcodeFormat.QR_CODE, width, height);
