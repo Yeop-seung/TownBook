@@ -16,6 +16,7 @@ import com.ssafy.townbook.model.repository.DetailLockerRepository;
 import com.ssafy.townbook.model.repository.LockerRepository;
 import com.ssafy.townbook.queryrepository.BookLogQueryRepository;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -84,9 +85,14 @@ public class BookLogServiceImpl implements BookLogService {
     @Override
     public List<ReceiveBookLogResponseDto> findBookLogByLockerNo(Long lockerNo) {
         List<BookLog> findBookLogs = bookLogQueryRepository.findBookLogByLockerNo(lockerNo).get();
-        return findBookLogs.stream()
-                .map(ReceiveBookLogResponseDto::new)
-                .collect(Collectors.toList());
+        
+        List<ReceiveBookLogResponseDto> findReceiveBookLogs = new ArrayList<>();
+        for (BookLog bookLog : findBookLogs) {
+            ReceiveBookLogResponseDto receiveBookLogResponseDto = new ReceiveBookLogResponseDto(bookLog.getBook(),
+                    bookLog.getLocker(), bookLog.getDetailLocker());
+            findReceiveBookLogs.add(receiveBookLogResponseDto);
+        }
+        return findReceiveBookLogs;
     }
     
     /**
@@ -158,12 +164,6 @@ public class BookLogServiceImpl implements BookLogService {
     @Override
     @Transactional
     public boolean receiveBook(ReceiveBookRequestDto receiveBookRequestDto) throws Exception {
-        // detailLocker
-        Long         detailLockerNo = receiveBookRequestDto.getDetailLockerNo();
-        DetailLocker detailLocker   = detailLockerRepository.findDetailLockerByDetailLockerNo(detailLockerNo).get();
-        detailLocker.setDetailLockerIsEmpty(true);
-        detailLockerRepository.save(detailLocker);
-        
         // account
         Account account = accountRepository.findByAccountNo(receiveBookRequestDto.getAccountNo()).get();
         if (account.getAccountPoint() < 200) {
@@ -172,6 +172,12 @@ public class BookLogServiceImpl implements BookLogService {
         }
         account.setAccountPoint(account.getAccountPoint() - 200);
         accountRepository.save(account);
+        
+        // detailLocker
+        Long         detailLockerNo = receiveBookRequestDto.getDetailLockerNo();
+        DetailLocker detailLocker   = detailLockerRepository.findDetailLockerByDetailLockerNo(detailLockerNo).get();
+        detailLocker.setDetailLockerIsEmpty(true);
+        detailLockerRepository.save(detailLocker);
         
         // bookLog
         BookLog bookLog = bookLogQueryRepository.findBookLogByDetailLockerNo(detailLockerNo).get().get(0);
