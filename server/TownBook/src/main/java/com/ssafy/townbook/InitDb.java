@@ -197,7 +197,7 @@ public class InitDb {
         }
         
         public void noticeInit() {
-            Account account = accountRepository.findByAccountNo(1L).get();
+            Long account = 1L;
             createNotice("제목1", "내용1", account);
             createNotice("제목1", "내용1", account);
             createNotice("제목1", "내용1", account);
@@ -221,23 +221,21 @@ public class InitDb {
             createGuide("제목1", "내용1", account);
         }
         
-        public void createNotice(String noticeTitle, String noticeContent, Account account) {
-            Notice notice = new Notice();
+        public void createNotice(String noticeTitle, String noticeContent, Long account) {
+            Notice notice = new Notice(account);
             notice.setNoticeTitle(noticeTitle);
             notice.setNoticeContent(noticeContent);
             notice.setNoticeWriteDateTime(LocalDateTime.now());
             notice.setNoticeCategory(0);
-            notice.setAccount(account);
             em.persist(notice);
         }
         
-        public void createGuide(String noticeTitle, String noticeContent, Account account) {
-            Notice notice = new Notice();
+        public void createGuide(String noticeTitle, String noticeContent, Long account) {
+            Notice notice = new Notice(account);
             notice.setNoticeTitle(noticeTitle);
             notice.setNoticeContent(noticeContent);
             notice.setNoticeWriteDateTime(LocalDateTime.now());
             notice.setNoticeCategory(1);
-            notice.setAccount(account);
             em.persist(notice);
         }
     }
