@@ -36,6 +36,28 @@ import {
 } from "reactstrap";
 
 function MyPage() {
+
+
+  // axios
+  //   .get(`https://i8b201.p.ssafy.io/backend/myPage/qr/${localStorage.getItem("accountEmail")}`, {
+  //     accountEmail,
+  //   })
+  //   // .get("https:///townbook/myPage/receive/${receiverNo}")
+  //   .then((res) => {
+  //     console.log(res);
+      
+  //     const base64 = btoa(
+  //       new Uint8Array(res.data).reduce(
+  //         (data, byte) => data + String.fromCharCode(byte),
+  //         ""
+  //       )
+  //     );
+  //     setImageUrl(`data:${res.headers["content-type"]};base64,${base64}`)
+     
+  //   })
+  //   .catch((error) => {
+  //     alert("qr로딩에 실패하였습니다.");
+  //   });
   return (
     <>
       
@@ -98,9 +120,11 @@ function MyPage() {
             </Card>
           </Col>
           <Col md="12">
+
+
           <Card>
               <CardHeader>
-                <CardTitle tag="h4">나의 기부/수령 목록</CardTitle>
+                <CardTitle tag="h4">나의 기부/수령 목록/포인트</CardTitle>
               </CardHeader>
               <CardBody>
                 <Table className="tablesorter" responsive>

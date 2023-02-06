@@ -59,7 +59,8 @@ function SignUp(props) {
     },
   //  console.log(data)
   };
-  
+  // const [password, setPassword] = React.useState('');
+
   const emailInputRef = useRef();
   const pwInputRef = useRef();
   const nameInputRef = useRef();
@@ -69,10 +70,11 @@ function SignUp(props) {
   const nicknameInputRef = useRef();
   const birthdayInputRef = useRef();
   const history = useHistory();
+  const pwSubmitRef = useRef();
+
 
   function submitHandler(event) {
     event.preventDefault();
-
     const enteredEmail = emailInputRef.current.value;
     const enteredPw = pwInputRef.current.value;
     const enteredName = nameInputRef.current.value;
@@ -81,6 +83,8 @@ function SignUp(props) {
     const enteredPhoneNumber = phonenumberInputRef.current.value;
     const enteredNickname = nicknameInputRef.current.value;
     const enteredBirthDay = birthdayInputRef.current.value;
+    const enteredPwSubmit = pwSubmitRef.current.value;
+
 
     const userInfo = {
       accountEmail: enteredEmail,
@@ -91,6 +95,7 @@ function SignUp(props) {
       accountPhoneNumber: enteredPhoneNumber,
       accountNickname: enteredNickname,
       accountBirthDay: enteredBirthDay,
+
     };
     console.log(userInfo);
     // props.onAddInfo(userInfo);
@@ -111,24 +116,36 @@ function SignUp(props) {
     // });
 
     // console.log(context);
-    axios
-      .post(
-        "https://i8b201.p.ssafy.io/backend/account/signup",
-        userInfo
-      )
-      // .get("https:///townbook/myPage/receive/${receiverNo}")
-      .then((response) => {
-        // if(response=="true"){
-        alert("회원가입에 성공하였습니다.");  
-        history.replace("/map");
-        // }
-        // else{
-        //   alert("회원가입에 실패하였습니다.");
-        // }
-      })
-      .catch((error) => {
-        alert("회원가입에 실패하였습니다.");
-      });
+    if (
+      userInfo.accountEmail == "" ||
+      userInfo.accountPw == "" ||
+      userInfo.accountName == "" ||
+      userInfo.accountAddress == "" ||
+      userInfo.accountGender == "" ||
+      userInfo.accountPhoneNumber == "" ||
+      userInfo.accountNickname == "" ||
+      userInfo.accountBirthDay == ""
+    ) {
+      alert("빈칸을 모두 채워주세요");
+    } else if (userInfo.accountPw != enteredPwSubmit) {
+      alert("비밀번호를 확인해주세요");
+    } else {
+      axios
+        .post("https://i8b201.p.ssafy.io/backend/account/signup", userInfo)
+        // .get("https:///townbook/myPage/receive/${receiverNo}")
+        .then((response) => {
+          // if(response=="true"){
+          alert("회원가입에 성공하였습니다.");
+          history.replace("/map");
+          // }
+          // else{
+          //   alert("회원가입에 실패하였습니다.");
+          // }
+        })
+        .catch((error) => {
+          alert("회원가입에 실패하였습니다.");
+        });
+    }
   }
   return (
     <>
@@ -185,9 +202,8 @@ function SignUp(props) {
                     <FormGroup>
                       <label>비밀번호</label>
                       <input
-                        //   defaultValue="Mike"
                         placeholder="비밀번호를 입력해주세요"
-                        type="text"
+                        type="password"
                         ref={pwInputRef}
                         className={classes.style}
                       />
@@ -198,10 +214,10 @@ function SignUp(props) {
                     <FormGroup>
                       <label>비밀번호 확인</label>
                       <input
-                        //   defaultValue="Andrew"
                         placeholder="비밀번호를 다시 입력해주세요"
-                        type="text"
+                        type="password"
                         className={classes.style}
+                        ref={pwSubmitRef}
                       />
                     </FormGroup>
                   </Col>
@@ -232,13 +248,15 @@ function SignUp(props) {
                   <Col className="pr-md-1" md="8">
                     <FormGroup>
                       <label>성별</label>
-                      <input
-                        //   defaultValue="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
-                        placeholder="성별"
-                        type="text"
-                        ref={genderInputRef}
-                        className={classes.style}
-                      />
+                      
+                      <select ref={genderInputRef}>
+                        <option key="man" value="0">
+                          남
+                        </option>
+                        <option key="woman" value="1">
+                          여
+                        </option>
+                      </select>
                     </FormGroup>
                   </Col>
 
@@ -260,7 +278,7 @@ function SignUp(props) {
                       <label>닉네임</label>
                       <input
                         //   defaultValue="Mike"
-                        placeholder="City"
+                        placeholder="닉네임을 입력해주세요"
                         type="text"
                         ref={nicknameInputRef}
                         className={classes.style}
@@ -272,8 +290,8 @@ function SignUp(props) {
                     <FormGroup>
                       <label>생년월일</label>
                       <input
-                        defaultValue="Andrew"
-                        placeholder="Country"
+                        // defaultValue=""
+                        placeholder="생년월일을 입력해주세요"
                         type="text"
                         ref={birthdayInputRef}
                         className={classes.style}
@@ -311,47 +329,7 @@ function SignUp(props) {
             </Card>
           </Col>
 
-          {/* <Col md="4">
-            <Card className="card-user">
-              <CardBody>
-                <CardText />
-                <div className="author">
-                  <div className="block block-one" />
-                  <div className="block block-two" />
-                  <div className="block block-three" />
-                  <div className="block block-four" />
-                  <a href="#pablo" onClick={(e) => e.preventDefault()}>
-                    <img
-                      alt="..."
-                      className="avatar"
-                      src={require("assets/img/anime3.png")}
-                    />
-
-                    <h5 className="title">이영재</h5>
-                  </a>
-                  <p className="description">Ceo/Co-Founder</p>
-                </div>
-                <div className="card-description">
-                  Do not be scared of the truth because we need to restart the
-                  human foundation in truth And I love you like Kanye loves
-                  Kanye I love Rick Owens’ bed design but the back is...
-                </div>
-              </CardBody>
-              <CardFooter>
-                <div className="button-container">
-                  <Button className="btn-icon btn-round" color="facebook">
-                    <i className="fab fa-facebook" />
-                  </Button>
-                  <Button className="btn-icon btn-round" color="twitter">
-                    <i className="fab fa-twitter" />
-                  </Button>
-                  <Button className="btn-icon btn-round" color="google">
-                    <i className="fab fa-google-plus" />
-                  </Button>
-                </div>
-              </CardFooter>
-            </Card>
-          </Col> */}
+        
         </Row>
         <Modal
           modalClassName="modal-search"

@@ -163,12 +163,13 @@ function AdminNavbar(props) {
             </div>
           </div>
 
-          <div className="d-lg-none">
+          <div className="d-lg-none" >
             <FontAwesomeIcon
               icon={faQrcode}
               size="xl"
               color="white"
               onClick={toggleModalSearch}
+              
             />
           </div>
           {/* 화면 줄였을때 오른쪽  ... 바 */}
