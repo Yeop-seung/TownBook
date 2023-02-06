@@ -12,4 +12,15 @@ module.exports = function(app){
       changeOrigin: true
     })
   )
+
+  app.use(
+    createProxyMiddleware('/server', {
+      target: 'http://i8b201.p.ssafy.io:8081',
+      pathRewrite: {
+        '^/server':''
+      },
+      changeOrigin: true
+    })
+  )
+
 };

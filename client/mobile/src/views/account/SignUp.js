@@ -113,7 +113,7 @@ function SignUp(props) {
     // console.log(context);
     axios
       .post(
-        "https://react-getting-started-9d228-default-rtdb.firebaseio.com/account/signup.json",
+        "/server/account/signup",
         userInfo
       )
       // .get("https:///townbook/myPage/receive/${receiverNo}")

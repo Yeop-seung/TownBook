@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // import classes from './black-dashboard-react.css';
@@ -43,6 +43,7 @@ function AdminNavbar(props) {
   const isPc = useMediaQuery({
     query: "(max-width:993px)",
   });
+  const [isToken, setisToken] = React.useState(true)
   const [modalSearch, setmodalSearch] = React.useState(false);
   const [color, setcolor] = React.useState("navbar-transparent");
   const [sidebarOpened, setsidebarOpened] = React.useState(
@@ -149,7 +150,13 @@ function AdminNavbar(props) {
       setcollapseOpen(!collapseOpen);
     }
   };
-
+  console.log(localStorage.getItem('TOKEN')) 
+  useEffect(() => {
+    if (localStorage.getItem('TOKEN') === null) {
+      setisToken(!isToken);
+    } 
+  },[]);
+  console.log(isToken)
   // const sethiddenpic = () => {
   //   if (window.innerWidth < 993) {
   //     return true;
@@ -162,6 +169,12 @@ function AdminNavbar(props) {
     setmodalSearch(!modalSearch);
   };
 
+  const logout = () => {
+    let token = localStorage.getItem('TOKEN')
+
+    localStorage.clear()
+    window.location.replace('/map')
+}
   return (
     <>
       <Navbar className={classNames("navbar-absolute", color)} expand="lg">
@@ -334,19 +347,21 @@ function AdminNavbar(props) {
                 {/* </DropdownMenu> */}
 
               {/* 로그인 안돼있을때만 보이는 */}
-
+              {/* {!localStorage.getItem('token') && (
+        <> */}
               <Link
                 to="/login"
                 onClick={verify}
                 style={{ paddingTop: 10, paddingInline: 20 }}
+                
               >
-                <div className="logo">
+                <div className="logo" hidden={isToken}>
                   <FontAwesomeIcon icon={faKey} size="xl" color="white" />
                   <p className="d-lg-none">로그인</p>
                 </div>
               </Link>
               {/* <ResizedComponent /> */}
-              <UncontrolledDropdown nav>
+              <UncontrolledDropdown nav  hidden={!isToken}>
                 {/* 프로필이미지 칸 */}
                 <DropdownToggle
                   caret
@@ -373,7 +388,7 @@ function AdminNavbar(props) {
                   <DropdownItem divider tag="li" />
 
                   <NavLink tag="li">
-                    <DropdownItem className="nav-item">로그아웃</DropdownItem>
+                    <DropdownItem className="nav-item" onClick={logout}>로그아웃</DropdownItem>
                   </NavLink>
                 </DropdownMenu>
               </UncontrolledDropdown>

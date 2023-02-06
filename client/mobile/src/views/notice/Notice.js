@@ -134,7 +134,9 @@ function Notice(props) {
                   <Link to={"/map"}>
                     <FontAwesomeIcon icon={faArrowLeft} size="xl" color="black"/>
                   </Link>
+
                   <CardTitle tag="h4">공지사항</CardTitle>
+
                   <Link to={"/notice/write"}>
                     <FontAwesomeIcon icon={faPlus} size="xl" color="black" />
                   </Link>

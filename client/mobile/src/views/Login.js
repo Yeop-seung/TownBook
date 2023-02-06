@@ -40,7 +40,7 @@ function Login(props) {
 
     axios
       .post(
-        "https://react-getting-started-9d228-default-rtdb.firebaseio.com/account/signup.json",
+        "/server/auth/login",
         { accountEmail, accountPw }
         // {
         //   method: "POST",
@@ -52,15 +52,17 @@ function Login(props) {
         //replace는 뒤로가기 버튼 비활성 이미 양식 제출했으므로
       )
       .then((res) => {
-        history.replace("/map");
-        // if (res.TOKEN) {
-        //   localStorage.clear()
-        //   localStorage.setItem("TOKEN", res.TOKEN)
-        //   history.replace("/map");
+        // console.log(res)
+        // history.replace("/map");
+        if (res.data.token) {
+          localStorage.clear()
+          localStorage.setItem("TOKEN", res.data.token)
+          window.location.replace("/map");
+          // history.replace("/map");
 
-        // }
-        console.log(res);
-        console.log(res.data);
+        }
+        // console.log(res);
+        // console.log(res.data);
         //then 대신에 asynce나 await가능
       });
   }
