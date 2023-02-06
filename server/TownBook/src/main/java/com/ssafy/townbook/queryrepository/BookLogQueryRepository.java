@@ -3,6 +3,7 @@ package com.ssafy.townbook.queryrepository;
 import static com.ssafy.townbook.model.entity.QBookLog.bookLog;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import com.ssafy.townbook.model.dto.BookLogDto;
 import com.ssafy.townbook.model.entity.BookLog;
 import java.util.List;
 import java.util.Optional;
@@ -77,4 +78,26 @@ public class BookLogQueryRepository {
                 .where(bookLog.detailLocker.detailLockerNo.eq(detailLockerNo)
                         .and(bookLog.bookLogState.eq(true))).fetch());
     }
+    
+    /**
+     * 제목 검색해서 북로그 반환
+     *
+     * @param bookTitle
+     * @return Optional<List<BookLog>>
+     */
+    public Optional<List<BookLog>> findBookLogByBookTitle(String bookTitle) {
+        return Optional.ofNullable(jpaQueryFactory
+                .select(bookLog)
+                .from(bookLog)
+                .where(bookLog.bookLogState.eq(true).and(bookLog.book.bookTitle.contains(bookTitle)))
+                .fetch());
+    }
+//    public Optional<List<BookLog>> findLockerByBookTitleAndDist(String bookTitle) {
+//        return Optional.ofNullable(jpaQueryFactory
+//                .select(bookLog)
+//                .from(bookLog)
+//                .where(bookLog.bookLogState.eq(true).and(bookLog.book.bookTitle.like(bookTitle)))
+//                .fetch());
+//    }
+
 }

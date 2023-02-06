@@ -1,10 +1,13 @@
 package com.ssafy.townbook.model.service;
 
 import com.ssafy.townbook.model.dto.BookLogDto;
+import com.ssafy.townbook.model.dto.LockerDto;
 import com.ssafy.townbook.model.dto.request.DonateBookRequestDto;
 import com.ssafy.townbook.model.dto.request.ReceiveBookRequestDto;
+import com.ssafy.townbook.model.dto.request.SearchTitleRequestDto;
 import com.ssafy.townbook.model.dto.response.DonateBookLogResponseDto;
 import com.ssafy.townbook.model.dto.response.ReceiveBookLogResponseDto;
+import com.ssafy.townbook.model.dto.response.SearchTitleResponseDto;
 import java.util.List;
 
 public interface BookLogService {
@@ -64,4 +67,13 @@ public interface BookLogService {
      * @throws Exception
      */
     boolean receiveBook(ReceiveBookRequestDto receiveBookRequestDto) throws Exception;
+    
+    /**
+     * 제목 검색해서 북로그 반환
+     *
+     * @param bookTitle
+     * @return List<BookLogDto>
+     */
+    List<BookLogDto>findBookLogByBookTitle(String bookTitle);
+//    LockerDto findLockerByBookTitleAndDist(SearchTitleRequestDto searchTitleRequestDto) throws Exception;
 }

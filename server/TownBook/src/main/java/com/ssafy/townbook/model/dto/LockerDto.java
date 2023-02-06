@@ -16,8 +16,8 @@ public class LockerDto {
     private Long lockerNo;
     private Integer lockerBookCnt;
     private String lockerRegion;
-    private String lockerLatitude;
-    private String lockerLongitude;
+    private Double lockerLatitude;
+    private Double lockerLongitude;
     private List<DetailLockerDto> detailLocker = new ArrayList<>();
     private int lockerStorage;
     
