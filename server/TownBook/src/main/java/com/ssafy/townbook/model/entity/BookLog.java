@@ -69,7 +69,7 @@ public class BookLog {
     @Column(name = "`fk-account-book_log`")
     private Long accountNo;
     
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "`fk-book-book_log`", insertable = false, updatable = false)
     private Book book;
     
@@ -87,8 +87,8 @@ public class BookLog {
     
     @Builder
     public BookLog(Long bookLogNo, Boolean bookLogState, String bookLogReview, Long bookLogReceiverNo,
-                   LocalDateTime bookLogDonateDateTime, LocalDateTime bookLogReceiveDateTime, Locker locker,
-                   DetailLocker detailLocker, Account account, Book book, List<WishList> wishLists) {
+            LocalDateTime bookLogDonateDateTime, LocalDateTime bookLogReceiveDateTime, Locker locker, Long lockerNo,
+            DetailLocker detailLocker, Long detailLockerNo, List<WishList> wishLists, Long accountNo, String bookIsbn) {
         this.bookLogNo              = bookLogNo;
         this.bookLogState           = bookLogState;
         this.bookLogReview          = bookLogReview;
@@ -96,9 +96,11 @@ public class BookLog {
         this.bookLogDonateDateTime  = bookLogDonateDateTime;
         this.bookLogReceiveDateTime = bookLogReceiveDateTime;
         this.locker                 = locker;
+        this.lockerNo               = lockerNo;
         this.detailLocker           = detailLocker;
-        this.account                = account;
-        this.book                   = book;
+        this.detailLockerNo         = detailLockerNo;
         this.wishLists              = wishLists;
+        this.accountNo              = accountNo;
+        this.bookIsbn               = bookIsbn;
     }
 }
