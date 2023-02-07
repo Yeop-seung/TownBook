@@ -53,7 +53,7 @@ public class NoticeController {
      * @return Boolean
      */
     @PostMapping("/write")
-    public ResponseEntity<Boolean> writeNotice(WriteNoticeRequestDto writeNoticeRequestDto)  throws Exception{
+    public ResponseEntity<Boolean> writeNotice(WriteNoticeRequestDto writeNoticeRequestDto){
         return new ResponseEntity<Boolean>(noticeService.writeNotice(writeNoticeRequestDto), HttpStatus.OK);
     }
     
