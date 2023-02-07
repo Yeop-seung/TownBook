@@ -17,7 +17,6 @@ import com.ssafy.townbook.model.repository.DetailLockerRepository;
 import com.ssafy.townbook.model.repository.LockerRepository;
 import com.ssafy.townbook.queryrepository.BookLogQueryRepository;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -198,19 +197,5 @@ public class BookLogServiceImpl implements BookLogService {
         bookLogRepository.save(bookLog);
         
         return new ReceiveBookLogResponseDto(account.getAccountPoint());
-    }
-    
-    /**
-     * 제목 검색해서 북로그 반환
-     *
-     * @param bookTitle
-     * @return List<BookLogDto>
-     */
-    @Override
-    public List<BookLogDto> findBookLogByBookTitle(String bookTitle) {
-        List<BookLog> findBookLogByBookTitle = bookLogQueryRepository.findBookLogByBookTitle(bookTitle).get();
-        return findBookLogByBookTitle.stream()
-                .map(BookLogDto::new)
-                .collect(Collectors.toList());
     }
 }

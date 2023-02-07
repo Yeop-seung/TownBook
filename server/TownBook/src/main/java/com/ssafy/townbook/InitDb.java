@@ -74,8 +74,8 @@ public class InitDb {
         }
         
         public Book createBook(String bookIsbn, String bookSubject, String bookTitle, String bookAuthor,
-                               String bookPublisher, LocalDate bookPublishPredate, String bookIntroductionURL,
-                               String bookTitleURL) {
+                String bookPublisher, LocalDate bookPublishPredate, String bookIntroductionURL,
+                String bookTitleURL) {
             Book book = new Book();
             book.setBookIsbn(bookIsbn);
             book.setBookSubject(bookSubject);
@@ -111,9 +111,9 @@ public class InitDb {
         }
         
         public Account createAccount(String accountEmail, String accountPw, String accountName, String accountAddress,
-                                     String accountPhoneNumber, Integer accountGender, String accountNickname,
-                                     String accountBirthDay,
-                                     Authority authority) {
+                String accountPhoneNumber, Integer accountGender, String accountNickname,
+                String accountBirthDay,
+                Authority authority) {
             Account account = new Account();
             account.setAccountEmail(accountEmail);
             account.setAccountPw(accountPw);
@@ -135,7 +135,7 @@ public class InitDb {
         }
         
         public void createLocker(String lockerRegion, int detailLockerCount, Double lockerLatitude,
-                                 Double lockerLongitude) {
+                Double lockerLongitude) {
             Locker locker = new Locker();
             locker.setLockerRegion(lockerRegion);
             locker.setLockerLatitude(lockerLatitude);
@@ -162,11 +162,15 @@ public class InitDb {
             Optional<Book>    book2         = bookRepository.findBookByBookIsbn("9788960777330");
             donateBook("재미 없어요", locker2, detailLocker2, account2, book2);
             
+            Locker       locker3       = lockerRepository.findLockerByLockerNo(3L).get();
+            DetailLocker detailLocker3 = locker3.getDetailLocker().get(0);
+            donateBook("꿀잼", locker3, detailLocker3, account1, book2);
+            
+            DetailLocker detailLocker4 = locker3.getDetailLocker().get(1);
+            donateBook("노잼", locker3, detailLocker4, account1, book2);
+            
             BookLog bookLog1 = bookLogRepository.findBookLogByBookLogNo(2L).get();
             receiveBook(bookLog1, account1);
-
-            DetailLocker detailLocker3 = locker2.getDetailLocker().get(1);
-            donateBook("test", locker2, detailLocker3, account1, book2);
         }
         
         public void donateBook(
@@ -188,7 +192,7 @@ public class InitDb {
             account.get().setAccountBookCnt(account.get().getAccountBookCnt() + 1);
             account.get().setAccountPoint(account.get().getAccountPoint() + 100);
             bookLog.setAccount(account.get());
-
+            
             bookLog.setBook(book.get());
             em.persist(bookLog);
         }
