@@ -5,6 +5,8 @@ import com.ssafy.townbook.model.entity.Account;
 import java.util.Set;
 import java.util.stream.Collectors;
 import javax.validation.constraints.NotNull;
+
+import com.ssafy.townbook.model.entity.File;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -40,6 +42,8 @@ public class AccountDto {
     
     @NotNull
     private String accountBirthDay;
+
+    private File file;
     
     private Set<AuthorityDto> authorityDtoSet;
     

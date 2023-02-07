@@ -37,7 +37,7 @@ public class AuthController {
                 new UsernamePasswordAuthenticationToken(loginDto.getAccountEmail(), loginDto.getAccountPw());
         
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
-        
+
         SecurityContextHolder.getContext().setAuthentication(authentication);
         
         String jwt = tokenProvider.createToken(authentication);
@@ -45,6 +45,6 @@ public class AuthController {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER, "Bearera" + jwt);
         
-        return new ResponseEntity<>(new TokenDto(jwt), httpHeaders, HttpStatus.OK);
+        return new ResponseEntity<>(new TokenDto(loginDto.getAccountNo(),jwt), httpHeaders, HttpStatus.OK);
     }
 }
