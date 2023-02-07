@@ -22,7 +22,7 @@ import Notice from "views/notice/Notice.js";
 // import Rtl from "views/Rtl.js";
 import TableList from "views/TableList.js";
 // import Typography from "views/Typography.js";
-import MyPage from "views/MyPage.js";
+import MyPage from "views/account/MyPage.js";
 // import SignUp from "views/SignUp";
 // import SignUpForm from "views/SignUpForm.js";
 import Login from "views/Login.js";

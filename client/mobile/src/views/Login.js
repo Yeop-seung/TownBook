@@ -52,11 +52,12 @@ function Login(props) {
         //replace는 뒤로가기 버튼 비활성 이미 양식 제출했으므로
       )
       .then((res) => {
-        // console.log(res)
+        console.log(res)
         // history.replace("/map");
         if (res.data.token) {
           localStorage.clear()
           localStorage.setItem("TOKEN", res.data.token)
+          // localStorage.setItem("accountNo, red.data.")
           localStorage.setItem("accountEmail", accountEmail)
           window.location.replace("/map");
           // history.replace("/map");
