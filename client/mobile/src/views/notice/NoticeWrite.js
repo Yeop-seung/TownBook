@@ -44,8 +44,8 @@ function NoticeWrite(props) {
       noticeTitle: enteredTitle,
       noticeContent: enteredContent,
       noticeWriteDateTime: "10",
-      notcieViews:"20",
-      noticestate: true,
+      notcieCategory:0,
+      accountNo: true,
       // noticeId: Id,
     };
     console.log(userInfo);

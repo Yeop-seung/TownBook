@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch, useLocation } from "react-router-dom";
+import { Route, Switch, useLocation, Redirect } from "react-router-dom";
 // javascript plugin used to create scrollbars on windows
 import PerfectScrollbar from "perfect-scrollbar";
 
@@ -132,7 +132,7 @@ function Admin(props) {
                 
 
 
-                {/* <Redirect from="*" to="/" /> */}
+                <Redirect from="*" to="/map" />
               </Switch>
               {
                 // we don't want the Footer to be rendered on map page
