@@ -97,7 +97,7 @@ function SignUp(props) {
       accountBirthDay: enteredBirthDay,
 
     };
-    console.log(userInfo);
+    // console.log(userInfo);
     // props.onAddInfo(userInfo);
 
     // fetch(
@@ -134,6 +134,7 @@ function SignUp(props) {
         .post("https://i8b201.p.ssafy.io/backend/account/signup", userInfo)
         // .get("https:///townbook/myPage/receive/${receiverNo}")
         .then((response) => {
+          console.log(response)
           // if(response=="true"){
           alert("회원가입에 성공하였습니다.");
           history.replace("/map");

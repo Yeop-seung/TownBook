@@ -166,7 +166,7 @@ function AdminNavbar(props) {
             </div>
           </div>
 
-          <div className="d-lg-none">
+          <div className="d-lg-none" hidden={!isToken}>
             <FontAwesomeIcon
               icon={faQrcode}
               size="xl"
@@ -276,7 +276,10 @@ function AdminNavbar(props) {
               {/* <i className="tim-icons icon-spaceship" /> */}
               {/* <FontAwesomeIcon icon={faSearch}/> */}
 
-              <div
+
+
+                {/* 웹qr > 필요엉ㅂ음*/}
+              {/* <div
                 hidden={collapseOpen}
                 style={{ paddingTop: 10, paddingInline: 20 }}
               >
@@ -286,7 +289,7 @@ function AdminNavbar(props) {
                   color="white"
                   onClick={toggleModalSearch}
                 />
-              </div>
+              </div> */}
 
               <Link
                 to="/tables"

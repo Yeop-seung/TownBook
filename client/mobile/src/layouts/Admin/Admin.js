@@ -132,7 +132,7 @@ function Admin(props) {
                 
 
 
-                <Redirect from="/" to="/map" />
+                {/* <Redirect from="/" to="/map" /> */}
               </Switch>
               {
                 // we don't want the Footer to be rendered on map page
