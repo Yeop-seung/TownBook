@@ -7,7 +7,7 @@ import net.minidev.json.JSONArray;
 
 public interface MyPageService {
     
-    Optional<Object> getQrCode(String accountEmail) throws WriterException, IOException;
+    Optional<Object> getQrCode(String qrSource) throws WriterException, IOException;
     
     Integer findPointByAccountNo(Long accountNo) throws Exception;
     
