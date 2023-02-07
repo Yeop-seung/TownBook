@@ -41,7 +41,7 @@ function Login(props) {
     axios
       .post(
         "https://i8b201.p.ssafy.io/backend/auth/login",
-        { accountEmail, accountPw }
+        {  accountEmail, accountPw }
         // {
         //   method: "POST",
         //   body: JSON.stringify(userInfo),
