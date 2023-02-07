@@ -57,7 +57,6 @@ public class NoticeServiceImpl implements NoticeService {
     @Transactional
     public Boolean writeNotice(WriteNoticeRequestDto writeNoticeRequestDto) {
         try {
-            writeNoticeRequestDto.setNoticeWriteDateTime((LocalDateTime.now()));
             Notice notice = new Notice(writeNoticeRequestDto);
             noticeRepository.save(notice);
             return true;

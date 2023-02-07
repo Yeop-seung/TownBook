@@ -54,7 +54,10 @@ public class NoticeController {
      */
     @PostMapping("/write")
     public ResponseEntity<Boolean> writeNotice(WriteNoticeRequestDto writeNoticeRequestDto){
-        return new ResponseEntity<Boolean>(noticeService.writeNotice(writeNoticeRequestDto), HttpStatus.OK);
+        System.out.println("writeNoticeRequestDto = " + writeNoticeRequestDto);
+        Boolean check = noticeService.writeNotice(writeNoticeRequestDto);
+        System.out.println("check = "+ check);
+        return new ResponseEntity<Boolean>(check, HttpStatus.OK);
     }
     
     /**
