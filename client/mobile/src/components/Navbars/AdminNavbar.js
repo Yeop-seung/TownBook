@@ -36,7 +36,7 @@ import {
   Modal,
   NavbarToggler,
   ModalHeader,
-  ModalBody
+  ModalBody,
 } from "reactstrap";
 
 function AdminNavbar(props) {
@@ -51,8 +51,7 @@ function AdminNavbar(props) {
   const [sidebarOpened, setsidebarOpened] = React.useState(
     document.documentElement.className.indexOf("nav-open") !== -1
   );
-  const [imageUrl, setImageUrl] = React.useState('') 
-
+  const [imageUrl, setImageUrl] = React.useState("");
 
   const { logo } = props;
 
@@ -110,25 +109,29 @@ function AdminNavbar(props) {
   const toggleModalSearch = () => {
     setmodalSearch(!modalSearch);
     axios
-    .get(`https://i8b201.p.ssafy.io/backend/myPage/qr/${localStorage.getItem("accountEmail")}`, {
-      responseType: "arraybuffer",
-    })
-    // .get("https:///townbook/myPage/receive/${receiverNo}")
-    .then((res) => {
-      console.log(res);
-      
-      const base64 = btoa(
-        new Uint8Array(res.data).reduce(
-          (data, byte) => data + String.fromCharCode(byte),
-          ""
-        )
-      );
-      setImageUrl(`data:${res.headers["content-type"]};base64,${base64}`)
-     
-    })
-    .catch((error) => {
-      alert("qr로딩에 실패하였습니다.");
-    });
+      .get(
+        `https://i8b201.p.ssafy.io/backend/myPage/qr/${localStorage.getItem(
+          "accountEmail"
+        )}`,
+        {
+          responseType: "arraybuffer",
+        }
+      )
+      // .get("https:///townbook/myPage/receive/${receiverNo}")
+      .then((res) => {
+        console.log(res);
+
+        const base64 = btoa(
+          new Uint8Array(res.data).reduce(
+            (data, byte) => data + String.fromCharCode(byte),
+            ""
+          )
+        );
+        setImageUrl(`data:${res.headers["content-type"]};base64,${base64}`);
+      })
+      .catch((error) => {
+        alert("qr로딩에 실패하였습니다.");
+      });
   };
 
   const logout = () => {
@@ -140,7 +143,7 @@ function AdminNavbar(props) {
   let test;
   // function getQr(params) {
   //   console.log("getqr")
-   
+
   // }
   return (
     <>
@@ -163,13 +166,12 @@ function AdminNavbar(props) {
             </div>
           </div>
 
-          <div className="d-lg-none" >
+          <div className="d-lg-none">
             <FontAwesomeIcon
               icon={faQrcode}
               size="xl"
               color="white"
               onClick={toggleModalSearch}
-              
             />
           </div>
           {/* 화면 줄였을때 오른쪽  ... 바 */}
@@ -388,20 +390,18 @@ function AdminNavbar(props) {
         modalClassName="modal-search"
         isOpen={modalSearch}
         toggle={toggleModalSearch}
-        style={{width:'20%'}}
+        style={{ width: "70%" }}
       >
-        <ModalBody>
-          {/* <Input placeholder="QR이미지" type="text" /> */}
-          <img alt="..." className="avatar" src={imageUrl} />
-               
-          <button
-            aria-label="Close"
-            className="close"
-            onClick={toggleModalSearch}
-          >
-            <i className="tim-icons icon-simple-remove" />
-          </button>
-        </ModalBody>
+        {/* <Input placeholder="QR이미지" type="text" /> */}
+        <img alt="..." className="avatar" src={imageUrl} />
+
+        <button
+          aria-label="Close"
+          className="close"
+          onClick={toggleModalSearch}
+        >
+          <i className="tim-icons icon-simple-remove" />
+        </button>
       </Modal>
     </>
   );
