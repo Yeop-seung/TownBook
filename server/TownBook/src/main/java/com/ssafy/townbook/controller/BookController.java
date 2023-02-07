@@ -1,6 +1,8 @@
 package com.ssafy.townbook.controller;
 
+import com.ssafy.townbook.model.dto.BookDto;
 import com.ssafy.townbook.model.service.BookService;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,8 +30,8 @@ public class BookController {
      * @return List<BookDto>
      */
     @GetMapping("")
-    public ResponseEntity<?> books() throws Exception {
-        return new ResponseEntity<>(bookService.findAll(), HttpStatus.OK);
+    public ResponseEntity<List<BookDto>> books() throws Exception {
+        return new ResponseEntity<List<BookDto>>(bookService.findAll(), HttpStatus.OK);
     }
     
     /**
@@ -39,8 +41,8 @@ public class BookController {
      * @return BookDto
      */
     @GetMapping("/{bookIsbn}")
-    public ResponseEntity<?> findBookByBookIsbn(@PathVariable String bookIsbn) {
-        return new ResponseEntity<>(bookService.findBookByBookIsbn(bookIsbn), HttpStatus.OK);
+    public ResponseEntity<BookDto> findBookByBookIsbn(@PathVariable String bookIsbn) {
+        return new ResponseEntity<BookDto>(bookService.findBookByBookIsbn(bookIsbn), HttpStatus.OK);
     }
     
     /**
@@ -50,7 +52,7 @@ public class BookController {
      * @return BookDto
      */
     @GetMapping("/find/{bookIsbn}")
-    public ResponseEntity<?> addBook(@PathVariable String bookIsbn) {
-        return new ResponseEntity<>(bookService.addBook(bookIsbn), HttpStatus.OK);
+    public ResponseEntity<BookDto> addBook(@PathVariable String bookIsbn) {
+        return new ResponseEntity<BookDto>(bookService.addBook(bookIsbn), HttpStatus.OK);
     }
 }

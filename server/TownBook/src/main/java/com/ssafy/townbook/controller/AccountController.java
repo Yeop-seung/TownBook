@@ -7,6 +7,7 @@ import com.ssafy.townbook.model.service.EmailService;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import net.minidev.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,6 +32,7 @@ public class AccountController {
     
     @PostMapping("/signup")
     public ResponseEntity<AccountDto> signup(@Valid @RequestBody AccountDto accountDto) {
+        System.out.println("이거");
         return ResponseEntity.ok(accountService.signup(accountDto));
     }
     
@@ -141,7 +143,7 @@ public class AccountController {
      * @throws Exception
      */
     @GetMapping("/ranking/{accountNo}")
-    public ResponseEntity<?> findAccountBookCnt(@PathVariable Long accountNo) throws Exception {
-        return new ResponseEntity<>(accountService.findAccountBookCnt(accountNo), HttpStatus.OK);
+    public ResponseEntity<JSONArray> findAccountBookCnt(@PathVariable Long accountNo) throws Exception {
+        return new ResponseEntity<JSONArray>(accountService.findAccountBookCnt(accountNo), HttpStatus.OK);
     }
 }

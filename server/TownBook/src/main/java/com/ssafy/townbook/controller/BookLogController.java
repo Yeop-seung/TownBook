@@ -1,8 +1,10 @@
 package com.ssafy.townbook.controller;
 
+import com.ssafy.townbook.model.dto.BookLogDto;
 import com.ssafy.townbook.model.dto.request.DonateBookRequestDto;
 import com.ssafy.townbook.model.dto.request.ReceiveBookRequestDto;
 import com.ssafy.townbook.model.service.BookLogService;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,7 +34,7 @@ public class BookLogController {
      * @return List<BookLogDto>
      */
     @GetMapping("")
-    public ResponseEntity<?> bookLogs() {
+    public ResponseEntity<List<BookLogDto>> bookLogs() {
         return new ResponseEntity<>(bookLogService.findAll(), HttpStatus.OK);
     }
     
@@ -43,8 +45,8 @@ public class BookLogController {
      * @return BookLogDto
      */
     @GetMapping("/{bookLogNo}")
-    public ResponseEntity<?> findBookLogByBookLog(@PathVariable Long bookLogNo) {
-        return new ResponseEntity<>(bookLogService.findBookLogByBookLogNo(bookLogNo), HttpStatus.OK);
+    public ResponseEntity<BookLogDto> findBookLogByBookLog(@PathVariable Long bookLogNo) {
+        return new ResponseEntity<BookLogDto>(bookLogService.findBookLogByBookLogNo(bookLogNo), HttpStatus.OK);
     }
     
     /**
@@ -54,8 +56,8 @@ public class BookLogController {
      * @return List<BookLog>
      */
     @GetMapping("/account/{accountNo}")
-    public ResponseEntity<?> findBookLogByAccountNo(@PathVariable Long accountNo) {
-        return new ResponseEntity<>(bookLogService.findBookLogByAccountNo(accountNo), HttpStatus.OK);
+    public ResponseEntity<List<BookLogDto>> findBookLogByAccountNo(@PathVariable Long accountNo) {
+        return new ResponseEntity<List<BookLogDto>>(bookLogService.findBookLogByAccountNo(accountNo), HttpStatus.OK);
     }
     
     /**
