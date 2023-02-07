@@ -10,26 +10,26 @@ import lombok.Setter;
 @Setter
 public class BookDto {
     
-    private String bookIsbn;
-    private String bookSubject;
-    private String bookTitle;
-    private Integer bookVol;
-    private String bookAuthor;
-    private String bookPublisher;
+    private String    bookIsbn;
+    private String    bookSubject;
+    private String    bookTitle;
+    private Integer   bookVol;
+    private String    bookAuthor;
+    private String    bookPublisher;
     private LocalDate bookPublishPredate;
-    private String bookIntroductionURL;
-    private String bookTitleURL;
+    private String    bookIntroductionURL;
+    private String    bookTitleURL;
     
     @Builder
     public BookDto(Book book) {
-        this.bookIsbn = book.getBookIsbn();
-        this.bookSubject = book.getBookSubject();
-        this.bookTitle = book.getBookTitle();
-        this.bookVol = book.getBookVol();
-        this.bookAuthor = book.getBookAuthor();
-        this.bookPublisher = book.getBookPublisher();
-        this.bookPublishPredate = book.getBookPublishPredate();
+        this.bookIsbn            = book.getBookIsbn();
+        this.bookSubject         = book.getBookSubject();
+        this.bookTitle           = book.getBookTitle();
+        this.bookVol             = book.getBookVol();
+        this.bookAuthor          = book.getBookAuthor();
+        this.bookPublisher       = book.getBookPublisher();
+        this.bookPublishPredate  = book.getBookPublishPredate();
         this.bookIntroductionURL = book.getBookIntroductionURL();
-        this.bookTitleURL = book.getBookTitleURL();
+        this.bookTitleURL        = book.getBookTitleURL();
     }
 }

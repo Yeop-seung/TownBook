@@ -37,8 +37,8 @@ public class DetailLocker {
     
     @Builder
     public DetailLocker(Long detailLockerNo, Locker locker, Boolean detailLockerIsEmpty) {
-        this.detailLockerNo = detailLockerNo;
-        this.locker = locker;
+        this.detailLockerNo      = detailLockerNo;
+        this.locker              = locker;
         this.detailLockerIsEmpty = detailLockerIsEmpty;
     }
 }

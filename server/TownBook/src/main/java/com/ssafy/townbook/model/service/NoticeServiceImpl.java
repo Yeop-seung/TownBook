@@ -5,7 +5,6 @@ import com.ssafy.townbook.model.dto.request.ModifyNoticeRequestDto;
 import com.ssafy.townbook.model.dto.request.WriteNoticeRequestDto;
 import com.ssafy.townbook.model.entity.Notice;
 import com.ssafy.townbook.model.repository.NoticeRepository;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.transaction.Transactional;
@@ -26,7 +25,7 @@ public class NoticeServiceImpl implements NoticeService {
     /**
      * 공지사항 수정
      *
-     * @param notice
+     * @param modifyNoticeRequestDto
      * @return Boolean
      */
     @Override
@@ -48,7 +47,7 @@ public class NoticeServiceImpl implements NoticeService {
     /**
      * 공지사항 작성
      *
-     * @param notice
+     * @param writeNoticeRequestDto
      * @return Boolean
      */
     @Override

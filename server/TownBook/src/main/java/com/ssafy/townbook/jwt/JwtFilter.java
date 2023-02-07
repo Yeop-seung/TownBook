@@ -15,9 +15,9 @@ import org.springframework.web.filter.GenericFilterBean;
 
 public class JwtFilter extends GenericFilterBean {
     
-    private static final Logger logger = LoggerFactory.getLogger(JwtFilter.class);
-    public static final String AUTHORIZATION_HEADER = "Authorization";
-    private TokenProvider tokenProvider;
+    private static final Logger        logger               = LoggerFactory.getLogger(JwtFilter.class);
+    public static final  String        AUTHORIZATION_HEADER = "Authorization";
+    private              TokenProvider tokenProvider;
     
     public JwtFilter(TokenProvider tokenProvider) {
         this.tokenProvider = tokenProvider;
@@ -28,8 +28,8 @@ public class JwtFilter extends GenericFilterBean {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
             throws IOException, ServletException, ServletException {
         HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
-        String jwt = resolveToken(httpServletRequest); // request에서 토큰을 받음
-        String requestURI = httpServletRequest.getRequestURI();
+        String             jwt                = resolveToken(httpServletRequest); // request에서 토큰을 받음
+        String             requestURI         = httpServletRequest.getRequestURI();
         
         if (StringUtils.hasText(jwt) && tokenProvider.validateToken(jwt)) {
             Authentication authentication = tokenProvider.getAuthentication(jwt);

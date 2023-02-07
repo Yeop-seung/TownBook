@@ -9,13 +9,13 @@ import lombok.Setter;
 @Setter
 public class DetailLockerDto {
     
-    private Long detailLockerNo;
+    private Long    detailLockerNo;
     private Boolean detailLockerIsEmpty;
     
     @Builder
     public DetailLockerDto(DetailLocker detailLocker) {
         
-        this.detailLockerNo = detailLocker.getDetailLockerNo();
+        this.detailLockerNo      = detailLocker.getDetailLockerNo();
         this.detailLockerIsEmpty = detailLocker.getDetailLockerIsEmpty();
     }
 }

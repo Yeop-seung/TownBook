@@ -14,8 +14,8 @@ public class SearchTitleRequestDto {
     
     @Builder
     public SearchTitleRequestDto(String bookTitle, String lockerLatitude, String lockerLongitude) {
-        this.bookTitle = bookTitle;
-        this.lockerLatitude = Double.parseDouble(lockerLatitude);
+        this.bookTitle       = bookTitle;
+        this.lockerLatitude  = Double.parseDouble(lockerLatitude);
         this.lockerLongitude = Double.parseDouble(lockerLongitude);
     }
 }
