@@ -44,7 +44,7 @@ public class NoticeController {
      * @return Boolean
      */
     @PutMapping("/modify")
-    public ResponseEntity<Boolean> modifyNotice(ModifyNoticeRequestDto modifyNoticeRequestDto) {
+    public ResponseEntity<Boolean> modifyNotice(ModifyNoticeRequestDto modifyNoticeRequestDto){
         return new ResponseEntity<Boolean>(noticeService.modifyNotice(modifyNoticeRequestDto), HttpStatus.OK);
     }
     
@@ -53,7 +53,7 @@ public class NoticeController {
      * @return Boolean
      */
     @PostMapping("/write")
-    public ResponseEntity<Boolean> writeNotice(WriteNoticeRequestDto writeNoticeRequestDto) {
+    public ResponseEntity<Boolean> writeNotice(WriteNoticeRequestDto writeNoticeRequestDto)  throws Exception{
         return new ResponseEntity<Boolean>(noticeService.writeNotice(writeNoticeRequestDto), HttpStatus.OK);
     }
     

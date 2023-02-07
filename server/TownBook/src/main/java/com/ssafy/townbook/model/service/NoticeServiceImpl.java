@@ -5,23 +5,25 @@ import com.ssafy.townbook.model.dto.request.ModifyNoticeRequestDto;
 import com.ssafy.townbook.model.dto.request.WriteNoticeRequestDto;
 import com.ssafy.townbook.model.entity.Notice;
 import com.ssafy.townbook.model.repository.NoticeRepository;
-import java.util.List;
-import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @Transactional(readOnly = true)
 public class NoticeServiceImpl implements NoticeService {
-    
+
     private NoticeRepository noticeRepository;
-    
+
     @Autowired
     public NoticeServiceImpl(NoticeRepository noticeRepository) {
         this.noticeRepository = noticeRepository;
     }
-    
+
     /**
      * 공지사항 수정
      *
@@ -31,7 +33,7 @@ public class NoticeServiceImpl implements NoticeService {
     @Override
     @Transactional
     public Boolean modifyNotice(ModifyNoticeRequestDto modifyNoticeRequestDto) {
-        
+
         try {
             Notice notice = new Notice(modifyNoticeRequestDto);
             Notice modifyNotice = noticeRepository.findById(notice.getNoticeNo()).get();
@@ -44,7 +46,7 @@ public class NoticeServiceImpl implements NoticeService {
             return false;
         }
     }
-    
+
     /**
      * 공지사항 작성
      *
@@ -55,6 +57,7 @@ public class NoticeServiceImpl implements NoticeService {
     @Transactional
     public Boolean writeNotice(WriteNoticeRequestDto writeNoticeRequestDto) {
         try {
+            writeNoticeRequestDto.setNoticeWriteDateTime((LocalDateTime.now()));
             Notice notice = new Notice(writeNoticeRequestDto);
             noticeRepository.save(notice);
             return true;
@@ -63,7 +66,7 @@ public class NoticeServiceImpl implements NoticeService {
             return false;
         }
     }
-    
+
     /**
      * 공지사항 or 이용안내 가져오기
      *
@@ -77,7 +80,7 @@ public class NoticeServiceImpl implements NoticeService {
                 .map(NoticeDto::new)
                 .collect(Collectors.toList());
     }
-    
+
     /**
      * 공지 하나 가져오기
      *
@@ -89,7 +92,7 @@ public class NoticeServiceImpl implements NoticeService {
         Notice notice = noticeRepository.findById(noticeNo).get();
         return new NoticeDto(notice);
     }
-    
+
     /**
      * 공지사항 삭제
      *

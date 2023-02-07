@@ -40,8 +40,7 @@ public class Notice {
     @NotNull
     @Column(name = "notice_category")
     private Integer noticeCategory;
-    
-    @NotNull
+
     @Column(name = "notice_write_time")
     private LocalDateTime noticeWriteDateTime;
     
