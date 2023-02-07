@@ -12,7 +12,7 @@ public interface NoticeService {
     
     Boolean writeNotice(WriteNoticeRequestDto writeNoticeRequestDto);
     
-    List<NoticeDto> findTop8ByNoticeStateAndNoticeCategoryOrderByNoticeNo(Integer category);
+    List<NoticeDto> findByNoticeStateAndNoticeCategoryOrderByNoticeNo(Integer category);
     
     NoticeDto getNotice(Long noticeNo);
     
