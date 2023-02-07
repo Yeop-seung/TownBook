@@ -7,12 +7,12 @@ import com.ssafy.townbook.model.entity.Notice;
 import com.ssafy.townbook.model.repository.NoticeRepository;
 import java.util.List;
 import java.util.stream.Collectors;
-import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@Transactional
+@Transactional(readOnly = true)
 public class NoticeServiceImpl implements NoticeService {
     
     private NoticeRepository noticeRepository;
@@ -29,10 +29,11 @@ public class NoticeServiceImpl implements NoticeService {
      * @return Boolean
      */
     @Override
+    @Transactional
     public Boolean modifyNotice(ModifyNoticeRequestDto modifyNoticeRequestDto) {
         
         try {
-            Notice notice       = new Notice(modifyNoticeRequestDto);
+            Notice notice = new Notice(modifyNoticeRequestDto);
             Notice modifyNotice = noticeRepository.findById(notice.getNoticeNo()).get();
             modifyNotice.setNoticeContent(notice.getNoticeContent());
             modifyNotice.setNoticeTitle(notice.getNoticeTitle());
@@ -51,6 +52,7 @@ public class NoticeServiceImpl implements NoticeService {
      * @return Boolean
      */
     @Override
+    @Transactional
     public Boolean writeNotice(WriteNoticeRequestDto writeNoticeRequestDto) {
         try {
             Notice notice = new Notice(writeNoticeRequestDto);
@@ -95,6 +97,7 @@ public class NoticeServiceImpl implements NoticeService {
      * @return Boolean
      */
     @Override
+    @Transactional
     public Boolean removeNotice(Long noticeNo) {
         try {
             Notice notice = noticeRepository.findById(noticeNo).get();
