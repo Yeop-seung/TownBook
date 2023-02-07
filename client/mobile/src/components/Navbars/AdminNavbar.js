@@ -388,6 +388,7 @@ function AdminNavbar(props) {
         modalClassName="modal-search"
         isOpen={modalSearch}
         toggle={toggleModalSearch}
+        style={{width:'20%'}}
       >
         <ModalBody>
           {/* <Input placeholder="QR이미지" type="text" /> */}
