@@ -1,9 +1,7 @@
 package com.ssafy.townbook.controller;
 
-import com.ssafy.townbook.model.dto.NoticeDto;
 import com.ssafy.townbook.model.dto.request.ModifyNoticeRequestDto;
 import com.ssafy.townbook.model.dto.request.WriteNoticeRequestDto;
-import com.ssafy.townbook.model.entity.Notice;
 import com.ssafy.townbook.model.service.NoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -40,7 +38,7 @@ public class NoticeController {
     /**
      * 공지사항 수정
      *
-     * @param notice
+     * @param modifyNoticeRequestDto
      * @return Boolean
      */
     @PutMapping("/modify")
@@ -49,7 +47,7 @@ public class NoticeController {
     }
     
     /**
-     * @param notice
+     * @param writeNoticeRequestDto
      * @return Boolean
      */
     @PostMapping("/write")

@@ -35,12 +35,12 @@ public class NoticeDto {
     
     @Builder
     public NoticeDto(Notice notice) {
-        this.noticeTitle = notice.getNoticeTitle();
-        this.noticeContent = notice.getNoticeContent();
-        this.noticeCategory = notice.getNoticeCategory();
-        this.noticeState = notice.getNoticeState();
-        this.noticeViews = notice.getNoticeViews();
+        this.noticeTitle         = notice.getNoticeTitle();
+        this.noticeContent       = notice.getNoticeContent();
+        this.noticeCategory      = notice.getNoticeCategory();
+        this.noticeState         = notice.getNoticeState();
+        this.noticeViews         = notice.getNoticeViews();
         this.noticeWriteDateTime = notice.getNoticeWriteDateTime();
-        this.adminDto = new AdminDto(notice.getAccount());
+        this.adminDto            = new AdminDto(notice.getAccount());
     }
 }

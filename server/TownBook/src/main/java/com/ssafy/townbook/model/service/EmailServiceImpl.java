@@ -14,15 +14,17 @@ import org.springframework.stereotype.Service;
 @Service
 public class EmailServiceImpl implements EmailService {
     
+    private JavaMailSender    emailSender;
+    private PasswordEncoder   passwordEncoder;
+    private AccountRepository accountRepository;
     
     @Autowired
-    JavaMailSender emailSender;
-    
-    @Autowired
-    PasswordEncoder passwordEncoder;
-    
-    @Autowired
-    AccountRepository accountRepository;
+    public EmailServiceImpl(JavaMailSender emailSender, PasswordEncoder passwordEncoder,
+                            AccountRepository accountRepository) {
+        this.emailSender       = emailSender;
+        this.passwordEncoder   = passwordEncoder;
+        this.accountRepository = accountRepository;
+    }
     
     public static final String ePw = createKey();
     
@@ -69,7 +71,7 @@ public class EmailServiceImpl implements EmailService {
      */
     public static String createKey() {
         StringBuffer key = new StringBuffer();
-        Random rnd = new Random();
+        Random       rnd = new Random();
         
         for (int i = 0; i < 8; i++) { // 인증코드 8자리
             int index = rnd.nextInt(3); // 0~2 까지 랜덤

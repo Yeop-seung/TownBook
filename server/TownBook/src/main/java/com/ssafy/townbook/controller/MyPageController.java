@@ -31,10 +31,10 @@ public class MyPageController {
      */
     @GetMapping("/qr/{accountEmail}")
     public Object createQr(@PathVariable String accountEmail) throws WriterException, IOException {
-//        return new ResponseEntity<>(myPageService.getQrCode(accountEmail).get(), HttpStatus.OK);
+        //        return new ResponseEntity<>(myPageService.getQrCode(accountEmail).get(), HttpStatus.OK);
         return myPageService.getQrCode(accountEmail).get();
     }
-
+    
     
     /**
      * 로그인 유저의 포인트 반환

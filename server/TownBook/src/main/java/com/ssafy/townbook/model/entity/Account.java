@@ -93,28 +93,28 @@ public class Account {
     
     @Builder
     public Account(Long accountNo, String accountEmail, String accountPw, String accountName,
-            String accountAddress, String accountPhoneNumber, Integer accountGender,
-            Integer accountPoint, Integer accountBookCnt, String accountNickname,
-            String accountBirthDay, BookLog bookLog, Boolean accountActivated, List<WishList> wishLists,
-            List<File> files,
-            List<Notice> notices,
-            Set<Authority> authorities) {
-        this.accountNo = accountNo;
-        this.accountEmail = accountEmail;
-        this.accountPw = accountPw;
-        this.accountName = accountName;
-        this.accountAddress = accountAddress;
+                   String accountAddress, String accountPhoneNumber, Integer accountGender,
+                   Integer accountPoint, Integer accountBookCnt, String accountNickname,
+                   String accountBirthDay, BookLog bookLog, Boolean accountActivated, List<WishList> wishLists,
+                   List<File> files,
+                   List<Notice> notices,
+                   Set<Authority> authorities) {
+        this.accountNo          = accountNo;
+        this.accountEmail       = accountEmail;
+        this.accountPw          = accountPw;
+        this.accountName        = accountName;
+        this.accountAddress     = accountAddress;
         this.accountPhoneNumber = accountPhoneNumber;
-        this.accountGender = accountGender;
-        this.accountPoint = accountPoint;
-        this.accountBookCnt = accountBookCnt;
-        this.accountNickname = accountNickname;
-        this.accountBirthDay = accountBirthDay;
-        this.bookLog = bookLog;
-        this.accountActivated = accountActivated;
-        this.wishLists = wishLists;
-        this.files = files;
-        this.authorities = authorities;
-        this.notices = notices;
+        this.accountGender      = accountGender;
+        this.accountPoint       = accountPoint;
+        this.accountBookCnt     = accountBookCnt;
+        this.accountNickname    = accountNickname;
+        this.accountBirthDay    = accountBirthDay;
+        this.bookLog            = bookLog;
+        this.accountActivated   = accountActivated;
+        this.wishLists          = wishLists;
+        this.files              = files;
+        this.authorities        = authorities;
+        this.notices            = notices;
     }
 }

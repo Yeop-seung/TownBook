@@ -14,9 +14,9 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 public class EmailConfig {
     
     @Value("${mail.smtp.port}")
-    private int port;
+    private int     port;
     @Value("${mail.smtp.socketFactory.port}")
-    private int socketPort;
+    private int     socketPort;
     @Value("${mail.smtp.auth}")
     private boolean auth;
     @Value("${mail.smtp.starttls.enable}")
@@ -26,9 +26,9 @@ public class EmailConfig {
     @Value("${mail.smtp.socketFactory.fallback}")
     private boolean fallback;
     @Value("${AdminMail.id}")
-    private String id;
+    private String  id;
     @Value("${AdminMail.password}")
-    private String password;
+    private String  password;
     
     /**
      * 메일 보낼 설정

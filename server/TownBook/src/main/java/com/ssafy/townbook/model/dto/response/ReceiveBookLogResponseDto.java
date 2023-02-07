@@ -1,8 +1,6 @@
 package com.ssafy.townbook.model.dto.response;
 
-import com.ssafy.townbook.model.dto.BookLogDto;
 import com.ssafy.townbook.model.entity.Book;
-import com.ssafy.townbook.model.entity.BookLog;
 import com.ssafy.townbook.model.entity.DetailLocker;
 import com.ssafy.townbook.model.entity.Locker;
 import lombok.Builder;
