@@ -1,6 +1,8 @@
 package com.ssafy.townbook.controller;
 
+import com.ssafy.townbook.model.dto.LockerDto;
 import com.ssafy.townbook.model.service.LockerService;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,8 +31,8 @@ public class LockerController {
      * @return List<LockerDto>
      */
     @GetMapping("")
-    public ResponseEntity<?> lockers() {
-        return new ResponseEntity<>(lockerService.findAll(), HttpStatus.OK);
+    public ResponseEntity<List<LockerDto>> lockers() {
+        return new ResponseEntity<List<LockerDto>>(lockerService.findAll(), HttpStatus.OK);
     }
     
     /**
@@ -40,8 +42,8 @@ public class LockerController {
      * @return LockerDto
      */
     @GetMapping("/{lockerNo}")
-    public ResponseEntity<?> findLockerByLockerNo(@PathVariable Long lockerNo) {
-        return new ResponseEntity<>(lockerService.findLockerByLockerNo(lockerNo), HttpStatus.OK);
+    public ResponseEntity<LockerDto> findLockerByLockerNo(@PathVariable Long lockerNo) {
+        return new ResponseEntity<LockerDto>(lockerService.findLockerByLockerNo(lockerNo), HttpStatus.OK);
     }
     
     /**
@@ -52,10 +54,10 @@ public class LockerController {
      * @return Boolean
      */
     @PostMapping("/add/{lockerRegion}/{detailLockerCount}/{lockerLatitude}/{lockerLongitude}")
-    public ResponseEntity<?> addLocker(
+    public ResponseEntity<Boolean> addLocker(
             @PathVariable String lockerRegion, @PathVariable int detailLockerCount,
             @PathVariable Double lockerLatitude, @PathVariable Double lockerLongitude) {
-        return new ResponseEntity<>(
+        return new ResponseEntity<Boolean>(
                 lockerService.addLocker(lockerRegion, detailLockerCount, lockerLatitude, lockerLongitude),
                 HttpStatus.OK);
     }

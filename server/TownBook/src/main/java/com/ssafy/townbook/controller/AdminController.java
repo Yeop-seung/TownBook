@@ -1,7 +1,10 @@
 package com.ssafy.townbook.controller;
 
+import com.ssafy.townbook.model.dto.AdminDto;
 import com.ssafy.townbook.model.service.AdminService;
 import com.ssafy.townbook.model.service.MyPageServiceImpl;
+import java.util.List;
+import net.minidev.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,8 +34,8 @@ public class AdminController {
      * @return List<AccountDto>
      */
     @GetMapping("")
-    public ResponseEntity<?> findAccounts() {
-        return new ResponseEntity<>(adminService.findAll(), HttpStatus.OK);
+    public ResponseEntity<List<AdminDto>> findAccounts() {
+        return new ResponseEntity<List<AdminDto>>(adminService.findAll(), HttpStatus.OK);
     }
     
     /**
@@ -42,8 +45,8 @@ public class AdminController {
      * @return AccountDto
      */
     @GetMapping("/{accountNo}")
-    public ResponseEntity<?> findAccountByAccountNo(@PathVariable Long accountNo) {
-        return new ResponseEntity<>(adminService.findAccountByAccountNo(accountNo), HttpStatus.OK);
+    public ResponseEntity<AdminDto> findAccountByAccountNo(@PathVariable Long accountNo) {
+        return new ResponseEntity<AdminDto>(adminService.findAccountByAccountNo(accountNo), HttpStatus.OK);
     }
     
     /**
@@ -54,7 +57,7 @@ public class AdminController {
      * @throws Exception
      */
     @GetMapping("/detail/{accountNo}/log")
-    public ResponseEntity<?> findBookLogByAccountNo(@PathVariable Long accountNo) throws Exception {
-        return new ResponseEntity<>(myPageService.findBookLogByAccountNo(accountNo), HttpStatus.OK);
+    public ResponseEntity<JSONArray> findBookLogByAccountNo(@PathVariable Long accountNo) throws Exception {
+        return new ResponseEntity<JSONArray>(myPageService.findBookLogByAccountNo(accountNo), HttpStatus.OK);
     }
 }

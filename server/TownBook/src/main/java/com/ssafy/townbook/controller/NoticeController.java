@@ -1,8 +1,10 @@
 package com.ssafy.townbook.controller;
 
+import com.ssafy.townbook.model.dto.NoticeDto;
 import com.ssafy.townbook.model.dto.request.ModifyNoticeRequestDto;
 import com.ssafy.townbook.model.dto.request.WriteNoticeRequestDto;
 import com.ssafy.townbook.model.service.NoticeService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,8 +33,8 @@ public class NoticeController {
      * @return noticeDto
      */
     @GetMapping("/{noticeNo}")
-    public ResponseEntity<?> getNotice(@PathVariable Long noticeNo) {
-        return new ResponseEntity(noticeService.getNotice(noticeNo), HttpStatus.OK);
+    public ResponseEntity<NoticeDto> getNotice(@PathVariable Long noticeNo) {
+        return new ResponseEntity<NoticeDto>(noticeService.getNotice(noticeNo), HttpStatus.OK);
     }
     
     /**
@@ -42,8 +44,8 @@ public class NoticeController {
      * @return Boolean
      */
     @PutMapping("/modify")
-    public ResponseEntity<?> modifyNotice(ModifyNoticeRequestDto modifyNoticeRequestDto) {
-        return new ResponseEntity<>(noticeService.modifyNotice(modifyNoticeRequestDto), HttpStatus.OK);
+    public ResponseEntity<Boolean> modifyNotice(ModifyNoticeRequestDto modifyNoticeRequestDto) {
+        return new ResponseEntity<Boolean>(noticeService.modifyNotice(modifyNoticeRequestDto), HttpStatus.OK);
     }
     
     /**
@@ -51,8 +53,8 @@ public class NoticeController {
      * @return Boolean
      */
     @PostMapping("/write")
-    public ResponseEntity<?> writeNotice(WriteNoticeRequestDto writeNoticeRequestDto) {
-        return new ResponseEntity<>(noticeService.writeNotice(writeNoticeRequestDto), HttpStatus.OK);
+    public ResponseEntity<Boolean> writeNotice(WriteNoticeRequestDto writeNoticeRequestDto) {
+        return new ResponseEntity<Boolean>(noticeService.writeNotice(writeNoticeRequestDto), HttpStatus.OK);
     }
     
     /**
@@ -62,8 +64,10 @@ public class NoticeController {
      * @return List<NoticeDto>
      */
     @GetMapping("/list/{category}")
-    public ResponseEntity<?> findTop8ByNoticeStateAndNoticeCategoryOrderByNoticeNo(@PathVariable Integer category) {
-        return new ResponseEntity(noticeService.findTop8ByNoticeStateAndNoticeCategoryOrderByNoticeNo(category),
+    public ResponseEntity<List<NoticeDto>> findTop8ByNoticeStateAndNoticeCategoryOrderByNoticeNo(
+            @PathVariable Integer category) {
+        return new ResponseEntity<List<NoticeDto>>(
+                noticeService.findTop8ByNoticeStateAndNoticeCategoryOrderByNoticeNo(category),
                 HttpStatus.OK);
     }
     
@@ -74,7 +78,7 @@ public class NoticeController {
      * @return Boolean
      */
     @PutMapping("/remove")
-    public ResponseEntity removeNotice(Long noticeNo) {
-        return new ResponseEntity(noticeService.removeNotice(noticeNo), HttpStatus.OK);
+    public ResponseEntity<Boolean> removeNotice(Long noticeNo) {
+        return new ResponseEntity<Boolean>(noticeService.removeNotice(noticeNo), HttpStatus.OK);
     }
 }
