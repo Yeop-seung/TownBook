@@ -72,8 +72,8 @@ public class Account {
     @ColumnDefault("true")
     private Boolean accountActivated;
     
-    @OneToOne(mappedBy = "account")
-    private BookLog bookLog;
+    @OneToMany(mappedBy = "account")
+    private List<BookLog> bookLog;
     
     @OneToMany(mappedBy = "account")
     private List<WishList> wishLists = new ArrayList<>();
@@ -92,13 +92,10 @@ public class Account {
     private Set<Authority> authorities;
     
     @Builder
-    public Account(Long accountNo, String accountEmail, String accountPw, String accountName,
-                   String accountAddress, String accountPhoneNumber, Integer accountGender,
-                   Integer accountPoint, Integer accountBookCnt, String accountNickname,
-                   String accountBirthDay, BookLog bookLog, Boolean accountActivated, List<WishList> wishLists,
-                   List<File> files,
-                   List<Notice> notices,
-                   Set<Authority> authorities) {
+    public Account(Long accountNo, String accountEmail, String accountPw, String accountName, String accountAddress,
+                   String accountPhoneNumber, Integer accountGender, Integer accountPoint, Integer accountBookCnt,
+                   String accountNickname, String accountBirthDay, Boolean accountActivated, List<BookLog> bookLog,
+                   List<WishList> wishLists, List<File> files, List<Notice> notices, Set<Authority> authorities) {
         this.accountNo          = accountNo;
         this.accountEmail       = accountEmail;
         this.accountPw          = accountPw;
@@ -110,11 +107,11 @@ public class Account {
         this.accountBookCnt     = accountBookCnt;
         this.accountNickname    = accountNickname;
         this.accountBirthDay    = accountBirthDay;
-        this.bookLog            = bookLog;
         this.accountActivated   = accountActivated;
+        this.bookLog            = bookLog;
         this.wishLists          = wishLists;
         this.files              = files;
-        this.authorities        = authorities;
         this.notices            = notices;
+        this.authorities        = authorities;
     }
 }

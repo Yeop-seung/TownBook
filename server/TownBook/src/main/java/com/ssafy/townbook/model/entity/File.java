@@ -29,6 +29,9 @@ public class File {
     private String filePath;
     
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "`fk-account-file`")
+    @JoinColumn(name = "`fk-account-file`", insertable = false, updatable = false)
     private Account account;
+    
+    @Column(name = "`fk-account-file`")
+    private Long accountNo;
 }

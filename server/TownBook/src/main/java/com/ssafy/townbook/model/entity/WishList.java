@@ -22,11 +22,16 @@ public class WishList {
     private Long wishListNo;
     
     @ManyToOne
-    @JoinColumn(name = "`fk-account-wish_list`")
+    @JoinColumn(name = "`fk-account-wish_list`", insertable = false, updatable = false)
     private Account account;
     
+    @Column(name = "`fk-account-wish_list`")
+    private Long accountNo;
     
     @ManyToOne
-    @JoinColumn(name = "`fk-book_log-wish_list`")
+    @JoinColumn(name = "`fk-book_log-wish_list`", insertable = false, updatable = false)
     private BookLog bookLog;
+    
+    @Column(name = "`fk-book_log-wish_list`")
+    private Long bookLogNo;
 }

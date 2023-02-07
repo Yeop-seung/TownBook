@@ -30,7 +30,7 @@ public interface BookLogService {
      * @param lockerNo
      * @return List<BookDto>
      */
-    List<ReceiveBookLogResponseDto> findBookLogByLockerNo(Long lockerNo);
+    List<BookLogDto> findBookLogByLockerNo(Long lockerNo);
     
     /**
      * 단일 도서의 모든 리뷰 조회
@@ -63,7 +63,7 @@ public interface BookLogService {
      * @return Boolean
      * @throws Exception
      */
-    boolean receiveBook(ReceiveBookRequestDto receiveBookRequestDto) throws Exception;
+    ReceiveBookLogResponseDto receiveBook(ReceiveBookRequestDto receiveBookRequestDto) throws Exception;
     
     /**
      * 제목 검색해서 북로그 반환

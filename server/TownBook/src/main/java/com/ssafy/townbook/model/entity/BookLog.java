@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -45,17 +46,23 @@ public class BookLog {
     private LocalDateTime bookLogReceiveDateTime;
     
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "`fk-locker-book_log`")
+    @JoinColumn(name = "`fk-locker-book_log`", insertable = false, updatable = false)
     private Locker locker;
     
+    @Column(name = "`fk-locker-book_log`")
+    private Long lockerNo;
+    
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "`fk-detail_locker-book_log`")
+    @JoinColumn(name = "`fk-detail_locker-book_log`", insertable = false, updatable = false)
     private DetailLocker detailLocker;
+    
+    @Column(name = "`fk-detail_locker-book_log`")
+    private Long detailLockerNo;
     
     @OneToMany(mappedBy = "bookLog")
     private List<WishList> wishLists = new ArrayList<>();
     
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "`fk-account-book_log`", insertable = false, updatable = false)
     private Account account;
     
@@ -69,12 +76,16 @@ public class BookLog {
     @Column(name = "`fk-book-book_log`")
     private String bookIsbn;
     
-    public BookLog(Long accountNo, String bookIsbn) {
-        this.accountNo = accountNo;
-        this.bookIsbn  = bookIsbn;
+    @Builder
+    public BookLog(Long lockerNo, Long detailLockerNo, Long accountNo, String bookIsbn) {
+        this.lockerNo              = lockerNo;
+        this.detailLockerNo        = detailLockerNo;
+        this.accountNo             = accountNo;
+        this.bookIsbn              = bookIsbn;
+        this.bookLogDonateDateTime = LocalDateTime.now();
     }
     
-    
+    @Builder
     public BookLog(Long bookLogNo, Boolean bookLogState, String bookLogReview, Long bookLogReceiverNo,
                    LocalDateTime bookLogDonateDateTime, LocalDateTime bookLogReceiveDateTime, Locker locker,
                    DetailLocker detailLocker, Account account, Book book, List<WishList> wishLists) {
