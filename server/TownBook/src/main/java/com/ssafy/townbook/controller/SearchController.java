@@ -2,12 +2,8 @@ package com.ssafy.townbook.controller;
 
 import com.ssafy.townbook.model.dto.BookLogDto;
 import com.ssafy.townbook.model.dto.LockerDto;
-import com.ssafy.townbook.model.dto.response.ReceiveBookLogResponseDto;
 import com.ssafy.townbook.model.entity.Book;
-import com.ssafy.townbook.model.entity.Locker;
-import com.ssafy.townbook.model.repository.BookLogRepository;
 import com.ssafy.townbook.model.repository.BookRepository;
-import com.ssafy.townbook.model.repository.LockerRepository;
 import com.ssafy.townbook.model.service.BookLogService;
 import com.ssafy.townbook.model.service.LockerService;
 import java.util.List;
@@ -45,12 +41,12 @@ public class SearchController {
      * @return List<BookLogDto>
      */
     @GetMapping("/searchTitle/{bookTitle}")
-    public ResponseEntity<?> findBookLogByBookTitle(@PathVariable String bookTitle) {
-        return new ResponseEntity<>(bookLogService.findBookLogByBookTitle(bookTitle), HttpStatus.OK);
+    public ResponseEntity<List<BookLogDto>> findBookLogByBookTitle(@PathVariable String bookTitle) {
+        return new ResponseEntity<List<BookLogDto>>(bookLogService.findBookLogByBookTitle(bookTitle), HttpStatus.OK);
     }
     
     @GetMapping("/searchLocker/{lockerNo}")
-    public ResponseEntity<?> findLockerByLockerNo(@PathVariable Long lockerNo) {
+    public ResponseEntity<JSONObject> findLockerByLockerNo(@PathVariable Long lockerNo) {
         LockerDto        findLockerDto   = lockerService.findLockerByLockerNo(lockerNo);
         List<BookLogDto> findBookLogDtos = bookLogService.findBookLogByLockerNo(lockerNo);
         JSONObject       jsonObject      = new JSONObject();
@@ -71,6 +67,6 @@ public class SearchController {
             jsonArray.add(jsonObject1);
         }
         jsonObject.put("BookLogDtos", jsonArray);
-        return new ResponseEntity<>(jsonObject, HttpStatus.OK);
+        return new ResponseEntity<JSONObject>(jsonObject, HttpStatus.OK);
     }
 }

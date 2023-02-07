@@ -24,32 +24,36 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
-
-    @Autowired
-    private AccountService accountService;
-
-    @Autowired
-    private TokenProvider tokenProvider;
-
-    @Autowired
+    
+    private AccountService               accountService;
+    private TokenProvider                tokenProvider;
     private AuthenticationManagerBuilder authenticationManagerBuilder;
-
-
+    
+    @Autowired
+    public AuthController(AccountService accountService, TokenProvider tokenProvider,
+                          AuthenticationManagerBuilder authenticationManagerBuilder) {
+        this.accountService               = accountService;
+        this.tokenProvider                = tokenProvider;
+        this.authenticationManagerBuilder = authenticationManagerBuilder;
+    }
+    
     @PostMapping("/login")
     public ResponseEntity<TokenDto> authorize(@Valid @RequestBody LoginDto loginDto) {
-
+        
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(loginDto.getAccountEmail(), loginDto.getAccountPw());
-
+        
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
-
+        
         SecurityContextHolder.getContext().setAuthentication(authentication);
-
+        
         String jwt = tokenProvider.createToken(authentication);
-
+        
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER, "Bearera" + jwt);
-
-        return new ResponseEntity<>(new TokenDto(accountService.findAccountByAccountEmail(loginDto.getAccountEmail()), jwt), httpHeaders, HttpStatus.OK);
+        
+        return new ResponseEntity<TokenDto>(
+                new TokenDto(accountService.findAccountByAccountEmail(loginDto.getAccountEmail()), jwt), httpHeaders,
+                HttpStatus.OK);
     }
 }

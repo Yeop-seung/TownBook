@@ -1,8 +1,13 @@
 package com.ssafy.townbook.controller;
 
+import com.ssafy.townbook.model.dto.BookLogDto;
 import com.ssafy.townbook.model.dto.request.DonateBookRequestDto;
 import com.ssafy.townbook.model.dto.request.ReceiveBookRequestDto;
+import com.ssafy.townbook.model.dto.response.DonateBookLogResponseDto;
+import com.ssafy.townbook.model.dto.response.ReceiveBookLogResponseDto;
+import com.ssafy.townbook.model.entity.BookLog;
 import com.ssafy.townbook.model.service.BookLogService;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,8 +37,8 @@ public class BookLogController {
      * @return List<BookLogDto>
      */
     @GetMapping("")
-    public ResponseEntity<?> bookLogs() {
-        return new ResponseEntity<>(bookLogService.findAll(), HttpStatus.OK);
+    public ResponseEntity<List<BookLogDto>> bookLogs() {
+        return new ResponseEntity<List<BookLogDto>>(bookLogService.findAll(), HttpStatus.OK);
     }
     
     /**
@@ -43,8 +48,8 @@ public class BookLogController {
      * @return BookLogDto
      */
     @GetMapping("/{bookLogNo}")
-    public ResponseEntity<?> findBookLogByBookLog(@PathVariable Long bookLogNo) {
-        return new ResponseEntity<>(bookLogService.findBookLogByBookLogNo(bookLogNo), HttpStatus.OK);
+    public ResponseEntity<BookLogDto> findBookLogByBookLog(@PathVariable Long bookLogNo) {
+        return new ResponseEntity<BookLogDto>(bookLogService.findBookLogByBookLogNo(bookLogNo), HttpStatus.OK);
     }
     
     /**
@@ -54,8 +59,8 @@ public class BookLogController {
      * @return List<BookLog>
      */
     @GetMapping("/account/{accountNo}")
-    public ResponseEntity<?> findBookLogByAccountNo(@PathVariable Long accountNo) {
-        return new ResponseEntity<>(bookLogService.findBookLogByAccountNo(accountNo), HttpStatus.OK);
+    public ResponseEntity<List<BookLogDto>> findBookLogByAccountNo(@PathVariable Long accountNo) {
+        return new ResponseEntity<List<BookLogDto>>(bookLogService.findBookLogByAccountNo(accountNo), HttpStatus.OK);
     }
     
     /**
@@ -65,8 +70,8 @@ public class BookLogController {
      * @return List<BookDto>
      */
     @GetMapping("/locker/{lockerNo}")
-    public ResponseEntity<?> findBookLogByLockerNo(@PathVariable Long lockerNo) {
-        return new ResponseEntity<>(bookLogService.findBookLogByLockerNo(lockerNo), HttpStatus.OK);
+    public ResponseEntity<List<BookLogDto>> findBookLogByLockerNo(@PathVariable Long lockerNo) {
+        return new ResponseEntity<List<BookLogDto>>(bookLogService.findBookLogByLockerNo(lockerNo), HttpStatus.OK);
     }
     
     /**
@@ -76,8 +81,8 @@ public class BookLogController {
      * @return List<BookLogDto.bookLogReview>
      */
     @GetMapping("/review/{bookIsbn}")
-    public ResponseEntity<?> findBookLogReviewByBookIsbn(@PathVariable String bookIsbn) {
-        return new ResponseEntity<>(bookLogService.findBookLogReviewByBookIsbn(bookIsbn), HttpStatus.OK);
+    public ResponseEntity<List<String>> findBookLogReviewByBookIsbn(@PathVariable String bookIsbn) {
+        return new ResponseEntity<List<String>>(bookLogService.findBookLogReviewByBookIsbn(bookIsbn), HttpStatus.OK);
     }
     
     /**
@@ -87,8 +92,8 @@ public class BookLogController {
      * @return AdminDto
      */
     @PostMapping("/donateBook")
-    public ResponseEntity<?> donateBook(@RequestBody DonateBookRequestDto donateBookRequestDto) throws Exception {
-        return new ResponseEntity<>(bookLogService.donateBook(donateBookRequestDto), HttpStatus.OK);
+    public ResponseEntity<DonateBookLogResponseDto> donateBook(@RequestBody DonateBookRequestDto donateBookRequestDto) throws Exception {
+        return new ResponseEntity<DonateBookLogResponseDto>(bookLogService.donateBook(donateBookRequestDto), HttpStatus.OK);
     }
     
     /**
@@ -99,7 +104,7 @@ public class BookLogController {
      * @throws Exception
      */
     @PostMapping("/receiveBook")
-    public ResponseEntity<?> receiveBook(@RequestBody ReceiveBookRequestDto receiveBookRequestDto) throws Exception {
-        return new ResponseEntity<>(bookLogService.receiveBook(receiveBookRequestDto), HttpStatus.OK);
+    public ResponseEntity<ReceiveBookLogResponseDto> receiveBook(@RequestBody ReceiveBookRequestDto receiveBookRequestDto) throws Exception {
+        return new ResponseEntity<ReceiveBookLogResponseDto>(bookLogService.receiveBook(receiveBookRequestDto), HttpStatus.OK);
     }
 }
