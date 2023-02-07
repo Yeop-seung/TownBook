@@ -3,12 +3,14 @@ package com.ssafy.townbook.model.service;
 import com.ssafy.townbook.exception.DuplicateMemberException;
 import com.ssafy.townbook.exception.NotFoundMemberException;
 import com.ssafy.townbook.model.dto.AccountDto;
+import com.ssafy.townbook.model.dto.AdminDto;
 import com.ssafy.townbook.model.entity.Account;
 import com.ssafy.townbook.model.entity.Authority;
 import com.ssafy.townbook.model.repository.AccountRepository;
 import com.ssafy.townbook.util.SecurityUtil;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -180,11 +182,14 @@ public class AccountServiceImpl implements AccountService {
      */
     public JSONArray findAccountBookCnt(Long accountNo) throws Exception {
         JSONArray jsonArray = new JSONArray();
-        List<Account> accounts = accountRepository.findAccountByAccountActivatedOrderByAccountBookCntDesc(true).get();
+        List<AdminDto> accounts = accountRepository.findAccountByAccountActivatedOrderByAccountBookCntDesc(true).get()
+                .stream()
+                .map(AdminDto::new)
+                .collect(Collectors.toList());
         
         int size = 10;
         int rank = 1;
-        int cnt = -1;
+        int cnt  = -1;
         
         // 유저가 존재할 경우
         if (accounts.size() != 0) {
@@ -201,7 +206,7 @@ public class AccountServiceImpl implements AccountService {
         
         // TOP10 찾기
         for (int i = 0; i < size; i++) {
-            Account account = accounts.get(i);
+            AdminDto account = accounts.get(i);
             
             System.out.println(cnt);
             if (cnt != account.getAccountBookCnt()) {
@@ -223,7 +228,7 @@ public class AccountServiceImpl implements AccountService {
         }
         
         // 자신의 rank 찾기
-        for (Account account : accounts
+        for (AdminDto account : accounts
         ) {
             if (account.getAccountNo() == accountNo) {
                 JSONObject jsonObject = new JSONObject();

@@ -16,6 +16,7 @@ import com.ssafy.townbook.model.repository.DetailLockerRepository;
 import com.ssafy.townbook.model.repository.LockerRepository;
 import com.ssafy.townbook.queryrepository.BookLogQueryRepository;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -29,26 +30,26 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class BookLogServiceImpl implements BookLogService {
     
-    private BookLogRepository bookLogRepository;
+    private BookLogRepository      bookLogRepository;
     private BookLogQueryRepository bookLogQueryRepository;
-    private LockerRepository lockerRepository;
+    private LockerRepository       lockerRepository;
     private DetailLockerRepository detailLockerRepository;
-    private AdminRepository adminRepository;
-    private BookRepository bookRepository;
-    private AccountRepository accountRepository;
+    private AdminRepository        adminRepository;
+    private BookRepository         bookRepository;
+    private AccountRepository      accountRepository;
     
     @Autowired
     public BookLogServiceImpl(
             BookLogRepository bookLogRepository, BookLogQueryRepository bookLogQueryRepository,
             LockerRepository lockerRepository, DetailLockerRepository detailLockerRepository,
             AdminRepository adminRepository, BookRepository bookRepository, AccountRepository accountRepository) {
-        this.bookLogRepository = bookLogRepository;
+        this.bookLogRepository      = bookLogRepository;
         this.bookLogQueryRepository = bookLogQueryRepository;
-        this.lockerRepository = lockerRepository;
+        this.lockerRepository       = lockerRepository;
         this.detailLockerRepository = detailLockerRepository;
-        this.adminRepository = adminRepository;
-        this.bookRepository = bookRepository;
-        this.accountRepository = accountRepository;
+        this.adminRepository        = adminRepository;
+        this.bookRepository         = bookRepository;
+        this.accountRepository      = accountRepository;
     }
     
     /**
@@ -84,9 +85,14 @@ public class BookLogServiceImpl implements BookLogService {
     @Override
     public List<ReceiveBookLogResponseDto> findBookLogByLockerNo(Long lockerNo) {
         List<BookLog> findBookLogs = bookLogQueryRepository.findBookLogByLockerNo(lockerNo).get();
-        return findBookLogs.stream()
-                .map(ReceiveBookLogResponseDto::new)
-                .collect(Collectors.toList());
+        
+        List<ReceiveBookLogResponseDto> findReceiveBookLogs = new ArrayList<>();
+        for (BookLog bookLog : findBookLogs) {
+            ReceiveBookLogResponseDto receiveBookLogResponseDto = new ReceiveBookLogResponseDto(bookLog.getBook(),
+                    bookLog.getLocker(), bookLog.getDetailLocker());
+            findReceiveBookLogs.add(receiveBookLogResponseDto);
+        }
+        return findReceiveBookLogs;
     }
     
     /**
@@ -122,7 +128,7 @@ public class BookLogServiceImpl implements BookLogService {
     @Override
     @Transactional
     public DonateBookLogResponseDto donateBook(DonateBookRequestDto donateBookRequestDto) throws Exception {
-        BookLog bookLog = new BookLog();
+        BookLog bookLog = new BookLog(donateBookRequestDto.getAccountNo(), donateBookRequestDto.getBookIsbn());
         
         // account : point 100++, bookCnt++
         // point 100 + cnt 1
@@ -131,22 +137,16 @@ public class BookLogServiceImpl implements BookLogService {
         account.setAccountBookCnt(account.getAccountBookCnt() + 1);
         accountRepository.save(account);
         
-        // locker
-        bookLog.setLocker(lockerRepository.findLockerByLockerNo(donateBookRequestDto.getLockerNo()).get());
-        
-        // book
-        bookLog.setBook(bookRepository.findBookByBookIsbn(donateBookRequestDto.getBookIsbn()).get());
-        
-        // bookLog
-        bookLog.setBookLogDonateDateTime(LocalDateTime.now());
-        
         // detailLocker : isEmpty false
         DetailLocker findDetailLocker = detailLockerRepository.findDetailLockerByDetailLockerNo(
                 donateBookRequestDto.getDetailLockerNo()).get();
         findDetailLocker.setDetailLockerIsEmpty(false);
+        detailLockerRepository.save(findDetailLocker);
         
-        bookLog.setDetailLocker(findDetailLocker);
-        bookLog.setAccount(account);
+        bookLog.setLocker(lockerRepository.findLockerByLockerNo(donateBookRequestDto.getLockerNo()).get());
+        bookLog.setDetailLocker(detailLockerRepository.findDetailLockerByDetailLockerNo(
+                donateBookRequestDto.getDetailLockerNo()).get());
+        bookLog.setBookLogDonateDateTime(LocalDateTime.now());
         bookLogRepository.save(bookLog);
         
         // return AdminDto
@@ -164,12 +164,6 @@ public class BookLogServiceImpl implements BookLogService {
     @Override
     @Transactional
     public boolean receiveBook(ReceiveBookRequestDto receiveBookRequestDto) throws Exception {
-        // detailLocker
-        Long detailLockerNo = receiveBookRequestDto.getDetailLockerNo();
-        DetailLocker detailLocker = detailLockerRepository.findDetailLockerByDetailLockerNo(detailLockerNo).get();
-        detailLocker.setDetailLockerIsEmpty(true);
-        detailLockerRepository.save(detailLocker);
-        
         // account
         Account account = accountRepository.findByAccountNo(receiveBookRequestDto.getAccountNo()).get();
         if (account.getAccountPoint() < 200) {
@@ -178,6 +172,12 @@ public class BookLogServiceImpl implements BookLogService {
         }
         account.setAccountPoint(account.getAccountPoint() - 200);
         accountRepository.save(account);
+        
+        // detailLocker
+        Long         detailLockerNo = receiveBookRequestDto.getDetailLockerNo();
+        DetailLocker detailLocker   = detailLockerRepository.findDetailLockerByDetailLockerNo(detailLockerNo).get();
+        detailLocker.setDetailLockerIsEmpty(true);
+        detailLockerRepository.save(detailLocker);
         
         // bookLog
         BookLog bookLog = bookLogQueryRepository.findBookLogByDetailLockerNo(detailLockerNo).get().get(0);
@@ -202,31 +202,4 @@ public class BookLogServiceImpl implements BookLogService {
                 .map(BookLogDto::new)
                 .collect(Collectors.toList());
     }
-
-//    @Override
-//    public LockerDto findLockerByBookTitleAndDist(SearchTitleRequestDto searchTitleRequestDto)
-//            throws Exception {
-//        List<BookLog> findBookLogs = bookLogQueryRepository.findLockerByBookTitleAndDist(
-//                        searchTitleRequestDto.getBookTitle())
-//                .get();
-//
-//        Double curLatitude = searchTitleRequestDto.getLockerLatitude();
-//        Double curLongitude = searchTitleRequestDto.getLockerLongitude();
-//        Double minDistance = Double.MAX_VALUE;
-//        Long minDistLockerNo = null;
-//
-//        for (int i = 0; i < findBookLogs.size(); i++) {
-//            Double tempLatitude = findBookLogs.get(i).getLocker().getLockerLatitude();
-//            Double tempLongitude = findBookLogs.get(i).getLocker().getLockerLongitude();
-//            Double curDist = Math.abs(curLatitude - tempLatitude) + Math.abs(curLongitude - tempLongitude);
-//
-//            if (minDistance > curDist) {
-//                minDistance = curDist;
-//                minDistLockerNo = findBookLogs.get(i).getLocker().getLockerNo();
-//            }
-//        }
-//
-//        Locker locker = lockerRepository.findLockerByLockerNo(minDistLockerNo).get();
-//        return new LockerDto(locker);
-//    }
 }
