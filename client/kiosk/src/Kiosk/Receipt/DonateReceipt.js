@@ -23,7 +23,7 @@ function DonateReceipt(props){
     //     })
     //     .then((response) => {
     //         const onClickHandlerThanks = () => {
-    //             navigate('/kiosk/ReceiptThanks', {state : response.data})
+    //             navigate('/ReceiptThanks', {state : response.data})
     //         }})
     //         onClickHandlerThanks()
     //     .catch(function (error) {
@@ -31,7 +31,7 @@ function DonateReceipt(props){
     //     })
     }
     const onClickHandlerHome = () => {
-        navigate('/kiosk')
+        navigate('/')
     }
     const goBack = () => {
         navigate(-1)

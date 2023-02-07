@@ -1,7 +1,7 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React from "react";
 import styles from "./DonateConfirm.module.css"
 import { useLocation, useNavigate } from "react-router-dom";
-// import List from "../../ui/List"
 import book from "../img/book.jpg"
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { BiHomeAlt } from 'react-icons/bi';
@@ -9,14 +9,13 @@ import axios from "axios";
 
 function DonateConfirm(props) {
     // 빈보관함이 무엇인지 확인하고 if로 하기  
-    const UrlOneOpen = ["http://192.168.140.1/mainServo/0", "http://192.168.140.1/servo1/0"]   //1번 보관함 열기 //메인 보관함 열기
+    const UrlOneOpen = ["http://192.168.140.1/mainServo/0", "http://192.168.140.1/servo1/0"]   //메인 보관함 열기 //1번 보관함 열기 
 
-    const UrlTwoOpen = "http://192.168.140.1/servo2/0"   //1번 보관함 열기
+    const UrlTwoOpen = "http://192.168.140.1/servo2/0"   //2번 보관함 열기
     
     const navigate = useNavigate()
 
     const location = useLocation()
-    
     
     const title = location.state.bookTitle
     let bookURL = location.state.bookIntroductionURL
@@ -24,25 +23,22 @@ function DonateConfirm(props) {
         bookURL = book
         }
     const onClickHandlerHome = () => {
-        navigate('/kiosk')
+        navigate('/')
     }
     const onClickHandlerComplete =() => {
-        // axios.get(UrlOneOpen, {
-        // })
-        // .then((response) => {
-        //     navigate('/DonateComplete')
-        // })
+        axios.get(UrlOneOpen, {
+        })
+        .then((response) => {
+            navigate('/DonateComplete')
+        })
         
-        // .catch(function (error) {
-        //     console.log(error)
-        // })
-        navigate('/kiosk/DonateComplete')
-    }
-    const onClickHandlerBarcodeRead =() => {
-        navigate('/kiosk/BarcodeRead')
+        .catch(function (error) {
+            console.log(error)
+        })
+        navigate('/DonateComplete')
     }
     const onClickHandlerBarcodeReadError =() => {
-        navigate('/kiosk/BarcodeReadError')
+        navigate('/BarcodeReadError')
     }
     const goBack = () => {
         navigate(-1)
@@ -50,7 +46,6 @@ function DonateConfirm(props) {
 
     // 회원정보를 가지고 있어야 된다.
     return (
-        // <div>
             <div>
                 <div className={styles.myImg}>
                     <button className={styles.circle} onClick={goBack}>
@@ -62,7 +57,6 @@ function DonateConfirm(props) {
                             <div className={styles.title}>
                                 {title}
                             </div>
-                            {/* <List /> */}
                             <p className={styles.textAlignTwo}>기부하시는 책이 맞습니까?</p>
                             <div>
                                 <button className={styles.buttonTwo} onClick={onClickHandlerComplete}>
@@ -79,9 +73,6 @@ function DonateConfirm(props) {
                     </button>
                 </div>
             </div>
-            /* <label htmlFor="title" onSubmit={}></label>
-            <input type="text" required id="title" />
-        </div> */
         )
 }
 

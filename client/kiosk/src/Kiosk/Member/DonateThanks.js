@@ -15,19 +15,19 @@ function DonateThanks(props) {
         // })
         // .then((response) => {
             // const onClickHandlerBarcodeRead =() => {
-            //     navigate('/Kiosk/BarcodeRead')
+            //     navigate('/BarcodeRead')
             // }
             // onClickHandlerBarcodeRead()
-        //     navigate('/Kiosk/DonateThanks')
+        //     navigate('/DonateThanks')
         // })
         
         // .catch(function (error) {
         //     console.log(error)
         // })
-        navigate('/kiosk/Finish')
+        navigate('/Finish')
     }
     const onClickHandlerBarcodeRead =() => {
-        navigate('/kiosk/BarcodeRead')
+        navigate('/BarcodeRead')
     }
 
     return (

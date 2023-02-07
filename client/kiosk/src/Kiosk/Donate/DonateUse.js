@@ -29,7 +29,7 @@ function DonateUse(props) {
             })
             .then((response) => {
                 const onClickHandlerBarcodeRead =() => {
-                    navigate('/kiosk/BarcodeRead', {state: response.data})
+                    navigate('/BarcodeRead', {state: response.data})
                 }
                 onClickHandlerBarcodeRead()
             })
@@ -45,7 +45,7 @@ function DonateUse(props) {
             .then((response) => {
                 // 수령 페이지로 이동
                 const onClickHandlerReceiptConfirm =() => {
-                    navigate('/kiosk/ReceiptConfirm', {state: isnavigate})
+                    navigate('/ReceiptConfirm', {state: isnavigate})
                 }
                 onClickHandlerReceiptConfirm()
             })
@@ -53,17 +53,14 @@ function DonateUse(props) {
                 console.log(error)
             })
             }
-
         }
-        
     
     const onClickHandlerHome = () => {
-        navigate('/kiosk')
+        navigate('/')
     }
     const goBack = () => {
         navigate(-1)
     }
-    
     //수령일때랑 기부일때랑 바꿔서 처리 if로 해서
     return (
         // <div>
@@ -72,9 +69,7 @@ function DonateUse(props) {
                     <button className={styles.circle} onClick={goBack}>
                         <AiOutlineArrowLeft className={styles.iconStyle}/>
                     </button>
-                    
                         {/* <div className={styles.buttonOne} onClick={onClickHandlerBarcodeRead}> */}
-                        
                         <div className={styles.buttonOne}>
                             <h3 className={styles.h3Align}>STEP1</h3>
                             <p className={styles.textAlignOne}>

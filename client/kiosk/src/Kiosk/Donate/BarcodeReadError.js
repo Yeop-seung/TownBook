@@ -7,6 +7,17 @@ import axios from "axios";
 
 function BarcodeReadError(props) {
     
+    const navigate = useNavigate()
+
+    const onClickHandlerHome = () => {
+        navigate('/')
+    }
+    const onClickHandlerBarcodeReadError =() => {
+        navigate('/BarcodeReadError')
+    }
+    const goBack = () => {
+        navigate(-1)
+    }
     const [inputs, setInputs] = useState({
         barcode : ""
     })
@@ -19,12 +30,10 @@ function BarcodeReadError(props) {
             })
             .then((response) => {
                 const onClickHandlerConfirm = () => {
-                    navigate('/Kiosk/DonateConfirm', {state : response.data} )
+                    navigate('/DonateConfirm', {state : response.data} )
                 }
                 onClickHandlerConfirm()
-                
             })
-            
             .catch(function (error) {
                 console.log(error)
             })
@@ -38,23 +47,12 @@ function BarcodeReadError(props) {
         })
     }
 
-    const navigate = useNavigate()
-
-    const onClickHandlerHome = () => {
-        navigate('/kiosk')
-    }
-    const onClickHandlerBarcodeReadError =() => {
-        navigate('/kiosk/BarcodeReadError')
-    }
-    const onClickHandlerUse = () => {
-        navigate('/kiosk/DonateUse')
-    }
     // 회원정보를 가지고 있어야 된다.
     return (
         // <div>
             <div>
                 <div className={styles.myImg}>
-                    <button className={styles.circle} onClick={onClickHandlerUse}>
+                    <button className={styles.circle} onClick={goBack}>
                         <AiOutlineArrowLeft className={styles.iconStyle}/>
                     </button>
                     <div >

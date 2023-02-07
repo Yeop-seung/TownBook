@@ -20,10 +20,10 @@ function DonateThanksNon(props) {
         // .catch(function (error) {
         //     console.log(error)
         // })
-        navigate('/kiosk/Finish')
+        navigate('/Finish')
     }
     const onClickHandlerBarcodeRead =() => {
-        navigate('/kiosk/BarcodeRead')
+        navigate('/BarcodeRead')
     }
     return (
         <div>

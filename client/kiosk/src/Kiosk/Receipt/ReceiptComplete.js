@@ -1,24 +1,34 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React from "react";
 import styles from "./ReceiptComplete.module.css"
-import List from "../../ui/List"
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import book from "../img/book.jpg"
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { BiHomeAlt } from 'react-icons/bi';
 
 function ReceiptComplete(props) {
-    // function submitHandler(event) {
-    //     event.preventDefault()
-    // }
+    const UrlOneOpen = ["http://192.168.140.1/mainServo/0", "http://192.168.140.1/servo1/0"]   //메인 보관함 열기 //1번 보관함 열기 
+
+    const UrlTwoOpen = "http://192.168.140.1/servo2/0"   //2번 보관함 열기
+    
     const navigate = useNavigate()
 
+    const location = useLocation()
+    
+    const title = location.state.bookTitle
+    let bookURL = location.state.bookIntroductionURL
+    if (bookURL === "null.png") {
+        bookURL = book
+        }
+
     const onClickHandlerHome = () => {
-        navigate('/kiosk')
+        navigate('/')
     }
     const onClickHandlerReceiptConfirm = () => {
-        navigate('/kiosk/ReceiptConfirm')
+        navigate('/ReceiptConfirm')
     }
     const onClickHandlerDonateReceipt = () => {
-        navigate('/kiosk/DonateReceipt')
+        navigate('/DonateReceipt')
     }
     const goBack = () => {
         navigate(-1)
@@ -31,8 +41,10 @@ function ReceiptComplete(props) {
                         <AiOutlineArrowLeft className={styles.iconStyle }/>
                     </button>
                     <div className={styles.buttonOne}>
-                        <List />
-                        {/* 책 리스트 */}
+                        <img src={bookURL} className={styles.book}/>
+                            <div className={styles.title}>
+                                {title}
+                            </div>
                         <p className={styles.textAlign}>수령하실 책이 맞습니까?
                         <br/>
                         예를 누르시면 포인트가

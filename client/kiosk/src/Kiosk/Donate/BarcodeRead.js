@@ -6,7 +6,17 @@ import { BiHomeAlt } from 'react-icons/bi';
 import axios from "axios";
 
 function BarcodeRead(props) {
-    
+    const navigate = useNavigate()
+
+    const onClickHandlerHome = () => {
+        navigate('/')
+    }
+    const onClickHandlerBarcodeReadError =() => {
+        navigate('/BarcodeReadError')
+    }
+    const goBack = () => {
+        navigate(-1)
+    }
     const [inputs, setInputs] = useState({
         barcode : ""
     })
@@ -19,11 +29,10 @@ function BarcodeRead(props) {
             })
             .then((response) => {
                 const onClickHandlerConfirm = () => {
-                    navigate('/Kiosk/DonateConfirm', {state : response.data} )
+                    navigate('/DonateConfirm', {state : response.data} )
                 }
                 onClickHandlerConfirm()
             })
-            
             .catch(function (error) {
                 console.log(error)
             })
@@ -35,21 +44,6 @@ function BarcodeRead(props) {
             ...inputs,
             [e.target.name]: e.target.value
         })
-    }
-
-    const navigate = useNavigate()
-
-    const onClickHandlerHome = () => {
-        navigate('/kiosk')
-    }
-    const onClickHandlerBarcodeReadError =() => {
-        navigate('/kiosk/BarcodeReadError')
-    }
-    const onClickHandlerUse = () => {
-        navigate('/kiosk/DonateUse')
-    }
-    const goBack = () => {
-        navigate(-1)
     }
     
     // 회원정보를 가지고 있어야 된다.

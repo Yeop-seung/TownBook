@@ -16,16 +16,16 @@ function ReceiptThanks(props) {
         // })
         // .then((response) => {
         //     // console.log('eeeee', e.target.value) // 값을 보내준다
-        //     navigate('/kiosk/DonateThanks')
+        //     navigate('/DonateThanks')
         // })
         
         // .catch(function (error) {
         //     console.log(error)
         // })
-        navigate('/kiosk/Finish')
+        navigate('/Finish')
     }
     const onClickHandlerReceiptConfirm = () => {
-        navigate('/kiosk/ReceiptConfirm')
+        navigate('/ReceiptConfirm')
     }
 
     return (
