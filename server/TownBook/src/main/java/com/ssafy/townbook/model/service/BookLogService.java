@@ -64,12 +64,4 @@ public interface BookLogService {
      * @throws Exception
      */
     ReceiveBookLogResponseDto receiveBook(ReceiveBookRequestDto receiveBookRequestDto) throws Exception;
-    
-    /**
-     * 제목 검색해서 북로그 반환
-     *
-     * @param bookTitle
-     * @return List<BookLogDto>
-     */
-    List<BookLogDto> findBookLogByBookTitle(String bookTitle);
 }
