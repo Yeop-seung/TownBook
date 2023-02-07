@@ -3,7 +3,6 @@ package com.ssafy.townbook.queryrepository;
 import static com.ssafy.townbook.model.entity.QBookLog.bookLog;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.ssafy.townbook.model.entity.Book;
 import com.ssafy.townbook.model.entity.BookLog;
 import java.util.List;
 import java.util.Optional;
@@ -28,9 +27,9 @@ public class BookLogQueryRepository {
      * @param lockerNo
      * @return Optional<List < Book>>
      */
-    public Optional<List<Book>> findBookByLockerNo(Long lockerNo) {
-        List<Book> result = jpaQueryFactory
-                .select(bookLog.book)
+    public Optional<List<BookLog>> findBookLogByLockerNo(Long lockerNo) {
+        List<BookLog> result = jpaQueryFactory
+                .select(bookLog)
                 .from(bookLog)
                 .where(bookLog.bookLogState.eq(true).and(bookLog.locker.lockerNo.eq(lockerNo)))
                 .fetch();
@@ -55,13 +54,41 @@ public class BookLogQueryRepository {
      * 단일 회원의 모든 북로그 조회
      *
      * @param accountNo
-     * @return Optional<List<BookLog>>
+     * @return Optional<List < BookLog>>
      */
     public Optional<List<BookLog>> findBookLogByAccountNo(Long accountNo) {
         return Optional.ofNullable(jpaQueryFactory
                 .select(bookLog)
                 .from(bookLog)
                 .where(bookLog.account.accountNo.eq(accountNo))
+                .fetch());
+    }
+    
+    /**
+     * 세부 보관함 번호로 단일 북로그 조회
+     *
+     * @param detailLockerNo
+     * @return Optional<List < BookLog>>
+     */
+    public Optional<List<BookLog>> findBookLogByDetailLockerNo(Long detailLockerNo) {
+        return Optional.ofNullable(jpaQueryFactory
+                .select(bookLog)
+                .from(bookLog)
+                .where(bookLog.detailLocker.detailLockerNo.eq(detailLockerNo)
+                        .and(bookLog.bookLogState.eq(true))).fetch());
+    }
+    
+    /**
+     * 제목 검색해서 북로그 반환
+     *
+     * @param bookTitle
+     * @return Optional<List < BookLog>>
+     */
+    public Optional<List<BookLog>> findBookLogByBookTitle(String bookTitle) {
+        return Optional.ofNullable(jpaQueryFactory
+                .select(bookLog)
+                .from(bookLog)
+                .where(bookLog.bookLogState.eq(true).and(bookLog.book.bookTitle.contains(bookTitle)))
                 .fetch());
     }
 }

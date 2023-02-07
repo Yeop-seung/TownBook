@@ -1,6 +1,5 @@
 package com.ssafy.townbook.model.entity;
 
-import com.ssafy.townbook.model.dto.DetailLockerDto;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
@@ -25,40 +24,41 @@ import org.hibernate.annotations.DynamicInsert;
 @Entity
 @DynamicInsert
 public class Locker {
-
+    
     @Id
     @Column(name = "locker_no")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long lockerNo;
-
+    
     @NotNull
     @Column(name = "locker_region")
     private String lockerRegion;
     
-
+    
     @NotNull
     @Column(name = "locker_latitude")
-    private String lockerLatitude;
-
+    private Double lockerLatitude;
+    
     @NotNull
     @Column(name = "locker_longitude")
-    private String lockerLongitude;
-
+    private Double lockerLongitude;
+    
     @Column(name = "locker_book_cnt")
     @ColumnDefault("0")
     private Integer lockerBookCnt;
-
+    
     @OneToMany(mappedBy = "locker")
     private List<DetailLocker> detailLocker = new ArrayList<>();
-
+    
     @Builder
-    public Locker(Long lockerNo, String lockerRegion, String lockerLatitude, String lockerLongitude, Integer lockerBookCnt, List<DetailLocker> detailLocker) {
-        this.lockerNo = lockerNo;
-        this.lockerRegion = lockerRegion;
-        this.lockerLatitude = lockerLatitude;
+    public Locker(Long lockerNo, String lockerRegion, Double lockerLatitude, Double lockerLongitude,
+                  Integer lockerBookCnt, List<DetailLocker> detailLocker) {
+        this.lockerNo        = lockerNo;
+        this.lockerRegion    = lockerRegion;
+        this.lockerLatitude  = lockerLatitude;
         this.lockerLongitude = lockerLongitude;
-        this.lockerBookCnt = lockerBookCnt;
-        this.detailLocker = detailLocker;
+        this.lockerBookCnt   = lockerBookCnt;
+        this.detailLocker    = detailLocker;
     }
     
     public void addDetailLocker(DetailLocker detailLocker) {

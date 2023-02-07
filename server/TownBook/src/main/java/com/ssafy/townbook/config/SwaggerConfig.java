@@ -13,7 +13,7 @@ import springfox.documentation.spring.web.plugins.Docket;
  */
 @Configuration
 public class SwaggerConfig {
-
+    
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.OAS_30)
@@ -22,5 +22,4 @@ public class SwaggerConfig {
                 .paths(PathSelectors.any())
                 .build();
     }
-
 }

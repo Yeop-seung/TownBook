@@ -61,7 +61,8 @@ public class LockerServiceImpl implements LockerService {
      */
     @Override
     @Transactional
-    public boolean addLocker(String lockerRegion, int detailLockerCount, String lockerLatitude, String lockerLongitude) {
+    public boolean addLocker(String lockerRegion, int detailLockerCount, Double lockerLatitude,
+            Double lockerLongitude) {
         try {
             Locker locker = new Locker();
             locker.setLockerRegion(lockerRegion);

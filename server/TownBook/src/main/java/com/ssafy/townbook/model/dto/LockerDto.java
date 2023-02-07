@@ -5,20 +5,23 @@ import com.ssafy.townbook.model.entity.Locker;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
-@NoArgsConstructor
+@Getter
+@Setter
 public class LockerDto {
     
     private Long lockerNo;
     private Integer lockerBookCnt;
     private String lockerRegion;
-    private String lockerLatitude;
-    private String lockerLongitude;
+    private Double lockerLatitude;
+    private Double lockerLongitude;
     private List<DetailLockerDto> detailLocker = new ArrayList<>();
+    private int lockerStorage;
     
+    @Builder
     public LockerDto(Locker locker) {
         this.lockerNo = locker.getLockerNo();
         this.lockerBookCnt = locker.getLockerBookCnt();
@@ -31,5 +34,13 @@ public class LockerDto {
         this.detailLocker = findDetailLockers.stream()
                 .map(DetailLockerDto::new)
                 .collect(Collectors.toList());
+        
+        // 보관함 저장 공간
+        this.lockerStorage = 0;
+        for (int i = 0; i < findDetailLockers.size(); i++) {
+            if (findDetailLockers.get(i).getDetailLockerIsEmpty()) {
+                this.lockerStorage++;
+            }
+        }
     }
 }

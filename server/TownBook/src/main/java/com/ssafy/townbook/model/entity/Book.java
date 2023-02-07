@@ -4,9 +4,12 @@ import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,10 +18,10 @@ import org.hibernate.annotations.DynamicInsert;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @ToString
 @Entity
 @DynamicInsert
+@NoArgsConstructor
 public class Book {
     
     @Id
@@ -57,18 +60,19 @@ public class Book {
     @OneToOne(mappedBy = "book", fetch = FetchType.LAZY)
     private BookLog bookLog;
     
+    @Builder
     public Book(String bookIsbn, String bookSubject, String bookTitle, Integer bookVol, String bookAuthor,
-            String bookPublisher, LocalDate bookPublishPredate, String bookIntroductionURL, String bookTitleURL,
-            BookLog bookLog) {
-        this.bookIsbn = bookIsbn;
-        this.bookSubject = bookSubject;
-        this.bookTitle = bookTitle;
-        this.bookVol = bookVol;
-        this.bookAuthor = bookAuthor;
-        this.bookPublisher = bookPublisher;
-        this.bookPublishPredate = bookPublishPredate;
+                String bookPublisher, LocalDate bookPublishPredate, String bookIntroductionURL, String bookTitleURL,
+                BookLog bookLog) {
+        this.bookIsbn            = bookIsbn;
+        this.bookSubject         = bookSubject;
+        this.bookTitle           = bookTitle;
+        this.bookVol             = bookVol;
+        this.bookAuthor          = bookAuthor;
+        this.bookPublisher       = bookPublisher;
+        this.bookPublishPredate  = bookPublishPredate;
         this.bookIntroductionURL = bookIntroductionURL;
-        this.bookTitleURL = bookTitleURL;
-        this.bookLog = bookLog;
+        this.bookTitleURL        = bookTitleURL;
+        this.bookLog             = bookLog;
     }
 }

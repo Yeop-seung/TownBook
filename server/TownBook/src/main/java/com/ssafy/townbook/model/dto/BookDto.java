@@ -2,11 +2,12 @@ package com.ssafy.townbook.model.dto;
 
 import com.ssafy.townbook.model.entity.Book;
 import java.time.LocalDate;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
-@NoArgsConstructor
+@Getter
+@Setter
 public class BookDto {
     
     private String bookIsbn;
@@ -19,6 +20,7 @@ public class BookDto {
     private String bookIntroductionURL;
     private String bookTitleURL;
     
+    @Builder
     public BookDto(Book book) {
         this.bookIsbn = book.getBookIsbn();
         this.bookSubject = book.getBookSubject();

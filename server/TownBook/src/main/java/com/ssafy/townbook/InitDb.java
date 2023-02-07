@@ -6,6 +6,7 @@ import com.ssafy.townbook.model.entity.Book;
 import com.ssafy.townbook.model.entity.BookLog;
 import com.ssafy.townbook.model.entity.DetailLocker;
 import com.ssafy.townbook.model.entity.Locker;
+import com.ssafy.townbook.model.entity.Notice;
 import com.ssafy.townbook.model.repository.AccountRepository;
 import com.ssafy.townbook.model.repository.BookLogRepository;
 import com.ssafy.townbook.model.repository.BookRepository;
@@ -40,10 +41,11 @@ public class InitDb {
     
     @PostConstruct
     public void init() {
-        initService.bookInit();
-        initService.accountInit();
-        initService.lockerInit();
-        initService.bookLogInit();
+        //initService.bookInit();
+        //initService.accountInit();
+        //initService.lockerInit();
+        //initService.bookLogInit();
+        //initService.noticeInit();
     }
     
     @Component
@@ -51,11 +53,11 @@ public class InitDb {
     @RequiredArgsConstructor
     static class InitService {
         
-        public final EntityManager em;
-        public final BookService bookService;
-        public final LockerRepository lockerRepository;
+        public final  EntityManager     em;
+        public final  BookService       bookService;
+        public final  LockerRepository  lockerRepository;
         private final AccountRepository accountRepository;
-        private final BookRepository bookRepository;
+        private final BookRepository    bookRepository;
         private final BookLogRepository bookLogRepository;
         
         public void bookInit() {
@@ -72,7 +74,8 @@ public class InitDb {
         }
         
         public Book createBook(String bookIsbn, String bookSubject, String bookTitle, String bookAuthor,
-                String bookPublisher, LocalDate bookPublishPredate, String bookIntroductionURL, String bookTitleURL) {
+                               String bookPublisher, LocalDate bookPublishPredate, String bookIntroductionURL,
+                               String bookTitleURL) {
             Book book = new Book();
             book.setBookIsbn(bookIsbn);
             book.setBookSubject(bookSubject);
@@ -88,7 +91,7 @@ public class InitDb {
         
         
         public void accountInit() {
-            Authority authorityRoleUser = createAuthority("ROLE_USER");
+            Authority authorityRoleUser  = createAuthority("ROLE_USER");
             Authority authorityRoleAdmin = createAuthority("ROLE_ADMIN");
             em.persist(authorityRoleUser);
             em.persist(authorityRoleAdmin);
@@ -108,8 +111,9 @@ public class InitDb {
         }
         
         public Account createAccount(String accountEmail, String accountPw, String accountName, String accountAddress,
-                String accountPhoneNumber, Integer accountGender, String accountNickname, String accountBirthDay,
-                Authority authority) {
+                                     String accountPhoneNumber, Integer accountGender, String accountNickname,
+                                     String accountBirthDay,
+                                     Authority authority) {
             Account account = new Account();
             account.setAccountEmail(accountEmail);
             account.setAccountPw(accountPw);
@@ -124,13 +128,13 @@ public class InitDb {
         }
         
         public void lockerInit() {
-            createLocker("어은동", 1, "12312312", "12312312");
-            createLocker("덕명동", 3, "32132132", "12312312");
-            createLocker("봉명동", 5, "12345678", "12312312");
+            createLocker("어은동", 1, 12312312D, 123123123D);
+            createLocker("덕명동", 3, 87654321D, 87654321D);
+            createLocker("봉명동", 5, 123D, 456D);
         }
         
-        public void createLocker(String lockerRegion, int detailLockerCount, String lockerLatitude,
-                String lockerLongitude) {
+        public void createLocker(String lockerRegion, int detailLockerCount, Double lockerLatitude,
+                                 Double lockerLongitude) {
             Locker locker = new Locker();
             locker.setLockerRegion(lockerRegion);
             locker.setLockerLatitude(lockerLatitude);
@@ -145,16 +149,16 @@ public class InitDb {
         }
         
         public void bookLogInit() {
-            Locker locker1 = lockerRepository.findLockerByLockerNo(1L).get();
-            DetailLocker detailLocker1 = locker1.getDetailLocker().get(0);
-            Optional<Account> account1 = accountRepository.findByAccountNo(1L);
-            Optional<Book> book1 = bookRepository.findBookByBookIsbn("8984993751");
-            donateBook("재밌어요", locker1, detailLocker1, account1, book1);
+            Locker            locker1       = lockerRepository.findLockerByLockerNo(1L).get();
+            DetailLocker      detailLocker1 = locker1.getDetailLocker().get(0);
+            Optional<Account> account1      = accountRepository.findByAccountNo(1L);
+            Optional<Book>    book1         = bookRepository.findBookByBookIsbn("8984993751");
+            donateBook("재미있어요", locker1, detailLocker1, account1, book1);
             
-            Locker locker2 = lockerRepository.findLockerByLockerNo(2L).get();
-            DetailLocker detailLocker2 = locker2.getDetailLocker().get(0);
-            Optional<Account> account2 = accountRepository.findByAccountNo(2L);
-            Optional<Book> book2 = bookRepository.findBookByBookIsbn("9788960777330");
+            Locker            locker2       = lockerRepository.findLockerByLockerNo(2L).get();
+            DetailLocker      detailLocker2 = locker2.getDetailLocker().get(0);
+            Optional<Account> account2      = accountRepository.findByAccountNo(2L);
+            Optional<Book>    book2         = bookRepository.findBookByBookIsbn("9788960777330");
             donateBook("재미 없어요", locker2, detailLocker2, account2, book2);
             
             BookLog bookLog1 = bookLogRepository.findBookLogByBookLogNo(2L).get();
@@ -164,21 +168,75 @@ public class InitDb {
         public void donateBook(
                 String bookLogReview, Locker locker, DetailLocker detailLocker,
                 Optional<Account> account, Optional<Book> book) {
-            BookLog bookLog = new BookLog();
+            BookLog bookLog = new BookLog(account.get().getAccountNo(), book.get().getBookIsbn());
             bookLog.setBookLogReview(bookLogReview);
             bookLog.setBookLogDonateDateTime(LocalDateTime.now());
             bookLog.setLocker(locker);
+            detailLocker.setDetailLockerIsEmpty(false);
             bookLog.setDetailLocker(detailLocker);
+            
+            // account
+            account.get().setAccountBookCnt(account.get().getAccountBookCnt() + 1);
+            account.get().setAccountPoint(account.get().getAccountPoint() + 100);
             bookLog.setAccount(account.get());
+            
             bookLog.setBook(book.get());
             em.persist(bookLog);
         }
         
         public void receiveBook(BookLog bookLog, Optional<Account> account) {
+            bookLog.getDetailLocker().setDetailLockerIsEmpty(true);
             bookLog.setBookLogState(false);
+            
+            // account
+            account.get().setAccountPoint(account.get().getAccountPoint() - 200);
             bookLog.setBookLogReceiverNo(account.get().getAccountNo());
+            
             bookLog.setBookLogReceiveDateTime(LocalDateTime.now());
             em.persist(bookLog);
+        }
+        
+        public void noticeInit() {
+            Long account = 1L;
+            createNotice("제목1", "내용1", account);
+            createNotice("제목1", "내용1", account);
+            createNotice("제목1", "내용1", account);
+            createNotice("제목1", "내용1", account);
+            createNotice("제목1", "내용1", account);
+            createNotice("제목1", "내용1", account);
+            createNotice("제목1", "내용1", account);
+            createNotice("제목1", "내용1", account);
+            createNotice("제목1", "내용1", account);
+            createNotice("제목1", "내용1", account);
+            
+            createGuide("제목1", "내용1", account);
+            createGuide("제목1", "내용1", account);
+            createGuide("제목1", "내용1", account);
+            createGuide("제목1", "내용1", account);
+            createGuide("제목1", "내용1", account);
+            createGuide("제목1", "내용1", account);
+            createGuide("제목1", "내용1", account);
+            createGuide("제목1", "내용1", account);
+            createGuide("제목1", "내용1", account);
+            createGuide("제목1", "내용1", account);
+        }
+        
+        public void createNotice(String noticeTitle, String noticeContent, Long account) {
+            Notice notice = new Notice(account);
+            notice.setNoticeTitle(noticeTitle);
+            notice.setNoticeContent(noticeContent);
+            notice.setNoticeWriteDateTime(LocalDateTime.now());
+            notice.setNoticeCategory(0);
+            em.persist(notice);
+        }
+        
+        public void createGuide(String noticeTitle, String noticeContent, Long account) {
+            Notice notice = new Notice(account);
+            notice.setNoticeTitle(noticeTitle);
+            notice.setNoticeContent(noticeContent);
+            notice.setNoticeWriteDateTime(LocalDateTime.now());
+            notice.setNoticeCategory(1);
+            em.persist(notice);
         }
     }
     

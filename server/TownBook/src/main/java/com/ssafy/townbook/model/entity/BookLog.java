@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -45,37 +46,49 @@ public class BookLog {
     private LocalDateTime bookLogReceiveDateTime;
     
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "`fk-detail_locker-book_log-1`")
+    @JoinColumn(name = "`fk-locker-book_log`")
     private Locker locker;
     
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "`fk-detail_locker-book_log-2`")
+    @JoinColumn(name = "`fk-detail_locker-book_log`")
     private DetailLocker detailLocker;
-    
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "`fk-account-book_log`")
-    private Account account;
-    
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "`fk-book-book_log`")
-    private Book book;
     
     @OneToMany(mappedBy = "bookLog")
     private List<WishList> wishLists = new ArrayList<>();
     
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "`fk-account-book_log`", insertable = false, updatable = false)
+    private Account account;
+    
+    @Column(name = "`fk-account-book_log`")
+    private Long accountNo;
+    
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "`fk-book-book_log`", insertable = false, updatable = false)
+    private Book book;
+    
+    @Column(name = "`fk-book-book_log`")
+    private String bookIsbn;
+    
+    public BookLog(Long accountNo, String bookIsbn) {
+        this.accountNo = accountNo;
+        this.bookIsbn  = bookIsbn;
+    }
+    
+    
     public BookLog(Long bookLogNo, Boolean bookLogState, String bookLogReview, Long bookLogReceiverNo,
-            LocalDateTime bookLogDonateDateTime, LocalDateTime bookLogReceiveDateTime, Locker locker,
-            DetailLocker detailLocker, Account account, Book book, List<WishList> wishLists) {
-        this.bookLogNo = bookLogNo;
-        this.bookLogState = bookLogState;
-        this.bookLogReview = bookLogReview;
-        this.bookLogReceiverNo = bookLogReceiverNo;
-        this.bookLogDonateDateTime = bookLogDonateDateTime;
+                   LocalDateTime bookLogDonateDateTime, LocalDateTime bookLogReceiveDateTime, Locker locker,
+                   DetailLocker detailLocker, Account account, Book book, List<WishList> wishLists) {
+        this.bookLogNo              = bookLogNo;
+        this.bookLogState           = bookLogState;
+        this.bookLogReview          = bookLogReview;
+        this.bookLogReceiverNo      = bookLogReceiverNo;
+        this.bookLogDonateDateTime  = bookLogDonateDateTime;
         this.bookLogReceiveDateTime = bookLogReceiveDateTime;
-        this.locker = locker;
-        this.detailLocker = detailLocker;
-        this.account = account;
-        this.book = book;
-        this.wishLists = wishLists;
+        this.locker                 = locker;
+        this.detailLocker           = detailLocker;
+        this.account                = account;
+        this.book                   = book;
+        this.wishLists              = wishLists;
     }
 }

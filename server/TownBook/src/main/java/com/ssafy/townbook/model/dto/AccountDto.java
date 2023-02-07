@@ -16,32 +16,33 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 public class AccountDto {
+    
     @NotNull
     private String accountEmail;
-
+    
     @NotNull
     private String accountPw;
-
+    
     @NotNull
     private String accountName;
-
+    
     @NotNull
     private String accountAddress;
-
+    
     @NotNull
     private String accountPhoneNumber;
-
+    
     @NotNull
     private Integer accountGender;
-
+    
     @NotNull
     private String accountNickname;
-
+    
     @NotNull
     private String accountBirthDay;
-
+    
     private Set<AuthorityDto> authorityDtoSet;
-
+    
     @Builder
     public AccountDto(String accountEmail, String accountPw, String accountName,
             String accountAddress,
@@ -63,7 +64,7 @@ public class AccountDto {
         if (account == null) {
             return null;
         }
-
+        
         return AccountDto.builder()
                 .accountName(account.getAccountName())
                 .accountPw(account.getAccountPw())

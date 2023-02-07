@@ -1,6 +1,5 @@
 package com.ssafy.townbook.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import lombok.Builder;
@@ -23,7 +22,7 @@ public class DetailLocker {
     @Column(name = "detail_locker_no")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long detailLockerNo;
-
+    
     @OneToOne(mappedBy = "detailLocker")
     private BookLog bookLog;
     

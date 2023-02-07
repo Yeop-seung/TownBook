@@ -1,8 +1,8 @@
 ### 1. 전체 도서 조회
-GET http://localhost:8080/book
+GET http://localhost:8081/backend/book
 
-### 2. 단일 도서 도회
-GET http://localhost:8080/book/9788960777330
+### 2. 단일 도서 도회 (DB)
+GET http://localhost:8081/backend/book/8984993751
 
-### 3-1. 도서 추가
-POST http://localhost:8080/book/add/9791127402310
+### 3. 도서관에서 도서 조회 (DB X) ISBN 13
+GET http://localhost:8081/backend/book/find/9788998139766
