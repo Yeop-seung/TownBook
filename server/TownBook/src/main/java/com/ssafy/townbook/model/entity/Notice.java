@@ -67,9 +67,9 @@ public class Notice {
     
     @Builder
     public Notice(WriteNoticeRequestDto writeNoticeRequestDto) {
+        this.noticeWriteDateTime = writeNoticeRequestDto.getNoticeWriteDateTime();
         this.noticeTitle         = writeNoticeRequestDto.getNoticeTitle();
         this.noticeContent       = writeNoticeRequestDto.getNoticeContent();
-        this.noticeWriteDateTime = writeNoticeRequestDto.getNoticeWriteDateTime();
         this.noticeCategory      = writeNoticeRequestDto.getNoticeCategory();
         this.accountNo           = writeNoticeRequestDto.getAccountNo();
     }
