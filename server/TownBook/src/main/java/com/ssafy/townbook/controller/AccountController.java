@@ -7,6 +7,7 @@ import com.ssafy.townbook.model.service.EmailService;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import net.minidev.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,11 +24,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/account")
 public class AccountController {
     
-    @Autowired
     private AccountService accountService;
+    private EmailService   emailService;
     
     @Autowired
-    private EmailService emailService;
+    public AccountController(AccountService accountService, EmailService emailService) {
+        this.accountService = accountService;
+        this.emailService   = emailService;
+    }
     
     @PostMapping("/signup")
     public ResponseEntity<AccountDto> signup(@Valid @RequestBody AccountDto accountDto) {
@@ -55,7 +59,7 @@ public class AccountController {
     @GetMapping("/findEmail/{phoneNumber}")
     public ResponseEntity<String> findEmail(@PathVariable String phoneNumber) {
         
-        return new ResponseEntity<>(accountService.findEmail(phoneNumber), HttpStatus.OK);
+        return new ResponseEntity<String>(accountService.findEmail(phoneNumber), HttpStatus.OK);
     }
     
     /**
@@ -65,8 +69,8 @@ public class AccountController {
      * @return
      */
     @PutMapping("/modify")
-    public ResponseEntity accountModify(@RequestBody AccountDto accountDto) {
-        return new ResponseEntity(accountService.accountModify(accountDto), HttpStatus.OK);
+    public ResponseEntity<Boolean> accountModify(@RequestBody AccountDto accountDto) {
+        return new ResponseEntity<>(accountService.accountModify(accountDto), HttpStatus.OK);
         
     }
     
@@ -78,9 +82,9 @@ public class AccountController {
      * @return
      */
     @PutMapping("/leave")
-    public ResponseEntity accountRemove(@RequestBody Map<String, String> leaveInfo) {
+    public ResponseEntity<Boolean> accountRemove(@RequestBody Map<String, String> leaveInfo) {
         System.out.println(leaveInfo.get("accountEmail"));
-        return new ResponseEntity(
+        return new ResponseEntity<Boolean>(
                 accountService.accountRemove(leaveInfo.get("accountEmail"), leaveInfo.get("accountPw")), HttpStatus.OK);
         
     }
@@ -95,8 +99,7 @@ public class AccountController {
     @PostMapping("/emailConfirm")
     public ResponseEntity<String> emailConfirm(@RequestBody String email) throws Exception {
         String confirm = emailService.sendSimpleMessage(email);
-        
-        return new ResponseEntity(confirm, HttpStatus.OK);
+        return new ResponseEntity<String>(confirm, HttpStatus.OK);
     }
     
     /**
@@ -141,7 +144,7 @@ public class AccountController {
      * @throws Exception
      */
     @GetMapping("/ranking/{accountNo}")
-    public ResponseEntity<?> findAccountBookCnt(@PathVariable Long accountNo) throws Exception {
-        return new ResponseEntity<>(accountService.findAccountBookCnt(accountNo), HttpStatus.OK);
+    public ResponseEntity<JSONArray> findAccountBookCnt(@PathVariable Long accountNo) throws Exception {
+        return new ResponseEntity<JSONArray>(accountService.findAccountBookCnt(accountNo), HttpStatus.OK);
     }
 }
