@@ -11,7 +11,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public class LoginDto {
-    
+
     @NotNull
     @Size(min = 3, max = 50)
     private String accountEmail;
