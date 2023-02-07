@@ -62,10 +62,10 @@ public class NoticeController {
      * @return List<NoticeDto>
      */
     @GetMapping("/list/{category}")
-    public ResponseEntity<List<NoticeDto>> findTop8ByNoticeStateAndNoticeCategoryOrderByNoticeNo(
+    public ResponseEntity<List<NoticeDto>> findByNoticeStateAndNoticeCategoryOrderByNoticeNo(
             @PathVariable Integer category) {
         return new ResponseEntity<List<NoticeDto>>(
-                noticeService.findTop8ByNoticeStateAndNoticeCategoryOrderByNoticeNo(category),
+                noticeService.findByNoticeStateAndNoticeCategoryOrderByNoticeNo(category),
                 HttpStatus.OK);
     }
     
