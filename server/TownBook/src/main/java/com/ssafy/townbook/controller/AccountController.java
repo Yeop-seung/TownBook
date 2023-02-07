@@ -111,7 +111,7 @@ public class AccountController {
     @PostMapping("/tempPassword")
     public ResponseEntity tempPassword(@RequestBody Map<String, String> accountEmail) throws Exception {
         String tempPassword = emailService.getTmpPassword();
-        String Email = accountEmail.get("accountEmail");
+        String Email        = accountEmail.get("accountEmail");
         
         if (accountService.updatePassword(Email, tempPassword)) {
             emailService.sendPasswordMessage(Email, tempPassword);
@@ -128,7 +128,7 @@ public class AccountController {
     @PostMapping("/changePassword")
     public ResponseEntity changePassword(@RequestBody Map<String, String> AccountInfo) {
         String email = AccountInfo.get("accountEmail");
-        String pw = AccountInfo.get("accountPw");
+        String pw    = AccountInfo.get("accountPw");
         
         accountService.updatePassword(email, pw);
         

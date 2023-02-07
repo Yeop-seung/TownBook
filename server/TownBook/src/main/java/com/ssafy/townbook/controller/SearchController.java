@@ -22,12 +22,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class SearchController {
     
     private BookLogService bookLogService;
-    private LockerService lockerService;
+    private LockerService  lockerService;
     
     @Autowired
     public SearchController(BookLogService bookLogService, LockerService lockerService) {
         this.bookLogService = bookLogService;
-        this.lockerService = lockerService;
+        this.lockerService  = lockerService;
     }
     
     /**
@@ -43,7 +43,7 @@ public class SearchController {
     
     @GetMapping("/searchLocker/{lockerNo}")
     public ResponseEntity<?> findLockerByLockerNo(@PathVariable Long lockerNo) {
-        LockerDto findLockerDto = lockerService.findLockerByLockerNo(lockerNo);
+        LockerDto                       findLockerDto                  = lockerService.findLockerByLockerNo(lockerNo);
         List<ReceiveBookLogResponseDto> findReceiveBookLogResponseDtos = bookLogService.findBookLogByLockerNo(lockerNo);
         
         JSONObject jsonObject = new JSONObject();
@@ -62,10 +62,10 @@ public class SearchController {
         jsonObject.put("BookLogDtos", jsonArray);
         return new ResponseEntity<>(jsonObject, HttpStatus.OK);
     }
-//    @GetMapping("/searchTitle")
-//    public ResponseEntity<?> findLockerByBookTitleAndDist(SearchTitleRequestDto searchTitleRequestDto)
-//            throws Exception {
-//        LockerDto lockerDto = bookLogService.findLockerByBookTitleAndDist(searchTitleRequestDto);
-//        return null;
-//    }
+    //    @GetMapping("/searchTitle")
+    //    public ResponseEntity<?> findLockerByBookTitleAndDist(SearchTitleRequestDto searchTitleRequestDto)
+    //            throws Exception {
+    //        LockerDto lockerDto = bookLogService.findLockerByBookTitleAndDist(searchTitleRequestDto);
+    //        return null;
+    //    }
 }
