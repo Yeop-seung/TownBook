@@ -33,7 +33,7 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
      * @param accountNo
      * @return Optional<Account>
      */
-    Optional<Account> findByAccountNo(Long accountNo);
+    Optional<List<Account>> findByAccountNo(Long accountNo);
     
     
     /**
