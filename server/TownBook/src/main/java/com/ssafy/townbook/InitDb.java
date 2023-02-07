@@ -182,7 +182,6 @@ public class InitDb {
             account.get().setAccountBookCnt(account.get().getAccountBookCnt() + 1);
             account.get().setAccountPoint(account.get().getAccountPoint() + 100);
             bookLog.setAccount(account.get());
-            account
 
             bookLog.setBook(book.get());
             em.persist(bookLog);
