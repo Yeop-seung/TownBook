@@ -137,7 +137,7 @@ function SignUp(props) {
           console.log(response)
           // if(response=="true"){
           alert("회원가입에 성공하였습니다.");
-          history.replace("/map");
+          history.replace("/login");
           // }
           // else{
           //   alert("회원가입에 실패하였습니다.");

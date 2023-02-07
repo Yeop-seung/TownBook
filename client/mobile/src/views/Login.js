@@ -57,8 +57,8 @@ function Login(props) {
         if (res.data.token) {
           localStorage.clear()
           localStorage.setItem("TOKEN", res.data.token)
-          // localStorage.setItem("accountNo, red.data.")
-          localStorage.setItem("accountEmail", accountEmail)
+          localStorage.setItem("accountNo", res.data.accountDto.accountNo)
+          localStorage.setItem("accountEmail", res.data.accountDto.accountEmail)
           window.location.replace("/map");
           // history.replace("/map");
 

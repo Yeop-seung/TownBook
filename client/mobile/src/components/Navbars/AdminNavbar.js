@@ -15,6 +15,8 @@ import {
   faComments,
   faBullhorn,
   faKey,
+  faUser,
+  faArrowRightFromBracket,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -222,8 +224,10 @@ function AdminNavbar(props) {
               >
                 {/* 로고 scss 분석하기 */}
                 <div className="logo">
-                  <FontAwesomeIcon icon={faSearch} size="xl" color="white" />
-                  <p className="d-lg-none">도서검색</p>
+                  <FontAwesomeIcon icon={faSearch} size="xl" color="white" style={{marginTop:5}}/>
+                  <p className="d-lg-none" style={{ marginTop:5 }}>
+                    도서검색
+                  </p>
                 </div>
               </Link>
 
@@ -246,8 +250,10 @@ function AdminNavbar(props) {
                 style={{ paddingTop: 10, paddingInline: 20 }}
               >
                 <div className="logo">
-                  <FontAwesomeIcon icon={faBullhorn} size="xl" color="white" />
-                  <p className="d-lg-none">공지사항</p>
+                  <FontAwesomeIcon icon={faBullhorn} size="xl" color="white" style={{marginTop:5}}/>
+                  <p className="d-lg-none" style={{ marginTop:5 }}>
+                    공지사항
+                  </p>
                 </div>
               </Link>
             </Nav>
@@ -276,9 +282,7 @@ function AdminNavbar(props) {
               {/* <i className="tim-icons icon-spaceship" /> */}
               {/* <FontAwesomeIcon icon={faSearch}/> */}
 
-
-
-                {/* 웹qr > 필요엉ㅂ음*/}
+              {/* 웹qr > 필요엉ㅂ음*/}
               {/* <div
                 hidden={collapseOpen}
                 style={{ paddingTop: 10, paddingInline: 20 }}
@@ -297,8 +301,10 @@ function AdminNavbar(props) {
                 style={{ paddingTop: 10, paddingInline: 20 }}
               >
                 <div className="logo">
-                  <FontAwesomeIcon icon={faHeadset} size="xl" color="white" />
-                  <p className="d-lg-none">고객센터</p>
+                  <FontAwesomeIcon icon={faHeadset} size="xl" color="white" style={{marginTop:5}} />
+                  <p className="d-lg-none" style={{ marginTop:5 }}>
+                    고객센터
+                  </p>
                 </div>
               </Link>
 
@@ -322,19 +328,25 @@ function AdminNavbar(props) {
               {/* 로그인 안돼있을때만 보이는 */}
               {/* {!localStorage.getItem('token') && (
         <> */}
+
               <Link
                 to="/login"
                 onClick={verify}
-                style={{ paddingTop: 10, paddingInline: 20 }}
+                style={{ paddingTop: 10, paddingInline: 20, paddingBottom: 10 }}
+                hidden={isToken}
               >
-                <div className="logo" hidden={isToken}>
-                  <FontAwesomeIcon icon={faKey} size="xl" color="white" />
-                  <p className="d-lg-none">로그인</p>
+                <div className="logo">
+                  <FontAwesomeIcon icon={faKey} size="xl" color="white" style={{marginTop:5}}/>
+                  <p className="d-lg-none" style={{ marginTop:5 }}>
+                    로그인
+                  </p>
                 </div>
               </Link>
+
               {/* <ResizedComponent /> */}
-              <UncontrolledDropdown nav hidden={!isToken}>
-                {/* 프로필이미지 칸 */}
+
+              {/* <UncontrolledDropdown nav hidden={!isToken}>
+                프로필이미지 칸
                 <DropdownToggle
                   caret
                   color="default"
@@ -348,24 +360,48 @@ function AdminNavbar(props) {
                   <p className="d-lg-none">Profile</p>
                 </DropdownToggle>
 
-                {/* 프로필이미지 누르면 나오는 드랍다운 */}
+                프로필이미지 누르면 나오는 드랍다운
                 <DropdownMenu className="dropdown-navbar" right tag="ul">
-                  <Link to="/myPage">
-                    <DropdownItem className="nav-item">마이페이지</DropdownItem>
-                  </Link>
-                  {/* <NavLink tag="li">
+                  <NavLink tag="li">
                     <DropdownItem className="nav-item">Settings</DropdownItem>
-                  </NavLink> */}
+                  </NavLink>
 
                   <DropdownItem divider tag="li" />
 
-                  <NavLink tag="li">
-                    <DropdownItem className="nav-item" onClick={logout}>
-                      로그아웃
-                    </DropdownItem>
-                  </NavLink>
+                  <NavLink tag="li"></NavLink>
                 </DropdownMenu>
-              </UncontrolledDropdown>
+              </UncontrolledDropdown> */}
+
+              <Link
+                to="/myPage"
+                style={{ paddingTop: 10, paddingInline: 20 }}
+                hidden={!isToken}
+                onClick={verify}
+              >
+                <div className="logo">
+                  <FontAwesomeIcon icon={faUser} size="xl" color="white" style={{marginTop:5}}/>
+                  <p className="d-lg-none" style={{ marginTop:5 }}>
+                    마이페이지
+                  </p>
+                </div>
+              </Link>
+
+              <Link
+                className="logo"
+                hidden={!isToken}
+                onClick={logout}
+                style={{ paddingTop: 10, paddingInline: 20, paddingBottom: 10 }}
+              >
+                <FontAwesomeIcon
+                  icon={faArrowRightFromBracket}
+                  size="xl"
+                  color="white"
+                  style={{marginTop:5}}
+                />
+                <p className="d-lg-none" style={{ marginTop:5 }}>
+                  로그아웃
+                </p>
+              </Link>
               <li className="separator d-lg-none" />
             </Nav>
           </Collapse>

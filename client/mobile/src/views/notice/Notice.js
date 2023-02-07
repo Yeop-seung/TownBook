@@ -79,21 +79,21 @@ function Notice(props) {
   useEffect(() => {
   axios
     .get(
-      "https://react-getting-started-9d228-default-rtdb.firebaseio.com/notices.json"
+      `https://i8b201.p.ssafy.io/backend/notice/list/0`
 
     )
     // .get("https:///townbook/myPage/receive/${receiverNo}")
-    .then((response) => {
+    .then((res) => {
       const notices = [];
-      console.log(response)
-      for (const key in response.data) {
+      console.log(res)
+      for (const key in res.data) {
         const notice = {
         id: key,
-        ...response.data[key]
+        ...res.data[key]
       };
         notices.push(notice);
       };
-      // if(response=="true"){
+      // if(res=="true"){
       // alert("회원가입에 성공하였습니다.");
       // history.replace("/");
       // }

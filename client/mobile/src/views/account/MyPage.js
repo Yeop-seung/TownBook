@@ -15,8 +15,8 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react";
-
+import React, {useEffect} from "react";
+import axios from "axios";
 // reactstrap components
 import {
   Button,
@@ -37,27 +37,26 @@ import {
 
 function MyPage() {
 
-
-  // axios
-  //   .get(`https://i8b201.p.ssafy.io/backend/myPage/qr/${localStorage.getItem("accountEmail")}`, {
-  //     accountEmail,
-  //   })
-  //   // .get("https:///townbook/myPage/receive/${receiverNo}")
-  //   .then((res) => {
-  //     console.log(res);
-      
-  //     const base64 = btoa(
-  //       new Uint8Array(res.data).reduce(
-  //         (data, byte) => data + String.fromCharCode(byte),
-  //         ""
-  //       )
-  //     );
-  //     setImageUrl(`data:${res.headers["content-type"]};base64,${base64}`)
+  useEffect(() => {
+  axios
+    .get(`https://i8b201.p.ssafy.io/backend/myPage/donate/${localStorage.getItem("accountNo")}`)
+    // .get("https:///townbook/myPage/receive/${receiverNo}")
+    .then((res) => {
+      console.log(res);
+    
+      // const base64 = btoa(
+      //   new Uint8Array(res.data).reduce(
+      //     (data, byte) => data + String.fromCharCode(byte),
+      //     ""
+      //   )
+      // );
+      // setImageUrl(`data:${res.headers["content-type"]};base64,${base64}`)
      
-  //   })
-  //   .catch((error) => {
-  //     alert("qr로딩에 실패하였습니다.");
-  //   });
+    })
+    .catch((error) => {
+      alert("qr로딩에 실패하였습니다.");
+    });
+  }, []);
   return (
     <>
       

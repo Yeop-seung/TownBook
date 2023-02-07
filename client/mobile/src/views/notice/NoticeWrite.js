@@ -41,28 +41,30 @@ function NoticeWrite(props) {
     const enteredContent = contentInputRef.current.value;
 
     const userInfo = {
-      noticeTitle: enteredTitle,
-      noticeContent: enteredContent,
-      noticeWriteDateTime: "10",
-      notcieCategory:0,
-      accountNo: true,
+      // noticeTitle: enteredTitle,
+      // noticeContent: enteredContent,
+      noticeTitle: "1",
+      noticeContent: "1",
+      // noticeWriteDateTime: "2023-02-07T05:23:54.712Z",
+      noticeCategory:1,
+      accountNo: 1,
       // noticeId: Id,
     };
     console.log(userInfo);
     // props.onAddInfo(userInfo);
 
     axios
-      .post(
-        "https://i8b201.p.ssafy.io/backend/notice/write",userInfo
-      )
+      .post( "https://i8b201.p.ssafy.io/backend/notice/write" , userInfo)
       // console.log("성공")
         //replace는 뒤로가기 버튼 비활성 이미 양식 제출했으므로
       .then((response) => {
+        console.log(response)
         //then 대신에 asynce나 await가능
         alert("글작성 성공.")
         history.replace("/notice");
       })
         .catch((error) => {
+          console.log(error)
           alert("작성에 실패하였습니다.");
       });
   }
