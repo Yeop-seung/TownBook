@@ -8,12 +8,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/notice")
@@ -44,7 +39,7 @@ public class NoticeController {
      * @return Boolean
      */
     @PutMapping("/modify")
-    public ResponseEntity<Boolean> modifyNotice(ModifyNoticeRequestDto modifyNoticeRequestDto) {
+    public ResponseEntity<Boolean> modifyNotice(@RequestBody ModifyNoticeRequestDto modifyNoticeRequestDto){
         return new ResponseEntity<Boolean>(noticeService.modifyNotice(modifyNoticeRequestDto), HttpStatus.OK);
     }
     
@@ -53,8 +48,11 @@ public class NoticeController {
      * @return Boolean
      */
     @PostMapping("/write")
-    public ResponseEntity<Boolean> writeNotice(WriteNoticeRequestDto writeNoticeRequestDto) {
-        return new ResponseEntity<Boolean>(noticeService.writeNotice(writeNoticeRequestDto), HttpStatus.OK);
+    public ResponseEntity<Boolean> writeNotice(@RequestBody WriteNoticeRequestDto writeNoticeRequestDto){
+        System.out.println("writeNoticeRequestDto = " + writeNoticeRequestDto);
+        Boolean check = noticeService.writeNotice(writeNoticeRequestDto);
+        System.out.println("check = "+ check);
+        return new ResponseEntity<Boolean>(check, HttpStatus.OK);
     }
     
     /**
