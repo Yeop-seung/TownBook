@@ -11,7 +11,7 @@
     height: 60vh;
     top: 18vh;
     left: 11vw; 
-    font-size: 80px;
+    font-size: 800%;
     font-weight: 800;
     box-shadow: 5px 5px 5px 5px gray;
     float: left;
@@ -29,7 +29,7 @@
     height: 60vh;
     top: 18vh;
     right: 11vw;
-    font-size: 64px;
+    font-size: 800%;
     font-weight: 800;
     box-shadow: 5px 5px 5px 5px gray;
     float: left;
