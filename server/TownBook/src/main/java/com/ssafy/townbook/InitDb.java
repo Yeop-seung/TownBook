@@ -41,11 +41,11 @@ public class InitDb {
     
     @PostConstruct
     public void init() {
-        //initService.bookInit();
-        //initService.accountInit();
-        //initService.lockerInit();
-        //initService.bookLogInit();
-        //initService.noticeInit();
+        initService.bookInit();
+        initService.accountInit();
+        initService.lockerInit();
+        initService.bookLogInit();
+        initService.noticeInit();
     }
     
     @Component

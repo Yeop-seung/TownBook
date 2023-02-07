@@ -7,14 +7,14 @@ import lombok.Setter;
 @Getter
 @Setter
 public class TokenDto {
-    
+
     private String token;
 
-    private Long accountNo;
-    
+    private AccountDto accountDto;
+
     @Builder
-    public TokenDto(Long accountNo,String token) {
-        this.accountNo = accountNo;
+    public TokenDto(AccountDto accountDto, String token) {
+        this.accountDto = accountDto;
         this.token = token;
     }
 }

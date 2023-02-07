@@ -5,7 +5,7 @@ import com.ssafy.townbook.jwt.JwtFilter;
 import com.ssafy.townbook.jwt.TokenProvider;
 import com.ssafy.townbook.model.dto.LoginDto;
 import com.ssafy.townbook.model.dto.TokenDto;
-import javax.validation.Valid;
+import com.ssafy.townbook.model.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -19,32 +19,37 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
-    
+
+    @Autowired
+    private AccountService accountService;
+
     @Autowired
     private TokenProvider tokenProvider;
-    
+
     @Autowired
     private AuthenticationManagerBuilder authenticationManagerBuilder;
-    
-    
+
+
     @PostMapping("/login")
     public ResponseEntity<TokenDto> authorize(@Valid @RequestBody LoginDto loginDto) {
-        
+
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(loginDto.getAccountEmail(), loginDto.getAccountPw());
-        
+
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        
+
         String jwt = tokenProvider.createToken(authentication);
-        
+
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER, "Bearera" + jwt);
-        
-        return new ResponseEntity<>(new TokenDto(loginDto.getAccountNo(),jwt), httpHeaders, HttpStatus.OK);
+
+        return new ResponseEntity<>(new TokenDto(accountService.findAccountByAccountEmail(loginDto.getAccountEmail()), jwt), httpHeaders, HttpStatus.OK);
     }
 }
