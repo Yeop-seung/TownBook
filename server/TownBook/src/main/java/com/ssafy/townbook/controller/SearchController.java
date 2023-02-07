@@ -1,7 +1,13 @@
 package com.ssafy.townbook.controller;
 
+import com.ssafy.townbook.model.dto.BookLogDto;
 import com.ssafy.townbook.model.dto.LockerDto;
 import com.ssafy.townbook.model.dto.response.ReceiveBookLogResponseDto;
+import com.ssafy.townbook.model.entity.Book;
+import com.ssafy.townbook.model.entity.Locker;
+import com.ssafy.townbook.model.repository.BookLogRepository;
+import com.ssafy.townbook.model.repository.BookRepository;
+import com.ssafy.townbook.model.repository.LockerRepository;
 import com.ssafy.townbook.model.service.BookLogService;
 import com.ssafy.townbook.model.service.LockerService;
 import java.util.List;
@@ -23,11 +29,13 @@ public class SearchController {
     
     private BookLogService bookLogService;
     private LockerService  lockerService;
+    private BookRepository bookRepository;
     
     @Autowired
-    public SearchController(BookLogService bookLogService, LockerService lockerService) {
+    public SearchController(BookLogService bookLogService, LockerService lockerService, BookRepository bookRepository) {
         this.bookLogService = bookLogService;
         this.lockerService  = lockerService;
+        this.bookRepository = bookRepository;
     }
     
     /**
@@ -43,29 +51,26 @@ public class SearchController {
     
     @GetMapping("/searchLocker/{lockerNo}")
     public ResponseEntity<?> findLockerByLockerNo(@PathVariable Long lockerNo) {
-        LockerDto                       findLockerDto                  = lockerService.findLockerByLockerNo(lockerNo);
-        List<ReceiveBookLogResponseDto> findReceiveBookLogResponseDtos = bookLogService.findBookLogByLockerNo(lockerNo);
+        LockerDto        findLockerDto   = lockerService.findLockerByLockerNo(lockerNo);
+        List<BookLogDto> findBookLogDtos = bookLogService.findBookLogByLockerNo(lockerNo);
+        JSONObject       jsonObject      = new JSONObject();
         
-        JSONObject jsonObject = new JSONObject();
         jsonObject.put("Locker", findLockerDto);
-        
         JSONArray jsonArray = new JSONArray();
-        for (ReceiveBookLogResponseDto bookLogDto : findReceiveBookLogResponseDtos) {
+        for (BookLogDto bookLogDto : findBookLogDtos) {
             JSONObject jsonObject1 = new JSONObject();
-            jsonObject1.put("bookTitle", bookLogDto.getBookTitle());
-            jsonObject1.put("detailLockerNo", bookLogDto.getDetailLockerNo());
-            jsonObject1.put("detailLockerNoInLocker", bookLogDto.getDetailLockerNoInLocker());
-            jsonObject1.put("bookIntroductionURL", bookLogDto.getBookIntroductionURL());
-            jsonObject1.put("bookTitleURL", bookLogDto.getBookTitleURL());
+            
+            // bookTitle
+            Book book = bookRepository.findBookByBookIsbn(bookLogDto.getBookIsbn()).get();
+            jsonObject1.put("bookTitle", book.getBookTitle());
+            
+            jsonObject1.put("detailLockerNo", bookLogDto.getLockerNo());
+            jsonObject1.put("detailLockerNoInLocker", bookLogDto.getDetailLockerNo());
+            jsonObject1.put("bookIntroductionURL", book.getBookIntroductionURL());
+            jsonObject1.put("bookTitleURL", book.getBookTitleURL());
             jsonArray.add(jsonObject1);
         }
         jsonObject.put("BookLogDtos", jsonArray);
         return new ResponseEntity<>(jsonObject, HttpStatus.OK);
     }
-    //    @GetMapping("/searchTitle")
-    //    public ResponseEntity<?> findLockerByBookTitleAndDist(SearchTitleRequestDto searchTitleRequestDto)
-    //            throws Exception {
-    //        LockerDto lockerDto = bookLogService.findLockerByBookTitleAndDist(searchTitleRequestDto);
-    //        return null;
-    //    }
 }

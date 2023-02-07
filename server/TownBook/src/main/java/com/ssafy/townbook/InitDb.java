@@ -171,10 +171,15 @@ public class InitDb {
         public void donateBook(
                 String bookLogReview, Locker locker, DetailLocker detailLocker,
                 Optional<Account> account, Optional<Book> book) {
-            BookLog bookLog = new BookLog(account.get().getAccountNo(), book.get().getBookIsbn());
+            BookLog bookLog = new BookLog(locker.getLockerNo(), detailLocker.getDetailLockerNo(), account.get()
+                    .getAccountNo(), book.get().getBookIsbn());
+            
             bookLog.setBookLogReview(bookLogReview);
             bookLog.setBookLogDonateDateTime(LocalDateTime.now());
+            
+            locker.setLockerBookCnt(locker.getLockerBookCnt() + 1);
             bookLog.setLocker(locker);
+            
             detailLocker.setDetailLockerIsEmpty(false);
             bookLog.setDetailLocker(detailLocker);
             
@@ -188,6 +193,7 @@ public class InitDb {
         }
         
         public void receiveBook(BookLog bookLog, Optional<Account> account) {
+            bookLog.getLocker().setLockerBookCnt(bookLog.getLocker().getLockerBookCnt() - 1);
             bookLog.getDetailLocker().setDetailLockerIsEmpty(true);
             bookLog.setBookLogState(false);
             
