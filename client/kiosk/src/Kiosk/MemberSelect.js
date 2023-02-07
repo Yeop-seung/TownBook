@@ -14,6 +14,9 @@ function MemberSelect(props) {
     
     console.log(location)
 
+    const goBack = () => {
+        navigate(-1)
+    }
     const onClickHandlerHome = () => {
         navigate('/Kiosk')
     }
@@ -27,7 +30,7 @@ function MemberSelect(props) {
     return (
         <div>
             <div className={styles.myImg}>
-                <button className={styles.circle} onClick={onClickHandlerHome}>
+                <button className={styles.circle} onClick={goBack}>
                 {/* 수령인지 기부인지 확인하고 뒤로가기 바꾸기 */}
                     <AiOutlineArrowLeft className={styles.iconStyle}/>
                 </button>

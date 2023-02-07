@@ -35,8 +35,8 @@ function DonateReceipt(props){
     const onClickHandlerHome = () => {
         navigate('/Kiosk')
     }
-    const onClickHandlerReceiptComplete = () => {
-        navigate('/Kiosk/ReceiptComplete', {replace: false})
+    const goBack = () => {
+        navigate(-1)
     }
     const onClickHandlerReceiptThanks = () => {
         navigate('/Kiosk/ReceiptThanks')
@@ -45,7 +45,7 @@ function DonateReceipt(props){
     return (
         <div>
             <div className={styles.myImg}>
-                <button className={styles.circle} onClick={onClickHandlerReceiptComplete}>
+                <button className={styles.circle} onClick={goBack}>
                     <AiOutlineArrowLeft className={styles.iconStyle}/>
                 </button>
                 {/* 보관함 책을 넣고 빼고  */}

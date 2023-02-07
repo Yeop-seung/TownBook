@@ -15,8 +15,8 @@ function ReceiptConfirm(props) {
     const onClickHandlerHome = () => {
         navigate('/Kiosk')
     }
-    const onClickHandlerDonateUse = () => {
-        navigate('/Kiosk/DonateUse')
+    const goBack = () => {
+        navigate(-1)
     }
     const onClickHandlerReceiptComplete = () => {
         navigate('/Kiosk/ReceiptComplete')
@@ -25,7 +25,7 @@ function ReceiptConfirm(props) {
         // 책 리스트 불러오기 
             <div>
                 <div className={styles.myImg}>
-                    <button className={styles.circle} onClick={onClickHandlerDonateUse}>
+                    <button className={styles.circle} onClick={goBack}>
                         <AiOutlineArrowLeft className={styles.iconStyle}/>
                     </button>
                     <div>

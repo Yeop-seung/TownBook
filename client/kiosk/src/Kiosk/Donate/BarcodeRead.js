@@ -48,13 +48,16 @@ function BarcodeRead(props) {
     const onClickHandlerUse = () => {
         navigate('/Kiosk/DonateUse')
     }
+    const goBack = () => {
+        navigate(-1)
+    }
     
     // 회원정보를 가지고 있어야 된다.
     return (
         // <div>
             <div>
                 <div className={styles.myImg}>
-                    <button className={styles.circle} onClick={onClickHandlerUse}>
+                    <button className={styles.circle} onClick={goBack}>
                         <AiOutlineArrowLeft className={styles.iconStyle}/>
                     </button>
                     <div >

@@ -31,13 +31,16 @@ function DonateComplete(props) {
         // })
         navigate('/Kiosk/DonateThanks')
     }
+    const goBack = () => {
+        navigate(-1)
+    }
 // 회원정보를 지금 여기서도 가지고 있어야 된다
 // 회원인지 비회원인지 확인 후 감사 인사 다르게 if
     return (
         <div>
             <div className={styles.myImg}>
                 <button className={styles.circle}>
-                    <AiOutlineArrowLeft className={styles.iconStyle} onClick={onClickHandlerConfirm}/>
+                    <AiOutlineArrowLeft className={styles.iconStyle} onClick={goBack}/>
                 </button>
                     <div className={styles.buttonOne}>
                         {/* {보관함 번호} */}

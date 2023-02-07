@@ -20,12 +20,15 @@ function ReceiptComplete(props) {
     const onClickHandlerDonateReceipt = () => {
         navigate('/Kiosk/DonateReceipt')
     }
+    const goBack = () => {
+        navigate(-1)
+    }
 
     return (
         // <div>
             <div>
                 <div className={styles.myImg}>
-                    <button className={styles.circle} onClick={onClickHandlerReceiptConfirm}>
+                    <button className={styles.circle} onClick={goBack}>
                         <AiOutlineArrowLeft className={styles.iconStyle }/>
                     </button>
                     <div className={styles.buttonOne}>

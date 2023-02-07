@@ -69,7 +69,7 @@ function DonateUse(props) {
         // <div>
             <div>
                 <div className={styles.myImg}>
-                    <button className={styles.circle} onClick={onClickHandlerHome}>
+                    <button className={styles.circle} onClick={goBack}>
                         <AiOutlineArrowLeft className={styles.iconStyle}/>
                     </button>
                     
