@@ -41,11 +41,11 @@ public class InitDb {
     
     @PostConstruct
     public void init() {
-//        initService.bookInit();
-//        initService.accountInit();
-//        initService.lockerInit();
-//        initService.bookLogInit();
-//        initService.noticeInit();
+        initService.bookInit();
+        initService.accountInit();
+        initService.lockerInit();
+        initService.bookLogInit();
+        initService.noticeInit();
     }
     
     @Component
@@ -131,6 +131,7 @@ public class InitDb {
             createLocker("어은동", 1, 12312312D, 123123123D);
             createLocker("덕명동", 3, 87654321D, 87654321D);
             createLocker("봉명동", 5, 123D, 456D);
+            createLocker("덕명동",5,36.3626496, 127.2971264);
         }
         
         public void createLocker(String lockerRegion, int detailLockerCount, Double lockerLatitude,
