@@ -13,23 +13,20 @@ function DonateComplete(props) {
     const UrlTwoClose = "http://192.168.140.1/servo2/90 " //2번 보관함 닫기
 
     const onClickHandlerHome = () => {
-        navigate('/Kiosk')
-    }
-    const onClickHandlerConfirm =() => {
-        navigate('/Kiosk/DonateConfirm')
+        navigate('/kiosk')
     }
     const onClickHandlerThanks = () => {
         // axios.get(UrlOneClose, {
         // })
         // .then((response) => {
         //     // console.log('eeeee', e.target.value) // 값을 보내준다
-        //     navigate('/DonateThanks')
+        //     navigate('/kiosk/DonateThanks')
         // })
         
         // .catch(function (error) {
         //     console.log(error)
         // })
-        navigate('/Kiosk/DonateThanks')
+        navigate('/kiosk/DonateThanks')
     }
     const goBack = () => {
         navigate(-1)

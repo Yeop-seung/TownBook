@@ -29,7 +29,7 @@ function DonateUse(props) {
             })
             .then((response) => {
                 const onClickHandlerBarcodeRead =() => {
-                    navigate('/Kiosk/BarcodeRead', {state: response.data})
+                    navigate('/kiosk/BarcodeRead', {state: response.data})
                 }
                 onClickHandlerBarcodeRead()
             })
@@ -45,7 +45,7 @@ function DonateUse(props) {
             .then((response) => {
                 // 수령 페이지로 이동
                 const onClickHandlerReceiptConfirm =() => {
-                    navigate('/Kiosk/ReceiptConfirm', {state: isnavigate})
+                    navigate('/kiosk/ReceiptConfirm', {state: isnavigate})
                 }
                 onClickHandlerReceiptConfirm()
             })
@@ -58,7 +58,7 @@ function DonateUse(props) {
         
     
     const onClickHandlerHome = () => {
-        navigate('/Kiosk')
+        navigate('/kiosk')
     }
     const goBack = () => {
         navigate(-1)

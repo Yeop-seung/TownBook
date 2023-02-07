@@ -41,13 +41,13 @@ function BarcodeReadError(props) {
     const navigate = useNavigate()
 
     const onClickHandlerHome = () => {
-        navigate('/Kiosk')
+        navigate('/kiosk')
     }
     const onClickHandlerBarcodeReadError =() => {
-        navigate('/Kiosk/BarcodeReadError')
+        navigate('/kiosk/BarcodeReadError')
     }
     const onClickHandlerUse = () => {
-        navigate('/Kiosk/DonateUse')
+        navigate('/kiosk/DonateUse')
     }
     // 회원정보를 가지고 있어야 된다.
     return (

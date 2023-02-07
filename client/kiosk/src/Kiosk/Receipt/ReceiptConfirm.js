@@ -13,13 +13,13 @@ function ReceiptConfirm(props) {
     const navigate = useNavigate()
 
     const onClickHandlerHome = () => {
-        navigate('/Kiosk')
+        navigate('/kiosk')
     }
     const goBack = () => {
         navigate(-1)
     }
     const onClickHandlerReceiptComplete = () => {
-        navigate('/Kiosk/ReceiptComplete')
+        navigate('/kiosk/ReceiptComplete')
     }
     return (
         // 책 리스트 불러오기 

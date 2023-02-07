@@ -7,39 +7,34 @@ import { BiHomeAlt } from 'react-icons/bi';
 // import {BsFillArrowRightCircleFill} from "react-icons/bs"
 
 function DonateReceipt(props){
+    const UrlTOneClose = "http://192.168.140.1/servo1/90" //1번 보관함 닫기
+    const UrlTwoClose = "http://192.168.140.1/servo2/90 " //2번 보관함 닫기
+
     const navigate = useNavigate()
 
     const location = useLocation()
 
     const isnavigate = location.state
     
-
-    function barcodeInput(e) {
-        let event=window.event || e;
+    function onClickHandlerReceiptThanks(e) {
+    //     let event=window.event || e;
         
-        if(event.target.value.length === 13){
-            axios.get(`/server/book/${e.target.value}`, {
-            })
-            .then((response) => {
-                const onClickHandlerConfirm = () => {
-                    navigate('/Kiosk/DonateConfirm', {state : response.data} )
-                }
-                onClickHandlerConfirm()
-                
-            })
-            
-            .catch(function (error) {
-                console.log(error)
-            })
-        }}
+    //     axios.get(`/server/book/${e.target.value}`, {
+    //     })
+    //     .then((response) => {
+    //         const onClickHandlerThanks = () => {
+    //             navigate('/kiosk/ReceiptThanks', {state : response.data})
+    //         }})
+    //         onClickHandlerThanks()
+    //     .catch(function (error) {
+    //         console.log(error)
+    //     })
+    }
     const onClickHandlerHome = () => {
-        navigate('/Kiosk')
+        navigate('/kiosk')
     }
     const goBack = () => {
         navigate(-1)
-    }
-    const onClickHandlerReceiptThanks = () => {
-        navigate('/Kiosk/ReceiptThanks')
     }
 
     return (

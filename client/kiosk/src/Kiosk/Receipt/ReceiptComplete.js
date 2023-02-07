@@ -12,20 +12,19 @@ function ReceiptComplete(props) {
     const navigate = useNavigate()
 
     const onClickHandlerHome = () => {
-        navigate('/Kiosk')
+        navigate('/kiosk')
     }
     const onClickHandlerReceiptConfirm = () => {
-        navigate('/Kiosk/ReceiptConfirm')
+        navigate('/kiosk/ReceiptConfirm')
     }
     const onClickHandlerDonateReceipt = () => {
-        navigate('/Kiosk/DonateReceipt')
+        navigate('/kiosk/DonateReceipt')
     }
     const goBack = () => {
         navigate(-1)
     }
 
     return (
-        // <div>
             <div>
                 <div className={styles.myImg}>
                     <button className={styles.circle} onClick={goBack}>
@@ -52,9 +51,6 @@ function ReceiptComplete(props) {
                     </button>
                 </div>
             </div>
-            /* <label htmlFor="title" onSubmit={}></label>
-            <input type="text" required id="title" />
-        </div> */
         )
 }
 

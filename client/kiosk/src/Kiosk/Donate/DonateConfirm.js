@@ -24,7 +24,7 @@ function DonateConfirm(props) {
         bookURL = book
         }
     const onClickHandlerHome = () => {
-        navigate('/Kiosk')
+        navigate('/kiosk')
     }
     const onClickHandlerComplete =() => {
         // axios.get(UrlOneOpen, {
@@ -36,13 +36,13 @@ function DonateConfirm(props) {
         // .catch(function (error) {
         //     console.log(error)
         // })
-        navigate('/Kiosk/DonateComplete')
+        navigate('/kiosk/DonateComplete')
     }
     const onClickHandlerBarcodeRead =() => {
-        navigate('/Kiosk/BarcodeRead')
+        navigate('/kiosk/BarcodeRead')
     }
     const onClickHandlerBarcodeReadError =() => {
-        navigate('/Kiosk/BarcodeReadError')
+        navigate('/kiosk/BarcodeReadError')
     }
     const goBack = () => {
         navigate(-1)

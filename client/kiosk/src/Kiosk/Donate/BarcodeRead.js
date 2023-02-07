@@ -40,13 +40,13 @@ function BarcodeRead(props) {
     const navigate = useNavigate()
 
     const onClickHandlerHome = () => {
-        navigate('/Kiosk')
+        navigate('/kiosk')
     }
     const onClickHandlerBarcodeReadError =() => {
-        navigate('/Kiosk/BarcodeReadError')
+        navigate('/kiosk/BarcodeReadError')
     }
     const onClickHandlerUse = () => {
-        navigate('/Kiosk/DonateUse')
+        navigate('/kiosk/DonateUse')
     }
     const goBack = () => {
         navigate(-1)

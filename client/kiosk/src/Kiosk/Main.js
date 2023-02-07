@@ -9,10 +9,6 @@ function Main(props) {
     const [modalOpen, setModalOpen] = useState(false);
 
     let isnavigate = true //true 기부 false 수령
-    // 모달창 노출
-    // const showModal = () => {
-    //     setModalOpen(true);
-    // };
 
     function onClickHandler() {
             axios.get(`http://i8b201.p.ssafy.io:8081/backend/locker/`, {
@@ -26,7 +22,7 @@ function Main(props) {
                     // 락커의 책과 길이가 같으면 모달창을 띄워줌           
                 } else {
                     const onClickHandlerMemberSelect = () => {
-                        navigate('/Kiosk/MemberSelect',
+                        navigate('/kiosk/MemberSelect',
                         {state: isnavigate,
                     })}
                     onClickHandlerMemberSelect()
@@ -39,7 +35,7 @@ function Main(props) {
         }
     const onClickHandlerUse = () => {
         isnavigate = false
-        navigate('/Kiosk/DonateUse', {state: isnavigate})
+        navigate('/kiosk/DonateUse', {state: isnavigate})
     }
 
     return (
