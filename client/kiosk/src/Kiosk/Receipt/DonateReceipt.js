@@ -13,7 +13,6 @@ function DonateReceipt(props){
 
     const isnavigate = location.state
     
-    console.log(isnavigate)
 
     function barcodeInput(e) {
         let event=window.event || e;
@@ -23,9 +22,8 @@ function DonateReceipt(props){
             })
             .then((response) => {
                 const onClickHandlerConfirm = () => {
-                    navigate('/DonateConfirm', {state : response.data} )
+                    navigate('/Kiosk/DonateConfirm', {state : response.data} )
                 }
-                console.log(response.data)
                 onClickHandlerConfirm()
                 
             })
@@ -35,13 +33,13 @@ function DonateReceipt(props){
             })
         }}
     const onClickHandlerHome = () => {
-        navigate('/')
+        navigate('/Kiosk')
     }
     const onClickHandlerReceiptComplete = () => {
-        navigate('/ReceiptComplete')
+        navigate('/Kiosk/ReceiptComplete')
     }
     const onClickHandlerReceiptThanks = () => {
-        navigate('/ReceiptThanks')
+        navigate('/Kiosk/ReceiptThanks')
     }
 
     return (

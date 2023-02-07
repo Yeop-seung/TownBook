@@ -13,10 +13,10 @@ function DonateComplete(props) {
     const UrlTwoClose = "http://192.168.140.1/servo2/90 " //2번 보관함 닫기
 
     const onClickHandlerHome = () => {
-        navigate('/')
+        navigate('/Kiosk')
     }
     const onClickHandlerConfirm =() => {
-        navigate('/DonateConfirm')
+        navigate('/Kiosk/DonateConfirm')
     }
     const onClickHandlerThanks = () => {
         // axios.get(UrlOneClose, {
@@ -29,7 +29,7 @@ function DonateComplete(props) {
         // .catch(function (error) {
         //     console.log(error)
         // })
-        navigate('/DonateThanks')
+        navigate('/Kiosk/DonateThanks')
     }
 // 회원정보를 지금 여기서도 가지고 있어야 된다
 // 회원인지 비회원인지 확인 후 감사 인사 다르게 if

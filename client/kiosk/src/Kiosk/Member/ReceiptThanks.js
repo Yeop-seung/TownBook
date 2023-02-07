@@ -22,10 +22,10 @@ function ReceiptThanks(props) {
         // .catch(function (error) {
         //     console.log(error)
         // })
-        navigate('/Finish')
+        navigate('/Kiosk/Finish')
     }
     const onClickHandlerReceiptConfirm = () => {
-        navigate('/ReceiptConfirm')
+        navigate('/Kiosk/ReceiptConfirm')
     }
 
     return (

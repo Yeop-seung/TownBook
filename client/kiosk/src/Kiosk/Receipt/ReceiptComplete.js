@@ -12,13 +12,13 @@ function ReceiptComplete(props) {
     const navigate = useNavigate()
 
     const onClickHandlerHome = () => {
-        navigate('/')
+        navigate('/Kiosk')
     }
     const onClickHandlerReceiptConfirm = () => {
-        navigate('/ReceiptConfirm')
+        navigate('/Kiosk/ReceiptConfirm')
     }
     const onClickHandlerDonateReceipt = () => {
-        navigate('/DonateReceipt')
+        navigate('/Kiosk/DonateReceipt')
     }
 
     return (

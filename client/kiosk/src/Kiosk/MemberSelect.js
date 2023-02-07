@@ -11,16 +11,17 @@ function MemberSelect(props) {
     const location = useLocation()
 
     const isnavigate = location.state
-    console.log(isnavigate)
+    
+    console.log(location)
 
     const onClickHandlerHome = () => {
-        navigate('/')
+        navigate('/Kiosk')
     }
     const onClickHandlerUse = () => {
-        navigate('/DonateUse', {state: isnavigate})
+        navigate('/Kiosk/DonateUse', {state: isnavigate})
     }
     const onClickHandlerBarcodeRead =() => {
-        navigate('/BarcodeRead', {state: isnavigate})
+        navigate('/Kiosk/BarcodeRead', {state: isnavigate})
     }
 
     return (

@@ -13,16 +13,16 @@ function BarcodeRead(props) {
     
     function barcodeInput(e) {
         let event=window.event || e;
-        
+
         if(event.target.value.length === 13){
-            axios.get(`/server/book/find/${e.target.value}`, {
+            axios.get(`http://i8b201.p.ssafy.io:8081/backend/book/find/${e.target.value}`, {
             })
             .then((response) => {
+                console.log('fffff')
                 const onClickHandlerConfirm = () => {
-                    navigate('/DonateConfirm', {state : response.data} )
+                    navigate('/Kiosk/DonateConfirm', {state : response.data} )
                 }
                 onClickHandlerConfirm()
-                
             })
             
             .catch(function (error) {
@@ -41,13 +41,13 @@ function BarcodeRead(props) {
     const navigate = useNavigate()
 
     const onClickHandlerHome = () => {
-        navigate('/')
+        navigate('/Kiosk')
     }
     const onClickHandlerBarcodeReadError =() => {
-        navigate('/BarcodeReadError')
+        navigate('/Kiosk/BarcodeReadError')
     }
     const onClickHandlerUse = () => {
-        navigate('/DonateUse')
+        navigate('/Kiosk/DonateUse')
     }
     
     // 회원정보를 가지고 있어야 된다.

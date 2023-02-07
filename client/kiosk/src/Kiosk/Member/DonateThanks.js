@@ -21,10 +21,10 @@ function DonateThanks(props) {
         // .catch(function (error) {
         //     console.log(error)
         // })
-        navigate('/Finish')
+        navigate('/Kiosk/Finish')
     }
     const onClickHandlerBarcodeRead =() => {
-        navigate('/BarcodeRead')
+        navigate('/Kiosk/BarcodeRead')
     }
 
     return (

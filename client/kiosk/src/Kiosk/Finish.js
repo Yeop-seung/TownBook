@@ -10,7 +10,7 @@ function Finish(props){
     const navigate = useNavigate()
     const timeout = () => {
         setTimeout(() => {
-        navigate('/');
+        navigate('/Kiosk');
         }, 3000);
     };
       // 컴포넌트가 화면에 다 나타나면 timeout 함수 실행

@@ -5,7 +5,6 @@ import Finish from "./Kiosk/Finish";
 import DonateUse from "./Kiosk/Donate/DonateUse";
 import MemberSelect from "./Kiosk/MemberSelect";
 import DonateConfirm from "./Kiosk/Donate/DonateConfirm";
-import DonateConfirmError from "./Kiosk/Donate/DonateConfirmError";
 import DonateComplete from "./Kiosk/Donate/DonateComplete";
 import DonateThanks from "./Kiosk/Member/DonateThanks";
 import BarcodeRead from "./Kiosk/Donate/BarcodeRead"
@@ -23,27 +22,23 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
     <Routes>
-      <Route path='/' element={<Main />}/>
-      <Route path='/Finish' element={<Finish />}/>
-      <Route path='/MemberSelect' element={<MemberSelect />}/>
-      <Route path='/DonateUse' element={<DonateUse />}/>
-      <Route path='/DonateConfirm' element={<DonateConfirm />}/>
-      <Route path='/DonateConfirmError' element={<DonateConfirmError />}/>
-      <Route path='/DonateComplete' element={<DonateComplete />}/>
-      <Route path='/DonateThanks' element={<DonateThanks />}/>
-      <Route path='/BarcodeRead' element={<BarcodeRead />}/>
-      <Route path='/BarcodeReadError' element={<BarcodeReadError />}/>
-      <Route path='/ReceiptConfirm' element={<ReceiptConfirm />}/>
-      <Route path='/ReceiptComplete' element={<ReceiptComplete />}/>
-      <Route path='/DonateReceipt' element={<DonateReceipt />}/>
-      <Route path='/ReceiptThanks' element={<ReceiptThanks />}/>
+      <Route path='/Kiosk' element={<Main />}/>
+      <Route path='/Kiosk/Finish' element={<Finish />}/>
+      <Route path='/Kiosk/MemberSelect' element={<MemberSelect />}/>
+      <Route path='/Kiosk/DonateUse' element={<DonateUse />}/>
+      <Route path='/Kiosk/DonateConfirm' element={<DonateConfirm />}/>
+      <Route path='/Kiosk/DonateComplete' element={<DonateComplete />}/>
+      <Route path='/Kiosk/DonateThanks' element={<DonateThanks />}/>
+      <Route path='/Kiosk/BarcodeRead' element={<BarcodeRead />}/>
+      <Route path='/Kiosk/BarcodeReadError' element={<BarcodeReadError />}/>
+      <Route path='/Kiosk/ReceiptConfirm' element={<ReceiptConfirm />}/>
+      <Route path='/Kiosk/ReceiptComplete' element={<ReceiptComplete />}/>
+      <Route path='/Kiosk/DonateReceipt' element={<DonateReceipt />}/>
+      <Route path='/Kiosk/ReceiptThanks' element={<ReceiptThanks />}/>
       {/* <Route path='/DonateThanksNon' element={<DonateThanksNon />}/> */}
       
     </Routes>
   </BrowserRouter>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();

@@ -15,7 +15,7 @@ function BarcodeReadError(props) {
         let event=window.event || e;
         
         if(event.target.value.length === 13){
-            axios.get(`/server/book/find/${e.target.value}`, {
+            axios.get(`http://i8b201.p.ssafy.io:8081/backend/book/find/${e.target.value}`, {
             })
             .then((response) => {
                 const onClickHandlerConfirm = () => {
@@ -41,13 +41,13 @@ function BarcodeReadError(props) {
     const navigate = useNavigate()
 
     const onClickHandlerHome = () => {
-        navigate('/')
+        navigate('/Kiosk')
     }
     const onClickHandlerBarcodeReadError =() => {
-        navigate('/BarcodeReadError')
+        navigate('/Kiosk/BarcodeReadError')
     }
     const onClickHandlerUse = () => {
-        navigate('/DonateUse')
+        navigate('/Kiosk/DonateUse')
     }
     // 회원정보를 가지고 있어야 된다.
     return (

@@ -36,7 +36,7 @@ function Modal( { setModalOpen, id, title, content, writer }) {
     const timeout = () => {
         setTimeout(() => {
         closeModal()
-        }, 10000);
+        }, 5000);
     };
       // 컴포넌트가 화면에 다 나타나면 timeout 함수 실행
     useEffect(() => {

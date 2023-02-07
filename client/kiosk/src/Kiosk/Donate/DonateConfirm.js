@@ -17,7 +17,6 @@ function DonateConfirm(props) {
 
     const location = useLocation()
     
-    // console.log(location.state)
     
     const title = location.state.bookTitle
     let bookURL = location.state.bookIntroductionURL
@@ -25,26 +24,25 @@ function DonateConfirm(props) {
         bookURL = book
         }
     const onClickHandlerHome = () => {
-        navigate('/')
+        navigate('/Kiosk')
     }
     const onClickHandlerComplete =() => {
         // axios.get(UrlOneOpen, {
         // })
         // .then((response) => {
-        //     // console.log('eeeee', e.target.value) // 값을 보내준다
         //     navigate('/DonateComplete')
         // })
         
         // .catch(function (error) {
         //     console.log(error)
         // })
-        navigate('/DonateComplete')
+        navigate('/Kiosk/DonateComplete')
     }
     const onClickHandlerBarcodeRead =() => {
-        navigate('/BarcodeRead')
+        navigate('/Kiosk/BarcodeRead')
     }
     const onClickHandlerBarcodeReadError =() => {
-        navigate('/BarcodeReadError')
+        navigate('/Kiosk/BarcodeReadError')
     }
 
     // 회원정보를 가지고 있어야 된다.
