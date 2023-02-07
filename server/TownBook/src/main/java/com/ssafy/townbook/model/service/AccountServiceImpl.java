@@ -59,8 +59,9 @@ public class AccountServiceImpl implements AccountService {
                 .authorities(Collections.singleton(authority))
                 .accountActivated(true)
                 .build();
-        
-        return AccountDto.from(accountRepository.save(account));
+        accountRepository.save(account);
+        account = accountRepository.findByAccountEmail(accountDto.getAccountEmail()).get();
+        return AccountDto.from(account);
     }
     
     @Override
@@ -249,5 +250,10 @@ public class AccountServiceImpl implements AccountService {
             }
         }
         return jsonArray;
+    }
+
+    @Override
+    public AccountDto findAccountByAccountEmail(String accountEmail) {
+        return AccountDto.from(accountRepository.findByAccountEmail(accountEmail).get());
     }
 }

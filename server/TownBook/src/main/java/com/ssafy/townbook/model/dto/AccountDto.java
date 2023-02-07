@@ -18,7 +18,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 public class AccountDto {
-    
+
+    private Long accountNo;
     @NotNull
     private String accountEmail;
     
@@ -48,10 +49,11 @@ public class AccountDto {
     private Set<AuthorityDto> authorityDtoSet;
     
     @Builder
-    public AccountDto(String accountEmail, String accountPw, String accountName,
+    public AccountDto(Long accountNo, String accountEmail, String accountPw, String accountName,
                       String accountAddress,
                       String accountPhoneNumber, Integer accountGender, String accountNickname,
                       String accountBirthDay, Set<AuthorityDto> authorityDtoSet) {
+        this.accountNo = accountNo;
         this.accountEmail       = accountEmail;
         this.accountPw          = accountPw;
         this.accountName        = accountName;
@@ -62,7 +64,7 @@ public class AccountDto {
         this.accountBirthDay    = accountBirthDay;
         this.authorityDtoSet    = authorityDtoSet;
     }
-    
+
     @Builder
     public static AccountDto from(Account account) {
         if (account == null) {
@@ -70,6 +72,7 @@ public class AccountDto {
         }
         
         return AccountDto.builder()
+                .accountNo(account.getAccountNo())
                 .accountName(account.getAccountName())
                 .accountPw(account.getAccountPw())
                 .accountPhoneNumber(account.getAccountPhoneNumber())

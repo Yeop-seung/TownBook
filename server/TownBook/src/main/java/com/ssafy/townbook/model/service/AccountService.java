@@ -21,4 +21,6 @@ public interface AccountService {
     
     JSONArray findAccountBookCnt(Long accountNo) throws Exception;
 
+    AccountDto findAccountByAccountEmail(String accountEmail);
+
 }
