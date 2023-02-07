@@ -40,17 +40,17 @@ public class MyPageServiceImpl implements MyPageService {
     /**
      * qr 코드 생성 및 반환
      *
-     * @param accountEmail
+     * @param qrSource
      * @return Optional<Object>
      * @throws WriterException
      * @throws IOException
      */
     @Override
-    public Optional<Object> getQrCode(String accountEmail) throws WriterException, IOException {
+    public Optional<Object> getQrCode(String qrSource) throws WriterException, IOException {
         int       width  = 200;
         int       height = 200;
-        BitMatrix matrix = new MultiFormatWriter().encode(accountEmail, BarcodeFormat.QR_CODE, width, height);
-        
+        BitMatrix matrix = new MultiFormatWriter().encode(qrSource, BarcodeFormat.QR_CODE, width, height);
+
         try (ByteArrayOutputStream out = new ByteArrayOutputStream();) {
             MatrixToImageWriter.writeToStream(matrix, "PNG", out);
             return Optional.ofNullable(ResponseEntity.ok()

@@ -30,15 +30,14 @@ public class MyPageController {
     /**
      * 로그인 유저의 이메일로 만든 QR코드 반환
      *
-     * @param accountEmail
+     * @param qrSource
      * @return Optional<Object>
      * @throws WriterException
      * @throws IOException
      */
     @GetMapping("/qr/{accountEmail}")
-    public Object createQr(@PathVariable String accountEmail) throws WriterException, IOException {
-        //        return new ResponseEntity<>(myPageService.getQrCode(accountEmail).get(), HttpStatus.OK);
-        return myPageService.getQrCode(accountEmail).get();
+    public Object createQr(@PathVariable String qrSource) throws WriterException, IOException {
+        return myPageService.getQrCode(qrSource).get();
     }
     
     
