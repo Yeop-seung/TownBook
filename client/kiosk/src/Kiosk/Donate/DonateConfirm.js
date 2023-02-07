@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./DonateConfirm.module.css"
 import { useLocation, useNavigate } from "react-router-dom";
-import List from "../../ui/List"
+// import List from "../../ui/List"
 import book from "../img/book.jpg"
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { BiHomeAlt } from 'react-icons/bi';

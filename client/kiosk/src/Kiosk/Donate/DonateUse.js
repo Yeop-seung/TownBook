@@ -10,8 +10,8 @@ function DonateUse(props) {
     
     const navigate = useNavigate()
     // 페이지 이동
-    const Url = `http://i8b201.p.ssafy.io:8081/backend/account/user/`
-
+    // const Url = `http://i8b201.p.ssafy.io:8081/backend/account/user/`
+    const Url = 'http://localhost:3000/Kiosk/'
     const [inputs, setInputs] = useState({
         barcode : ""
     })
@@ -19,8 +19,7 @@ function DonateUse(props) {
     const location = useLocation()
 
     const isnavigate = location.state
-    
-    const isMember = true //
+    console.log(isnavigate)
     
     function barcodeInput(e) {
         let event=window.event || e;
@@ -30,7 +29,7 @@ function DonateUse(props) {
             })
             .then((response) => {
                 const onClickHandlerBarcodeRead =() => {
-                    navigate('/Kiosk/BarcodeRead', {state: isMember})
+                    navigate('/Kiosk/BarcodeRead', {state: response.data})
                 }
                 onClickHandlerBarcodeRead()
             })
@@ -64,7 +63,7 @@ function DonateUse(props) {
         
     
     const onClickHandlerHome = () => {
-        navigate('/')
+        navigate('/Kiosk')
     }
     
     
