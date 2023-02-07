@@ -19,7 +19,7 @@ function BarcodeReadError(props) {
             })
             .then((response) => {
                 const onClickHandlerConfirm = () => {
-                    navigate('/DonateConfirm', {state : response.data} )
+                    navigate('/Kiosk/DonateConfirm', {state : response.data} )
                 }
                 onClickHandlerConfirm()
                 

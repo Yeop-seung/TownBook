@@ -46,9 +46,9 @@ function DonateComplete(props) {
                         <p className={styles.textAlignOne}>완료</p>
                         <p className={styles.textAlignTwo}> 버튼을 눌러주세요</p>
                         <div>
-                            <div className={styles.buttonTwo} onClick={onClickHandlerThanks}>
-                                <p className={styles.textAlignThree}>완료</p>
-                            </div>
+                            <button className={styles.buttonTwo} onClick={onClickHandlerThanks}>
+                                완료
+                            </button>
                         </div>
                     </div>
                 <button className={styles.homeCircle} onClick={onClickHandlerHome}>

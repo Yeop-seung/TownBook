@@ -22,7 +22,7 @@ function ReceiptConfirm(props) {
         navigate('/Kiosk/ReceiptComplete')
     }
     return (
-        // <div>
+        // 책 리스트 불러오기 
             <div>
                 <div className={styles.myImg}>
                     <button className={styles.circle} onClick={onClickHandlerDonateUse}>
@@ -40,9 +40,6 @@ function ReceiptConfirm(props) {
                     </button>
                 </div>
             </div>
-            /* <label htmlFor="title" onSubmit={}></label>
-            <input type="text" required id="title" />
-        </div> */
         )
 }
 

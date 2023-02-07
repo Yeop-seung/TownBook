@@ -36,12 +36,12 @@ function ReceiptComplete(props) {
                         예를 누르시면 포인트가
                         <br/>차감되고 보관함이 열립니다</p>
                         <div>
-                            <div className={styles.buttonTwo} onClick={onClickHandlerDonateReceipt}>
-                                <p className={styles.textAlignOne}>예</p>
-                            </div>
-                            <div className={styles.buttonThree} onClick={onClickHandlerReceiptConfirm}>
-                                <p className={styles.textAlignOne}>아니오</p>
-                            </div>
+                            <button className={styles.buttonTwo} onClick={onClickHandlerDonateReceipt}>
+                                예
+                            </button>
+                            <button className={styles.buttonThree} onClick={onClickHandlerReceiptConfirm}>
+                                아니오
+                            </button>
                         </div>
                     </div>
                     <button className={styles.homeCircle} onClick={onClickHandlerHome}>

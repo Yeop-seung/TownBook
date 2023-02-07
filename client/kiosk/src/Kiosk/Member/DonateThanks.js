@@ -14,8 +14,11 @@ function DonateThanks(props) {
         // axios.get(UrlMainClose, {
         // })
         // .then((response) => {
-        //     // console.log('eeeee', e.target.value) // 값을 보내준다
-        //     navigate('/DonateThanks')
+            // const onClickHandlerBarcodeRead =() => {
+            //     navigate('/Kiosk/BarcodeRead')
+            // }
+            // onClickHandlerBarcodeRead()
+        //     navigate('/Kiosk/DonateThanks')
         // })
         
         // .catch(function (error) {
@@ -31,12 +34,18 @@ function DonateThanks(props) {
         <div>
             <div className={styles.myImg}>
                     <div className={styles.buttonOne}>
-                        <p className={styles.textAlign}>기부해 주셔서 감사합니다<br />포인트가 적립 되었습니다<br /><br />책을 추가 기부하시겠습니까?</p>
+                        <p className={styles.textAlign}>
+                        기부해 주셔서 감사합니다
+                        <br />
+                        {}포인트가 적립 되었습니다
+                        <br />
+                        <br />
+                        책을 추가 기부하시겠습니까?</p>
                         <button className={styles.buttonTwo} onClick={onClickHandlerFinish} >
-                            <p className={styles.textAlignOne}>처음화면</p>
+                            처음화면
                         </button>
                         <button className={styles.buttonThree} onClick={onClickHandlerBarcodeRead}>
-                            <p className={styles.textAlignOne}>추가기부</p>
+                            추가기부
                         </button>
                     </div>
             </div>

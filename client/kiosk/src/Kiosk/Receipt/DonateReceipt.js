@@ -36,7 +36,7 @@ function DonateReceipt(props){
         navigate('/Kiosk')
     }
     const onClickHandlerReceiptComplete = () => {
-        navigate('/Kiosk/ReceiptComplete')
+        navigate('/Kiosk/ReceiptComplete', {replace: false})
     }
     const onClickHandlerReceiptThanks = () => {
         navigate('/Kiosk/ReceiptThanks')
@@ -56,7 +56,7 @@ function DonateReceipt(props){
                         <p className={styles.textAlignTwo}> 버튼을 눌러주세요</p>
                         <div>
                             <button className={styles.buttonTwo} onClick={onClickHandlerReceiptThanks}>
-                                <p className={styles.textAlignThree}>완료</p>
+                                완료
                             </button>
                         </div>
                     </div>

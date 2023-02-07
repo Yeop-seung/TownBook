@@ -60,6 +60,7 @@
     position: absolute;
     width: 14vw;
     height: 18vh;
+    font-size: 250%;
     font-weight: 800;
     border-radius: 12px;
     left : 20vw;
@@ -72,7 +73,7 @@
     position: absolute;
     width: 14vw;
     height: 18vh;
-    font-size: 48px;
+    font-size: 250%;
     font-weight: 800;
     border-radius: 12px;
     left : 44vw;
@@ -85,18 +86,24 @@
     color: #2a2a2a;
     text-align: center;
     vertical-align: bottom;
-    font-size: 40px;
+    font-size: 300%;
     margin: 0%;
-    top: 20vh;
-    left: 15vw;
+    top: 24vh;
+    left: 15%;
 }
 .textAlignOne{
     position: relative;
     color: #2a2a2a;
     text-align: center;
     margin: 4%;
-    font-size: 40px;
     top: 4vh;
 }
 /* 텍스트 정렬 */
+.book{
+    position: absolute;
+    height: 30%;
+    width: 30%;
+    left: 35%;
+    top: 20%;
+}
 

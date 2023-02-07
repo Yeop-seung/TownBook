@@ -11,7 +11,7 @@ function DonateUse(props) {
     const navigate = useNavigate()
     // 페이지 이동
     // const Url = `http://i8b201.p.ssafy.io:8081/backend/account/user/`
-    const Url = 'http://localhost:3000/Kiosk/'
+    const Url = 'http://localhost:3000/'
     const [inputs, setInputs] = useState({
         barcode : ""
     })
@@ -56,16 +56,13 @@ function DonateUse(props) {
 
         }
         
-        // setInputs({
-        //     ...inputs,
-        //     [e.target.name]: e.target.value
-        // })
-        
     
     const onClickHandlerHome = () => {
         navigate('/Kiosk')
     }
-    
+    const goBack = () => {
+        navigate(-1)
+    }
     
     //수령일때랑 기부일때랑 바꿔서 처리 if로 해서
     return (

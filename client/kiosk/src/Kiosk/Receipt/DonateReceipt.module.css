@@ -60,11 +60,11 @@
     position: absolute;
     width: 180px;
     height: 160px;
-    font-size: 70px;
+    font-size: 400%;
     font-weight: 800;
     border-radius: 12px;
     left : 31vw;
-    top: 36vh ;
+    top: 40vh ;
     box-shadow: 5px 5px 5px 5px gray;
 }
 /* 글씨 쓰는 부분 */
@@ -73,36 +73,29 @@
     color: #2a2a2a;
     text-align: center;
     margin: 0%;
-    font-size: 52px;
+    font-size: 350%;
     vertical-align: bottom;
-    top: 8vh;
+    top: 10vh;
     left: 18vw;
 }
 .textAlignOne{
     position: absolute;
     text-align: center;
     color: #fd5454;
-    font-size: 64px;
+    font-size: 500%;
     vertical-align: bottom;
     margin: 0%;
-    top: 18vh;
+    top: 20vh;
     left: 14vw;
 }
 .textAlignTwo{
     position: absolute;
     color: #2a2a2a;
     text-align: center;
-    font-size: 52px;
+    font-size: 350%;
     vertical-align: bottom;
     margin: 0%;
-    top: 20vh;
+    top: 22vh;
     left: 28vw;
-}
-.textAlignThree{
-    position: relative;
-    color: #2a2a2a;
-    text-align: center;
-    margin: 0%;
-    font-size: 80%;
 }
 /* 텍스트 정렬 */

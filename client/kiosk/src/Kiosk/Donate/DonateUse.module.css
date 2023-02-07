@@ -62,22 +62,22 @@
     position: absolute;
     text-align:start;
     margin: 0%;
-    font-size: 80px;
-    top: 5vh;
-    left: 7vw;
+    font-size: 500%;
+    top: 8vh;
+    left: 9vw;
 }
 .h3AlignOne{
     position: absolute;
     text-align: center;
     margin: 0%;
     font-size: 80px;
-    top: 5vh;
-    left: 48vw;
+    top: 8vh;
+    left: 50vw;
 }
 .textAlignOne{
     position: absolute;
     text-align: center;
-    font-size: 46px;
+    font-size: 350%;
     vertical-align: bottom;
     top: 20vh;
     left: 1vw;
@@ -85,17 +85,17 @@
 .textAlignTwo{
     position: absolute;
     text-align: center;
-    font-size: 46px;
+    font-size: 350%;
     vertical-align: bottom;
     top: 20vh;
-    left: 44vw;
+    left: 42vw;
 }
 /* 텍스트 정렬 */
 .arrowRight{
     position: absolute;
     justify-self: center;
-    top: 28vh;
-    left: 35vw
+    top: 10vh;
+    left: 36vw
 }
 /* 오른쪽 화살표 */
 .barcode{
@@ -103,6 +103,6 @@
     background: rgba( 255, 255, 255, 0.5 );
     border: rgba( 255, 255, 255, 0.5 );
     color: rgba( 255, 255, 255, 0.5 );
-    left: 41vw;
+    left: 43vw;
     top: 82vh
 }
