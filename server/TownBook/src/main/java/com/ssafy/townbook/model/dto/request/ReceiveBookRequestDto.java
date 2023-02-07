@@ -14,6 +14,6 @@ public class ReceiveBookRequestDto {
     @Builder
     public ReceiveBookRequestDto(Long detailLockerNo, Long accountNo) {
         this.detailLockerNo = detailLockerNo;
-        this.accountNo = accountNo;
+        this.accountNo      = accountNo;
     }
 }

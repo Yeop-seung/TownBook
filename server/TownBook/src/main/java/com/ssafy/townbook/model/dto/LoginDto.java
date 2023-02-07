@@ -23,6 +23,6 @@ public class LoginDto {
     @Builder
     public LoginDto(String accountEmail, String accountPw) {
         this.accountEmail = accountEmail;
-        this.accountPw = accountPw;
+        this.accountPw    = accountPw;
     }
 }

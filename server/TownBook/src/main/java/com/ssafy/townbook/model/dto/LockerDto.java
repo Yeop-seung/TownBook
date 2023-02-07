@@ -13,20 +13,20 @@ import lombok.Setter;
 @Setter
 public class LockerDto {
     
-    private Long lockerNo;
-    private Integer lockerBookCnt;
-    private String lockerRegion;
-    private Double lockerLatitude;
-    private Double lockerLongitude;
+    private Long                  lockerNo;
+    private Integer               lockerBookCnt;
+    private String                lockerRegion;
+    private Double                lockerLatitude;
+    private Double                lockerLongitude;
     private List<DetailLockerDto> detailLocker = new ArrayList<>();
-    private int lockerStorage;
+    private int                   lockerStorage;
     
     @Builder
     public LockerDto(Locker locker) {
-        this.lockerNo = locker.getLockerNo();
-        this.lockerBookCnt = locker.getLockerBookCnt();
-        this.lockerRegion = locker.getLockerRegion();
-        this.lockerLatitude = locker.getLockerLatitude();
+        this.lockerNo        = locker.getLockerNo();
+        this.lockerBookCnt   = locker.getLockerBookCnt();
+        this.lockerRegion    = locker.getLockerRegion();
+        this.lockerLatitude  = locker.getLockerLatitude();
         this.lockerLongitude = locker.getLockerLongitude();
         
         // 연관 관계의 무한 참조를 방지하기 위해 DetailLockerDto 사용

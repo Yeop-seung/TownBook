@@ -27,17 +27,17 @@ import org.springframework.stereotype.Component;
 @Component
 public class TokenProvider implements InitializingBean {
     
-    private final Logger logger = LoggerFactory.getLogger(TokenProvider.class);
+    private final        Logger logger          = LoggerFactory.getLogger(TokenProvider.class);
     private static final String AUTHORITIES_KEY = "auth";
-    private final String secret;
-    private final long tokenValidityInMilliseconds;
-    private Key key;
+    private final        String secret;
+    private final        long   tokenValidityInMilliseconds;
+    private              Key    key;
     
     // 토큰 제공자는
     public TokenProvider(
             @Value("${jwt.secret}") String secret,
             @Value("${jwt.token-validity-in-seconds}") long tokenValidityInSeconds) {
-        this.secret = secret;
+        this.secret                      = secret;
         this.tokenValidityInMilliseconds = tokenValidityInSeconds * 1000;
     }
     

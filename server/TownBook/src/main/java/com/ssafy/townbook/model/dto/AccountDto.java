@@ -49,18 +49,18 @@ public class AccountDto {
     
     @Builder
     public AccountDto(String accountEmail, String accountPw, String accountName,
-            String accountAddress,
-            String accountPhoneNumber, Integer accountGender, String accountNickname,
-            String accountBirthDay, Set<AuthorityDto> authorityDtoSet) {
-        this.accountEmail = accountEmail;
-        this.accountPw = accountPw;
-        this.accountName = accountName;
-        this.accountAddress = accountAddress;
+                      String accountAddress,
+                      String accountPhoneNumber, Integer accountGender, String accountNickname,
+                      String accountBirthDay, Set<AuthorityDto> authorityDtoSet) {
+        this.accountEmail       = accountEmail;
+        this.accountPw          = accountPw;
+        this.accountName        = accountName;
+        this.accountAddress     = accountAddress;
         this.accountPhoneNumber = accountPhoneNumber;
-        this.accountGender = accountGender;
-        this.accountNickname = accountNickname;
-        this.accountBirthDay = accountBirthDay;
-        this.authorityDtoSet = authorityDtoSet;
+        this.accountGender      = accountGender;
+        this.accountNickname    = accountNickname;
+        this.accountBirthDay    = accountBirthDay;
+        this.authorityDtoSet    = authorityDtoSet;
     }
     
     @Builder

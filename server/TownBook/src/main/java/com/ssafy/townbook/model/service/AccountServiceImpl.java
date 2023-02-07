@@ -21,11 +21,14 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class AccountServiceImpl implements AccountService {
     
-    @Autowired
     private AccountRepository accountRepository;
+    private PasswordEncoder   passwordEncoder;
     
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    public AccountServiceImpl(AccountRepository accountRepository, PasswordEncoder passwordEncoder) {
+        this.accountRepository = accountRepository;
+        this.passwordEncoder   = passwordEncoder;
+    }
     
     /**
      * 회원 가입

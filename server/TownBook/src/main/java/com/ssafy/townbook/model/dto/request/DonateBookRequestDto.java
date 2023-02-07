@@ -8,16 +8,16 @@ import lombok.Setter;
 @Setter
 public class DonateBookRequestDto {
     
-    private Long lockerNo;
-    private Long detailLockerNo;
-    private Long accountNo;
+    private Long   lockerNo;
+    private Long   detailLockerNo;
+    private Long   accountNo;
     private String bookIsbn;
     
     @Builder
     public DonateBookRequestDto(Long lockerNo, Long detailLockerNo, Long accountNo, String bookIsbn) {
-        this.lockerNo = lockerNo;
+        this.lockerNo       = lockerNo;
         this.detailLockerNo = detailLockerNo;
-        this.accountNo = accountNo;
-        this.bookIsbn = bookIsbn;
+        this.accountNo      = accountNo;
+        this.bookIsbn       = bookIsbn;
     }
 }

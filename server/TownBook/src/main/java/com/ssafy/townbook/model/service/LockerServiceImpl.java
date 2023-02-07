@@ -18,12 +18,12 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class LockerServiceImpl implements LockerService {
     
-    private LockerRepository lockerRepository;
+    private LockerRepository       lockerRepository;
     private DetailLockerRepository detailLockerRepository;
     
     @Autowired
     public LockerServiceImpl(LockerRepository lockerRepository, DetailLockerRepository detailLockerRepository) {
-        this.lockerRepository = lockerRepository;
+        this.lockerRepository       = lockerRepository;
         this.detailLockerRepository = detailLockerRepository;
     }
     
@@ -62,7 +62,7 @@ public class LockerServiceImpl implements LockerService {
     @Override
     @Transactional
     public boolean addLocker(String lockerRegion, int detailLockerCount, Double lockerLatitude,
-            Double lockerLongitude) {
+                             Double lockerLongitude) {
         try {
             Locker locker = new Locker();
             locker.setLockerRegion(lockerRegion);
