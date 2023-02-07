@@ -163,6 +163,9 @@ public class InitDb {
             
             BookLog bookLog1 = bookLogRepository.findBookLogByBookLogNo(2L).get();
             receiveBook(bookLog1, account1);
+
+            DetailLocker detailLocker3 = locker2.getDetailLocker().get(1);
+            donateBook("test", locker2, detailLocker3, account1, book2);
         }
         
         public void donateBook(
@@ -179,7 +182,7 @@ public class InitDb {
             account.get().setAccountBookCnt(account.get().getAccountBookCnt() + 1);
             account.get().setAccountPoint(account.get().getAccountPoint() + 100);
             bookLog.setAccount(account.get());
-            
+
             bookLog.setBook(book.get());
             em.persist(bookLog);
         }
