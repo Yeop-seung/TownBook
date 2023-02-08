@@ -41,11 +41,11 @@ public class InitDb {
     
     @PostConstruct
     public void init() {
-//        initService.bookInit();
-//        initService.accountInit();
-//        initService.lockerInit();
-//        initService.bookLogInit();
-//        initService.noticeInit();
+        initService.bookInit();
+        initService.accountInit();
+        initService.lockerInit();
+        initService.bookLogInit();
+        initService.noticeInit();
     }
     
     @Component
@@ -96,9 +96,15 @@ public class InitDb {
             em.persist(authorityRoleUser);
             em.persist(authorityRoleAdmin);
             
+            Account accountNon = createAccount("nonmember@townbook.com", "nonmember", "비회원", "", "", 0, "비회원 계정",
+                    "000000", authorityRoleUser);
+            accountNon.setAccountPoint(99999999);
+            em.persist(accountNon);
+            
             Account account1 = createAccount("test@test.com", "password", "김싸피", "대전시 유성구 덕명동", "010-1234-5678", 0,
                     "내가 바로 김싸피", "220222", authorityRoleUser);
             em.persist(account1);
+            
             Account account2 = createAccount("admin@test.com", "adminPassword", "최어드", "대전시 유성구 어드동", "010-5678-1234",
                     1, "내가 바로 최어드", "111111", authorityRoleAdmin);
             em.persist(account2);
@@ -128,10 +134,10 @@ public class InitDb {
         }
         
         public void lockerInit() {
-            createLocker("어은동", 1, 12312312D, 123123123D);
-            createLocker("덕명동", 3, 87654321D, 87654321D);
-            createLocker("봉명동", 5, 123D, 456D);
-            createLocker("덕명동",5,36.3626496, 127.2971264);
+            createLocker("어은동", 10, 36.3622D, 127.3562D);
+            createLocker("덕명동", 10, 36.3663D, 127.2981D);
+            createLocker("봉명동", 10, 36.3553D, 127.2981D);
+            createLocker("효자동", 10, 36.3553D, 127.2981D);
         }
         
         public void createLocker(String lockerRegion, int detailLockerCount, Double lockerLatitude,
@@ -152,13 +158,13 @@ public class InitDb {
         public void bookLogInit() {
             Locker            locker1       = lockerRepository.findLockerByLockerNo(1L).get();
             DetailLocker      detailLocker1 = locker1.getDetailLocker().get(0);
-            Optional<Account> account1      = accountRepository.findByAccountNo(1L);
+            Optional<Account> account1      = accountRepository.findByAccountNo(2L);
             Optional<Book>    book1         = bookRepository.findBookByBookIsbn("8984993751");
             donateBook("재미있어요", locker1, detailLocker1, account1, book1);
             
             Locker            locker2       = lockerRepository.findLockerByLockerNo(2L).get();
             DetailLocker      detailLocker2 = locker2.getDetailLocker().get(0);
-            Optional<Account> account2      = accountRepository.findByAccountNo(2L);
+            Optional<Account> account2      = accountRepository.findByAccountNo(3L);
             Optional<Book>    book2         = bookRepository.findBookByBookIsbn("9788960777330");
             donateBook("재미 없어요", locker2, detailLocker2, account2, book2);
             
