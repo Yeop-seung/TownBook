@@ -24,7 +24,7 @@ function ReceiptConfirm(props) {
         const response = await axios.get(`http://i8b201.p.ssafy.io:8081/backend/bookLog/locker/${lockerNo}`)
         const data = response.data.data
         console.log('fffffff',response.data.data)
-        for (let i = 1; response.data.data.length; i++ ){
+        for (let i = 1; i < response.data.data.length; i++ ){
             const dataInfo = response.data.data[i].bookIsbn
             const postResponse = await axios.post(`http://i8b201.p.ssafy.io:8081/backend/book/find`, dataInfo)
             const postData = postResponse.data.data
