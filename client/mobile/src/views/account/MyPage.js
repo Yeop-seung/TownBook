@@ -41,7 +41,7 @@ function MyPage() {
 
   useEffect(() => {
   axios
-    .get(`https://i8b201.p.ssafy.io/backend/myPage/donate/5`)
+    .get(`https://i8b201.p.ssafy.io/backend/myPage/donate/4`)
     // .get("https:///townbook/myPage/receive/${receiverNo}")
     .then((res) => {
       console.log(res);
@@ -89,7 +89,7 @@ function MyPage() {
                 <CardTitle tag="h4">내가 쓴 글</CardTitle>
               </CardHeader>
               <CardBody>
-                <Table className="tablesorter" responsive>
+                {/* <Table className="tablesorter" responsive>
                   <thead className="text-primary">
                     <tr>
                       <th>번호</th>
@@ -134,7 +134,7 @@ function MyPage() {
                       <td>Gloucester</td>
                     </tr>
                   </tbody>
-                </Table>
+                </Table> */}
               </CardBody>
             </Card>
           </Col>
