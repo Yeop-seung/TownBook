@@ -5,7 +5,8 @@ import first from "../img/first.jpg"
 import second from "../img/second.jpg"
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { BiHomeAlt } from 'react-icons/bi';
-import {BsFillArrowRightCircleFill} from "react-icons/bs"
+import { BsFillArrowRightCircleFill } from "react-icons/bs"
+import { AiOutlineArrowUp } from 'react-icons/ai' 
 import axios from 'axios'
 
 function DonateUse(props) {
@@ -53,15 +54,24 @@ function DonateUse(props) {
                         <AiOutlineArrowLeft className={styles.iconStyle}/>
                     </button>
                         {/* <div className={styles.buttonOne} onClick={onClickHandlerBarcodeRead}> */}
-                        <div className={styles.buttonOne}>
-                            <h3 className={styles.h3Align}>STEP1</h3>
-                            {/* <img src={}  /> */}
-                            <BsFillArrowRightCircleFill className={styles.arrowRight} size={80}/>
-                            <h3 className={styles.h3AlignOne}>STEP2</h3>
-                            
+                    <div className={styles.buttonOne}>
+                        <h3 className={styles.h3Align}>STEP1</h3>
+                        <img src={first} className={styles.firstImg} />
+                        <div className={styles.circleMain}></div>
+                        <AiOutlineArrowUp className={styles.iconStyleTwo}/>
+                        <div className={styles.buttonThree}>
+                            메인페이지에서 
+                            <br />
+                            QR코드를 클릭해주세요
                         </div>
-                        <input className={styles.barcode} type="text" onChange={barcodeInput} autoFocus/>
-                        {/* onChange={onChangeHandler} value={barcode}  */}
+                        <BsFillArrowRightCircleFill className={styles.arrowRight} size={80}/>
+                        <h3 className={styles.h3AlignOne}>STEP2</h3>
+                        <img src={second} className={styles.secondImg} />
+                        <div>바코드 리더기에 <br />QR코드를 찍어주세요
+                        </div>
+                    </div>
+                    
+                    <input className={styles.barcode} type="text" onChange={barcodeInput} autoFocus/>
                     <button className={styles.homeCircle} onClick={onClickHandlerHome} >
                         <BiHomeAlt className={styles.iconStyle}/>
                     </button>

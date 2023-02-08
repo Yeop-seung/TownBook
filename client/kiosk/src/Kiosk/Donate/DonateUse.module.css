@@ -31,12 +31,29 @@
     bottom: 24px;
     border: #ffffff;
 }
+.circleMain {
+    width : 5%;
+    height : 5%;
+    border-radius: 50%;
+    background-color: rgb(255, 255, 255, 10%);
+    position: absolute;
+    left: 18vw;
+    top: 20vh;
+    border: 3px solid #ff0202;
+}
 /* 홈버튼 */
 .iconStyle{
     font-size: 70px;
     color: #90C6FE;
 }
 /* 아이콘 스타일*/
+.iconStyleTwo{
+    position: absolute;
+    font-size: 40px;
+    left: 18vw;
+    top: 24vh;
+    color: #ff0202;
+}
 .buttonOne{
     display: flex;
     flex-direction: row;
@@ -57,13 +74,48 @@
 .buttonTwo{
     border-radius: 12px;
 }
+.buttonThree{
+    display: flex;
+    flex-direction: row;
+    color: #2a2a2a;
+    border-radius: 12px;
+    align-items: center;
+    position: absolute;
+    margin:auto;
+    left: 10vw;
+    top: 28vh;
+    width: 20vw;
+    height: 10vh;
+    text-align: center;
+    font-size: 120%;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid #040404;
+    font-weight: 800;
+}
+.buttonFour{
+    display: flex;
+    flex-direction: row;
+    color: #2a2a2a;
+    border-radius: 12px;
+    align-items: center;
+    position: absolute;
+    margin:auto;
+    left: 12vw;
+    top: 28vh;
+    width: 15vw;
+    height: 10vh;
+    text-align: center;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid #040404;
+    font-weight: 800;
+}
 /* 글씨 쓰는 부분 */
 .h3Align{
     position: absolute;
     text-align:start;
     margin: 0%;
     font-size: 500%;
-    top: 8vh;
+    top: 6vh;
     left: 9vw;
 }
 .h3AlignOne{
@@ -71,7 +123,7 @@
     text-align: center;
     margin: 0%;
     font-size: 80px;
-    top: 8vh;
+    top: 6vh;
     left: 50vw;
 }
 .textAlignOne{
@@ -94,10 +146,10 @@
 .arrowRight{
     position: absolute;
     justify-self: center;
-    top: 10vh;
+    top: 8vh;
     left: 36vw
 }
-/* 오른쪽 화살표 */
+/* 오른쪽 화살표 */ 
 .barcode{
     position: absolute;
     background: rgba( 255, 255, 255, 0.5 );
@@ -105,4 +157,18 @@
     color: rgba( 255, 255, 255, 0.5 );
     left: 43vw;
     top: 82vh
+}
+.firstImg{
+    position: absolute;
+    height: 60%;
+    width: 30%;
+    top: 20vh;
+    left: 8vw;
+}
+.secondImg{
+    position: absolute;
+    height: 60%;
+    width: 30%;
+    top: 20vh;
+    left: 48vw;
 }

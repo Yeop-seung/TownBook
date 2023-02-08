@@ -35,8 +35,8 @@ function BarcodeRead(props) {
         let event=window.event || e;
 
         if(event.target.value.length === 13){
-            axios.get(`http://i8b201.p.ssafy.io:8081/backend/book/find/${e.target.value}`, {
-            })
+            axios.post(`http://i8b201.p.ssafy.io:8081/backend/book/find`, event.target.value
+            )
             .then((response) => {
                 const data = {isnavigate: isnavigate, Locker :Locker, User: User, Book: response.data}
                 const onClickHandlerConfirm = () => {
