@@ -15,7 +15,7 @@ public interface NoticeService {
     
     SaveOneResponseDto modifyNotice(ModifyNoticeRequestDto modifyNoticeRequestDto);
     
-    Boolean writeNotice(WriteNoticeRequestDto writeNoticeRequestDto);
+    SaveOneResponseDto writeNotice(WriteNoticeRequestDto writeNoticeRequestDto);
     
-    Boolean removeNotice(Long noticeNo);
+    SaveOneResponseDto removeNotice(Long noticeNo);
 }

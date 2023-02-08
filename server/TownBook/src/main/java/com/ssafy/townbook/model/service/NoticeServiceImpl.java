@@ -87,20 +87,13 @@ public class NoticeServiceImpl implements NoticeService {
      */
     @Override
     @Transactional
-    public Boolean writeNotice(WriteNoticeRequestDto writeNoticeRequestDto) {
+    public SaveOneResponseDto writeNotice(WriteNoticeRequestDto writeNoticeRequestDto) {
         try {
-            String noticeTitle = writeNoticeRequestDto.getNoticeTitle();
-            String noticeContent = writeNoticeRequestDto.getNoticeContent();
-            Integer noticeCategory = writeNoticeRequestDto.getNoticeCategory();
-            Long accountNo = writeNoticeRequestDto.getAccountNo();
-            
-            
             Notice notice = new Notice(writeNoticeRequestDto);
             noticeRepository.save(notice);
-            return true;
+            return new SaveOneResponseDto(true);
         } catch (Exception e) {
-            e.getMessage();
-            return false;
+            return new SaveOneResponseDto(e.getMessage());
         }
     }
     
@@ -112,14 +105,14 @@ public class NoticeServiceImpl implements NoticeService {
      */
     @Override
     @Transactional
-    public Boolean removeNotice(Long noticeNo) {
+    public SaveOneResponseDto removeNotice(Long noticeNo) {
         try {
             Notice notice = noticeRepository.findById(noticeNo).get();
             notice.setNoticeState(false);
             noticeRepository.save(notice);
-            return true;
+            return new SaveOneResponseDto(true);
         } catch (Exception e) {
-            return false;
+            return new SaveOneResponseDto(e.getMessage());
         }
     }
 }

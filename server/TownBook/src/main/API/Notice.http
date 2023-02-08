@@ -21,7 +21,14 @@ POST http://localhost:8081/backend/notice/write
 Content-Type: application/json
 
 {
-    ""
+    "noticeTitle": "New Title",
+    "noticeContent": "New Content",
+    "noticeCategory": 1,
+    "accountNo": 1
 }
 
 ### 5. 공지사항/이용안내 삭제
+PUT http://localhost:8081/backend/notice/remove
+Content-Type: application/x-www-form-urlencoded
+
+noticeNo=2

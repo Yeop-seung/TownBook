@@ -77,11 +77,8 @@ public class NoticeController {
      */
     @Transactional
     @PostMapping("/write")
-    public ResponseEntity<Boolean> writeNotice(@RequestBody WriteNoticeRequestDto writeNoticeRequestDto) {
-        System.out.println("writeNoticeRequestDto = " + writeNoticeRequestDto);
-        Boolean check = noticeService.writeNotice(writeNoticeRequestDto);
-        System.out.println("check = " + check);
-        return new ResponseEntity<Boolean>(check, HttpStatus.OK);
+    public ResponseEntity<SaveOneResponseDto> writeNotice(@RequestBody WriteNoticeRequestDto writeNoticeRequestDto) {
+        return new ResponseEntity<SaveOneResponseDto>(noticeService.writeNotice(writeNoticeRequestDto), HttpStatus.OK);
     }
     
     /**
@@ -92,7 +89,7 @@ public class NoticeController {
      */
     @Transactional
     @PutMapping("/remove")
-    public ResponseEntity<Boolean> removeNotice(Long noticeNo) {
-        return new ResponseEntity<Boolean>(noticeService.removeNotice(noticeNo), HttpStatus.OK);
+    public ResponseEntity<SaveOneResponseDto> removeNotice(Long noticeNo) {
+        return new ResponseEntity<SaveOneResponseDto>(noticeService.removeNotice(noticeNo), HttpStatus.OK);
     }
 }
