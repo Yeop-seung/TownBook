@@ -2,6 +2,8 @@ package com.ssafy.townbook.controller;
 
 
 import com.ssafy.townbook.model.dto.AccountDto;
+import com.ssafy.townbook.model.dto.request.SaveFileRequestDto;
+import com.ssafy.townbook.model.dto.response.SaveOneResponseDto;
 import com.ssafy.townbook.model.service.AccountService;
 import com.ssafy.townbook.model.service.EmailService;
 import java.util.Map;
@@ -19,11 +21,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/account")
 public class AccountController {
-    
+
     private AccountService accountService;
     private EmailService   emailService;
     

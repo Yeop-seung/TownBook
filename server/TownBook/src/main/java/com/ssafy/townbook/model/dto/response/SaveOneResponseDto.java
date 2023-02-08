@@ -7,23 +7,18 @@ import lombok.Setter;
 @Getter
 @Setter
 public class SaveOneResponseDto<T> {
-    
+
     private Boolean success;
     private String  message;
     private T       data;
-    
+
     @Builder
     public SaveOneResponseDto(T data) {
-        if ((Boolean) data) {
             this.success = true;
             this.message = "저장 성공";
-            this.data    = data;
-        } else {
-            this.success = false;
-            this.message = "저장 실패";
-        }
+            this.data = data;
     }
-    
+
     @Builder
     public SaveOneResponseDto() {
         this.success = false;
