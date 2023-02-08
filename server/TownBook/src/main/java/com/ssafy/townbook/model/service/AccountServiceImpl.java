@@ -4,8 +4,11 @@ import com.ssafy.townbook.exception.DuplicateMemberException;
 import com.ssafy.townbook.exception.NotFoundMemberException;
 import com.ssafy.townbook.model.dto.AccountDto;
 import com.ssafy.townbook.model.dto.AdminDto;
+import com.ssafy.townbook.model.dto.request.SaveFileRequestDto;
+import com.ssafy.townbook.model.dto.response.SaveOneResponseDto;
 import com.ssafy.townbook.model.entity.Account;
 import com.ssafy.townbook.model.entity.Authority;
+import com.ssafy.townbook.model.entity.File;
 import com.ssafy.townbook.model.repository.AccountRepository;
 import com.ssafy.townbook.util.SecurityUtil;
 import java.util.Collections;
@@ -17,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class AccountServiceImpl implements AccountService {
