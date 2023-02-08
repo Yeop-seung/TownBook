@@ -10,7 +10,6 @@ function DonateUse(props) {
     
     const navigate = useNavigate()
     // 페이지 이동
-    const Url = 'http://localhost:3000/'
 
     const location = useLocation()
 
@@ -21,35 +20,19 @@ function DonateUse(props) {
     function barcodeInput(e) {
         let event=window.event || e;
         if(isnavigate === true) {
-            axios.get(Url, {
-            })
-            .then((response) => {
                 console.log(event.target.value)
                 const data = {isnavigate: isnavigate, Locker :locker, User: event.target.value}
                 const onClickHandlerBarcodeRead =() => {
                     navigate('/BarcodeRead', {state: data})
                 }
                 onClickHandlerBarcodeRead()
-            })
-            .catch(function (error) {
-                console.log(error)
-            })
-        } else {
-            // axios.get(`/server/account/user/${e.target.value}`, {
-            // })
-            axios.get(Url, {
-            })
-            .then((response) => {
+            } else {
                 // 수령 페이지로 이동
                 const data = {isnavigate: isnavigate, Locker :locker, User: e.target.value}
                 const onClickHandlerReceiptConfirm =() => {
                     navigate('/ReceiptConfirm', {state: data})
                 }
                 onClickHandlerReceiptConfirm()
-            })
-            .catch(function (error) {
-                console.log(error)
-            })
             }
         }
     

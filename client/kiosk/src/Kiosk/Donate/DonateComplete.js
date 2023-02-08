@@ -18,10 +18,10 @@ function DonateComplete(props) {
     const Locker = location.state.Locker
     const User = location.state.User
     const Book = location.state.Book
-    console.log(isnavigate)
-    console.log(Locker)
-    console.log(User)
-    console.log(Book)
+    // console.log(isnavigate)
+    // console.log(Locker)
+    // console.log(User)
+    // console.log(Book)
 
     const data = {lockerNo: Locker.lockerNo, detailLockerNo: Locker.detailLocker[0].detailLockerNo, accountNo: User, bookIsbn: Book.bookIsbn}
     console.log(data)
@@ -40,10 +40,12 @@ function DonateComplete(props) {
         const postResponse = await axios.post('http://i8b201.p.ssafy.io:8081/backend/bookLog/donateBook', data)
         const postData = postResponse.data
         console.log(postData)
-        if (User === null) {
-            navigate('/DonateThanksNon')
+        if (User === undefined) {
+            const data = {isnavigate: isnavigate, Locker :Locker, User: User}
+            navigate('/DonateThanksNon', data)
         }else {
-            navigate('/DonateThanks')
+            const data = {isnavigate: isnavigate, Locker :Locker, User: User}
+            navigate('/DonateThanks', data)
         }
         } catch (error) {
         console.error(error);

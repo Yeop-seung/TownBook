@@ -9,23 +9,22 @@ import axios from "axios";
 function DonateConfirm(props) {
     // 빈보관함이 무엇인지 확인하고 if로 하기  
     const UrlMainOpen = "http://192.168.140.1/mainServo/0"   //메인 보관함 열기 1번 보관함 열기 2번 보관함 열기
-    const UrlOneOpen = "http://192.168.140.1/servo1/0"
-    const UrlTwoOpen = "http://192.168.140.1/servo2/0"
     
     const Url = 'http://localhost:3000/'
     const navigate = useNavigate()
     const location = useLocation()
-    console.log(location)
+
     const isnavigate = location.state.isnavigate
     const Locker = location.state.Locker
     const User = location.state.User
     const Book = location.state.Book
+    const detailLocker = location.state.Locker.detailLocker
+    
     console.log(isnavigate)
     console.log(Locker)
     console.log(User)
     console.log(Book)
-
-    const data = {isnavigate: isnavigate, Locker :Locker, User: User, Book: Book}
+    console.log(detailLocker)
 
     const title = Book.bookTitle
     // 책 제목
@@ -39,12 +38,24 @@ function DonateConfirm(props) {
     }
     //홈
     const onClickHandlerComplete =() => {
+        // axios.get(UrlMainOpen, {
+        // })
         axios.get(Url, {
         })
         .then((response) => {
-            // axios.get(UrlTwoOpen, {
-
-            // })
+            for (let i = 0; i >= detailLocker.length; i++){
+                if (detailLocker[i].detailLockerIsEmpty === true){
+                    // axios.get(`http://192.168.140.1/servo${i}/0`, {
+                    // })
+                    axios.get(`Url${i}/`, {
+                    })
+                    const detailLockerNo = detailLocker[i]
+                    console.log(detailLockerNo)
+                    break  
+                } 
+                console.log(i)
+            }
+            const data = {isnavigate: isnavigate, Locker :Locker, User: User, Book: Book}
             navigate('/DonateComplete', {state: data})
         })
         .catch(function (error) {

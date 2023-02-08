@@ -3,9 +3,6 @@ import styles from "./DonateThanks.module.css"
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-// import { Route } from "react-router-dom";
-// import {BsFillArrowRightCircleFill} from "react-icons/bs"
-
 function DonateThanks(props) {
     const navigate = useNavigate()
     const UrlMainClose = "http://192.168.140.1/mainServo/90 " //메인 보관함 닫기
