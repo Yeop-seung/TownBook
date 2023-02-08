@@ -30,11 +30,6 @@ function BarcodeRead(props) {
         navigate(-1)
     }
     //뒤로가기
-    const inputRef = useRef(null);
-
-    useEffect(() => {
-    inputRef.current.focus();
-    }, []);
 
     function barcodeInput(e) {
         let event=window.event || e;
@@ -74,7 +69,7 @@ function BarcodeRead(props) {
                             도서 바코드를 찍어주세요</p>
                         </div>
                     </div>
-                    <input className={styles.barcode} type="text" onChange={barcodeInput}  ref={inputRef} />
+                    <input className={styles.barcode} type="text" onChange={barcodeInput} />
                     <button className={styles.homeCircle} onClick={onClickHandlerHome}>
                         <BiHomeAlt className={styles.iconStyle}/>
                     </button>
