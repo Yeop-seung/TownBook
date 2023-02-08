@@ -7,8 +7,10 @@ import com.ssafy.townbook.model.entity.Book;
 import com.ssafy.townbook.model.entity.BookLog;
 import com.ssafy.townbook.model.repository.BookLogRepository;
 import com.ssafy.townbook.model.repository.BookRepository;
+import com.ssafy.townbook.model.repository.LockerRepository;
 import com.ssafy.townbook.queryrepository.BookLogQueryRepository;
 import com.ssafy.townbook.queryrepository.SearchQueryRepository;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,17 +27,17 @@ import org.springframework.transaction.annotation.Transactional;
 public class SearchServiceImpl implements SearchService {
     
     private SearchQueryRepository  searchQueryRepository;
-    private LockerService          lockerService;
     private BookRepository         bookRepository;
     private BookLogQueryRepository bookLogQueryRepository;
+    private LockerRepository       lockerRepository;
     
     @Autowired
-    public SearchServiceImpl(SearchQueryRepository searchQueryRepository, LockerService lockerService,
-            BookRepository bookRepository, BookLogQueryRepository bookLogQueryRepository) {
+    public SearchServiceImpl(SearchQueryRepository searchQueryRepository, BookRepository bookRepository,
+            BookLogQueryRepository bookLogQueryRepository, LockerRepository lockerRepository) {
         this.searchQueryRepository  = searchQueryRepository;
-        this.lockerService          = lockerService;
         this.bookRepository         = bookRepository;
         this.bookLogQueryRepository = bookLogQueryRepository;
+        this.lockerRepository       = lockerRepository;
     }
     
     /**
@@ -60,14 +62,13 @@ public class SearchServiceImpl implements SearchService {
      */
     @Override
     public FindListResponseDto findLockerByLockerNo(Long lockerNo) {
-        LockerDto     lockerDto   = lockerService.findLockerByLockerNo(lockerNo);
+        LockerDto     lockerDto   = new LockerDto(lockerRepository.findLockerByLockerNo(lockerNo).get());
         List<BookLog> bookLogList = bookLogQueryRepository.findBookLogByLockerNo(lockerNo).get();
         List<BookLogDto> bookLogDtoList = bookLogList.stream()
                 .map(BookLogDto::new)
                 .collect(Collectors.toList());
         
-        
-        JSONObject    jsonObject  = new JSONObject();
+        JSONObject jsonObject = new JSONObject();
         jsonObject.put("Locker", lockerDto);
         JSONArray jsonArray = new JSONArray();
         for (BookLogDto bookLogDto : bookLogDtoList) {
