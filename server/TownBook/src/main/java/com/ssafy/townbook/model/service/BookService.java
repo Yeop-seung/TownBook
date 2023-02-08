@@ -1,7 +1,7 @@
 package com.ssafy.townbook.model.service;
 
-import com.ssafy.townbook.model.dto.response.FindOneResponseDto;
 import com.ssafy.townbook.model.dto.response.FindListResponseDto;
+import com.ssafy.townbook.model.dto.response.FindOneResponseDto;
 
 public interface BookService {
     

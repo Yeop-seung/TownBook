@@ -5,4 +5,7 @@ GET http://localhost:8081/backend/book
 GET http://localhost:8081/backend/book/8984993751
 
 ### 3. 도서관에서 도서 조회 (DB X) ISBN 13
-POST http://localhost:8081/backend/book/find/9788998139766
+POST http://localhost:8081/backend/book/find
+Content-Type: application/x-www-form-urlencoded
+
+bookIsbn=9788966260959

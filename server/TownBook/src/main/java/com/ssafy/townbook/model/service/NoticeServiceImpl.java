@@ -3,27 +3,57 @@ package com.ssafy.townbook.model.service;
 import com.ssafy.townbook.model.dto.NoticeDto;
 import com.ssafy.townbook.model.dto.request.ModifyNoticeRequestDto;
 import com.ssafy.townbook.model.dto.request.WriteNoticeRequestDto;
+import com.ssafy.townbook.model.dto.response.FindListResponseDto;
+import com.ssafy.townbook.model.dto.response.FindOneResponseDto;
+import com.ssafy.townbook.model.dto.response.SaveOneResponseDto;
 import com.ssafy.townbook.model.entity.Notice;
 import com.ssafy.townbook.model.repository.NoticeRepository;
+import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.stream.Collectors;
-
 @Service
 @Transactional(readOnly = true)
 public class NoticeServiceImpl implements NoticeService {
-
+    
     private NoticeRepository noticeRepository;
-
+    
     @Autowired
     public NoticeServiceImpl(NoticeRepository noticeRepository) {
         this.noticeRepository = noticeRepository;
     }
-
+    
+    /**
+     * 공지 하나 가져오기
+     *
+     * @param noticeNo
+     * @return NoticeDto
+     */
+    @Override
+    public FindOneResponseDto getNotice(Long noticeNo) {
+        Notice    notice    = noticeRepository.findById(noticeNo).get();
+        NoticeDto noticeDto = new NoticeDto(notice);
+        return new FindOneResponseDto<NoticeDto>(noticeDto);
+    }
+    
+    
+    /**
+     * 카테고리(공지사항, 이용안내) 별로 최신 8개 리스트 가져오기
+     *
+     * @param category
+     * @return List<NoticeDto>
+     */
+    @Override
+    public FindListResponseDto findByNoticeStateAndNoticeCategoryOrderByNoticeNo(Integer category) {
+        List<Notice> noticeList = noticeRepository.findByNoticeStateAndNoticeCategoryOrderByNoticeNo(true, category)
+                .get();
+        return new FindListResponseDto(noticeList.stream()
+                .map(NoticeDto::new)
+                .collect(Collectors.toList()));
+    }
+    
     /**
      * 공지사항 수정
      *
@@ -32,21 +62,23 @@ public class NoticeServiceImpl implements NoticeService {
      */
     @Override
     @Transactional
-    public Boolean modifyNotice(ModifyNoticeRequestDto modifyNoticeRequestDto) {
-
+    public SaveOneResponseDto modifyNotice(ModifyNoticeRequestDto modifyNoticeRequestDto) {
         try {
-            Notice notice = new Notice(modifyNoticeRequestDto);
-            Notice modifyNotice = noticeRepository.findById(notice.getNoticeNo()).get();
-            modifyNotice.setNoticeContent(notice.getNoticeContent());
-            modifyNotice.setNoticeTitle(notice.getNoticeTitle());
-            noticeRepository.save(modifyNotice);
-            return true;
+            long   noticeNo      = modifyNoticeRequestDto.getNoticeNo();
+            String noticeTitle   = modifyNoticeRequestDto.getNoticeTitle();
+            String noticeContent = modifyNoticeRequestDto.getNoticeContent();
+            
+            Notice notice = noticeRepository.findById(noticeNo).get();
+            notice.setNoticeTitle(noticeTitle);
+            notice.setNoticeContent(noticeContent);
+            noticeRepository.save(notice);
+            return new SaveOneResponseDto(true);
         } catch (Exception e) {
             e.getMessage();
-            return false;
+            return new SaveOneResponseDto(false);
         }
     }
-
+    
     /**
      * 공지사항 작성
      *
@@ -57,6 +89,12 @@ public class NoticeServiceImpl implements NoticeService {
     @Transactional
     public Boolean writeNotice(WriteNoticeRequestDto writeNoticeRequestDto) {
         try {
+            String noticeTitle = writeNoticeRequestDto.getNoticeTitle();
+            String noticeContent = writeNoticeRequestDto.getNoticeContent();
+            Integer noticeCategory = writeNoticeRequestDto.getNoticeCategory();
+            Long accountNo = writeNoticeRequestDto.getAccountNo();
+            
+            
             Notice notice = new Notice(writeNoticeRequestDto);
             noticeRepository.save(notice);
             return true;
@@ -65,33 +103,7 @@ public class NoticeServiceImpl implements NoticeService {
             return false;
         }
     }
-
-    /**
-     * 공지사항 or 이용안내 가져오기
-     *
-     * @return List<NoticeDto>
-     */
-    @Override
-    public List<NoticeDto> findByNoticeStateAndNoticeCategoryOrderByNoticeNo(Integer category) {
-        List<Notice> noticeList = noticeRepository.findByNoticeStateAndNoticeCategoryOrderByNoticeNo(true, category)
-                .get();
-        return noticeList.stream()
-                .map(NoticeDto::new)
-                .collect(Collectors.toList());
-    }
-
-    /**
-     * 공지 하나 가져오기
-     *
-     * @param noticeNo
-     * @return NoticeDto
-     */
-    @Override
-    public NoticeDto getNotice(Long noticeNo) {
-        Notice notice = noticeRepository.findById(noticeNo).get();
-        return new NoticeDto(notice);
-    }
-
+    
     /**
      * 공지사항 삭제
      *
