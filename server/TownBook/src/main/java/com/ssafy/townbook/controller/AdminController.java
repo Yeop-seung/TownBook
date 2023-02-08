@@ -4,7 +4,6 @@ import com.ssafy.townbook.model.dto.response.FindListResponseDto;
 import com.ssafy.townbook.model.dto.response.FindOneResponseDto;
 import com.ssafy.townbook.model.service.AdminService;
 import com.ssafy.townbook.model.service.MyPageServiceImpl;
-import net.minidev.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -47,17 +46,5 @@ public class AdminController {
     @GetMapping("/{accountNo}")
     public ResponseEntity<FindOneResponseDto> findAccountByAccountNo(@PathVariable Long accountNo) {
         return new ResponseEntity<FindOneResponseDto>(adminService.findAccountByAccountNo(accountNo), HttpStatus.OK);
-    }
-    
-    /**
-     * 로그인 유저의 책 기부/수령 전체 로그와 책 정보 반환
-     *
-     * @param accountNo
-     * @return JSONArray
-     * @throws Exception
-     */
-    @GetMapping("/detail/{accountNo}/log")
-    public ResponseEntity<JSONArray> findBookLogByAccountNo(@PathVariable Long accountNo) throws Exception {
-        return new ResponseEntity<JSONArray>(myPageService.findBookLogByAccountNo(accountNo), HttpStatus.OK);
     }
 }
