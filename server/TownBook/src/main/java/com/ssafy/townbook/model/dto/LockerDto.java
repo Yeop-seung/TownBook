@@ -18,8 +18,8 @@ public class LockerDto {
     private String                lockerRegion;
     private Double                lockerLatitude;
     private Double                lockerLongitude;
-    private List<DetailLockerDto> detailLocker = new ArrayList<>();
     private int                   lockerStorage;
+    private List<DetailLockerDto> detailLocker = new ArrayList<>();
     
     @Builder
     public LockerDto(Locker locker) {

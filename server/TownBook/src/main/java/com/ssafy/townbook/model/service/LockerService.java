@@ -1,7 +1,9 @@
 package com.ssafy.townbook.model.service;
 
 import com.ssafy.townbook.model.dto.LockerDto;
-import java.util.List;
+import com.ssafy.townbook.model.dto.response.FindListResponseDto;
+import com.ssafy.townbook.model.dto.response.FindOneResponseDto;
+import com.ssafy.townbook.model.dto.response.SaveOneResponseDto;
 
 public interface LockerService {
     
@@ -10,7 +12,7 @@ public interface LockerService {
      *
      * @return List<LockerDto>
      */
-    List<LockerDto> findAll();
+    FindListResponseDto findAll();
     
     /**
      * 단일 보관함 및 보관함에 할당된 세부 보관함 조회
@@ -18,7 +20,7 @@ public interface LockerService {
      * @param lockerNo
      * @return LockerDto
      */
-    LockerDto findLockerByLockerNo(Long lockerNo);
+    FindOneResponseDto findLockerByLockerNo(Long lockerNo);
     
     /**
      * 보관함 및 세부 보관함을 생성한다.
@@ -27,5 +29,5 @@ public interface LockerService {
      * @param detailLockerCount
      * @return Boolean
      */
-    Boolean addLocker(String lockerRegion, int detailLockerCount, Double lockerLatitude, Double lockerLongitude);
+    SaveOneResponseDto addLocker(String lockerRegion, int detailLockerCount, Double lockerLatitude, Double lockerLongitude);
 }

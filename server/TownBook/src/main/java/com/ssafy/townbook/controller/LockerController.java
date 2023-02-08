@@ -1,8 +1,10 @@
 package com.ssafy.townbook.controller;
 
 import com.ssafy.townbook.model.dto.LockerDto;
+import com.ssafy.townbook.model.dto.response.FindListResponseDto;
+import com.ssafy.townbook.model.dto.response.FindOneResponseDto;
+import com.ssafy.townbook.model.dto.response.SaveOneResponseDto;
 import com.ssafy.townbook.model.service.LockerService;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,8 +33,8 @@ public class LockerController {
      * @return List<LockerDto>
      */
     @GetMapping("")
-    public ResponseEntity<List<LockerDto>> lockers() {
-        return new ResponseEntity<List<LockerDto>>(lockerService.findAll(), HttpStatus.OK);
+    public ResponseEntity<FindListResponseDto> lockers() {
+        return new ResponseEntity<FindListResponseDto>(lockerService.findAll(), HttpStatus.OK);
     }
     
     /**
@@ -42,8 +44,8 @@ public class LockerController {
      * @return LockerDto
      */
     @GetMapping("/{lockerNo}")
-    public ResponseEntity<LockerDto> findLockerByLockerNo(@PathVariable Long lockerNo) {
-        return new ResponseEntity<LockerDto>(lockerService.findLockerByLockerNo(lockerNo), HttpStatus.OK);
+    public ResponseEntity<FindOneResponseDto> findLockerByLockerNo(@PathVariable Long lockerNo) {
+        return new ResponseEntity<FindOneResponseDto>(lockerService.findLockerByLockerNo(lockerNo), HttpStatus.OK);
     }
     
     /**
@@ -54,10 +56,10 @@ public class LockerController {
      * @return Boolean
      */
     @PostMapping("/add/{lockerRegion}/{detailLockerCount}/{lockerLatitude}/{lockerLongitude}")
-    public ResponseEntity<Boolean> addLocker(
+    public ResponseEntity<SaveOneResponseDto> addLocker(
             @PathVariable String lockerRegion, @PathVariable int detailLockerCount,
             @PathVariable Double lockerLatitude, @PathVariable Double lockerLongitude) {
-        return new ResponseEntity<Boolean>(
+        return new ResponseEntity<SaveOneResponseDto>(
                 lockerService.addLocker(lockerRegion, detailLockerCount, lockerLatitude, lockerLongitude),
                 HttpStatus.OK);
     }
