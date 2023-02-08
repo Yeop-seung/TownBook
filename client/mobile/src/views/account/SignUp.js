@@ -71,7 +71,24 @@ function SignUp(props) {
   const birthdayInputRef = useRef();
   const history = useHistory();
   const pwSubmitRef = useRef();
-
+  // function emailConfirm(event) {
+  //   axios
+  //   .post("https://i8b201.p.ssafy.io/backend/account/signup", {accountEmail})
+  //   // .get("https:///townbook/myPage/receive/${receiverNo}")
+  //   .then((response) => {
+  //     console.log(response)
+  //     // if(response=="true"){
+  //     alert("회원가입에 성공하였습니다.");
+  //     history.replace("/login");
+  //     // }
+  //     // else{  
+  //     //   alert("회원가입에 실패하였습니다.");
+  //     // }
+  //   })
+  //   .catch((error) => {
+  //     alert("회원가입에 실패하였습니다.");
+  //   });
+  // }
 
   function submitHandler(event) {
     event.preventDefault();
@@ -139,7 +156,7 @@ function SignUp(props) {
           alert("회원가입에 성공하였습니다.");
           history.replace("/login");
           // }
-          // else{
+          // else{  
           //   alert("회원가입에 실패하였습니다.");
           // }
         })
@@ -190,6 +207,7 @@ function SignUp(props) {
                   <Col className="pr-md-1" md="5">
                     <FormGroup>
                       <label htmlFor="exampleInputEmail1">이메일</label>
+                      <button>이메일 인증</button>
                       <input
                         placeholder="ssafy@email.com"
                         type="email"

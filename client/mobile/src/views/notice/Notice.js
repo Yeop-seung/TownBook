@@ -79,13 +79,16 @@ function Notice(props) {
   useEffect(() => {
   axios
     .get(
-      `https://i8b201.p.ssafy.io/backend/notice/list/0`
+      `https://i8b201.p.ssafy.io/backend/notice/list/2`
 
     )
     // .get("https:///townbook/myPage/receive/${receiverNo}")
     .then((res) => {
       const notices = [];
       console.log(res)
+      // for (let i = 0; i < res.data.length; i++) {
+      //   notices.push({ ...res.data[i], id: i + 1 });
+      // }
       for (const key in res.data) {
         const notice = {
         id: key,
@@ -103,7 +106,7 @@ function Notice(props) {
       // }
       setIsLoading(false);
       setLoadedMeetups(notices);
-      console.log(notices)
+      // console.log(notices)
     })
     .catch((error) => {
       alert("글로딩에 실패하였습니다.");

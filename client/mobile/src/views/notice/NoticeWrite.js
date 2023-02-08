@@ -17,6 +17,7 @@ import {
   Col,
 } from "reactstrap";
 import axios from "axios";
+// import { userInfo } from "os";
 // import { isPropertySignature } from "typescript";
 
 function NoticeWrite(props) {
@@ -41,13 +42,11 @@ function NoticeWrite(props) {
     const enteredContent = contentInputRef.current.value;
 
     const userInfo = {
-      // noticeTitle: enteredTitle,
-      // noticeContent: enteredContent,
-      noticeTitle: "1",
-      noticeContent: "1",
+      noticeTitle: enteredTitle,
+      noticeContent: enteredContent,
       // noticeWriteDateTime: "2023-02-07T05:23:54.712Z",
-      noticeCategory:1,
-      accountNo: 1,
+      noticeCategory:2,
+      accountNo: localStorage.getItem("accountNo"),
       // noticeId: Id,
     };
     console.log(userInfo);

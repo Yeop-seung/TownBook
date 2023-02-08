@@ -37,26 +37,35 @@ import {
 
 function MyPage() {
 
-  useEffect(() => {
-  axios
-    .get(`https://i8b201.p.ssafy.io/backend/myPage/donate/${localStorage.getItem("accountNo")}`)
-    // .get("https:///townbook/myPage/receive/${receiverNo}")
-    .then((res) => {
-      console.log(res);
-    
-      // const base64 = btoa(
-      //   new Uint8Array(res.data).reduce(
-      //     (data, byte) => data + String.fromCharCode(byte),
-      //     ""
-      //   )
-      // );
-      // setImageUrl(`data:${res.headers["content-type"]};base64,${base64}`)
+  // useEffect(() => {
+  // axios
+  //   .get(`https://i8b201.p.ssafy.io/backend/myPage/donate/5`)
+  //   // .get("https:///townbook/myPage/receive/${receiverNo}")
+  //   .then((res) => {
+  //     console.log(res);
+  //    // for (let i = 0; i < res.data.length; i++) {
+  //     //   notices.push({ ...res.data[i], id: i + 1 });
+  //     // }
+  //     for (const key in res.data) {
+  //       const notice = {
+  //       id: key,
+  //       ...res.data[key]
+  //     };
+  //       notices.push(notice);
+  //     };
+  //     // const base64 = btoa(
+  //     //   new Uint8Array(res.data).reduce(
+  //     //     (data, byte) => data + String.fromCharCode(byte),
+  //     //     ""
+  //     //   )
+  //     // );
+  //     // setImageUrl(`data:${res.headers["content-type"]};base64,${base64}`)
      
-    })
-    .catch((error) => {
-      alert("qr로딩에 실패하였습니다.");
-    });
-  }, []);
+  //   })
+  //   .catch((error) => {
+  //     alert("qr로딩에 실패하였습니다.");
+  //   });
+  // }, []);
   return (
     <>
       

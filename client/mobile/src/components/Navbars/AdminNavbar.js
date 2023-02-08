@@ -112,7 +112,7 @@ function AdminNavbar(props) {
     setmodalSearch(!modalSearch);
     axios
       .get(
-        `https://i8b201.p.ssafy.io/backend/myPage/qr/${localStorage.getItem(
+        `https://i8b201.p.ssafy.io/backend/myPage/qrSource/${localStorage.getItem(
           "accountEmail"
         )}`,
         {
@@ -220,7 +220,7 @@ function AdminNavbar(props) {
               <Link
                 to="/map"
                 onClick={verify}
-                style={{ paddingTop: 10, paddingInline: 20 }}
+                style={{ paddingTop: 10, paddingInline:10 }}
               >
                 {/* 로고 scss 분석하기 */}
                 <div className="logo">
@@ -247,7 +247,7 @@ function AdminNavbar(props) {
               <Link
                 to="/notice"
                 onClick={verify}
-                style={{ paddingTop: 10, paddingInline: 20 }}
+                style={{ paddingTop: 10, paddingInline:10 }}
               >
                 <div className="logo">
                   <FontAwesomeIcon icon={faBullhorn} size="xl" color="white" style={{marginTop:5}}/>
@@ -298,7 +298,7 @@ function AdminNavbar(props) {
               <Link
                 to="/tables"
                 onClick={verify}
-                style={{ paddingTop: 10, paddingInline: 20 }}
+                style={{ paddingTop: 10, paddingInline:10 }}
               >
                 <div className="logo">
                   <FontAwesomeIcon icon={faHeadset} size="xl" color="white" style={{marginTop:5}} />
@@ -332,7 +332,7 @@ function AdminNavbar(props) {
               <Link
                 to="/login"
                 onClick={verify}
-                style={{ paddingTop: 10, paddingInline: 20, paddingBottom: 10 }}
+                style={{ paddingTop: 10 ,paddingBottom: 10, paddingInline:10  }}
                 hidden={isToken}
               >
                 <div className="logo">
@@ -374,7 +374,7 @@ function AdminNavbar(props) {
 
               <Link
                 to="/myPage"
-                style={{ paddingTop: 10, paddingInline: 20 }}
+                style={{ paddingTop: 10 , paddingInline:10}}
                 hidden={!isToken}
                 onClick={verify}
               >
@@ -390,7 +390,7 @@ function AdminNavbar(props) {
                 className="logo"
                 hidden={!isToken}
                 onClick={logout}
-                style={{ paddingTop: 10, paddingInline: 20, paddingBottom: 10 }}
+                style={{ paddingTop: 10, paddingBottom: 10, paddingInline:10 }}
               >
                 <FontAwesomeIcon
                   icon={faArrowRightFromBracket}
