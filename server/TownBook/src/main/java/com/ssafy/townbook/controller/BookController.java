@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -43,7 +44,7 @@ public class BookController {
      */
     @GetMapping("/{bookIsbn}")
     public ResponseEntity<FindOneResponseDto> findBookByBookIsbn(@PathVariable String bookIsbn) {
-        return new ResponseEntity<FindOneResponseDto>(bookService.findBookByBookIsbn(bookIsbn), HttpStatus.OK);
+        return new ResponseEntity<>(bookService.findBookByBookIsbn(bookIsbn), HttpStatus.OK);
     }
     
     /**
@@ -52,8 +53,9 @@ public class BookController {
      * @param bookIsbn
      * @return BookDto
      */
-    @PostMapping("/find/{bookIsbn}")
-    public ResponseEntity<FindOneResponseDto> findBookInLibraryAndSave(@PathVariable String bookIsbn) {
+    @PostMapping("/find")
+    public ResponseEntity<FindOneResponseDto> findBookInLibraryAndSave(
+            @RequestParam String bookIsbn) {
         return new ResponseEntity<FindOneResponseDto>(bookService.findBookInLibraryAndSave(bookIsbn), HttpStatus.OK);
     }
 }
