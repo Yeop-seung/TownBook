@@ -10,30 +10,28 @@ function DonateUse(props) {
     
     const navigate = useNavigate()
     // 페이지 이동
-    // const Url = `http://i8b201.p.ssafy.io:8081/backend/account/user/`
     const Url = 'http://localhost:3000/'
-    const [inputs, setInputs] = useState({
-        barcode : ""
-    })
 
     const location = useLocation()
 
-    const isnavigate = location.state
+    const isnavigate = location.state.isnavigate
+    const Locker = location.state.Locker
     console.log(isnavigate)
+    console.log(Locker)
     
     function barcodeInput(e) {
         let event=window.event || e;
         if(isnavigate === true) {
-            console.log(Url + `${e.target.value}`)
-            axios.get(Url + `${e.target.value}`, {
+            console.log(e.target.value)
+            axios.get(Url, {
             })
             .then((response) => {
+                const data = {isnavigate: isnavigate, Locker :Locker, User: e.target.value}
                 const onClickHandlerBarcodeRead =() => {
-                    navigate('/BarcodeRead', {state: response.data})
+                    navigate('/BarcodeRead', {state: data})
                 }
                 onClickHandlerBarcodeRead()
             })
-            
             .catch(function (error) {
                 console.log(error)
             })
@@ -44,8 +42,9 @@ function DonateUse(props) {
             })
             .then((response) => {
                 // 수령 페이지로 이동
+                const data = {isnavigate: isnavigate, Locker :Locker, User: e.target.value}
                 const onClickHandlerReceiptConfirm =() => {
-                    navigate('/ReceiptConfirm', {state: isnavigate})
+                    navigate('/ReceiptConfirm', {state: data})
                 }
                 onClickHandlerReceiptConfirm()
             })

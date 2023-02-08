@@ -1,22 +1,37 @@
 import React, { useState } from "react";
 import styles from "./BarcodeRead.module.css"
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { BiHomeAlt } from 'react-icons/bi';
 import axios from "axios";
 
 function BarcodeRead(props) {
     const navigate = useNavigate()
+    const location = useLocation()
+
+    const isnavigate = location.state.isnavigate
+    const Locker = location.state.Locker
+    const User = location.state.User
+    const data = {isnavigate: isnavigate, Locker :Locker, User: User}
+    
+    console.log(isnavigate)
+    console.log(Locker)
+    console.log(User)
+
+
 
     const onClickHandlerHome = () => {
         navigate('/')
     }
+    //홈
     const onClickHandlerBarcodeReadError =() => {
-        navigate('/BarcodeReadError')
+        navigate('/BarcodeReadError', {state: data})
     }
+    //다시 찍어달라하기
     const goBack = () => {
         navigate(-1)
     }
+    //뒤로가기
     const [inputs, setInputs] = useState({
         barcode : ""
     })
@@ -28,8 +43,9 @@ function BarcodeRead(props) {
             axios.get(`http://i8b201.p.ssafy.io:8081/backend/book/find/${e.target.value}`, {
             })
             .then((response) => {
+                const data = {isnavigate: isnavigate, Locker :Locker, User: User, Book: response.data}
                 const onClickHandlerConfirm = () => {
-                    navigate('/DonateConfirm', {state : response.data} )
+                    navigate('/DonateConfirm', {state : data} )
                 }
                 onClickHandlerConfirm()
             })

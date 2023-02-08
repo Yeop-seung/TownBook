@@ -1,38 +1,57 @@
 import React from "react";
 import styles from "./DonateComplete.module.css"
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 // import { Route } from "react-router-dom";
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { BiHomeAlt } from 'react-icons/bi';
 // import {BsFillArrowRightCircleFill} from "react-icons/bs"
+import axios from "axios";
 
 function DonateComplete(props) {
     const navigate = useNavigate()
 
-    const UrlTOneClose = "http://192.168.140.1/servo1/90" //1번 보관함 닫기
+    const UrlOneClose = "http://192.168.140.1/servo1/90" //1번 보관함 닫기
     const UrlTwoClose = "http://192.168.140.1/servo2/90 " //2번 보관함 닫기
 
-    const onClickHandlerHome = () => {
-        navigate('/')
-    }
-    const onClickHandlerThanks = () => {
-        // axios.get(UrlOneClose, {
-        // })
-        // .then((response) => {
-        //     // console.log('eeeee', e.target.value) // 값을 보내준다
-        //     navigate('/DonateThanks')
-        // })
-        
-        // .catch(function (error) {
-        //     console.log(error)
-        // })
-        navigate('/DonateThanks')
-    }
+    const location = useLocation()
+    const isnavigate = location.state.isnavigate
+    const Locker = location.state.Locker
+    const User = location.state.User
+    const Book = location.state.Book
+    console.log(isnavigate)
+    console.log(Locker)
+    console.log(User)
+    console.log(Book)
+
+    const data = {lockerNo: 3, detailLockerNo: 10, accountNo: 4, bookIsbn: 9791162241950}
+    console.log(data.lockerNo)
     const goBack = () => {
         navigate(-1)
     }
-// 회원정보를 지금 여기서도 가지고 있어야 된다
-// 회원인지 비회원인지 확인 후 감사 인사 다르게 if
+    const onClickHandlerHome = () => {
+        navigate('/')
+    }
+    async function onClickHandlerThanks() {
+        try {
+        const response = await axios.get(UrlOneClose)
+        const data = response.data
+
+        // const response = await axios.get(UrlOneClose);
+        // const data = response.data;
+    
+        const postResponse = await axios.post('http://i8b201.p.ssafy.io:8081/backend/bookLog/donateBook', data)
+        const postData = postResponse.data
+        console.log(postData)
+        if (User === null) {
+            navigate('/DonateThanksNon')
+        }else {
+            navigate('/DonateThanks')
+        }
+        } catch (error) {
+        console.error(error);
+        }
+    }
+
     return (
         <div>
             <div className={styles.myImg}>

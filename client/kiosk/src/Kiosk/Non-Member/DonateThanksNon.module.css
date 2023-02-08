@@ -2,7 +2,7 @@
     margin: 0%;
     height : 100vh;
     width: 100vw;
-    background-image : url('./img/Gradient.png');
+    background-image : url('../img/Gradient.png');
     background-size : cover;
     background-position : center;
     background-repeat : no-repeat;

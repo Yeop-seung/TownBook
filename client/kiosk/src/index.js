@@ -13,7 +13,7 @@ import ReceiptConfirm from "./Kiosk/Receipt/ReceiptConfirm";
 import ReceiptComplete from "./Kiosk/Receipt/ReceiptComplete";
 import DonateReceipt from "./Kiosk/Receipt/DonateReceipt";
 import ReceiptThanks from "./Kiosk/Member/ReceiptThanks";
-// import DonateThanksNon from "./kiosk/Non-Member/DonateThankNon";
+import DonateThanksNon from "./Kiosk/Non-Member/DonateThankNon";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 // import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -35,7 +35,7 @@ root.render(
       <Route path='/ReceiptComplete' element={<ReceiptComplete />}/>
       <Route path='/DonateReceipt' element={<DonateReceipt />}/>
       <Route path='/ReceiptThanks' element={<ReceiptThanks />}/>
-      {/* <Route path='/DonateThanksNon' element={<DonateThanksNon />}/> */}
+      <Route path='/DonateThanksNon' element={<DonateThanksNon />}/>
       
     </Routes>
   </BrowserRouter>

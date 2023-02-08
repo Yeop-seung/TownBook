@@ -14,17 +14,17 @@ function Main(props) {
             axios.get(`http://i8b201.p.ssafy.io:8081/backend/locker/`, {
             })
             .then((response) => {
-                if (response.data[0].detailLocker.length === response.data[0].lockerBookCnt) {
+                if (response.data[1].detailLocker.length === response.data[1].lockerStorage) {
                     const showModal = () => {
                         setModalOpen(true);
                     };
                     showModal()
                     // 락커의 책과 길이가 같으면 모달창을 띄워줌           
                 } else {
-                    console.log(response.data)
+                    const data = { isnavigate: isnavigate, Locker: response.data[1] }
                     const onClickHandlerMemberSelect = () => {
                         navigate('/MemberSelect',
-                        {state: isnavigate,
+                        {state: data,
                     })}
                     onClickHandlerMemberSelect()
                 }
@@ -36,7 +36,18 @@ function Main(props) {
         }
     const onClickHandlerUse = () => {
         isnavigate = false
-        navigate('/DonateUse', {state: isnavigate})
+        axios.get(`http://i8b201.p.ssafy.io:8081/backend/locker/`, {
+            })
+            .then((response) => {
+                    const data = { isnavigate: isnavigate, Locker: response.data[1] }
+                    const onClickHandlerDonateUse = () => {
+                        navigate('/DonateUse',
+                        {state: data})
+                }
+                onClickHandlerDonateUse() })
+            .catch(function (error) {
+                console.log(error)
+            })
     }
 
     return (

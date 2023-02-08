@@ -10,9 +10,12 @@ function MemberSelect(props) {
 
     const location = useLocation()
 
-    const isnavigate = location.state
+    const isnavigate = location.state.isnavigate
+    const LockerNO = location.state.LockerNO
     
-    console.log(location)
+    const data = {isnavigate: isnavigate, Locker :LockerNO}
+    
+    console.log(location.state.Locker)
 
     const goBack = () => {
         navigate(-1)
@@ -21,10 +24,10 @@ function MemberSelect(props) {
         navigate('/')
     }
     const onClickHandlerUse = () => {
-        navigate('/DonateUse', {state: isnavigate})
+        navigate('/DonateUse', {state: data})
     }
     const onClickHandlerBarcodeRead =() => {
-        navigate('/BarcodeRead', {state: isnavigate})
+        navigate('/BarcodeRead', {state: data})
     }
 
     return (

@@ -9,40 +9,56 @@ import axios from "axios";
 
 function DonateConfirm(props) {
     // 빈보관함이 무엇인지 확인하고 if로 하기  
-    const UrlOneOpen = ["http://192.168.140.1/mainServo/0", "http://192.168.140.1/servo1/0"]   //메인 보관함 열기 //1번 보관함 열기 
-
-    const UrlTwoOpen = "http://192.168.140.1/servo2/0"   //2번 보관함 열기
-    
+    const UrlOneOpen = "http://192.168.140.1/mainServo/0"   //메인 보관함 열기 1번 보관함 열기 2번 보관함 열기
+    const UrlTwoOpen = ["http://192.168.140.1/servo1/0", "http://192.168.140.1/servo2/0"]
+    const Url = 'http://localhost:3000/'
     const navigate = useNavigate()
-
     const location = useLocation()
-    
-    const title = location.state.bookTitle
+
+    const isnavigate = location.state.isnavigate
+    const Locker = location.state.Locker
+    const User = location.state.User
+    const Book = location.state.Book
+    console.log(isnavigate)
+    console.log(Locker)
+    console.log(User)
+    console.log(Book)
+
+    const data = {isnavigate: isnavigate, Locker :Locker, User: User, Book: Book}
+
+    const title = Book.bookTitle
+    // 책 제목
     let bookURL = location.state.bookIntroductionURL
     if (bookURL === "null.png") {
         bookURL = book
         }
+    // 이미지가 없을 때 빈이미지 대신 넣는 이미지
     const onClickHandlerHome = () => {
         navigate('/')
     }
+    //홈
     const onClickHandlerComplete =() => {
-        axios.get(UrlOneOpen, {
+        axios.get(Url, {
         })
         .then((response) => {
-            navigate('/DonateComplete')
+            // axios.get(UrlTwoOpen, {
+
+            // })
+            navigate('/DonateComplete', {state: data})
         })
-        
         .catch(function (error) {
             console.log(error)
         })
-        navigate('/DonateComplete')
     }
     const onClickHandlerBarcodeReadError =() => {
-        navigate('/BarcodeReadError')
+        const data = {isnavigate: isnavigate, Locker :Locker, User: User}
+        navigate('/BarcodeReadError', {state: data})
     }
+    // 다시 바코드를 찍게
     const goBack = () => {
         navigate(-1)
     }
+    // 뒤로가기
 
     // 회원정보를 가지고 있어야 된다.
     return (
