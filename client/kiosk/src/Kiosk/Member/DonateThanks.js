@@ -6,8 +6,7 @@ import axios from "axios";
 function DonateThanks(props) {
     const navigate = useNavigate()
     const location = useLocation()
-
-    
+    console.log(location)
     const isnavigate = location.state.isnavigate
     const Locker = location.state.Locker
     const User = location.state.User
@@ -15,27 +14,22 @@ function DonateThanks(props) {
     console.log(isnavigate)
     console.log(Locker)
     console.log(User)
+    const data = {isnavigate: isnavigate, Locker :Locker, User: User}
 
     const UrlMainClose = "http://192.168.140.1/mainServo/90 " //메인 보관함 닫기
 
     const onClickHandlerFinish = () => {
-        // axios.get(UrlMainClose, {
-        // })
-        // .then((response) => {
-            // const onClickHandlerBarcodeRead =() => {
-            //     navigate('/BarcodeRead')
-            // }
-            // onClickHandlerBarcodeRead()
-        //     navigate('/DonateThanks')
-        // })
-        
-        // .catch(function (error) {
-        //     console.log(error)
-        // })
-        navigate('/Finish')
+        axios.get(UrlMainClose, {
+        })
+        .then((response) => {
+            navigate('/Finish')
+        })
+        .catch(function (error) {
+            console.log(error)
+        })
     }
     const onClickHandlerBarcodeRead =() => {
-        navigate('/BarcodeRead')
+        navigate('/BarcodeRead', {state: data})
     }
 
     return (

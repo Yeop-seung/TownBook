@@ -9,27 +9,30 @@ import axios from "axios";
 
 function DonateComplete(props) {
     const navigate = useNavigate()
-
-    const UrlOneClose = "http://192.168.140.1/servo1/90" //1번 보관함 닫기
-    const UrlTwoClose = "http://192.168.140.1/servo2/90 " //2번 보관함 닫기
-
     const location = useLocation()
-
-    console.log(location)
     const isnavigate = location.state.isnavigate
     const Locker = location.state.Locker
     const User = location.state.User
-    const Book = location.state.Book
-    const detailLockerNo = location.state.detailLockerNo
+    const Book = location.state.Book.data
+    const LockerNo = location.state.detailLockerNo
+    const detailLockerNo = Locker.detailLocker[LockerNo].detailLockerNo
+
+    const UrlOneClose = `http://192.168.140.1/servo${LockerNo}/90` //1번 보관함 닫기
+
+    const Url = 'http://localhost:3000/'
+
+    // console.log(location)
+    // console.log(UrlOneClose)
     // console.log(isnavigate)
-    console.log(Locker)
+    // console.log(Locker)
+    // console.log(LockerNo)
     // console.log(User)
     // console.log(Book)
-    console.log(detailLockerNo)
+    // console.log(Locker.detailLocker[LockerNo].detailLockerNo)
 
-    // const data = {lockerNo: Locker.lockerNo, detailLockerNo: detailLockerNo, accountNo: User, bookIsbn: Book.bookIsbn}
-    const data = {lockerNo: 3, detailLockerNo: 25, accountNo: 1, bookIsbn: 9791162241950}
-    
+    const realdata = {lockerNo: Locker.lockerNo, detailLockerNo: detailLockerNo, accountNo: User, bookIsbn: Book.bookIsbn}
+    // const data = {lockerNo: 3, detailLockerNo: 25, accountNo: 1, bookIsbn: 9791162241950}
+    console.log(realdata)
     const goBack = () => {
         navigate(-1)
     }
@@ -39,20 +42,22 @@ function DonateComplete(props) {
     async function onClickHandlerThanks() {
         try {
         // const response = await axios.get(UrlOneClose)
-        // const data = response.data
-    
-        const postResponse = await axios.post('http://i8b201.p.ssafy.io:8081/backend/bookLog/donateBook', data)
+        const response = await axios.get(Url)
+        const data = response.data
+
+        const postResponse = await axios.post('http://i8b201.p.ssafy.io:8081/backend/bookLog/donateBook', realdata)
         const postData = postResponse.data
         console.log(postData)
-        if (User === undefined) {
-            const data = {isnavigate: isnavigate, Locker :Locker, User: User}
-            navigate('/DonateThanksNon', data)
-        }else {
-            const data = {isnavigate: isnavigate, Locker :Locker, User: User}
-            navigate('/DonateThanks', data)
-        }
+
         } catch (error) {
         console.error(error);
+        }
+        if (User === 1) {
+            const data = {isnavigate: isnavigate, Locker :Locker, User: User}
+            navigate('/DonateThanksNon', {state: data})
+        }else {
+            const data = {isnavigate: isnavigate, Locker :Locker, User: User}
+            navigate('/DonateThanks', {state: data})
         }
     }
 

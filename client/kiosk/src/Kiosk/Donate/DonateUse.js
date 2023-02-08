@@ -23,7 +23,7 @@ function DonateUse(props) {
     function barcodeInput(e) {
         let event=window.event || e;
         if(isnavigate === true) {
-            axios.get(`http://i8b201.p.ssafy.io:8081/backend/admin/${event.target.value}`, {
+            axios.get(`http://i8b201.p.ssafy.io:8081/backend/admin/${e.target.value}`, {
             })
             .then((response) => {
                 console.log(response.data)
@@ -37,7 +37,7 @@ function DonateUse(props) {
                 console.log(error)
             })
             } else {
-                axios.get(`http://i8b201.p.ssafy.io:8081/backend/admin/${event.target.value}`, {
+                axios.get(`http://i8b201.p.ssafy.io:8081/backend/admin/${e.target.value}`, {
             })
             .then((response) => {
                 // 수령 페이지로 이동

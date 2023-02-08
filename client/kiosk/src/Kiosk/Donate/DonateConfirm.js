@@ -20,16 +20,16 @@ function DonateConfirm(props) {
     const Book = location.state.Book
     const detailLocker = location.state.Locker.detailLocker
     
-    console.log(isnavigate)
-    console.log(Locker)
-    console.log(User)
-    console.log(Book)
+    // console.log(isnavigate)
+    // console.log(Locker)
+    // console.log(User)
+    // console.log(Book)
     console.log(detailLocker)
 
     const title = Book.data.bookTitle
     // 책 제목
-    const [detailLockerNo, setDetailLockerNo] = useState()
-    console.log(detailLockerNo)
+    // const [detailLockerNo, setDetailLockerNo] = useState()
+    // console.log(detailLockerNo)
 
     let bookURL = location.state.bookIntroductionURL
     if (bookURL === "null.png") {
@@ -40,34 +40,37 @@ function DonateConfirm(props) {
         navigate('/')
     }
     //홈
+    
     const onClickHandlerComplete =() => {
         // axios.get(UrlMainOpen, {
         // })
-        axios.get(Url, {
-        })
-        .then((response) => {
-            for (let i = 0; i >= detailLocker.length; i++){
-                console.log(i)
-                if (detailLocker[i].detailLockerIsEmpty === true){
-                    // axios.get(`http://192.168.140.1/servo${i}/0`, {
+        let numbers = []
+        for (let i = 0; i < detailLocker.length; i++){
+            console.log(detailLocker[i].detailLockerIsEmpty)
+            if (detailLocker[i].detailLockerIsEmpty === true){
+                numbers.push(i)
+                console.log(numbers)
+                break
+            }else {
+                continue
+            }
+            axios.get(Url, {
+            })
+            .then((response) => {
+                // axios.get(`http://192.168.140.1/servo${i}/0`, {  
                     // })
-                    // const chageNo = () => {
-                    //     setDetailLockerNo(detailLockerNo = detailLocker[i].detailLockerNo);
-                    // }
-                    // chageNo()
-                    // console.log('fffff', setDetailLockerNo)
                     axios.get(`Url${i}/`, {
                     })
-                    break  
-                } 
-            }
-            const data = {isnavigate: isnavigate, Locker :Locker, User: User, Book: Book, detailLockerNo: detailLockerNo}
+                
+            })
+            .catch(function (error) {
+                console.log(error)
+            })}
+            const data = {isnavigate: isnavigate, Locker :Locker, User: User, Book: Book, detailLockerNo: numbers[0]}
             navigate('/DonateComplete', {state: data})
-        })
-        .catch(function (error) {
-            console.log(error)
-        })
-    }
+            }
+            
+
     const onClickHandlerBarcodeReadError =() => {
         const data = {isnavigate: isnavigate, Locker :Locker, User: User}
         navigate('/BarcodeReadError', {state: data})

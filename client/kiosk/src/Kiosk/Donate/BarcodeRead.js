@@ -12,6 +12,7 @@ function BarcodeRead(props) {
     const isnavigate = location.state.isnavigate
     const Locker = location.state.Locker
     const User = location.state.User
+    
     const data = {isnavigate: isnavigate, Locker :Locker, User: User}
     
     console.log(isnavigate)

@@ -1,26 +1,35 @@
 import React from "react";
 import styles from "./DonateThanksNon.module.css"
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function DonateThanksNon(props) {
     const navigate = useNavigate()
+    const location = useLocation()
+
     const UrlMainClose = "http://192.168.140.1/mainServo/90 " //메인 보관함 닫기
+    
+    const isnavigate = location.state.isnavigate
+    const Locker = location.state.Locker
+    const User = location.state.User
+    
+    console.log(isnavigate)
+    console.log(Locker)
+    console.log(User)
+    const data = {isnavigate: isnavigate, Locker :Locker, User: User}
 
     const onClickHandlerFinish = () => {
-        // axios.get(UrlMainClose, {
-        // })
-        // .then((response) => {
-        //     // console.log('eeeee', e.target.value) // 값을 보내준다
-        //     navigate('/DonateThanks')
-        // })
-        
-        // .catch(function (error) {
-        //     console.log(error)
-        // })
-        navigate('/Finish')
+        axios.get(UrlMainClose, {
+        })
+        .then((response) => {
+            navigate('/Finish')
+        })
+        .catch(function (error) {
+            console.log(error)
+        })
     }
     const onClickHandlerBarcodeRead =() => {
-        navigate('/BarcodeRead')
+        navigate('/BarcodeRead', data)
     }
     return (
         <div>
