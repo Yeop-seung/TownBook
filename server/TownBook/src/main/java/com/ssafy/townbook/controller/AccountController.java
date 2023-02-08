@@ -2,6 +2,8 @@ package com.ssafy.townbook.controller;
 
 
 import com.ssafy.townbook.model.dto.AccountDto;
+import com.ssafy.townbook.model.dto.request.FileRequestDto;
+import com.ssafy.townbook.model.entity.File;
 import com.ssafy.townbook.model.service.AccountService;
 import com.ssafy.townbook.model.service.EmailService;
 import java.util.Map;
@@ -146,5 +148,10 @@ public class AccountController {
     @GetMapping("/ranking/{accountNo}")
     public ResponseEntity<JSONArray> findAccountBookCnt(@PathVariable Long accountNo) throws Exception {
         return new ResponseEntity<JSONArray>(accountService.findAccountBookCnt(accountNo), HttpStatus.OK);
+    }
+
+    @PostMapping("/file")
+    public ResponseEntity<Boolean> fileUpload(@RequestBody FileRequestDto fileRequestDto) throws Exception{
+        return new ResponseEntity<Boolean>(accountService.,HttpStatus.OK);
     }
 }
