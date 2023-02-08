@@ -1,11 +1,10 @@
 package com.ssafy.townbook.model.service;
 
-import com.ssafy.townbook.model.dto.BookLogDto;
 import com.ssafy.townbook.model.dto.request.DonateBookRequestDto;
 import com.ssafy.townbook.model.dto.request.ReceiveBookRequestDto;
-import com.ssafy.townbook.model.dto.response.DonateBookLogResponseDto;
+import com.ssafy.townbook.model.dto.response.FindListResponseDto;
+import com.ssafy.townbook.model.dto.response.FindOneResponseDto;
 import com.ssafy.townbook.model.dto.response.ReceiveBookLogResponseDto;
-import java.util.List;
 
 public interface BookLogService {
     
@@ -14,7 +13,7 @@ public interface BookLogService {
      *
      * @return List<BookLogDto>
      */
-    List<BookLogDto> findAll();
+    FindListResponseDto findAll();
     
     /**
      * 단일 북로그 조회
@@ -22,23 +21,7 @@ public interface BookLogService {
      * @param bookLogNo
      * @return BookLogDto
      */
-    BookLogDto findBookLogByBookLogNo(Long bookLogNo);
-    
-    /**
-     * 단일 보관함에 보관중인 도서 전부 조회
-     *
-     * @param lockerNo
-     * @return List<BookDto>
-     */
-    List<BookLogDto> findBookLogByLockerNo(Long lockerNo);
-    
-    /**
-     * 단일 도서의 모든 리뷰 조회
-     *
-     * @param bookIsbn
-     * @return List<BookLogDto.bookLogReview>
-     */
-    List<String> findBookLogReviewByBookIsbn(String bookIsbn);
+    FindOneResponseDto findBookLogByBookLogNo(Long bookLogNo);
     
     /**
      * 단일 회원의 모든 북로그 조회
@@ -46,7 +29,24 @@ public interface BookLogService {
      * @param accountNo
      * @return List<BookLog>
      */
-    List<BookLogDto> findBookLogByAccountNo(Long accountNo);
+    FindListResponseDto findBookLogByAccountNo(Long accountNo);
+    
+    /**
+     * 단일 보관함에 보관중인 도서 전부 조회
+     *
+     * @param lockerNo
+     * @return List<BookDto>
+     */
+    FindListResponseDto findBookLogByLockerNo(Long lockerNo);
+    
+    /**
+     * 단일 도서의 모든 리뷰 조회
+     *
+     * @param bookIsbn
+     * @return List<BookLogDto.bookLogReview>
+     */
+    FindListResponseDto findBookLogReviewByBookIsbn(String bookIsbn);
+    
     
     /**
      * 도서 기부
@@ -54,7 +54,7 @@ public interface BookLogService {
      * @param donateBookRequestDto
      * @return AccountDto
      */
-    DonateBookLogResponseDto donateBook(DonateBookRequestDto donateBookRequestDto) throws Exception;
+    FindOneResponseDto donateBook(DonateBookRequestDto donateBookRequestDto) throws Exception;
     
     /**
      * 도서 수령
@@ -63,5 +63,5 @@ public interface BookLogService {
      * @return Boolean
      * @throws Exception
      */
-    ReceiveBookLogResponseDto receiveBook(ReceiveBookRequestDto receiveBookRequestDto) throws Exception;
+    FindOneResponseDto receiveBook(ReceiveBookRequestDto receiveBookRequestDto) throws Exception;
 }
