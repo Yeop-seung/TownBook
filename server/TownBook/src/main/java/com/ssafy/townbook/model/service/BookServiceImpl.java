@@ -78,7 +78,7 @@ public class BookServiceImpl implements BookService {
         try {
             // API 호출
             URL url = new URL("https://www.nl.go.kr/seoji/SearchApi.do?cert_key=" +
-                    APIKey + "&result_style=json&page_no=1&page_size=10&isbn=" + bookIsbn);
+                    APIKey + "&result_style=json&page_no=1&page_size=10&" + bookIsbn);
             
             System.out.println("url = " + url);
             // Json 가공
