@@ -8,12 +8,14 @@ import lombok.Setter;
 @Setter
 public class ModifyNoticeRequestDto {
     
+    private Long    noticeNo;
     private String  noticeTitle;
     private String  noticeContent;
     private Integer noticeCategory;
     
     @Builder
-    public ModifyNoticeRequestDto(String noticeTitle, String noticeContent, Integer noticeCategory) {
+    public ModifyNoticeRequestDto(Long noticeNo, String noticeTitle, String noticeContent, Integer noticeCategory) {
+        this.noticeNo       = noticeNo;
         this.noticeTitle    = noticeTitle;
         this.noticeContent  = noticeContent;
         this.noticeCategory = noticeCategory;

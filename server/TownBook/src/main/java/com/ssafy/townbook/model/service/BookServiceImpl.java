@@ -78,7 +78,7 @@ public class BookServiceImpl implements BookService {
         try {
             // API 호출
             URL url = new URL("https://www.nl.go.kr/seoji/SearchApi.do?cert_key=" +
-                    APIKey + "&result_style=json&page_no=1&page_size=10&isbn=" + bookIsbn);
+                    APIKey + "&result_style=json&page_no=1&page_size=10&" + bookIsbn);
             
             System.out.println("url = " + url);
             // Json 가공
@@ -103,12 +103,11 @@ public class BookServiceImpl implements BookService {
             book.setBookTitleURL((String) jsonObject.get("TITLE_URL"));
             
             bookRepository.save(book);
-            BookDto            bookDto            = new BookDto(book);
-            FindOneResponseDto findOneResponseDto = new FindOneResponseDto(bookDto);
-            return findOneResponseDto;
+            BookDto bookDto = new BookDto(book);
+            return new FindOneResponseDto(bookDto);
         } catch (Exception e) {
             System.out.println("정보가 없는 도서입니다");
-            return null;
+            return new FindOneResponseDto();
         }
     }
     

@@ -1,7 +1,6 @@
 package com.ssafy.townbook.model.service;
 
-import com.ssafy.townbook.model.dto.BookLogDto;
-import java.util.List;
+import com.ssafy.townbook.model.dto.response.FindListResponseDto;
 
 public interface SearchService {
     
@@ -11,5 +10,7 @@ public interface SearchService {
      * @param bookTitle
      * @return List<BookLogDto>
      */
-    List<BookLogDto> findBookLogByBookTitle(String bookTitle);
+    FindListResponseDto findBookLogByBookTitle(String bookTitle);
+    
+    FindListResponseDto findLockerByLockerNo(Long lockerNo);
 }

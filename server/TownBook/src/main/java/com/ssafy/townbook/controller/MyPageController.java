@@ -1,6 +1,8 @@
 package com.ssafy.townbook.controller;
 
 import com.google.zxing.WriterException;
+import com.ssafy.townbook.model.dto.response.FindListResponseDto;
+import com.ssafy.townbook.model.dto.response.FindOneResponseDto;
 import com.ssafy.townbook.model.service.MyPageService;
 import com.ssafy.townbook.model.service.MyPageServiceImpl;
 import java.io.IOException;
@@ -49,8 +51,8 @@ public class MyPageController {
      * @throws Exception
      */
     @GetMapping("/myPoint/{accountNo}")
-    public ResponseEntity<Integer> findPointByAccountNo(@PathVariable Long accountNo) throws Exception {
-        return new ResponseEntity<Integer>(myPageService.findPointByAccountNo(accountNo), HttpStatus.OK);
+    public ResponseEntity<FindOneResponseDto> findPointByAccountNo(@PathVariable Long accountNo) throws Exception {
+        return new ResponseEntity<FindOneResponseDto>(myPageService.findPointByAccountNo(accountNo), HttpStatus.OK);
     }
     
     /**
@@ -60,9 +62,9 @@ public class MyPageController {
      * @return Optional<JSONArray>
      * @throws Exception
      */
-    @GetMapping("/allLog/{accountNo}")
-    public ResponseEntity<JSONArray> findBookLogByAccountNo(@PathVariable Long accountNo) throws Exception {
-        return new ResponseEntity<JSONArray>(myPageService.findBookLogByAccountNo(accountNo), HttpStatus.OK);
+    @GetMapping("/log/{accountNo}")
+    public ResponseEntity<FindListResponseDto> findBookLogByAccountNo(@PathVariable Long accountNo) throws Exception {
+        return new ResponseEntity<FindListResponseDto>(myPageService.findBookLogByAccountNo(accountNo), HttpStatus.OK);
     }
     
     /**
@@ -73,8 +75,8 @@ public class MyPageController {
      * @throws Exception
      */
     @GetMapping("/donate/{accountNo}")
-    public ResponseEntity<JSONArray> findBookLogDonateByAccountNo(@PathVariable Long accountNo) throws Exception {
-        return new ResponseEntity<JSONArray>(myPageService.findBookLogDonateByAccountNo(accountNo), HttpStatus.OK);
+    public ResponseEntity<FindListResponseDto> findDonateBookLogByAccountNo(@PathVariable Long accountNo) throws Exception {
+        return new ResponseEntity<FindListResponseDto>(myPageService.findDonateBookLogByAccountNo(accountNo), HttpStatus.OK);
     }
     
     /**
@@ -85,8 +87,8 @@ public class MyPageController {
      * @throws Exception
      */
     @GetMapping("/receive/{receiverNo}")
-    public ResponseEntity<JSONArray> findBookLogReceiverByReceiverNo(@PathVariable Long receiverNo) throws Exception {
-        return new ResponseEntity<JSONArray>(myPageService.findBookLogReceiverByReceiverNo(receiverNo), HttpStatus.OK);
+    public ResponseEntity<FindListResponseDto> findReceiveBookLogByReceiverNo(@PathVariable Long receiverNo) throws Exception {
+        return new ResponseEntity<FindListResponseDto>(myPageService.findReceiveBookLogByReceiverNo(receiverNo), HttpStatus.OK);
     }
     
     /**
@@ -97,7 +99,7 @@ public class MyPageController {
      * @throws Exception
      */
     @GetMapping("/wishList/{accountNo}")
-    public ResponseEntity<JSONArray> findWishListByAccountNo(@PathVariable Long accountNo) throws Exception {
-        return new ResponseEntity<JSONArray>(myPageService.findWishListByAccountNo(accountNo), HttpStatus.OK);
+    public ResponseEntity<FindListResponseDto> findWishListByAccountNo(@PathVariable Long accountNo) throws Exception {
+        return new ResponseEntity<FindListResponseDto>(myPageService.findWishListByAccountNo(accountNo), HttpStatus.OK);
     }
 }

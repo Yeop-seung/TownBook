@@ -1,6 +1,9 @@
 package com.ssafy.townbook.model.service;
 
 import com.ssafy.townbook.model.dto.LockerDto;
+import com.ssafy.townbook.model.dto.response.FindListResponseDto;
+import com.ssafy.townbook.model.dto.response.FindOneResponseDto;
+import com.ssafy.townbook.model.dto.response.SaveOneResponseDto;
 import com.ssafy.townbook.model.entity.DetailLocker;
 import com.ssafy.townbook.model.entity.Locker;
 import com.ssafy.townbook.model.repository.DetailLockerRepository;
@@ -33,11 +36,11 @@ public class LockerServiceImpl implements LockerService {
      * @return List<LockerDto>
      */
     @Override
-    public List<LockerDto> findAll() {
+    public FindListResponseDto findAll() {
         Optional<List<Locker>> findLockers = Optional.ofNullable(lockerRepository.findAll());
-        return findLockers.get().stream()
+        return new FindListResponseDto(findLockers.get().stream()
                 .map(LockerDto::new)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
     }
     
     /**
@@ -47,9 +50,9 @@ public class LockerServiceImpl implements LockerService {
      * @return LockerDto
      */
     @Override
-    public LockerDto findLockerByLockerNo(Long lockerNo) {
+    public FindOneResponseDto findLockerByLockerNo(Long lockerNo) {
         Locker findLocker = lockerRepository.findLockerByLockerNo(lockerNo).get();
-        return new LockerDto(findLocker);
+        return new FindOneResponseDto(new LockerDto(findLocker));
     }
     
     /**
@@ -61,8 +64,8 @@ public class LockerServiceImpl implements LockerService {
      */
     @Override
     @Transactional
-    public Boolean addLocker(String lockerRegion, int detailLockerCount, Double lockerLatitude,
-                             Double lockerLongitude) {
+    public SaveOneResponseDto addLocker(String lockerRegion, int detailLockerCount, Double lockerLatitude,
+            Double lockerLongitude) {
         try {
             Locker locker = new Locker();
             locker.setLockerRegion(lockerRegion);
@@ -74,10 +77,9 @@ public class LockerServiceImpl implements LockerService {
                 locker.addDetailLocker(detailLocker);
                 detailLockerRepository.save(detailLocker);
             }
-            return true;
+            return new SaveOneResponseDto(true);
         } catch (Exception e) {
-            e.getMessage();
-            return false;
+            return new SaveOneResponseDto(e.getMessage());
         }
     }
 }
