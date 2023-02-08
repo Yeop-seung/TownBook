@@ -35,10 +35,6 @@ function BarcodeRead(props) {
         let event=window.event || e;
 
         if(event.target.value.length === 13){
-            console.log(event.target.value)
-            
-                
-            
             axios.post(`http://i8b201.p.ssafy.io:8081/backend/book/find`, `isbn=${event.target.value}`
             )
             .then((response) => {
@@ -56,13 +52,12 @@ function BarcodeRead(props) {
             onClickHandlerBarcodeReadError()
         }
     }
-    
     // 회원정보를 가지고 있어야 된다.
     return (
         // <div>
             <div>
                 <div className={styles.myImg}>
-                    <button className={styles.circle} onClick={goBack} autoFocus>
+                    <button className={styles.circle} onClick={goBack} >
                         <AiOutlineArrowLeft className={styles.iconStyle}/>
                     </button>
                     <div >
@@ -73,7 +68,7 @@ function BarcodeRead(props) {
                             도서 바코드를 찍어주세요</p>
                         </div>
                     </div>
-                    <input className={styles.barcode} type="text" onChange={barcodeInput} />
+                    <input className={styles.barcode} type="text" onChange={barcodeInput} autoFocus/>
                     <button className={styles.homeCircle} onClick={onClickHandlerHome}>
                         <BiHomeAlt className={styles.iconStyle}/>
                     </button>

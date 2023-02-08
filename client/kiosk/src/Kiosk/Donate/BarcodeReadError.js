@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./BarcodeReadError.module.css"
 import { useLocation, useNavigate } from "react-router-dom";
 import { AiOutlineArrowLeft } from 'react-icons/ai';
@@ -13,7 +13,7 @@ function BarcodeReadError(props) {
     const Locker = location.state.Locker
     const User = location.state.User
     const data = {isnavigate: isnavigate, Locker :Locker, User: User}
-    
+
     const onClickHandlerHome = () => {
         navigate('/')
     }
@@ -26,16 +26,12 @@ function BarcodeReadError(props) {
         navigate(-1)
     }
     //뒤로가기
-    const [inputs, setInputs] = useState({
-        barcode : ""
-    })
-
     function barcodeInput(e) {
         let event=window.event || e;
 
         if(event.target.value.length === 13){
-            axios.get(`http://i8b201.p.ssafy.io:8081/backend/book/find/${e.target.value}`, {
-            })
+            axios.post(`http://i8b201.p.ssafy.io:8081/backend/book/find`, `isbn=${event.target.value}`
+            )
             .then((response) => {
                 const data = {isnavigate: isnavigate, Locker :Locker, User: User, Book: response.data}
                 const onClickHandlerConfirm = () => {
@@ -50,12 +46,7 @@ function BarcodeReadError(props) {
         else if (event.target.value.length > 13) {
             onClickHandlerBarcodeReadError()
         }
-        setInputs({
-            ...inputs,
-            [e.target.name]: e.target.value
-        })
     }
-
     // 회원정보를 가지고 있어야 된다.
     return (
         // <div>

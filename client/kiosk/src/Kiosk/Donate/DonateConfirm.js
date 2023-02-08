@@ -51,11 +51,11 @@ function DonateConfirm(props) {
                 if (detailLocker[i].detailLockerIsEmpty === true){
                     // axios.get(`http://192.168.140.1/servo${i}/0`, {
                     // })
-                    const chageNo = () => {
-                        setDetailLockerNo(detailLockerNo = detailLocker[i].detailLockerNo);
-                    }
-                    chageNo()
-                    console.log('fffff', setDetailLockerNo)
+                    // const chageNo = () => {
+                    //     setDetailLockerNo(detailLockerNo = detailLocker[i].detailLockerNo);
+                    // }
+                    // chageNo()
+                    // console.log('fffff', setDetailLockerNo)
                     axios.get(`Url${i}/`, {
                     })
                     break  
