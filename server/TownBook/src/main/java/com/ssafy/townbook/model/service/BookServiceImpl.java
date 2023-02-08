@@ -103,12 +103,11 @@ public class BookServiceImpl implements BookService {
             book.setBookTitleURL((String) jsonObject.get("TITLE_URL"));
             
             bookRepository.save(book);
-            BookDto            bookDto            = new BookDto(book);
-            FindOneResponseDto findOneResponseDto = new FindOneResponseDto(bookDto);
-            return findOneResponseDto;
+            BookDto bookDto = new BookDto(book);
+            return new FindOneResponseDto(bookDto);
         } catch (Exception e) {
             System.out.println("정보가 없는 도서입니다");
-            return null;
+            return new FindOneResponseDto();
         }
     }
     
