@@ -1,7 +1,6 @@
 package com.ssafy.townbook.model.entity;
 
 import lombok.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -23,38 +22,22 @@ public class File {
     @NotNull
     private String fileOriginName;
 
-    @Column(name = "file_saved_name")
-    @NotNull
-    private String fileSavedName;
-
-    @Column(name = "file_extension")
-    private String fileExtension;
-
-    @Column(name = "file_size")
-    private Long fileSize;
-
-    @Column(name = "file_contentType")
-    private String fileContentType;
-
     @Column(name = "file_multipart_file")
     @Lob
     private Blob fileMultipartFile;
+
+    @Column(name = "`fk-account-file`")
+    private Long accountNo;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "`fk-account-file`", insertable = false, updatable = false)
     private Account account;
 
-    @Column(name = "`fk-account-file`")
-    private Long accountNo;
 
     @Builder
-    public File(Long fileNo, String fileOriginName, String fileSavedName, String fileExtension, Long fileSize, String fileContentType, Long accountNo,Blob fileMultipartFile) {
+    public File(Long fileNo, String fileOriginName, Long accountNo, Blob fileMultipartFile) {
         this.fileNo = fileNo;
         this.fileOriginName = fileOriginName;
-        this.fileSavedName = fileSavedName;
-        this.fileExtension = fileExtension;
-        this.fileSize = fileSize;
-        this.fileContentType = fileContentType;
         this.accountNo = accountNo;
         this.fileMultipartFile = fileMultipartFile;
     }

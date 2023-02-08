@@ -14,15 +14,9 @@ public class SaveOneResponseDto<T> {
 
     @Builder
     public SaveOneResponseDto(T data) {
-        if((Boolean)data == true) {
             this.success = true;
             this.message = "저장 성공";
             this.data = data;
-        }
-        else {
-            this.success = false;
-            this.message = "저장 실패";
-        }
     }
 
     @Builder
