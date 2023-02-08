@@ -1,17 +1,39 @@
 import React from "react";
 import styles from "./ReceiptConfirm.module.css"
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import List from "../../ui/List"
 // import { Route } from "react-router-dom";
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { BiHomeAlt } from 'react-icons/bi';
+import axios from "axios";
 
 function ReceiptConfirm(props) {
-    // function submitHandler(event) {
-    //     event.preventDefault()
-    // }
     const navigate = useNavigate()
+    const location = useLocation()
 
+    const isnavigate = location.state.isnavigate
+    const Locker = location.state.Locker
+    const User = location.state.User
+    // const Book = location.state.Book
+    // const detailLocker = location.state.Locker.detailLocker
+    
+    console.log(isnavigate)
+    console.log(Locker)
+    console.log(User)
+    // console.log(Book)
+    // console.log(detailLocker)
+
+    // const title = Book.data.bookTitle
+    axios.get(`http://i8b201.p.ssafy.io:8081/backend/bookLog/locker/${Locker}`, {
+
+    })
+    .then((resposne) => {
+        console.log(resposne)
+    })
+    .catch((error) => {
+        console.log(error)
+    })
+    
     const onClickHandlerHome = () => {
         navigate('/')
     }

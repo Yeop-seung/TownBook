@@ -49,9 +49,9 @@
 /* 아이콘 스타일*/
 .iconStyleTwo{
     position: absolute;
-    font-size: 40px;
-    left: 18vw;
-    top: 24vh;
+    font-size: 800%;
+    left: 19%;
+    top: 32%;
     color: #ff0202;
 }
 .buttonOne{
@@ -83,11 +83,12 @@
     position: absolute;
     margin:auto;
     left: 10vw;
-    top: 28vh;
+    top: 38vh;
     width: 20vw;
     height: 10vh;
     text-align: center;
     font-size: 120%;
+    justify-content: center;
     background-color: rgb(255, 255, 255);
     border: 1px solid #040404;
     font-weight: 800;
@@ -98,12 +99,14 @@
     color: #2a2a2a;
     border-radius: 12px;
     align-items: center;
+    justify-content: center;
     position: absolute;
     margin:auto;
-    left: 12vw;
-    top: 28vh;
-    width: 15vw;
+    left: 50vw;
+    top: 38vh;
+    width: 20vw;
     height: 10vh;
+    font-size: 120%;
     text-align: center;
     background-color: rgb(255, 255, 255);
     border: 1px solid #040404;

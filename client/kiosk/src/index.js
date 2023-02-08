@@ -22,7 +22,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
     <Routes>
-      <Route path='/kiosk' element={<Main />}/>
+      <Route path='/' element={<Main />}/>
       <Route path='/Finish' element={<Finish />}/>
       <Route path='/MemberSelect' element={<MemberSelect />}/>
       <Route path='/DonateUse' element={<DonateUse />}/>
