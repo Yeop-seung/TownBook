@@ -2,6 +2,7 @@ package com.ssafy.townbook.controller;
 
 import com.ssafy.townbook.model.dto.BookLogDto;
 import com.ssafy.townbook.model.dto.LockerDto;
+import com.ssafy.townbook.model.dto.response.FindListResponseDto;
 import com.ssafy.townbook.model.entity.Book;
 import com.ssafy.townbook.model.repository.BookRepository;
 import com.ssafy.townbook.model.service.BookLogService;
@@ -45,8 +46,8 @@ public class SearchController {
      * @return List<BookLogDto>
      */
     @GetMapping("/searchTitle/{bookTitle}")
-    public ResponseEntity<List<BookLogDto>> findBookLogByBookTitle(@PathVariable String bookTitle) {
-        return new ResponseEntity<List<BookLogDto>>(searchService.findBookLogByBookTitle(bookTitle), HttpStatus.OK);
+    public ResponseEntity<FindListResponseDto> findBookLogByBookTitle(@PathVariable String bookTitle) {
+        return new ResponseEntity<FindListResponseDto>(searchService.findBookLogByBookTitle(bookTitle), HttpStatus.OK);
     }
     
     /**
