@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/alt-text */
 import React from "react";
 import styles from "./DonateConfirm.module.css"
 import { useLocation, useNavigate } from "react-router-dom";
@@ -9,12 +8,14 @@ import axios from "axios";
 
 function DonateConfirm(props) {
     // 빈보관함이 무엇인지 확인하고 if로 하기  
-    const UrlOneOpen = "http://192.168.140.1/mainServo/0"   //메인 보관함 열기 1번 보관함 열기 2번 보관함 열기
-    const UrlTwoOpen = ["http://192.168.140.1/servo1/0", "http://192.168.140.1/servo2/0"]
+    const UrlMainOpen = "http://192.168.140.1/mainServo/0"   //메인 보관함 열기 1번 보관함 열기 2번 보관함 열기
+    const UrlOneOpen = "http://192.168.140.1/servo1/0"
+    const UrlTwoOpen = "http://192.168.140.1/servo2/0"
+    
     const Url = 'http://localhost:3000/'
     const navigate = useNavigate()
     const location = useLocation()
-
+    console.log(location)
     const isnavigate = location.state.isnavigate
     const Locker = location.state.Locker
     const User = location.state.User

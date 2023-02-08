@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./DonateUse.module.css"
 import { useLocation, useNavigate } from "react-router-dom";
 import { AiOutlineArrowLeft } from 'react-icons/ai';
@@ -14,19 +14,18 @@ function DonateUse(props) {
 
     const location = useLocation()
 
+    console.log(location)
     const isnavigate = location.state.isnavigate
-    const Locker = location.state.Locker
-    console.log(isnavigate)
-    console.log(Locker)
-    
+    const locker = location.state.Locker
+
     function barcodeInput(e) {
         let event=window.event || e;
         if(isnavigate === true) {
-            console.log(e.target.value)
             axios.get(Url, {
             })
             .then((response) => {
-                const data = {isnavigate: isnavigate, Locker :Locker, User: e.target.value}
+                console.log(event.target.value)
+                const data = {isnavigate: isnavigate, Locker :locker, User: event.target.value}
                 const onClickHandlerBarcodeRead =() => {
                     navigate('/BarcodeRead', {state: data})
                 }
@@ -42,7 +41,7 @@ function DonateUse(props) {
             })
             .then((response) => {
                 // 수령 페이지로 이동
-                const data = {isnavigate: isnavigate, Locker :Locker, User: e.target.value}
+                const data = {isnavigate: isnavigate, Locker :locker, User: e.target.value}
                 const onClickHandlerReceiptConfirm =() => {
                     navigate('/ReceiptConfirm', {state: data})
                 }

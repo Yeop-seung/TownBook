@@ -21,6 +21,7 @@ function Main(props) {
                     showModal()
                     // 락커의 책과 길이가 같으면 모달창을 띄워줌           
                 } else {
+                    console.log(response.data)
                     const data = { isnavigate: isnavigate, Locker: response.data[1] }
                     const onClickHandlerMemberSelect = () => {
                         navigate('/MemberSelect',

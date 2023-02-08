@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./BarcodeRead.module.css"
 import { useLocation, useNavigate } from "react-router-dom";
 import { AiOutlineArrowLeft } from 'react-icons/ai';
@@ -18,8 +18,6 @@ function BarcodeRead(props) {
     console.log(Locker)
     console.log(User)
 
-
-
     const onClickHandlerHome = () => {
         navigate('/')
     }
@@ -32,9 +30,6 @@ function BarcodeRead(props) {
         navigate(-1)
     }
     //뒤로가기
-    const [inputs, setInputs] = useState({
-        barcode : ""
-    })
     
     function barcodeInput(e) {
         let event=window.event || e;
@@ -56,10 +51,6 @@ function BarcodeRead(props) {
         else if (event.target.value.length > 13) {
             onClickHandlerBarcodeReadError()
         }
-        setInputs({
-            ...inputs,
-            [e.target.name]: e.target.value
-        })
     }
     
     // 회원정보를 가지고 있어야 된다.
@@ -78,7 +69,7 @@ function BarcodeRead(props) {
                             도서 바코드를 찍어주세요</p>
                         </div>
                     </div>
-                    <input className={styles.barcode} type="text" name="inputs" onChange={barcodeInput} autoFocus />
+                    <input className={styles.barcode} type="text" onChange={barcodeInput} autoFocus />
                     <button className={styles.homeCircle} onClick={onClickHandlerHome}>
                         <BiHomeAlt className={styles.iconStyle}/>
                     </button>

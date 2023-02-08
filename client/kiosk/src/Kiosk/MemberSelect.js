@@ -7,15 +7,13 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 function MemberSelect(props) {
     const navigate = useNavigate()
-
     const location = useLocation()
 
     const isnavigate = location.state.isnavigate
-    const LockerNO = location.state.LockerNO
+    const locker = location.state.Locker
+    const lockerNo = location.state.Locker.lockerNo
     
-    const data = {isnavigate: isnavigate, Locker :LockerNO}
-    
-    console.log(location.state.Locker)
+    const data = {isnavigate: isnavigate, Locker: locker ,LockerNo :lockerNo}
 
     const goBack = () => {
         navigate(-1)
