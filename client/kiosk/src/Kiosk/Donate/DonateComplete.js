@@ -23,7 +23,8 @@ function DonateComplete(props) {
     // console.log(User)
     // console.log(Book)
 
-    const data = {lockerNo: Locker.lockerNo, detailLockerNo: Locker.detailLocker[0].detailLockerNo, accountNo: User, bookIsbn: Book.bookIsbn}
+    // const data = {lockerNo: Locker.lockerNo, detailLockerNo: Locker.detailLocker[0].detailLockerNo, accountNo: User, bookIsbn: Book.bookIsbn}
+    const data = {lockerNo: 2, detailLockerNo: 5, accountNo: 4, bookIsbn: 978966260959}
     console.log(data)
     
     const goBack = () => {
@@ -34,8 +35,8 @@ function DonateComplete(props) {
     }
     async function onClickHandlerThanks() {
         try {
-        const response = await axios.get(UrlOneClose)
-        const data = response.data
+        // const response = await axios.get(UrlOneClose)
+        // const data = response.data
     
         const postResponse = await axios.post('http://i8b201.p.ssafy.io:8081/backend/bookLog/donateBook', data)
         const postData = postResponse.data

@@ -14,7 +14,7 @@ function Main(props) {
             axios.get(`http://i8b201.p.ssafy.io:8081/backend/locker/`, {
             })
             .then((response) => {
-                if (response.data[1].detailLocker.length === response.data[1].lockerStorage) {
+                if (response.data[2].detailLocker.length === response.data[2].lockerStorage) {
                     const showModal = () => {
                         setModalOpen(true);
                     };
