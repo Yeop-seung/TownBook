@@ -14,15 +14,14 @@ function Main(props) {
             axios.get(`http://i8b201.p.ssafy.io:8081/backend/locker/`, {
             })
             .then((response) => {
-                if (response.data[2].detailLocker.length === response.data[2].lockerStorage) {
+                if (response.data[2].detailLocker.length === response.data[2].lockerBookCnt) {
                     const showModal = () => {
                         setModalOpen(true);
                     };
                     showModal()
                     // 락커의 책과 길이가 같으면 모달창을 띄워줌           
                 } else {
-                    console.log(response.data)
-                    const data = { isnavigate: isnavigate, Locker: response.data[1] }
+                    const data = { isnavigate: isnavigate, Locker: response.data[2] }
                     const onClickHandlerMemberSelect = () => {
                         navigate('/MemberSelect',
                         {state: data,

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./DonateConfirm.module.css"
 import { useLocation, useNavigate } from "react-router-dom";
 import book from "../img/book.jpg"
@@ -26,8 +26,11 @@ function DonateConfirm(props) {
     console.log(Book)
     console.log(detailLocker)
 
-    const title = Book.bookTitle
+    const title = Book.data.bookTitle
     // 책 제목
+    const [detailLockerNo, setDetailLockerNo] = useState()
+    console.log(detailLockerNo)
+
     let bookURL = location.state.bookIntroductionURL
     if (bookURL === "null.png") {
         bookURL = book
@@ -44,18 +47,21 @@ function DonateConfirm(props) {
         })
         .then((response) => {
             for (let i = 0; i >= detailLocker.length; i++){
+                console.log(i)
                 if (detailLocker[i].detailLockerIsEmpty === true){
                     // axios.get(`http://192.168.140.1/servo${i}/0`, {
                     // })
+                    const chageNo = () => {
+                        setDetailLockerNo(detailLockerNo = detailLocker[i].detailLockerNo);
+                    }
+                    chageNo()
+                    console.log('fffff', setDetailLockerNo)
                     axios.get(`Url${i}/`, {
                     })
-                    const detailLockerNo = detailLocker[i]
-                    console.log(detailLockerNo)
                     break  
                 } 
-                console.log(i)
             }
-            const data = {isnavigate: isnavigate, Locker :Locker, User: User, Book: Book}
+            const data = {isnavigate: isnavigate, Locker :Locker, User: User, Book: Book, detailLockerNo: detailLockerNo}
             navigate('/DonateComplete', {state: data})
         })
         .catch(function (error) {

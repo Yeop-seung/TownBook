@@ -25,6 +25,7 @@ function MemberSelect(props) {
         navigate('/DonateUse', {state: data})
     }
     const onClickHandlerBarcodeRead =() => {
+        const data = {isnavigate: isnavigate, Locker: locker ,LockerNo :lockerNo, User: 1}
         navigate('/BarcodeRead', {state: data})
     }
 

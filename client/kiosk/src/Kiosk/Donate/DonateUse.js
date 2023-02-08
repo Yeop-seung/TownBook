@@ -1,6 +1,8 @@
 import React from "react";
 import styles from "./DonateUse.module.css"
 import { useLocation, useNavigate } from "react-router-dom";
+import first from "../img/first.jpg"
+import second from "../img/second.jpg"
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { BiHomeAlt } from 'react-icons/bi';
 import {BsFillArrowRightCircleFill} from "react-icons/bs"
@@ -53,20 +55,10 @@ function DonateUse(props) {
                         {/* <div className={styles.buttonOne} onClick={onClickHandlerBarcodeRead}> */}
                         <div className={styles.buttonOne}>
                             <h3 className={styles.h3Align}>STEP1</h3>
-                            <p className={styles.textAlignOne}>
-                            마이페이지에서
-                            <br />
-                            QR코드를
-                            <br />
-                            발급해주세요</p>
+                            {/* <img src={}  /> */}
                             <BsFillArrowRightCircleFill className={styles.arrowRight} size={80}/>
                             <h3 className={styles.h3AlignOne}>STEP2</h3>
-                            <p className={styles.textAlignTwo}>
-                            바코드리더기에
-                            <br />
-                            QR코드를
-                            <br />
-                            찍어주세요</p>
+                            
                         </div>
                         <input className={styles.barcode} type="text" onChange={barcodeInput} autoFocus/>
                         {/* onChange={onChangeHandler} value={barcode}  */}

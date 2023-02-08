@@ -14,18 +14,21 @@ function DonateComplete(props) {
     const UrlTwoClose = "http://192.168.140.1/servo2/90 " //2번 보관함 닫기
 
     const location = useLocation()
+
+    console.log(location)
     const isnavigate = location.state.isnavigate
     const Locker = location.state.Locker
     const User = location.state.User
     const Book = location.state.Book
+    const detailLockerNo = location.state.detailLockerNo
     // console.log(isnavigate)
-    // console.log(Locker)
+    console.log(Locker)
     // console.log(User)
     // console.log(Book)
+    console.log(detailLockerNo)
 
-    // const data = {lockerNo: Locker.lockerNo, detailLockerNo: Locker.detailLocker[0].detailLockerNo, accountNo: User, bookIsbn: Book.bookIsbn}
-    const data = {lockerNo: 2, detailLockerNo: 15, accountNo: 4, bookIsbn: 9791162241950}
-    console.log(data)
+    // const data = {lockerNo: Locker.lockerNo, detailLockerNo: detailLockerNo, accountNo: User, bookIsbn: Book.bookIsbn}
+    const data = {lockerNo: 3, detailLockerNo: 25, accountNo: 1, bookIsbn: 9791162241950}
     
     const goBack = () => {
         navigate(-1)
