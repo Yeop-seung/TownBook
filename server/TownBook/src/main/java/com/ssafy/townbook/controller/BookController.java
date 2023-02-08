@@ -4,6 +4,7 @@ import com.ssafy.townbook.model.dto.request.FindBookInLibraryRequestDto;
 import com.ssafy.townbook.model.dto.response.FindOneResponseDto;
 import com.ssafy.townbook.model.dto.response.FindListResponseDto;
 import com.ssafy.townbook.model.service.BookService;
+import com.ssafy.townbook.queryrepository.BookQueryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -57,7 +58,17 @@ public class BookController {
      */
     @PostMapping("/find")
     public ResponseEntity<FindOneResponseDto> findBookInLibraryAndSave(@RequestBody String bookIsbn) {
-        System.out.println(bookIsbn);
         return new ResponseEntity<FindOneResponseDto>(bookService.findBookInLibraryAndSave(bookIsbn), HttpStatus.OK);
+    }
+    
+    /**
+     * 보관함에 보관중이 도서 전부 조회
+     *
+     * @param lockerNo
+     * @return
+     */
+    @GetMapping("/locker/{lockerNo}")
+    public ResponseEntity<FindListResponseDto> findAllBookByLockerNo(@PathVariable Long lockerNo) {
+        return new ResponseEntity<FindListResponseDto>(bookService.findAllBookByLockerNo(lockerNo), HttpStatus.OK);
     }
 }

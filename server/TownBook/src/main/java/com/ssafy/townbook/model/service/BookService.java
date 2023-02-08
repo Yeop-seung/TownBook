@@ -27,4 +27,6 @@ public interface BookService {
      * @return BookDto
      */
     FindOneResponseDto findBookInLibraryAndSave(String bookIsbn);
+    
+    FindListResponseDto findAllBookByLockerNo(Long lockerNo);
 }

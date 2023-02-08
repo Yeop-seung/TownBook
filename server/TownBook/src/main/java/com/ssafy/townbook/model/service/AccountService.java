@@ -1,21 +1,23 @@
 package com.ssafy.townbook.model.service;
 
 import com.ssafy.townbook.model.dto.AccountDto;
+import com.ssafy.townbook.model.dto.response.FindOneResponseDto;
+import com.ssafy.townbook.model.dto.response.SaveOneResponseDto;
 import net.minidev.json.JSONArray;
 
 public interface AccountService {
     
-    AccountDto signup(AccountDto accountDto);
+    SaveOneResponseDto signup(AccountDto accountDto);
     
     AccountDto getUserWithAuthorities(String accountId);
     
     AccountDto getMyUserWithAuthorities();
     
-    String findEmail(String accountPhoneNumber);
+    FindOneResponseDto findEmail(String accountPhoneNumber);
     
-    Boolean accountModify(AccountDto accountDto);
+    SaveOneResponseDto accountModify(AccountDto accountDto);
     
-    Boolean accountRemove(String accountEmail, String accountPw);
+    SaveOneResponseDto accountRemove(String accountEmail, String accountPw);
     
     Boolean updatePassword(String accountEmail, String tmpPassword);
     

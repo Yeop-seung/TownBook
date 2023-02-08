@@ -2,6 +2,8 @@ package com.ssafy.townbook.controller;
 
 
 import com.ssafy.townbook.model.dto.AccountDto;
+import com.ssafy.townbook.model.dto.response.FindOneResponseDto;
+import com.ssafy.townbook.model.dto.response.SaveOneResponseDto;
 import com.ssafy.townbook.model.service.AccountService;
 import com.ssafy.townbook.model.service.EmailService;
 import java.util.Map;
@@ -33,17 +35,25 @@ public class AccountController {
         this.emailService   = emailService;
     }
     
+    /**
+     * 회원 가입
+     *
+     * @param accountDto
+     * @return
+     */
     @PostMapping("/signup")
-    public ResponseEntity<AccountDto> signup(@Valid @RequestBody AccountDto accountDto) {
-        return ResponseEntity.ok(accountService.signup(accountDto));
+    public ResponseEntity<SaveOneResponseDto> signup(@Valid @RequestBody AccountDto accountDto) {
+        return new ResponseEntity<SaveOneResponseDto>(accountService.signup(accountDto), HttpStatus.OK);
     }
     
+    // 보류
     @GetMapping("/user")
     @PreAuthorize("hasAnyRole('USER','ADMIN')")
     public ResponseEntity<AccountDto> getMyUserInfo(HttpServletRequest request) {
         return ResponseEntity.ok(accountService.getMyUserWithAuthorities());
     }
     
+    // 보류
     @GetMapping("/user/{accountEmail}")
     @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<AccountDto> getUserInfo(@PathVariable String accountEmail) {
@@ -57,9 +67,8 @@ public class AccountController {
      * @return
      */
     @GetMapping("/findEmail/{phoneNumber}")
-    public ResponseEntity<String> findEmail(@PathVariable String phoneNumber) {
-        
-        return new ResponseEntity<String>(accountService.findEmail(phoneNumber), HttpStatus.OK);
+    public ResponseEntity<FindOneResponseDto> findEmail(@PathVariable String phoneNumber) {
+        return new ResponseEntity<FindOneResponseDto>(accountService.findEmail(phoneNumber), HttpStatus.OK);
     }
     
     /**
@@ -69,8 +78,8 @@ public class AccountController {
      * @return
      */
     @PutMapping("/modify")
-    public ResponseEntity<Boolean> accountModify(@RequestBody AccountDto accountDto) {
-        return new ResponseEntity<>(accountService.accountModify(accountDto), HttpStatus.OK);
+    public ResponseEntity<SaveOneResponseDto> accountModify(@RequestBody AccountDto accountDto) {
+        return new ResponseEntity<SaveOneResponseDto>(accountService.accountModify(accountDto), HttpStatus.OK);
         
     }
     
@@ -82,9 +91,8 @@ public class AccountController {
      * @return
      */
     @PutMapping("/leave")
-    public ResponseEntity<Boolean> accountRemove(@RequestBody Map<String, String> leaveInfo) {
-        System.out.println(leaveInfo.get("accountEmail"));
-        return new ResponseEntity<Boolean>(
+    public ResponseEntity<SaveOneResponseDto> accountRemove(@RequestBody Map<String, String> leaveInfo) {
+        return new ResponseEntity<SaveOneResponseDto>(
                 accountService.accountRemove(leaveInfo.get("accountEmail"), leaveInfo.get("accountPw")), HttpStatus.OK);
         
     }

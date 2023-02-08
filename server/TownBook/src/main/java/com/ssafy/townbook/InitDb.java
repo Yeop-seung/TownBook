@@ -137,7 +137,7 @@ public class InitDb {
         
         public void lockerInit() {
             createLocker("어은동", 10, 36.3622D, 127.3562D);
-            createLocker("덕명동", 10, 36.3663D, 127.2981D);
+            createLocker("덕명동", 2, 36.3663D, 127.2981D);
             createLocker("봉명동", 10, 36.3553D, 127.2981D);
             createLocker("효자동", 10, 36.3553D, 127.2981D);
         }

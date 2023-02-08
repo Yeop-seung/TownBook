@@ -22,7 +22,7 @@ public class BookLogQueryRepository {
     }
     
     /**
-     * 단일 보관함에 보관중인 도서 전부 조회
+     * 단일 보관함에 보관중인 북로드 전부 조회
      *
      * @param lockerNo
      * @return Optional<List < Book>>

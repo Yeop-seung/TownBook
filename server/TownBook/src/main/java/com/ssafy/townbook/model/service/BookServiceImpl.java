@@ -5,6 +5,7 @@ import com.ssafy.townbook.model.dto.response.FindOneResponseDto;
 import com.ssafy.townbook.model.dto.response.FindListResponseDto;
 import com.ssafy.townbook.model.entity.Book;
 import com.ssafy.townbook.model.repository.BookRepository;
+import com.ssafy.townbook.queryrepository.BookQueryRepository;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
@@ -30,11 +31,13 @@ public class BookServiceImpl implements BookService {
     @Value("${APIKey}")
     private String APIKey;
     
-    private BookRepository bookRepository;
+    private BookRepository      bookRepository;
+    private BookQueryRepository bookQueryRepository;
     
     @Autowired
-    public BookServiceImpl(BookRepository bookRepository) {
-        this.bookRepository = bookRepository;
+    public BookServiceImpl(BookRepository bookRepository, BookQueryRepository bookQueryRepository) {
+        this.bookRepository      = bookRepository;
+        this.bookQueryRepository = bookQueryRepository;
     }
     
     /**
@@ -110,6 +113,16 @@ public class BookServiceImpl implements BookService {
             return new FindOneResponseDto();
         }
     }
+    
+    @Override
+    public FindListResponseDto findAllBookByLockerNo(Long lockerNo) {
+        List<Book> findBookList = bookQueryRepository.findBookLogByLockerNo(lockerNo).get();
+        List<BookDto> findBookDtoList = findBookList.stream()
+                .map(BookDto::new)
+                .collect(Collectors.toList());
+        return new FindListResponseDto(findBookDtoList);
+    }
+    
     
     /**
      * vol이 null인지 체크
