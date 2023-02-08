@@ -112,9 +112,7 @@ function AdminNavbar(props) {
     setmodalSearch(!modalSearch);
     axios
       .get(
-        `https://i8b201.p.ssafy.io/backend/myPage/qr/${localStorage.getItem(
-          "accountEmail"
-        )}`,
+        `https://i8b201.p.ssafy.io/backend/myPage/qr/${localStorage.getItem("accountNo")}&${localStorage.getItem("accountEmail")}`,
         {
           responseType: "arraybuffer",
         }

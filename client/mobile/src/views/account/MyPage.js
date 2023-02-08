@@ -36,36 +36,47 @@ import {
 } from "reactstrap";
 
 function MyPage() {
+  const [isLoading, setIsLoading] = React.useState(true);
+  const [loadedMeetups, setLoadedMeetups] = React.useState([]);
 
-  // useEffect(() => {
-  // axios
-  //   .get(`https://i8b201.p.ssafy.io/backend/myPage/donate/5`)
-  //   // .get("https:///townbook/myPage/receive/${receiverNo}")
-  //   .then((res) => {
-  //     console.log(res);
-  //    // for (let i = 0; i < res.data.length; i++) {
-  //     //   notices.push({ ...res.data[i], id: i + 1 });
-  //     // }
-  //     for (const key in res.data) {
-  //       const notice = {
-  //       id: key,
-  //       ...res.data[key]
-  //     };
-  //       notices.push(notice);
-  //     };
-  //     // const base64 = btoa(
-  //     //   new Uint8Array(res.data).reduce(
-  //     //     (data, byte) => data + String.fromCharCode(byte),
-  //     //     ""
-  //     //   )
-  //     // );
-  //     // setImageUrl(`data:${res.headers["content-type"]};base64,${base64}`)
-     
-  //   })
-  //   .catch((error) => {
-  //     alert("qr로딩에 실패하였습니다.");
-  //   });
-  // }, []);
+  useEffect(() => {
+  axios
+    .get(`https://i8b201.p.ssafy.io/backend/myPage/donate/5`)
+    // .get("https:///townbook/myPage/receive/${receiverNo}")
+    .then((res) => {
+      console.log(res);
+      const notices=[];
+     for (let i = 0; i < res.data.length; i++) {
+        notices.push({ ...res.data[i], id: i + 1 });
+      }
+      // for (const key in res.data) {
+      //   const notice = {
+      //   id: key,
+      //   ...res.data[key]
+      // };
+        // notices.push(notice);
+      // };
+      // const base64 = btoa(
+      //   new Uint8Array(res.data).reduce(
+      //     (data, byte) => data + String.fromCharCode(byte),
+      //     ""
+      //   )
+      // );
+      // setImageUrl(`data:${res.headers["content-type"]};base64,${base64}`)
+     console.log(notices)
+     setIsLoading(false);
+     setLoadedMeetups(notices);
+    })
+    .catch((error) => {
+      alert("qr로딩에 실패하였습니다.");
+    });
+  }, []);
+  if (isLoading) {
+    <section>
+      <p>Loading...</p>
+    </section>
+  }
+
   return (
     <>
       
