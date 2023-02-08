@@ -35,7 +35,7 @@ public class MyPageController {
      * @throws WriterException
      * @throws IOException
      */
-    @GetMapping("/qr/{accountEmail}")
+    @GetMapping("/qr/{qrSource}")
     public Object createQr(@PathVariable String qrSource) throws WriterException, IOException {
         return myPageService.getQrCode(qrSource).get();
     }
