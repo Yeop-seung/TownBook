@@ -77,18 +77,4 @@ public class BookLogQueryRepository {
                 .where(bookLog.detailLocker.detailLockerNo.eq(detailLockerNo)
                         .and(bookLog.bookLogState.eq(true))).fetch());
     }
-    
-    /**
-     * 제목 검색해서 북로그 반환
-     *
-     * @param bookTitle
-     * @return Optional<List < BookLog>>
-     */
-    public Optional<List<BookLog>> findBookLogByBookTitle(String bookTitle) {
-        return Optional.ofNullable(jpaQueryFactory
-                .select(bookLog)
-                .from(bookLog)
-                .where(bookLog.bookLogState.eq(true).and(bookLog.book.bookTitle.contains(bookTitle)))
-                .fetch());
-    }
 }

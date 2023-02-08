@@ -1,6 +1,8 @@
 package com.ssafy.townbook.model.service;
 
 import com.ssafy.townbook.model.dto.AdminDto;
+import com.ssafy.townbook.model.dto.response.FindListResponseDto;
+import com.ssafy.townbook.model.dto.response.FindOneResponseDto;
 import com.ssafy.townbook.model.entity.Account;
 import com.ssafy.townbook.model.repository.AdminRepository;
 import java.util.List;
@@ -29,11 +31,11 @@ public class AdminServiceImpl implements AdminService {
      * @return List<AccountDto>
      */
     @Override
-    public List<AdminDto> findAll() {
+    public FindListResponseDto findAll() {
         Optional<List<Account>> findAccounts = Optional.ofNullable(adminRepository.findAll());
-        return findAccounts.get().stream()
+        return new FindListResponseDto(findAccounts.get().stream()
                 .map(AdminDto::new)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
     }
     
     /**
@@ -43,8 +45,9 @@ public class AdminServiceImpl implements AdminService {
      * @return AccountDto
      */
     @Override
-    public AdminDto findAccountByAccountNo(Long accountNo) {
-        Account findAccount = adminRepository.findAccountByAccountNo(accountNo).get();
-        return new AdminDto(findAccount);
+    public FindOneResponseDto findAccountByAccountNo(Long accountNo) {
+        Account  findAccount = adminRepository.findAccountByAccountNo(accountNo).get();
+        AdminDto adminDto    = new AdminDto(findAccount);
+        return new FindOneResponseDto(adminDto);
     }
 }

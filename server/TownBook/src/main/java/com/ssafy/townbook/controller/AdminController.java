@@ -1,9 +1,9 @@
 package com.ssafy.townbook.controller;
 
-import com.ssafy.townbook.model.dto.AdminDto;
+import com.ssafy.townbook.model.dto.response.FindListResponseDto;
+import com.ssafy.townbook.model.dto.response.FindOneResponseDto;
 import com.ssafy.townbook.model.service.AdminService;
 import com.ssafy.townbook.model.service.MyPageServiceImpl;
-import java.util.List;
 import net.minidev.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,8 +34,8 @@ public class AdminController {
      * @return List<AccountDto>
      */
     @GetMapping("")
-    public ResponseEntity<List<AdminDto>> findAccounts() {
-        return new ResponseEntity<List<AdminDto>>(adminService.findAll(), HttpStatus.OK);
+    public ResponseEntity<FindListResponseDto> findAccounts() {
+        return new ResponseEntity<FindListResponseDto>(adminService.findAll(), HttpStatus.OK);
     }
     
     /**
@@ -45,8 +45,8 @@ public class AdminController {
      * @return AccountDto
      */
     @GetMapping("/{accountNo}")
-    public ResponseEntity<AdminDto> findAccountByAccountNo(@PathVariable Long accountNo) {
-        return new ResponseEntity<AdminDto>(adminService.findAccountByAccountNo(accountNo), HttpStatus.OK);
+    public ResponseEntity<FindOneResponseDto> findAccountByAccountNo(@PathVariable Long accountNo) {
+        return new ResponseEntity<FindOneResponseDto>(adminService.findAccountByAccountNo(accountNo), HttpStatus.OK);
     }
     
     /**

@@ -6,6 +6,7 @@ import com.ssafy.townbook.model.entity.Book;
 import com.ssafy.townbook.model.repository.BookRepository;
 import com.ssafy.townbook.model.service.BookLogService;
 import com.ssafy.townbook.model.service.LockerService;
+import com.ssafy.townbook.model.service.SearchService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import net.minidev.json.JSONArray;
@@ -26,12 +27,15 @@ public class SearchController {
     private BookLogService bookLogService;
     private LockerService  lockerService;
     private BookRepository bookRepository;
+    private SearchService  searchService;
     
     @Autowired
-    public SearchController(BookLogService bookLogService, LockerService lockerService, BookRepository bookRepository) {
+    public SearchController(BookLogService bookLogService, LockerService lockerService, BookRepository bookRepository,
+            SearchService searchService) {
         this.bookLogService = bookLogService;
         this.lockerService  = lockerService;
         this.bookRepository = bookRepository;
+        this.searchService  = searchService;
     }
     
     /**
@@ -42,9 +46,15 @@ public class SearchController {
      */
     @GetMapping("/searchTitle/{bookTitle}")
     public ResponseEntity<List<BookLogDto>> findBookLogByBookTitle(@PathVariable String bookTitle) {
-        return new ResponseEntity<List<BookLogDto>>(bookLogService.findBookLogByBookTitle(bookTitle), HttpStatus.OK);
+        return new ResponseEntity<List<BookLogDto>>(searchService.findBookLogByBookTitle(bookTitle), HttpStatus.OK);
     }
     
+    /**
+     * 보관함 검색
+     *
+     * @param lockerNo
+     * @return JSONObject
+     */
     @GetMapping("/searchLocker/{lockerNo}")
     public ResponseEntity<JSONObject> findLockerByLockerNo(@PathVariable Long lockerNo) {
         LockerDto        findLockerDto   = lockerService.findLockerByLockerNo(lockerNo);

@@ -1,6 +1,8 @@
 package com.ssafy.townbook.model.service;
 
 import com.ssafy.townbook.model.dto.BookDto;
+import com.ssafy.townbook.model.dto.response.FindOneResponseDto;
+import com.ssafy.townbook.model.dto.response.FindListResponseDto;
 import com.ssafy.townbook.model.entity.Book;
 import com.ssafy.townbook.model.repository.BookRepository;
 import java.io.BufferedReader;
@@ -41,11 +43,12 @@ public class BookServiceImpl implements BookService {
      * @return List<BookDto>
      */
     @Override
-    public List<BookDto> findAll() {
+    public FindListResponseDto findAllBooks() {
         Optional<List<Book>> findBooks = Optional.ofNullable(bookRepository.findAll());
-        return findBooks.get().stream()
+        return new FindListResponseDto(findBooks.get().stream()
                 .map(BookDto::new)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
+        
     }
     
     /**
@@ -55,9 +58,11 @@ public class BookServiceImpl implements BookService {
      * @return BookDto
      */
     @Override
-    public BookDto findBookByBookIsbn(String bookIsbn) {
-        Book findBook = bookRepository.findBookByBookIsbn(bookIsbn).get();
-        return new BookDto(findBook);
+    public FindOneResponseDto findBookByBookIsbn(String bookIsbn) {
+        Book               findBook           = bookRepository.findBookByBookIsbn(bookIsbn).get();
+        BookDto            bookDto            = new BookDto(findBook);
+        FindOneResponseDto findOneResponseDto = new FindOneResponseDto(bookDto);
+        return findOneResponseDto;
     }
     
     
@@ -69,7 +74,7 @@ public class BookServiceImpl implements BookService {
      */
     @Override
     @Transactional
-    public BookDto addBook(String bookIsbn) {
+    public FindOneResponseDto findBookInLibraryAndSave(String bookIsbn) {
         try {
             // API 호출
             URL url = new URL("https://www.nl.go.kr/seoji/SearchApi.do?cert_key=" +
@@ -92,13 +97,15 @@ public class BookServiceImpl implements BookService {
             book.setBookVol(checkVol((String) jsonObject.get("VOL")));
             book.setBookAuthor((String) jsonObject.get("AUTHOR"));
             book.setBookPublisher((String) jsonObject.get("PUBLISHER"));
-            book.setBookPublishPredate(convertDate((String) jsonObject.get("PUBLISH_PREDATE")));
+            book.setBookPublishPredate(stringToDate((String) jsonObject.get("PUBLISH_PREDATE")));
             book.setBookIntroductionURL(jsonObject.get("BOOK_INTRODUCTION_URL").equals("") ? "null.png"
                     : (String) jsonObject.get("BOOK_INTRODUCTION_URL"));
             book.setBookTitleURL((String) jsonObject.get("TITLE_URL"));
             
             bookRepository.save(book);
-            return new BookDto(book);
+            BookDto            bookDto            = new BookDto(book);
+            FindOneResponseDto findOneResponseDto = new FindOneResponseDto(bookDto);
+            return findOneResponseDto;
         } catch (Exception e) {
             System.out.println("정보가 없는 도서입니다");
             return null;
@@ -122,7 +129,7 @@ public class BookServiceImpl implements BookService {
      * @param dateString
      * @return LocalDate
      */
-    static LocalDate convertDate(String dateString) {
+    static LocalDate stringToDate(String dateString) {
         LocalDate localDate = LocalDate.parse(dateString, DateTimeFormatter.ofPattern("yyyyMMdd"));
         return localDate;
     }
