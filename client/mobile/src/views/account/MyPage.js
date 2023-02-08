@@ -89,6 +89,7 @@ function MyPage() {
                 <CardTitle tag="h4">내가 쓴 글</CardTitle>
               </CardHeader>
               <CardBody>
+                {/* <MyPageDonateList/> */}
                 {/* <Table className="tablesorter" responsive>
                   <thead className="text-primary">
                     <tr>
