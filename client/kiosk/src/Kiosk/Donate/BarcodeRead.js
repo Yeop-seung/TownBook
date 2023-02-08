@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import styles from "./BarcodeRead.module.css"
 import { useLocation, useNavigate } from "react-router-dom";
 import { AiOutlineArrowLeft } from 'react-icons/ai';
@@ -30,7 +30,12 @@ function BarcodeRead(props) {
         navigate(-1)
     }
     //뒤로가기
-    
+    const inputRef = useRef(null);
+
+    useEffect(() => {
+    inputRef.current.focus();
+    }, []);
+
     function barcodeInput(e) {
         let event=window.event || e;
 
@@ -69,7 +74,7 @@ function BarcodeRead(props) {
                             도서 바코드를 찍어주세요</p>
                         </div>
                     </div>
-                    <input className={styles.barcode} type="text" onChange={barcodeInput} autoFocus />
+                    <input className={styles.barcode} type="text" onChange={barcodeInput} autoFocus ref={inputRef} />
                     <button className={styles.homeCircle} onClick={onClickHandlerHome}>
                         <BiHomeAlt className={styles.iconStyle}/>
                     </button>

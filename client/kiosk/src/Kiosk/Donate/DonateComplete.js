@@ -24,7 +24,7 @@ function DonateComplete(props) {
     // console.log(Book)
 
     // const data = {lockerNo: Locker.lockerNo, detailLockerNo: Locker.detailLocker[0].detailLockerNo, accountNo: User, bookIsbn: Book.bookIsbn}
-    const data = {lockerNo: 2, detailLockerNo: 5, accountNo: 4, bookIsbn: 978966260959}
+    const data = {lockerNo: 2, detailLockerNo: 15, accountNo: 4, bookIsbn: 9791162241950}
     console.log(data)
     
     const goBack = () => {
