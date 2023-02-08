@@ -1,6 +1,6 @@
 package com.ssafy.townbook.controller;
 
-import com.ssafy.townbook.model.dto.LockerDto;
+import com.ssafy.townbook.model.dto.request.CreateLockerRequestDto;
 import com.ssafy.townbook.model.dto.response.FindListResponseDto;
 import com.ssafy.townbook.model.dto.response.FindOneResponseDto;
 import com.ssafy.townbook.model.dto.response.SaveOneResponseDto;
@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -51,14 +52,15 @@ public class LockerController {
     /**
      * 보관함 및 세부 보관함을 생성한다.
      *
-     * @param lockerRegion
-     * @param detailLockerCount
-     * @return Boolean
+     * @param createLockerRequestDto
+     * @return
      */
-    @PostMapping("/add/{lockerRegion}/{detailLockerCount}/{lockerLatitude}/{lockerLongitude}")
-    public ResponseEntity<SaveOneResponseDto> addLocker(
-            @PathVariable String lockerRegion, @PathVariable int detailLockerCount,
-            @PathVariable Double lockerLatitude, @PathVariable Double lockerLongitude) {
+    @PostMapping("/add")
+    public ResponseEntity<SaveOneResponseDto> addLocker(@RequestBody CreateLockerRequestDto createLockerRequestDto) {
+        String  lockerRegion      = createLockerRequestDto.getLockerRegion();
+        Integer detailLockerCount = createLockerRequestDto.getDetailLockerCount();
+        Double  lockerLatitude    = createLockerRequestDto.getLockerLatitude();
+        Double  lockerLongitude   = createLockerRequestDto.getLockerLongitude();
         return new ResponseEntity<SaveOneResponseDto>(
                 lockerService.addLocker(lockerRegion, detailLockerCount, lockerLatitude, lockerLongitude),
                 HttpStatus.OK);
