@@ -1,21 +1,22 @@
 package com.ssafy.townbook.model.service;
 
 import com.google.zxing.WriterException;
+import com.ssafy.townbook.model.dto.response.FindListResponseDto;
+import com.ssafy.townbook.model.dto.response.FindOneResponseDto;
 import java.io.IOException;
 import java.util.Optional;
-import net.minidev.json.JSONArray;
 
 public interface MyPageService {
     
     Optional<Object> getQrCode(String qrSource) throws WriterException, IOException;
     
-    Integer findPointByAccountNo(Long accountNo) throws Exception;
+    FindOneResponseDto findPointByAccountNo(Long accountNo) throws Exception;
     
-    JSONArray findBookLogByAccountNo(Long accountNo) throws Exception;
+    FindListResponseDto findBookLogByAccountNo(Long accountNo) throws Exception;
     
-    JSONArray findBookLogDonateByAccountNo(Long accountNo) throws Exception;
+    FindListResponseDto findDonateBookLogByAccountNo(Long accountNo) throws Exception;
     
-    JSONArray findBookLogReceiverByReceiverNo(Long receiverNo) throws Exception;
+    FindListResponseDto findReceiveBookLogByReceiverNo(Long receiverNo) throws Exception;
     
-    JSONArray findWishListByAccountNo(Long accountNo) throws Exception;
+    FindListResponseDto findWishListByAccountNo(Long accountNo) throws Exception;
 }
