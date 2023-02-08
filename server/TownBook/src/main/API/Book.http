@@ -1,3 +1,4 @@
+###
 ### 1. 전체 도서 조회
 GET http://localhost:8081/backend/book
 
@@ -8,4 +9,4 @@ GET http://localhost:8081/backend/book/8984993751
 POST http://localhost:8081/backend/book/find
 Content-Type: application/x-www-form-urlencoded
 
-bookIsbn=9788966260959
+isbn=9788966260959

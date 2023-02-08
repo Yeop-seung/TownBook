@@ -1,5 +1,6 @@
 package com.ssafy.townbook.controller;
 
+import com.ssafy.townbook.model.dto.request.FindBookInLibraryRequestDto;
 import com.ssafy.townbook.model.dto.response.FindOneResponseDto;
 import com.ssafy.townbook.model.dto.response.FindListResponseDto;
 import com.ssafy.townbook.model.service.BookService;
@@ -10,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -54,8 +56,8 @@ public class BookController {
      * @return BookDto
      */
     @PostMapping("/find")
-    public ResponseEntity<FindOneResponseDto> findBookInLibraryAndSave(
-            @RequestParam String bookIsbn) {
+    public ResponseEntity<FindOneResponseDto> findBookInLibraryAndSave(@RequestBody String bookIsbn) {
+        System.out.println(bookIsbn);
         return new ResponseEntity<FindOneResponseDto>(bookService.findBookInLibraryAndSave(bookIsbn), HttpStatus.OK);
     }
 }
