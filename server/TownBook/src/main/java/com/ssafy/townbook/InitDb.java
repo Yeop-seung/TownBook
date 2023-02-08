@@ -20,6 +20,7 @@ import java.util.Optional;
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -59,6 +60,7 @@ public class InitDb {
         private final AccountRepository accountRepository;
         private final BookRepository    bookRepository;
         private final BookLogRepository bookLogRepository;
+        private final PasswordEncoder   passwordEncoder;
         
         public void bookInit() {
             Book book1 = createBook("8984993751", "8", "토지", "박경리", "커뮤니케이션 북스", convertDate("20051103"),
@@ -96,17 +98,17 @@ public class InitDb {
             em.persist(authorityRoleUser);
             em.persist(authorityRoleAdmin);
             
-            Account accountNon = createAccount("nonmember@townbook.com", "nonmember", "비회원", "", "", 0, "비회원 계정",
-                    "000000", authorityRoleUser);
+            Account accountNon = createAccount("nonmember@townbook.com", passwordEncoder.encode("password"), "비회원", "",
+                    "", 0, "비회원 계정", "000000", authorityRoleUser);
             accountNon.setAccountPoint(99999999);
             em.persist(accountNon);
             
-            Account account1 = createAccount("test@test.com", "password", "김싸피", "대전시 유성구 덕명동", "010-1234-5678", 0,
-                    "내가 바로 김싸피", "220222", authorityRoleUser);
+            Account account1 = createAccount("test@townbook.com", passwordEncoder.encode("password"), "김싸피", "대전시 유성구 덕명동",
+                    "010-1234-5678", 0, "내가 바로 김싸피", "220222", authorityRoleUser);
             em.persist(account1);
             
-            Account account2 = createAccount("admin@test.com", "adminPassword", "최어드", "대전시 유성구 어드동", "010-5678-1234",
-                    1, "내가 바로 최어드", "111111", authorityRoleAdmin);
+            Account account2 = createAccount("admin@townbook.com", passwordEncoder.encode("password"), "최어드", "대전시 유성구 어드동",
+                    "010-5678-1234", 1, "내가 바로 최어드", "111111", authorityRoleAdmin);
             em.persist(account2);
         }
         
