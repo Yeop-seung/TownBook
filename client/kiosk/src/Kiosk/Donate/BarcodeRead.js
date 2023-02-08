@@ -63,7 +63,7 @@ function BarcodeRead(props) {
         // <div>
             <div>
                 <div className={styles.myImg}>
-                    <button className={styles.circle} onClick={goBack}>
+                    <button className={styles.circle} onClick={goBack} autoFocus>
                         <AiOutlineArrowLeft className={styles.iconStyle}/>
                     </button>
                     <div >
@@ -74,7 +74,7 @@ function BarcodeRead(props) {
                             도서 바코드를 찍어주세요</p>
                         </div>
                     </div>
-                    <input className={styles.barcode} type="text" onChange={barcodeInput} autoFocus ref={inputRef} />
+                    <input className={styles.barcode} type="text" onChange={barcodeInput}  ref={inputRef} />
                     <button className={styles.homeCircle} onClick={onClickHandlerHome}>
                         <BiHomeAlt className={styles.iconStyle}/>
                     </button>
