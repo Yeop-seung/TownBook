@@ -1,5 +1,6 @@
 package com.ssafy.townbook.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import lombok.*;
 
 import javax.persistence.*;
@@ -11,6 +12,7 @@ import java.sql.Blob;
 @NoArgsConstructor
 @ToString
 @Entity
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class File {
 
     @Id
