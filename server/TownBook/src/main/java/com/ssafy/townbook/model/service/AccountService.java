@@ -23,7 +23,7 @@ public interface AccountService {
     Boolean updatePassword(String accountEmail, String tmpPassword);
     
     JSONArray findAccountBookCnt(Long accountNo) throws Exception;
-
+    
     AccountDto findAccountByAccountEmail(String accountEmail);
-
+    
 }
