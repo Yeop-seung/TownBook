@@ -3,10 +3,12 @@ import styles from "./Main.module.css"
 import Modal from "../ui/Modal.js"
 import axios from "axios"
 import { useNavigate } from 'react-router-dom';
+import ReceiptModal from "../ui/ReceiptModal";
 
 function Main(props) {
     const navigate = useNavigate()
     const [modalOpen, setModalOpen] = useState(false);
+    const [ReceiptmodalOpen, setReceiptModalOpen] = useState(false);
 
     let isnavigate = true //true 기부 false 수령
 
@@ -14,14 +16,15 @@ function Main(props) {
             axios.get(`http://i8b201.p.ssafy.io:8081/backend/locker/`, {
             })
             .then((response) => {
-                if (response.data.data[1].detailLocker.length === response.data.data[1].lockerBookCnt) {
+                if (response.data.data[2].detailLocker.length === response.data.data[2].lockerBookCnt) {
+                // if (response.data.data[2].lockerBookCnt === 2) {
                     const showModal = () => {
                         setModalOpen(true);
                     };
                     showModal()
                     // 락커의 책과 길이가 같으면 모달창을 띄워줌           
                 } else {
-                    const data = { isnavigate: isnavigate, Locker: response.data.data[1] }
+                    const data = { isnavigate: isnavigate, Locker: response.data.data[2] }
                     const onClickHandlerMemberSelect = () => {
                         navigate('/MemberSelect',
                         {state: data,
@@ -39,13 +42,22 @@ function Main(props) {
         axios.get(`http://i8b201.p.ssafy.io:8081/backend/locker/`, {
             })
             .then((response) => {
+                // if (response.data.data[1].lockerBookCnt === 0) {
+                if (response.data.data[2].lockerBookCnt === 0) {
+                    const ReceiptShowModal = () => {
+                        setReceiptModalOpen(true);
+                    };
+                    ReceiptShowModal()
+                    // 락커의 책과 길이가 같으면 모달창을 띄워줌           
+                } else {
                 console.log(response.data.data)
-                    const data = { isnavigate: isnavigate, Locker: response.data.data[1] }
+                    const data = { isnavigate: isnavigate, Locker: response.data.data[2] }
                     const onClickHandlerDonateUse = () => {
                         navigate('/DonateUse',
                         {state: data})
                 }
-                onClickHandlerDonateUse() })
+                onClickHandlerDonateUse()}
+            })
             .catch(function (error) {
                 console.log(error)
             })
@@ -53,15 +65,14 @@ function Main(props) {
 
     return (
             <div className={styles.myImg}>
-                    <div>
                         <button className={styles.buttonLeft} onClick={onClickHandler}>
                             도서 기부
                         </button>
+                        <button className={styles.buttonRight} onClick={onClickHandlerUse}>
+                            도서 수령
+                        </button>
                         {modalOpen && <Modal setModalOpen={setModalOpen} />}
-                    </div>
-                    <button className={styles.buttonRight} onClick={onClickHandlerUse}>
-                        도서 수령
-                    </button>
+                        {ReceiptmodalOpen && <ReceiptModal setReceiptModalOpen={setReceiptModalOpen} />}
             </div>
         )
 }

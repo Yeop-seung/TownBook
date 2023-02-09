@@ -10,7 +10,7 @@ function DonateConfirm(props) {
     // 빈보관함이 무엇인지 확인하고 if로 하기  
     const UrlMainOpen = "http://192.168.140.1/mainServo/0"   //메인 보관함 열기 1번 보관함 열기 2번 보관함 열기
     
-    const Url = 'http://localhost:3000/'
+    // const Url = 'http://localhost:3000/'
     const navigate = useNavigate()
     const location = useLocation()
 
@@ -24,7 +24,7 @@ function DonateConfirm(props) {
     // console.log(Locker)
     // console.log(User)
     // console.log(Book)
-    console.log(detailLocker)
+    // console.log(detailLocker)
 
     const title = Book.data.bookTitle
     // 책 제목
@@ -42,8 +42,7 @@ function DonateConfirm(props) {
     //홈
     
     const onClickHandlerComplete =() => {
-        // axios.get(UrlMainOpen, {
-        // })
+        
         let numbers = []
         for (let i = 0; i < detailLocker.length; i++){
             console.log(detailLocker[i].detailLockerIsEmpty)
@@ -54,13 +53,15 @@ function DonateConfirm(props) {
             }else {
                 continue
             }
-            axios.get(Url, {
+            // axios.get(Url, {
+            // })
+            axios.get(UrlMainOpen, {
             })
             .then((response) => {
-                // axios.get(`http://192.168.140.1/servo${i}/0`, {  
-                    // })
-                    axios.get(`Url${i}/`, {
+                axios.get(`http://192.168.140.1/servo${i}/0`, {  
                     })
+                    // axios.get(`Url${i}/`, {
+                    // })
                 
             })
             .catch(function (error) {

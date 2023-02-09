@@ -55,9 +55,8 @@ function DonateUse(props) {
     const goBack = () => {
         navigate(-1)
     }
-    //수령일때랑 기부일때랑 바꿔서 처리 if로 해서
+
     return (
-        // <div>
             <div>
                 <div className={styles.myImg}>
                     <button className={styles.circle} onClick={goBack}>
@@ -86,9 +85,7 @@ function DonateUse(props) {
                     </button>
                 </div>
             </div>
-            /* <label htmlFor="title" onSubmit={}></label>
-            <input type="text" required id="title" />
-        </div> */
+            
         )
 }
 

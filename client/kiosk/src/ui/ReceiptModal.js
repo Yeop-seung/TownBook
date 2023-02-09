@@ -1,13 +1,13 @@
 import React, { useEffect }  from 'react';
 // , { useEffect, useRef }
-import styles from "./Modal.module.css"
+import styles from "./ReceiptModal.module.css"
 import { AiOutlineClose } from "react-icons/ai";
 
-function Modal( { setModalOpen, id, title, content, writer }) {
+function ReceiptModal( { setReceiptModalOpen, id, title, content, writer }) {
     
     // 모달 끄기 (X버튼 onClick 이벤트 핸들러)
-    const closeModal = () => {
-        setModalOpen(false);
+    const ReceiptCloseModal = () => {
+        setReceiptModalOpen(false);
     };
     
     // 모달 외부 클릭시 끄기 처리
@@ -35,7 +35,7 @@ function Modal( { setModalOpen, id, title, content, writer }) {
     // });
     const timeout = () => {
         setTimeout(() => {
-        closeModal()
+        ReceiptCloseModal()
         }, 5000);
     };
       // 컴포넌트가 화면에 다 나타나면 timeout 함수 실행
@@ -48,13 +48,13 @@ function Modal( { setModalOpen, id, title, content, writer }) {
     });
     return (
         <div  className={styles.container}>
-                <AiOutlineClose className={styles.close} onClick={closeModal}/>
+        {/* ref={modalRef} */}
+                <AiOutlineClose className={styles.close} onClick={ReceiptCloseModal}/>
             <p className={styles.text}> 죄송합니다.
-            <br />지금 동네북에 책이
-            <br />가득 차 있습니다.
+            <br />지금 동네북에 책이 없습니다.
             <br />다른 동네북을 이용해주세요.
             </p>
         </div>
     );
 }
-export default Modal
+export default ReceiptModal

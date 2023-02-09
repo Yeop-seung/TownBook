@@ -10,16 +10,18 @@ import axios from "axios";
 function DonateComplete(props) {
     const navigate = useNavigate()
     const location = useLocation()
+    console.log(location)
     const isnavigate = location.state.isnavigate
     const Locker = location.state.Locker
     const User = location.state.User
     const Book = location.state.Book.data
     const LockerNo = location.state.detailLockerNo
     const detailLockerNo = Locker.detailLocker[LockerNo].detailLockerNo
+    // const detailLockerIsEmpty = Locker.detailLocker[LockerNo].detailLockerIsEmpty
 
     const UrlOneClose = `http://192.168.140.1/servo${LockerNo}/90` //1번 보관함 닫기
 
-    const Url = 'http://localhost:3000/'
+    // const Url = 'http://localhost:3000/'
 
     // console.log(location)
     // console.log(UrlOneClose)
@@ -30,9 +32,14 @@ function DonateComplete(props) {
     // console.log(Book)
     // console.log(Locker.detailLocker[LockerNo].detailLockerNo)
 
-    const realdata = {lockerNo: Locker.lockerNo, detailLockerNo: detailLockerNo, accountNo: User, bookIsbn: Book.bookIsbn}
-    // const data = {lockerNo: 3, detailLockerNo: 25, accountNo: 1, bookIsbn: 9791162241950}
-    console.log(realdata)
+    const realData = {
+        lockerNo: Locker.lockerNo,
+        detailLockerNo: detailLockerNo,
+        accountNo: User,
+        bookIsbn: Book.bookIsbn,
+        detailLockerIsEmpty: false
+    }
+    // console.log(realData)
     const goBack = () => {
         navigate(-1)
     }
@@ -41,11 +48,11 @@ function DonateComplete(props) {
     }
     async function onClickHandlerThanks() {
         try {
-        // const response = await axios.get(UrlOneClose)
-        const response = await axios.get(Url)
-        const data = response.data
+        const response = await axios.get(UrlOneClose)
+        // const response = await axios.get(Url)
 
-        const postResponse = await axios.post('http://i8b201.p.ssafy.io:8081/backend/bookLog/donateBook', realdata)
+        const postResponse = await axios.post('http://i8b201.p.ssafy.io:8081/backend/bookLog/donateBook', realData)
+        
         const postData = postResponse.data
         console.log(postData)
 
@@ -68,8 +75,7 @@ function DonateComplete(props) {
                     <AiOutlineArrowLeft className={styles.iconStyle} onClick={goBack}/>
                 </button>
                     <div className={styles.buttonOne}>
-                        {/* {보관함 번호} */}
-                        <p className={styles.textAlign}> 보관함에 책을 넣고</p>
+                        <p className={styles.textAlign}> {detailLockerNo}번 보관함에 책을 넣고</p>
                         <br />
                         <p className={styles.textAlignOne}>완료</p>
                         <p className={styles.textAlignTwo}> 버튼을 눌러주세요</p>

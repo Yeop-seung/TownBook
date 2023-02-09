@@ -47,7 +47,6 @@ function BarcodeReadError(props) {
             onClickHandlerBarcodeReadError()
         }
     }
-    // 회원정보를 가지고 있어야 된다.
     return (
         // <div>
             <div>

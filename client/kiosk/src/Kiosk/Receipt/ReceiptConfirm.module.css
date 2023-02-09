@@ -97,13 +97,12 @@
     font-size: 36px;
     top: 5vh;
 }
-.textAlignTwo{
-    position: relative;
-    color: #2a2a2a;
-    text-align: center;
-    margin: 0%;
-    font-size: 100%;
-    top: 5vh;
+.table{
+    position: absolute;
+    left: 22%;
+    top: 30%;
+    font-size: 200%;
+    border: solid #2a2a2a;
 }
 /* 텍스트 정렬 */
 

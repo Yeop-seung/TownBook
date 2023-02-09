@@ -75,8 +75,8 @@
     margin: 0%;
     font-size: 350%;
     vertical-align: bottom;
-    top: 10vh;
-    left: 18vw;
+    top: 12%;
+    left: 17%;
 }
 .textAlignOne{
     position: absolute;
@@ -86,7 +86,7 @@
     vertical-align: bottom;
     margin: 0%;
     top: 20vh;
-    left: 14vw;
+    left: 15%;
 }
 .textAlignTwo{
     position: absolute;

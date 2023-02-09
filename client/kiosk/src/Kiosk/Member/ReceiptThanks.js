@@ -1,28 +1,26 @@
 import React from "react";
 import styles from "./DonateThanks.module.css"
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 // import { Route } from "react-router-dom";
 // import {BsFillArrowRightCircleFill} from "react-icons/bs"
 
 function ReceiptThanks(props) {
     
-    const UrlMainClose = "http://192.168.140.1/mainServo/90 " //메인 보관함 닫기
-
     const navigate = useNavigate()
 
+    const UrlMainClose = "http://192.168.140.1/mainServo/90 " //메인 보관함 닫기
+
     const onClickHandlerFinish = () => {
-        // axios.get(UrlMainClose, {
-        // })
-        // .then((response) => {
-        //     // console.log('eeeee', e.target.value) // 값을 보내준다
-        //     navigate('/DonateThanks')
-        // })
-        
-        // .catch(function (error) {
-        //     console.log(error)
-        // })
-        navigate('/Finish')
+        axios.get(UrlMainClose, {
+        })
+        .then((response) => {
+            navigate('/Finish')
+        })
+        .catch(function (error) {
+            console.log(error)
+        })
     }
     const onClickHandlerReceiptConfirm = () => {
         navigate('/ReceiptConfirm')
