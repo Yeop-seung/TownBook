@@ -48,10 +48,15 @@ public class SearchServiceImpl implements SearchService {
      */
     @Override
     public FindListResponseDto findBookLogByBookTitle(String bookTitle) {
+        JSONArray jsonArray = new JSONArray();
+        
         List<BookLog> findBookLogByBookTitle = searchQueryRepository.findBookLogByBookTitle(bookTitle).get();
-        return new FindListResponseDto(findBookLogByBookTitle.stream()
+        List<BookLogDto> bookLogDtoList = findBookLogByBookTitle.stream()
                 .map(BookLogDto::new)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList());
+        jsonArray.add(bookLogDtoList);
+        
+        return new FindListResponseDto(jsonArray);
     }
     
     /**
