@@ -116,9 +116,8 @@ public class AccountServiceImpl implements AccountService {
             Account account = accountRepository.findByAccountNo(modifyAccountRequestDto.getAccountNo()).orElseThrow(() ->
                    new IllegalArgumentException("해당 사용자가 존재하지 않습니다."));
             account.setAccountAddress(modifyAccountRequestDto.getAccountAddress());
+            account.setAccountPhoneNumber(modifyAccountRequestDto.getAccountPhoneNumber());
             account.setAccountBirthDay(modifyAccountRequestDto.getAccountBirthDay());
-            account.setAccountName(modifyAccountRequestDto.getAccountName());
-            account.setAccountGender(modifyAccountRequestDto.getAccountGender());
             account.setAccountNickname(modifyAccountRequestDto.getAccountNickname());
             account.setAccountPw(passwordEncoder.encode(modifyAccountRequestDto.getAccountPw()));
             accountRepository.save(account);
@@ -140,30 +139,28 @@ public class AccountServiceImpl implements AccountService {
      */
     @Override
     public SaveOneResponseDto accountRemove(String accountEmail, String accountPw) {
-        System.out.println(accountPw);
-        System.out.println(passwordEncoder.encode(accountPw));
-        Account account = accountRepository.findByAccountEmail(accountEmail).get();
-        System.out.println(account.getAccountPw());
+        try {
+            Account account = accountRepository.findByAccountEmail(accountEmail).orElseThrow(() ->
+                    new IllegalArgumentException("해당 사용자가 존재하지 않습니다."));
+            try {
+                if (passwordEncoder.matches(accountPw, account.getAccountPw())) {
+                    account.setAccountActivated(false);
+                    accountRepository.save(account);
+                    return new SaveOneResponseDto(true);
+                } else {
+                    new IllegalArgumentException("해당 비밀번호가 맞지 않습니다.");
+                    return new SaveOneResponseDto();
+                }
+            } catch (Exception e) {
+                e.getMessage();
+            }
+        } catch (Exception e) {
+            e.getMessage();
+            return new SaveOneResponseDto();
+        }
         return new SaveOneResponseDto();
-//
-//        try {
-//            Account account = accountRepository.findByAccountEmail(accountEmail).orElseThrow(() ->
-//                    new IllegalArgumentException("해당 사용자가 존재하지 않습니다."));
-//            if (passwordEncoder.matches(passwordEncoder.encode(accountPw), account.getAccountPw())) {
-//                System.out.println(1);
-//                account.setAccountActivated(false);
-//                accountRepository.save(account);
-//                return new SaveOneResponseDto(true);
-//            } else {
-//                System.out.println(2);
-//                throw new IllegalArgumentException("해당 비밀번호가 맞지 않습니다.");
-//            }
-//        } catch (Exception e) {
-//            e.getMessage();
-//            System.out.println(3);
-//            return new SaveOneResponseDto();
-//        }
     }
+    
     
     /**
      * 비밀 번호 찾기(임시비밀번호로 바꾸기)

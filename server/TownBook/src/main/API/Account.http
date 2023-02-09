@@ -30,6 +30,7 @@ Content-Type: application/json
     "accountNickname": "New Nickname",
     "accountBirthDay": "000000"
 }
+
 ### 3. 계정 삭제(비활성화)
 PUT http://localhost:8081/backend/account/leave
 Content-Type: application/json
@@ -40,6 +41,10 @@ Content-Type: application/json
 }
 
 ### 4. 이메일 인증
+POST http://localhost:8081/backend/account/emailConfirm
+Content-Type:text/plain
+
+test@townbook.com
 
 ### 5. 임시 비밀번호
 
