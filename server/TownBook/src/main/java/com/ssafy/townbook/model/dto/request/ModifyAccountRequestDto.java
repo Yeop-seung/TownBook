@@ -16,8 +16,6 @@ import java.util.stream.Collectors;
 public class ModifyAccountRequestDto {
 
     private Long accountNo;
-    @NotNull
-    private String accountEmail;
 
     @NotNull
     private String accountPw;
@@ -40,9 +38,8 @@ public class ModifyAccountRequestDto {
     @NotNull
     private String accountBirthDay;
 
-    public ModifyAccountRequestDto(Long accountNo, String accountEmail, String accountPw, String accountName, String accountAddress, String accountPhoneNumber, Integer accountGender, String accountNickname, String accountBirthDay) {
+    public ModifyAccountRequestDto(Long accountNo, String accountPw, String accountName, String accountAddress, String accountPhoneNumber, Integer accountGender, String accountNickname, String accountBirthDay) {
         this.accountNo = accountNo;
-        this.accountEmail = accountEmail;
         this.accountPw = accountPw;
         this.accountName = accountName;
         this.accountAddress = accountAddress;

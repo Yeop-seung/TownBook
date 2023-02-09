@@ -6,6 +6,7 @@ import com.ssafy.townbook.model.dto.AccountDto;
 import com.ssafy.townbook.model.dto.AdminDto;
 import com.ssafy.townbook.model.dto.request.ModifyAccountRequestDto;
 import com.ssafy.townbook.model.dto.response.FindOneResponseDto;
+import com.ssafy.townbook.model.dto.response.ModifyAccountResponseDto;
 import com.ssafy.townbook.model.dto.response.SaveOneResponseDto;
 import com.ssafy.townbook.model.entity.Account;
 import com.ssafy.townbook.model.entity.Authority;
@@ -121,7 +122,9 @@ public class AccountServiceImpl implements AccountService {
             account.setAccountNickname(modifyAccountRequestDto.getAccountNickname());
             account.setAccountPw(passwordEncoder.encode(modifyAccountRequestDto.getAccountPw()));
             accountRepository.save(account);
-            return new SaveOneResponseDto(true);
+
+            ModifyAccountResponseDto modifyAccountResponseDto = new ModifyAccountResponseDto(account);
+            return new SaveOneResponseDto(modifyAccountResponseDto);
         } catch (Exception e) {
             e.getMessage();
             return new SaveOneResponseDto();
