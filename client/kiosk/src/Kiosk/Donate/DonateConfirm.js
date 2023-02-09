@@ -44,7 +44,7 @@ function DonateConfirm(props) {
     const onClickHandlerComplete =() => {
         
         let numbers = []
-        for (let i = 0; i < detailLocker.length; i++){
+        for (let i = 1; i < detailLocker.length; i++){
             console.log(detailLocker[i].detailLockerIsEmpty)
             if (detailLocker[i].detailLockerIsEmpty === true){
                 numbers.push(i)
