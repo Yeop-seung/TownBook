@@ -20,8 +20,6 @@ public class ModifyAccountRequestDto {
     @NotNull
     private String accountPw;
 
-    @NotNull
-    private String accountName;
 
     @NotNull
     private String accountAddress;
@@ -30,21 +28,16 @@ public class ModifyAccountRequestDto {
     private String accountPhoneNumber;
 
     @NotNull
-    private Integer accountGender;
-
-    @NotNull
     private String accountNickname;
 
     @NotNull
     private String accountBirthDay;
 
-    public ModifyAccountRequestDto(Long accountNo, String accountPw, String accountName, String accountAddress, String accountPhoneNumber, Integer accountGender, String accountNickname, String accountBirthDay) {
+    public ModifyAccountRequestDto(Long accountNo, String accountPw, String accountAddress, String accountPhoneNumber, String accountNickname, String accountBirthDay) {
         this.accountNo = accountNo;
         this.accountPw = accountPw;
-        this.accountName = accountName;
         this.accountAddress = accountAddress;
         this.accountPhoneNumber = accountPhoneNumber;
-        this.accountGender = accountGender;
         this.accountNickname = accountNickname;
         this.accountBirthDay = accountBirthDay;
     }
