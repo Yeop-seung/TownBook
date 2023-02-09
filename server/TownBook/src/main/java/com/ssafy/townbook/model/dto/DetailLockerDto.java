@@ -10,12 +10,14 @@ import lombok.Setter;
 public class DetailLockerDto {
     
     private Long    detailLockerNo;
+    private Long    detailLockerNoInLocker;
     private Boolean detailLockerIsEmpty;
     
     @Builder
     public DetailLockerDto(DetailLocker detailLocker) {
         
-        this.detailLockerNo      = detailLocker.getDetailLockerNo();
-        this.detailLockerIsEmpty = detailLocker.getDetailLockerIsEmpty();
+        this.detailLockerNo         = detailLocker.getDetailLockerNo();
+        this.detailLockerNoInLocker = detailLocker.getDetailLockerNoInLocker();
+        this.detailLockerIsEmpty    = detailLocker.getDetailLockerIsEmpty();
     }
 }
