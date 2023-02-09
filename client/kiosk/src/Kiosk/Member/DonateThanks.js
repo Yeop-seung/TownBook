@@ -16,7 +16,7 @@ function DonateThanks(props) {
     console.log(User)
     const data = {isnavigate: isnavigate, Locker :Locker, User: User}
 
-    const UrlMainClose = "http://192.168.140.1/mainServo/90 " //메인 보관함 닫기
+    const UrlMainClose = "server/90" //메인 보관함 닫기
 
     const onClickHandlerFinish = () => {
         axios.get(UrlMainClose, {
