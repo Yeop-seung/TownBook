@@ -2,6 +2,7 @@ package com.ssafy.townbook.controller;
 
 
 import com.ssafy.townbook.model.dto.AccountDto;
+import com.ssafy.townbook.model.dto.request.ModifyAccountRequestDto;
 import com.ssafy.townbook.model.dto.response.FindOneResponseDto;
 import com.ssafy.townbook.model.dto.response.SaveOneResponseDto;
 import com.ssafy.townbook.model.service.AccountService;
@@ -78,8 +79,8 @@ public class AccountController {
      * @return
      */
     @PutMapping("/modify")
-    public ResponseEntity<SaveOneResponseDto> accountModify(@RequestBody AccountDto accountDto) {
-        return new ResponseEntity<SaveOneResponseDto>(accountService.accountModify(accountDto), HttpStatus.OK);
+    public ResponseEntity<SaveOneResponseDto> accountModify(@RequestBody ModifyAccountRequestDto modifyAccountRequestDto) {
+        return new ResponseEntity<SaveOneResponseDto>(accountService.accountModify(modifyAccountRequestDto), HttpStatus.OK);
         
     }
     
