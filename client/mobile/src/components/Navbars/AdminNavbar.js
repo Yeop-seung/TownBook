@@ -427,7 +427,7 @@ function AdminNavbar(props) {
         modalClassName="modal-search"
         isOpen={modalSearch}
         toggle={toggleModalSearch}
-        style={{ width: "70%" }}
+        // style={{ width: "70%" }}
       >
         {/* <Input placeholder="QR이미지" type="text" /> */}
         <img alt="..." className="avatar" src={imageUrl} />

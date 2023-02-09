@@ -59,6 +59,14 @@ function Login(props) {
           localStorage.setItem("TOKEN", res.data.token)
           localStorage.setItem("accountNo", res.data.accountDto.accountNo)
           localStorage.setItem("accountEmail", res.data.accountDto.accountEmail)
+          localStorage.setItem("accountBirthDay", res.data.accountDto.accountBirthDay)
+          localStorage.setItem("accountAddress", res.data.accountDto.accountAddress)
+          localStorage.setItem("accountName", res.data.accountDto.accountName)
+          localStorage.setItem("accountNickname", res.data.accountDto.accountNickname)
+          localStorage.setItem("accountPhoneNumber", res.data.accountDto.accountPhoneNumber)
+
+
+
           window.location.replace("/map");
           // history.replace("/map");
 
@@ -106,7 +114,7 @@ function Login(props) {
                         <input
                           //   defaultValue="Mike"
                           placeholder="비밀번호를 입력해주세요"
-                          type="text"
+                          type="password"
                           ref={pwInputRef}
                           className={classes.style}
                         />
@@ -138,6 +146,7 @@ function Login(props) {
                     // color="black"
                     type="submit"
                     onClick={submitHandler}
+                    // onKeyDown={submitHandler}
                     className={classes.style}
                   >
                     로그인

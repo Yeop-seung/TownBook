@@ -1,7 +1,10 @@
 import classes from "./MeetupItem.module.css";
-import { Card } from "reactstrap";
+import { Card, CardHeader } from "reactstrap";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+
 function NoticeDetail(props) {
     console.log(props)
     const ID = props.location.state.id
@@ -42,9 +45,14 @@ function NoticeDetail(props) {
 //       });
 //   }
   return (
-    <li className="content">
+    <div className="content">
         {/* // 컴포넌트로 감싸서 jsx 콘텐츠를 감싼다(children 개념) */}
       <Card> 
+      <CardHeader>
+                <Link to={"/notice"}>
+                  <FontAwesomeIcon icon={faArrowLeft} size="xl" color="#C1B5A9"/>
+                </Link>
+              </CardHeader>
         {/* <div className={classes.image}>
           <img src={props.image} alt={props.contentTitle} />
         </div> */}
@@ -73,7 +81,7 @@ function NoticeDetail(props) {
             {props.noticeContent}
         </div> */}
       </Card>
-    </li>
+    </div>
   );
 }
 

@@ -6,7 +6,7 @@ import classes from "./Login.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-
+import axios from "axios";
 // reactstrap components
 import {
   // Button,
@@ -27,6 +27,9 @@ import {
 function IdFind(props) {
   const emailInputRef = useRef();
   const pwInputRef = useRef();
+  const phonenumberInputRef = useRef();
+
+
 
   const history = useHistory();
   const [hiddenpassword, sethiddenpassword] = React.useState(true);
@@ -47,33 +50,50 @@ function IdFind(props) {
       sethiddenpassword(false)
       // setClicked(true);
   };
+  function findEmail() {
+    const enteredPhoneNumber = phonenumberInputRef.current.value;
+
+    axios
+        .get(`https://i8b201.p.ssafy.io/backend/account/findEmail/${enteredPhoneNumber}`)
+        // .get("https:///townbook/myPage/receive/${receiverNo}")
+        .then((response) => {
+          console.log(response)
+          // if(response=="true"){
+          // alert("회원가입에 성공하였습니다.");
+          // history.replace("/login");
+          // }
+          // else{  
+          //   alert("회원가입에 실패하였습니다.");
+          // }
+          alert(`회원님의 이메일은 ${response.data.data}입니다.`)
+        })
+        .catch((error) => {
+          alert("전화번호가 틀렸습니다.");
+        });
+  }
 
   function submitHandler(event) {
     event.preventDefault();
 
     const enteredEmail = emailInputRef.current.value;
-    const enteredPw = pwInputRef.current.value;
 
     const userInfo = {
       accountEmail: enteredEmail,
-      accountPw: enteredPw,
     };
     console.log(userInfo);
     // props.onAddInfo(userInfo);
 
-    fetch(
-      "https://react-getting-started-9d228-default-rtdb.firebaseio.com/meetups.json",
-      {
-        method: "POST",
-        body: JSON.stringify(userInfo),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
+    axios
+    .post(
+      `https://i8b201.p.ssafy.io/backend/account/tempPassword`,userInfo
+      
       //replace는 뒤로가기 버튼 비활성 이미 양식 제출했으므로
-    ).then(() => {
+    ).then((res) => {
+      console.log(res)
       //then 대신에 asynce나 await가능
-      history.replace("/");
+      alert('입력하신 이메일로 임시 비밀번호가 보내졌습니다. 로그인 후 비밀번호를 다시 바꿔주세요')
+      history.replace("/login");
+
     });
   }
   return (
@@ -130,7 +150,7 @@ function IdFind(props) {
                         <input
                           placeholder="핸드폰 번호를 입력해주세요."
                           type="name"
-                          ref={emailInputRef}
+                          ref={phonenumberInputRef}
                           className={classes.style}
                         />
                       </div>
@@ -160,7 +180,7 @@ function IdFind(props) {
                     // className="btn-login"
                     // color="black"
                     type="submit"
-                    onClick={submitHandler}
+                    onClick={findEmail}
                     className={classes.style}
                   >
                     찾기

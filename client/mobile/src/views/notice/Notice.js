@@ -89,10 +89,10 @@ function Notice(props) {
       // for (let i = 0; i < res.data.length; i++) {
       //   notices.push({ ...res.data[i], id: i + 1 });
       // }
-      for (const key in res.data) {
+      for (const key in res.data.data) {
         const notice = {
         id: key,
-        ...res.data[key]
+        ...res.data.data[key]
       };
         notices.push(notice);
       };
