@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import java.sql.Blob;
 import java.util.Optional;
 
 
@@ -40,7 +41,7 @@ public class FileServiceImpl implements FileService {
     @Override
     public SaveOneResponseDto fileSave(SaveFileRequestDto saveFileRequestDto, MultipartFile multipartFile) {
         try {
-            if(multipartFile.isEmpty()){
+            if (multipartFile.isEmpty()) {
                 throw new Exception("파일이 등록되어있지 않습니다");
             }
 
@@ -63,6 +64,34 @@ public class FileServiceImpl implements FileService {
             return new SaveOneResponseDto(true);
         } catch (Exception e) {
             return new SaveOneResponseDto(e.getMessage());
+        }
+    }
+
+    /**
+     * 회원번호로 파일 찾기
+     *
+     * @param accountNo
+     * @return Byte[]
+     * @throws Exception
+     */
+    @Override
+    public SaveOneResponseDto findFileByAccountNo(Long accountNo) throws Exception {
+        try {
+            File file;
+            Optional<File> fileOptional = fileRepository.findByAccountNo(accountNo);
+            if (fileOptional.isEmpty()) {
+                return new SaveOneResponseDto(null);
+            } else {
+                file = fileOptional.get();
+                Blob blob = (Blob) file.getFileMultipartFile();
+                int blobLength = (int) blob.length();
+                byte[] blobBytes = blob.getBytes(1, blobLength);
+                blob.free();
+
+                return new SaveOneResponseDto(blobBytes);
+            }
+        } catch (Exception e) {
+            return new SaveOneResponseDto();
         }
     }
 }

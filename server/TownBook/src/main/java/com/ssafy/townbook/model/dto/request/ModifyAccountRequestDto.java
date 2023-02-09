@@ -20,7 +20,6 @@ public class ModifyAccountRequestDto {
     @NotNull
     private String accountPw;
 
-
     @NotNull
     private String accountAddress;
 

@@ -15,4 +15,12 @@ public interface FileService {
      * @throws Exception
      */
     SaveOneResponseDto fileSave(SaveFileRequestDto saveFileRequestDto, MultipartFile multipartFile) throws Exception;
+
+    /**
+     * 회원번호로 파일 찾기
+     *
+     * @param accountNo
+     * @return SaveOneResponseDto
+     */
+    SaveOneResponseDto findFileByAccountNo(Long accountNo) throws Exception;
 }

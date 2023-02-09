@@ -8,7 +8,8 @@ import java.util.Optional;
 public interface FileRepository extends JpaRepository<File, Long> {
 
     /**
-     * 파일 업로드&업데이트
+     * 회원번호로 파일 찾기
+     * 
      *
      * @param accountNo
      * @return Optional<File>
