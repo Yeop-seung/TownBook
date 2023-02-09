@@ -35,6 +35,9 @@ public class DetailLocker {
     @ColumnDefault("true")
     private Boolean detailLockerIsEmpty;
     
+    @Column(name = "detail_locker_no_in_locker")
+    private Long detailLockerNoInLocker;
+    
     @Builder
     public DetailLocker(Long detailLockerNo, Locker locker, Boolean detailLockerIsEmpty) {
         this.detailLockerNo      = detailLockerNo;
