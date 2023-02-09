@@ -102,8 +102,6 @@ public class AccountController {
      */
     @PostMapping("/emailConfirm")
     public ResponseEntity<String> emailConfirm(@RequestBody Map<String, String> email) throws Exception {
-        System.out.println(email);
-        System.out.println(email.get("email"));
         String confirm = emailService.sendSimpleMessage(email.get("email"));
         return new ResponseEntity<String>(confirm, HttpStatus.OK);
     }
@@ -150,7 +148,7 @@ public class AccountController {
      * @throws Exception
      */
     @GetMapping("/ranking/{accountNo}")
-    public ResponseEntity<JSONArray> findAccountBookCnt(@PathVariable Long accountNo) throws Exception {
-        return new ResponseEntity<JSONArray>(accountService.findAccountBookCnt(accountNo), HttpStatus.OK);
+    public ResponseEntity<FindOneResponseDto> findAccountBookCnt(@PathVariable Long accountNo) throws Exception {
+        return new ResponseEntity<FindOneResponseDto>(accountService.findAccountBookCnt(accountNo), HttpStatus.OK);
     }
 }
