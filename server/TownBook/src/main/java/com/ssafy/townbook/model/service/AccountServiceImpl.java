@@ -113,8 +113,9 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public SaveOneResponseDto accountModify(ModifyAccountRequestDto modifyAccountRequestDto) {
         try {
-            Account account = accountRepository.findByAccountNo(modifyAccountRequestDto.getAccountNo()).orElseThrow(() ->
-                   new IllegalArgumentException("해당 사용자가 존재하지 않습니다."));
+            Account account = accountRepository.findByAccountNo(modifyAccountRequestDto.getAccountNo())
+                    .orElseThrow(() ->
+                            new IllegalArgumentException("해당 사용자가 존재하지 않습니다."));
             account.setAccountAddress(modifyAccountRequestDto.getAccountAddress());
             account.setAccountPhoneNumber(modifyAccountRequestDto.getAccountPhoneNumber());
             account.setAccountBirthDay(modifyAccountRequestDto.getAccountBirthDay());
@@ -191,7 +192,7 @@ public class AccountServiceImpl implements AccountService {
      * @return JSONArrays
      * @throws Exception
      */
-    public JSONArray findAccountBookCnt(Long accountNo) throws Exception {
+    public FindOneResponseDto findAccountBookCnt(Long accountNo) throws Exception {
         JSONArray jsonArray = new JSONArray();
         List<AdminDto> accounts = accountRepository.findAccountByAccountActivatedOrderByAccountBookCntDesc(true).get()
                 .stream()
@@ -207,19 +208,20 @@ public class AccountServiceImpl implements AccountService {
             cnt = accounts.get(0).getAccountBookCnt();
         }
         
-        System.out.println(accounts.get(0));
-        
-        System.out.println(cnt);
         // TOP10이 아닌경우 범위 재설정
         if (accounts.size() < 10) {
             size = accounts.size();
         }
         
+        // 내 랭킹 찾아서 저장할 변수
+        String nickName  = "";
+        int    myRank    = 0;
+        int    bookCount = 0;
+        
         // TOP10 찾기
         for (int i = 0; i < size; i++) {
             AdminDto account = accounts.get(i);
             
-            System.out.println(cnt);
             if (cnt != account.getAccountBookCnt()) {
                 cnt = account.getAccountBookCnt();
                 ++rank;
@@ -229,34 +231,24 @@ public class AccountServiceImpl implements AccountService {
             jsonObject.put("accountNickname", account.getAccountNickname());
             jsonObject.put("accountBookCnt", account.getAccountBookCnt());
             
+            // 내 랭킹 저장
+            if (account.getAccountNo().equals(accountNo)) {
+                myRank    = rank;
+                nickName  = account.getAccountNickname();
+                bookCount = account.getAccountBookCnt();
+            }
+            
             jsonArray.add(jsonObject);
         }
         
-        rank = 1;
-        // 유저가 존재할 경우
-        if (accounts.size() != 0) {
-            cnt = accounts.get(0).getAccountBookCnt();
-        }
+        // 내 랭킹
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("rank", myRank);
+        jsonObject.put("accountNickname", nickName);
+        jsonObject.put("accountBookCnt", bookCount);
+        jsonArray.add(jsonObject);
         
-        // 자신의 rank 찾기
-        for (AdminDto account : accounts
-        ) {
-            if (account.getAccountNo() == accountNo) {
-                JSONObject jsonObject = new JSONObject();
-                jsonObject.put("rank", rank);
-                jsonObject.put("accountNickname", account.getAccountNickname());
-                jsonObject.put("accountBookCnt", account.getAccountBookCnt());
-                
-                jsonArray.add(jsonObject);
-                break;
-            }
-            
-            if (cnt != account.getAccountBookCnt()) {
-                cnt = account.getAccountBookCnt();
-                ++rank;
-            }
-        }
-        return jsonArray;
+        return new FindOneResponseDto(jsonArray);
     }
     
     @Override
