@@ -164,6 +164,7 @@ public class EmailServiceImpl implements EmailService {
     public String sendSimpleMessage(String to) throws Exception {
         // TODO Auto-generated method stub
         MimeMessage message = createMessage(to);
+        System.out.println(message);
         try {//예외처리
             emailSender.send(message);
         } catch (MailException es) {
