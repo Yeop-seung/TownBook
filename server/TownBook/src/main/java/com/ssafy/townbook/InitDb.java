@@ -138,10 +138,11 @@ public class InitDb {
         }
         
         public void lockerInit() {
-            createLocker("어은동", 10, 36.3622D, 127.3562D);
-            createLocker("덕명동", 2, 36.3663D, 127.2981D);
-            createLocker("봉명동", 10, 36.3553D, 127.2981D);
-            createLocker("효자동", 10, 36.3553D, 127.2981D);
+            createLocker("역삼동", 2, 37.5021D, 127.0396D);
+            createLocker("덕명동", 2, 36.3552D, 127.2984D);
+            createLocker("공단동", 2, 36.0988D, 128.3897D);
+            createLocker("송정동", 2, 35.0955D, 128.8556D);
+            createLocker("오선동", 2, 35.2042D, 128.8556D);
         }
         
         public void createLocker(String lockerRegion, int detailLockerCount, Double lockerLatitude,
