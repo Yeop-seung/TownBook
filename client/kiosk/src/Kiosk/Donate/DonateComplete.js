@@ -37,7 +37,7 @@ function DonateComplete(props) {
         detailLockerNo: detailLockerNo,
         accountNo: User,
         bookIsbn: Book.bookIsbn,
-        detailLockerIsEmpty: false
+        // detailLockerIsEmpty: false
     }
     // console.log(realData)
     const goBack = () => {
