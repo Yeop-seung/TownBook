@@ -115,9 +115,8 @@ public class AccountServiceImpl implements AccountService {
             Account account = accountRepository.findByAccountNo(modifyAccountRequestDto.getAccountNo()).orElseThrow(() ->
                    new IllegalArgumentException("해당 사용자가 존재하지 않습니다."));
             account.setAccountAddress(modifyAccountRequestDto.getAccountAddress());
+            account.setAccountPhoneNumber(modifyAccountRequestDto.getAccountPhoneNumber());
             account.setAccountBirthDay(modifyAccountRequestDto.getAccountBirthDay());
-            account.setAccountName(modifyAccountRequestDto.getAccountName());
-            account.setAccountGender(modifyAccountRequestDto.getAccountGender());
             account.setAccountNickname(modifyAccountRequestDto.getAccountNickname());
             account.setAccountPw(passwordEncoder.encode(modifyAccountRequestDto.getAccountPw()));
             accountRepository.save(account);
