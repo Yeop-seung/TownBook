@@ -18,8 +18,8 @@ POST http://localhost:8081/backend/bookLog/donateBook
 Content-Type: application/json
 
 {
-    "lockerNo": 3,
-    "detailLockerNo": 7,
+    "lockerNo": 1,
+    "detailLockerNo": 2,
     "accountNo": 2,
     "bookIsbn": "9788960777330"
 }
