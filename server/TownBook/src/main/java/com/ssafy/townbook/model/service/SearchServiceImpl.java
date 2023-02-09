@@ -1,5 +1,6 @@
 package com.ssafy.townbook.model.service;
 
+import com.ssafy.townbook.model.dto.BookDto;
 import com.ssafy.townbook.model.dto.BookLogDto;
 import com.ssafy.townbook.model.dto.LockerDto;
 import com.ssafy.townbook.model.dto.response.FindListResponseDto;
@@ -48,14 +49,17 @@ public class SearchServiceImpl implements SearchService {
      */
     @Override
     public FindListResponseDto findBookLogByBookTitle(String bookTitle) {
-        JSONArray jsonArray = new JSONArray();
-        
-        List<BookLog> findBookLogByBookTitle = searchQueryRepository.findBookLogByBookTitle(bookTitle).get();
-        List<BookLogDto> bookLogDtoList = findBookLogByBookTitle.stream()
+        List<BookLogDto> findBookLogByBookTitle = searchQueryRepository.findBookLogByBookTitle(bookTitle).get().stream()
                 .map(BookLogDto::new)
                 .collect(Collectors.toList());
-        jsonArray.add(bookLogDtoList);
+        JSONArray jsonArray = new JSONArray();
         
+        for (BookLogDto bookLogDto : findBookLogByBookTitle) {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("bookLog", bookLogDto);
+            jsonObject.put("book", new BookDto(bookRepository.findBookByBookIsbn(bookLogDto.getBookIsbn()).get()));
+            jsonArray.add(jsonObject);
+        }
         return new FindListResponseDto(jsonArray);
     }
     

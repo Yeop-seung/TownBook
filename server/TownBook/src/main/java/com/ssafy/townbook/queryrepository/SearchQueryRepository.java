@@ -1,8 +1,10 @@
 package com.ssafy.townbook.queryrepository;
 
+import static com.ssafy.townbook.model.entity.QBook.book;
 import static com.ssafy.townbook.model.entity.QBookLog.bookLog;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import com.ssafy.townbook.model.entity.Book;
 import com.ssafy.townbook.model.entity.BookLog;
 import java.util.List;
 import java.util.Optional;
