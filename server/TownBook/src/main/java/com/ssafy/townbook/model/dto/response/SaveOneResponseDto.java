@@ -1,11 +1,13 @@
 package com.ssafy.townbook.model.dto.response;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class SaveOneResponseDto<T> {
 
     private Boolean success;

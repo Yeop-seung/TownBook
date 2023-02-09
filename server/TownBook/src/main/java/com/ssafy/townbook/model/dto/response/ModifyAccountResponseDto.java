@@ -15,6 +15,8 @@ public class ModifyAccountResponseDto {
     private String accountName;
 
     @NotNull
+    private String accountPw;
+    @NotNull
     private String accountAddress;
 
     @NotNull
@@ -29,6 +31,7 @@ public class ModifyAccountResponseDto {
     @Builder
     public ModifyAccountResponseDto(Account account) {
         this.accountName = account.getAccountName();
+        this.accountPw = account.getAccountPw();
         this.accountAddress = account.getAccountAddress();
         this.accountPhoneNumber = account.getAccountPhoneNumber();
         this.accountNickname = account.getAccountNickname();
