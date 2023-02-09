@@ -1,0 +1,5 @@
+### 1. 책 제목으로 검색
+GET http://localhost:8081/backend/search/searchTitle/토
+
+### 2. 지역검색 - 보관함 선택
+GET http://localhost:8081/backend/search/searchLocker/1
