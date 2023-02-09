@@ -50,8 +50,6 @@ function DonateConfirm(props) {
                 numbers.push(i)
                 console.log(numbers)
                 break
-            }else {
-                continue
             }
             // axios.get(Url, {
             // })
@@ -62,7 +60,6 @@ function DonateConfirm(props) {
                     })
                     // axios.get(`Url${i}/`, {
                     // })
-                
             })
             .catch(function (error) {
                 console.log(error)

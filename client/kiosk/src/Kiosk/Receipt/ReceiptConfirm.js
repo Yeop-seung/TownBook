@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import styles from "./ReceiptConfirm.module.css"
 import { useLocation, useNavigate } from "react-router-dom";
-import ItemList from "../../ui/Item";
 // import { Route } from "react-router-dom";
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { BiHomeAlt } from 'react-icons/bi';
@@ -18,29 +17,47 @@ function ReceiptConfirm(props) {
     const lockerNo = location.state.Locker.lockerNo
     const User = location.state.User
 
-    const [inputData, setInputData] = useState([{
+    console.log(Locker)
+    console.log(lockerNo)
+    
+    const [inputData, setInputData] = useState([{   
         title: '',
         detailLocker: ''
     }])
     
-    useEffect(async() => {
-        try {
-            const res = await axios.get(`http://i8b201.p.ssafy.io:8081/backend/book/locker/${lockerNo}`)
-            console.log(res.data.data)
-            let resData = await res.data.data.map((rowData) => ({
-                title : resData.bookTitle,
-                detailLocker: resData
-            })
-            )
-        setInputData(inputData.concat(data))
-        } catch(error) {
-            console.log(error)
-        }
-        return {
-
-        }
-    })
+    // useEffect(async() => {
+    //     try {
+    //         const res = await axios.get(`http://i8b201.p.ssafy.io:8081/backend/book/locker/${lockerNo}`)
+    //         console.log(res.data.data)
+    //         let resData = await res.data.data.map((rowData) => ({
+                
+    //             title : resData.bookTitle,
+    //             detailLocker: resData
+    //         })
+    //         )
+    //     setInputData(inputData.concat(data))
+    //     } catch(error) {
+    //         console.log(error)
+    //     }
+    // },[])
     
+    async function check() {
+        try {
+        const response = await axios.get(`http://i8b201.p.ssafy.io:8081/backend/book/locker/${lockerNo}`)
+        const data = response.data.data
+
+        for( let i = 0; i < data.length; i++){
+            console.log('efefef', data[i])
+            const title = data[i].bookTitle
+            console.log('fffffff', title)
+        }
+        } catch (error) {
+        console.error(error);
+        }
+    }
+
+    check()
+
     const columns = useMemo(
         () => [
             {
@@ -57,25 +74,9 @@ function ReceiptConfirm(props) {
     const data = useMemo(
         () => [{
             'title': '제목',
-            'detailLocker': '1',
+            'detailLocker': `${Locker.detailLocker}`,
         }],[]);
     
-    // async function check() {
-    //     try {
-    //     const response = await axios.get(`http://i8b201.p.ssafy.io:8081/backend/book/locker/${lockerNo}`)
-    //     const data = response.data.data
-    //     console.log('fffffff', data.length)
-    //     for( let i = 1; i < data.length; i++){
-    //         console.log('efefef', data[i])
-    //         const title = data[i].bookTitle
-    //         console.log('fffffff', title)
-    //     }
-    //     } catch (error) {
-    //     console.error(error);
-    //     }
-    // }
-
-    // check()
     
     const onClickHandlerHome = () => {
         navigate('/')
@@ -98,7 +99,7 @@ function ReceiptConfirm(props) {
                             <p className={styles.h3Text}>수령하실 책을 선택해주세요</p>
                         </div>
                         <div className={styles.table}>
-                        <Table  columns={columns} data={data}/>
+                        <Table columns={columns} data={data}/>
                         </div>
                     </div>
                     <button className={styles.homeCircle} onClick={onClickHandlerHome}>
