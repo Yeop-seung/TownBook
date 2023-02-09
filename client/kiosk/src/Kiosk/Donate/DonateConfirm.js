@@ -49,27 +49,30 @@ function DonateConfirm(props) {
             console.log(detailLocker[i].detailLockerIsEmpty)
             if (detailLocker[i].detailLockerIsEmpty === true){
                 numbers.push(i)
-                console.log(numbers)
+                // console.log(numbers)
                 break
-            }
+            }}
             // axios.get(Url, {
             // })
+        const check = () => {
             axios.get(UrlMainOpen, {
             })
             console.log('get1', UrlMainOpen)
             .then((response) => {
-                axios.get(`http://192.168.140.1/servo${i}/0`, {  
+                axios.get(`http://192.168.140.1/servo${numbers[0]}/0`, {  
                     })
-                    console.log('get2',`http://192.168.140.1/servo${i}/0` )
+                    console.log('get2',`http://192.168.140.1/servo${numbers[0]}/0` )
                     // axios.get(`Url${i}/`, {
                     // })
             })
             .catch(function (error) {
                 console.log(error)
             })}
-            const data = {isnavigate: isnavigate, Locker :Locker, User: User, Book: Book, detailLockerNo: numbers[0]}
-            navigate('/DonateComplete', {state: data})
-            }
+        
+        check()
+        const data = {isnavigate: isnavigate, Locker :Locker, User: User, Book: Book, detailLockerNo: numbers[0]}
+        navigate('/DonateComplete', {state: data})
+        }
             
 
     const onClickHandlerBarcodeReadError =() => {
