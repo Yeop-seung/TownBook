@@ -72,11 +72,13 @@ public class LockerServiceImpl implements LockerService {
             locker.setLockerLatitude(lockerLatitude);
             locker.setLockerLongitude(lockerLongitude);
             lockerRepository.save(locker);
-            while (detailLockerCount-- > 0) {
+            
+            for (int i = 1; i <= detailLockerCount; i++) {
                 DetailLocker detailLocker = new DetailLocker();
                 locker.addDetailLocker(detailLocker);
-                detailLockerRepository.save(detailLocker);
+                detailLocker.setDetailLockerNoInLocker((long) i);
             }
+            
             return new SaveOneResponseDto(true);
         } catch (Exception e) {
             return new SaveOneResponseDto(e.getMessage());

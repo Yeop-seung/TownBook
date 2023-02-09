@@ -2,7 +2,7 @@
 GET http://localhost:8081/backend/locker
 
 ### 2. 단일 보관함 조회
-GET http://localhost:8081/backend/locker/1
+GET http://localhost:8081/backend/locker/2
 
 ### 3. 보관함 추가
 POST http://localhost:8081/backend/locker/add
