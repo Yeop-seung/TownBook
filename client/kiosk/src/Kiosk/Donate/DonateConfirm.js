@@ -45,6 +45,7 @@ function DonateConfirm(props) {
         
         let numbers = []
         for (let i = 1; i < detailLocker.length; i++){
+            console.log(i)
             console.log(detailLocker[i].detailLockerIsEmpty)
             if (detailLocker[i].detailLockerIsEmpty === true){
                 numbers.push(i)
