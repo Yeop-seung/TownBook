@@ -35,14 +35,14 @@ public class FileController {
 
     /**
      * 회원번호로 파일 찾기
-     * 
+     *
      * @param accountNo
      * @return
      * @throws Exception
      */
     @Transactional
     @GetMapping("/{accountNo}")
-    public ResponseEntity<SaveOneResponseDto> findFileByAccountNo(@PathVariable Long accountNo) throws Exception{
-        return new ResponseEntity<SaveOneResponseDto>(fileService.findFileByAccountNo(accountNo),HttpStatus.OK);
+    public ResponseEntity<SaveOneResponseDto> findFileByAccountNo(@PathVariable Long accountNo) throws Exception {
+        return new ResponseEntity<SaveOneResponseDto>(fileService.findFileByAccountNo(accountNo), HttpStatus.OK);
     }
 }
