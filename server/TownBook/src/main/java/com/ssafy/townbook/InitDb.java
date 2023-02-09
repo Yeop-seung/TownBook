@@ -103,11 +103,13 @@ public class InitDb {
             accountNon.setAccountPoint(99999999);
             em.persist(accountNon);
             
-            Account account1 = createAccount("test@townbook.com", passwordEncoder.encode("password"), "김싸피", "대전시 유성구 덕명동",
+            Account account1 = createAccount("test@townbook.com", passwordEncoder.encode("password"), "김싸피",
+                    "대전시 유성구 덕명동",
                     "010-1234-5678", 0, "내가 바로 김싸피", "220222", authorityRoleUser);
             em.persist(account1);
             
-            Account account2 = createAccount("admin@townbook.com", passwordEncoder.encode("password"), "최어드", "대전시 유성구 어드동",
+            Account account2 = createAccount("admin@townbook.com", passwordEncoder.encode("password"), "최어드",
+                    "대전시 유성구 어드동",
                     "010-5678-1234", 1, "내가 바로 최어드", "111111", authorityRoleAdmin);
             em.persist(account2);
         }
@@ -150,9 +152,10 @@ public class InitDb {
             locker.setLockerLongitude(lockerLongitude);
             em.persist(locker);
             
-            while (detailLockerCount-- > 0) {
+            for (int i = 1; i <= detailLockerCount; i++) {
                 DetailLocker detailLocker = new DetailLocker();
                 locker.addDetailLocker(detailLocker);
+                detailLocker.setDetailLockerNoInLocker((long) i);
                 em.persist(detailLocker);
             }
         }
