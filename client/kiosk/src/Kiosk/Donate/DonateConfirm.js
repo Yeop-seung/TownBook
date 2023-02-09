@@ -8,7 +8,7 @@ import axios from "axios";
 
 function DonateConfirm(props) {
     // 빈보관함이 무엇인지 확인하고 if로 하기  
-    const UrlMainOpen = "/server/0"   //메인 보관함 열기 1번 보관함 열기 2번 보관함 열기
+    const UrlMainOpen = "http://192.168.140.1/mainServo/0"   //메인 보관함 열기 1번 보관함 열기 2번 보관함 열기
     
     // const Url = 'http://localhost:3000/'
     const navigate = useNavigate()

@@ -31,26 +31,26 @@
     text-align: center;
     background-color: rgb(255, 255, 255);
     position: absolute;
-    width: 18vw;
-    height: 27vh;
-    font-size: 70px;
+    width: 180px;
+    height: 160px;
+    font-size: 250%;
     font-weight: 800;
     border-radius: 12px;
-    left : 14vw;
-    top: 35vh ;
+    left : 16vw;
+    top: 40vh ;
     box-shadow: 5px 5px 5px 5px gray;
 }
 .buttonThree{
     text-align: center;
     background-color: rgb(255, 255, 255);
     position: absolute;
-    width: 18vw;
-    height: 27vh;
-    font-size: 60px;
+    width: 180px;
+    height: 160px;
+    font-size: 250%;
     font-weight: 800;
     border-radius: 12px;
-    right : 14vw;
-    top: 35vh ;
+    left : 44vw;
+    top: 40vh ;
     box-shadow: 5px 5px 5px 5px gray;
 }
 /* 글씨 쓰는 부분 */
@@ -58,19 +58,9 @@
     position: absolute;
     color: #2a2a2a;
     text-align: center;
-    font-size: 40px;
-    vertical-align: bottom;
     margin: 0%;
-    top: 9vh;
-    left: 14vw;
-}
-.textAlignOne{
-    position: relative;
-    color: #2a2a2a;
-    text-align: center;
-    margin: 4%;
-    font-size: 40px;
-    top: 45px;
-    
+    font-size: 300%;
+    top: 20%;
+    left: 15%;
 }
 /* 텍스트 정렬 */
