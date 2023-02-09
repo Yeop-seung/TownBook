@@ -1,11 +1,13 @@
 package com.ssafy.townbook.model.dto.request;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import com.ssafy.townbook.model.dto.AuthorityDto;
+import com.ssafy.townbook.model.entity.Account;
+import com.ssafy.townbook.model.entity.File;
+import lombok.*;
 
 import javax.validation.constraints.NotNull;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -17,6 +19,7 @@ public class ModifyAccountRequestDto {
 
     @NotNull
     private String accountPw;
+
 
     @NotNull
     private String accountAddress;
