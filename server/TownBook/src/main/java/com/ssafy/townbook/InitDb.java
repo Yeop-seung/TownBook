@@ -138,6 +138,8 @@ public class InitDb {
         }
         
         public void lockerInit() {
+            createLocker("Init", 0, 0D, 0D);
+            createLocker("Init", 0, 0D, 0D);
             createLocker("역삼동", 2, 37.5021D, 127.0396D);
             createLocker("덕명동", 2, 36.3552D, 127.2984D);
             createLocker("공단동", 2, 36.0988D, 128.3897D);
@@ -162,26 +164,26 @@ public class InitDb {
         }
         
         public void bookLogInit() {
-            Locker            locker1       = lockerRepository.findLockerByLockerNo(1L).get();
+            Locker            locker1       = lockerRepository.findLockerByLockerNo(3L).get();
             DetailLocker      detailLocker1 = locker1.getDetailLocker().get(0);
             Optional<Account> account1      = accountRepository.findByAccountNo(2L);
             Optional<Book>    book1         = bookRepository.findBookByBookIsbn("8984993751");
             donateBook("재미있어요", locker1, detailLocker1, account1, book1);
             
-            Locker            locker2       = lockerRepository.findLockerByLockerNo(2L).get();
+            Locker            locker2       = lockerRepository.findLockerByLockerNo(4L).get();
             DetailLocker      detailLocker2 = locker2.getDetailLocker().get(0);
             Optional<Account> account2      = accountRepository.findByAccountNo(3L);
             Optional<Book>    book2         = bookRepository.findBookByBookIsbn("9788960777330");
             donateBook("재미 없어요", locker2, detailLocker2, account2, book2);
             
-            Locker       locker3       = lockerRepository.findLockerByLockerNo(3L).get();
+            Locker       locker3       = lockerRepository.findLockerByLockerNo(5L).get();
             DetailLocker detailLocker3 = locker3.getDetailLocker().get(0);
             donateBook("꿀잼", locker3, detailLocker3, account1, book2);
             
             DetailLocker detailLocker4 = locker3.getDetailLocker().get(1);
             donateBook("노잼", locker3, detailLocker4, account1, book2);
             
-            BookLog bookLog1 = bookLogRepository.findBookLogByBookLogNo(2L).get();
+            BookLog bookLog1 = bookLogRepository.findBookLogByBookLogNo(4L).get();
             receiveBook(bookLog1, account1);
         }
         
