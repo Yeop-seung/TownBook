@@ -4,6 +4,7 @@ import com.ssafy.townbook.exception.DuplicateMemberException;
 import com.ssafy.townbook.exception.NotFoundMemberException;
 import com.ssafy.townbook.model.dto.AccountDto;
 import com.ssafy.townbook.model.dto.AdminDto;
+import com.ssafy.townbook.model.dto.request.ModifyAccountRequestDto;
 import com.ssafy.townbook.model.dto.response.FindOneResponseDto;
 import com.ssafy.townbook.model.dto.response.SaveOneResponseDto;
 import com.ssafy.townbook.model.entity.Account;
@@ -105,20 +106,20 @@ public class AccountServiceImpl implements AccountService {
     /**
      * 계정 수정하기
      *
-     * @param accountDto
+     * @param modifyAccountRequestDto
      * @return
      */
     @Override
-    public SaveOneResponseDto accountModify(AccountDto accountDto) {
+    public SaveOneResponseDto accountModify(ModifyAccountRequestDto modifyAccountRequestDto) {
         try {
-            Account account = accountRepository.findByAccountEmail(accountDto.getAccountEmail()).orElseThrow(() ->
-                    new IllegalArgumentException("해당 사용자가 존재하지 않습니다."));
-            account.setAccountAddress(accountDto.getAccountAddress());
-            account.setAccountBirthDay(accountDto.getAccountBirthDay());
-            account.setAccountName(accountDto.getAccountName());
-            account.setAccountGender(accountDto.getAccountGender());
-            account.setAccountNickname(accountDto.getAccountNickname());
-            account.setAccountPw(passwordEncoder.encode(accountDto.getAccountPw()));
+            Account account = accountRepository.findByAccountNo(modifyAccountRequestDto.getAccountNo()).orElseThrow(() ->
+                   new IllegalArgumentException("해당 사용자가 존재하지 않습니다."));
+            account.setAccountAddress(modifyAccountRequestDto.getAccountAddress());
+            account.setAccountBirthDay(modifyAccountRequestDto.getAccountBirthDay());
+            account.setAccountName(modifyAccountRequestDto.getAccountName());
+            account.setAccountGender(modifyAccountRequestDto.getAccountGender());
+            account.setAccountNickname(modifyAccountRequestDto.getAccountNickname());
+            account.setAccountPw(passwordEncoder.encode(modifyAccountRequestDto.getAccountPw()));
             accountRepository.save(account);
             return new SaveOneResponseDto(true);
         } catch (Exception e) {

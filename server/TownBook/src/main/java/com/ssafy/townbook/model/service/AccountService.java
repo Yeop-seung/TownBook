@@ -1,6 +1,7 @@
 package com.ssafy.townbook.model.service;
 
 import com.ssafy.townbook.model.dto.AccountDto;
+import com.ssafy.townbook.model.dto.request.ModifyAccountRequestDto;
 import com.ssafy.townbook.model.dto.response.FindOneResponseDto;
 import com.ssafy.townbook.model.dto.response.SaveOneResponseDto;
 import net.minidev.json.JSONArray;
@@ -15,7 +16,7 @@ public interface AccountService {
     
     FindOneResponseDto findEmail(String accountPhoneNumber);
     
-    SaveOneResponseDto accountModify(AccountDto accountDto);
+    SaveOneResponseDto accountModify(ModifyAccountRequestDto modifyAccountRequestDto);
     
     SaveOneResponseDto accountRemove(String accountEmail, String accountPw);
     
