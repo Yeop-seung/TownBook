@@ -45,7 +45,7 @@ function DonateConfirm(props) {
         
         let numbers = []
         for (let i = 1; i < detailLocker.length; i++){
-            console.log(i)
+            console.log('fffffff', i)
             console.log(detailLocker[i].detailLockerIsEmpty)
             if (detailLocker[i].detailLockerIsEmpty === true){
                 numbers.push(i)
@@ -56,9 +56,11 @@ function DonateConfirm(props) {
             // })
             axios.get(UrlMainOpen, {
             })
+            console.log('get1', UrlMainOpen)
             .then((response) => {
                 axios.get(`http://192.168.140.1/servo${i}/0`, {  
                     })
+                    console.log('get2',`http://192.168.140.1/servo${i}/0` )
                     // axios.get(`Url${i}/`, {
                     // })
             })
