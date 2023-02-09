@@ -43,34 +43,41 @@ function DonateConfirm(props) {
     
     const onClickHandlerComplete =() => {
         
-        let numbers = []
+        let numbers = 0
         for (let i = 1; i < detailLocker.length; i++){
             console.log('fffffff', i)
             console.log(detailLocker[i].detailLockerIsEmpty)
             if (detailLocker[i].detailLockerIsEmpty === true){
-                numbers.push(i)
+                numbers = i
                 // console.log(numbers)
                 break
             }}
             // axios.get(Url, {
             // })
+            console.log(numbers)
         const check = () => {
             axios.get(UrlMainOpen, {
             })
-            console.log('get1', UrlMainOpen)
             .then((response) => {
-                axios.get(`http://192.168.140.1/servo${numbers[0]}/0`, {  
-                    })
-                    console.log('get2',`http://192.168.140.1/servo${numbers[0]}/0` )
-                    // axios.get(`Url${i}/`, {
-                    // })
+                console.log(response)
+            })
+            .catch(function (error) {
+                console.log(error)
+            })}
+
+        const checkTwo = () => {
+            axios.get(`http://192.168.140.1/servo${numbers}/0`, {
+            })
+            .then((response) => {
+                console.log(response)
             })
             .catch(function (error) {
                 console.log(error)
             })}
         
         check()
-        const data = {isnavigate: isnavigate, Locker :Locker, User: User, Book: Book, detailLockerNo: numbers[0]}
+        checkTwo()
+        const data = {isnavigate: isnavigate, Locker :Locker, User: User, Book: Book, detailLockerNo: numbers}
         navigate('/DonateComplete', {state: data})
         }
             
