@@ -1,17 +1,21 @@
 package com.ssafy.townbook.model.service;
 
+import com.ssafy.townbook.model.dto.DetailLockerDto;
 import com.ssafy.townbook.model.dto.LockerDto;
 import com.ssafy.townbook.model.dto.response.FindListResponseDto;
 import com.ssafy.townbook.model.dto.response.FindOneResponseDto;
 import com.ssafy.townbook.model.dto.response.SaveOneResponseDto;
 import com.ssafy.townbook.model.entity.DetailLocker;
 import com.ssafy.townbook.model.entity.Locker;
+import com.ssafy.townbook.model.repository.BookRepository;
 import com.ssafy.townbook.model.repository.DetailLockerRepository;
 import com.ssafy.townbook.model.repository.LockerRepository;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
+import net.minidev.json.JSONArray;
+import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -51,8 +55,21 @@ public class LockerServiceImpl implements LockerService {
      */
     @Override
     public FindOneResponseDto findLockerByLockerNo(Long lockerNo) {
+        JSONArray jsonArray = new JSONArray();
         Locker findLocker = lockerRepository.findLockerByLockerNo(lockerNo).get();
-        return new FindOneResponseDto(new LockerDto(findLocker));
+
+        for (int i =0; i<findLocker.getLockerBookCnt();i++){
+            JSONObject jsonObject = new JSONObject();
+
+            DetailLockerDto detailLockerDto = new DetailLockerDto(detailLockerRepository.findDetailLockerByDetailLockerNo(findLocker.getDetailLocker().get(i).getDetailLockerNo()).get());
+            jsonObject.put("detailLocker", detailLockerDto);
+
+//            책 이름, 디테일 보관함 번호
+            jsonArray.add(jsonObject);
+        }
+
+//        return new FindOneResponseDto(new LockerDto(findLocker));
+        return new FindOneResponseDto(jsonArray);
     }
     
     /**
