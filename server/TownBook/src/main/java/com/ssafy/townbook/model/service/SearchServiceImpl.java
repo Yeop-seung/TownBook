@@ -48,7 +48,7 @@ public class SearchServiceImpl implements SearchService {
      * @return List<BookLogDto>
      */
     @Override
-    public FindListResponseDto findBookLogByBookTitle(String bookTitle) {
+    public FindListResponseDto searchBookLogByBookTitle(String bookTitle) {
         List<BookLogDto> findBookLogByBookTitle = searchQueryRepository.findBookLogByBookTitle(bookTitle).get().stream()
                 .map(BookLogDto::new)
                 .collect(Collectors.toList());
@@ -70,7 +70,7 @@ public class SearchServiceImpl implements SearchService {
      * @return
      */
     @Override
-    public FindListResponseDto findLockerByLockerNo(Long lockerNo) {
+    public FindListResponseDto searchLockerByLockerNo(Long lockerNo) {
         LockerDto     lockerDto   = new LockerDto(lockerRepository.findLockerByLockerNo(lockerNo).get());
         List<BookLog> bookLogList = bookLogQueryRepository.findBookLogByLockerNo(lockerNo).get();
         List<BookLogDto> bookLogDtoList = bookLogList.stream()

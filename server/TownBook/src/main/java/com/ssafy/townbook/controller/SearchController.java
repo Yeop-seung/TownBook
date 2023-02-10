@@ -30,8 +30,8 @@ public class SearchController {
      * @return List<BookLogDto>
      */
     @GetMapping("/searchTitle/{bookTitle}")
-    public ResponseEntity<FindListResponseDto> findBookLogByBookTitle(@PathVariable String bookTitle) {
-        return new ResponseEntity<FindListResponseDto>(searchService.findBookLogByBookTitle(bookTitle), HttpStatus.OK);
+    public ResponseEntity<FindListResponseDto> searchBookLogByBookTitle(@PathVariable String bookTitle) {
+        return new ResponseEntity<FindListResponseDto>(searchService.searchBookLogByBookTitle(bookTitle), HttpStatus.OK);
     }
     
     /**
@@ -41,7 +41,7 @@ public class SearchController {
      * @return JSONObject
      */
     @GetMapping("/searchLocker/{lockerNo}")
-    public ResponseEntity<FindListResponseDto> findLockerByLockerNo(@PathVariable Long lockerNo) {
-        return new ResponseEntity<FindListResponseDto>(searchService.findLockerByLockerNo(lockerNo), HttpStatus.OK);
+    public ResponseEntity<FindListResponseDto> searchLockerByLockerNo(@PathVariable Long lockerNo) {
+        return new ResponseEntity<FindListResponseDto>(searchService.searchLockerByLockerNo(lockerNo), HttpStatus.OK);
     }
 }

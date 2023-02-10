@@ -9,9 +9,9 @@ import com.ssafy.townbook.model.dto.response.SaveOneResponseDto;
 
 public interface NoticeService {
     
-    FindOneResponseDto getNotice(Long noticeNo);
+    FindOneResponseDto findNoticeByNoticeNo(Long noticeNo);
     
-    FindListResponseDto findByNoticeStateAndNoticeCategoryOrderByNoticeNo(Integer category);
+    FindListResponseDto findNoticeByNoticeStateAndNoticeCategoryOrderByNoticeNo(Integer category);
     
     SaveOneResponseDto modifyNotice(ModifyNoticeRequestDto modifyNoticeRequestDto);
     

@@ -10,7 +10,7 @@ public interface SearchService {
      * @param bookTitle
      * @return List<BookLogDto>
      */
-    FindListResponseDto findBookLogByBookTitle(String bookTitle);
+    FindListResponseDto searchBookLogByBookTitle(String bookTitle);
     
-    FindListResponseDto findLockerByLockerNo(Long lockerNo);
+    FindListResponseDto searchLockerByLockerNo(Long lockerNo);
 }

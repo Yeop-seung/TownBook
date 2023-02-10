@@ -108,11 +108,15 @@ public class BookLogServiceImpl implements BookLogService {
         
         JSONArray jsonArray = new JSONArray();
         for (BookLogDto bookLogDto : findBookLogDtoList) {
-            JSONObject jsonObject = new JSONObject();
-            String     bookIsbn   = bookLogDto.getBookIsbn();
-            String     bookTitle  = bookRepository.findBookByBookIsbn(bookIsbn).get().getBookTitle();
+            JSONObject jsonObject             = new JSONObject();
+            String     bookIsbn               = bookLogDto.getBookIsbn();
+            String     bookTitle              = bookRepository.findBookByBookIsbn(bookIsbn).get().getBookTitle();
+            long       detailLockerNo         = bookLogDto.getDetailLockerNo();
+            long       detailLockerNoInLocker = detailLockerRepository.findDetailLockerByDetailLockerNo(detailLockerNo)
+                    .get().getDetailLockerNoInLocker();
             jsonObject.put("bookLog", bookLogDto);
             jsonObject.put("bookTitle", bookTitle);
+            jsonObject.put("detailLockerNoInLocker", detailLockerNoInLocker);
             jsonArray.add(jsonObject);
         }
         
