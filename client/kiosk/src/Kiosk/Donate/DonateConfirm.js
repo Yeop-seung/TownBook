@@ -21,9 +21,9 @@ function DonateConfirm(props) {
 
     const detailLocker = location.state.Locker.detailLocker // 안에 서랍장
     
-    console.log(isnavigate)
+    // console.log(isnavigate)
     console.log(Locker)
-    console.log(User)
+    // console.log(User)
     console.log(Book)
     console.log(detailLocker)
 

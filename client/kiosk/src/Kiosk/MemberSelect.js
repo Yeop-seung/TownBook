@@ -11,7 +11,7 @@ function MemberSelect(props) {
 
     const isnavigate = location.state.isnavigate // 기부인지
     const locker = location.state.Locker //락커 정보 
-    console.log(locker) 
+    // console.log(locker)
 
     const data = {isnavigate: isnavigate, Locker: locker }
 

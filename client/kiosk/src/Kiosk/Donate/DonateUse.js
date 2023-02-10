@@ -19,8 +19,8 @@ function DonateUse(props) {
     const isnavigate = location.state.isnavigate
     const locker = location.state.Locker
 
-    console.log(location)
-    console.log(locker)
+    // console.log(location)
+    // console.log(locker)
 
     function barcodeInput(e) {
         let event=window.event || e;
@@ -28,7 +28,7 @@ function DonateUse(props) {
             axios.get(`http://i8b201.p.ssafy.io:8081/backend/admin/${e.target.value}`, {
             })
             .then((response) => {
-                console.log(response.data)
+                // console.log(response.data)
                 const data = {isnavigate: isnavigate, Locker :locker, User: event.target.value}
                 const onClickHandlerBarcodeRead = () => {
                     navigate('/BarcodeRead', {state: data})

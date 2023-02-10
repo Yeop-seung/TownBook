@@ -41,7 +41,7 @@ function DonateThanks(props) {
                         <p className={styles.textAlign}>
                         기부해 주셔서 감사합니다
                         <br />
-                        {accountPoint} 포인트가 적립 되었습니다
+                        남아 있는 포인트는 {accountPoint} 입니다
                         <br />
                         <br />
                         책을 추가 기부하시겠습니까?</p>

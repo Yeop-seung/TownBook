@@ -5,7 +5,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { BiHomeAlt } from 'react-icons/bi';
 import axios from "axios";
-import Table from "../../ui/Table";
 
 
 function ReceiptConfirm(props) {
@@ -39,18 +38,19 @@ function ReceiptConfirm(props) {
 
     console.log('bookData', bookData)
     
-    
-    
     const onClickHandlerHome = () => {
         navigate('/')
     }
     const goBack = () => {
         navigate(-1)
     }
-    const onClickHandlerReceiptComplete = (e) => {
-        console.log('eeeessadf',e.target.outerText)
-        const detailLockerNo = detailLocker
-        const data = {isnavigate: isnavigate, Locker :Locker, User: User, detailLocker: detailLocker, Book: bookData, BookName:e.target.outerText}
+    const [selectedItem, setSelectedItem] = useState(null);
+
+    
+    function onClickHandlerReceiptComplete (item) {
+        setSelectedItem(item);
+        console.log('eeeessadfitme',item)
+        const data = {isnavigate: isnavigate, Locker :Locker, User: User, Book: item}
         navigate('/ReceiptComplete', {state:data})
     }
     return (
@@ -63,10 +63,12 @@ function ReceiptConfirm(props) {
                         <div className={styles.buttonOne}>
                             <p className={styles.h3Text}>수령하실 책을 선택해주세요</p>
                             <ul >
-                            {bookData.map(item =>
-                                <li className={styles.table} onClick={onClickHandlerReceiptComplete} key={item.id}>
-                                {item.bookTitle}</li>
-                            )}
+                                {bookData.map(item =>
+                                <p className={styles.list} onClick={() => onClickHandlerReceiptComplete(item)} key={item.id}>
+                                {item.detailLockerNoInLocker}.
+                                {item.bookTitle}</p>
+                                )}
+                                {selectedItem && <p>Selected: {selectedItem}</p>}
                             </ul>
                         </div>
                     <button className={styles.homeCircle} onClick={onClickHandlerHome}>

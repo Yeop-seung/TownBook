@@ -15,30 +15,27 @@ function DonateReceipt(props){
     const Locker = location.state.Locker           // 락커
     const User = location.state.User               // 유저
     const Book = location.state.Book          // 책정보
-    const detailLocker = location.state.detailLocker    //세부 락커 위치
+    
+    const detailLocker = Book.bookLog.detailLockerNo
+
 
     const UrlOneClose = `http://192.168.140.1/servo${detailLocker}/90` //n번 보관함 닫기
 
     console.log(Locker)
     console.log(Locker.lockerNo)
     console.log(User)
-    console.log(Book)
+    console.log('Book',Book.bookLog)
     
     const realData = {
         lockerNo: Locker.lockerNo   , // 동네북 위치
         detailLockerNo: detailLocker, // 서랍장
         accountNo: User, // 유저 넘버
-        bookIsbn: Book,  // 책
-        bookLogNo: 0
+        bookIsbn: Book.bookLog.bookIsbn,  // 책
+        bookLogNo: Book.bookLog.bookLogNo
     }
-    // const realData = {
-    //     lockerNo: 2, // 동네북 위치
-    //     detailLockerNo: 12, // 서랍장
-    //     accountNo: User, //
-    //     bookIsbn: Book.bookIsbn,
-    //     bookLogNo: 0
-    // }
-    // console.log('realData', realData)
+
+    console.log('realData', realData)
+    
     const goBack = () => {
         navigate(-1)
     }
@@ -73,7 +70,7 @@ function DonateReceipt(props){
                 </button>
                 {/* 보관함 책을 넣고 빼고  */}
                     <div className={styles.buttonOne}>
-                        <p className={styles.textAlign}>보관함에 책을 빼고</p>
+                        <p className={styles.textAlign}>{detailLocker} 보관함에 책을 빼고</p>
                         <br />
                         <p className={styles.textAlignOne}>완료</p>
                         <p className={styles.textAlignTwo}> 버튼을 눌러주세요</p>

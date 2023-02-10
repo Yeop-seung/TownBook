@@ -18,15 +18,14 @@ function ReceiptComplete(props) {
     const lockerNo = location.state.Locker.lockerNo // 락커번호
     const User = location.state.User        //user number
     const Book = location.state.Book        //isbn
-    const detailLocker = location.state.detailLocker
-    const BookName =location.state.BookName
-
+    
+    const detailLocker = Book.detailLockerNoInLocker
     const title = Book.bookTitle
+    console.log(Book)
     console.log(Locker)
     console.log(lockerNo)
-    console.log(detailLocker)
 
-    const data = {isnavigate: isnavigate, Locker :Locker, User: User, detailLocker: detailLocker, Book: Book.bookIsbn}
+    const data = {isnavigate: isnavigate, Locker :Locker, User: User, Book: Book}
 
     let bookURL = location.state.bookIntroductionURL
     if (bookURL === "null.png") {
@@ -70,7 +69,7 @@ function ReceiptComplete(props) {
                     </button>
                     <div className={styles.buttonOne}>
                             <div className={styles.title}>
-                                {BookName}
+                                {title}
                             </div>
                         <p className={styles.textAlign}>수령하실 책이 맞습니까?
                         <br/>

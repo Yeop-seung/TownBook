@@ -8,7 +8,8 @@ import axios from "axios";
 function BarcodeRead(props) {
     const navigate = useNavigate()
     const location = useLocation()
-    console.log(location)
+    // console.log(location)
+
     const isnavigate = location.state.isnavigate
     const Locker = location.state.Locker
     const User = location.state.User
