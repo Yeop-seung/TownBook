@@ -9,11 +9,11 @@ function MemberSelect(props) {
     const navigate = useNavigate()
     const location = useLocation()
 
-    const isnavigate = location.state.isnavigate
-    const locker = location.state.Locker
-    const lockerNo = location.state.Locker.lockerNo
-    
-    const data = {isnavigate: isnavigate, Locker: locker ,LockerNo :lockerNo}
+    const isnavigate = location.state.isnavigate // 기부인지
+    const locker = location.state.Locker //락커 정보 
+    console.log(locker) 
+
+    const data = {isnavigate: isnavigate, Locker: locker }
 
     const goBack = () => {
         navigate(-1)
@@ -25,10 +25,10 @@ function MemberSelect(props) {
         navigate('/DonateUse', {state: data})
     }
     const onClickHandlerBarcodeRead =() => {
-        const data = {isnavigate: isnavigate, Locker: locker ,LockerNo :lockerNo, User: 1}
+        const data = {isnavigate: isnavigate, Locker: locker , User: 1}
         navigate('/BarcodeRead', {state: data})
-    }
-
+    } 
+    // 비회원일시 User 번호 1
     return (
         <div>
             <div className={styles.myImg}>

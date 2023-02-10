@@ -1,49 +1,26 @@
+import axios from "axios";
 import React, { useState, useEffect, useRef } from "react";
 
+
 const ItemList = () => {
-    const [page, setPage] = useState(1);
-    const [loading, setLoading] = useState(false);
-    const observer = useRef(null);
-
-    useEffect(() => {
-    observer.current = new IntersectionObserver(
-        ([entry]) => {
-        if (entry.isIntersecting) {
-            setPage(prevPage => prevPage + 1);
-        }
-        },
-        { rootMargin: "200px" }
-    );
-    return () => {
-        observer.current.disconnect();
-    };
-    }, []);
-
-    useEffect(() => {
-    if (loading) return;
-    setLoading(true);
-    fetch(`https://jsonplaceholder.typicode.com/posts?_page=${page}`)
-        .then(res => res.json())
-        .then(data => {
-        setTimeout(() => {
-            setLoading(false);
-        }, 1000);
-        });
-    }, [loading, page]);
+    let [data, setData] = useState([])
+    const check = () => {
+        
+        axios.get(`http://i8b201.p.ssafy.io:8081/backend/book/locker/${lockerNo}`, {
+        })
+        .then((response) => {
+            const responseData = response.data.data
+            setData(responseData)
+            console.log('gggggg',responseData)
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+    }
 
     return (
     <div>
-        {Array.from({ length: 10 }, (_, i) => (
-        <div
-            key={i}
-            ref={node => {
-            if (node) observer.current.observe(node);
-            }}
-        >
-            Item {i + 10 * (page - 1)}
-        </div>
-        ))}
-        {loading && <div>Loading...</div>}
+        
     </div>
     );
     };

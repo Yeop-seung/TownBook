@@ -15,7 +15,8 @@ import DonateReceipt from "./Kiosk/Receipt/DonateReceipt";
 import ReceiptThanks from "./Kiosk/Member/ReceiptThanks";
 import DonateThanksNon from "./Kiosk/Non-Member/DonateThankNon";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Table from './ui/Table';
+import DoorClose from './Kiosk/DoorClose'; 
+// import Table from './ui/Table';
 // import App from './App';
 import reportWebVitals from './reportWebVitals';
 
@@ -37,7 +38,7 @@ root.render(
       <Route path='/DonateReceipt' element={<DonateReceipt />}/>
       <Route path='/ReceiptThanks' element={<ReceiptThanks />}/>
       <Route path='/DonateThanksNon' element={<DonateThanksNon />}/>
-      <Route path='/Table' element={<Table />}/>
+      <Route path='/DoorClose' element={<DoorClose />}/>
     </Routes>
   </BrowserRouter>
 );

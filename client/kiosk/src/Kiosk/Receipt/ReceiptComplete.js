@@ -5,30 +5,58 @@ import { useLocation, useNavigate } from "react-router-dom";
 import book from "../img/book.jpg"
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { BiHomeAlt } from 'react-icons/bi';
+import axios from "axios";
 
 function ReceiptComplete(props) {
-    const UrlOneOpen = ["http://192.168.140.1/mainServo/0", "http://192.168.140.1/servo1/0"]   //메인 보관함 열기 //1번 보관함 열기 
-
-    const UrlTwoOpen = "http://192.168.140.1/servo2/0"   //2번 보관함 열기
     
     const navigate = useNavigate()
 
     const location = useLocation()
-    
-    const title = location.state.bookTitle
+    console.log(location)
+    const isnavigate = location.state.isnavigate    //기부 및 수령인지
+    const Locker = location.state.Locker
+    const lockerNo = location.state.Locker.lockerNo // 락커번호
+    const User = location.state.User        //user number
+    const Book = location.state.Book        //isbn
+    const detailLocker = location.state.detailLocker
+    const BookName =location.state.BookName
+
+    const title = Book.bookTitle
+    console.log(Locker)
+    console.log(lockerNo)
+    console.log(detailLocker)
+
+    const data = {isnavigate: isnavigate, Locker :Locker, User: User, detailLocker: detailLocker, Book: Book.bookIsbn}
+
     let bookURL = location.state.bookIntroductionURL
     if (bookURL === "null.png") {
         bookURL = book
+    } 
+
+    const onClickHandlerDonateReceipt =() => {
+        
+        const UrlServo = `http://192.168.140.1/servo${detailLocker}/0`
+        
+        const checkTwo = () => {
+            axios.get(UrlServo, {
+            })
+            .then((response) => {
+                console.log(response)
+            })
+            .catch((error) => {
+                console.log(error)
+            })
         }
+
+        checkTwo()
+        navigate('/DonateReceipt', {state: data})
+    }
 
     const onClickHandlerHome = () => {
         navigate('/')
     }
     const onClickHandlerReceiptConfirm = () => {
-        navigate('/ReceiptConfirm')
-    }
-    const onClickHandlerDonateReceipt = () => {
-        navigate('/DonateReceipt')
+        navigate('/ReceiptConfirm' ,{state: data})
     }
     const goBack = () => {
         navigate(-1)
@@ -41,20 +69,19 @@ function ReceiptComplete(props) {
                         <AiOutlineArrowLeft className={styles.iconStyle }/>
                     </button>
                     <div className={styles.buttonOne}>
-                        <img src={bookURL} className={styles.book}/>
                             <div className={styles.title}>
-                                {title}
+                                {BookName}
                             </div>
                         <p className={styles.textAlign}>수령하실 책이 맞습니까?
                         <br/>
-                        예를 누르시면 포인트가
+                        예를 누르시면 200 포인트가
                         <br/>차감되고 보관함이 열립니다</p>
                         <div>
                             <button className={styles.buttonTwo} onClick={onClickHandlerDonateReceipt}>
                                 예
                             </button>
                             <button className={styles.buttonThree} onClick={onClickHandlerReceiptConfirm}>
-                                아니오
+                                아니요
                             </button>
                         </div>
                     </div>

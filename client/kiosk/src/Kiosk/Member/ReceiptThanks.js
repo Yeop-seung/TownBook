@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./DonateThanks.module.css"
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { useLocation, useNavigate } from "react-router-dom";
+// import axios from "axios";
 
 // import { Route } from "react-router-dom";
 // import {BsFillArrowRightCircleFill} from "react-icons/bs"
@@ -9,43 +9,45 @@ import axios from "axios";
 function ReceiptThanks(props) {
     
     const navigate = useNavigate()
+    const location = useLocation()
 
-    const UrlMainClose = "http://192.168.140.1/mainServo/90 " //메인 보관함 닫기
+    const isnavigate = location.state.isnavigate
+    const Locker = location.state.Locker
+    const User = location.state.User
+    const accountPoint = location.state.accountPoint
+    
+    console.log(isnavigate)
+    console.log(Locker)
+    console.log(User)
+    const data = {isnavigate: isnavigate, Locker :Locker, User: User}
 
-    const onClickHandlerFinish = () => {
-        axios.get(UrlMainClose, {
-        })
-        .then((response) => {
-            navigate('/Finish')
-        })
-        .catch(function (error) {
-            console.log(error)
-        })
+
+    const onClickHandlerDoorClose = () => {
+        navigate('/DoorClose')
     }
     const onClickHandlerReceiptConfirm = () => {
-        navigate('/ReceiptConfirm')
+        navigate('/ReceiptConfirm', {state: data})
     }
 
     return (
-        <div>
             <div className={styles.myImg}>
                 <div className={styles.buttonOne}>
                     <p className={styles.textAlign}>이용해 주셔서 감사합니다
-                    <br />포인트가 {props.children} 사용 되었습니다
+                    <br /> {accountPoint} 포인트가  사용 되었습니다
+                    
                     <br />
                     <br />
                     책을 추가 수령하시겠습니까?</p>
                     <div>
-                        <button className={styles.buttonTwo} onClick={onClickHandlerFinish}>
-                            <p className={styles.textAlignOne}>처음화면</p>
-                        </button>
                         <button className={styles.buttonThree} onClick={onClickHandlerReceiptConfirm}>
-                            <p className={styles.textAlignOne}>추가수령</p>
+                            <p className={styles.textAlignOne}>예</p>
+                        </button>
+                        <button className={styles.buttonTwo} onClick={onClickHandlerDoorClose}>
+                            <p className={styles.textAlignOne}>아니요</p>
                         </button>
                     </div>
                 </div>
             </div>  
-        </div>
         )
 }
 

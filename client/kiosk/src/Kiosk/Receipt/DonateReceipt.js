@@ -7,34 +7,62 @@ import { BiHomeAlt } from 'react-icons/bi';
 // import {BsFillArrowRightCircleFill} from "react-icons/bs"
 
 function DonateReceipt(props){
-    const UrlTOneClose = "http://192.168.140.1/servo1/90" //1번 보관함 닫기
-    const UrlTwoClose = "http://192.168.140.1/servo2/90 " //2번 보관함 닫기
-
     const navigate = useNavigate()
-
     const location = useLocation()
+    console.log(location)
 
-    const isnavigate = location.state
+    const isnavigate = location.state.isnavigate   // 기부인지
+    const Locker = location.state.Locker           // 락커
+    const User = location.state.User               // 유저
+    const Book = location.state.Book          // 책정보
+    const detailLocker = location.state.detailLocker    //세부 락커 위치
+
+    const UrlOneClose = `http://192.168.140.1/servo${detailLocker}/90` //n번 보관함 닫기
+
+    console.log(Locker)
+    console.log(Locker.lockerNo)
+    console.log(User)
+    console.log(Book)
     
-    function onClickHandlerReceiptThanks(e) {
-    //     let event=window.event || e;
-        
-    //     axios.get(`/server/book/${e.target.value}`, {
-    //     })
-    //     .then((response) => {
-    //         const onClickHandlerThanks = () => {
-    //             navigate('/ReceiptThanks', {state : response.data})
-    //         }})
-    //         onClickHandlerThanks()
-    //     .catch(function (error) {
-    //         console.log(error)
-    //     })
+    const realData = {
+        lockerNo: Locker.lockerNo   , // 동네북 위치
+        detailLockerNo: detailLocker, // 서랍장
+        accountNo: User, // 유저 넘버
+        bookIsbn: Book,  // 책
+        bookLogNo: 0
+    }
+    // const realData = {
+    //     lockerNo: 2, // 동네북 위치
+    //     detailLockerNo: 12, // 서랍장
+    //     accountNo: User, //
+    //     bookIsbn: Book.bookIsbn,
+    //     bookLogNo: 0
+    // }
+    // console.log('realData', realData)
+    const goBack = () => {
+        navigate(-1)
     }
     const onClickHandlerHome = () => {
         navigate('/')
     }
-    const goBack = () => {
-        navigate(-1)
+    let accountPoint = 0    
+
+    async function onClickHandlerReceiptThanks() {
+        try {
+        const response = await axios.get(UrlOneClose)
+        // const response = await axios.get(Url)
+        
+        const postResponse = await axios.post('http://i8b201.p.ssafy.io:8081/backend/bookLog/receiveBook', realData)
+        
+        const postData = postResponse.data.data
+        console.log('postData',postData)
+
+        accountPoint = postData.accountPoint // 포인트
+        } catch (error) {
+        console.error(error);
+        }
+        const data = {isnavigate: isnavigate, Locker :Locker, User: User, accountPoint: accountPoint }
+        navigate('/ReceiptTanks', {state: data}) // 회원
     }
 
     return (

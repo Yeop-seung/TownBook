@@ -13,19 +13,21 @@ function Main(props) {
     let isnavigate = true //true 기부 false 수령
 
     function onClickHandler() {
+            isnavigate = true
             axios.get(`http://i8b201.p.ssafy.io:8081/backend/locker/`, {
             })
             .then((response) => {
-                console.log(response)
-                if (response.data.data[0].detailLocker.length === response.data.data[0].lockerBookCnt) {
+                console.log(response.data.data)
+                if (response.data.data[4].lockerStorage === 0) {
                 // if (response.data.data[2].lockerBookCnt === 2) {
                     const showModal = () => {
                         setModalOpen(true);
                     };
                     showModal()
-                    // 락커의 책과 길이가 같으면 모달창을 띄워줌           
+                    // 락커 여유공간이 없다면 모달 창 띄우기          
                 } else {
-                    const data = { isnavigate: isnavigate, Locker: response.data.data[0] }
+                    const data = { isnavigate: isnavigate, Locker: response.data.data[4] }
+                    // 기부와 락커 정보 가져오기
                     const onClickHandlerMemberSelect = () => {
                         navigate('/MemberSelect',
                         {state: data,
@@ -38,13 +40,14 @@ function Main(props) {
                 console.log(error)
             })
         }
+
     const onClickHandlerUse = () => {
         isnavigate = false
         axios.get(`http://i8b201.p.ssafy.io:8081/backend/locker/`, {
             })
             .then((response) => {
+                if (response.data.data[4].lockerBookCnt === 0) {
                 // if (response.data.data[1].lockerBookCnt === 0) {
-                if (response.data.data[0].lockerBookCnt === 0) {
                     const ReceiptShowModal = () => {
                         setReceiptModalOpen(true);
                     };
@@ -52,7 +55,7 @@ function Main(props) {
                     // 락커의 책과 길이가 같으면 모달창을 띄워줌           
                 } else {
                 console.log(response.data.data)
-                    const data = { isnavigate: isnavigate, Locker: response.data.data[0] }
+                    const data = { isnavigate: isnavigate, Locker: response.data.data[4] }
                     const onClickHandlerDonateUse = () => {
                         navigate('/DonateUse',
                         {state: data})
@@ -66,14 +69,14 @@ function Main(props) {
 
     return (
             <div className={styles.myImg}>
-                        <button className={styles.buttonLeft} onClick={onClickHandler}>
-                            도서 기부
-                        </button>
-                        <button className={styles.buttonRight} onClick={onClickHandlerUse}>
-                            도서 수령
-                        </button>
-                        {modalOpen && <Modal setModalOpen={setModalOpen} />}
-                        {ReceiptmodalOpen && <ReceiptModal setReceiptModalOpen={setReceiptModalOpen} />}
+                <button className={styles.buttonLeft} onClick={onClickHandler}>
+                    도서 기부
+                </button>
+                <button className={styles.buttonRight} onClick={onClickHandlerUse}>
+                    도서 수령
+                </button>
+                {modalOpen && <Modal setModalOpen={setModalOpen} />}
+                {ReceiptmodalOpen && <ReceiptModal setReceiptModalOpen={setReceiptModalOpen} />}
             </div>
         )
 }

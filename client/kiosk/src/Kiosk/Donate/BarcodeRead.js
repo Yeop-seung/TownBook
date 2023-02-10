@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import styles from "./BarcodeRead.module.css"
 import { useLocation, useNavigate } from "react-router-dom";
 import { AiOutlineArrowLeft } from 'react-icons/ai';
@@ -8,16 +8,16 @@ import axios from "axios";
 function BarcodeRead(props) {
     const navigate = useNavigate()
     const location = useLocation()
-
+    console.log(location)
     const isnavigate = location.state.isnavigate
     const Locker = location.state.Locker
     const User = location.state.User
     
     const data = {isnavigate: isnavigate, Locker :Locker, User: User}
     
-    console.log(isnavigate)
-    console.log(Locker)
-    console.log(User)
+    // console.log(isnavigate)
+    // console.log(Locker)
+    // console.log(User)
 
     const onClickHandlerHome = () => {
         navigate('/')

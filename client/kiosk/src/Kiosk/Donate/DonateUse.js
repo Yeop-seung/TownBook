@@ -16,9 +16,11 @@ function DonateUse(props) {
 
     const location = useLocation()
 
-    console.log(location)
     const isnavigate = location.state.isnavigate
     const locker = location.state.Locker
+
+    console.log(location)
+    console.log(locker)
 
     function barcodeInput(e) {
         let event=window.event || e;
@@ -28,7 +30,7 @@ function DonateUse(props) {
             .then((response) => {
                 console.log(response.data)
                 const data = {isnavigate: isnavigate, Locker :locker, User: event.target.value}
-                const onClickHandlerBarcodeRead =() => {
+                const onClickHandlerBarcodeRead = () => {
                     navigate('/BarcodeRead', {state: data})
                 }
                 onClickHandlerBarcodeRead()
@@ -36,18 +38,26 @@ function DonateUse(props) {
             .catch((error) =>{
                 console.log(error)
             })
-            } else {
-                axios.get(`http://i8b201.p.ssafy.io:8081/backend/admin/${e.target.value}`, {
+        } else {
+            axios.get(`http://i8b201.p.ssafy.io:8081/backend/admin/${e.target.value}`, {
             })
             .then((response) => {
                 // 수령 페이지로 이동
-                const data = {isnavigate: isnavigate, Locker :locker, User: e.target.value}
-                const onClickHandlerReceiptConfirm =() => {
+                console.log('fffffffffff', event.target.value)
+                console.log(response.data.data)
+                const data = {isnavigate: isnavigate, Locker :locker, User: event.target.value}
+                console.log('eerqrewq', data)
+                const onClickHandlerReceiptConfirm = () => {
                     navigate('/ReceiptConfirm', {state: data})
                 }
-                onClickHandlerReceiptConfirm()
+                    onClickHandlerReceiptConfirm()
+                // if (response.data.data.accountPoint >= 200){
+                    //     onClickHandlerReceiptConfirm()
+                // } else {
+
+                // }
             })
-            }
+        }
         }
     const onClickHandlerHome = () => {
         navigate('/')

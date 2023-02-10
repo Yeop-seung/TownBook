@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./DonateConfirm.module.css"
 import { useLocation, useNavigate } from "react-router-dom";
 import book from "../img/book.jpg"
@@ -8,26 +8,27 @@ import axios from "axios";
 
 function DonateConfirm(props) {
     // 빈보관함이 무엇인지 확인하고 if로 하기  
-    const UrlMainOpen = "http://192.168.140.1/mainServo/0"   //메인 보관함 열기 1번 보관함 열기 2번 보관함 열기
+    // const UrlMainOpen = "http://192.168.140.1/mainServo/0"   //메인 보관함 열기 1번 보관함 열기 2번 보관함 열기
     
     // const Url = 'http://localhost:3000/'
     const navigate = useNavigate()
     const location = useLocation()
 
-    const isnavigate = location.state.isnavigate
-    const Locker = location.state.Locker
-    const User = location.state.User
-    const Book = location.state.Book
-    const detailLocker = location.state.Locker.detailLocker
-    
-    // console.log(isnavigate)
-    // console.log(Locker)
-    // console.log(User)
-    // console.log(Book)
-    // console.log(detailLocker)
+    const isnavigate = location.state.isnavigate // 기부인지 수령인지 확인
+    const Locker = location.state.Locker // 락커
+    const User = location.state.User  // 유저정보
+    const Book = location.state.Book  // 책정보
 
-    const title = Book.data.bookTitle
-    // 책 제목
+    const detailLocker = location.state.Locker.detailLocker // 안에 서랍장
+    
+    console.log(isnavigate)
+    console.log(Locker)
+    console.log(User)
+    console.log(Book)
+    console.log(detailLocker)
+
+    const title = Book.data.bookTitle  // 책 제목
+
     // const [detailLockerNo, setDetailLockerNo] = useState()
     // console.log(detailLockerNo)
 
@@ -43,41 +44,38 @@ function DonateConfirm(props) {
     
     const onClickHandlerComplete =() => {
         
-        let numbers = 0
-        for (let i = 1; i < detailLocker.length; i++){
+        let numbers = 1
+        console.log('detailLocker.length',detailLocker.length)
+        for (let i = 1; i <= detailLocker.length; i++){
             console.log('fffffff', i)
-            console.log(detailLocker[i].detailLockerIsEmpty)
-            if (detailLocker[i].detailLockerIsEmpty === true){
+            console.log(detailLocker[i - 1])
+            if (detailLocker[i - 1].bookInDetailLocker === null){
                 numbers = i
+                console.log('eeesss',detailLocker[i - 1])
                 // console.log(numbers)
                 break
             }}
-            // axios.get(Url, {
-            // })
-            console.log(numbers)
-        const check = () => {
-            axios.get(UrlMainOpen, {
-            })
-            .then((response) => {
-                console.log(response)
-            })
-            .catch(function (error) {
-                console.log(error)
-            })}
-
-        const checkTwo = () => {
-            axios.get(`http://192.168.140.1/servo${numbers}/0`, {
-            })
-            .then((response) => {
-                console.log(response)
-            })
-            .catch(function (error) {
-                console.log(error)
-            })}
+            
+        console.log('numbers', numbers)
         
-        check()
+        const UrlServo = `http://192.168.140.1/servo${numbers}/0`
+        console.log('UrlServo', UrlServo)
+        
+        const checkTwo = () => {
+            console.log('axiosnumbers',numbers)
+            axios.get(UrlServo, {
+            })
+            .then((response) => {
+                console.log('gggggg',response)
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+        }
         checkTwo()
-        const data = {isnavigate: isnavigate, Locker :Locker, User: User, Book: Book, detailLockerNo: numbers}
+        
+        const data = {isnavigate: isnavigate, Locker :Locker, User: User, Book: Book, numbers: numbers}
+        console.log('data', data)
         navigate('/DonateComplete', {state: data})
         }
             
@@ -111,7 +109,7 @@ function DonateConfirm(props) {
                                     <p className={styles.textAlignOne}>예</p>
                                 </button>
                                 <button className={styles.buttonThree} onClick={onClickHandlerBarcodeReadError}>
-                                    <p className={styles.textAlignOne}>아니오</p>
+                                    <p className={styles.textAlignOne}>아니요</p>
                                 </button>
                             </div>
                         </div>
