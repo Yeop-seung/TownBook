@@ -1,0 +1,14 @@
+### 2. 로그인 유저의 포인트 반환
+GET http://localhost:8081/backend/myPage/myPoint/1
+
+### 3. 로그인 유저의 기부/수령 전체 목록 반환
+GET http://localhost:8081/backend/myPage/log/2
+
+### 4. 로그인 유저의 기부 목록 반환
+GET http://localhost:8081/backend/myPage/donate/2
+
+### 5. 로그인 유저의 수령 목록 반환
+GET http://localhost:8081/backend/myPage/receive/2
+
+### 6. 로그인 유저의 책 찜 목록 반환
+GET http://localhost:8081/backend/myPage/wishList/2

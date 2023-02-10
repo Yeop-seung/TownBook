@@ -1,0 +1,54 @@
+### 회원 가입
+POST http://localhost:8081/backend/account/signup
+Content-Type: application/json
+
+{
+    "accountEmail": "new@townbook.com",
+    "accountPw": "password",
+    "accountName": "New Account",
+    "accountAddress": "New Address",
+    "accountPhoneNumber": "010-0101-0101",
+    "accountGender": 1,
+    "accountNickname": "New Nickname",
+    "accountBirthDay": "000000"
+}
+
+### 1. 핸드폰 번호로 이메일 찾기
+GET http://localhost:8081/backend/account/findEmail/010-1234-5678
+
+### 2. 계정 수정
+PUT http://localhost:8081/backend/account/modify
+Content-Type: application/json
+
+{
+    "accountEmail": "test@townbook.com",
+    "accountPw": "password",
+    "accountName": "New Account",
+    "accountAddress": "New Address",
+    "accountPhoneNumber": "010-0101-0101",
+    "accountGender": 1,
+    "accountNickname": "New Nickname",
+    "accountBirthDay": "000000"
+}
+
+### 3. 계정 삭제(비활성화)
+PUT http://localhost:8081/backend/account/leave
+Content-Type: application/json
+
+{
+    "accountEmail": "test@townbook.com",
+    "accountPw": "password"
+}
+
+### 4. 이메일 인증
+POST http://localhost:8081/backend/account/emailConfirm
+Content-Type:text/plain
+
+test@townbook.com
+
+### 5. 임시 비밀번호
+
+### 6. 비밀번호 변경
+
+### 7. 유저 TOP10 랭킹과 자신의 랭킹 조회
+GET http://localhost:8081/backend/account/ranking/1

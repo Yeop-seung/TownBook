@@ -2,6 +2,7 @@
 import React from "react";
 import MyPageDonateItem from "views/account/MyPageDonateItem";
 import MyPageReceiveItem from "views/account/MyPageReceiveItem";
+
 import {
   Alert,
   UncontrolledAlert,
@@ -10,8 +11,8 @@ import {
   CardHeader,
   CardTitle,
   Card,
+  Button,
 } from "reactstrap";
-
 
 function NoticeList(props) {
   const [hiddenpassword, sethiddenpassword] = React.useState(true);
@@ -28,27 +29,28 @@ function NoticeList(props) {
   };
   // console.log(props)
 
-
-
-  console.log(props)
+  console.log(props);
   return (
     <div>
       <CardBody>
         <Row style={{ justifyContent: "center" }}>
           <div>
-            <button
-              // color="black"
+            <Button
+              color="primary"
+              className="animation-on-hover"
               type="submit"
               onClick={showid}
               // className={classes.style}
               style={{ backgroundColor: hiddenid ? "black" : "white" }}
             >
               기부
-            </button>
+            </Button>
           </div>
 
           <div>
-            <button
+            <Button
+              color="info"
+              className="animation-on-hover"
               // color="black"
               type="submit"
               onClick={showpassword}
@@ -56,7 +58,7 @@ function NoticeList(props) {
               style={{ backgroundColor: hiddenpassword ? "black" : "white" }}
             >
               수령
-            </button>
+            </Button>
           </div>
         </Row>
       </CardBody>
@@ -66,7 +68,6 @@ function NoticeList(props) {
       {props.Donates.map((donate) => (
         <div>
           <Alert color="info" hidden={hiddenid}>
-            
             <MyPageDonateItem
               //   key={donate.id}
               id={donate.id}
@@ -74,15 +75,11 @@ function NoticeList(props) {
               bookLogDonateDateTime={donate.bookLogDonateDateTime}
             />
           </Alert>
-
-          
         </div>
       ))}
       {props.Receives.map((receive) => (
         <div>
-
           <Alert color="info" hidden={hiddenpassword}>
-            
             <MyPageReceiveItem
               //   key={receive.id}
               id={receive.id}

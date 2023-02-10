@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from "react";
 import axios from "axios";
 // reactstrap components
 import classes from "./Login.module.css";
-import { useHistory } from "react-router-dom"; 
+import { useHistory } from "react-router-dom";
 import {
   Button,
   Card,
@@ -31,8 +31,6 @@ function MyPage(props) {
   const birthdayInputRef = useRef();
   const modalpwInputRef = useRef();
 
-
-
   const [modalSearch, setmodalSearch] = React.useState(false);
   const toggleModalSearch = () => {
     setmodalSearch(!modalSearch);
@@ -42,10 +40,9 @@ function MyPage(props) {
   const [Receives, setReceives] = React.useState([]);
   const [Point, setPoint] = React.useState("");
   const [verifiedPassword, setverifiedPassword] = React.useState(false);
-  
+
   const accountNo = localStorage.getItem("accountNo");
   const history = useHistory();
-
 
   function modifyMyInfo(event) {
     event.preventDefault();
@@ -62,24 +59,24 @@ function MyPage(props) {
       accountNickname: enteredNickname,
       accountBirthDay: enteredBirthDay,
       accountPhoneNumber: enteredPhoneNumber,
-      accountNo: localStorage.getItem('accountNo')
-    }
-  
-    console.log(userInfo)
-    axios
-      .put("https://i8b201.p.ssafy.io/backend/account/modify", 
-        userInfo
-      )
-      .then((res) => {
-        
-        console.log("변경",res);
-        // if (res.)
-        localStorage.setItem('accountBirthDay', res.data.data.accountBirthDay)
-        localStorage.setItem('accountNickname', res.data.data.accountNickname)
-        localStorage.setItem('accountAddress', res.data.data.accountAddress)
-        localStorage.setItem('accountPhoneNumber', res.data.data.accountPhoneNumber)
+      accountNo: localStorage.getItem("accountNo"),
+    };
 
-        setverifiedPassword(false)
+    console.log(userInfo);
+    axios
+      .put("https://i8b201.p.ssafy.io/backend/account/modify", userInfo)
+      .then((res) => {
+        console.log("변경", res);
+        // if (res.)
+        localStorage.setItem("accountBirthDay", res.data.data.accountBirthDay);
+        localStorage.setItem("accountNickname", res.data.data.accountNickname);
+        localStorage.setItem("accountAddress", res.data.data.accountAddress);
+        localStorage.setItem(
+          "accountPhoneNumber",
+          res.data.data.accountPhoneNumber
+        );
+
+        setverifiedPassword(false);
         // history.replace('/mypage')
         alert("변경완료.");
       })
@@ -176,10 +173,7 @@ function MyPage(props) {
               <CardHeader>
                 <Row style={{ justifyContent: "space-between" }}>
                   <CardTitle tag="h4">내 정보</CardTitle>
-                  <Button
-                    onClick={toggleModalSearch}
-                    hidden={verifiedPassword}
-                  >
+                  <Button onClick={toggleModalSearch} hidden={verifiedPassword}>
                     개인정보수정
                   </Button>
                 </Row>
@@ -262,10 +256,25 @@ function MyPage(props) {
                     />
                   </FormGroup>
                 </Col>
+<<<<<<< HEAD
+                <Row style={{ justifyContent: "center" }}>
+                  <button hidden={!verifiedPassword} onClick={modifyMyInfo}>
+                    수정완료
+                  </button>
+                  <button
+                    hidden={!verifiedPassword}
+                    onClick={() => {
+                      setverifiedPassword(false);
+                    }}
+                  >
+                    취소
+                  </button>
+=======
                 <Row style={{justifyContent:"center"}}>
                   <button hidden={!verifiedPassword} onClick={modifyMyInfo}>수정완료</button>
                   <button hidden={!verifiedPassword} onClick={()=>{setverifiedPassword(false)}}>취소</button>
                   <button>회원탈퇴</button>
+>>>>>>> 322c2252ae5d4fe56837e0d91b9a7b12fec4b04f
                 </Row>
               </CardBody>
               <CardBody>
@@ -468,7 +477,10 @@ function MyPage(props) {
                   className="btn-login"
                   // color="black"
                   type="submit"
-                  onClick={()=>{verifyPassword(); toggleModalSearch();}}
+                  onClick={() => {
+                    verifyPassword();
+                    toggleModalSearch();
+                  }}
                   className={classes.style}
                 >
                   확인
