@@ -29,9 +29,14 @@ function BookItem(props) {
           }}
         >
           
-            <p style={{color:"white"}}>{props.id}</p>
-            <p style={{color:"white"}}>{props.bookTitle}</p>
-            <p style={{color:"white"}}>{props.bookLogDonateDateTime}</p>
+          <p style={{ color: "white" }}>{props.id}</p>
+        <img
+          alt="..."
+          // className="avatar"
+          src={props.bookTitleURL}
+          className={"image"}
+        />
+        <p style={{ color: "white" }}>{props.bookTitle}</p>
 
             {/* <address>{props.noticeContent}</address> */}
           
