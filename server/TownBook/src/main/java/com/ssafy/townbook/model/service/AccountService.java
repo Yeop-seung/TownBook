@@ -22,7 +22,7 @@ public interface AccountService {
     
     Boolean updatePassword(String accountEmail, String tmpPassword);
     
-    FindOneResponseDto findAccountBookCnt(Long accountNo) throws Exception;
+    FindOneResponseDto findRankAccountBookCnt(Long accountNo) throws Exception;
     
     AccountDto findAccountByAccountEmail(String accountEmail);
     

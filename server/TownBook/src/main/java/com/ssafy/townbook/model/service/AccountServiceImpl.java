@@ -114,19 +114,17 @@ public class AccountServiceImpl implements AccountService {
     public SaveOneResponseDto accountModify(ModifyAccountRequestDto modifyAccountRequestDto) {
         try {
             Account account = accountRepository.findByAccountNo(modifyAccountRequestDto.getAccountNo())
-                    .orElseThrow(() ->
-                            new IllegalArgumentException("해당 사용자가 존재하지 않습니다."));
+                    .orElseThrow(() -> new IllegalArgumentException("해당 사용자가 존재하지 않습니다."));
             account.setAccountAddress(modifyAccountRequestDto.getAccountAddress());
             account.setAccountPhoneNumber(modifyAccountRequestDto.getAccountPhoneNumber());
             account.setAccountBirthDay(modifyAccountRequestDto.getAccountBirthDay());
             account.setAccountNickname(modifyAccountRequestDto.getAccountNickname());
-            account.setAccountPw(passwordEncoder.encode(modifyAccountRequestDto.getAccountPw()));
             accountRepository.save(account);
-
+            
             ModifyAccountResponseDto modifyAccountResponseDto = new ModifyAccountResponseDto(account);
             return new SaveOneResponseDto(modifyAccountResponseDto);
         } catch (Exception e) {
-            e.getMessage();
+            System.out.println(e.getMessage());
             return new SaveOneResponseDto();
         }
     }
@@ -149,14 +147,13 @@ public class AccountServiceImpl implements AccountService {
                     accountRepository.save(account);
                     return new SaveOneResponseDto(true);
                 } else {
-                    new IllegalArgumentException("해당 비밀번호가 맞지 않습니다.");
-                    return new SaveOneResponseDto();
+                    throw new IllegalArgumentException("해당 비밀번호가 맞지 않습니다.");
                 }
             } catch (Exception e) {
                 e.getMessage();
             }
         } catch (Exception e) {
-            e.getMessage();
+            System.out.println(e.getMessage());
             return new SaveOneResponseDto();
         }
         return new SaveOneResponseDto();
@@ -171,9 +168,7 @@ public class AccountServiceImpl implements AccountService {
      */
     @Override
     public Boolean updatePassword(String accountEmail, String tmpPassword) {
-        
         String encryptPassword = passwordEncoder.encode(tmpPassword);
-        
         try {
             Account account = accountRepository.findByAccountEmail(accountEmail).orElseThrow(() ->
                     new IllegalArgumentException("해당 사용자가 존재하지 않습니다."));
@@ -181,6 +176,7 @@ public class AccountServiceImpl implements AccountService {
             accountRepository.save(account);
             return true;
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             return false;
         }
     }
@@ -192,7 +188,7 @@ public class AccountServiceImpl implements AccountService {
      * @return JSONArrays
      * @throws Exception
      */
-    public FindOneResponseDto findAccountBookCnt(Long accountNo) throws Exception {
+    public FindOneResponseDto findRankAccountBookCnt(Long accountNo) throws Exception {
         JSONArray jsonArray = new JSONArray();
         List<AdminDto> accounts = accountRepository.findAccountByAccountActivatedOrderByAccountBookCntDesc(true).get()
                 .stream()

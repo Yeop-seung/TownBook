@@ -2,4 +2,4 @@
 GET http://localhost:8081/backend/search/searchTitle/j
 
 ### 2. 지역검색 - 보관함 선택
-GET http://localhost:8081/backend/search/searchLocker/1
+GET http://localhost:8081/backend/search/searchLocker/3
