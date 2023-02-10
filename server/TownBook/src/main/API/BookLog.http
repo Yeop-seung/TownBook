@@ -2,26 +2,26 @@
 GET http://localhost:8081/backend/bookLog
 
 ### 2. 단일 북로그 조회
-GET http://localhost:8081/backend/bookLog/1
+GET http://localhost:8081/backend/bookLog/{{bookLogNo}}
 
 ### 3. 단일 회원의 전체 북로그 조회
-GET http://localhost:8081/backend/bookLog/account/2
+GET http://localhost:8081/backend/bookLog/account/{{accountNo}}
 
-### 4. 단일 보관함의 전체 북로그 조회
-GET http://localhost:8081/backend/bookLog/locker/3
+## 4. 단일 보관함의 전체 북로그 조회 (사용 안함)
+#GET http://localhost:8081/backend/bookLog/locker/{{lockerNo}}
 
 ### 5. 단일 도서의 전체 리뷰 조회
-GET http://localhost:8081/backend/bookLog/review/8984993751
+GET http://localhost:8081/backend/bookLog/review/{{bookIsbn}}
 
 ### 6. 북로그 생성 (도서 기부)
 POST http://localhost:8081/backend/bookLog/donateBook
 Content-Type: application/json
 
 {
-    "lockerNo": 1,
-    "detailLockerNo": 2,
-    "accountNo": 2,
-    "bookIsbn": "9788960777330"
+    "lockerNo": {{lockerNo}},
+    "detailLockerNo": {{detailLockerNo}},
+    "accountNo": {{accountNo}},
+    "bookIsbn": {{bookIsbn}}
 }
 
 ### 7. 북로그 (도서 수령)
@@ -29,11 +29,11 @@ POST http://localhost:8081/backend/bookLog/receiveBook
 Content-Type: application/json
 
 {
-    "bookLogNo": 1,
-    "accountNo": 2,
-    "bookIsbn": "8984993751",
-    "lockerNo": 1,
-    "detailLockerNo": 1
+    "bookLogNo": {{bookLogNo}},
+    "accountNo": {{accountNo}},
+    "bookIsbn": {{bookIsbn}},
+    "lockerNo": {{lockerNo}},
+    "detailLockerNo": {{detailLockerNo}}
 }
 
 

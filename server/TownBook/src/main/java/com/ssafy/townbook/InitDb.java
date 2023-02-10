@@ -106,6 +106,7 @@ public class InitDb {
             Account account1 = createAccount("test@townbook.com", passwordEncoder.encode("password"), "김싸피",
                     "대전시 유성구 덕명동",
                     "010-1234-5678", 0, "내가 바로 김싸피", "220222", authorityRoleUser);
+            account1.setAccountPoint(1000000);
             em.persist(account1);
             
             Account account2 = createAccount("admin@townbook.com", passwordEncoder.encode("password"), "최어드",
@@ -159,6 +160,7 @@ public class InitDb {
                 DetailLocker detailLocker = new DetailLocker();
                 locker.addDetailLocker(detailLocker);
                 detailLocker.setDetailLockerNoInLocker((long) i);
+                detailLocker.setBookInDetailLocker(null);
                 em.persist(detailLocker);
             }
         }
@@ -199,7 +201,7 @@ public class InitDb {
             locker.setLockerBookCnt(locker.getLockerBookCnt() + 1);
             bookLog.setLocker(locker);
             
-            detailLocker.setDetailLockerIsEmpty(false);
+            detailLocker.setBookInDetailLocker(book.get().getBookTitle());
             bookLog.setDetailLocker(detailLocker);
             
             // account
@@ -213,7 +215,7 @@ public class InitDb {
         
         public void receiveBook(BookLog bookLog, Optional<Account> account) {
             bookLog.getLocker().setLockerBookCnt(bookLog.getLocker().getLockerBookCnt() - 1);
-            bookLog.getDetailLocker().setDetailLockerIsEmpty(true);
+            bookLog.getDetailLocker().setBookInDetailLocker(null);
             bookLog.setBookLogState(false);
             
             // account

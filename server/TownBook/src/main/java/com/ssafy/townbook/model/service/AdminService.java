@@ -10,7 +10,7 @@ public interface AdminService {
      *
      * @return List<AccountDto>
      */
-    FindListResponseDto findAll();
+    FindListResponseDto findAllAccounts();
     
     /**
      * 회원번호로 단일 회원을 조회

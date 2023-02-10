@@ -31,7 +31,7 @@ public class AdminServiceImpl implements AdminService {
      * @return List<AccountDto>
      */
     @Override
-    public FindListResponseDto findAll() {
+    public FindListResponseDto findAllAccounts() {
         Optional<List<Account>> findAccounts = Optional.ofNullable(adminRepository.findAll());
         return new FindListResponseDto(findAccounts.get().stream()
                 .map(AdminDto::new)

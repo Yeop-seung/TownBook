@@ -33,8 +33,8 @@ public class AdminController {
      * @return List<AccountDto>
      */
     @GetMapping("")
-    public ResponseEntity<FindListResponseDto> findAccounts() {
-        return new ResponseEntity<FindListResponseDto>(adminService.findAll(), HttpStatus.OK);
+    public ResponseEntity<FindListResponseDto> findAllAccounts() {
+        return new ResponseEntity<FindListResponseDto>(adminService.findAllAccounts(), HttpStatus.OK);
     }
     
     /**

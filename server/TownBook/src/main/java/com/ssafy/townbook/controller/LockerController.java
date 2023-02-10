@@ -34,8 +34,8 @@ public class LockerController {
      * @return List<LockerDto>
      */
     @GetMapping("")
-    public ResponseEntity<FindListResponseDto> lockers() {
-        return new ResponseEntity<FindListResponseDto>(lockerService.findAll(), HttpStatus.OK);
+    public ResponseEntity<FindListResponseDto> findAllLockers() {
+        return new ResponseEntity<FindListResponseDto>(lockerService.findAllLockers(), HttpStatus.OK);
     }
     
     /**
