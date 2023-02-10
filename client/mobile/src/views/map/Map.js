@@ -8,7 +8,7 @@ import {
   UncontrolledAlert,
   Modal,
   Input,
-  Button
+  Button,
 } from "reactstrap";
 import axios from "axios";
 import BookList from "views/map/BookList";
@@ -33,7 +33,7 @@ function Map() {
   const [lockerList, setlockerList] = React.useState([]);
   const [bookList, setbookList] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
-
+  const [Lockers, setLockers] = React.useState([]);
   const [modalSearch, setmodalSearch] = React.useState(false);
   const toggleModalSearch = () => {
     setmodalSearch(!modalSearch);
@@ -42,6 +42,20 @@ function Map() {
 
   const [test, settest] = React.useState();
   useEffect(() => {
+    axios
+      .get(`https://i8b201.p.ssafy.io/backend/locker`)
+      .then((res) => {
+        console.log("락커들", res);
+        const lockers = [];
+        for (let i = 0; i < res.data.count; i++) {
+          lockers.push({ ...res.data.data[i], id: i + 1 });
+        }
+        setLockers(lockers);
+        console.log(lockers);
+      })
+      .catch((error) => {
+        alert("error");
+      });
     const container = document.getElementById("map"); //찾으려는 id
     const options = {
       center: new kakao.maps.LatLng(37.49676871972202, 127.02474726969814),
@@ -73,39 +87,93 @@ function Map() {
     }
 
     function displayMarker(locPosition, message) {
+      console.log("찐락", Lockers);
+
+      // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+
+      // const markerPosition  = new kakao.maps.LatLng(37.49676871972202, 127.02474726969814);
+      // for (let i = 0;Lockers.lenth; i++) {
+      //   const DBmarker`${i}` = Lockers[i]
+      // }
+
+      // object[`DBmarker${i}`];
+
+      // 마커를 생성합니다
+      // const marker = new kakao.maps.Marker({
+      //   position: locPosition,
+      //   image: markerImage,
+      // });
+
+      //동네북 위치 마커
+      // const DBmarker = new kakao.maps.Marker({
+      //   position: new kakao.maps.LatLng(36.3504119, 127.3845475),
+      //   image: markerImage,
+      // });
+
+      var positions = [];
+      for (const locker of Lockers) {
+        positions.push({
+          title: locker.lockerNo,
+          latlng: new kakao.maps.LatLng(
+            locker.lockerLatitude,
+            locker.lockerLongitude
+          ),
+        });
+      }
       const imageSrc =
           "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png", // 마커이미지의 주소입니다
         imageSize = new kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
         imageOption = { offset: new kakao.maps.Point(27, 69) }; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
-
-      // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
       const markerImage = new kakao.maps.MarkerImage(
         imageSrc,
         imageSize,
         imageOption
       );
 
-      // const markerPosition  = new kakao.maps.LatLng(37.49676871972202, 127.02474726969814);
-        // for () {
-          
-        // }
-      // 마커를 생성합니다
-      const marker = new kakao.maps.Marker({
-        position: locPosition,
-        image: markerImage,
-      });
-      //동네북 위치 마커
-      const DBmarker = new kakao.maps.Marker({
-        position: new kakao.maps.LatLng(36.3504119, 127.3845475),
-        image: markerImage,
-      });
+      for (var i = 0; i < positions.length; i ++) {
+        // 마커 이미지의 이미지 크기 입니다
 
+        // const lockerno = position.title;
+        // console.log("이건 진짜 라커넘버", lockerno);
+        // 마커 이미지를 생성합니다
+        // var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+
+        // 마커를 생성합니다
+        var marker = new kakao.maps.Marker({
+          map: map, // 마커를 표시할 지도
+          position: positions[i].latlng, // 마커를 표시할 위치
+          title: positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+          image: markerImage, // 마커 이미지
+        });
+
+        kakao.maps.event.addListener(
+          marker,
+          "click",
+          // makeOverListener(map, marker, infowindow)
+          (function (title) {
+            return function () {
+              searchLocker(title);
+            };
+          })(positions[i].title)
+        );
+      }
+    //   function makeClickListener(map, marker, infowindow) {
+    //     return function() {
+    //         infowindow.open(map, marker);
+    //     };
+    // }
+
+    // (function (lockerno) {
+    //   return function () {
+    //   searchLocker(lockerno);
+    //   toggleModalSearch();
+    //   };
+    //   })(lockerno)
       // 마커가 지도 위에 표시되도록 설정합니다
       // for () {
-        marker.setMap(map);
-        DBmarker.setMap(map);
-      // }
-   
+      // for (let i = 0;Lockers.lenth; i++) {
+      // marker.setMap(map);
+      // DBmarker.setMap(map);
 
       const iwContent = `<div style=width:"95%",height:"70vh"">${message} <div/>`, // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
         iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
@@ -121,12 +189,14 @@ function Map() {
       map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 
       // 마커에 클릭이벤트를 등록합니다
-      kakao.maps.event.addListener(DBmarker, "click", function () {
-        // 마커 위에 인포윈도우를 표시합니다
-        // infowindow.open(map, DBmarker);
-        searchLocker();
-        toggleModalSearch();
-      });
+
+      // for (const locker of positions) {
+      // kakao.maps.event.addListener(DBmarker, "click", function () {
+      //   // 마커 위에 인포윈도우를 표시합니다
+      //   // infowindow.open(map, DBmarker);
+
+      // });
+      // }
     }
   }, []);
   function searchBook(event) {
@@ -157,16 +227,16 @@ function Map() {
       });
   }
 
-  function searchLocker() {
+  function searchLocker(title) {
     // event.preventDefault();
-
-    const enteredBookTitle = searchbookRef.current.value;
+    // console.log("라커넘버라네", lockerno);
+    // const enteredBookTitle = searchbookRef.current.value;
 
     // const enteredBookTitle = searchbookRef.current.value;
     // console.log(enteredBookTitle)
 
     axios
-      .get(`https://i8b201.p.ssafy.io/backend/book/locker/4`)
+      .get(`https://i8b201.p.ssafy.io/backend/book/locker/${title}`)
       .then((res) => {
         console.log("라커 res", res);
         const books = [];
@@ -177,17 +247,18 @@ function Map() {
         console.log("lockerbooks", books);
         // console.log('lockerlist',lockerList)
         setIsLoading(false);
+        toggleModalSearch();
       })
 
       .catch((error) => {
         alert("error.");
       });
 
-      if (isLoading) {
-        <section>
-          <p>Loading...</p>
-        </section>
-      }
+    if (isLoading) {
+      <section>
+        <p>Loading...</p>
+      </section>;
+    }
   }
 
   return (

@@ -28,6 +28,11 @@ function LockerBookList(props) {
               id={book.id}
               bookTitle={book.bookTitle}
               bookTitleURL={book.bookTitleURL}
+              bookAuthor = {book.bookAuthor}
+              bookPublisher = {book.bookPublisher}
+              bookIntroductionURL = {book.bookIntroductionURL}
+              bookPublishPredate = {book.bookPublishPredate}
+
             />
           </Alert>
       ))}

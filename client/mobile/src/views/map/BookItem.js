@@ -1,6 +1,6 @@
 import classes from "./MeetupItem.module.css";
 import { Card } from "reactstrap";
-import NoticeDetail from "views/notice/NoticeDetail";
+import BookDetail from "views/map/BookDetail";
 import { Route, Switch } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { faBold } from "@fortawesome/free-solid-svg-icons";
@@ -20,11 +20,11 @@ function BookItem(props) {
         </div> */}
         <Link
           to={{
-            pathname: `/notice/${props.id}`,
+            pathname: `/book/${props.id}`,
             state: {
               id: props.id,
-              noticeTitle: props.bookTitle,
-              noticeContent: props.bookLogDonateDateTime,
+              bookTitle: props.bookTitle,
+              bookTitleURL: props.bookTitleURL,
             },
           }}
         >
