@@ -41,7 +41,7 @@ function Login(props) {
     axios
       .post(
         "https://i8b201.p.ssafy.io/backend/auth/login",
-        {  accountEmail, accountPw }
+        { accountEmail, accountPw }
         // {
         //   method: "POST",
         //   body: JSON.stringify(userInfo),
@@ -52,29 +52,42 @@ function Login(props) {
         //replace는 뒤로가기 버튼 비활성 이미 양식 제출했으므로
       )
       .then((res) => {
-        console.log(res)
+        console.log(res);
         // history.replace("/map");
         if (res.data.token) {
-          localStorage.clear()
-          localStorage.setItem("TOKEN", res.data.token)
-          localStorage.setItem("accountNo", res.data.accountDto.accountNo)
-          localStorage.setItem("accountEmail", res.data.accountDto.accountEmail)
-          localStorage.setItem("accountBirthDay", res.data.accountDto.accountBirthDay)
-          localStorage.setItem("accountAddress", res.data.accountDto.accountAddress)
-          localStorage.setItem("accountName", res.data.accountDto.accountName)
-          localStorage.setItem("accountNickname", res.data.accountDto.accountNickname)
-          localStorage.setItem("accountPhoneNumber", res.data.accountDto.accountPhoneNumber)
-
-
+          localStorage.clear();
+          localStorage.setItem("TOKEN", res.data.token);
+          localStorage.setItem("accountNo", res.data.accountDto.accountNo);
+          localStorage.setItem(
+            "accountEmail",
+            res.data.accountDto.accountEmail
+          );
+          localStorage.setItem(
+            "accountBirthDay",
+            res.data.accountDto.accountBirthDay
+          );
+          localStorage.setItem(
+            "accountAddress",
+            res.data.accountDto.accountAddress
+          );
+          localStorage.setItem("accountName", res.data.accountDto.accountName);
+          localStorage.setItem(
+            "accountNickname",
+            res.data.accountDto.accountNickname
+          );
+          localStorage.setItem(
+            "accountPhoneNumber",
+            res.data.accountDto.accountPhoneNumber
+          );
 
           window.location.replace("/map");
           // history.replace("/map");
-
         }
         // console.log(res);
         // console.log(res.data);
         //then 대신에 asynce나 await가능
-      }).catch((error) => {
+      })
+      .catch((error) => {
         alert("이메일 또는 비밀번호를 확인해주세요.");
       });
   }
@@ -86,7 +99,11 @@ function Login(props) {
             <Card>
               <CardHeader>
                 <Link to={"/map"}>
-                  <FontAwesomeIcon icon={faArrowLeft} size="xl" color="#C1B5A9"/>
+                  <FontAwesomeIcon
+                    icon={faArrowLeft}
+                    size="xl"
+                    color="#C1B5A9"
+                  />
                 </Link>
               </CardHeader>
               <CardBody>
@@ -97,10 +114,10 @@ function Login(props) {
                         <label htmlFor="exampleInputEmail1">이메일</label>
                       </div> */}
                       <div>
-                        <input
+                        <Input
                           placeholder="이메일을 입력해주세요."
                           type="email"
-                          ref={emailInputRef}
+                          innerRef={emailInputRef}
                           className={classes.style}
                         />
                       </div>
@@ -111,11 +128,11 @@ function Login(props) {
                     <FormGroup>
                       {/* <label>비밀번호</label> */}
                       <div>
-                        <input
+                        <Input
                           //   defaultValue="Mike"
                           placeholder="비밀번호를 입력해주세요"
                           type="password"
-                          ref={pwInputRef}
+                          innerRef={pwInputRef}
                           className={classes.style}
                         />
                       </div>
@@ -141,7 +158,8 @@ function Login(props) {
               </CardBody>
               <CardFooter>
                 <Row style={{ justifyContent: "center", paddingInline: 30 }}>
-                  <button
+                  <Button
+                    color="success"
                     className="btn-login"
                     // color="black"
                     type="submit"
@@ -150,7 +168,7 @@ function Login(props) {
                     className={classes.style}
                   >
                     로그인
-                  </button>
+                  </Button>
                 </Row>
                 <Row
                   style={{
