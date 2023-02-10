@@ -7,6 +7,8 @@ import {
   CardTitle,
   UncontrolledAlert,
   Modal,
+  Input,
+  Button
 } from "reactstrap";
 import axios from "axios";
 import BookList from "views/map/BookList";
@@ -84,7 +86,9 @@ function Map() {
       );
 
       // const markerPosition  = new kakao.maps.LatLng(37.49676871972202, 127.02474726969814);
-
+        // for () {
+          
+        // }
       // 마커를 생성합니다
       const marker = new kakao.maps.Marker({
         position: locPosition,
@@ -97,8 +101,11 @@ function Map() {
       });
 
       // 마커가 지도 위에 표시되도록 설정합니다
-      marker.setMap(map);
-      DBmarker.setMap(map);
+      // for () {
+        marker.setMap(map);
+        DBmarker.setMap(map);
+      // }
+   
 
       const iwContent = `<div style=width:"95%",height:"70vh"">${message} <div/>`, // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
         iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
@@ -118,7 +125,7 @@ function Map() {
         // 마커 위에 인포윈도우를 표시합니다
         // infowindow.open(map, DBmarker);
         searchLocker();
-        // toggleModalSearch();
+        toggleModalSearch();
       });
     }
   }, []);
@@ -135,7 +142,7 @@ function Map() {
       .then((res) => {
         console.log("북 res", res);
         const books = [];
-        for (let i = 0; i <= res.data.count; i++) {
+        for (let i = 0; i < res.data.count; i++) {
           books.push({ ...res.data.data[i], id: i + 1 });
         }
         setbookList(books);
@@ -181,11 +188,7 @@ function Map() {
           <p>Loading...</p>
         </section>
       }
-    // console.log('lockerlist',lockerList)
   }
-  // console.log("lockerlist",lockerList)
-
-  // console.log("usetate",bookList)
 
   return (
     <>
@@ -193,17 +196,37 @@ function Map() {
       <div className="content">
         <div>
           <form>
-            <input
-              type="text"
-              //   maxLength="20"
-              className="search_input"
-              name="search"
-              placeholder="검색어를 입력해주세요."
-              ref={searchbookRef}
-            />
-            <button className="btn-search" type="submit" onClick={searchBook}>
-              검색
-            </button>
+            <div
+              style={{
+                display: "flex",
+                marginBottom: "10px",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <Input
+                type="text"
+                //   maxLength="20"
+                className="search_input"
+                name="search"
+                placeholder="검색어를 입력해주세요."
+                innerRef={searchbookRef}
+                style={{
+                  width: "70%",
+                }}
+              />
+              <Button
+                className="btn-simple"
+                color="info"
+                type="submit"
+                onClick={searchBook}
+                style={{
+                  width: "25%",
+                }}
+              >
+                검색
+              </Button>
+            </div>
           </form>
         </div>
         <Card>

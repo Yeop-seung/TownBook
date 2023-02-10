@@ -27,7 +27,7 @@ function LockerBookList(props) {
               //   key={donate.id}
               id={book.id}
               bookTitle={book.bookTitle}
-              bookLogDonateDateTime={book.bookLogDonateDateTime}
+              bookTitleURL={book.bookTitleURL}
             />
           </Alert>
       ))}
