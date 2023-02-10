@@ -17,7 +17,7 @@
 */
 import Book from "views/Book.js";
 import Icons from "views/Icons.js";
-import Map from "views/Map.js";
+import Map from "views/map/Map.js";
 import Notice from "views/notice/Notice.js";
 // import Rtl from "views/Rtl.js";
 import TableList from "views/TableList.js";

@@ -265,6 +265,7 @@ function MyPage(props) {
                 <Row style={{justifyContent:"center"}}>
                   <button hidden={!verifiedPassword} onClick={modifyMyInfo}>수정완료</button>
                   <button hidden={!verifiedPassword} onClick={()=>{setverifiedPassword(false)}}>취소</button>
+                  <button>회원탈퇴</button>
                 </Row>
               </CardBody>
               <CardBody>
