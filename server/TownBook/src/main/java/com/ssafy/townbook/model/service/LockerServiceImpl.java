@@ -1,6 +1,5 @@
 package com.ssafy.townbook.model.service;
 
-import com.ssafy.townbook.model.dto.DetailLockerDto;
 import com.ssafy.townbook.model.dto.LockerDto;
 import com.ssafy.townbook.model.dto.response.FindListResponseDto;
 import com.ssafy.townbook.model.dto.response.FindOneResponseDto;
@@ -55,21 +54,8 @@ public class LockerServiceImpl implements LockerService {
      */
     @Override
     public FindOneResponseDto findLockerByLockerNo(Long lockerNo) {
-        JSONArray jsonArray = new JSONArray();
         Locker findLocker = lockerRepository.findLockerByLockerNo(lockerNo).get();
-
-        for (int i =0; i<findLocker.getLockerBookCnt();i++){
-            JSONObject jsonObject = new JSONObject();
-
-            DetailLockerDto detailLockerDto = new DetailLockerDto(detailLockerRepository.findDetailLockerByDetailLockerNo(findLocker.getDetailLocker().get(i).getDetailLockerNo()).get());
-            jsonObject.put("detailLocker", detailLockerDto);
-
-//            책 이름, 디테일 보관함 번호
-            jsonArray.add(jsonObject);
-        }
-
-//        return new FindOneResponseDto(new LockerDto(findLocker));
-        return new FindOneResponseDto(jsonArray);
+        return new FindOneResponseDto(new LockerDto(findLocker));
     }
     
     /**

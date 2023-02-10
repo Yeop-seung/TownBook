@@ -19,8 +19,7 @@ public class LockerDto {
     private Double                lockerLatitude;
     private Double                lockerLongitude;
     private int                   lockerStorage;
-//    private List<DetailLockerDto> detailLocker = new ArrayList<>();
-    private List<Long> detailLocker = new ArrayList<>();
+    private List<DetailLockerDto> detailLocker = new ArrayList<>();
 
     @Builder
     public LockerDto(Locker locker) {
@@ -31,15 +30,10 @@ public class LockerDto {
         this.lockerLongitude = locker.getLockerLongitude();
         
         // 연관 관계의 무한 참조를 방지하기 위해 DetailLockerDto 사용
-//        List<DetailLocker> findDetailLockers = locker.getDetailLocker();
-//        this.detailLocker = findDetailLockers.stream()
-//                .map(DetailLockerDto::new)
-//                .collect(Collectors.toList());
-
         List<DetailLocker> findDetailLockers = locker.getDetailLocker();
-        for (int i = 0 ; i<findDetailLockers.size();i++) {
-            this.detailLocker.add(findDetailLockers.get(i).getDetailLockerNo());
-        }
+        this.detailLocker = findDetailLockers.stream()
+                .map(DetailLockerDto::new)
+                .collect(Collectors.toList());
 
         // 보관함 저장 공간
         this.lockerStorage = 0;
