@@ -23,6 +23,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
+import net.minidev.json.JSONArray;
+import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -101,10 +103,20 @@ public class BookLogServiceImpl implements BookLogService {
      */
     @Override
     public FindListResponseDto findBookLogByLockerNo(Long lockerNo) {
-        List<BookLog> findBookLogs = bookLogQueryRepository.findBookLogByLockerNo(lockerNo).get();
-        return new FindListResponseDto(findBookLogs.stream()
-                .map(BookLogDto::new)
-                .collect(Collectors.toList()));
+        List<BookLog>    findBookLogs       = bookLogQueryRepository.findBookLogByLockerNo(lockerNo).get();
+        List<BookLogDto> findBookLogDtoList = findBookLogs.stream().map(BookLogDto::new).collect(Collectors.toList());
+        
+        JSONArray jsonArray = new JSONArray();
+        for (BookLogDto bookLogDto : findBookLogDtoList) {
+            JSONObject jsonObject = new JSONObject();
+            String     bookIsbn   = bookLogDto.getBookIsbn();
+            String     bookTitle  = bookRepository.findBookByBookIsbn(bookIsbn).get().getBookTitle();
+            jsonObject.put("bookLog", bookLogDto);
+            jsonObject.put("bookTitle", bookTitle);
+            jsonArray.add(jsonObject);
+        }
+        
+        return new FindListResponseDto(jsonArray);
     }
     
     /**
