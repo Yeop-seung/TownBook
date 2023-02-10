@@ -4,7 +4,6 @@ import com.ssafy.townbook.model.dto.request.DonateBookRequestDto;
 import com.ssafy.townbook.model.dto.request.ReceiveBookRequestDto;
 import com.ssafy.townbook.model.dto.response.FindListResponseDto;
 import com.ssafy.townbook.model.dto.response.FindOneResponseDto;
-import com.ssafy.townbook.model.dto.response.ReceiveBookLogResponseDto;
 
 public interface BookLogService {
     
@@ -13,7 +12,7 @@ public interface BookLogService {
      *
      * @return List<BookLogDto>
      */
-    FindListResponseDto findAll();
+    FindListResponseDto findAllBookLogs();
     
     /**
      * 단일 북로그 조회

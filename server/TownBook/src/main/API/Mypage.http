@@ -1,3 +1,6 @@
+### 1. QR
+GET http://localhost:8081/backend/myPage/qr/test.com
+
 ### 2. 로그인 유저의 포인트 반환
 GET http://localhost:8081/backend/myPage/myPoint/1
 

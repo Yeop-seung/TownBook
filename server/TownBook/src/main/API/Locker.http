@@ -10,7 +10,7 @@ Content-Type: application/json
 
 {
     "lockerRegion": "장대동",
-    "detailLockerCount": 10,
+    "detailLockerCount": 2,
     "lockerLatitude": 123.123123,
     "lockerLongitude": 12.123123
 }

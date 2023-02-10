@@ -60,7 +60,7 @@ public class BookLogServiceImpl implements BookLogService {
      * @return List<BookLogDto>
      */
     @Override
-    public FindListResponseDto findAll() {
+    public FindListResponseDto findAllBookLogs() {
         Optional<List<BookLog>> findBookLogs = Optional.ofNullable(bookLogRepository.findAll());
         return new FindListResponseDto(findBookLogs.get().stream()
                 .map(BookLogDto::new)
@@ -131,12 +131,14 @@ public class BookLogServiceImpl implements BookLogService {
         // 비어있는지 체크
         long         detailLockerNo = donateBookRequestDto.getDetailLockerNo();
         DetailLocker detailLocker   = detailLockerRepository.findDetailLockerByDetailLockerNo(detailLockerNo).get();
-        if (!detailLocker.getDetailLockerIsEmpty()) { // 비어있지 않다면
+        if (detailLocker.getBookInDetailLocker() != null) { // 비어있지 않다면
             // return fail message
             String status = "보관함이 비어있지 않습니다.";
             return new FindOneResponseDto(status);
         } else {
-            detailLocker.setDetailLockerIsEmpty(false);
+            String bookIsbn  = donateBookRequestDto.getBookIsbn();
+            String bookTitle = bookRepository.findBookByBookIsbn(bookIsbn).get().getBookTitle();
+            detailLocker.setBookInDetailLocker(bookTitle);
         }
         
         // Account
@@ -191,7 +193,7 @@ public class BookLogServiceImpl implements BookLogService {
         // detailLocker
         long         detailLockerNo = receiveBookRequestDto.getDetailLockerNo();
         DetailLocker detailLocker   = detailLockerRepository.findDetailLockerByDetailLockerNo(detailLockerNo).get();
-        detailLocker.setDetailLockerIsEmpty(true);
+        detailLocker.setBookInDetailLocker(null);
         
         // bookLog
         long    bookLogNo = receiveBookRequestDto.getBookLogNo();

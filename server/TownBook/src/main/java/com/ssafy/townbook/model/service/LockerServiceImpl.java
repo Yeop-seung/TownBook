@@ -36,7 +36,7 @@ public class LockerServiceImpl implements LockerService {
      * @return List<LockerDto>
      */
     @Override
-    public FindListResponseDto findAll() {
+    public FindListResponseDto findAllLockers() {
         Optional<List<Locker>> findLockers = Optional.ofNullable(lockerRepository.findAll());
         return new FindListResponseDto(findLockers.get().stream()
                 .map(LockerDto::new)
@@ -77,6 +77,8 @@ public class LockerServiceImpl implements LockerService {
                 DetailLocker detailLocker = new DetailLocker();
                 locker.addDetailLocker(detailLocker);
                 detailLocker.setDetailLockerNoInLocker((long) i);
+                detailLocker.setBookInDetailLocker(null);
+                detailLockerRepository.save(detailLocker);
             }
             
             return new SaveOneResponseDto(true);

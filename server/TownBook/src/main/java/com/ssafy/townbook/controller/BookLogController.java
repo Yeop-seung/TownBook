@@ -34,8 +34,8 @@ public class BookLogController {
      * @return List<BookLogDto>
      */
     @GetMapping("")
-    public ResponseEntity<FindListResponseDto> bookLogs() {
-        return new ResponseEntity<FindListResponseDto>(bookLogService.findAll(), HttpStatus.OK);
+    public ResponseEntity<FindListResponseDto> findAllBookLogs() {
+        return new ResponseEntity<FindListResponseDto>(bookLogService.findAllBookLogs(), HttpStatus.OK);
     }
     
     /**
@@ -45,7 +45,7 @@ public class BookLogController {
      * @return BookLogDto
      */
     @GetMapping("/{bookLogNo}")
-    public ResponseEntity<FindOneResponseDto> findBookLogByBookLog(@PathVariable Long bookLogNo) {
+    public ResponseEntity<FindOneResponseDto> findBookLogByBookLogNo(@PathVariable Long bookLogNo) {
         return new ResponseEntity<FindOneResponseDto>(bookLogService.findBookLogByBookLogNo(bookLogNo), HttpStatus.OK);
     }
     
