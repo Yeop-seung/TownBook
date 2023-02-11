@@ -20,10 +20,10 @@ function NoticeItem(props) {
         </div> */}
         <Link
           to={{
-            pathname: `/notice/${props.id}`,
+            pathname: `/book/${props.id}`,
             state: {
               id: props.id,
-              noticeTitle: props.bookTitle,
+              bookTitle: props.bookTitle,
               noticeContent: props.bookLogReceiveDateTime,
             },
           }}

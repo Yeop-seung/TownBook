@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import "./Map.css";
+import markerimg from "assets/img/library2.png";
 import {
   Card,
   CardBody,
@@ -35,6 +36,7 @@ function Map() {
   const [isLoading, setIsLoading] = React.useState(true);
   const [Lockers, setLockers] = React.useState([]);
   const [modalSearch, setmodalSearch] = React.useState(false);
+  const [count, setCount] = React.useState(0);
   const toggleModalSearch = () => {
     setmodalSearch(!modalSearch);
   };
@@ -51,11 +53,14 @@ function Map() {
           lockers.push({ ...res.data.data[i], id: i + 1 });
         }
         setLockers(lockers);
-        console.log(lockers);
+        setIsLoading(false);
       })
       .catch((error) => {
         alert("error");
       });
+
+    console.log("테스트해보자", Lockers);
+
     const container = document.getElementById("map"); //찾으려는 id
     const options = {
       center: new kakao.maps.LatLng(37.49676871972202, 127.02474726969814),
@@ -71,7 +76,7 @@ function Map() {
           lon = position.coords.longitude; // 경도
 
         const locPosition = new kakao.maps.LatLng(lat, lon); // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
-        const message = '<div style="padding:10px;">여기에 계신가요?!</div>'; // 인포윈도우에 표시될 내용입니다
+        const message = `'<div style="padding:10px;">여기에 계신가요?!</div>'`; // 인포윈도우에 표시될 내용입니다
         map.panTo(locPosition);
 
         // 마커와 인포윈도우를 표시합니다
@@ -89,93 +94,7 @@ function Map() {
     function displayMarker(locPosition, message) {
       console.log("찐락", Lockers);
 
-      // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
-
-      // const markerPosition  = new kakao.maps.LatLng(37.49676871972202, 127.02474726969814);
-      // for (let i = 0;Lockers.lenth; i++) {
-      //   const DBmarker`${i}` = Lockers[i]
-      // }
-
-      // object[`DBmarker${i}`];
-
-      // 마커를 생성합니다
-      // const marker = new kakao.maps.Marker({
-      //   position: locPosition,
-      //   image: markerImage,
-      // });
-
-      //동네북 위치 마커
-      // const DBmarker = new kakao.maps.Marker({
-      //   position: new kakao.maps.LatLng(36.3504119, 127.3845475),
-      //   image: markerImage,
-      // });
-
-      var positions = [];
-      for (const locker of Lockers) {
-        positions.push({
-          title: locker.lockerNo,
-          latlng: new kakao.maps.LatLng(
-            locker.lockerLatitude,
-            locker.lockerLongitude
-          ),
-        });
-      }
-      const imageSrc =
-          "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png", // 마커이미지의 주소입니다
-        imageSize = new kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
-        imageOption = { offset: new kakao.maps.Point(27, 69) }; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
-      const markerImage = new kakao.maps.MarkerImage(
-        imageSrc,
-        imageSize,
-        imageOption
-      );
-
-      for (var i = 0; i < positions.length; i ++) {
-        // 마커 이미지의 이미지 크기 입니다
-
-        // const lockerno = position.title;
-        // console.log("이건 진짜 라커넘버", lockerno);
-        // 마커 이미지를 생성합니다
-        // var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
-
-        // 마커를 생성합니다
-        var marker = new kakao.maps.Marker({
-          map: map, // 마커를 표시할 지도
-          position: positions[i].latlng, // 마커를 표시할 위치
-          title: positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-          image: markerImage, // 마커 이미지
-        });
-
-        kakao.maps.event.addListener(
-          marker,
-          "click",
-          // makeOverListener(map, marker, infowindow)
-          (function (title) {
-            return function () {
-              searchLocker(title);
-            };
-          })(positions[i].title)
-        );
-      }
-    //   function makeClickListener(map, marker, infowindow) {
-    //     return function() {
-    //         infowindow.open(map, marker);
-    //     };
-    // }
-
-    // (function (lockerno) {
-    //   return function () {
-    //   searchLocker(lockerno);
-    //   toggleModalSearch();
-    //   };
-    //   })(lockerno)
-      // 마커가 지도 위에 표시되도록 설정합니다
-      // for () {
-      // for (let i = 0;Lockers.lenth; i++) {
-      // marker.setMap(map);
-      // DBmarker.setMap(map);
-
-      const iwContent = `<div style=width:"95%",height:"70vh"">${message} <div/>`, // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+      const iwContent = `<div style=width:"95%",height:"70vh">${message} <div/>`, // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
         iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
 
       // 인포윈도우를 생성합니다
@@ -188,6 +107,102 @@ function Map() {
 
       map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 
+      // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+
+      // const markerPosition  = new kakao.maps.LatLng(37.49676871972202, 127.02474726969814);
+      // for (let i = 0;Lockers.lenth; i++) {
+      //   const DBmarker`${i}` = Lockers[i]
+      // }
+
+      // object[`DBmarker${i}`];
+
+      // 마커를 생성합니다
+      // const myposition = new kakao.maps.Marker({
+      //   position: locPosition,
+      //   image: markerImage,
+      // });
+      const imageSrc =
+          "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png", // 마커이미지의 주소입니다
+        imageSize = new kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
+        imageOption = { offset: new kakao.maps.Point(27, 69) }; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+      const markerImage = new kakao.maps.MarkerImage(
+        imageSrc,
+        imageSize,
+        imageOption
+      );
+
+      //내위치
+      const myposition = new kakao.maps.Marker({
+        map: map, // 마커를 표시할 지도
+        position: locPosition, // 마커를 표시할 위치
+        content: "내위치", // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+        image: markerImage, // 마커 이미지
+      });
+
+      //동네북 위치 배열
+      var positions = [];
+
+      for (const locker of Lockers) {
+        positions.push({
+          title: locker.lockerNo,
+          latlng: new kakao.maps.LatLng(
+            locker.lockerLatitude,
+            locker.lockerLongitude
+          ),
+        });
+      }
+
+      for (var i = 0; i < positions.length; i++) {
+        // const lockerno = position.title;
+        // console.log("이건 진짜 라커넘버", lockerno);
+
+        // 마커를 생성합니다
+        var marker = new kakao.maps.Marker({
+          map: map, // 마커를 표시할 지도
+          position: positions[i].latlng, // 마커를 표시할 위치
+          title: positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+          image: markerImage, // 마커 이미지
+        });
+
+        //마커들에 클릭 이벤트 추가
+        kakao.maps.event.addListener(
+          marker,
+          "click",
+          // makeOverListener(map, marker, infowindow)
+          (function (title) {
+            return function () {
+              searchLocker(title);
+              console.log(title);
+            };
+          })(positions[i].title)
+        );
+        kakao.maps.event.addListener(
+          marker,
+          "mouseover",
+          makeOverListener(map, marker, infowindow)
+        );
+        kakao.maps.event.addListener(
+          marker,
+          "mouseout",
+          makeOutListener(infowindow)
+        );
+      }
+
+      function makeOverListener(map, marker, infowindow) {
+        return function () {
+          infowindow.open(map, marker);
+        };
+      }
+
+      // 인포윈도우를 닫는 클로저를 만드는 함수입니다
+      function makeOutListener(infowindow) {
+        return function () {
+          infowindow.close();
+        };
+      }
+      // myposition.setMap(map);
+      // DBmarker.setMap(map);
+
       // 마커에 클릭이벤트를 등록합니다
 
       // for (const locker of positions) {
@@ -198,12 +213,16 @@ function Map() {
       // });
       // }
     }
-  }, []);
+  }, [isLoading]);
+  if (isLoading) {
+    <section>
+      <p>Loading...</p>
+    </section>;
+  }
   function searchBook(event) {
     event.preventDefault();
 
     const enteredBookTitle = searchbookRef.current.value;
-    // console.log(enteredBookTitle)
 
     axios
       .get(
@@ -218,8 +237,6 @@ function Map() {
         setbookList(books);
         console.log("book", books);
         console.log("bookset", bookList);
-
-        // console.log("전달값",books)
       })
 
       .catch((error) => {
@@ -228,13 +245,6 @@ function Map() {
   }
 
   function searchLocker(title) {
-    // event.preventDefault();
-    // console.log("라커넘버라네", lockerno);
-    // const enteredBookTitle = searchbookRef.current.value;
-
-    // const enteredBookTitle = searchbookRef.current.value;
-    // console.log(enteredBookTitle)
-
     axios
       .get(`https://i8b201.p.ssafy.io/backend/book/locker/${title}`)
       .then((res) => {
