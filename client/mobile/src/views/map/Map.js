@@ -341,6 +341,12 @@ function Map() {
         modalClassName="modal-search"
         isOpen={modalSearch2}
         toggle={toggleModalSearch2}
+        style={{position: "absolute",
+          bottom: 0,
+          left: 0,
+          right: 0,
+          height: "20%",
+          backgroundColor: "transparent",}}
       >
         <button
           aria-label="Close"
@@ -352,14 +358,13 @@ function Map() {
         >
           <i className="tim-icons icon-simple-remove" />
         </button>
-        <Card>
-          <CardHeader>
-            <CardTitle tag="h4">검색결과</CardTitle>
-          </CardHeader>
-          <CardBody>
-            <BookList bookList={bookList} />
-          </CardBody>
-        </Card>
+        
+            <BookList
+              // to={{ pathname: `/map/${searchbookRef}` }}
+              bookList={bookList}
+            />
+         
+        
       </Modal>
 
       <Modal
