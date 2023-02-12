@@ -41,7 +41,7 @@ function NoticeList(props) {
               type="submit"
               onClick={showid}
               // className={classes.style}
-              style={{ backgroundColor: hiddenid ? "black" : "white" }}
+              style={{ backgroundColor: hiddenid ? "info" : "primary" }}
             >
               기부
             </Button>
@@ -55,7 +55,7 @@ function NoticeList(props) {
               type="submit"
               onClick={showpassword}
               // className={classes.style}
-              style={{ backgroundColor: hiddenpassword ? "black" : "white" }}
+              style={{ backgroundColor: hiddenpassword ? "info" : "primary" }}
             >
               수령
             </Button>
@@ -67,19 +67,20 @@ function NoticeList(props) {
 
       {props.Donates.map((donate) => (
         <div>
-          <Alert color="info" hidden={hiddenid}>
+          <Alert  hidden={hiddenid}>
             <MyPageDonateItem
               //   key={donate.id}
               id={donate.id}
               bookTitle={donate.bookTitle}
               bookLogDonateDateTime={donate.bookLogDonateDateTime}
+              bookLogLocker={donate.bookLogLocker}
             />
           </Alert>
         </div>
       ))}
       {props.Receives.map((receive) => (
         <div>
-          <Alert color="info" hidden={hiddenpassword}>
+          <Alert  hidden={hiddenpassword}>
             <MyPageReceiveItem
               //   key={receive.id}
               id={receive.id}

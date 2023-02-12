@@ -1,23 +1,9 @@
-/*!
-
-=========================================================
-* Black Dashboard React v1.2.1
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/black-dashboard-react
-* Copyright 2022 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/black-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-import React from "react";
-
+import React, { useRef } from "react";
+import { useDispatch } from "react-redux";
+import emailjs from "@emailjs/browser";
 // reactstrap components
+import classes from "./NoticeWrite.module.css";
+
 import {
   Card,
   CardHeader,
@@ -25,10 +11,32 @@ import {
   CardTitle,
   Table,
   Row,
-  Col
+  Col,
 } from "reactstrap";
 
 function Tables() {
+  const form = useRef();
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs
+      .sendForm(
+        "service_0x9vq6a",
+        "template_daz3hhq",
+        form.current,
+        "s8h3MJKjM8o8y_z-B"
+      )
+      .then(
+        (result) => {
+          alert("답변은 가입할 때 입력하신 이메일로 받으실 수 있습니다. 문의해주셔서 감사합니다. ")
+          console.log(result.text);
+        },
+        (error) => {
+          console.log(error.text);
+        }
+      );
+  };
   return (
     <>
       <div className="content">
@@ -36,67 +44,64 @@ function Tables() {
           <Col md="12">
             <Card>
               <CardHeader>
-                <CardTitle tag="h4">랭킹</CardTitle>
+                <CardTitle tag="h4">고객센터</CardTitle>
               </CardHeader>
               <CardBody>
-                <Table className="tablesorter" responsive>
-                  <thead className="text-primary">
-                    <tr>
-                      <th>이름</th>
-                      <th>시</th>
-                      <th>동</th>
-                      <th className="text-center">포인트</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>Dakota Rice</td>
-                      <td>Niger</td>
-                      <td>Oud-Turnhout</td>
-                      <td className="text-center">$36,738</td>
-                    </tr>
-                    <tr>
-                      <td>Minerva Hooper</td>
-                      <td>Curaçao</td>
-                      <td>Sinaai-Waas</td>
-                      <td className="text-center">$23,789</td>
-                    </tr>
-                    <tr>
-                      <td>Sage Rodriguez</td>
-                      <td>Netherlands</td>
-                      <td>Baileux</td>
-                      <td className="text-center">$56,142</td>
-                    </tr>
-                    <tr>
-                      <td>Philip Chaney</td>
-                      <td>Korea, South</td>
-                      <td>Overland Park</td>
-                      <td className="text-center">$38,735</td>
-                    </tr>
-                    <tr>
-                      <td>Doris Greene</td>
-                      <td>Malawi</td>
-                      <td>Feldkirchen in Kärnten</td>
-                      <td className="text-center">$63,542</td>
-                    </tr>
-                    <tr>
-                      <td>Mason Porter</td>
-                      <td>Chile</td>
-                      <td>Gloucester</td>
-                      <td className="text-center">$78,615</td>
-                    </tr>
-                    <tr>
-                      <td>Jon Porter</td>
-                      <td>Portugal</td>
-                      <td>Gloucester</td>
-                      <td className="text-center">$98,615</td>
-                    </tr>
-                  </tbody>
-                </Table>
+                <form ref={form} onSubmit={sendEmail}>
+                  <Col>
+                    <Row>
+                      <label>제목</label>
+                    </Row>
+                    <Row>
+                      <textarea
+                        placeholder="제목을 입력해주세요."
+                        type="text"
+                        name="title"
+                        className={classes.titlestyle}
+                      />
+                    </Row>
+
+                    <Row>
+                      <input
+                        type="text"
+                        name="from_name"
+                        defaultValue={`${localStorage.getItem("accountNo")}`}
+                        hidden={true}
+                      />
+                    </Row>
+
+                    <Row>
+                      <label>문의사항</label>
+                    </Row>
+                    <Row>
+                      <textarea
+                        //   defaultValue="Mike"
+                        placeholder="내용을 입력해주세요"
+                        name="message"
+                        type="text"
+                        className={classes.contentstyle}
+                        required
+                        id="content"
+                      />
+                    </Row>
+                    <Row>
+                    <input
+                      type="submit"
+                      value="문의하기"
+                      className="btn-login"
+                      // color="black"
+                      style={{
+                        marginLeft: 15,
+                      }}
+                    />
+                    </Row>
+                  </Col>
+                </form>
               </CardBody>
             </Card>
           </Col>
-          <Col md="12">
+
+          {/* <Col md="12">
             <Card className="card-plain">
               <CardHeader>
                 <CardTitle tag="h4">Table on Plain Background</CardTitle>
@@ -159,7 +164,7 @@ function Tables() {
                 </Table>
               </CardBody>
             </Card>
-          </Col>
+          </Col> */}
         </Row>
       </div>
     </>

@@ -8,7 +8,7 @@ function NoticeList(props) {
       {props.notices.map((notice) => (
         
 
-      <UncontrolledAlert color="info">
+      <Alert style={{backgroundColor: "#C1B5A9"}}>
         <NoticeItem
           key={notice.id}
           id={notice.id}
@@ -16,7 +16,7 @@ function NoticeList(props) {
           noticeContent={notice.noticeContent}
           
         />
-      </UncontrolledAlert>
+      </Alert>
 
         
       ))}

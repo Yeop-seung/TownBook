@@ -99,6 +99,17 @@
   &.navbar-absolute {
     position: fixed;
     z-index: 1050;
+    @media (max-width: 993px) {
+      bottom: 0;
+      // height: 60px;
+      
+    } 
+    padding: 0;
+    
+
+    
+    
+    // height
   }
 
   &.navbar-abs {

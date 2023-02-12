@@ -25,16 +25,22 @@ function BookItem(props) {
               id: props.id,
               bookTitle: props.bookTitle,
               bookTitleURL: props.bookTitleURL,
+              MapToken: true,
             },
           }}
         >
           
-          <p style={{ color: "white" }}>{props.id}</p>
+          {/* <p style={{ color: "white" }}>{props.id}</p> */}
         <img
           alt="..."
           // className="avatar"
           src={props.bookTitleURL}
           className={"image"}
+          style={{
+            height: "100%",
+            width: "30%",
+            boxShadow: "rgba(0, 0, 0, 0.5) 3px 3px 10px",
+          }}
         />
         <p style={{ color: "white" }}>{props.bookTitle}</p>
 

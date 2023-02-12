@@ -135,13 +135,13 @@ function Notice(props) {
                   style={{ justifyContent: "space-between", paddingInline: 15 }}
                 >
                   <Link to={"/map"}>
-                    <FontAwesomeIcon icon={faArrowLeft} size="xl" color="black"/>
+                    <FontAwesomeIcon icon={faArrowLeft} size="xl" color="black" />
                   </Link>
 
                   <CardTitle tag="h4">공지사항</CardTitle>
 
                   <Link to={"/notice/write"}>
-                    <FontAwesomeIcon icon={faPlus} size="xl" color="black" />
+                    <FontAwesomeIcon icon={faPlus} size="xl" color="black" hidden={localStorage.getItem("accountNO") === null}/>
                   </Link>
                 </Row>
               </CardHeader>

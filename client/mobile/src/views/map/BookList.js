@@ -25,8 +25,8 @@ function BookList(props) {
         <div>
           <Alert color="info" >
             <BookItem
-              key={book.id}
-              id={book.id}
+              // key={book.id}
+              // id={book.id}
               bookTitle={book.book.bookTitle}
               bookTitleURL={book.book.bookTitleURL}
             />

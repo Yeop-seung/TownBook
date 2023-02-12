@@ -3,7 +3,7 @@ import { Card, CardHeader } from "reactstrap";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft, faBookmark } from "@fortawesome/free-solid-svg-icons";
 
 function BookDetail(props) {
   console.log(props);
@@ -34,12 +34,18 @@ function BookDetail(props) {
       <Card>
         <CardHeader>
           <Link to={"/map"}>
-            <FontAwesomeIcon icon={faArrowLeft} size="xl" color="#C1B5A9" />
+            <FontAwesomeIcon icon={faArrowLeft} size="xl" color="#C1B5A9" hidden={book.MyPageToken}/>
+          </Link>
+          <Link to={"/myPage"}>
+            <FontAwesomeIcon icon={faArrowLeft} size="xl" color="#C1B5A9" hidden={book.MapToken}/>
           </Link>
         </CardHeader>
 
         <div className={classes.content}>
-          <div style={{ display: "flex" }}>책상세</div>
+          <div style={{ display: "flex" }}>
+            <div>책상세</div>
+            <div></div>
+            </div>
           <hr />
           <div style={{ display: "flex" }}>
             <img

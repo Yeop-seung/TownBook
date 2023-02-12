@@ -29,6 +29,7 @@ function LockerBookItem(book) {
             bookPublisher: book.bookPublisher,
             bookIntroductionURL: book.bookIntroductionURL,
             bookPublishPredate: book.bookPublishPredate,
+            MapToken : true,
           },
         }}
       >

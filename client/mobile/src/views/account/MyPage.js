@@ -2,6 +2,7 @@ import MyPageDonateList from "views/account/MyPageDonateList";
 import React, { useEffect, useRef } from "react";
 import axios from "axios";
 // reactstrap components
+import AdminPage from "views/account/AdminPage";
 import classes from "./Login.module.css";
 import { useHistory } from "react-router-dom";
 import {
@@ -40,6 +41,16 @@ function MyPage(props) {
   const [Receives, setReceives] = React.useState([]);
   const [Point, setPoint] = React.useState("");
   const [verifiedPassword, setverifiedPassword] = React.useState(false);
+  const [users, setusers] = React.useState([]);
+  const [hiddenadmin, sethiddenadmin] = React.useState(true);
+
+  const hiddenAdminPage = () => {
+    if (localStorage.getItem("accountNo") === 3) {
+      return false
+    } else {
+      return true
+    }
+  }
 
   const accountNo = localStorage.getItem("accountNo");
   const history = useHistory();
@@ -85,6 +96,8 @@ function MyPage(props) {
       });
   }
   // console.log(accountNo);
+
+  //개인정보수정 확인 비밀번호
   function verifyPassword() {
     const enteredPw = modalpwInputRef.current.value;
 
@@ -107,6 +120,8 @@ function MyPage(props) {
       });
   }
 
+
+
   useEffect(() => {
     Promise.all([
       axios.get(`https://i8b201.p.ssafy.io/backend/myPage/donate/${accountNo}`),
@@ -116,20 +131,28 @@ function MyPage(props) {
       axios.get(
         `https://i8b201.p.ssafy.io/backend/myPage/myPoint/${accountNo}`
       ),
+      axios.get(
+        `https://i8b201.p.ssafy.io/backend/admin`
+      )
     ])
       // .get("https:///townbook/myPage/receive/${receiverNo}")
-      .then(([res1, res2, res3]) => {
+      .then(([res1, res2, res3, res4]) => {
         console.log(res1);
         // console.log(res1);
         // console.log(res2);
-        // console.log(res4)
+        console.log(res4)
         const donates = [];
         const receives = [];
+        const usersinfo = [];
         for (let i = 0; i < res1.data.count; i++) {
           donates.push({ ...res1.data.data[i], id: i + 1 });
         }
         for (let i = 0; i < res2.data.count; i++) {
           receives.push({ ...res2.data.data[i], id: i + 1 });
+        }
+
+        for (let i = 0; i < res4.data.count; i++) {
+          usersinfo.push({ ...res4.data.data[i], id: i + 1 });
         }
         // for (const key in res.data) {
         //   const notice = {
@@ -145,40 +168,50 @@ function MyPage(props) {
         //   )
         // );
         // setImageUrl(`data:${res.headers["content-type"]};base64,${base64}`)
-        console.log("기부", donates);
-        console.log("수령", receives);
-        console.log(res3);
-        setIsLoading(false);
+        // console.log("기부", donates);
+        // console.log("수령", receives);
+        // console.log(res3);
+        console.log('유저인포',usersinfo)
         setDonates(donates);
         setReceives(receives);
+        setusers(usersinfo);
         setPoint(res3.data.data);
+        setIsLoading(false);
         // console.log("합친거", Donates)
       })
       .catch((error) => {
         alert("내역 로딩에 실패하였습니다.");
       });
-  }, []);
+  }, [isLoading]);
   if (isLoading) {
     <section>
       <p>Loading...</p>
     </section>;
   }
-
+  console.log('유저스',users)
   return (
     <>
       <div className="content">
         <Row>
           <Col md="12">
+            <Card hidden={hiddenadmin}>
+              <CardHeader>
+                관리자페이지
+              </CardHeader>
+              <CardBody>
+                <AdminPage users={users}/>
+              </CardBody>
+            </Card>
             <Card>
               <CardHeader>
                 <Row style={{ justifyContent: "space-between" }}>
-                  <CardTitle tag="h4">내 정보</CardTitle>
-                  <Button onClick={toggleModalSearch} hidden={verifiedPassword}>
+                  <CardTitle tag="h4" style={{paddingLeft:15, marginTop:10}}>내 정보</CardTitle>
+                  <Button onClick={toggleModalSearch} hidden={verifiedPassword} style={{marginRight:15, margin:0, paddingTop:0, paddingBottom:0}}>
                     개인정보수정
                   </Button>
                 </Row>
               </CardHeader>
-              <CardBody>
+              <CardBody style={{paddingInline:0}}>
                 <Col>내포인트 : {Point}</Col>
 
                 <Col>이름 : {localStorage.getItem("accountName")}</Col>
@@ -263,54 +296,7 @@ function MyPage(props) {
                 </Row>
               </CardBody>
               <CardBody>
-                {/* <MyPageDonateList/> */}
-                {/* <Table className="tablesorter" responsive>
-                  <thead className="text-primary">
-                    <tr>
-                      <th>번호</th>
-                      <th>제목</th>
-                      <th>작성일자</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>Dakota Rice</td>
-                      <td>Niger</td>
-                      <td>Oud-Turnhout</td>
-                    </tr>
-                    <tr>
-                      <td>Minerva Hooper</td>
-                      <td>Curaçao</td>
-                      <td>Sinaai-Waas</td>
-                    </tr>
-                    <tr>
-                      <td>Sage Rodriguez</td>
-                      <td>Netherlands</td>
-                      <td>Baileux</td>
-                    </tr>
-                    <tr>
-                      <td>Philip Chaney</td>
-                      <td>Korea, South</td>
-                      <td>Overland Park</td>
-                    </tr>
-                    <tr>
-                      <td>Doris Greene</td>
-                      <td>Malawi</td>
-                      <td>Feldkirchen in Kärnten</td>
-                    </tr>
-                    <tr>
-                      <td>Mason Porter</td>
-                      <td>Chile</td>
-                      <td>Gloucester</td>
-                    </tr>
-                    <tr>
-                      <td>Jon Porter</td>
-                      <td>Portugal</td>
-                      <td>Gloucester</td>
-                    </tr>
-                  </tbody>
-                </Table> */}
-                {/* {point} */}
+               
               </CardBody>
             </Card>
           </Col>
@@ -319,60 +305,7 @@ function MyPage(props) {
               <CardBody>
                 <MyPageDonateList Donates={Donates} Receives={Receives} />
 
-                {/* <Table className="tablesorter" responsive>
-                  <thead className="text-primary">
-                    <tr>
-                      <th>이름</th>
-                      <th>시</th>
-                      <th>동</th>
-                      <th className="text-center">포인트</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>Dakota Rice</td>
-                      <td>Niger</td>
-                      <td>Oud-Turnhout</td>
-                      <td className="text-center">$36,738</td>
-                    </tr>
-                    <tr>
-                      <td>Minerva Hooper</td>
-                      <td>Curaçao</td>
-                      <td>Sinaai-Waas</td>
-                      <td className="text-center">$23,789</td>
-                    </tr>
-                    <tr>
-                      <td>Sage Rodriguez</td>
-                      <td>Netherlands</td>
-                      <td>Baileux</td>
-                      <td className="text-center">$56,142</td>
-                    </tr>
-                    <tr>
-                      <td>Philip Chaney</td>
-                      <td>Korea, South</td>
-                      <td>Overland Park</td>
-                      <td className="text-center">$38,735</td>
-                    </tr>
-                    <tr>
-                      <td>Doris Greene</td>
-                      <td>Malawi</td>
-                      <td>Feldkirchen in Kärnten</td>
-                      <td className="text-center">$63,542</td>
-                    </tr>
-                    <tr>
-                      <td>Mason Porter</td>
-                      <td>Chile</td>
-                      <td>Gloucester</td>
-                      <td className="text-center">$78,615</td>
-                    </tr>
-                    <tr>
-                      <td>Jon Porter</td>
-                      <td>Portugal</td>
-                      <td>Gloucester</td>
-                      <td className="text-center">$98,615</td>
-                    </tr>
-                  </tbody>
-                </Table> */}
+               
               </CardBody>
             </Card>
           </Col>

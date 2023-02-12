@@ -36,12 +36,18 @@ function Map() {
   const [isLoading, setIsLoading] = React.useState(true);
   const [Lockers, setLockers] = React.useState([]);
   const [modalSearch, setmodalSearch] = React.useState(false);
+  const [modalSearch2, setmodalSearch2] = React.useState(false);
+
   const [count, setCount] = React.useState(0);
   const toggleModalSearch = () => {
     setmodalSearch(!modalSearch);
   };
+  const toggleModalSearch2 = () => {
+    setmodalSearch2(!modalSearch2);
+  };
   const searchbookRef = useRef();
-
+  // const height = window.innerWidth < 993 ? '93vh' : '70vh';
+  // const [styles, setstyles] = React.useState({width:"100%",height:"70vh"});
   const [test, settest] = React.useState();
   useEffect(() => {
     axios
@@ -61,6 +67,11 @@ function Map() {
 
     console.log("테스트해보자", Lockers);
 
+    // if (window.innerWidth < 993) {
+    //   setstyles({width:"100%",height:"93vh"})
+    // } else {
+    //   setstyles({width:"100%", height:"70vh"})
+    // }
     const container = document.getElementById("map"); //찾으려는 id
     const options = {
       center: new kakao.maps.LatLng(37.49676871972202, 127.02474726969814),
@@ -103,9 +114,9 @@ function Map() {
         removable: iwRemoveable,
       });
       // 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
-      const zoomControl = new kakao.maps.ZoomControl();
+      // const zoomControl = new kakao.maps.ZoomControl();
 
-      map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+      // map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 
       // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
 
@@ -237,10 +248,11 @@ function Map() {
         setbookList(books);
         console.log("book", books);
         console.log("bookset", bookList);
+        toggleModalSearch2();
       })
 
       .catch((error) => {
-        alert("error.");
+        alert("검색어를 입력해주세요.");
       });
   }
 
@@ -274,45 +286,72 @@ function Map() {
   return (
     <>
       {/* {searchBook} */}
-      <div className="content">
-        <div>
-          <form>
-            <div
+      <div
+        style={{
+          position: "absolute",
+          zIndex: 100,
+          width: "100%",
+          top: 10,
+          paddingInline: 10,
+          paddingTop: 15,
+        }}
+      >
+        <form>
+          <div
+            style={{
+              display: "flex",
+              marginBottom: "10px",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <Input
+              type="text"
+              //   maxLength="20"
+              className="search_input"
+              name="search"
+              placeholder="검색할 도서를 입력해주세요."
+              innerRef={searchbookRef}
               style={{
-                display: "flex",
-                marginBottom: "10px",
-                justifyContent: "space-between",
-                alignItems: "center",
+                width: "70%",
+                boxShadow: "rgba(0, 0, 0, 0.2) 3px 3px 3px",
+              }}
+            />
+            <Button
+              className="btn-simple"
+              type="submit"
+              onClick={searchBook}
+              style={{
+                width: "25%",
+                backgroundColor: "#427bf1",
+                color: "#ffffff",
+                borderColor: "transparent",
               }}
             >
-              <Input
-                type="text"
-                //   maxLength="20"
-                className="search_input"
-                name="search"
-                placeholder="검색어를 입력해주세요."
-                innerRef={searchbookRef}
-                style={{
-                  width: "70%",
-                }}
-              />
-              <Button
-                className="btn-simple"
-                color="info"
-                type="submit"
-                onClick={searchBook}
-                style={{
-                  width: "25%",
-                }}
-              >
-                검색
-              </Button>
-            </div>
-          </form>
-        </div>
-        <Card>
-          <div id="map" style={{ width: "100%", height: "70vh" }}></div>
-        </Card>
+              검색
+            </Button>
+          </div>
+        </form>
+      </div>
+      <Card>
+        <div id="map" style={{ width: "100%", height: "93vh" }}></div>
+      </Card>
+
+      <Modal
+        modalClassName="modal-search"
+        isOpen={modalSearch2}
+        toggle={toggleModalSearch2}
+      >
+        <button
+          aria-label="Close"
+          className="close"
+          onClick={() => {
+            toggleModalSearch2();
+            // handle.clickButton();
+          }}
+        >
+          <i className="tim-icons icon-simple-remove" />
+        </button>
         <Card>
           <CardHeader>
             <CardTitle tag="h4">검색결과</CardTitle>
@@ -321,31 +360,31 @@ function Map() {
             <BookList bookList={bookList} />
           </CardBody>
         </Card>
+      </Modal>
 
-        <Modal
-          modalClassName="modal-search"
-          isOpen={modalSearch}
-          toggle={toggleModalSearch}
-          // style={{ width: "70%" }}
+      <Modal
+        modalClassName="modal-search"
+        isOpen={modalSearch}
+        toggle={toggleModalSearch}
+        // style={{ width: "70%" }}
+      >
+        {/* <Input placeholder="QR이미지" type="text" /> */}
+        <Card>
+          <CardBody>
+            <LockerBookList lockerList={lockerList} />
+          </CardBody>
+        </Card>
+        <button
+          aria-label="Close"
+          className="close"
+          onClick={() => {
+            toggleModalSearch();
+            // handle.clickButton();
+          }}
         >
-          {/* <Input placeholder="QR이미지" type="text" /> */}
-          <Card>
-            <CardBody>
-              <LockerBookList lockerList={lockerList} />
-            </CardBody>
-          </Card>
-          <button
-            aria-label="Close"
-            className="close"
-            onClick={() => {
-              toggleModalSearch();
-              // handle.clickButton();
-            }}
-          >
-            <i className="tim-icons icon-simple-remove" />
-          </button>
-        </Modal>
-      </div>
+          <i className="tim-icons icon-simple-remove" />
+        </button>
+      </Modal>
     </>
   );
 }
