@@ -6,6 +6,7 @@ import com.ssafy.townbook.model.dto.response.FindListResponseDto;
 import com.ssafy.townbook.model.dto.response.FindOneResponseDto;
 import com.ssafy.townbook.model.dto.response.SaveOneResponseDto;
 import com.ssafy.townbook.model.service.NoticeService;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -37,8 +39,8 @@ public class NoticeController {
      * @return noticeDto
      */
     @GetMapping("/{noticeNo}")
-    public ResponseEntity<FindOneResponseDto> getNotice(@PathVariable Long noticeNo) {
-        return new ResponseEntity<FindOneResponseDto>(noticeService.getNotice(noticeNo), HttpStatus.OK);
+    public ResponseEntity<FindOneResponseDto> findNoticeByNoticeNo(@PathVariable Long noticeNo) {
+        return new ResponseEntity<FindOneResponseDto>(noticeService.findNoticeByNoticeNo(noticeNo), HttpStatus.OK);
     }
     
     
@@ -49,10 +51,10 @@ public class NoticeController {
      * @return List<NoticeDto>
      */
     @GetMapping("/list/{category}")
-    public ResponseEntity<FindListResponseDto> findByNoticeStateAndNoticeCategoryOrderByNoticeNo(
+    public ResponseEntity<FindListResponseDto> findNoticeByNoticeStateAndNoticeCategoryOrderByNoticeNo(
             @PathVariable Integer category) {
         return new ResponseEntity<FindListResponseDto>(
-                noticeService.findByNoticeStateAndNoticeCategoryOrderByNoticeNo(category),
+                noticeService.findNoticeByNoticeStateAndNoticeCategoryOrderByNoticeNo(category),
                 HttpStatus.OK);
     }
     
@@ -89,7 +91,8 @@ public class NoticeController {
      */
     @Transactional
     @PutMapping("/remove")
-    public ResponseEntity<SaveOneResponseDto> removeNotice(Long noticeNo) {
+    public ResponseEntity<SaveOneResponseDto> removeNotice(@RequestBody Map<String, Integer> Info) {
+        long noticeNo = Info.get("noticeNo");
         return new ResponseEntity<SaveOneResponseDto>(noticeService.removeNotice(noticeNo), HttpStatus.OK);
     }
 }

@@ -38,7 +38,7 @@ public class LockerDto {
         // 보관함 저장 공간
         this.lockerStorage = 0;
         for (int i = 0; i < findDetailLockers.size(); i++) {
-            if (findDetailLockers.get(i).getBookInDetailLocker() != "") {
+            if (findDetailLockers.get(i).getBookInDetailLocker() != ""||findDetailLockers.get(i).getBookInDetailLocker() == null) {
                 this.lockerStorage++;
             }
         }

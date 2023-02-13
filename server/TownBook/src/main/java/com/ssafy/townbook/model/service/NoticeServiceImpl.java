@@ -32,7 +32,7 @@ public class NoticeServiceImpl implements NoticeService {
      * @return NoticeDto
      */
     @Override
-    public FindOneResponseDto getNotice(Long noticeNo) {
+    public FindOneResponseDto findNoticeByNoticeNo(Long noticeNo) {
         Notice    notice    = noticeRepository.findById(noticeNo).get();
         NoticeDto noticeDto = new NoticeDto(notice);
         return new FindOneResponseDto<NoticeDto>(noticeDto);
@@ -46,7 +46,7 @@ public class NoticeServiceImpl implements NoticeService {
      * @return List<NoticeDto>
      */
     @Override
-    public FindListResponseDto findByNoticeStateAndNoticeCategoryOrderByNoticeNo(Integer category) {
+    public FindListResponseDto findNoticeByNoticeStateAndNoticeCategoryOrderByNoticeNo(Integer category) {
         List<Notice> noticeList = noticeRepository.findByNoticeStateAndNoticeCategoryOrderByNoticeNo(true, category)
                 .get();
         return new FindListResponseDto(noticeList.stream()
