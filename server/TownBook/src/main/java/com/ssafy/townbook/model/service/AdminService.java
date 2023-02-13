@@ -19,4 +19,6 @@ public interface AdminService {
      * @return AccountDto
      */
     FindOneResponseDto findAccountByAccountNo(Long accountNo);
+
+//    FindOneResponseDto givePointOneUser(Long accountNo);
 }

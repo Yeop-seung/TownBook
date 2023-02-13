@@ -47,4 +47,16 @@ public class AdminController {
     public ResponseEntity<FindOneResponseDto> findAccountByAccountNo(@PathVariable Long accountNo) {
         return new ResponseEntity<FindOneResponseDto>(adminService.findAccountByAccountNo(accountNo), HttpStatus.OK);
     }
+
+
+    /**
+     *
+     *
+     * @param accountNo
+     * @return
+     */
+//    @GetMapping("/givePoint/{accountNo")
+//    public ResponseEntity<FindOneResponseDto> givePointOneUser(@PathVariable Long accountNo){
+//        return new ResponseEntity<FindOneResponseDto>(adminService.givePointOneUser(accountNo),HttpStatus.OK);
+//    }
 }
