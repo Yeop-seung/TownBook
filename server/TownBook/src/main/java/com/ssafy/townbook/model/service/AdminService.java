@@ -20,5 +20,11 @@ public interface AdminService {
      */
     FindOneResponseDto findAccountByAccountNo(Long accountNo);
 
-//    FindOneResponseDto givePointOneUser(Long accountNo);
+    /**
+     * 특정 회원에게 포인트 부여
+     *
+     * @param accountNo
+     * @return Integer
+     */
+    FindOneResponseDto givePointOneUser(Long accountNo, Integer point);
 }

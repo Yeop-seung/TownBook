@@ -50,13 +50,13 @@ public class AdminController {
 
 
     /**
-     *
+     * 특정 회원에게 포인트 부여
      *
      * @param accountNo
-     * @return
+     * @return Integer
      */
-//    @GetMapping("/givePoint/{accountNo")
-//    public ResponseEntity<FindOneResponseDto> givePointOneUser(@PathVariable Long accountNo){
-//        return new ResponseEntity<FindOneResponseDto>(adminService.givePointOneUser(accountNo),HttpStatus.OK);
-//    }
+    @GetMapping("/givePoint/{accountNo}/{point}")
+    public ResponseEntity<FindOneResponseDto> givePointOneUser(@PathVariable Long accountNo, @PathVariable Integer point){
+        return new ResponseEntity<FindOneResponseDto>(adminService.givePointOneUser(accountNo,point),HttpStatus.OK);
+    }
 }
