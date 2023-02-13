@@ -2,6 +2,7 @@ package com.ssafy.townbook.controller;
 
 import com.ssafy.townbook.model.dto.request.DonateBookRequestDto;
 import com.ssafy.townbook.model.dto.request.ReceiveBookRequestDto;
+import com.ssafy.townbook.model.dto.request.ReceiverWishListRequestDto;
 import com.ssafy.townbook.model.dto.response.FindListResponseDto;
 import com.ssafy.townbook.model.dto.response.FindOneResponseDto;
 import com.ssafy.townbook.model.service.BookLogService;
@@ -108,5 +109,16 @@ public class BookLogController {
             @RequestBody ReceiveBookRequestDto receiveBookRequestDto) throws Exception {
         return new ResponseEntity<FindOneResponseDto>(bookLogService.receiveBook(receiveBookRequestDto),
                 HttpStatus.OK);
+    }
+    /**
+     * 책 찜 상태 변경
+     *
+     * @param receiverWishListRequestDto
+     * @return Boolean
+     * @throws Exception
+     */
+    @PostMapping("/wishList")
+    public ResponseEntity<FindOneResponseDto> changeWishState(@RequestBody ReceiverWishListRequestDto receiverWishListRequestDto)throws Exception{
+        return new ResponseEntity<FindOneResponseDto>(bookLogService.changeWishState(receiverWishListRequestDto),HttpStatus.OK);
     }
 }

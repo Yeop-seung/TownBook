@@ -107,8 +107,8 @@ public class AccountController {
      * @throws Exception
      */
     @PostMapping("/emailConfirm")
-    public ResponseEntity<String> emailConfirm(@RequestBody String email) throws Exception {
-        String confirm = emailService.sendSimpleMessage(email);
+    public ResponseEntity<String> emailConfirm(@RequestBody Map<String, String> email) throws Exception {
+        String confirm = emailService.sendSimpleMessage(email.get("email"));
         return new ResponseEntity<String>(confirm, HttpStatus.OK);
     }
     

@@ -2,6 +2,7 @@ package com.ssafy.townbook.model.service;
 
 import com.ssafy.townbook.model.dto.request.DonateBookRequestDto;
 import com.ssafy.townbook.model.dto.request.ReceiveBookRequestDto;
+import com.ssafy.townbook.model.dto.request.ReceiverWishListRequestDto;
 import com.ssafy.townbook.model.dto.response.FindListResponseDto;
 import com.ssafy.townbook.model.dto.response.FindOneResponseDto;
 
@@ -63,4 +64,13 @@ public interface BookLogService {
      * @throws Exception
      */
     FindOneResponseDto receiveBook(ReceiveBookRequestDto receiveBookRequestDto) throws Exception;
+
+    /**
+     * 책 찜 상태 변경
+     *
+     * @param receiverWishListRequestDto
+     * @return Boolean
+     * @throws Exception
+     */
+    FindOneResponseDto changeWishState(ReceiverWishListRequestDto receiverWishListRequestDto) throws Exception;
 }
