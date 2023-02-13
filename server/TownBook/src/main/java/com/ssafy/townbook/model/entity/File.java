@@ -31,7 +31,7 @@ public class File {
     @Column(name = "`fk-account-file`")
     private Long accountNo;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "`fk-account-file`", insertable = false, updatable = false)
     private Account account;
 

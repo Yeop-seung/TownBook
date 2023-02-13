@@ -19,7 +19,7 @@ public class BookLogDto {
     private Long           bookLogReceiverNo;
     private LocalDateTime  bookLogDonateDateTime;
     private LocalDateTime  bookLogReceiveDateTime;
-    private List<WishList> wishLists = new ArrayList<>();
+    private List<Long> wishListNo = new ArrayList<>();
     private Long           accountNo;
     private String         bookIsbn;
     private Long           lockerNo;
@@ -33,7 +33,10 @@ public class BookLogDto {
         this.bookLogReceiverNo      = bookLog.getBookLogReceiverNo();
         this.bookLogDonateDateTime  = bookLog.getBookLogDonateDateTime();
         this.bookLogReceiveDateTime = bookLog.getBookLogReceiveDateTime();
-        this.wishLists              = bookLog.getWishLists();
+        for (WishList wishList:
+             bookLog.getWishLists()) {
+            this.wishListNo.add(wishList.getWishListNo());
+        }
         this.accountNo              = bookLog.getAccountNo();
         this.bookIsbn               = bookLog.getBookIsbn();
         this.lockerNo               = bookLog.getLockerNo();
