@@ -1,12 +1,12 @@
 import React from "react";
 import styles from "./DonateUse.module.css"
 import { useLocation, useNavigate } from "react-router-dom";
-import first from "../img/first.jpg"
-import second from "../img/second.jpg"
+import first from "../img/first.png"
+import second from "../img/second.png"
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { BiHomeAlt } from 'react-icons/bi';
 import { BsFillArrowRightCircleFill } from "react-icons/bs"
-import { AiOutlineArrowUp } from 'react-icons/ai' 
+import { AiOutlineArrowDown } from 'react-icons/ai' 
 import axios from 'axios'
 
 function DonateUse(props) {
@@ -77,7 +77,7 @@ function DonateUse(props) {
                         <h3 className={styles.h3Align}>STEP1</h3>
                         <img src={first} className={styles.firstImg} />
                         <div className={styles.circleMain}></div>
-                        <AiOutlineArrowUp className={styles.iconStyleTwo}/>
+                        <AiOutlineArrowDown className={styles.iconStyleTwo}/>
                         <div className={styles.buttonThree}>
                             메인페이지에서 
                             <br />

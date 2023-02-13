@@ -18,14 +18,14 @@ function ReceiptComplete(props) {
     const lockerNo = location.state.Locker.lockerNo // 락커번호
     const User = location.state.User        //user number
     const Book = location.state.Book        //isbn
-    
-    const detailLocker = Book.detailLockerNoInLocker
+
+    const detailLocker = location.state.detailLocker
     const title = Book.bookTitle
     console.log(Book)
     console.log(Locker)
     console.log(lockerNo)
 
-    const data = {isnavigate: isnavigate, Locker :Locker, User: User, Book: Book}
+    const data = {isnavigate: isnavigate, Locker :Locker, User: User, Book: Book, detailLocker: detailLocker}
 
     let bookURL = location.state.bookIntroductionURL
     if (bookURL === "null.png") {

@@ -22,17 +22,19 @@ function DonateConfirm(props) {
     const detailLocker = location.state.Locker.detailLocker // 안에 서랍장
     
     // console.log(isnavigate)
-    console.log(Locker)
+    // console.log(Locker)
     // console.log(User)
-    console.log(Book)
-    console.log(detailLocker)
+    // console.log(Book)
+    // console.log(detailLocker)
 
     const title = Book.data.bookTitle  // 책 제목
 
     // const [detailLockerNo, setDetailLockerNo] = useState()
     // console.log(detailLockerNo)
-
-    let bookURL = location.state.bookIntroductionURL
+    console.log(location.state.Book)
+    console.log(location.state.Book.data.bookIntroductionURL)
+    console.log(book)
+    let bookURL = location.state.Book.data.bookIntroductionURL
     if (bookURL === "null.png") {
         bookURL = book
         }
@@ -43,30 +45,29 @@ function DonateConfirm(props) {
     //홈
     
     const onClickHandlerComplete =() => {
-        
         let numbers = 1
-        console.log('detailLocker.length',detailLocker.length)
+        // console.log('detailLocker.length',detailLocker.length)
         for (let i = 1; i <= detailLocker.length; i++){
-            console.log('fffffff', i)
-            console.log(detailLocker[i - 1])
+            // console.log('fffffff', i)
+            // console.log(detailLocker[i - 1])
             if (detailLocker[i - 1].bookInDetailLocker === null){
                 numbers = i
-                console.log('eeesss',detailLocker[i - 1])
+                // console.log('eeesss',detailLocker[i - 1])
                 // console.log(numbers)
                 break
             }}
             
-        console.log('numbers', numbers)
+        // console.log('numbers', numbers)
         
         const UrlServo = `http://192.168.140.1/servo${numbers}/0`
-        console.log('UrlServo', UrlServo)
+        // console.log('UrlServo', UrlServo)
         
         const checkTwo = () => {
             console.log('axiosnumbers',numbers)
             axios.get(UrlServo, {
             })
             .then((response) => {
-                console.log('gggggg',response)
+                console.log(response)
             })
             .catch((error) => {
                 console.log(error)
@@ -75,7 +76,7 @@ function DonateConfirm(props) {
         checkTwo()
         
         const data = {isnavigate: isnavigate, Locker :Locker, User: User, Book: Book, numbers: numbers}
-        console.log('data', data)
+        // console.log('data', data)
         navigate('/DonateComplete', {state: data})
         }
             

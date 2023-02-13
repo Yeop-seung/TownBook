@@ -10,49 +10,22 @@
     filter: brightness(100%);
 }
 /* 뒷배경 */
-.circle {
-    width : 8vw;
-    height : 12vh;
-    border-radius: 50%;
-    background-color: rgb(255, 255, 255);
-    position: absolute;
-    left: 24px;
-    top: 24px;
-    border: #ffffff;
-}
-/* 뒤로가기 */
-.homeCircle {
-    width : 8vw;
-    height : 12vh;
-    border-radius: 50%;
-    background-color: rgb(255, 255, 255);
-    position: absolute;
-    right: 24px;
-    bottom: 24px;
-    border: #ffffff;
-}
-.iconStyle{
-    font-size: 70px;
-    color: #90C6FE;
-}
-/* 아이콘 스타일*/
-/* 홈버튼 */
 .buttonOne{
     display: flex;
     flex-direction: row;
-    color: #2a2a2a;
     border-radius: 12px;
     align-items: center;
     position: absolute;
     margin:auto;
-    width: 78vw;
-    height: 70vh;
     left: 11vw;
     top: 16vh;
-    border: 1px solid #ececec;
-    font-weight: 800;
-    background-color: rgb(255, 255, 255);
     text-align: center;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid #ffffff;
+    width: 78vw;
+    height: 70vh;
+    font-weight: 800;
+    border-radius: 12px;
 }
 .buttonTwo{
     text-align: center;
@@ -85,37 +58,9 @@
     position: absolute;
     color: #2a2a2a;
     text-align: center;
-    vertical-align: bottom;
-    font-size: 300%;
     margin: 0%;
-    top: 25%;
-    left: 18%;
-}
-.textAlignOne{
-    position: relative;
-    color: #2a2a2a;
-    text-align: center;
+    font-size: 300%;
+    top: 10%;
+    left: 10%;
 }
 /* 텍스트 정렬 */
-.title{
-    position: absolute;
-    color: #2a2a2a;
-    text-align: center;
-    overflow-y: scroll;
-    font-size: 300%;
-    height: 15%;
-    width: 70%;
-    top: 5%;
-    left: 14%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-.book{
-    position: absolute;
-    height: 30%;
-    width: 30%;
-    left: 35%;
-    top: 20%;
-}
-

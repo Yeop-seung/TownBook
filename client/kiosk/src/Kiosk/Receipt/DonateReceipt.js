@@ -16,24 +16,23 @@ function DonateReceipt(props){
     const User = location.state.User               // 유저
     const Book = location.state.Book          // 책정보
     
-    const detailLocker = Book.bookLog.detailLockerNo
-
+    
+    const detailLocker = location.state.detailLocker
 
     const UrlOneClose = `http://192.168.140.1/servo${detailLocker}/90` //n번 보관함 닫기
 
     console.log(Locker)
-    console.log(Locker.lockerNo)
+    console.log('2222', Locker.lockerNo.detailLockerNo)
     console.log(User)
-    console.log('Book',Book.bookLog)
+    console.log('Book',Book.bookLog.detailLockerNo)
     
     const realData = {
         lockerNo: Locker.lockerNo   , // 동네북 위치
-        detailLockerNo: detailLocker, // 서랍장
+        detailLockerNo: Book.bookLog.detailLockerNo, // 서랍장
         accountNo: User, // 유저 넘버
         bookIsbn: Book.bookLog.bookIsbn,  // 책
         bookLogNo: Book.bookLog.bookLogNo
     }
-
     console.log('realData', realData)
     
     const goBack = () => {
@@ -59,7 +58,7 @@ function DonateReceipt(props){
         console.error(error);
         }
         const data = {isnavigate: isnavigate, Locker :Locker, User: User, accountPoint: accountPoint }
-        navigate('/ReceiptTanks', {state: data}) // 회원
+        navigate('/ReceiptThanks', {state: data}) // 회원
     }
 
     return (

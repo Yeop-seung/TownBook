@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./MemberSelect.module.css"
-// import { Route } from "react-router-dom";
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { BiHomeAlt } from 'react-icons/bi';
 import { useLocation, useNavigate } from "react-router-dom";
@@ -11,7 +10,6 @@ function MemberSelect(props) {
 
     const isnavigate = location.state.isnavigate // 기부인지
     const locker = location.state.Locker //락커 정보 
-    // console.log(locker)
 
     const data = {isnavigate: isnavigate, Locker: locker }
 

@@ -37,8 +37,8 @@
     border-radius: 50%;
     background-color: rgb(255, 255, 255, 10%);
     position: absolute;
-    left: 18vw;
-    top: 20vh;
+    left: 18.5vw;
+    top: 58.5vh;
     border: 3px solid #ff0202;
 }
 /* 홈버튼 */
@@ -51,7 +51,7 @@
     position: absolute;
     font-size: 800%;
     left: 19%;
-    top: 32%;
+    top: 65%;
     color: #ff0202;
 }
 .buttonOne{

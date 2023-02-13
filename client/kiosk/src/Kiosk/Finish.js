@@ -1,10 +1,6 @@
 import React, { useEffect } from "react";
 import styles from "./Finish.module.css"
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-
-// import { Route } from "react-router-dom";
-// import {BsFillArrowRightCircleFill} from "react-icons/bs"
 
 function Finish(props){
     
@@ -13,7 +9,7 @@ function Finish(props){
     const timeout = () => {
         setTimeout(() => {
         navigate('/');
-        }, 8000);
+        }, 4000);
     };
       // 컴포넌트가 화면에 다 나타나면 timeout 함수 실행
     useEffect(() => {

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styles from "./DonateComplete.module.css"
 import { useLocation, useNavigate } from "react-router-dom";
 import { AiOutlineArrowLeft } from 'react-icons/ai';
@@ -23,14 +23,14 @@ function DonateComplete(props) {
 
     // const Url = 'http://localhost:3000/'
 
-    console.log('location', location)
+    // console.log('location', location)
     // console.log(Locker)
-    console.log(Locker.lockerNo)
+    // console.log(Locker.lockerNo)
     // console.log(User)
     // console.log(Book)
     // console.log(Book.bookIsbn)
-    console.log('detailLockerNo', detailLockerNo)
-    console.log('detailLockerNoInLocker',detailLockerNoInLocker)
+    // console.log('detailLockerNo', detailLockerNo)
+    // console.log('detailLockerNoInLocker',detailLockerNoInLocker)
     // const UrlServo = `http://192.168.140.1/servo${numbers}/0`
     
     const realData = {
@@ -62,7 +62,7 @@ function DonateComplete(props) {
         const postResponse = await axios.post('http://i8b201.p.ssafy.io:8081/backend/bookLog/donateBook', realData)
         
         const postData = postResponse.data.data
-        console.log('postData',postData)
+        console.log('postData', postData)
 
         accountPoint = postData.accountPoint // 포인트
         } catch (error) {

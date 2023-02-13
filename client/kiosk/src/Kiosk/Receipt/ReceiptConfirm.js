@@ -50,7 +50,7 @@ function ReceiptConfirm(props) {
     function onClickHandlerReceiptComplete (item) {
         setSelectedItem(item);
         console.log('eeeessadfitme',item)
-        const data = {isnavigate: isnavigate, Locker :Locker, User: User, Book: item}
+        const data = {isnavigate: isnavigate, Locker :Locker, User: User, Book: item, detailLocker:item.detailLockerNoInLocker}
         navigate('/ReceiptComplete', {state:data})
     }
     return (
@@ -62,9 +62,9 @@ function ReceiptConfirm(props) {
                     <div>
                         <div className={styles.buttonOne}>
                             <p className={styles.h3Text}>수령하실 책을 선택해주세요</p>
-                            <ul >
+                            <ul className={styles.list}>
                                 {bookData.map(item =>
-                                <p className={styles.list} onClick={() => onClickHandlerReceiptComplete(item)} key={item.id}>
+                                <p className={styles.bookList} onClick={() => onClickHandlerReceiptComplete(item)} key={item.id}>
                                 {item.detailLockerNoInLocker}.
                                 {item.bookTitle}</p>
                                 )}

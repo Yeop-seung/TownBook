@@ -1,10 +1,7 @@
 import React from "react";
 import styles from "./DonateThanks.module.css"
 import { useLocation, useNavigate } from "react-router-dom";
-// import axios from "axios";
 
-// import { Route } from "react-router-dom";
-// import {BsFillArrowRightCircleFill} from "react-icons/bs"
 
 function ReceiptThanks(props) {
     
@@ -33,16 +30,15 @@ function ReceiptThanks(props) {
             <div className={styles.myImg}>
                 <div className={styles.buttonOne}>
                     <p className={styles.textAlign}>이용해 주셔서 감사합니다
-                    <br /> {accountPoint} 포인트가  사용 되었습니다
-                    
+                    <br /> {accountPoint} 포인트가 남아 있습니다
                     <br />
                     <br />
                     책을 추가 수령하시겠습니까?</p>
                     <div>
-                        <button className={styles.buttonThree} onClick={onClickHandlerReceiptConfirm}>
+                        <button className={styles.buttonTwo} onClick={onClickHandlerReceiptConfirm}>
                             <p className={styles.textAlignOne}>예</p>
                         </button>
-                        <button className={styles.buttonTwo} onClick={onClickHandlerDoorClose}>
+                        <button className={styles.buttonThree} onClick={onClickHandlerDoorClose}>
                             <p className={styles.textAlignOne}>아니요</p>
                         </button>
                     </div>

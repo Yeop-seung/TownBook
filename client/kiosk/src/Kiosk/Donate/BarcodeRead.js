@@ -40,6 +40,7 @@ function BarcodeRead(props) {
             axios.post(`http://i8b201.p.ssafy.io:8081/backend/book/find`, `isbn=${event.target.value}`
             )
             .then((response) => {
+                console.log(response.data)
                 const data = {isnavigate: isnavigate, Locker :Locker, User: User, Book: response.data}
                 const onClickHandlerConfirm = () => {
                     navigate('/DonateConfirm', {state : data} )
