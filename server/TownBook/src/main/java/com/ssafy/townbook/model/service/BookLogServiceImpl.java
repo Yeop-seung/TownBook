@@ -199,6 +199,7 @@ public class BookLogServiceImpl implements BookLogService {
         // locker
         long   lockerNo = receiveBookRequestDto.getLockerNo();
         Locker locker   = lockerRepository.findLockerByLockerNo(lockerNo).get();
+        System.out.println(locker.getLockerBookCnt());
         locker.setLockerBookCnt(locker.getLockerBookCnt() - 1);
         
         // detailLocker
