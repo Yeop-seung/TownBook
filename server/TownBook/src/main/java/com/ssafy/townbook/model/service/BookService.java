@@ -1,7 +1,7 @@
 package com.ssafy.townbook.model.service;
 
-import com.ssafy.townbook.model.dto.BookDto;
-import java.util.List;
+import com.ssafy.townbook.model.dto.response.FindListResponseDto;
+import com.ssafy.townbook.model.dto.response.FindOneResponseDto;
 
 public interface BookService {
     
@@ -10,7 +10,7 @@ public interface BookService {
      *
      * @return List<BookDto>
      */
-    List<BookDto> findAll();
+    FindListResponseDto findAllBooks();
     
     /**
      * ISBN 으로 도서 조회
@@ -18,7 +18,7 @@ public interface BookService {
      * @param bookIsbn
      * @return BookDto
      */
-    BookDto findBookByBookIsbn(String bookIsbn);
+    FindOneResponseDto findBookByBookIsbn(String bookIsbn);
     
     /**
      * ISBN으로 국립도서관의 도서 정보 조회
@@ -26,5 +26,7 @@ public interface BookService {
      * @param bookIsbn
      * @return BookDto
      */
-    BookDto addBook(String bookIsbn);
+    FindOneResponseDto findBookInLibraryAndSave(String bookIsbn);
+    
+    FindListResponseDto findAllBookByLockerNo(Long lockerNo);
 }

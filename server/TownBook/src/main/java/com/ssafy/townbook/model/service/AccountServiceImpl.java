@@ -4,6 +4,10 @@ import com.ssafy.townbook.exception.DuplicateMemberException;
 import com.ssafy.townbook.exception.NotFoundMemberException;
 import com.ssafy.townbook.model.dto.AccountDto;
 import com.ssafy.townbook.model.dto.AdminDto;
+import com.ssafy.townbook.model.dto.request.ModifyAccountRequestDto;
+import com.ssafy.townbook.model.dto.response.FindOneResponseDto;
+import com.ssafy.townbook.model.dto.response.ModifyAccountResponseDto;
+import com.ssafy.townbook.model.dto.response.SaveOneResponseDto;
 import com.ssafy.townbook.model.entity.Account;
 import com.ssafy.townbook.model.entity.Authority;
 import com.ssafy.townbook.model.repository.AccountRepository;
@@ -38,7 +42,7 @@ public class AccountServiceImpl implements AccountService {
      */
     @Override
     @Transactional
-    public AccountDto signup(AccountDto accountDto) {
+    public SaveOneResponseDto signup(AccountDto accountDto) {
         if (accountRepository.findOneWithAuthoritiesByAccountEmail(accountDto.getAccountEmail()).orElse(null) != null) {
             throw new DuplicateMemberException("이미 가입되어 있는 유저입니다.");
         }
@@ -59,16 +63,19 @@ public class AccountServiceImpl implements AccountService {
                 .authorities(Collections.singleton(authority))
                 .accountActivated(true)
                 .build();
-        
-        return AccountDto.from(accountRepository.save(account));
+        accountRepository.save(account);
+        account = accountRepository.findByAccountEmail(accountDto.getAccountEmail()).get();
+        return new SaveOneResponseDto(true);
     }
     
+    // 보류
     @Override
     @Transactional(readOnly = true)
     public AccountDto getUserWithAuthorities(String accountEmail) {
         return AccountDto.from(accountRepository.findOneWithAuthoritiesByAccountEmail(accountEmail).orElse(null));
     }
     
+    // 보류
     @Override
     @Transactional(readOnly = true)
     public AccountDto getMyUserWithAuthorities() {
@@ -86,41 +93,40 @@ public class AccountServiceImpl implements AccountService {
      * @return
      */
     @Override
-    public String findEmail(String accountPhoneNumber) {
+    public FindOneResponseDto findEmail(String accountPhoneNumber) {
         
         try {
             Account account = accountRepository.findByAccountPhoneNumber(accountPhoneNumber).get();
-            return account.getAccountEmail();
-            
-        } catch (Exception e) {
-            e.getMessage();
-            return "존재하지 않는 번호입니다.";
+            return new FindOneResponseDto(account.getAccountEmail());
+        } catch (Exception exception) {
+            exception.getMessage();
+            return new FindOneResponseDto();
         }
     }
     
     /**
      * 계정 수정하기
      *
-     * @param accountDto
+     * @param modifyAccountRequestDto
      * @return
      */
     @Override
-    public Boolean accountModify(AccountDto accountDto) {
+    public SaveOneResponseDto accountModify(ModifyAccountRequestDto modifyAccountRequestDto) {
         try {
-            Account account = accountRepository.findByAccountEmail(accountDto.getAccountEmail()).orElseThrow(() ->
-                    new IllegalArgumentException("해당 사용자가 존재하지 않습니다."));
-            account.setAccountAddress(accountDto.getAccountAddress());
-            account.setAccountBirthDay(accountDto.getAccountBirthDay());
-            account.setAccountName(accountDto.getAccountName());
-            account.setAccountGender(accountDto.getAccountGender());
-            account.setAccountNickname(accountDto.getAccountNickname());
-            account.setAccountPw(passwordEncoder.encode(accountDto.getAccountPw()));
+            Account account = accountRepository.findByAccountNo(modifyAccountRequestDto.getAccountNo())
+                    .orElseThrow(() -> new IllegalArgumentException("해당 사용자가 존재하지 않습니다."));
+            account.setAccountAddress(modifyAccountRequestDto.getAccountAddress());
+            account.setAccountPhoneNumber(modifyAccountRequestDto.getAccountPhoneNumber());
+            account.setAccountBirthDay(modifyAccountRequestDto.getAccountBirthDay());
+            account.setAccountNickname(modifyAccountRequestDto.getAccountNickname());
             accountRepository.save(account);
+            
+            ModifyAccountResponseDto modifyAccountResponseDto = new ModifyAccountResponseDto(account);
+            return new SaveOneResponseDto(modifyAccountResponseDto);
         } catch (Exception e) {
-            e.getMessage();
-            return false;
+            System.out.println(e.getMessage());
+            return new SaveOneResponseDto();
         }
-        return true;
     }
     
     /**
@@ -131,7 +137,7 @@ public class AccountServiceImpl implements AccountService {
      * @return
      */
     @Override
-    public Boolean accountRemove(String accountEmail, String accountPw) {
+    public SaveOneResponseDto accountRemove(String accountEmail, String accountPw) {
         try {
             Account account = accountRepository.findByAccountEmail(accountEmail).orElseThrow(() ->
                     new IllegalArgumentException("해당 사용자가 존재하지 않습니다."));
@@ -139,20 +145,20 @@ public class AccountServiceImpl implements AccountService {
                 if (passwordEncoder.matches(accountPw, account.getAccountPw())) {
                     account.setAccountActivated(false);
                     accountRepository.save(account);
-                    return true;
+                    return new SaveOneResponseDto(true);
                 } else {
-                    new IllegalArgumentException("해당 비밀번호가 맞지 않습니다.");
-                    return false;
+                    throw new IllegalArgumentException("해당 비밀번호가 맞지 않습니다.");
                 }
             } catch (Exception e) {
                 e.getMessage();
             }
         } catch (Exception e) {
-            e.getMessage();
-            return false;
+            System.out.println(e.getMessage());
+            return new SaveOneResponseDto();
         }
-        return true;
+        return new SaveOneResponseDto();
     }
+    
     
     /**
      * 비밀 번호 찾기(임시비밀번호로 바꾸기)
@@ -162,9 +168,7 @@ public class AccountServiceImpl implements AccountService {
      */
     @Override
     public Boolean updatePassword(String accountEmail, String tmpPassword) {
-        
         String encryptPassword = passwordEncoder.encode(tmpPassword);
-        
         try {
             Account account = accountRepository.findByAccountEmail(accountEmail).orElseThrow(() ->
                     new IllegalArgumentException("해당 사용자가 존재하지 않습니다."));
@@ -172,6 +176,7 @@ public class AccountServiceImpl implements AccountService {
             accountRepository.save(account);
             return true;
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             return false;
         }
     }
@@ -183,7 +188,7 @@ public class AccountServiceImpl implements AccountService {
      * @return JSONArrays
      * @throws Exception
      */
-    public JSONArray findAccountBookCnt(Long accountNo) throws Exception {
+    public FindOneResponseDto findRankAccountBookCnt(Long accountNo) throws Exception {
         JSONArray jsonArray = new JSONArray();
         List<AdminDto> accounts = accountRepository.findAccountByAccountActivatedOrderByAccountBookCntDesc(true).get()
                 .stream()
@@ -199,19 +204,20 @@ public class AccountServiceImpl implements AccountService {
             cnt = accounts.get(0).getAccountBookCnt();
         }
         
-        System.out.println(accounts.get(0));
-        
-        System.out.println(cnt);
         // TOP10이 아닌경우 범위 재설정
         if (accounts.size() < 10) {
             size = accounts.size();
         }
         
+        // 내 랭킹 찾아서 저장할 변수
+        String nickName  = "";
+        int    myRank    = 0;
+        int    bookCount = 0;
+        
         // TOP10 찾기
         for (int i = 0; i < size; i++) {
             AdminDto account = accounts.get(i);
             
-            System.out.println(cnt);
             if (cnt != account.getAccountBookCnt()) {
                 cnt = account.getAccountBookCnt();
                 ++rank;
@@ -221,33 +227,28 @@ public class AccountServiceImpl implements AccountService {
             jsonObject.put("accountNickname", account.getAccountNickname());
             jsonObject.put("accountBookCnt", account.getAccountBookCnt());
             
+            // 내 랭킹 저장
+            if (account.getAccountNo().equals(accountNo)) {
+                myRank    = rank;
+                nickName  = account.getAccountNickname();
+                bookCount = account.getAccountBookCnt();
+            }
+            
             jsonArray.add(jsonObject);
         }
         
-        rank = 1;
-        // 유저가 존재할 경우
-        if (accounts.size() != 0) {
-            cnt = accounts.get(0).getAccountBookCnt();
-        }
+        // 내 랭킹
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("rank", myRank);
+        jsonObject.put("accountNickname", nickName);
+        jsonObject.put("accountBookCnt", bookCount);
+        jsonArray.add(jsonObject);
         
-        // 자신의 rank 찾기
-        for (AdminDto account : accounts
-        ) {
-            if (account.getAccountNo() == accountNo) {
-                JSONObject jsonObject = new JSONObject();
-                jsonObject.put("rank", rank);
-                jsonObject.put("accountNickname", account.getAccountNickname());
-                jsonObject.put("accountBookCnt", account.getAccountBookCnt());
-                
-                jsonArray.add(jsonObject);
-                break;
-            }
-            
-            if (cnt != account.getAccountBookCnt()) {
-                cnt = account.getAccountBookCnt();
-                ++rank;
-            }
-        }
-        return jsonArray;
+        return new FindOneResponseDto(jsonArray);
+    }
+    
+    @Override
+    public AccountDto findAccountByAccountEmail(String accountEmail) {
+        return AccountDto.from(accountRepository.findByAccountEmail(accountEmail).get());
     }
 }

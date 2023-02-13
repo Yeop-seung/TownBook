@@ -1,2 +1,34 @@
-### 1. 공지사항, 이용안내 조회
-GET http://localhost:8081/backend/notice/list/0
+### 1. 공지사항/이용안내 1개 가져오기
+GET http://localhost:8081/backend/notice/{{noticeNo}}
+
+### 2. 카테고리(공지사항, 이용안내) 별로 최신 8개 리스트 가져오기
+GET http://localhost:8081/backend/notice/list/{{noticeCategory}}
+
+### 3. 공지사항/이용안내 수정
+PUT http://localhost:8081/backend/notice/modify
+Content-Type: application/json
+
+{
+    "noticeNo": 1,
+    "noticeTitle": "New Title",
+    "noticeContent": "New Content"
+}
+
+### 4. 공지사항/이용안내 작성
+POST http://localhost:8081/backend/notice/write
+Content-Type: application/json
+
+{
+    "noticeTitle": "New Title",
+    "noticeContent": "New Content",
+    "noticeCategory": 1,
+    "accountNo": 1
+}
+
+### 5. 공지사항/이용안내 삭제
+PUT http://localhost:8081/backend/notice/remove
+Content-Type:application/json
+
+{
+    "noticeNo": 2
+}

@@ -20,6 +20,7 @@ import java.util.Optional;
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -41,11 +42,11 @@ public class InitDb {
     
     @PostConstruct
     public void init() {
-        //initService.bookInit();
-        //initService.accountInit();
-        //initService.lockerInit();
-        //initService.bookLogInit();
-        //initService.noticeInit();
+        initService.bookInit();
+        initService.accountInit();
+        initService.lockerInit();
+        initService.bookLogInit();
+        initService.noticeInit();
     }
     
     @Component
@@ -59,6 +60,7 @@ public class InitDb {
         private final AccountRepository accountRepository;
         private final BookRepository    bookRepository;
         private final BookLogRepository bookLogRepository;
+        private final PasswordEncoder   passwordEncoder;
         
         public void bookInit() {
             Book book1 = createBook("8984993751", "8", "토지", "박경리", "커뮤니케이션 북스", convertDate("20051103"),
@@ -74,8 +76,8 @@ public class InitDb {
         }
         
         public Book createBook(String bookIsbn, String bookSubject, String bookTitle, String bookAuthor,
-                               String bookPublisher, LocalDate bookPublishPredate, String bookIntroductionURL,
-                               String bookTitleURL) {
+                String bookPublisher, LocalDate bookPublishPredate, String bookIntroductionURL,
+                String bookTitleURL) {
             Book book = new Book();
             book.setBookIsbn(bookIsbn);
             book.setBookSubject(bookSubject);
@@ -96,11 +98,20 @@ public class InitDb {
             em.persist(authorityRoleUser);
             em.persist(authorityRoleAdmin);
             
-            Account account1 = createAccount("test@test.com", "password", "김싸피", "대전시 유성구 덕명동", "010-1234-5678", 0,
-                    "내가 바로 김싸피", "220222", authorityRoleUser);
+            Account accountNon = createAccount("nonmember@townbook.com", passwordEncoder.encode("password"), "비회원", "",
+                    "", 0, "비회원 계정", "000000", authorityRoleUser);
+            accountNon.setAccountPoint(99999999);
+            em.persist(accountNon);
+            
+            Account account1 = createAccount("test@townbook.com", passwordEncoder.encode("password"), "김싸피",
+                    "대전시 유성구 덕명동",
+                    "010-1234-5678", 0, "내가 바로 김싸피", "220222", authorityRoleUser);
+            account1.setAccountPoint(1000000);
             em.persist(account1);
-            Account account2 = createAccount("admin@test.com", "adminPassword", "최어드", "대전시 유성구 어드동", "010-5678-1234",
-                    1, "내가 바로 최어드", "111111", authorityRoleAdmin);
+            
+            Account account2 = createAccount("admin@townbook.com", passwordEncoder.encode("password"), "최어드",
+                    "대전시 유성구 어드동",
+                    "010-5678-1234", 1, "내가 바로 최어드", "111111", authorityRoleAdmin);
             em.persist(account2);
         }
         
@@ -111,9 +122,9 @@ public class InitDb {
         }
         
         public Account createAccount(String accountEmail, String accountPw, String accountName, String accountAddress,
-                                     String accountPhoneNumber, Integer accountGender, String accountNickname,
-                                     String accountBirthDay,
-                                     Authority authority) {
+                String accountPhoneNumber, Integer accountGender, String accountNickname,
+                String accountBirthDay,
+                Authority authority) {
             Account account = new Account();
             account.setAccountEmail(accountEmail);
             account.setAccountPw(accountPw);
@@ -128,67 +139,83 @@ public class InitDb {
         }
         
         public void lockerInit() {
-            createLocker("어은동", 1, 12312312D, 123123123D);
-            createLocker("덕명동", 3, 87654321D, 87654321D);
-            createLocker("봉명동", 5, 123D, 456D);
+            createLocker("Init", 0, 0D, 0D);
+            createLocker("Init", 0, 0D, 0D);
+            createLocker("역삼동", 2, 37.5021D, 127.0396D);
+            createLocker("덕명동", 2, 36.3552D, 127.2984D);
+            createLocker("공단동", 2, 36.0988D, 128.3897D);
+            createLocker("송정동", 2, 35.0955D, 128.8556D);
+            createLocker("오선동", 2, 35.2042D, 128.8556D);
         }
         
         public void createLocker(String lockerRegion, int detailLockerCount, Double lockerLatitude,
-                                 Double lockerLongitude) {
+                Double lockerLongitude) {
             Locker locker = new Locker();
             locker.setLockerRegion(lockerRegion);
             locker.setLockerLatitude(lockerLatitude);
             locker.setLockerLongitude(lockerLongitude);
             em.persist(locker);
             
-            while (detailLockerCount-- > 0) {
+            for (int i = 1; i <= detailLockerCount; i++) {
                 DetailLocker detailLocker = new DetailLocker();
                 locker.addDetailLocker(detailLocker);
+                detailLocker.setDetailLockerNoInLocker((long) i);
+                detailLocker.setBookInDetailLocker(null);
                 em.persist(detailLocker);
             }
         }
         
         public void bookLogInit() {
-            Locker            locker1       = lockerRepository.findLockerByLockerNo(1L).get();
+            Locker            locker1       = lockerRepository.findLockerByLockerNo(3L).get();
             DetailLocker      detailLocker1 = locker1.getDetailLocker().get(0);
-            Optional<Account> account1      = accountRepository.findByAccountNo(1L);
+            Optional<Account> account1      = accountRepository.findByAccountNo(2L);
             Optional<Book>    book1         = bookRepository.findBookByBookIsbn("8984993751");
             donateBook("재미있어요", locker1, detailLocker1, account1, book1);
             
-            Locker            locker2       = lockerRepository.findLockerByLockerNo(2L).get();
+            Locker            locker2       = lockerRepository.findLockerByLockerNo(4L).get();
             DetailLocker      detailLocker2 = locker2.getDetailLocker().get(0);
-            Optional<Account> account2      = accountRepository.findByAccountNo(2L);
+            Optional<Account> account2      = accountRepository.findByAccountNo(3L);
             Optional<Book>    book2         = bookRepository.findBookByBookIsbn("9788960777330");
             donateBook("재미 없어요", locker2, detailLocker2, account2, book2);
             
-            BookLog bookLog1 = bookLogRepository.findBookLogByBookLogNo(2L).get();
+            Locker       locker3       = lockerRepository.findLockerByLockerNo(5L).get();
+            DetailLocker detailLocker3 = locker3.getDetailLocker().get(0);
+            donateBook("꿀잼", locker3, detailLocker3, account1, book2);
+            
+            DetailLocker detailLocker4 = locker3.getDetailLocker().get(1);
+            donateBook("노잼", locker3, detailLocker4, account1, book2);
+            
+            BookLog bookLog1 = bookLogRepository.findBookLogByBookLogNo(4L).get();
             receiveBook(bookLog1, account1);
-
-            DetailLocker detailLocker3 = locker2.getDetailLocker().get(1);
-            donateBook("test", locker2, detailLocker3, account1, book2);
         }
         
         public void donateBook(
                 String bookLogReview, Locker locker, DetailLocker detailLocker,
                 Optional<Account> account, Optional<Book> book) {
-            BookLog bookLog = new BookLog(account.get().getAccountNo(), book.get().getBookIsbn());
+            BookLog bookLog = new BookLog(locker.getLockerNo(), detailLocker.getDetailLockerNo(), account.get()
+                    .getAccountNo(), book.get().getBookIsbn());
+            
             bookLog.setBookLogReview(bookLogReview);
             bookLog.setBookLogDonateDateTime(LocalDateTime.now());
+            
+            locker.setLockerBookCnt(locker.getLockerBookCnt() + 1);
             bookLog.setLocker(locker);
-            detailLocker.setDetailLockerIsEmpty(false);
+            
+            detailLocker.setBookInDetailLocker(book.get().getBookTitle());
             bookLog.setDetailLocker(detailLocker);
             
             // account
             account.get().setAccountBookCnt(account.get().getAccountBookCnt() + 1);
             account.get().setAccountPoint(account.get().getAccountPoint() + 100);
             bookLog.setAccount(account.get());
-
+            
             bookLog.setBook(book.get());
             em.persist(bookLog);
         }
         
         public void receiveBook(BookLog bookLog, Optional<Account> account) {
-            bookLog.getDetailLocker().setDetailLockerIsEmpty(true);
+            bookLog.getLocker().setLockerBookCnt(bookLog.getLocker().getLockerBookCnt() - 1);
+            bookLog.getDetailLocker().setBookInDetailLocker(null);
             bookLog.setBookLogState(false);
             
             // account

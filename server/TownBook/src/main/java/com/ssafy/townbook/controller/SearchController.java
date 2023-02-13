@@ -1,13 +1,8 @@
 package com.ssafy.townbook.controller;
 
-import com.ssafy.townbook.model.dto.LockerDto;
-import com.ssafy.townbook.model.dto.response.ReceiveBookLogResponseDto;
-import com.ssafy.townbook.model.service.BookLogService;
-import com.ssafy.townbook.model.service.LockerService;
-import java.util.List;
+import com.ssafy.townbook.model.dto.response.FindListResponseDto;
+import com.ssafy.townbook.model.service.SearchService;
 import lombok.RequiredArgsConstructor;
-import net.minidev.json.JSONArray;
-import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,13 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class SearchController {
     
-    private BookLogService bookLogService;
-    private LockerService  lockerService;
+    private SearchService searchService;
     
     @Autowired
-    public SearchController(BookLogService bookLogService, LockerService lockerService) {
-        this.bookLogService = bookLogService;
-        this.lockerService  = lockerService;
+    public SearchController(SearchService searchService) {
+        this.searchService = searchService;
     }
     
     /**
@@ -37,35 +30,18 @@ public class SearchController {
      * @return List<BookLogDto>
      */
     @GetMapping("/searchTitle/{bookTitle}")
-    public ResponseEntity<?> findBookLogByBookTitle(@PathVariable String bookTitle) {
-        return new ResponseEntity<>(bookLogService.findBookLogByBookTitle(bookTitle), HttpStatus.OK);
+    public ResponseEntity<FindListResponseDto> searchBookLogByBookTitle(@PathVariable String bookTitle) {
+        return new ResponseEntity<FindListResponseDto>(searchService.searchBookLogByBookTitle(bookTitle), HttpStatus.OK);
     }
     
+    /**
+     * 보관함 검색
+     *
+     * @param lockerNo
+     * @return JSONObject
+     */
     @GetMapping("/searchLocker/{lockerNo}")
-    public ResponseEntity<?> findLockerByLockerNo(@PathVariable Long lockerNo) {
-        LockerDto                       findLockerDto                  = lockerService.findLockerByLockerNo(lockerNo);
-        List<ReceiveBookLogResponseDto> findReceiveBookLogResponseDtos = bookLogService.findBookLogByLockerNo(lockerNo);
-        
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("Locker", findLockerDto);
-        
-        JSONArray jsonArray = new JSONArray();
-        for (ReceiveBookLogResponseDto bookLogDto : findReceiveBookLogResponseDtos) {
-            JSONObject jsonObject1 = new JSONObject();
-            jsonObject1.put("bookTitle", bookLogDto.getBookTitle());
-            jsonObject1.put("detailLockerNo", bookLogDto.getDetailLockerNo());
-            jsonObject1.put("detailLockerNoInLocker", bookLogDto.getDetailLockerNoInLocker());
-            jsonObject1.put("bookIntroductionURL", bookLogDto.getBookIntroductionURL());
-            jsonObject1.put("bookTitleURL", bookLogDto.getBookTitleURL());
-            jsonArray.add(jsonObject1);
-        }
-        jsonObject.put("BookLogDtos", jsonArray);
-        return new ResponseEntity<>(jsonObject, HttpStatus.OK);
+    public ResponseEntity<FindListResponseDto> searchLockerByLockerNo(@PathVariable Long lockerNo) {
+        return new ResponseEntity<FindListResponseDto>(searchService.searchLockerByLockerNo(lockerNo), HttpStatus.OK);
     }
-    //    @GetMapping("/searchTitle")
-    //    public ResponseEntity<?> findLockerByBookTitleAndDist(SearchTitleRequestDto searchTitleRequestDto)
-    //            throws Exception {
-    //        LockerDto lockerDto = bookLogService.findLockerByBookTitleAndDist(searchTitleRequestDto);
-    //        return null;
-    //    }
 }

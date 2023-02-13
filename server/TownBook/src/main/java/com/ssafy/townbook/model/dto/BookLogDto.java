@@ -19,16 +19,11 @@ public class BookLogDto {
     private Long           bookLogReceiverNo;
     private LocalDateTime  bookLogDonateDateTime;
     private LocalDateTime  bookLogReceiveDateTime;
-    //private LockerDto       lockerDto;
-    //private DetailLockerDto detailLockerDto;
-    //private AdminDto adminDto;
-    //private BookDto bookDto;
     private List<WishList> wishLists = new ArrayList<>();
-    
-    private Long   accountNo;
-    private String bookIsbn;
-    private Long   lockerNo;
-    private Long   detailLockerNo;
+    private Long           accountNo;
+    private String         bookIsbn;
+    private Long           lockerNo;
+    private Long           detailLockerNo;
     
     @Builder
     public BookLogDto(BookLog bookLog) {
@@ -41,7 +36,7 @@ public class BookLogDto {
         this.wishLists              = bookLog.getWishLists();
         this.accountNo              = bookLog.getAccountNo();
         this.bookIsbn               = bookLog.getBookIsbn();
-        //this.lockerNo       = bookLog.getLockerNo();
-        //this.detailLockerNo = bookLog.getDetailLockerNo();
+        this.lockerNo               = bookLog.getLockerNo();
+        this.detailLockerNo         = bookLog.getDetailLockerNo();
     }
 }

@@ -1,7 +1,7 @@
 package com.ssafy.townbook.model.service;
 
-import com.ssafy.townbook.model.dto.AdminDto;
-import java.util.List;
+import com.ssafy.townbook.model.dto.response.FindListResponseDto;
+import com.ssafy.townbook.model.dto.response.FindOneResponseDto;
 
 public interface AdminService {
     
@@ -10,7 +10,7 @@ public interface AdminService {
      *
      * @return List<AccountDto>
      */
-    List<AdminDto> findAll();
+    FindListResponseDto findAllAccounts();
     
     /**
      * 회원번호로 단일 회원을 조회
@@ -18,5 +18,5 @@ public interface AdminService {
      * @param accountNo
      * @return AccountDto
      */
-    AdminDto findAccountByAccountNo(Long accountNo);
+    FindOneResponseDto findAccountByAccountNo(Long accountNo);
 }

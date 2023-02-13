@@ -32,13 +32,15 @@ public class DetailLocker {
     private Locker locker;
     
     @Column(name = "detail_locker_isEmpty")
-    @ColumnDefault("true")
-    private Boolean detailLockerIsEmpty;
+    private String bookInDetailLocker;
+    
+    @Column(name = "detail_locker_no_in_locker")
+    private Long detailLockerNoInLocker;
     
     @Builder
-    public DetailLocker(Long detailLockerNo, Locker locker, Boolean detailLockerIsEmpty) {
-        this.detailLockerNo      = detailLockerNo;
-        this.locker              = locker;
-        this.detailLockerIsEmpty = detailLockerIsEmpty;
+    public DetailLocker(Long detailLockerNo, Locker locker, String bookInDetailLocker) {
+        this.detailLockerNo     = detailLockerNo;
+        this.locker             = locker;
+        this.bookInDetailLocker = bookInDetailLocker;
     }
 }

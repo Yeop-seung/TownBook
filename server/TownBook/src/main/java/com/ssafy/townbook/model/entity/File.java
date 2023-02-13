@@ -1,34 +1,46 @@
 package com.ssafy.townbook.model.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import lombok.*;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.sql.Blob;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @ToString
 @Entity
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class File {
-    
+
     @Id
     @Column(name = "file_no")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long fileNo;
-    
-    @Column(name = "file_name")
-    private String fileName;
-    
-    @Column(name = "file_path")
-    private String filePath;
-    
+
+    @Column(name = "file_origin_name")
+    @NotNull
+    private String fileOriginName;
+
+    @Column(name = "file_multipart_file")
+    @Lob
+    private Blob fileMultipartFile;
+
+    @Column(name = "`fk-account-file`")
+    private Long accountNo;
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "`fk-account-file`")
+    @JoinColumn(name = "`fk-account-file`", insertable = false, updatable = false)
     private Account account;
+
+
+    @Builder
+    public File(Long fileNo, String fileOriginName, Long accountNo, Blob fileMultipartFile) {
+        this.fileNo = fileNo;
+        this.fileOriginName = fileOriginName;
+        this.accountNo = accountNo;
+        this.fileMultipartFile = fileMultipartFile;
+    }
 }

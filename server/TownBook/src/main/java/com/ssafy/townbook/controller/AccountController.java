@@ -2,12 +2,14 @@ package com.ssafy.townbook.controller;
 
 
 import com.ssafy.townbook.model.dto.AccountDto;
+import com.ssafy.townbook.model.dto.request.ModifyAccountRequestDto;
+import com.ssafy.townbook.model.dto.response.FindOneResponseDto;
+import com.ssafy.townbook.model.dto.response.SaveOneResponseDto;
 import com.ssafy.townbook.model.service.AccountService;
 import com.ssafy.townbook.model.service.EmailService;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import net.minidev.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,24 +26,34 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/account")
 public class AccountController {
     
-    @Autowired
     private AccountService accountService;
+    private EmailService   emailService;
     
     @Autowired
-    private EmailService emailService;
-    
-    @PostMapping("/signup")
-    public ResponseEntity<AccountDto> signup(@Valid @RequestBody AccountDto accountDto) {
-        System.out.println("이거");
-        return ResponseEntity.ok(accountService.signup(accountDto));
+    public AccountController(AccountService accountService, EmailService emailService) {
+        this.accountService = accountService;
+        this.emailService   = emailService;
     }
     
+    /**
+     * 회원 가입
+     *
+     * @param accountDto
+     * @return
+     */
+    @PostMapping("/signup")
+    public ResponseEntity<SaveOneResponseDto> signup(@Valid @RequestBody AccountDto accountDto) {
+        return new ResponseEntity<SaveOneResponseDto>(accountService.signup(accountDto), HttpStatus.OK);
+    }
+    
+    // 보류
     @GetMapping("/user")
     @PreAuthorize("hasAnyRole('USER','ADMIN')")
     public ResponseEntity<AccountDto> getMyUserInfo(HttpServletRequest request) {
         return ResponseEntity.ok(accountService.getMyUserWithAuthorities());
     }
     
+    // 보류
     @GetMapping("/user/{accountEmail}")
     @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<AccountDto> getUserInfo(@PathVariable String accountEmail) {
@@ -55,20 +67,21 @@ public class AccountController {
      * @return
      */
     @GetMapping("/findEmail/{phoneNumber}")
-    public ResponseEntity<String> findEmail(@PathVariable String phoneNumber) {
-        
-        return new ResponseEntity<>(accountService.findEmail(phoneNumber), HttpStatus.OK);
+    public ResponseEntity<FindOneResponseDto> findEmail(@PathVariable String phoneNumber) {
+        return new ResponseEntity<FindOneResponseDto>(accountService.findEmail(phoneNumber), HttpStatus.OK);
     }
     
     /**
      * 계정 수정
      *
-     * @param accountDto
+     * @param modifyAccountRequestDto
      * @return
      */
     @PutMapping("/modify")
-    public ResponseEntity accountModify(@RequestBody AccountDto accountDto) {
-        return new ResponseEntity(accountService.accountModify(accountDto), HttpStatus.OK);
+    public ResponseEntity<SaveOneResponseDto> accountModify(
+            @RequestBody ModifyAccountRequestDto modifyAccountRequestDto) {
+        return new ResponseEntity<SaveOneResponseDto>(accountService.accountModify(modifyAccountRequestDto),
+                HttpStatus.OK);
         
     }
     
@@ -80,9 +93,8 @@ public class AccountController {
      * @return
      */
     @PutMapping("/leave")
-    public ResponseEntity accountRemove(@RequestBody Map<String, String> leaveInfo) {
-        System.out.println(leaveInfo.get("accountEmail"));
-        return new ResponseEntity(
+    public ResponseEntity<SaveOneResponseDto> accountRemove(@RequestBody Map<String, String> leaveInfo) {
+        return new ResponseEntity<SaveOneResponseDto>(
                 accountService.accountRemove(leaveInfo.get("accountEmail"), leaveInfo.get("accountPw")), HttpStatus.OK);
         
     }
@@ -95,10 +107,9 @@ public class AccountController {
      * @throws Exception
      */
     @PostMapping("/emailConfirm")
-    public ResponseEntity<String> emailConfirm(@RequestBody String email) throws Exception {
-        String confirm = emailService.sendSimpleMessage(email);
-        
-        return new ResponseEntity(confirm, HttpStatus.OK);
+    public ResponseEntity<String> emailConfirm(@RequestBody Map<String, String> email) throws Exception {
+        String confirm = emailService.sendSimpleMessage(email.get("email"));
+        return new ResponseEntity<String>(confirm, HttpStatus.OK);
     }
     
     /**
@@ -109,14 +120,15 @@ public class AccountController {
      * @throws Exception
      */
     @PostMapping("/tempPassword")
-    public ResponseEntity tempPassword(@RequestBody Map<String, String> accountEmail) throws Exception {
+    public ResponseEntity<SaveOneResponseDto> tempPassword(@RequestBody String accountEmail) throws Exception {
         String tempPassword = emailService.getTmpPassword();
-        String Email        = accountEmail.get("accountEmail");
         
-        if (accountService.updatePassword(Email, tempPassword)) {
-            emailService.sendPasswordMessage(Email, tempPassword);
+        if (accountService.updatePassword(accountEmail, tempPassword)) {
+            emailService.sendPasswordMessage(accountEmail, tempPassword);
+            return new ResponseEntity<SaveOneResponseDto>(new SaveOneResponseDto(true), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<SaveOneResponseDto>(new SaveOneResponseDto(), HttpStatus.OK);
         }
-        return new ResponseEntity(HttpStatus.OK);
     }
     
     /**
@@ -126,13 +138,15 @@ public class AccountController {
      * @return
      */
     @PostMapping("/changePassword")
-    public ResponseEntity changePassword(@RequestBody Map<String, String> AccountInfo) {
+    public ResponseEntity<SaveOneResponseDto> changePassword(@RequestBody Map<String, String> AccountInfo) {
         String email = AccountInfo.get("accountEmail");
         String pw    = AccountInfo.get("accountPw");
         
-        accountService.updatePassword(email, pw);
-        
-        return new ResponseEntity(HttpStatus.OK);
+        if (accountService.updatePassword(email, pw)) {
+            return new ResponseEntity<SaveOneResponseDto>(new SaveOneResponseDto(true), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<SaveOneResponseDto>(new SaveOneResponseDto(), HttpStatus.OK);
+        }
     }
     
     /**
@@ -143,7 +157,7 @@ public class AccountController {
      * @throws Exception
      */
     @GetMapping("/ranking/{accountNo}")
-    public ResponseEntity<JSONArray> findAccountBookCnt(@PathVariable Long accountNo) throws Exception {
-        return new ResponseEntity<JSONArray>(accountService.findAccountBookCnt(accountNo), HttpStatus.OK);
+    public ResponseEntity<FindOneResponseDto> findRankAccountBookCnt(@PathVariable Long accountNo) throws Exception {
+        return new ResponseEntity<FindOneResponseDto>(accountService.findRankAccountBookCnt(accountNo), HttpStatus.OK);
     }
 }

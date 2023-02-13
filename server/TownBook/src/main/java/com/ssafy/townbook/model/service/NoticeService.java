@@ -1,20 +1,21 @@
 package com.ssafy.townbook.model.service;
 
-import com.ssafy.townbook.model.dto.NoticeDto;
 import com.ssafy.townbook.model.dto.request.ModifyNoticeRequestDto;
 import com.ssafy.townbook.model.dto.request.WriteNoticeRequestDto;
-import java.util.List;
+import com.ssafy.townbook.model.dto.response.FindListResponseDto;
+import com.ssafy.townbook.model.dto.response.FindOneResponseDto;
+import com.ssafy.townbook.model.dto.response.SaveOneResponseDto;
 
 
 public interface NoticeService {
     
-    Boolean modifyNotice(ModifyNoticeRequestDto modifyNoticeRequestDto);
+    FindOneResponseDto findNoticeByNoticeNo(Long noticeNo);
     
-    Boolean writeNotice(WriteNoticeRequestDto writeNoticeRequestDto);
+    FindListResponseDto findNoticeByNoticeStateAndNoticeCategoryOrderByNoticeNo(Integer category);
     
-    List<NoticeDto> findTop8ByNoticeStateAndNoticeCategoryOrderByNoticeNo(Integer category);
+    SaveOneResponseDto modifyNotice(ModifyNoticeRequestDto modifyNoticeRequestDto);
     
-    NoticeDto getNotice(Long noticeNo);
+    SaveOneResponseDto writeNotice(WriteNoticeRequestDto writeNoticeRequestDto);
     
-    Boolean removeNotice(Long noticeNo);
+    SaveOneResponseDto removeNotice(Long noticeNo);
 }

@@ -59,7 +59,7 @@ public class EmailServiceImpl implements EmailService {
         msgg += ePw + "</strong><div><br/> ";
         msgg += "</div>";
         message.setText(msgg, "utf-8", "html");//내용
-        message.setFrom(new InternetAddress("smhyun128@jbnu.ac.kr", "동네북"));//보내는 사람
+        message.setFrom(new InternetAddress("townbook1@gmail.com", "동네북"));//보내는 사람
         
         return message;
     }
@@ -125,7 +125,7 @@ public class EmailServiceImpl implements EmailService {
         msgg += password + "</strong><div><br/> ";
         msgg += "</div>";
         message.setText(msgg, "utf-8", "html");//내용
-        message.setFrom(new InternetAddress("smhyun128@jbnu.ac.kr", "동네북"));//보내는 사람
+        message.setFrom(new InternetAddress("townbook1@gmail.com", "동네북"));//보내는 사람
         
         return message;
     }
@@ -164,6 +164,7 @@ public class EmailServiceImpl implements EmailService {
     public String sendSimpleMessage(String to) throws Exception {
         // TODO Auto-generated method stub
         MimeMessage message = createMessage(to);
+        System.out.println(message);
         try {//예외처리
             emailSender.send(message);
         } catch (MailException es) {

@@ -5,6 +5,8 @@ import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
+import com.ssafy.townbook.model.dto.response.FindListResponseDto;
+import com.ssafy.townbook.model.dto.response.FindOneResponseDto;
 import com.ssafy.townbook.model.entity.Book;
 import com.ssafy.townbook.model.entity.BookLog;
 import com.ssafy.townbook.model.entity.WishList;
@@ -31,7 +33,7 @@ public class MyPageServiceImpl implements MyPageService {
     
     @Autowired
     public MyPageServiceImpl(MyPageQueryRepository myPageQueryRepository, AccountRepository accountRepository,
-                             BookRepository bookRepository) {
+            BookRepository bookRepository) {
         this.myPageQueryRepository = myPageQueryRepository;
         this.accountRepository     = accountRepository;
         this.bookRepository        = bookRepository;
@@ -40,16 +42,16 @@ public class MyPageServiceImpl implements MyPageService {
     /**
      * qr 코드 생성 및 반환
      *
-     * @param accountEmail
+     * @param qrSource
      * @return Optional<Object>
      * @throws WriterException
      * @throws IOException
      */
     @Override
-    public Optional<Object> getQrCode(String accountEmail) throws WriterException, IOException {
+    public Optional<Object> getQrCode(String qrSource) throws WriterException, IOException {
         int       width  = 200;
         int       height = 200;
-        BitMatrix matrix = new MultiFormatWriter().encode(accountEmail, BarcodeFormat.QR_CODE, width, height);
+        BitMatrix matrix = new MultiFormatWriter().encode(qrSource, BarcodeFormat.QR_CODE, width, height);
         
         try (ByteArrayOutputStream out = new ByteArrayOutputStream();) {
             MatrixToImageWriter.writeToStream(matrix, "PNG", out);
@@ -67,8 +69,8 @@ public class MyPageServiceImpl implements MyPageService {
      * @throws Exception
      */
     @Override
-    public Integer findPointByAccountNo(Long accountNo) throws Exception {
-        return accountRepository.findByAccountNo(accountNo).get().getAccountPoint();
+    public FindOneResponseDto findPointByAccountNo(Long accountNo) throws Exception {
+        return new FindOneResponseDto(accountRepository.findByAccountNo(accountNo).get().getAccountPoint());
     }
     
     /**
@@ -79,33 +81,19 @@ public class MyPageServiceImpl implements MyPageService {
      * @throws Exception
      */
     @Override
-    public JSONArray findBookLogByAccountNo(Long accountNo) throws Exception {
+    public FindListResponseDto findBookLogByAccountNo(Long accountNo) throws Exception {
         JSONArray jsonArray = new JSONArray();
-        
         for (BookLog bookLog :
                 myPageQueryRepository.findBookLogByAccountNo(accountNo).get()) {
-            Book book = bookRepository.findBookByBookIsbn(bookLog.getBook().getBookIsbn()).get();
-            
+            Book       book       = bookRepository.findBookByBookIsbn(bookLog.getBook().getBookIsbn()).get();
             JSONObject jsonObject = new JSONObject();
+            jsonObject.put("bookNo", book.getBookIsbn());
             jsonObject.put("bookTitle", book.getBookTitle());
-            jsonObject.put("bookVol", book.getBookVol());
+            jsonObject.put("bookLogLocker", bookLog.getLocker().getLockerNo());
             jsonObject.put("bookLogDonateDateTime", bookLog.getBookLogDonateDateTime());
-            
             jsonArray.add(jsonObject);
         }
-        
-        for (BookLog bookLog :
-                myPageQueryRepository.findReceiveBookLog(accountNo).get()) {
-            Book book = bookRepository.findBookByBookIsbn(bookLog.getBook().getBookIsbn()).get();
-            
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("bookTitle", book.getBookTitle());
-            jsonObject.put("bookVol", book.getBookVol());
-            jsonObject.put("bookLogReceiveDateTime", bookLog.getBookLogReceiveDateTime());
-            
-            jsonArray.add(jsonObject);
-        }
-        return jsonArray;
+        return new FindListResponseDto(jsonArray);
     }
     
     /**
@@ -116,20 +104,19 @@ public class MyPageServiceImpl implements MyPageService {
      * @throws Exception
      */
     @Override
-    public JSONArray findBookLogDonateByAccountNo(Long accountNo) throws Exception {
+    public FindListResponseDto findDonateBookLogByAccountNo(Long accountNo) throws Exception {
         JSONArray jsonArray = new JSONArray();
         for (BookLog bookLog :
-                myPageQueryRepository.findBookLogByAccountNo(accountNo).get()) {
-            Book book = bookRepository.findBookByBookIsbn(bookLog.getBook().getBookIsbn()).get();
-            
+                myPageQueryRepository.findDonateBookLogByAccountNo(accountNo).get()) {
+            Book       book       = bookRepository.findBookByBookIsbn(bookLog.getBook().getBookIsbn()).get();
             JSONObject jsonObject = new JSONObject();
+            jsonObject.put("bookNo", book.getBookIsbn());
             jsonObject.put("bookTitle", book.getBookTitle());
-            jsonObject.put("bookVol", book.getBookVol());
+            jsonObject.put("bookLogLocker", bookLog.getLocker().getLockerNo());
             jsonObject.put("bookLogDonateDateTime", bookLog.getBookLogDonateDateTime());
-            
             jsonArray.add(jsonObject);
         }
-        return jsonArray;
+        return new FindListResponseDto(jsonArray);
     }
     
     /**
@@ -140,20 +127,19 @@ public class MyPageServiceImpl implements MyPageService {
      * @throws Exception
      */
     @Override
-    public JSONArray findBookLogReceiverByReceiverNo(Long receiverNo) throws Exception {
+    public FindListResponseDto findReceiveBookLogByReceiverNo(Long receiverNo) throws Exception {
         JSONArray jsonArray = new JSONArray();
         for (BookLog bookLog :
-                myPageQueryRepository.findReceiveBookLog(receiverNo).get()) {
-            Book book = bookRepository.findBookByBookIsbn(bookLog.getBook().getBookIsbn()).get();
-            
+                myPageQueryRepository.findReceiveBookLogByReceiverNo(receiverNo).get()) {
+            Book       book       = bookRepository.findBookByBookIsbn(bookLog.getBook().getBookIsbn()).get();
             JSONObject jsonObject = new JSONObject();
+            jsonObject.put("bookNo", book.getBookIsbn());
             jsonObject.put("bookTitle", book.getBookTitle());
-            jsonObject.put("bookVol", book.getBookVol());
-            jsonObject.put("bookLogReceiveDateTime", bookLog.getBookLogReceiveDateTime());
-            
+            jsonObject.put("bookLogLocker", bookLog.getLocker().getLockerNo());
+            jsonObject.put("bookLogDonateDateTime", bookLog.getBookLogDonateDateTime());
             jsonArray.add(jsonObject);
         }
-        return jsonArray;
+        return new FindListResponseDto(jsonArray);
     }
     
     /**
@@ -164,10 +150,9 @@ public class MyPageServiceImpl implements MyPageService {
      * @throws Exception
      */
     @Override
-    public JSONArray findWishListByAccountNo(Long accountNo) throws Exception {
+    public FindListResponseDto findWishListByAccountNo(Long accountNo) throws Exception {
         JSONArray jsonArray = new JSONArray();
-        for (WishList wishList : myPageQueryRepository.findWishList(accountNo).get()
-        ) {
+        for (WishList wishList : myPageQueryRepository.findWishList(accountNo).get()) {
             BookLog bookLog = myPageQueryRepository.findBookLogByBookLogNo(wishList.getBookLog().getBookLogNo()).get();
             Book    book    = bookRepository.findBookByBookIsbn(bookLog.getBook().getBookIsbn()).get();
             
@@ -180,6 +165,6 @@ public class MyPageServiceImpl implements MyPageService {
             jsonArray.add(jsonObject);
             
         }
-        return jsonArray;
+        return new FindListResponseDto(jsonArray);
     }
 }

@@ -5,8 +5,6 @@ import com.ssafy.townbook.model.entity.Account;
 import java.util.Set;
 import java.util.stream.Collectors;
 import javax.validation.constraints.NotNull;
-
-import com.ssafy.townbook.model.entity.File;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,6 +17,7 @@ import lombok.ToString;
 @ToString
 public class AccountDto {
     
+    private Long   accountNo;
     @NotNull
     private String accountEmail;
     
@@ -42,16 +41,16 @@ public class AccountDto {
     
     @NotNull
     private String accountBirthDay;
-
+    
     private File file;
     
     private Set<AuthorityDto> authorityDtoSet;
     
     @Builder
-    public AccountDto(String accountEmail, String accountPw, String accountName,
-                      String accountAddress,
-                      String accountPhoneNumber, Integer accountGender, String accountNickname,
-                      String accountBirthDay, Set<AuthorityDto> authorityDtoSet) {
+    public AccountDto(Long accountNo, String accountEmail, String accountPw, String accountName, String accountAddress,
+            String accountPhoneNumber, Integer accountGender, String accountNickname, String accountBirthDay,
+            Set<AuthorityDto> authorityDtoSet) {
+        this.accountNo          = accountNo;
         this.accountEmail       = accountEmail;
         this.accountPw          = accountPw;
         this.accountName        = accountName;
@@ -70,6 +69,7 @@ public class AccountDto {
         }
         
         return AccountDto.builder()
+                .accountNo(account.getAccountNo())
                 .accountName(account.getAccountName())
                 .accountPw(account.getAccountPw())
                 .accountPhoneNumber(account.getAccountPhoneNumber())

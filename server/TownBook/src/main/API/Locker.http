@@ -2,7 +2,15 @@
 GET http://localhost:8081/backend/locker
 
 ### 2. 단일 보관함 조회
-GET http://localhost:8081/backend/locker/1
+GET http://localhost:8081/backend/locker/3
 
 ### 3. 보관함 추가
-POST http://localhost:8081/backend/locker/add/장대동/10/12312312/12312312
+POST http://localhost:8081/backend/locker/add
+Content-Type: application/json
+
+{
+    "lockerRegion": "장대동",
+    "detailLockerCount": 2,
+    "lockerLatitude": 123.123123,
+    "lockerLongitude": 12.123123
+}

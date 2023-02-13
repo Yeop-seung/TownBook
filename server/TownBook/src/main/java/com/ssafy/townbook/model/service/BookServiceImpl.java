@@ -1,8 +1,11 @@
 package com.ssafy.townbook.model.service;
 
 import com.ssafy.townbook.model.dto.BookDto;
+import com.ssafy.townbook.model.dto.response.FindOneResponseDto;
+import com.ssafy.townbook.model.dto.response.FindListResponseDto;
 import com.ssafy.townbook.model.entity.Book;
 import com.ssafy.townbook.model.repository.BookRepository;
+import com.ssafy.townbook.queryrepository.BookQueryRepository;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
@@ -28,11 +31,13 @@ public class BookServiceImpl implements BookService {
     @Value("${APIKey}")
     private String APIKey;
     
-    private BookRepository bookRepository;
+    private BookRepository      bookRepository;
+    private BookQueryRepository bookQueryRepository;
     
     @Autowired
-    public BookServiceImpl(BookRepository bookRepository) {
-        this.bookRepository = bookRepository;
+    public BookServiceImpl(BookRepository bookRepository, BookQueryRepository bookQueryRepository) {
+        this.bookRepository      = bookRepository;
+        this.bookQueryRepository = bookQueryRepository;
     }
     
     /**
@@ -41,11 +46,12 @@ public class BookServiceImpl implements BookService {
      * @return List<BookDto>
      */
     @Override
-    public List<BookDto> findAll() {
+    public FindListResponseDto findAllBooks() {
         Optional<List<Book>> findBooks = Optional.ofNullable(bookRepository.findAll());
-        return findBooks.get().stream()
+        return new FindListResponseDto(findBooks.get().stream()
                 .map(BookDto::new)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
+        
     }
     
     /**
@@ -55,9 +61,11 @@ public class BookServiceImpl implements BookService {
      * @return BookDto
      */
     @Override
-    public BookDto findBookByBookIsbn(String bookIsbn) {
-        Book findBook = bookRepository.findBookByBookIsbn(bookIsbn).get();
-        return new BookDto(findBook);
+    public FindOneResponseDto findBookByBookIsbn(String bookIsbn) {
+        Book               findBook           = bookRepository.findBookByBookIsbn(bookIsbn).get();
+        BookDto            bookDto            = new BookDto(findBook);
+        FindOneResponseDto findOneResponseDto = new FindOneResponseDto(bookDto);
+        return findOneResponseDto;
     }
     
     
@@ -69,11 +77,11 @@ public class BookServiceImpl implements BookService {
      */
     @Override
     @Transactional
-    public BookDto addBook(String bookIsbn) {
+    public FindOneResponseDto findBookInLibraryAndSave(String bookIsbn) {
         try {
             // API 호출
             URL url = new URL("https://www.nl.go.kr/seoji/SearchApi.do?cert_key=" +
-                    APIKey + "&result_style=json&page_no=1&page_size=10&isbn=" + bookIsbn);
+                    APIKey + "&result_style=json&page_no=1&page_size=10&" + bookIsbn);
             
             System.out.println("url = " + url);
             // Json 가공
@@ -92,18 +100,29 @@ public class BookServiceImpl implements BookService {
             book.setBookVol(checkVol((String) jsonObject.get("VOL")));
             book.setBookAuthor((String) jsonObject.get("AUTHOR"));
             book.setBookPublisher((String) jsonObject.get("PUBLISHER"));
-            book.setBookPublishPredate(convertDate((String) jsonObject.get("PUBLISH_PREDATE")));
+            book.setBookPublishPredate(stringToDate((String) jsonObject.get("PUBLISH_PREDATE")));
             book.setBookIntroductionURL(jsonObject.get("BOOK_INTRODUCTION_URL").equals("") ? "null.png"
                     : (String) jsonObject.get("BOOK_INTRODUCTION_URL"));
             book.setBookTitleURL((String) jsonObject.get("TITLE_URL"));
             
             bookRepository.save(book);
-            return new BookDto(book);
+            BookDto bookDto = new BookDto(book);
+            return new FindOneResponseDto(bookDto);
         } catch (Exception e) {
             System.out.println("정보가 없는 도서입니다");
-            return null;
+            return new FindOneResponseDto();
         }
     }
+    
+    @Override
+    public FindListResponseDto findAllBookByLockerNo(Long lockerNo) {
+        List<Book> findBookList = bookQueryRepository.findBookLogByLockerNo(lockerNo).get();
+        List<BookDto> findBookDtoList = findBookList.stream()
+                .map(BookDto::new)
+                .collect(Collectors.toList());
+        return new FindListResponseDto(findBookDtoList);
+    }
+    
     
     /**
      * vol이 null인지 체크
@@ -122,7 +141,7 @@ public class BookServiceImpl implements BookService {
      * @param dateString
      * @return LocalDate
      */
-    static LocalDate convertDate(String dateString) {
+    static LocalDate stringToDate(String dateString) {
         LocalDate localDate = LocalDate.parse(dateString, DateTimeFormatter.ofPattern("yyyyMMdd"));
         return localDate;
     }

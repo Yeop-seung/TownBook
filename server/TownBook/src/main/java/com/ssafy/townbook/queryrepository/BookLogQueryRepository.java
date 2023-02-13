@@ -22,7 +22,7 @@ public class BookLogQueryRepository {
     }
     
     /**
-     * 단일 보관함에 보관중인 도서 전부 조회
+     * 단일 보관함에 보관중인 북로드 전부 조회
      *
      * @param lockerNo
      * @return Optional<List < Book>>
@@ -76,19 +76,5 @@ public class BookLogQueryRepository {
                 .from(bookLog)
                 .where(bookLog.detailLocker.detailLockerNo.eq(detailLockerNo)
                         .and(bookLog.bookLogState.eq(true))).fetch());
-    }
-    
-    /**
-     * 제목 검색해서 북로그 반환
-     *
-     * @param bookTitle
-     * @return Optional<List < BookLog>>
-     */
-    public Optional<List<BookLog>> findBookLogByBookTitle(String bookTitle) {
-        return Optional.ofNullable(jpaQueryFactory
-                .select(bookLog)
-                .from(bookLog)
-                .where(bookLog.bookLogState.eq(true).and(bookLog.book.bookTitle.contains(bookTitle)))
-                .fetch());
     }
 }

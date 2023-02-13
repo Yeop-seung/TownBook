@@ -1,15 +1,20 @@
 package com.ssafy.townbook.controller;
 
-import com.ssafy.townbook.model.dto.BookDto;
+import com.ssafy.townbook.model.dto.request.FindBookInLibraryRequestDto;
+import com.ssafy.townbook.model.dto.response.FindOneResponseDto;
+import com.ssafy.townbook.model.dto.response.FindListResponseDto;
 import com.ssafy.townbook.model.service.BookService;
-import java.util.List;
+import com.ssafy.townbook.queryrepository.BookQueryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -30,8 +35,8 @@ public class BookController {
      * @return List<BookDto>
      */
     @GetMapping("")
-    public ResponseEntity<List<BookDto>> books() throws Exception {
-        return new ResponseEntity<List<BookDto>>(bookService.findAll(), HttpStatus.OK);
+    public ResponseEntity<FindListResponseDto> findAllBooks() throws Exception {
+        return new ResponseEntity<FindListResponseDto>(bookService.findAllBooks(), HttpStatus.OK);
     }
     
     /**
@@ -41,8 +46,8 @@ public class BookController {
      * @return BookDto
      */
     @GetMapping("/{bookIsbn}")
-    public ResponseEntity<BookDto> findBookByBookIsbn(@PathVariable String bookIsbn) {
-        return new ResponseEntity<BookDto>(bookService.findBookByBookIsbn(bookIsbn), HttpStatus.OK);
+    public ResponseEntity<FindOneResponseDto> findBookByBookIsbn(@PathVariable String bookIsbn) {
+        return new ResponseEntity<>(bookService.findBookByBookIsbn(bookIsbn), HttpStatus.OK);
     }
     
     /**
@@ -51,8 +56,19 @@ public class BookController {
      * @param bookIsbn
      * @return BookDto
      */
-    @GetMapping("/find/{bookIsbn}")
-    public ResponseEntity<BookDto> addBook(@PathVariable String bookIsbn) {
-        return new ResponseEntity<BookDto>(bookService.addBook(bookIsbn), HttpStatus.OK);
+    @PostMapping("/find")
+    public ResponseEntity<FindOneResponseDto> findBookInLibraryAndSave(@RequestBody String bookIsbn) {
+        return new ResponseEntity<FindOneResponseDto>(bookService.findBookInLibraryAndSave(bookIsbn), HttpStatus.OK);
+    }
+    
+    /**
+     * 보관함에 보관중이 도서 전부 조회
+     *
+     * @param lockerNo
+     * @return
+     */
+    @GetMapping("/locker/{lockerNo}")
+    public ResponseEntity<FindListResponseDto> findAllBookByLockerNo(@PathVariable Long lockerNo) {
+        return new ResponseEntity<FindListResponseDto>(bookService.findAllBookByLockerNo(lockerNo), HttpStatus.OK);
     }
 }

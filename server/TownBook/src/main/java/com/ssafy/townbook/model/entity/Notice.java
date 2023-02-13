@@ -40,8 +40,7 @@ public class Notice {
     @NotNull
     @Column(name = "notice_category")
     private Integer noticeCategory;
-    
-    @NotNull
+
     @Column(name = "notice_write_time")
     private LocalDateTime noticeWriteDateTime;
     
@@ -68,9 +67,9 @@ public class Notice {
     
     @Builder
     public Notice(WriteNoticeRequestDto writeNoticeRequestDto) {
+        this.noticeWriteDateTime = LocalDateTime.now();
         this.noticeTitle         = writeNoticeRequestDto.getNoticeTitle();
         this.noticeContent       = writeNoticeRequestDto.getNoticeContent();
-        this.noticeWriteDateTime = writeNoticeRequestDto.getNoticeWriteDateTime();
         this.noticeCategory      = writeNoticeRequestDto.getNoticeCategory();
         this.accountNo           = writeNoticeRequestDto.getAccountNo();
     }

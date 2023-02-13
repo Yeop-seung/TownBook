@@ -8,12 +8,18 @@ import lombok.Setter;
 @Setter
 public class ReceiveBookRequestDto {
     
-    private Long detailLockerNo;
-    private Long accountNo;
+    private Long   bookLogNo;
+    private Long   accountNo;
+    private String bookIsbn;
+    private Long   lockerNo;
+    private Long   detailLockerNo;
     
     @Builder
-    public ReceiveBookRequestDto(Long detailLockerNo, Long accountNo) {
-        this.detailLockerNo = detailLockerNo;
+    public ReceiveBookRequestDto(Long bookLogNo, Long accountNo, String bookIsbn, Long lockerNo, Long detailLockerNo) {
+        this.bookLogNo      = bookLogNo;
         this.accountNo      = accountNo;
+        this.bookIsbn       = bookIsbn;
+        this.lockerNo       = lockerNo;
+        this.detailLockerNo = detailLockerNo;
     }
 }

@@ -11,9 +11,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public class LoginDto {
-    @NotNull
-    @Size(min = 1, max = 50)
-    private Long accountNo;
+
     @NotNull
     @Size(min = 3, max = 50)
     private String accountEmail;
@@ -23,8 +21,7 @@ public class LoginDto {
     private String accountPw;
     
     @Builder
-    public LoginDto(Long accountNo,String accountEmail, String accountPw) {
-        this.accountNo = accountNo;
+    public LoginDto(String accountEmail, String accountPw) {
         this.accountEmail = accountEmail;
         this.accountPw    = accountPw;
     }

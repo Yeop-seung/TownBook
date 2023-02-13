@@ -1,8 +1,12 @@
 package com.ssafy.townbook.controller;
 
 import com.google.zxing.WriterException;
+import com.ssafy.townbook.model.dto.response.FindListResponseDto;
+import com.ssafy.townbook.model.dto.response.FindOneResponseDto;
+import com.ssafy.townbook.model.service.MyPageService;
 import com.ssafy.townbook.model.service.MyPageServiceImpl;
 import java.io.IOException;
+import net.minidev.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,21 +22,24 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/myPage")
 public class MyPageController {
     
+    private MyPageService myPageService;
+    
     @Autowired
-    private MyPageServiceImpl myPageService;
+    public MyPageController(MyPageServiceImpl myPageService) {
+        this.myPageService = myPageService;
+    }
     
     /**
      * 로그인 유저의 이메일로 만든 QR코드 반환
      *
-     * @param accountEmail
+     * @param qrSource
      * @return Optional<Object>
      * @throws WriterException
      * @throws IOException
      */
-    @GetMapping("/qr/{accountEmail}")
-    public Object createQr(@PathVariable String accountEmail) throws WriterException, IOException {
-        //        return new ResponseEntity<>(myPageService.getQrCode(accountEmail).get(), HttpStatus.OK);
-        return myPageService.getQrCode(accountEmail).get();
+    @GetMapping("/qr/{qrSource}")
+    public Object createQr(@PathVariable String qrSource) throws WriterException, IOException {
+        return myPageService.getQrCode(qrSource).get();
     }
     
     
@@ -44,8 +51,8 @@ public class MyPageController {
      * @throws Exception
      */
     @GetMapping("/myPoint/{accountNo}")
-    public ResponseEntity<?> findPointByAccountNo(@PathVariable Long accountNo) throws Exception {
-        return new ResponseEntity<>(myPageService.findPointByAccountNo(accountNo), HttpStatus.OK);
+    public ResponseEntity<FindOneResponseDto> findPointByAccountNo(@PathVariable Long accountNo) throws Exception {
+        return new ResponseEntity<FindOneResponseDto>(myPageService.findPointByAccountNo(accountNo), HttpStatus.OK);
     }
     
     /**
@@ -55,9 +62,9 @@ public class MyPageController {
      * @return Optional<JSONArray>
      * @throws Exception
      */
-    @GetMapping("/allLog/{accountNo}")
-    public ResponseEntity<?> findBookLogByAccountNo(@PathVariable Long accountNo) throws Exception {
-        return new ResponseEntity<>(myPageService.findBookLogByAccountNo(accountNo), HttpStatus.OK);
+    @GetMapping("/log/{accountNo}")
+    public ResponseEntity<FindListResponseDto> findBookLogByAccountNo(@PathVariable Long accountNo) throws Exception {
+        return new ResponseEntity<FindListResponseDto>(myPageService.findBookLogByAccountNo(accountNo), HttpStatus.OK);
     }
     
     /**
@@ -68,8 +75,8 @@ public class MyPageController {
      * @throws Exception
      */
     @GetMapping("/donate/{accountNo}")
-    public ResponseEntity<?> findBookLogDonateByAccountNo(@PathVariable Long accountNo) throws Exception {
-        return new ResponseEntity<>(myPageService.findBookLogDonateByAccountNo(accountNo), HttpStatus.OK);
+    public ResponseEntity<FindListResponseDto> findDonateBookLogByAccountNo(@PathVariable Long accountNo) throws Exception {
+        return new ResponseEntity<FindListResponseDto>(myPageService.findDonateBookLogByAccountNo(accountNo), HttpStatus.OK);
     }
     
     /**
@@ -80,8 +87,8 @@ public class MyPageController {
      * @throws Exception
      */
     @GetMapping("/receive/{receiverNo}")
-    public ResponseEntity<?> findBookLogReceiverByReceiverNo(@PathVariable Long receiverNo) throws Exception {
-        return new ResponseEntity<>(myPageService.findBookLogReceiverByReceiverNo(receiverNo), HttpStatus.OK);
+    public ResponseEntity<FindListResponseDto> findReceiveBookLogByReceiverNo(@PathVariable Long receiverNo) throws Exception {
+        return new ResponseEntity<FindListResponseDto>(myPageService.findReceiveBookLogByReceiverNo(receiverNo), HttpStatus.OK);
     }
     
     /**
@@ -92,7 +99,7 @@ public class MyPageController {
      * @throws Exception
      */
     @GetMapping("/wishList/{accountNo}")
-    public ResponseEntity<?> findWishListByAccountNo(@PathVariable Long accountNo) throws Exception {
-        return new ResponseEntity<>(myPageService.findWishListByAccountNo(accountNo), HttpStatus.OK);
+    public ResponseEntity<FindListResponseDto> findWishListByAccountNo(@PathVariable Long accountNo) throws Exception {
+        return new ResponseEntity<FindListResponseDto>(myPageService.findWishListByAccountNo(accountNo), HttpStatus.OK);
     }
 }
