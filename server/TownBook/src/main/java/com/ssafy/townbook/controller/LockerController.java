@@ -5,6 +5,7 @@ import com.ssafy.townbook.model.dto.response.FindListResponseDto;
 import com.ssafy.townbook.model.dto.response.FindOneResponseDto;
 import com.ssafy.townbook.model.dto.response.SaveOneResponseDto;
 import com.ssafy.townbook.model.service.LockerService;
+import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -64,5 +65,14 @@ public class LockerController {
         return new ResponseEntity<SaveOneResponseDto>(
                 lockerService.addLocker(lockerRegion, detailLockerCount, lockerLatitude, lockerLongitude),
                 HttpStatus.OK);
+    }
+    
+    @GetMapping("/findNearLocker")
+    public ResponseEntity<FindListResponseDto> findNearLocker(@RequestBody Map<String, Double> userLocate) {
+        Double userLatitude  = userLocate.get("userLatitude");
+        Double userLongitude = userLocate.get("userLongitude");
+        System.out.println("userLatitude = " + userLatitude);
+        System.out.println("userLongitude = " + userLongitude);
+        return new ResponseEntity<>(lockerService.findNearLocker(userLatitude, userLongitude), HttpStatus.OK);
     }
 }

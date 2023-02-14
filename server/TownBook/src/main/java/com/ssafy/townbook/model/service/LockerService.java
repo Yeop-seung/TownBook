@@ -28,5 +28,8 @@ public interface LockerService {
      * @param detailLockerCount
      * @return Boolean
      */
-    SaveOneResponseDto addLocker(String lockerRegion, int detailLockerCount, Double lockerLatitude, Double lockerLongitude);
+    SaveOneResponseDto addLocker(String lockerRegion, int detailLockerCount, Double lockerLatitude,
+            Double lockerLongitude);
+    
+    FindListResponseDto findNearLocker(Double userLatitude, Double userLongitude);
 }
