@@ -67,7 +67,23 @@ public class AdminServiceImpl implements AdminService {
         if (account.isEmpty())
             return new FindOneResponseDto(null);
         Integer result = account.get().getAccountPoint() + point;
-                account.get().setAccountPoint(result);
+        account.get().setAccountPoint(result);
         return new FindOneResponseDto(result);
+    }
+
+    /**
+     * Type이 1인 유저 : 취약계층 전체 회원에게 포인트 부여
+     *
+     * @param point
+     * @return Boolean
+     */
+    @Override
+    public FindOneResponseDto givePointTypeUser(Integer point) {
+        try {
+            adminRepository.givePointTypeUser(point, 1);
+            return new FindOneResponseDto("Success");
+        } catch (Exception e) {
+            return new FindOneResponseDto();
+        }
     }
 }
