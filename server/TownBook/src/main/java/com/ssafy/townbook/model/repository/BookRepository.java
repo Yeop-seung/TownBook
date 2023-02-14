@@ -8,7 +8,7 @@ public interface BookRepository extends JpaRepository<Book, String> { // Long ->
     
     
     /**
-     * ISBN 으로 도서 조회
+     * 도서의 ISBN으로 단일 도서 조회
      *
      * @param bookIsbn
      * @return Optional<Book>

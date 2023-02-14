@@ -54,7 +54,7 @@ public class BookLogController {
      * 단일 회원의 모든 북로그 조회
      *
      * @param accountNo
-     * @return List<BookLog>
+     * @return List<BookLogDto>
      */
     @GetMapping("/account/{accountNo}")
     public ResponseEntity<FindListResponseDto> findBookLogByAccountNo(@PathVariable Long accountNo) {

@@ -106,7 +106,7 @@ public class InitDb {
             Account account1 = createAccount("test@townbook.com", passwordEncoder.encode("password"), "김싸피",
                     "대전시 유성구 덕명동",
                     "010-1234-5678", 0, "내가 바로 김싸피", "220222", authorityRoleUser);
-            account1.setAccountPoint(1000000);
+            account1.setAccountPoint(1000);
             em.persist(account1);
             
             Account account2 = createAccount("admin@townbook.com", passwordEncoder.encode("password"), "최어드",
@@ -227,28 +227,20 @@ public class InitDb {
         }
         
         public void noticeInit() {
-            Long account = 1L;
-            createNotice("제목1", "내용1", account);
-            createNotice("제목1", "내용1", account);
-            createNotice("제목1", "내용1", account);
-            createNotice("제목1", "내용1", account);
-            createNotice("제목1", "내용1", account);
-            createNotice("제목1", "내용1", account);
-            createNotice("제목1", "내용1", account);
-            createNotice("제목1", "내용1", account);
-            createNotice("제목1", "내용1", account);
-            createNotice("제목1", "내용1", account);
+            Long account = 3L;
+            createNotice("2023년 02월 동네북 서비스 일정",
+                    "2023년 02월 동네북 서비스 일정에 대해 공지 드립니다.", account);
+            createNotice("2023년 02월 동네북 이벤트 안내",
+                    "2023년 02월 동네북 이벤트에 대해 공지 드립니다.", account);
+            createNotice("2023년 02월 신규 동네북 보관함 안내",
+                    "2023년 02월 신규 동네북 보관함에 대해 공지 드립니다.", account);
             
-            createGuide("제목1", "내용1", account);
-            createGuide("제목1", "내용1", account);
-            createGuide("제목1", "내용1", account);
-            createGuide("제목1", "내용1", account);
-            createGuide("제목1", "내용1", account);
-            createGuide("제목1", "내용1", account);
-            createGuide("제목1", "내용1", account);
-            createGuide("제목1", "내용1", account);
-            createGuide("제목1", "내용1", account);
-            createGuide("제목1", "내용1", account);
+            createGuide("내 주변 동네북 보관함 찾기",
+                    "내 주변 동네북 보관함 찾는 방법", account);
+            createGuide("비회원으로 도서 기부하기",
+                    "비회원으로 도서 기부하는 방법", account);
+            createGuide("회원 QR코드 발급 받기",
+                    "회원 QR코드 발급 받는 방법", account);
         }
         
         public void createNotice(String noticeTitle, String noticeContent, Long account) {
