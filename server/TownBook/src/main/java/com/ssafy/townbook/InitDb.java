@@ -98,21 +98,26 @@ public class InitDb {
             em.persist(authorityRoleUser);
             em.persist(authorityRoleAdmin);
             
-            Account accountNon = createAccount("nonmember@townbook.com", passwordEncoder.encode("password"), "비회원", "",
+            Account account1 = createAccount("nonmember@townbook.com", passwordEncoder.encode("password"), "비회원", "",
                     "", 0, "비회원 계정", "000000", authorityRoleUser);
-            accountNon.setAccountPoint(99999999);
-            em.persist(accountNon);
-            
-            Account account1 = createAccount("test@townbook.com", passwordEncoder.encode("password"), "김싸피",
-                    "대전시 유성구 덕명동",
-                    "010-1234-5678", 0, "내가 바로 김싸피", "220222", authorityRoleUser);
-            account1.setAccountPoint(1000);
+            account1.setAccountPoint(99999999);
             em.persist(account1);
             
-            Account account2 = createAccount("admin@townbook.com", passwordEncoder.encode("password"), "최어드",
+            Account account2 = createAccount("test@townbook.com", passwordEncoder.encode("password"), "김싸피",
+                    "대전시 유성구 덕명동",
+                    "010-1234-5678", 0, "내가 바로 김싸피", "220222", authorityRoleUser);
+            account2.setAccountPoint(1000);
+            em.persist(account2);
+            
+            Account account3 = createAccount("admin@townbook.com", passwordEncoder.encode("password"), "최어드",
                     "대전시 유성구 어드동",
                     "010-5678-1234", 1, "내가 바로 최어드", "111111", authorityRoleAdmin);
-            em.persist(account2);
+            em.persist(account3);
+            
+            Account account4 = createAccount("support@townbook.com", passwordEncoder.encode("password"), "박지원",
+                    "대전시 유성구 봉명동", "010-4545-4545", 1, "내가 바로 박지원", "900909", authorityRoleUser);
+            account4.setAccountType(1);
+            em.persist(account4);
         }
         
         public Authority createAuthority(String authorityName) {
