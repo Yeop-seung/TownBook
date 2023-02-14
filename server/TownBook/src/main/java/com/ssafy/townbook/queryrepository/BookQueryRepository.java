@@ -4,6 +4,7 @@ import static com.ssafy.townbook.model.entity.QBookLog.bookLog;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.ssafy.townbook.model.entity.Book;
+import com.ssafy.townbook.model.entity.BookLog;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
@@ -28,9 +29,9 @@ public class BookQueryRepository {
      * @param lockerNo
      * @return Optional<List<Book>>
      */
-    public Optional<List<Book>> findBookLogByLockerNo(Long lockerNo) {
-        List<Book> result = jpaQueryFactory
-                .select(bookLog.book)
+    public Optional<List<BookLog>> findBookLogByLockerNo(Long lockerNo) {
+        List<BookLog> result = jpaQueryFactory
+                .select(bookLog)
                 .from(bookLog)
                 .where(bookLog.bookLogState.eq(true).and(bookLog.locker.lockerNo.eq(lockerNo)))
                 .fetch();

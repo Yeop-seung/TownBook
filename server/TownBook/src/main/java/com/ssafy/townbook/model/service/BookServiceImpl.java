@@ -1,9 +1,11 @@
 package com.ssafy.townbook.model.service;
 
 import com.ssafy.townbook.model.dto.BookDto;
+import com.ssafy.townbook.model.dto.response.FindBookByLockerResponseDto;
 import com.ssafy.townbook.model.dto.response.FindListResponseDto;
 import com.ssafy.townbook.model.dto.response.FindOneResponseDto;
 import com.ssafy.townbook.model.entity.Book;
+import com.ssafy.townbook.model.entity.BookLog;
 import com.ssafy.townbook.model.repository.BookRepository;
 import com.ssafy.townbook.queryrepository.BookQueryRepository;
 import java.io.BufferedReader;
@@ -140,9 +142,9 @@ public class BookServiceImpl implements BookService {
      */
     @Override
     public FindListResponseDto findAllBookByLockerNo(Long lockerNo) {
-        List<Book> findBookList = bookQueryRepository.findBookLogByLockerNo(lockerNo).get();
-        List<BookDto> findBookDtoList = findBookList.stream()
-                .map(BookDto::new)
+        List<BookLog> findBookLogList = bookQueryRepository.findBookLogByLockerNo(lockerNo).get();
+        List<FindBookByLockerResponseDto> findBookDtoList = findBookLogList.stream()
+                .map(FindBookByLockerResponseDto::new)
                 .collect(Collectors.toList());
         return new FindListResponseDto(findBookDtoList);
     }
