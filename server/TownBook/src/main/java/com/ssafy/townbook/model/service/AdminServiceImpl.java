@@ -93,10 +93,10 @@ public class AdminServiceImpl implements AdminService {
     public FindOneResponseDto givePointTypeUser(Integer point) {
         try {
             Long result = adminQueryRepository.givePointTypeUser(point, 1).get();
-            if(result==1)
-                return new FindOneResponseDto("성공");
-            else
+            if(result==0)
                 return new FindOneResponseDto("SQL 오류");
+            else
+                return new FindOneResponseDto("성공");
         }
         catch (Exception e){
             return new FindOneResponseDto();
