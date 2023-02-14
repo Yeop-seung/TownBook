@@ -1,10 +1,8 @@
 package com.ssafy.townbook.controller;
 
-import com.ssafy.townbook.model.dto.request.FindBookInLibraryRequestDto;
-import com.ssafy.townbook.model.dto.response.FindOneResponseDto;
 import com.ssafy.townbook.model.dto.response.FindListResponseDto;
+import com.ssafy.townbook.model.dto.response.FindOneResponseDto;
 import com.ssafy.townbook.model.service.BookService;
-import com.ssafy.townbook.queryrepository.BookQueryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -30,7 +27,7 @@ public class BookController {
     }
     
     /**
-     * 전체 책 조회
+     * 등록된 전체 도서를 조회
      *
      * @return List<BookDto>
      */
@@ -40,7 +37,7 @@ public class BookController {
     }
     
     /**
-     * ISBN 으로 도서 조회
+     * 도서의 ISBN으로 단일 도서 조회
      *
      * @param bookIsbn
      * @return BookDto
@@ -51,7 +48,7 @@ public class BookController {
     }
     
     /**
-     * ISBN으로 국립도서관의 도서 정보 조회
+     * 도서의 ISBN으로 국립중앙도서관에서 도서 정보를 가져오고 DB에 등록
      *
      * @param bookIsbn
      * @return BookDto
@@ -62,10 +59,10 @@ public class BookController {
     }
     
     /**
-     * 보관함에 보관중이 도서 전부 조회
+     * 단일 보관함에 보관중인 모든 도서 조회
      *
      * @param lockerNo
-     * @return
+     * @return List<BookDto>
      */
     @GetMapping("/locker/{lockerNo}")
     public ResponseEntity<FindListResponseDto> findAllBookByLockerNo(@PathVariable Long lockerNo) {
