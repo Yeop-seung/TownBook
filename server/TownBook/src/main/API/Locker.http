@@ -14,3 +14,12 @@ Content-Type: application/json
     "lockerLatitude": 123.123123,
     "lockerLongitude": 12.123123
 }
+
+### 4. 접속 위치와 가까운 순으로 보관함 조회
+GET http://localhost:8081/backend/locker/findNearLocker
+Content-Type: application/json
+
+{
+    "userLatitude": 36.3655,
+    "userLongitude": 127.3554
+}
