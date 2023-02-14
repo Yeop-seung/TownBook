@@ -7,6 +7,7 @@ import com.ssafy.townbook.model.service.MyPageServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -55,8 +56,20 @@ public class AdminController {
      * @param accountNo
      * @return Integer
      */
-    @GetMapping("/givePoint/{accountNo}/{point}")
+    @GetMapping("/giveOne/{accountNo}/{point}")
     public ResponseEntity<FindOneResponseDto> givePointOneUser(@PathVariable Long accountNo, @PathVariable Integer point){
         return new ResponseEntity<FindOneResponseDto>(adminService.givePointOneUser(accountNo,point),HttpStatus.OK);
+    }
+
+    /**
+     * Type이 1인 유저 : 취약계층 전체 회원에게 포인트 부여
+     *
+     * @param point
+     * @return Boolean
+     */
+    @Transactional
+    @GetMapping("/giveType/{point}")
+    public ResponseEntity<FindOneResponseDto> givePointTypeUser(@PathVariable Integer point){
+        return new ResponseEntity<FindOneResponseDto>(adminService.givePointTypeUser(point),HttpStatus.OK);
     }
 }
