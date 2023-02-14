@@ -73,7 +73,13 @@ public class InitDb {
                     "https://www.nl.go.kr/seoji/fu/ecip/dbfiles/CIP_FILES_TBL/4721454_5.txt"
                     , "https://www.nl.go.kr/seoji/fu/ecip/dbfiles/CIP_FILES_TBL/4721454_3.jpg");
             em.persist(book2);
+            
+            Book book3 = createBook("9788966262670", "0",
+                    "실전 리액트 프로그래밍", "이재승 지음", "인사이트", convertDate("20200713"), "URL이 없습니다.",
+                    "https://www.nl.go.kr/seoji/fu/ecip/dbfiles/CIP_FILES_TBL/2020/06/08/9788966262670.jpg");
+            em.persist(book3);
         }
+        
         
         public Book createBook(String bookIsbn, String bookSubject, String bookTitle, String bookAuthor,
                 String bookPublisher, LocalDate bookPublishPredate, String bookIntroductionURL,
@@ -171,27 +177,11 @@ public class InitDb {
         }
         
         public void bookLogInit() {
-            Locker            locker1       = lockerRepository.findLockerByLockerNo(3L).get();
+            Locker            locker1       = lockerRepository.findLockerByLockerNo(4L).get();
             DetailLocker      detailLocker1 = locker1.getDetailLocker().get(0);
             Optional<Account> account1      = accountRepository.findByAccountNo(2L);
-            Optional<Book>    book1         = bookRepository.findBookByBookIsbn("8984993751");
+            Optional<Book>    book1         = bookRepository.findBookByBookIsbn("9788966262670");
             donateBook("재미있어요", locker1, detailLocker1, account1, book1);
-            
-            Locker            locker2       = lockerRepository.findLockerByLockerNo(4L).get();
-            DetailLocker      detailLocker2 = locker2.getDetailLocker().get(0);
-            Optional<Account> account2      = accountRepository.findByAccountNo(3L);
-            Optional<Book>    book2         = bookRepository.findBookByBookIsbn("9788960777330");
-            donateBook("재미 없어요", locker2, detailLocker2, account2, book2);
-            
-            Locker       locker3       = lockerRepository.findLockerByLockerNo(5L).get();
-            DetailLocker detailLocker3 = locker3.getDetailLocker().get(0);
-            donateBook("꿀잼", locker3, detailLocker3, account1, book2);
-            
-            DetailLocker detailLocker4 = locker3.getDetailLocker().get(1);
-            donateBook("노잼", locker3, detailLocker4, account1, book2);
-            
-            BookLog bookLog1 = bookLogRepository.findBookLogByBookLogNo(4L).get();
-            receiveBook(bookLog1, account1);
         }
         
         public void donateBook(
@@ -265,6 +255,7 @@ public class InitDb {
             notice.setNoticeCategory(1);
             em.persist(notice);
         }
+        
     }
     
     static LocalDate convertDate(String dateString) {

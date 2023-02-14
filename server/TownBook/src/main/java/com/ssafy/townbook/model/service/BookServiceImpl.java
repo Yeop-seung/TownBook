@@ -11,6 +11,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -101,9 +102,26 @@ public class BookServiceImpl implements BookService {
             book.setBookAuthor((String) jsonObject.get("AUTHOR"));
             book.setBookPublisher((String) jsonObject.get("PUBLISHER"));
             book.setBookPublishPredate(stringToDate((String) jsonObject.get("PUBLISH_PREDATE")));
-            book.setBookIntroductionURL(jsonObject.get("BOOK_INTRODUCTION_URL").equals("") ? "null.png"
-                    : (String) jsonObject.get("BOOK_INTRODUCTION_URL"));
-            book.setBookTitleURL((String) jsonObject.get("TITLE_URL"));
+            
+            String bookTitleURL =
+                    jsonObject.get("TITLE_URL").equals("") ? "null.png" : (String) jsonObject.get("TITLE_URL");
+            book.setBookTitleURL(bookTitleURL);
+            
+            String bookIntroduction = (String) jsonObject.get("BOOK_INTRODUCTION_URL");
+            if (bookIntroduction.equals("")) {
+                book.setBookIntroductionURL("URL이 없습니다.");
+            } else {
+                URL bookIntroductionURL = new URL(bookIntroduction);
+                BufferedReader bookIntroductionURLBr = new BufferedReader(
+                        new InputStreamReader(bookIntroductionURL.openStream(), "euc-kr"));
+                
+                StringBuilder stringBuilder = new StringBuilder();
+                List<String>  newList       = bookIntroductionURLBr.lines().collect(Collectors.toList());
+                for (int i = 0; i < newList.size(); i++) {
+                    stringBuilder.append(newList.get(i));
+                }
+                book.setBookIntroductionURL(String.valueOf(stringBuilder));
+            }
             
             bookRepository.save(book);
             BookDto bookDto = new BookDto(book);
