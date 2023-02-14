@@ -56,6 +56,7 @@ public class AdminController {
      * @param accountNo
      * @return Integer
      */
+    @Transactional(readOnly = false)
     @GetMapping("/giveOne/{accountNo}/{point}")
     public ResponseEntity<FindOneResponseDto> givePointOneUser(@PathVariable Long accountNo, @PathVariable Integer point){
         return new ResponseEntity<FindOneResponseDto>(adminService.givePointOneUser(accountNo,point),HttpStatus.OK);
@@ -67,7 +68,7 @@ public class AdminController {
      * @param point
      * @return Boolean
      */
-    @Transactional
+    @Transactional(readOnly = false)
     @GetMapping("/giveType/{point}")
     public ResponseEntity<FindOneResponseDto> givePointTypeUser(@PathVariable Integer point){
         return new ResponseEntity<FindOneResponseDto>(adminService.givePointTypeUser(point),HttpStatus.OK);
