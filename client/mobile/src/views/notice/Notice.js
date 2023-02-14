@@ -1,4 +1,3 @@
-
 import axios from "axios";
 
 import { React, useState, useEffect, useRef } from "react";
@@ -7,9 +6,7 @@ import NotificationAlert from "react-notification-alert";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import NoticeList from "views/notice/NoticeList";
-import {
-  faArrowLeft
-} from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import {
   faHeadset,
   faQrcode,
@@ -77,53 +74,51 @@ function Notice(props) {
   };
 
   useEffect(() => {
-  axios
-    .get(
-      `https://i8b201.p.ssafy.io/backend/notice/list/2`
+    axios
+      .get(`https://i8b201.p.ssafy.io/backend/notice/list/2`)
+      // .get("https:///townbook/myPage/receive/${receiverNo}")
+      .then((res) => {
+        const notices = [];
+        console.log(res);
+        // for (let i = 0; i < res.data.length; i++) {
+        //   notices.push({ ...res.data[i], id: i + 1 });
+        // }
+        for (const key in res.data.data) {
+          const notice = {
+            id: key,
+            ...res.data.data[key],
+          };
+          notices.push(notice);
+        }
+        // if(res=="true"){
+        // alert("회원가입에 성공하였습니다.");
+        // history.replace("/");
+        // }
+        // else{
 
-    )
-    // .get("https:///townbook/myPage/receive/${receiverNo}")
-    .then((res) => {
-      const notices = [];
-      console.log(res)
-      // for (let i = 0; i < res.data.length; i++) {
-      //   notices.push({ ...res.data[i], id: i + 1 });
-      // }
-      for (const key in res.data.data) {
-        const notice = {
-        id: key,
-        ...res.data.data[key]
-      };
-        notices.push(notice);
-      };
-      // if(res=="true"){
-      // alert("회원가입에 성공하였습니다.");
-      // history.replace("/");
-      // }
-      // else{
-
-      //   alert("회원가입에 실패하였습니다.");
-      // }
-      setIsLoading(false);
-      setLoadedMeetups(notices);
-      // console.log(notices)
-    })
-    .catch((error) => {
-      alert("글로딩에 실패하였습니다.");
-    });
+        //   alert("회원가입에 실패하였습니다.");
+        // }
+        setIsLoading(false);
+        setLoadedMeetups(notices);
+        // console.log(notices)
+      })
+      .catch((error) => {
+        alert("글로딩에 실패하였습니다.");
+      });
   }, []);
-
 
   if (isLoading) {
     <section>
       <p>Loading...</p>
-    </section>
+    </section>;
   }
 
-
   return (
-    <>
+    <><Link to={"/map"} >
+    <FontAwesomeIcon icon={faArrowLeft} size="xl" color="black" position="absolute" zIndex="2000" style={{ margin: 15,marginBottom:5 }}/>
+  </Link>
       <div className="content">
+        
         <div className="react-notification-alert-container">
           <NotificationAlert ref={notificationAlertRef} />
         </div>
@@ -134,14 +129,15 @@ function Notice(props) {
                 <Row
                   style={{ justifyContent: "space-between", paddingInline: 15 }}
                 >
-                  <Link to={"/map"}>
-                    <FontAwesomeIcon icon={faArrowLeft} size="xl" color="black" />
-                  </Link>
-
                   <CardTitle tag="h4">공지사항</CardTitle>
 
                   <Link to={"/notice/write"}>
-                    <FontAwesomeIcon icon={faPlus} size="xl" color="black" hidden={localStorage.getItem("accountNO") === null}/>
+                    <FontAwesomeIcon
+                      icon={faPlus}
+                      size="xl"
+                      color="black"
+                      hidden={localStorage.getItem("accountNO") === 3}
+                    />
                   </Link>
                 </Row>
               </CardHeader>
@@ -154,10 +150,8 @@ function Notice(props) {
                   <span>This is a notification with close button.</span>
                 </UncontrolledAlert> */}
 
-                
-                <NoticeList notices={loadedMeetups}/>
+                <NoticeList notices={loadedMeetups} />
 
-                
                 {/* 
                 <UncontrolledAlert className="alert-with-icon" color="info">
                   <span className="tim-icons icon-bell-55" data-notify="icon" />

@@ -133,7 +133,7 @@ function Map() {
       //   image: markerImage,
       // });
       const imageSrc =
-          "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png", // 마커이미지의 주소입니다
+          "https://ifh.cc/g/HqQFF7.png", // 마커이미지의 주소입니다
         imageSize = new kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
         imageOption = { offset: new kakao.maps.Point(27, 69) }; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
       const markerImage = new kakao.maps.MarkerImage(
@@ -142,12 +142,22 @@ function Map() {
         imageOption
       );
 
+      const imageSrc2 =
+          "https://ifh.cc/g/X5DS1w.png", // 마커이미지의 주소입니다
+        imageSize2 = new kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
+        imageOption2 = { offset: new kakao.maps.Point(27, 69) }; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+      const markerImage2 = new kakao.maps.MarkerImage(
+        imageSrc2,
+        imageSize2,
+        imageOption2
+      );
+
       //내위치
       const myposition = new kakao.maps.Marker({
         map: map, // 마커를 표시할 지도
         position: locPosition, // 마커를 표시할 위치
         content: "내위치", // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-        image: markerImage, // 마커 이미지
+        image: markerImage2, // 마커 이미지
       });
 
       //동네북 위치 배열
@@ -318,7 +328,8 @@ function Map() {
               }}
             />
             <Button
-              className="btn-simple"
+              // className="btn-simple"
+              color="info"
               type="submit"
               onClick={searchBook}
               style={{

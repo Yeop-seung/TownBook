@@ -2,7 +2,7 @@
 import React from "react";
 import MyPageDonateItem from "views/account/MyPageDonateItem";
 import MyPageReceiveItem from "views/account/MyPageReceiveItem";
-
+// import Table from "reactstrap";
 import {
   Alert,
   UncontrolledAlert,
@@ -13,16 +13,14 @@ import {
   Card,
   Button,
   Col,
+  Table,
 } from "reactstrap";
 
 function AdminPage(props) {
-
-
-  console.log(props);
+  console.log('이건관리자프롭',props);
   return (
     <div>
-    
-      <Alert>
+      {/* <Alert>
         <Row>
           <Col>회원번호</Col>
           <Col>이메일</Col>
@@ -30,38 +28,34 @@ function AdminPage(props) {
           <Col>포인트</Col>
           <Col>휴대폰</Col>
           <Col>회원유형</Col>
-
         </Row>
-      </Alert>
-      {props.users.map((user) => (
-        <div>
-          <Alert>
-     
-            <Row>
-              <Col>
-                <p style={{ color: "white" }}>{user.accountNo}</p>
-              </Col>
-              <Col>
-                <p style={{ color: "white" }}>{user.accountEmail}</p>
-              </Col>
-              <Col>
-              <p style={{ color: "white" }}>{user.accountName}({user.accountNickname})</p>
-              </Col>
-              <Col>
-              <p style={{ color: "white" }}>{user.accountPoint}</p>
-              </Col>
-
-              <Col>
-              <p style={{ color: "white" }}>{user.accountPhoneNumber}</p>
-
-              </Col>
-              <Col>
-              회원유형자리
-              </Col>
-            </Row>
-          </Alert>
-        </div>
-      ))}
+      </Alert> */}
+      <Table  className="tablesorter">
+      <thead className="text-primary">
+        <tr>
+          <th>회원번호</th>
+          <th>이메일</th>
+          <th>이름(닉네임)</th>
+          <th>포인트</th>
+          <th>휴대폰</th>
+          <th>회원유형</th>
+          {/* <th className="text-center">Salary</th> */}
+        </tr>
+      </thead>
+              <tbody>
+              {props.users.map((user) => (
+                <tr>
+                  <td style={{ color: "white" }}>{user.accountNo}</td>
+                  <td style={{ color: "white" }}>{user.accountEmail}</td>
+                  <td style={{ color: "white" }}>{user.accountName}({user.accountNickname})</td>
+                  <td style={{ color: "white" }}>{user.accountPoint}</td>
+                  <td style={{ color: "white" }}>{user.accountPhoneNumber}</td>
+                  <td>회원유형자리</td>
+                </tr>
+                ))}
+              </tbody>
+            </Table>
+      
       {/* {props.Receives.map((receive) => (
         <div>
           <Alert color="info" hidden={hiddenpassword}>

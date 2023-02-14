@@ -3,7 +3,9 @@ import { useDispatch } from "react-redux";
 import emailjs from "@emailjs/browser";
 // reactstrap components
 import classes from "./NoticeWrite.module.css";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 import {
   Card,
   CardHeader,
@@ -12,6 +14,7 @@ import {
   Table,
   Row,
   Col,
+  
 } from "reactstrap";
 
 function Tables() {
@@ -39,6 +42,9 @@ function Tables() {
   };
   return (
     <>
+    <Link to={"/map"} >
+    <FontAwesomeIcon icon={faArrowLeft} size="xl" color="black" position="absolute" zIndex="2000" style={{ margin: 15,marginBottom:5 }}/>
+  </Link>
       <div className="content">
         <Row>
           <Col md="12">

@@ -5,6 +5,9 @@ import axios from "axios";
 import AdminPage from "views/account/AdminPage";
 import classes from "./Login.module.css";
 import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import {
   Button,
   Card,
@@ -23,6 +26,7 @@ import {
   ModalHeader,
   ModalBody,
 } from "reactstrap";
+import WishList from "./WishList";
 
 function MyPage(props) {
   const pwInputRef = useRef();
@@ -31,10 +35,16 @@ function MyPage(props) {
   const nicknameInputRef = useRef();
   const birthdayInputRef = useRef();
   const modalpwInputRef = useRef();
+  const modalemailInputRef = useRef();
 
   const [modalSearch, setmodalSearch] = React.useState(false);
+  const [modalSearch2, setmodalSearch2] = React.useState(false);
+
   const toggleModalSearch = () => {
     setmodalSearch(!modalSearch);
+  };
+  const toggleModalSearch2 = () => {
+    setmodalSearch2(!modalSearch2);
   };
   const [isLoading, setIsLoading] = React.useState(true);
   const [Donates, setDonates] = React.useState([]);
@@ -43,17 +53,30 @@ function MyPage(props) {
   const [verifiedPassword, setverifiedPassword] = React.useState(false);
   const [users, setusers] = React.useState([]);
   const [hiddenadmin, sethiddenadmin] = React.useState(true);
-
-  const hiddenAdminPage = () => {
-    if (localStorage.getItem("accountNo") === 3) {
-      return false
-    } else {
-      return true
-    }
-  }
-
+  const [wishList, setwishList] = React.useState([]);
   const accountNo = localStorage.getItem("accountNo");
   const history = useHistory();
+  const [lockerRegion, setlockerRegion] = React.useState([]);
+  const [LockerRegion, setLockerRegion] = React.useState([]);
+
+
+
+  function findRegion() {
+
+    
+    const lockerNo = lockerRegion
+    axios
+      .put(`https://i8b201.p.ssafy.io/backend/locker/${lockerNo}`)
+      .then((res) => {
+        // console.log("변경", res);
+        // if (res.)
+        setLockerRegion(res.data.lockerRegion)
+      })
+      .catch((error) => {
+        alert("지역을 못불러왔습니다.");
+      });
+  }
+
 
   function modifyMyInfo(event) {
     event.preventDefault();
@@ -74,10 +97,14 @@ function MyPage(props) {
     };
 
     console.log(userInfo);
+
+
+
+    
     axios
       .put("https://i8b201.p.ssafy.io/backend/account/modify", userInfo)
       .then((res) => {
-        console.log("변경", res);
+        // console.log("변경", res);
         // if (res.)
         localStorage.setItem("accountBirthDay", res.data.data.accountBirthDay);
         localStorage.setItem("accountNickname", res.data.data.accountNickname);
@@ -113,16 +140,49 @@ function MyPage(props) {
         if (res) {
           setverifiedPassword(true);
         }
-        console.log(res);
+        // console.log(res);
       })
       .catch((error) => {
         alert("비밀번호를 확인해주세요.");
       });
   }
+  function accountRemove(params) {
+    const enteredPw = modalpwInputRef.current.value;
+    const enteredEmail = modalemailInputRef.current.value;
+    const accountEmail = enteredEmail;
+    const accountPw = enteredPw;
 
-
+    axios
+      .put("https://i8b201.p.ssafy.io/backend/account/leave", {
+        accountEmail,
+        accountPw,
+      })
+      .then((res) => {
+        if (res.data.success) {
+          alert("회원탈퇴가 완료되었습니다. 이용해주셔서 감사합니다.");
+          localStorage.clear();
+          history.replace("/login");
+        }
+        // console.log("회원탈퇴", res);
+      })
+      .catch((error) => {
+        alert("이메일 또는 비밀번호를 확인해주세요.");
+      });
+  }
 
   useEffect(() => {
+    console.log("어드민",localStorage.getItem("accountNo"))
+
+      if (localStorage.getItem("accountNo") === '3') {
+        sethiddenadmin(false);
+        console.log('어드민입니다.')
+      } else {
+        sethiddenadmin(true);
+        console.log('어드민아닙니니다.')
+
+      }
+    
+
     Promise.all([
       axios.get(`https://i8b201.p.ssafy.io/backend/myPage/donate/${accountNo}`),
       axios.get(
@@ -131,19 +191,20 @@ function MyPage(props) {
       axios.get(
         `https://i8b201.p.ssafy.io/backend/myPage/myPoint/${accountNo}`
       ),
-      axios.get(
-        `https://i8b201.p.ssafy.io/backend/admin`
-      )
+      axios.get(`https://i8b201.p.ssafy.io/backend/admin`),
+      axios.get(`https://i8b201.p.ssafy.io/backend/myPage/wishList/${accountNo}`)
+
     ])
-      // .get("https:///townbook/myPage/receive/${receiverNo}")
-      .then(([res1, res2, res3, res4]) => {
-        console.log(res1);
+      .then(([res1, res2, res3, res4, res5]) => {
+        console.log('기부내역 받아오는 부분',res1);
         // console.log(res1);
-        // console.log(res2);
-        console.log(res4)
+        // console.log("포인트액시오스", res3);
+        console.log(res4);
+        console.log('찜목록입니다',res5)
         const donates = [];
         const receives = [];
         const usersinfo = [];
+        const wishlist= [];
         for (let i = 0; i < res1.data.count; i++) {
           donates.push({ ...res1.data.data[i], id: i + 1 });
         }
@@ -153,6 +214,10 @@ function MyPage(props) {
 
         for (let i = 0; i < res4.data.count; i++) {
           usersinfo.push({ ...res4.data.data[i], id: i + 1 });
+        }
+
+        for (let i = 0; i < res5.data.count; i++) {
+          wishlist.push({ ...res5.data.data[i], id: i + 1 });
         }
         // for (const key in res.data) {
         //   const notice = {
@@ -171,47 +236,54 @@ function MyPage(props) {
         // console.log("기부", donates);
         // console.log("수령", receives);
         // console.log(res3);
-        console.log('유저인포',usersinfo)
+        // console.log("유저인포", usersinfo);
+        setwishList(wishlist);
         setDonates(donates);
         setReceives(receives);
         setusers(usersinfo);
         setPoint(res3.data.data);
         setIsLoading(false);
+        setlockerRegion(res1.data.bookLogLocker)
         // console.log("합친거", Donates)
       })
       .catch((error) => {
         alert("내역 로딩에 실패하였습니다.");
       });
-  }, [isLoading]);
+  }, [hiddenadmin]);
   if (isLoading) {
     <section>
       <p>Loading...</p>
     </section>;
   }
-  console.log('유저스',users)
+  // console.log("hidden",hiddenadmin)
+  // console.log("유저스", users);
   return (
     <>
+    <Link to={"/map"} >
+    <FontAwesomeIcon icon={faArrowLeft} size="xl" color="#424a51" position="absolute" zIndex="2000" style={{ margin: 15,marginBottom:5 }}/>
+  </Link>
       <div className="content">
         <Row>
           <Col md="12">
             <Card hidden={hiddenadmin}>
-              <CardHeader>
-                관리자페이지
-              </CardHeader>
+              <CardHeader>관리자페이지</CardHeader>
               <CardBody>
-                <AdminPage users={users}/>
+                <AdminPage users={users} />
               </CardBody>
             </Card>
             <Card>
               <CardHeader>
                 <Row style={{ justifyContent: "space-between" }}>
-                  <CardTitle tag="h4" style={{paddingLeft:15, marginTop:10}}>내 정보</CardTitle>
-                  <Button onClick={toggleModalSearch} hidden={verifiedPassword} style={{marginRight:15, margin:0, paddingTop:0, paddingBottom:0}}>
-                    개인정보수정
-                  </Button>
+                  <CardTitle
+                    tag="h4"
+                    style={{ paddingLeft: 15, marginTop: 10 }}
+                  >
+                    내 정보
+                  </CardTitle>
+                  
                 </Row>
               </CardHeader>
-              <CardBody style={{paddingInline:0}}>
+              <CardBody style={{ paddingInline: 0 }}>
                 <Col>내포인트 : {Point}</Col>
 
                 <Col>이름 : {localStorage.getItem("accountName")}</Col>
@@ -219,11 +291,11 @@ function MyPage(props) {
                 <Col hidden={!verifiedPassword}>
                   <FormGroup>
                     <label>비밀번호</label>
-                    <input
+                    <Input
                       //   defaultValue="비밀번호를 입력해주세요"
                       placeholder="비밀번호를 입력해주세요"
                       type="password"
-                      ref={pwInputRef}
+                      innerRef={pwInputRef}
                       // className={classes.style}
                     />
                   </FormGroup>
@@ -235,11 +307,11 @@ function MyPage(props) {
                 <Col hidden={!verifiedPassword}>
                   <FormGroup>
                     <label>닉네임</label>
-                    <input
+                    <Input
                       //   defaultValue="비밀번호를 입력해주세요"
                       placeholder="닉네임을 입력해주세요"
                       type="text"
-                      ref={nicknameInputRef}
+                      innerRef={nicknameInputRef}
                       // className={classes.style}
                     />
                   </FormGroup>
@@ -250,11 +322,11 @@ function MyPage(props) {
                 <Col hidden={!verifiedPassword}>
                   <FormGroup>
                     <label>생일</label>
-                    <input
+                    <Input
                       //   defaultValue="비밀번호를 입력해주세요"
                       placeholder="생일을 입력해주세요"
                       type="text"
-                      ref={birthdayInputRef}
+                      innerRef={birthdayInputRef}
                       // className={classes.style}
                     />
                   </FormGroup>
@@ -265,11 +337,11 @@ function MyPage(props) {
                 <Col hidden={!verifiedPassword}>
                   <FormGroup>
                     <label>주소</label>
-                    <input
+                    <Input
                       //   defaultValue="비밀번호를 입력해주세요"
                       placeholder="주소를 입력해주세요"
                       type="text"
-                      ref={addressInputRef}
+                      innerRef={addressInputRef}
                       // className={classes.style}
                     />
                   </FormGroup>
@@ -280,32 +352,49 @@ function MyPage(props) {
                 <Col hidden={!verifiedPassword}>
                   <FormGroup>
                     <label>연락처</label>
-                    <input
+                    <Input
                       //   defaultValue="비밀번호를 입력해주세요"
                       placeholder="휴대폰 번호를 입력해주세요"
                       type="text"
-                      ref={phonenumberInputRef}
+                      innerRef={phonenumberInputRef}
                       // className={classes.style}
                     />
                   </FormGroup>
                 </Col>
-                <Row style={{justifyContent:"center"}}>
-                  <button hidden={!verifiedPassword} onClick={modifyMyInfo}>수정완료</button>
-                  <button hidden={!verifiedPassword} onClick={()=>{setverifiedPassword(false)}}>취소</button>
-                  <button>회원탈퇴</button>
+                <Row style={{ justifyContent: "center" }}>
+                  <Button hidden={!verifiedPassword} onClick={modifyMyInfo}>
+                    수정완료
+                  </Button>
+                  <Button
+                    hidden={!verifiedPassword}
+                    onClick={() => {
+                      setverifiedPassword(false);
+                    }}
+                  >
+                    취소
+                  </Button>
+                  <Button
+                    onClick={toggleModalSearch}
+                    hidden={verifiedPassword}
+                    style={{
+                      marginRight: 20,
+                      margin: 0,
+                      paddingTop: 0,
+                      paddingBottom: 0,
+                    }}
+                  >
+                    개인정보수정
+                  </Button>
+                  <Button onClick={toggleModalSearch2}  hidden={verifiedPassword}>회원탈퇴</Button>
                 </Row>
               </CardBody>
-              <CardBody>
-               
-              </CardBody>
+              <CardBody></CardBody>
             </Card>
           </Col>
           <Col md="12">
             <Card>
               <CardBody>
                 <MyPageDonateList Donates={Donates} Receives={Receives} />
-
-               
               </CardBody>
             </Card>
           </Col>
@@ -315,11 +404,12 @@ function MyPage(props) {
                 <h5 className="title">찜목록</h5>
                 {/* <p className="category">
                   Handcrafted by our friends from{" "}
-                  <a href="https://nucleoapp.com/?ref=1712">NucleoApp</a>
+                  <a href="https://nucleoapp.com/?innerRef=1712">NucleoApp</a>
                 </p> */}
               </CardHeader>
               <CardBody className="all-icons">
-                <Row>
+                <WishList wishList={wishList}/>
+                {/* <Row>
                   <Col
                     className="font-icon-list col-xs-6 col-xs-6"
                     lg="2"
@@ -364,7 +454,7 @@ function MyPage(props) {
                       <p>icon-app</p>
                     </div>
                   </Col>
-                </Row>
+                </Row> */}
               </CardBody>
             </Card>
           </Col>
@@ -380,18 +470,19 @@ function MyPage(props) {
                 <FormGroup>
                   {/* <label>비밀번호</label> */}
                   <div>
-                    <input
+                    <Input
                       //   defaultValue="Mike"
                       placeholder="비밀번호를 입력해주세요"
                       type="text"
-                      ref={modalpwInputRef}
+                      inner
+                      innerRef={modalpwInputRef}
                       className={classes.style}
                     />
                   </div>
                 </FormGroup>
               </Col>
               <Row style={{ justifyContent: "center", paddingInline: 30 }}>
-                <button
+                <Button
                   className="btn-login"
                   // color="black"
                   type="submit"
@@ -402,7 +493,7 @@ function MyPage(props) {
                   className={classes.style}
                 >
                   확인
-                </button>
+                </Button>
               </Row>
             </div>
             <button
@@ -410,6 +501,59 @@ function MyPage(props) {
               className="close"
               onClick={() => {
                 toggleModalSearch();
+                // handle.clickButton();
+              }}
+            >
+              <i className="tim-icons icon-simple-remove" />
+            </button>
+          </ModalBody>
+        </Modal>
+
+        <Modal
+          modalClassName="modal-search"
+          isOpen={modalSearch2}
+          toggle={toggleModalSearch2}
+        >
+          <ModalBody>
+            <div>
+              <Col>
+                <FormGroup>
+                  {/* <label>비밀번호</label> */}
+                  <div>
+                    <Input
+                      //   defaultValue="Mike"
+                      placeholder="이메일을 입력해주세요"
+                      type="text"
+                      innerRef={modalemailInputRef}
+                      className={classes.style}
+                    />
+                    <Input
+                      //   defaultValue="Mike"
+                      placeholder="비밀번호를 입력해주세요"
+                      type="text"
+                      innerRef={modalpwInputRef}
+                      className={classes.style}
+                    />
+                  </div>
+                </FormGroup>
+              </Col>
+              <Row style={{ justifyContent: "center", paddingInline: 30 }}>
+                <Button
+                  className="btn-login"
+                  // color="black"
+                  type="submit"
+                  onClick={accountRemove}
+                  className={classes.style}
+                >
+                  확인
+                </Button>
+              </Row>
+            </div>
+            <button
+              aria-label="Close"
+              className="close"
+              onClick={() => {
+                toggleModalSearch2();
                 // handle.clickButton();
               }}
             >

@@ -2,7 +2,7 @@
 import React from "react";
 import MyPageDonateItem from "views/account/MyPageDonateItem";
 import MyPageReceiveItem from "views/account/MyPageReceiveItem";
-
+import WishListItem from "./WishListItem";
 import {
   Alert,
   UncontrolledAlert,
@@ -12,27 +12,18 @@ import {
   CardTitle,
   Card,
   Button,
+  Col
 } from "reactstrap";
 
-function NoticeList(props) {
-  const [hiddenpassword, sethiddenpassword] = React.useState(true);
-  const [hiddenid, sethiddenid] = React.useState(false);
-  const showid = () => {
-    sethiddenpassword(true);
-    sethiddenid(false);
-    // setClicked(true);;
-  };
-
-  const showpassword = () => {
-    sethiddenid(true);
-    sethiddenpassword(false);
-  };
+function WishList(props) {
+    console.log('위시리스트프롭',props)
+   
   // console.log(props)
 
-  console.log('리스트입니다.',props);
+  console.log(props);
   return (
     <div>
-      <CardBody>
+      {/* <CardBody>
         <Row style={{ justifyContent: "center" }}>
           <div>
             <Button
@@ -61,26 +52,20 @@ function NoticeList(props) {
             </Button>
           </div>
         </Row>
-      </CardBody>
-      <CardTitle hidden={hiddenid}>나의 기부내역</CardTitle>
-      <CardTitle hidden={hiddenpassword}>나의 수령내역</CardTitle>
+      </CardBody> */}
+      {/* <CardTitle hidden={hiddenid}>나의 기부내역</CardTitle>
+      <CardTitle hidden={hiddenpassword}>나의 수령내역</CardTitle> */}
 
-      {props.Donates.map((donate) => (
+      {props.wishList.map((wish) => (
         <div>
-          <Alert  hidden={hiddenid}>
-            <MyPageDonateItem
-              //   key={donate.id}
-              id={donate.id}
-              bookTitle={donate.bookTitle}
-              bookLogDonateDateTime={donate.bookLogDonateDateTime}
-              bookLogLocker={donate.bookLogLocker}
-            />
+          <Alert >
+          <WishListItem bookTitle={wish.bookTitle} bookLogNo={wish.bookLogNo} id={wish.id}/>
           </Alert>
         </div>
       ))}
-      {props.Receives.map((receive) => (
+      {/* {props.Receives.map((receive) => (
         <div>
-          <Alert  hidden={hiddenpassword}>
+          <Alert  >
             <MyPageReceiveItem
               //   key={receive.id}
               id={receive.id}
@@ -89,8 +74,8 @@ function NoticeList(props) {
             />
           </Alert>
         </div>
-      ))}
+      ))} */}
     </div>
   );
 }
-export default NoticeList;
+export default WishList;

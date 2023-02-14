@@ -29,6 +29,13 @@ function BookList(props) {
               // id={book.id}
               bookTitle={book.book.bookTitle}
               bookTitleURL={book.book.bookTitleURL}
+              bookLogNo={book.bookLog.bookLogNo}
+              bookAuthor={book.book.bookAuthor}
+              id={book.id}
+              bookPublisher = {book.book.bookPublisher}
+              bookIntroductionURL = {book.book.bookIntroductionURL}
+              bookPublishPredate = {book.book.bookPublishPredate}
+              lockerNo = {book.bookLog.lockerNo}
             />
           
 

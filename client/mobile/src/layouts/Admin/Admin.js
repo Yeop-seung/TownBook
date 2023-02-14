@@ -11,7 +11,7 @@ import FixedPlugin from "components/FixedPlugin/FixedPlugin.js";
 import NoticeWrite from "views/notice/NoticeWrite";
 import routes from "routes.js";
 import Notice from "views/notice/Notice";
-import logo from "assets/img/react-logo.png";
+import logo from "assets/img/동네북.png";
 import { BackgroundColorContext } from "contexts/BackgroundColorContext";
 import SignUp from "views/account/SignUp";
 import IdFind from "views/account/IdFind.js";
