@@ -19,6 +19,7 @@ public class BookDto {
     private LocalDate bookPublishPredate;
     private String    bookIntroductionURL;
     private String    bookTitleURL;
+    private Long bookLogNo;
     
     @Builder
     public BookDto(Book book) {
