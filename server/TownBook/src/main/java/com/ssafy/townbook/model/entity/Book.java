@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
@@ -51,6 +52,7 @@ public class Book {
     @Column(name = "book_publish_predate")
     private LocalDate bookPublishPredate;
     
+    @Lob
     @Column(name = "book_introduction_url")
     private String bookIntroductionURL;
     
