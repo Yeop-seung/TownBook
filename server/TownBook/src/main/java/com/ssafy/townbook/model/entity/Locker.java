@@ -47,12 +47,13 @@ public class Locker {
     @ColumnDefault("0")
     private Integer lockerBookCnt;
     
-    @OneToMany(mappedBy = "locker")
+    //    @OneToMany(mappedBy = "locker")
+    @OneToMany
     private List<DetailLocker> detailLocker = new ArrayList<>();
     
     @Builder
     public Locker(Long lockerNo, String lockerRegion, Double lockerLatitude, Double lockerLongitude,
-                  Integer lockerBookCnt, List<DetailLocker> detailLocker) {
+            Integer lockerBookCnt, List<DetailLocker> detailLocker) {
         this.lockerNo        = lockerNo;
         this.lockerRegion    = lockerRegion;
         this.lockerLatitude  = lockerLatitude;

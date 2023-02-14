@@ -42,10 +42,10 @@ public class InitDb {
     
     @PostConstruct
     public void init() {
-        initService.bookInit();
+//        initService.bookInit();
         initService.accountInit();
         initService.lockerInit();
-        initService.bookLogInit();
+//        initService.bookLogInit();
         initService.noticeInit();
     }
     
