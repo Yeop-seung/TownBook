@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
+import classes from "./AdminNavbar.module.css";
 // import classes from './black-dashboard-react.css';
 // import Sidebar from "components/Sidebar/Sidebar.js";
 // import routes from "routes.js";
@@ -17,7 +18,7 @@ import {
   faKey,
   faUser,
   faArrowRightFromBracket,
-  faHouse
+  faHouse,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -63,10 +64,15 @@ function AdminNavbar(props) {
       to={logo.innerLink}
       className="simple-text logo-mini"
       onClick={props.toggleSidebar}
+      style={{ margin: 0, padding: 0, marginTop: 12, marginLeft: 4, marginBottom:5}}
     >
       <div className="logo-img">
-      <FontAwesomeIcon icon={faHouse} size="md" color="white" style={{marginTop:5}}/>
-
+        <FontAwesomeIcon
+          icon={faHouse}
+          size="md"
+          color="white"
+          style={{ margin: 0 }}
+        />
       </div>
     </Link>
   );
@@ -114,7 +120,9 @@ function AdminNavbar(props) {
     setmodalSearch(!modalSearch);
     axios
       .get(
-        `https://i8b201.p.ssafy.io/backend/myPage/qr/${localStorage.getItem("accountNo")}`,
+        `https://i8b201.p.ssafy.io/backend/myPage/qr/${localStorage.getItem(
+          "accountNo"
+        )}`,
         {
           responseType: "arraybuffer",
         }
@@ -157,17 +165,33 @@ function AdminNavbar(props) {
                 toggled: props.sidebarOpened,
               })}
             >
-              {/* 화면 왼쪽위 토글 */}
+              
               <NavbarToggler
                 // onClick={props.toggleSidebar}
                 style={{ padding: 0 }}
               >
-                {/* 각각 짝대기 */}
+                {/* 홈버튼 */}
                 <div className="logo">{logoImg}</div>
               </NavbarToggler>
             </div>
           </div>
-
+          <Link
+            to="/notice"
+            onClick={verify}
+            style={{ paddingTop: 10, paddingInline: 10, padding: 0 }}
+          >
+            <div className="logo">
+              <FontAwesomeIcon
+                icon={faBullhorn}
+                size="xl"
+                color="white"
+                className={classes.dlgnone2}
+              />
+              <p style={{ marginTop: 5 }} className={classes.dlgnone}>
+                공지사항
+              </p>
+            </div>
+          </Link>
           <div className="d-lg-none" hidden={!isToken}>
             <FontAwesomeIcon
               icon={faQrcode}
@@ -176,233 +200,142 @@ function AdminNavbar(props) {
               onClick={toggleModalSearch}
             />
           </div>
+          <Link
+            to="/tables"
+            onClick={verify}
+            style={{ paddingTop: 10, paddingInline: 10, padding: 0 }}
+          >
+            <div className="logo">
+              <FontAwesomeIcon
+                icon={faHeadset}
+                size="xl"
+                color="white"
+                className={classes.dlgnone2}
+              />
+              <p className={classes.dlgnone}>고객센터</p>
+            </div>
+          </Link>
+
+          {/* <DropdownToggle
+              caret
+              color="default"
+              nav
+              onClick={(e) => e.preventDefault()}
+            >
+              
+              <b className="caret d-none d-lg-block d-xl-block" />
+              <p className={classes.dlgnone}>Profile</p>
+            </DropdownToggle>
+            <DropdownMenu className="dropdown-navbar" right tag="ul">
+              <NavLink tag="li">
+                <DropdownItem className="nav-item">Settings</DropdownItem>
+              </NavLink>
+
+              <DropdownItem divider tag="li" />
+
+              
+            </DropdownMenu> */}
           {/* 화면 줄였을때 오른쪽  ... 바 */}
-          <NavbarToggler onClick={toggleCollapse} style={{marginLeft:20}}>
-            <span className="navbar-toggler-bar navbar-kebab" />
-            <span className="navbar-toggler-bar navbar-kebab" />
-            <span className="navbar-toggler-bar navbar-kebab" />
+          <NavbarToggler
+            onClick={toggleCollapse}
+            style={{ padding: 0, marginInline: 7, marginBottom: 2, marginLeft:3 }}
+          >
+            <FontAwesomeIcon
+              icon={faUser}
+              size="lg"
+              color="white"
+              style={{ padding: 0 }}
+            />
           </NavbarToggler>
 
-          {/* 이 Collapse 안에 있으면 모바일 시 상단 오른쪽으로 감 */}
+          {/* 이 Collapse 안에 있으면 모바일 시 토글로 감 */}
           <Collapse navbar isOpen={collapseOpen}>
             <Nav className="mr-auto" navbar>
-              {/* 로고자리 */}
-              {/* <li>
-              <NavbarBrand href="#pablo" onClick={(e) => e.preventDefault()}>
-                {props.brandText}
-              </NavbarBrand>
-              </li> */}
-
-              {/* 인풋그룹 왜하는지? */}
-              {/* 도서검색 */}
-              {/* <InputGroup className="search-bar">  */}
-
-              {/* <Sidebar
-                  routes={routes}
-                  logo={{
-                    // outterLink: "https://www.creative-tim.com/",
-                    innerLink: "/admin/dashboard",
-
-                    text: "동네북",
-                    imgSrc: logo,
-                  }}
-                  toggleSidebar={toggleSidebar}
-                /> */}
-              {/* <Link to="/admin/dashboard" className="{classes.}">
-                <div className="photo">
-                    <img alt="..." src={require("assets/img/anime3.png")} />
-                  </div>
-                </Link> */}
               <div className="logo" hidden={collapseOpen}>
                 {logoImg}
               </div>
 
-              <Link
+              {/* <Link
                 to="/map"
                 onClick={verify}
-                style={{ paddingTop: 10, paddingInline:10 }}
+                style={{ paddingTop: 10, paddingInline: 10 }}
               >
-                {/* 로고 scss 분석하기 */}
+                로고 scss 분석하기
                 <div className="logo">
-                  <FontAwesomeIcon icon={faSearch} size="xl" color="white" style={{marginTop:5}}/>
-                  <p className="d-lg-none" style={{ marginTop:5 }}>
+                  <FontAwesomeIcon
+                    icon={faSearch}
+                    size="xl"
+                    color="white"
+                    style={{ marginTop: 5 }}
+                  />
+                  <p className="d-lg-none" style={{ marginTop: 5 }}>
                     도서검색
                   </p>
                 </div>
-              </Link>
-
-              {/* </InputGroup> */}
-
-              {/* <Link
-                to="/icons"
-                onClick={verify}
-                style={{ paddingTop: 10, paddingInline: 20 }}
-              >
-                <div className="logo">
-                  <FontAwesomeIcon icon={faComments} size="xl" color="white" />
-                  <p className="d-lg-none">커뮤니티</p>
-                </div>
               </Link> */}
-
-              <Link
-                to="/notice"
-                onClick={verify}
-                style={{ paddingTop: 10, paddingInline:10 }}
-              >
-                <div className="logo">
-                  <FontAwesomeIcon icon={faBullhorn} size="xl" color="white" style={{marginTop:5}}/>
-                  <p className="d-lg-none" style={{ marginTop:5 }}>
-                    공지사항
-                  </p>
-                </div>
-              </Link>
             </Nav>
             <Nav className="ml-auto" navbar>
-              {/* QR 아이콘*/}
-
-              {/* 시간되면 버튼형식으로 바꾸기! */}
-
-              {/* <InputGroup className="search-bar"> */}
-              {/* <Button onClick={toggleModalSearch} className={'btn-link'}>
-                  <FontAwesomeIcon icon={faQrcode} size="xl"/>
-                  <span className="d-lg-none d-md-block">QRcode</span>
-                </Button> */}
-
-              {/* </InputGroup> */}
-
-              {/* 고객센터 */}
-              {/* <DropdownToggle
-                  caret
-                  color="default"
-                  data-toggle="dropdown"
-                  nav
-                > */}
-
-              {/* <div className="notification d-none d-lg-block d-xl-block" /> */}
-              {/* <i className="tim-icons icon-spaceship" /> */}
-              {/* <FontAwesomeIcon icon={faSearch}/> */}
-
-              {/* 웹qr > 필요엉ㅂ음*/}
-              {/* <div
-                hidden={collapseOpen}
-                style={{ paddingTop: 10, paddingInline: 20 }}
-              >
-                <FontAwesomeIcon
-                  icon={faQrcode}
-                  size="xl"
-                  color="white"
-                  onClick={toggleModalSearch}
-                />
-              </div> */}
-
-              <Link
-                to="/tables"
-                onClick={verify}
-                style={{ paddingTop: 10, paddingInline:10 }}
-              >
-                <div className="logo">
-                  <FontAwesomeIcon icon={faHeadset} size="xl" color="white" style={{marginTop:5}} />
-                  <p className="d-lg-none" style={{ marginTop:5 }}>
-                    고객센터
-                  </p>
-                </div>
-              </Link>
-
-              {/* </DropdownToggle> */}
-
-              {/* <DropdownMenu className="dropdown-navbar" right tag="ul"> */}
-
-              {/* <NavLink tag="li">
-                    <DropdownItem className="nav-item">고객센터</DropdownItem>
-                  </NavLink> */}
-
-              {/* <NavLink tag="li">
-                    <DropdownItem className="nav-item">
-                      You have 5 more tasks
-                    </DropdownItem>
-                  </NavLink>
-
-                  
-                {/* </DropdownMenu> */}
-
-              {/* 로그인 안돼있을때만 보이는 */}
-              {/* {!localStorage.getItem('token') && (
-        <> */}
-
               <Link
                 to="/login"
                 onClick={verify}
-                style={{ paddingTop: 10 ,paddingBottom: 10, paddingInline:10  }}
+                style={{ paddingTop: 10, paddingBottom: 10, paddingInline: 10,display: "flex",
+                justifyContent: "end", }}
                 hidden={isToken}
               >
                 <div className="logo">
-                  <FontAwesomeIcon icon={faKey} size="xl" color="white" style={{marginTop:5}}/>
-                  <p className="d-lg-none" style={{ marginTop:5 }}>
+                  {/* <FontAwesomeIcon
+                    icon={faKey}
+                    size="xl"
+                    color="white"
+                    style={{ marginTop: 5 }}
+                    className={classes.dlgnone2}
+                  /> */}
+                  <p style={{ marginTop: 5 }}>
                     로그인
                   </p>
                 </div>
               </Link>
-
-              {/* <ResizedComponent /> */}
-
-              {/* <UncontrolledDropdown nav hidden={!isToken}>
-                프로필이미지 칸
-                <DropdownToggle
-                  caret
-                  color="default"
-                  nav
-                  onClick={(e) => e.preventDefault()}
-                >
-                  <div className="photo">
-                    <img alt="..." src={require("assets/img/anime3.png")} />
-                  </div>
-                  <b className="caret d-none d-lg-block d-xl-block" />
-                  <p className="d-lg-none">Profile</p>
-                </DropdownToggle>
-
-                프로필이미지 누르면 나오는 드랍다운
-                <DropdownMenu className="dropdown-navbar" right tag="ul">
-                  <NavLink tag="li">
-                    <DropdownItem className="nav-item">Settings</DropdownItem>
-                  </NavLink>
-
-                  <DropdownItem divider tag="li" />
-
-                  <NavLink tag="li"></NavLink>
-                </DropdownMenu>
-              </UncontrolledDropdown> */}
-
               <Link
                 to="/myPage"
-                style={{ paddingTop: 10 , paddingInline:10}}
                 hidden={!isToken}
                 onClick={verify}
+                style={{ paddingTop: 10,
+                  paddingBottom: 10,
+                  paddingInline: 10,display: "flex", justifyContent: "end" }}
               >
                 <div className="logo">
-                  <FontAwesomeIcon icon={faUser} size="xl" color="white" style={{marginTop:5}}/>
-                  <p className="d-lg-none" style={{ marginTop:5 }}>
-                    마이페이지
-                  </p>
+                  {/* <FontAwesomeIcon
+                    icon={faUser}
+                    size="xl"
+                    color="white"
+                    
+                    className={classes.dlgnone2}
+                  /> */}
+                  <p style={{ marginTop: 5 }}>마이페이지</p>
                 </div>
               </Link>
-
               <Link
                 className="logo"
                 hidden={!isToken}
                 onClick={logout}
-                style={{ paddingTop: 10, paddingBottom: 10, paddingInline:10 }}
+                style={{
+                  paddingTop: 10,
+                  paddingBottom: 10,
+                  paddingInline: 10,
+                  display: "flex",
+                  justifyContent: "end",
+                }}
               >
-                <FontAwesomeIcon
+                {/* <FontAwesomeIcon
                   icon={faArrowRightFromBracket}
                   size="xl"
                   color="white"
-                  style={{marginTop:5}}
-                />
-                <p className="d-lg-none" style={{ marginTop:5 }}>
-                  로그아웃
-                </p>
+                  style={{ marginTop: 5 }}
+                  className={classes.dlgnone2}
+                /> */}
+                <p style={{ marginTop: 5 }}>로그아웃</p>
               </Link>
-              <li className="separator d-lg-none" />
+              {/* <li className="separator d-lg-none" /> */}
             </Nav>
           </Collapse>
         </Container>

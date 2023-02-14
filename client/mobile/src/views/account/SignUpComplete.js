@@ -30,37 +30,15 @@ import {
 } from "reactstrap";
 
 function SignUpComplete(props) {
-  const [isLoading, setIsLoading] = useState(true);
-  const [loadedMeetups, setLoadedMeetups] = useState([]);
-  const notificationAlertRef = useRef(null);
+
 
   useEffect(() => {
     axios
       .post(`https://i8b201.p.ssafy.io/backend/file`)
       // .get("https:///townbook/myPage/receive/${receiverNo}")
       .then((res) => {
-        const notices = [];
-        console.log(res);
-        // for (let i = 0; i < res.data.length; i++) {
-        //   notices.push({ ...res.data[i], id: i + 1 });
-        // }
-        for (const key in res.data.data) {
-          const notice = {
-            id: key,
-            ...res.data.data[key],
-          };
-          notices.push(notice);
-        }
-        // if(res=="true"){
-        // alert("회원가입에 성공하였습니다.");
-        // history.replace("/");
-        // }
-        // else{
-
-        //   alert("회원가입에 실패하였습니다.");
-        // }
-        setIsLoading(false);
-        setLoadedMeetups(notices);
+       
+     
         // console.log(notices)
       })
       .catch((error) => {
@@ -68,11 +46,11 @@ function SignUpComplete(props) {
       });
   }, []);
 
-  if (isLoading) {
-    <section>
-      <p>Loading...</p>
-    </section>;
-  }
+  // if (isLoading) {
+  //   <section>
+  //     <p>Loading...</p>
+  //   </section>;
+  // }
 
   return (
     <>

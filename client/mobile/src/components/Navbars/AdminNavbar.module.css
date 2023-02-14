@@ -1,0 +1,25 @@
+@media (max-width: 992px) {
+    .dlgnone {
+      display: none !important; }
+    .d-lg-inline {
+      display: inline !important; }
+    .d-lg-inline-block {
+      display: inline-block !important; }
+    .d-lg-block {
+      display: block !important; }
+    .d-lg-table {
+      display: table !important; }
+    .d-lg-table-row {
+      display: table-row !important; }
+    .d-lg-table-cell {
+      display: table-cell !important; }
+    .d-lg-flex {
+      display: flex !important; }
+    .d-lg-inline-flex {
+      display: inline-flex !important; } }
+
+@media (min-width: 992px) {
+    .dlgnone2 {
+        display: none !important;
+    }
+}

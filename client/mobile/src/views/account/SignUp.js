@@ -288,9 +288,7 @@ function SignUp(props) {
                   </Col>
                   <Col className="pr-md-1" md="5">
                     <FormGroup>
-                      <Row>
-                        <Label htmlFor="exampleInputEmail1">이메일</Label>
-                      </Row>
+                        <Label>이메일</Label>
 
                       <Input
                         placeholder="ssafy@email.com"

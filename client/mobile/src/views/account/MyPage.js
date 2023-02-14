@@ -453,7 +453,7 @@ function MyPage(props) {
                   zIndex="2000"
                   style={{ margin: 15, marginBottom: 5 }}
                   onClick={toggleDonate}
-                  hidden={showDonate}
+                  hidden={!showDonate}
                 />
                 <FontAwesomeIcon
                   icon={faAngleDown}
@@ -463,12 +463,12 @@ function MyPage(props) {
                   zIndex="2000"
                   style={{ margin: 15, marginBottom: 5 }}
                   onClick={toggleDonate}
-                  hidden={!showDonate}
+                  hidden={showDonate}
                 />
                 </Row>
               </CardHeader>
               
-              <CardBody hidden={showDonate}>
+              <CardBody hidden={!showDonate}>
                 <MyPageDonateList Donates={Donates} Receives={Receives} />
               </CardBody>
             </Card>

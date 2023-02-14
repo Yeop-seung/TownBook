@@ -323,8 +323,10 @@ function Map() {
               placeholder="검색할 도서를 입력해주세요."
               innerRef={searchbookRef}
               style={{
-                width: "70%",
+                width: "40vh",
                 boxShadow: "rgba(0, 0, 0, 0.2) 3px 3px 3px",
+                border:0,
+                height:"5vh"
               }}
             />
             <Button
@@ -337,6 +339,10 @@ function Map() {
                 backgroundColor: "#427bf1",
                 color: "#ffffff",
                 borderColor: "transparent",
+                boxShadow: "rgba(0, 0, 0, 0.2) 3px 3px 3px",
+                margin:0,
+                height:"5vh",
+                marginLeft:13,
               }}
             >
               검색
