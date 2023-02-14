@@ -6,6 +6,7 @@ import com.ssafy.townbook.model.dto.response.FindOneResponseDto;
 import com.ssafy.townbook.model.entity.Account;
 import com.ssafy.townbook.model.repository.AccountRepository;
 import com.ssafy.townbook.model.repository.AdminRepository;
+import com.ssafy.townbook.queryrepository.AdminQueryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,10 +24,13 @@ public class AdminServiceImpl implements AdminService {
     private AccountRepository accountRepository;
     private AdminRepository adminRepository;
 
+    private AdminQueryRepository adminQueryRepository;
+
     @Autowired
-    public AdminServiceImpl(AccountRepository accountRepository, AdminRepository adminRepository) {
+    public AdminServiceImpl(AccountRepository accountRepository, AdminRepository adminRepository, AdminQueryRepository adminQueryRepository) {
         this.accountRepository = accountRepository;
         this.adminRepository = adminRepository;
+        this.adminQueryRepository = adminQueryRepository;
     }
 
     /**
@@ -63,12 +67,20 @@ public class AdminServiceImpl implements AdminService {
      */
     @Override
     public FindOneResponseDto givePointOneUser(Long accountNo, Integer point) {
+        try {
         Optional<Account> account = accountRepository.findByAccountNo(accountNo);
         if (account.isEmpty())
             return new FindOneResponseDto(null);
-        Integer result = account.get().getAccountPoint() + point;
-        account.get().setAccountPoint(result);
-        return new FindOneResponseDto(result);
+        Integer updatePoint = account.get().getAccountPoint() + point;
+        Long result = adminQueryRepository.givePointOneUser(updatePoint, accountNo).get();
+        if(result==1)
+            return new FindOneResponseDto(updatePoint);
+        else
+            return new FindOneResponseDto("SQL 오류");
+        }
+        catch (Exception e){
+            return new FindOneResponseDto();
+        }
     }
 
     /**
@@ -80,9 +92,13 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public FindOneResponseDto givePointTypeUser(Integer point) {
         try {
-            adminRepository.givePointTypeUser(point, 1);
-            return new FindOneResponseDto("Success");
-        } catch (Exception e) {
+            Long result = adminQueryRepository.givePointTypeUser(point, 1).get();
+            if(result==0)
+                return new FindOneResponseDto("SQL 오류");
+            else
+                return new FindOneResponseDto("성공");
+        }
+        catch (Exception e){
             return new FindOneResponseDto();
         }
     }

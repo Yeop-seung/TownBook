@@ -17,16 +17,5 @@ public interface AdminRepository extends JpaRepository<Account, Long> {
      * @return Optional<Account>
      */
     Optional<Account> findAccountByAccountNo(Long accountNo);
-
-    /**
-     * Type이 1인 유저 : 취약계층 전체 회원에게 포인트 부여
-     *
-     * @param point
-     * @param type
-     * @return Boolean
-     */
-    @Modifying
-    @Query("update Account m set m.accountPoint = m.accountPoint + :point where m.accountType = :type and m.accountActivated = true")
-    int givePointTypeUser(@Param("point") Integer point, @Param("type") Integer type);
 }
 
