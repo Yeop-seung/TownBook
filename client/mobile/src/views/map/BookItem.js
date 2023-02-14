@@ -42,7 +42,7 @@ function BookItem(props) {
       .then((response) => {response.text(); console.log('이건txt',response)})
       .then(data => setText(data));
   }, []);
-  FileReader
+  // FileReader
   // console.log(props.noticeContent)
   console.log("item전달받은값", props);
   const [bookmark, setbookmark] = React.useState(false);
