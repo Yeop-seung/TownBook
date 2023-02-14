@@ -1,8 +1,8 @@
 package com.ssafy.townbook.model.service;
 
 import com.ssafy.townbook.model.dto.BookDto;
-import com.ssafy.townbook.model.dto.response.FindOneResponseDto;
 import com.ssafy.townbook.model.dto.response.FindListResponseDto;
+import com.ssafy.townbook.model.dto.response.FindOneResponseDto;
 import com.ssafy.townbook.model.entity.Book;
 import com.ssafy.townbook.model.repository.BookRepository;
 import com.ssafy.townbook.queryrepository.BookQueryRepository;
@@ -41,7 +41,7 @@ public class BookServiceImpl implements BookService {
     }
     
     /**
-     * 전체 책 조회
+     * 등록된 전체 도서를 조회
      *
      * @return List<BookDto>
      */
@@ -55,7 +55,7 @@ public class BookServiceImpl implements BookService {
     }
     
     /**
-     * ISBN 으로 도서 조회
+     * 도서의 ISBN으로 단일 도서 조회
      *
      * @param bookIsbn
      * @return BookDto
@@ -70,7 +70,7 @@ public class BookServiceImpl implements BookService {
     
     
     /**
-     * ISBN으로 국립도서관의 도서 정보 조회
+     * 도서의 ISBN으로 국립중앙도서관에서 도서 정보를 가져오고 DB에 등록
      *
      * @param bookIsbn
      * @return BookDto
@@ -114,6 +114,12 @@ public class BookServiceImpl implements BookService {
         }
     }
     
+    /**
+     * 단일 보관함에 보관중인 모든 도서 조회
+     *
+     * @param lockerNo
+     * @return List<BookDto>
+     */
     @Override
     public FindListResponseDto findAllBookByLockerNo(Long lockerNo) {
         List<Book> findBookList = bookQueryRepository.findBookLogByLockerNo(lockerNo).get();
