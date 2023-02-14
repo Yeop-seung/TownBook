@@ -34,10 +34,16 @@ import { data } from "jquery";
 function SignUp(props) {
   const [certifyNumber, setcertifyNumber] = React.useState("");
   const [modalSearch, setmodalSearch] = React.useState(false);
+  const [modalSearch2, setmodalSearch2] = React.useState(false);
+
   const [emailHidden, setemailHidden] = React.useState(false);
   const [emailToken, setemailToken] = React.useState(false);
   const toggleModalSearch = () => {
     setmodalSearch(!modalSearch);
+  };
+
+  const toggleModalSearch2 = () => {
+    setmodalSearch2(!modalSearch2);
   };
   /**
    * useState
@@ -188,16 +194,45 @@ function SignUp(props) {
         axios
           .post("https://i8b201.p.ssafy.io/backend/account/signup", userInfo)
           // .get("https:///townbook/myPage/receive/${receiverNo}")
-          .then((response) => {
-            console.log(response);
+          .then((res) => {
+            console.log(res);
+            localStorage.clear();
+            localStorage.setItem("TOKEN", res.data.token);
+            localStorage.setItem("accountNo", res.data.accountDto.accountNo);
+            localStorage.setItem(
+              "accountEmail",
+              res.data.accountDto.accountEmail
+            );
+            localStorage.setItem(
+              "accountBirthDay",
+              res.data.accountDto.accountBirthDay
+            );
+            localStorage.setItem(
+              "accountAddress",
+              res.data.accountDto.accountAddress
+            );
+            localStorage.setItem(
+              "accountName",
+              res.data.accountDto.accountName
+            );
+            localStorage.setItem(
+              "accountNickname",
+              res.data.accountDto.accountNickname
+            );
+            localStorage.setItem(
+              "accountPhoneNumber",
+              res.data.accountDto.accountPhoneNumber
+            );
             // if(response=="true"){
-            alert("회원가입에 성공하였습니다.");
-            history.replace("/login");
+            // toggleModalSearch2();
+            // alert("회원가입에 성공하였습니다.");
+            setemailToken(false);
+            history.replace("/account/signupcomplete");
             // }
             // else{
             //   alert("회원가입에 실패하였습니다.");
             // }
-            setemailToken(false);
+            
           })
           .catch((error) => {
             alert("회원가입에 실패하였습니다.");

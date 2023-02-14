@@ -18,6 +18,7 @@ import IdFind from "views/account/IdFind.js";
 import NoticeDetail from "views/notice/NoticeDetail";
 import NoticeUpdate from "views/notice/NoticeUpdate";
 import BookDetail from "views/map/BookDetail";
+import SignUpComplete from "views/account/SignUpComplete";
 var ps;
 
 function Admin(props) {
@@ -129,6 +130,8 @@ function Admin(props) {
                 {<Route exact path='/notice/:id' component={NoticeDetail}/>}
                 {<Route path='/notice/modify/:id' component={NoticeUpdate}/>}
                 {<Route exact path='/book/:id' component={BookDetail}/>}
+                {<Route exact path='/account/signupcomplete' component={SignUpComplete}/>}
+
 
                 {/* {<Route path='/notice' component={IdFind}/>} */}
                 
@@ -142,7 +145,7 @@ function Admin(props) {
               }
             </div>
           </div>
-          <FixedPlugin bgColor={color} handleBgClick={changeColor} />
+          {/* <FixedPlugin bgColor={color} handleBgClick={changeColor} /> */}
         </React.Fragment>
       )}
     </BackgroundColorContext.Consumer>

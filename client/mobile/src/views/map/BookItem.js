@@ -37,8 +37,7 @@ function BookItem(props) {
     // };
     // const map = new kakao.maps.Map(container, options);
 
-    axios
-    .get('https://www.nl.go.kr/seoji/fu/ecip/dbfiles/CIP_FILES_TBL/4721454_5.txt')
+    fetch('https://www.nl.go.kr/seoji/fu/ecip/dbfiles/CIP_FILES_TBL/4721454_5.txt')
       .then((response) => {response.text(); console.log('이건txt',response)})
       .then(data => setText(data));
   }, []);
@@ -55,6 +54,8 @@ function BookItem(props) {
     setbookmark(!bookmark);
   };
   console.log("라겈넘", props.lockerNo);
+
+  
   const lockerNo = props.lockerNo;
   axios
     .get(`https://i8b201.p.ssafy.io/backend/locker/${lockerNo}`)

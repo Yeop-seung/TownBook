@@ -1,13 +1,18 @@
 import MyPageDonateList from "views/account/MyPageDonateList";
 import React, { useEffect, useRef } from "react";
 import axios from "axios";
+import "../../assets/css/nucleo-icons.css"
 // reactstrap components
 import AdminPage from "views/account/AdminPage";
 import classes from "./Login.module.css";
 import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowLeft,
+  faAngleUp,
+  faAngleDown,
+} from "@fortawesome/free-solid-svg-icons";
 import {
   Button,
   Card,
@@ -39,12 +44,29 @@ function MyPage(props) {
 
   const [modalSearch, setmodalSearch] = React.useState(false);
   const [modalSearch2, setmodalSearch2] = React.useState(false);
+  const [showInfo, setshowInfo] = React.useState(false);
+  const [hiddenInfo, sethiddenInfo] = React.useState(true);
+
+  const [showDonate, setshowDonate] = React.useState(false);
+  const [showWish, setshowWish] = React.useState(false);
 
   const toggleModalSearch = () => {
     setmodalSearch(!modalSearch);
   };
   const toggleModalSearch2 = () => {
     setmodalSearch2(!modalSearch2);
+  };
+  const toggleInfo = () => {
+    setshowInfo(!showInfo);
+    sethiddenInfo(!hiddenInfo);
+  };
+
+  const toggleDonate = () => {
+    setshowDonate(!showDonate);
+  };
+
+  const toggleWish = () => {
+    setshowWish(!showWish);
   };
   const [isLoading, setIsLoading] = React.useState(true);
   const [Donates, setDonates] = React.useState([]);
@@ -59,24 +81,19 @@ function MyPage(props) {
   const [lockerRegion, setlockerRegion] = React.useState([]);
   const [LockerRegion, setLockerRegion] = React.useState([]);
 
-
-
   function findRegion() {
-
-    
-    const lockerNo = lockerRegion
+    const lockerNo = lockerRegion;
     axios
       .put(`https://i8b201.p.ssafy.io/backend/locker/${lockerNo}`)
       .then((res) => {
         // console.log("변경", res);
         // if (res.)
-        setLockerRegion(res.data.lockerRegion)
+        setLockerRegion(res.data.lockerRegion);
       })
       .catch((error) => {
         alert("지역을 못불러왔습니다.");
       });
   }
-
 
   function modifyMyInfo(event) {
     event.preventDefault();
@@ -98,9 +115,6 @@ function MyPage(props) {
 
     console.log(userInfo);
 
-
-
-    
     axios
       .put("https://i8b201.p.ssafy.io/backend/account/modify", userInfo)
       .then((res) => {
@@ -171,17 +185,15 @@ function MyPage(props) {
   }
 
   useEffect(() => {
-    console.log("어드민",localStorage.getItem("accountNo"))
+    console.log("어드민", localStorage.getItem("accountNo"));
 
-      if (localStorage.getItem("accountNo") === '3') {
-        sethiddenadmin(false);
-        console.log('어드민입니다.')
-      } else {
-        sethiddenadmin(true);
-        console.log('어드민아닙니니다.')
-
-      }
-    
+    if (localStorage.getItem("accountNo") === "3") {
+      sethiddenadmin(false);
+      console.log("어드민입니다.");
+    } else {
+      sethiddenadmin(true);
+      console.log("어드민아닙니니다.");
+    }
 
     Promise.all([
       axios.get(`https://i8b201.p.ssafy.io/backend/myPage/donate/${accountNo}`),
@@ -192,19 +204,20 @@ function MyPage(props) {
         `https://i8b201.p.ssafy.io/backend/myPage/myPoint/${accountNo}`
       ),
       axios.get(`https://i8b201.p.ssafy.io/backend/admin`),
-      axios.get(`https://i8b201.p.ssafy.io/backend/myPage/wishList/${accountNo}`)
-
+      axios.get(
+        `https://i8b201.p.ssafy.io/backend/myPage/wishList/${accountNo}`
+      ),
     ])
       .then(([res1, res2, res3, res4, res5]) => {
-        console.log('기부내역 받아오는 부분',res1);
+        console.log("기부내역 받아오는 부분", res1);
         // console.log(res1);
         // console.log("포인트액시오스", res3);
         console.log(res4);
-        console.log('찜목록입니다',res5)
+        console.log("찜목록입니다", res5);
         const donates = [];
         const receives = [];
         const usersinfo = [];
-        const wishlist= [];
+        const wishlist = [];
         for (let i = 0; i < res1.data.count; i++) {
           donates.push({ ...res1.data.data[i], id: i + 1 });
         }
@@ -243,7 +256,7 @@ function MyPage(props) {
         setusers(usersinfo);
         setPoint(res3.data.data);
         setIsLoading(false);
-        setlockerRegion(res1.data.bookLogLocker)
+        setlockerRegion(res1.data.bookLogLocker);
         // console.log("합친거", Donates)
       })
       .catch((error) => {
@@ -259,9 +272,16 @@ function MyPage(props) {
   // console.log("유저스", users);
   return (
     <>
-    <Link to={"/map"} >
-    <FontAwesomeIcon icon={faArrowLeft} size="xl" color="#424a51" position="absolute" zIndex="2000" style={{ margin: 15,marginBottom:5 }}/>
-  </Link>
+      <Link to={"/map"}>
+        <FontAwesomeIcon
+          icon={faArrowLeft}
+          size="xl"
+          color="#424a51"
+          position="absolute"
+          zIndex="2000"
+          style={{ margin: 15, marginBottom: 5 }}
+        />
+      </Link>
       <div className="content">
         <Row>
           <Col md="12">
@@ -272,18 +292,38 @@ function MyPage(props) {
               </CardBody>
             </Card>
             <Card>
-              <CardHeader>
+              <CardHeader style={{paddingTop:0}}>
                 <Row style={{ justifyContent: "space-between" }}>
                   <CardTitle
                     tag="h4"
-                    style={{ paddingLeft: 15, marginTop: 10 }}
+                    style={{ paddingLeft: 15, marginTop: 10, color:"#424A51", fontFamily:"Nanum Gothic", fontWeight:"bold"}}
+                    className="SCD"
                   >
                     내 정보
                   </CardTitle>
-                  
+                  {/* <FontAwesomeIcon
+                    icon={faAngleUp}
+                    size="xl"
+                    color="#424a51"
+                    position="absolute"
+                    zIndex="2000"
+                    style={{ margin: 15, marginBottom: 5 }}
+                    onClick={toggleInfo}
+                    hidden={!showInfo}
+                  />
+                  <FontAwesomeIcon
+                    icon={faAngleDown}
+                    size="xl"
+                    color="#424a51"
+                    position="absolute"
+                    zIndex="2000"
+                    style={{ margin: 15, marginBottom: 5 }}
+                    onClick={toggleInfo}
+                    hidden={showInfo}
+                  /> */}
                 </Row>
               </CardHeader>
-              <CardBody style={{ paddingInline: 0 }}>
+              <CardBody style={{ paddingInline: 0, fontFamily: "Nanum Gothic", fontWeight:400 }}>
                 <Col>내포인트 : {Point}</Col>
 
                 <Col>이름 : {localStorage.getItem("accountName")}</Col>
@@ -376,39 +416,102 @@ function MyPage(props) {
                   <Button
                     onClick={toggleModalSearch}
                     hidden={verifiedPassword}
-                    style={{
-                      marginRight: 20,
-                      margin: 0,
-                      paddingTop: 0,
-                      paddingBottom: 0,
-                    }}
+                    // style={{
+                    //   marginRight: 20,
+                    //   margin: 0,
+                    //   paddingTop: 0,
+                    //   paddingBottom: 0,
+                    // }}
                   >
                     개인정보수정
                   </Button>
-                  <Button onClick={toggleModalSearch2}  hidden={verifiedPassword}>회원탈퇴</Button>
+                  <Button
+                    onClick={toggleModalSearch2}
+                    hidden={verifiedPassword}
+                  >
+                    회원탈퇴
+                  </Button>
                 </Row>
               </CardBody>
-              <CardBody></CardBody>
             </Card>
           </Col>
           <Col md="12">
             <Card>
-              <CardBody>
+              <CardHeader  style={{paddingTop:0}}>
+                <Row style={{ justifyContent: "space-between" }}>
+                <CardTitle
+                    tag="h4"
+                    style={{ paddingLeft: 15, marginTop: 10 ,color:"#424A51",  fontFamily:"Nanum Gothic", fontWeight:"bold"}}
+                  >
+                    기부/수령 내역
+                  </CardTitle>
+                <FontAwesomeIcon
+                  icon={faAngleUp}
+                  size="xl"
+                  color="#424a51"
+                  position="absolute"
+                  zIndex="2000"
+                  style={{ margin: 15, marginBottom: 5 }}
+                  onClick={toggleDonate}
+                  hidden={showDonate}
+                />
+                <FontAwesomeIcon
+                  icon={faAngleDown}
+                  size="xl"
+                  color="#424a51"
+                  position="absolute"
+                  zIndex="2000"
+                  style={{ margin: 15, marginBottom: 5 }}
+                  onClick={toggleDonate}
+                  hidden={!showDonate}
+                />
+                </Row>
+              </CardHeader>
+              
+              <CardBody hidden={showDonate}>
                 <MyPageDonateList Donates={Donates} Receives={Receives} />
               </CardBody>
             </Card>
           </Col>
           <Col md="12">
             <Card>
-              <CardHeader>
-                <h5 className="title">찜목록</h5>
+              <CardHeader  style={{paddingTop:0}}>
                 {/* <p className="category">
                   Handcrafted by our friends from{" "}
                   <a href="https://nucleoapp.com/?innerRef=1712">NucleoApp</a>
                 </p> */}
+                <Row style={{ justifyContent: "space-between" }}>
+                  <CardTitle
+                    tag="h4"
+                    style={{ paddingLeft: 15, marginTop: 10,color:"#424A51", fontFamily:"Nanum Gothic", fontWeight:"bold" }}
+                  >
+                    찜 목록
+                  </CardTitle>
+                  <FontAwesomeIcon
+                    icon={faAngleUp}
+                    size="xl"
+                    color="#424a51"
+                    position="absolute"
+                    zIndex="2000"
+                    style={{ margin: 15, marginBottom: 5 }}
+                    onClick={toggleWish}
+                    hidden={!showWish}
+                  />
+                  <FontAwesomeIcon
+                    icon={faAngleDown}
+                    size="xl"
+                    color="#424a51"
+                    position="absolute"
+                    zIndex="2000"
+                    style={{ margin: 15, marginBottom: 5 }}
+                    onClick={toggleWish}
+                    hidden={showWish}
+                  />
+                </Row>
               </CardHeader>
-              <CardBody className="all-icons">
-                <WishList wishList={wishList}/>
+              
+              <CardBody className="all-icons" hidden={!showWish}>
+                <WishList wishList={wishList} />
                 {/* <Row>
                   <Col
                     className="font-icon-list col-xs-6 col-xs-6"

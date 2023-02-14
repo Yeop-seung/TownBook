@@ -266,14 +266,14 @@ function Map() {
       });
   }
 
-  function searchLocker(title) {
+  function searchLocker(lockerNo) {
     axios
-      .get(`https://i8b201.p.ssafy.io/backend/book/locker/${title}`)
+      .get(`https://i8b201.p.ssafy.io/backend/book/locker/${lockerNo}`)
       .then((res) => {
         console.log("라커 res", res);
         const books = [];
         for (let i = 0; i < res.data.count; i++) {
-          books.push({ ...res.data.data[i], id: i + 1 });
+          books.push({ ...res.data.data[i], id: i + 1, lockerNo });
         }
         setlockerList(books);
         console.log("lockerbooks", books);

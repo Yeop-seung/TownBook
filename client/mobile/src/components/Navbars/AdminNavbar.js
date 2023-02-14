@@ -17,6 +17,7 @@ import {
   faKey,
   faUser,
   faArrowRightFromBracket,
+  faHouse
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -64,7 +65,8 @@ function AdminNavbar(props) {
       onClick={props.toggleSidebar}
     >
       <div className="logo-img">
-        <img src={logo.imgSrc} alt="react-logo" />
+      <FontAwesomeIcon icon={faHouse} size="md" color="white" style={{marginTop:5}}/>
+
       </div>
     </Link>
   );
@@ -175,7 +177,7 @@ function AdminNavbar(props) {
             />
           </div>
           {/* 화면 줄였을때 오른쪽  ... 바 */}
-          <NavbarToggler onClick={toggleCollapse}>
+          <NavbarToggler onClick={toggleCollapse} style={{marginLeft:20}}>
             <span className="navbar-toggler-bar navbar-kebab" />
             <span className="navbar-toggler-bar navbar-kebab" />
             <span className="navbar-toggler-bar navbar-kebab" />
