@@ -14,12 +14,35 @@ import {
 import { faBookmark as fabookmark } from "@fortawesome/free-solid-svg-icons";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import "./Map.css";
+import React, { useEffect } from "react";
 
-import React from "react";
+const { kakao } = window;
+
 function BookItem(props) {
   // console.log(props.id)
   // console.log(props.noticeTitle)
+  let bookTitle;
+  if (props.bookTitle.length > 11) {
+    bookTitle = props.bookTitle.substr(0, 17) + "...";
+  } else {
+    bookTitle = props.bookTitle;
+  }
+  const [text, setText] = React.useState('');
+  useEffect(() => {
+    // const container = document.getElementById("map"); //찾으려는 id
+    // const options = {
+    //   center: new kakao.maps.LatLng(37.49676871972202, 127.02474726969814),
+    //   level: 3,
+    // };
+    // const map = new kakao.maps.Map(container, options);
 
+    axios
+    .get('https://www.nl.go.kr/seoji/fu/ecip/dbfiles/CIP_FILES_TBL/4721454_5.txt')
+      .then((response) => {response.text(); console.log('이건txt',response)})
+      .then(data => setText(data));
+  }, []);
+  FileReader
   // console.log(props.noticeContent)
   console.log("item전달받은값", props);
   const [bookmark, setbookmark] = React.useState(false);
@@ -31,17 +54,17 @@ function BookItem(props) {
   const toggleBookmark = () => {
     setbookmark(!bookmark);
   };
-  console.log('라겈넘',props.lockerNo)
+  console.log("라겈넘", props.lockerNo);
   const lockerNo = props.lockerNo;
   axios
     .get(`https://i8b201.p.ssafy.io/backend/locker/${lockerNo}`)
     .then((res) => {
-      console.log('락커액시오스',res)
+      console.log("락커액시오스", res);
       setLockerNo(res.data.data.lockerRegion);
     })
-    .catch((error)=> {
+    .catch((error) => {
       // alert("error")
-    })
+    });
 
   function addWishList(params) {
     const accountNo = localStorage.getItem("accountNo");
@@ -81,8 +104,9 @@ function BookItem(props) {
         > */}
       <Link onClick={toggleModalSearch}>
         {/* <p style={{ color: "white" }}>{props.id}</p> */}
-        <Card style={{ margin: 0 }}>
-          <Alert color="info">
+        {/* <Card style={{ margin: 0 }}> */}
+        <Alert color="#ffffff">
+          <Row>
             <img
               alt="..."
               // className="avatar"
@@ -94,10 +118,19 @@ function BookItem(props) {
                 boxShadow: "rgba(0, 0, 0, 0.5) 3px 3px 10px",
               }}
             />
-
-            <p style={{ color: "white" }}>{props.bookTitle}</p>
-          </Alert>
-        </Card>
+            <Col>
+              <p style={{ color: "#333333", fontSize: 16, fontWeight: "bold", marginBottom:3 }}>
+                {bookTitle}
+              </p>
+              <p style={{ marginBottom:7, fontWeight: "bold"}}>저자: {props.bookAuthor}</p>
+              <p style={{ color: "#ec217b", fontWeight: "bolder", marginBottom:3 }}>
+                동네북 위치: {LockerNo}
+              </p>
+            </Col>
+          </Row>
+        </Alert>
+        <hr />
+        {/* </Card> */}
       </Link>
       {/* <address>{props.noticeContent}</address> */}
 
@@ -131,18 +164,7 @@ function BookItem(props) {
 
           <hr />
 
-          <div
-            style={{
-              fontWeight: "bold",
-              marginLeft: 13,
-              marginBottom: 10,
-              fontSize: 17,
-            }}
-          >
-            {props.bookTitle}
-          </div>
-
-          <Row
+          {/* <Row
           span={24}
             style={{
               display: "flex",
@@ -150,55 +172,90 @@ function BookItem(props) {
               marginInline: 15,
                flexWrap: "wrap"
             }}
+          > */}
+          <div style={{ display: "block", margin: "auto" }}>
+            <img
+              alt="..."
+              // className="avatar"
+              src={props.bookTitleURL}
+              className={"image"}
+              style={{
+                height: "50vh",
+                width: "35vh",
+                boxShadow: "rgba(0, 0, 0, 0.5) 3px 3px 10px",
+              }}
+            />
+          </div>
+          <div
+            style={{
+              fontWeight: "bold",
+              color: "#333333",
+              marginLeft: 15,
+              marginRight: 10,
+              marginBottom: 10,
+              fontSize: 17,
+              marginTop: 15,
+            }}
           >
-            <Col span={12} style={{ padding: 0, marginRight: 10 }}>
-              <img
-                alt="..."
-                // className="avatar"
-                src={props.bookTitleURL}
-                className={"image"}
-                style={{
-                  height: "30vh",
-                  width: "20vh",
-                  boxShadow: "rgba(0, 0, 0, 0.5) 3px 3px 10px",
-                }}
+            {props.bookTitle}
+          </div>
+          <CardBody>
+            <Row style={{ marginLeft: "90%", marginBottom: 10 }}>
+              <FontAwesomeIcon
+                icon={fabookmark}
+                size="xl"
+                color="#333333"
+                onClick={addWishList}
+                style={{ marginTop: 5 }}
+                hidden={!bookmark}
+                // color=""
               />
+              <FontAwesomeIcon
+                icon={faBookmark}
+                size="xl"
+                color="#333333"
+                onClick={addWishList}
+                style={{ marginTop: 5 }}
+                hidden={bookmark}
+                // color=""
+              />
+            </Row>
+
+            <Col style={{ fontSize: "12px" }}>
+              <Col>
+                <hr style={{ margin: 2 }} />
+                <Row style={{ display: "flex", flexWrap: "wrap" }}>
+                  저자 : {props.bookAuthor}
+                </Row>
+                <hr style={{ margin: 2 }} />
+                <Row style={{ display: "flex", flexWrap: "wrap" }}>
+                  출판사 : {props.bookPublisher}
+                </Row>
+                <hr style={{ margin: 2 }} />
+                <Row style={{ display: "flex", flexWrap: "wrap" }}>
+                  출판일 : {props.bookPublishPredate}
+                </Row>
+                <hr style={{ margin: 2 }} />
+                <Row style={{ display: "flex", flexWrap: "wrap" }}>
+                  소개 : {text}
+                  {/* <img
+                    alt="..."
+                    // className="avatar"
+                    src={props.bookIntroductionURL}
+                  /> */}
+                </Row>
+                <hr style={{ margin: 2 }} />
+                <Row style={{ display: "flex", flexWrap: "wrap" }}>
+                  동네북 위치 : {LockerNo}
+                </Row>
+              </Col>
             </Col>
 
-            <Col span={12} style={{ fontSize: "12px" }}>
-              <Row style={{ display: "flex" , flexWrap: "wrap"}}>
-                <FontAwesomeIcon
-                  icon={fabookmark}
-                  size="xl"
-                  color="black"
-                  onClick={addWishList}
-                  style={{ marginTop: 5 }}
-                  hidden={!bookmark}
-                  // color=""
-                />
-                <FontAwesomeIcon
-                  icon={faBookmark}
-                  size="xl"
-                  color="black"
-                  onClick={addWishList}
-                  style={{ marginTop: 5 }}
-                  hidden={bookmark}
-                  // color=""
-                />
-              </Row>
-              <hr style={{ margin: 2 }} />
-              <Row style={{ display: "flex" , flexWrap: "wrap"}}>저자 : {props.bookAuthor}</Row>
-              <hr style={{ margin: 2 }} />
-              <Row style={{ display: "flex" , flexWrap: "wrap"}}>출판사 : {props.bookPublisher}</Row>
-              <hr style={{ margin: 2 }} />
-              <Row style={{ display: "flex" , flexWrap: "wrap"}}>출판일 : {props.bookPublishPredate}</Row>
-              <hr style={{ margin: 2 }} />
-              <Row style={{ display: "flex" , flexWrap: "wrap"}}>소개 : {props.bookIntroductionURL}</Row>
-              <hr style={{ margin: 2 }} />
-
-              <Row style={{ display: "flex" , flexWrap: "wrap"}}>동네북 위치 : {LockerNo}</Row>
-            </Col>
-          </Row>
+            {/* <Card>
+              <div id="map" style={{ width: "10vh", height: "10vh" }}></div>
+            </Card> */}
+          </CardBody>
+          {/* </Row> */}
         </Card>
       </Modal>
       {/* <div className={classes.actions}>
