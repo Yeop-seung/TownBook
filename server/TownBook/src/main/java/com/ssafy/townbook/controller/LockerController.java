@@ -67,12 +67,16 @@ public class LockerController {
                 HttpStatus.OK);
     }
     
+    /**
+     * 이용자의 접속 위치에서 가까운 순서로 보관함을 조회한다.
+     *
+     * @param userLocate
+     * @return List<LockerDto>
+     */
     @GetMapping("/findNearLocker")
     public ResponseEntity<FindListResponseDto> findNearLocker(@RequestBody Map<String, Double> userLocate) {
         Double userLatitude  = userLocate.get("userLatitude");
         Double userLongitude = userLocate.get("userLongitude");
-        System.out.println("userLatitude = " + userLatitude);
-        System.out.println("userLongitude = " + userLongitude);
         return new ResponseEntity<>(lockerService.findNearLocker(userLatitude, userLongitude), HttpStatus.OK);
     }
 }

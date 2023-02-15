@@ -63,8 +63,8 @@ public class InitDb {
         private final PasswordEncoder   passwordEncoder;
         
         public void bookInit() {
-            Book book1 = createBook("8984993751", "8", "토지", "박경리", "커뮤니케이션 북스", convertDate("20051103"),
-                    null, null);
+            Book book1 = createBook("9788966260959", "0", "클린코드", "로버트 마틴", "인사이트", convertDate("20131224"),
+                    "URL이 없습니다.", "http://www.nl.go.kr/seoji/fu/ecip/dbfiles/CIP_FILES_TBL/3164716_3.jpg");
             em.persist(book1);
             
             Book book2 = createBook("9788960777330", "0",
@@ -78,6 +78,16 @@ public class InitDb {
                     "실전 리액트 프로그래밍", "이재승 지음", "인사이트", convertDate("20200713"), "URL이 없습니다.",
                     "https://www.nl.go.kr/seoji/fu/ecip/dbfiles/CIP_FILES_TBL/2020/06/08/9788966262670.jpg");
             em.persist(book3);
+            
+            Book book4 = createBook("9791158510619", "1",
+                    "타이탄의 도구들", "팀 페리스", "토네이도미디어그룹(주)", convertDate("20170403"),
+                    "URL이 없습니다.", "http://www.nl.go.kr/seoji/fu/ecip/dbfiles/CIP_FILES_TBL/6143212_3.jpg");
+            em.persist(book4);
+            
+            Book book5 = createBook("9791190313186", "1", "지적 대화를 위한 넓고 얕은 지식 ", "채사장", "Whalebooks",
+                    convertDate("20200120"), "URL이 없습니다.",
+                    "https://www.nl.go.kr/seoji/fu/ecip/dbfiles/CIP_FILES_TBL/2020/01/07/9791190313186.jpg");
+            em.persist(book5);
         }
         
         
@@ -111,17 +121,17 @@ public class InitDb {
             
             Account account2 = createAccount("test@townbook.com", passwordEncoder.encode("password"), "김싸피",
                     "대전시 유성구 덕명동",
-                    "010-1234-5678", 0, "내가 바로 김싸피", "220222", authorityRoleUser);
+                    "01012345678", 0, "내가 바로 김싸피", "951221", authorityRoleUser);
             account2.setAccountPoint(1000);
             em.persist(account2);
             
             Account account3 = createAccount("admin@townbook.com", passwordEncoder.encode("password"), "최어드",
                     "대전시 유성구 어드동",
-                    "010-5678-1234", 1, "내가 바로 최어드", "111111", authorityRoleAdmin);
+                    "01056781234", 1, "내가 바로 최어드", "931006", authorityRoleAdmin);
             em.persist(account3);
             
             Account account4 = createAccount("support@townbook.com", passwordEncoder.encode("password"), "박지원",
-                    "대전시 유성구 봉명동", "010-4545-4545", 1, "내가 바로 박지원", "900909", authorityRoleUser);
+                    "대전시 유성구 봉명동", "01045454545", 1, "내가 바로 박지원", "970128", authorityRoleUser);
             account4.setAccountType(1);
             em.persist(account4);
         }
@@ -156,7 +166,7 @@ public class InitDb {
             createLocker("덕명동", 2, 36.3552D, 127.2984D);
             createLocker("공단동", 2, 36.0988D, 128.3897D);
             createLocker("송정동", 2, 35.0955D, 128.8556D);
-            createLocker("오선동", 2, 35.2042D, 128.8556D);
+            createLocker("오선동", 2, 35.2042D, 126.8072D);
         }
         
         public void createLocker(String lockerRegion, int detailLockerCount, Double lockerLatitude,
@@ -177,11 +187,38 @@ public class InitDb {
         }
         
         public void bookLogInit() {
-            Locker            locker1       = lockerRepository.findLockerByLockerNo(4L).get();
-            DetailLocker      detailLocker1 = locker1.getDetailLocker().get(0);
-            Optional<Account> account1      = accountRepository.findByAccountNo(2L);
-            Optional<Book>    book1         = bookRepository.findBookByBookIsbn("9788966262670");
-            donateBook("재미있어요", locker1, detailLocker1, account1, book1);
+            Optional<Account> account1 = accountRepository.findByAccountNo(2L);
+            Optional<Account> account2 = accountRepository.findByAccountNo(4L);
+            
+            // 3
+            Locker         locker3       = lockerRepository.findLockerByLockerNo(3L).get();
+            DetailLocker   detailLocker3 = locker3.getDetailLocker().get(0);
+            Optional<Book> book3         = bookRepository.findBookByBookIsbn("9788966260959");
+            donateBook("환상적인 책이예요", locker3, detailLocker3, account2, book3);
+            
+            // 4
+            Locker         locker4       = lockerRepository.findLockerByLockerNo(4L).get();
+            DetailLocker   detailLocker4 = locker4.getDetailLocker().get(0);
+            Optional<Book> book4         = bookRepository.findBookByBookIsbn("9788966262670");
+            donateBook("재미있어요", locker4, detailLocker4, account1, book4);
+            
+            // 5
+            Locker         locker5       = lockerRepository.findLockerByLockerNo(5L).get();
+            DetailLocker   detailLocker5 = locker5.getDetailLocker().get(0);
+            Optional<Book> book5         = bookRepository.findBookByBookIsbn("9788960777330");
+            donateBook("다시 읽고 싶지 않아요", locker5, detailLocker5, account2, book5);
+            
+            // 6
+            Locker         locker6       = lockerRepository.findLockerByLockerNo(6L).get();
+            DetailLocker   detailLocker6 = locker6.getDetailLocker().get(0);
+            Optional<Book> book6         = bookRepository.findBookByBookIsbn("9791158510619");
+            donateBook("너무 재밌어요", locker6, detailLocker6, account1, book6);
+            
+            // 7
+            Locker         locker7       = lockerRepository.findLockerByLockerNo(7L).get();
+            DetailLocker   detailLocker7 = locker7.getDetailLocker().get(0);
+            Optional<Book> book7         = bookRepository.findBookByBookIsbn("9791190313186");
+            donateBook("그닥 재미 없어요", locker7, detailLocker7, account1, book7);
         }
         
         public void donateBook(

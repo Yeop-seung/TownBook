@@ -3,7 +3,6 @@ package com.ssafy.townbook.model.dto;
 import com.ssafy.townbook.model.entity.DetailLocker;
 import com.ssafy.townbook.model.entity.Locker;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.Builder;
@@ -136,7 +135,7 @@ public class LockerDto {
             double verticalDistance = 0D;
             double verticalD        = 88.8D;
             double verticalM        = 1.48D;
-            double verticalS        = 0.030D;
+            double verticalS        = 0.025D;
             verticalDistance = Math.abs(userLatitudeDDouble - lockerLatitudeDDouble) * verticalD
                     + Math.abs(userLatitudeMDouble - lockerLatitudeMDouble) * verticalM
                     + Math.abs(userLatitudeSDouble - lockerLatitudeSDouble) * verticalS;
@@ -145,7 +144,7 @@ public class LockerDto {
             double horizontalDistance = 0D;
             double horizontalD        = 111D;
             double horizontalM        = 1.85D;
-            double horizontalS        = 0.025D;
+            double horizontalS        = 0.030D;
             horizontalDistance = Math.abs(userLongitudeDDouble - lockerLongitudeDDouble) * horizontalD
                     + Math.abs(userLongitudeMDouble - lockerLongitudeMDouble) * horizontalM
                     + Math.abs(userLongitudeSDouble - lockerLongitudeSDouble) * horizontalS;
