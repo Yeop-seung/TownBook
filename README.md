@@ -24,13 +24,31 @@
 
 ## 기술 스택
 
+<p align="center">
+<img src="./readmeAsset/stack.png" width="800px">
+</p>
+
 ## 시스템 구조
 
+<p align="center">
+<img src="./readmeAsset/structure.png" width="800px">
+</p>
+
 ## ERD 다이어그램
+
+<p align="center">
+<img src="./readmeAsset/erd.png" width="800px">
+</p>
 
 ## 요구사항 명세서
 
 ## API 명세서
+
+<p align="center">
+<img src="./readmeAsset/api.png" width="800px">
+</p>
+
+[API 명세서](https://documenter.getpostman.com/view/25310566/2s935snMhq)
 
 # :computer: HardWare
 
@@ -54,12 +72,21 @@
 
 ## :computer: HardWare
 
+<p align="center">
+<img src="./readmeAsset/null.png" width="270px">
+</p>
+
 ## :bar_chart: Front-End
 
 <p align="center">
-<img src="./readmeAsset/null.png">
-<img src="./readmeAsset/null.png">
-<img src="./readmeAsset/null.png">
+<img src="./readmeAsset/null.png" width="270px">
+<img src="./readmeAsset/null.png" width="270px">
 </p>
 
 ## :telescope: Back-End
+
+<p align="center">
+<img src="./readmeAsset/null.png" width="270px">
+<img src="./readmeAsset/null.png" width="270px">
+<img src="./readmeAsset/null.png" width="270px">
+</p>
