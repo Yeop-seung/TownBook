@@ -23,7 +23,8 @@ public class DetailLocker {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long detailLockerNo;
     
-    @OneToOne(mappedBy = "detailLocker")
+//    @OneToOne(mappedBy = "detailLocker")
+    @OneToOne
     private BookLog bookLog;
     
     @NotNull
