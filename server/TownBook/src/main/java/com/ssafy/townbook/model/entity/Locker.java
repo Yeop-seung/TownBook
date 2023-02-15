@@ -34,7 +34,6 @@ public class Locker {
     @Column(name = "locker_region")
     private String lockerRegion;
     
-    
     @NotNull
     @Column(name = "locker_latitude")
     private Double lockerLatitude;
@@ -47,7 +46,7 @@ public class Locker {
     @ColumnDefault("0")
     private Integer lockerBookCnt;
     
-    //    @OneToMany(mappedBy = "locker")
+//    @OneToMany(mappedBy = "locker")
     @OneToMany
     private List<DetailLocker> detailLocker = new ArrayList<>();
     
