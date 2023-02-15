@@ -42,9 +42,7 @@ public class AccountDto {
     
     @NotNull
     private String accountBirthDay;
-    
-    private File file;
-    
+
     private Set<AuthorityDto> authorityDtoSet;
     
     @Builder

@@ -13,17 +13,17 @@ import lombok.Setter;
 @Setter
 public class BookLogDto {
     
-    private Long           bookLogNo;
-    private Boolean        bookLogState;
-    private String         bookLogReview;
-    private Long           bookLogReceiverNo;
-    private LocalDateTime  bookLogDonateDateTime;
-    private LocalDateTime  bookLogReceiveDateTime;
-    private List<WishList> wishLists = new ArrayList<>();
-    private Long           accountNo;
-    private String         bookIsbn;
-    private Long           lockerNo;
-    private Long           detailLockerNo;
+    private Long          bookLogNo;
+    private Boolean       bookLogState;
+    private String        bookLogReview;
+    private Long          bookLogReceiverNo;
+    private LocalDateTime bookLogDonateDateTime;
+    private LocalDateTime bookLogReceiveDateTime;
+    private List<Long>    wishListNo = new ArrayList<>();
+    private Long          accountNo;
+    private String        bookIsbn;
+    private Long          lockerNo;
+    private Long          detailLockerNo;
     
     @Builder
     public BookLogDto(BookLog bookLog) {
@@ -33,10 +33,12 @@ public class BookLogDto {
         this.bookLogReceiverNo      = bookLog.getBookLogReceiverNo();
         this.bookLogDonateDateTime  = bookLog.getBookLogDonateDateTime();
         this.bookLogReceiveDateTime = bookLog.getBookLogReceiveDateTime();
-        this.wishLists              = bookLog.getWishLists();
-        this.accountNo              = bookLog.getAccountNo();
-        this.bookIsbn               = bookLog.getBookIsbn();
-        this.lockerNo               = bookLog.getLockerNo();
-        this.detailLockerNo         = bookLog.getDetailLockerNo();
+        for (WishList wishList : bookLog.getWishLists()) {
+            this.wishListNo.add(wishList.getWishListNo());
+        }
+        this.accountNo      = bookLog.getAccountNo();
+        this.bookIsbn       = bookLog.getBookIsbn();
+        this.lockerNo       = bookLog.getLockerNo();
+        this.detailLockerNo = bookLog.getDetailLockerNo();
     }
 }

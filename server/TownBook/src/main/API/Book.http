@@ -8,7 +8,7 @@ GET http://localhost:8081/backend/book/{{bookIsbn}}
 POST http://localhost:8081/backend/book/find
 Content-Type: application/x-www-form-urlencoded
 
-isbn=9788960777330
+isbn=9791190313186
 
 ### 4. 보관함에 보관중인 전체 도서 조회
-GET http://localhost:8081/backend/book/locker/{{lockerNo}}
+GET http://localhost:8081/backend/book/locker/4

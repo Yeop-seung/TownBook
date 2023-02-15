@@ -27,6 +27,10 @@ public class Account {
     @Column(name = "account_no")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long accountNo;
+
+    @Column(name = "account_type")
+    @ColumnDefault("0")
+    private Integer accountType;
     
     @Column(name = "account_email", length = 50, unique = true)
     @NotNull
@@ -78,8 +82,8 @@ public class Account {
     @OneToMany(mappedBy = "account")
     private List<WishList> wishLists = new ArrayList<>();
     
-    @OneToMany(mappedBy = "account")
-    private List<File> files = new ArrayList<>();
+    @OneToOne(mappedBy = "account")
+    private File file;
     
     @OneToMany(mappedBy = "account")
     private List<Notice> notices = new ArrayList<>();
@@ -95,7 +99,7 @@ public class Account {
     public Account(Long accountNo, String accountEmail, String accountPw, String accountName, String accountAddress,
                    String accountPhoneNumber, Integer accountGender, Integer accountPoint, Integer accountBookCnt,
                    String accountNickname, String accountBirthDay, Boolean accountActivated, List<BookLog> bookLog,
-                   List<WishList> wishLists, List<File> files, List<Notice> notices, Set<Authority> authorities) {
+                   List<WishList> wishLists,File file, List<Notice> notices, Set<Authority> authorities) {
         this.accountNo          = accountNo;
         this.accountEmail       = accountEmail;
         this.accountPw          = accountPw;
@@ -110,7 +114,7 @@ public class Account {
         this.accountActivated   = accountActivated;
         this.bookLog            = bookLog;
         this.wishLists          = wishLists;
-        this.files              = files;
+        this.file               = file;
         this.notices            = notices;
         this.authorities        = authorities;
     }

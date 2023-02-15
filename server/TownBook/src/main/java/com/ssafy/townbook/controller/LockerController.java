@@ -5,6 +5,7 @@ import com.ssafy.townbook.model.dto.response.FindListResponseDto;
 import com.ssafy.townbook.model.dto.response.FindOneResponseDto;
 import com.ssafy.townbook.model.dto.response.SaveOneResponseDto;
 import com.ssafy.townbook.model.service.LockerService;
+import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -66,8 +67,16 @@ public class LockerController {
                 HttpStatus.OK);
     }
     
-//    @PostMapping("/checkLockerStorage/{lockerNo}")
-//    public ResponseEntity<?> checkLockerStorage(@PathVariable Long lockerNo){
-//        return
-//    }
+    /**
+     * 이용자의 접속 위치에서 가까운 순서로 보관함을 조회한다.
+     *
+     * @param userLocate
+     * @return List<LockerDto>
+     */
+    @GetMapping("/findNearLocker")
+    public ResponseEntity<FindListResponseDto> findNearLocker(@RequestBody Map<String, Double> userLocate) {
+        Double userLatitude  = userLocate.get("userLatitude");
+        Double userLongitude = userLocate.get("userLongitude");
+        return new ResponseEntity<>(lockerService.findNearLocker(userLatitude, userLongitude), HttpStatus.OK);
+    }
 }

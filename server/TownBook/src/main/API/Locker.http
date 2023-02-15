@@ -2,7 +2,7 @@
 GET http://localhost:8081/backend/locker
 
 ### 2. 단일 보관함 조회
-GET http://localhost:8081/backend/locker/3
+GET http://localhost:8081/backend/locker/4
 
 ### 3. 보관함 추가
 POST http://localhost:8081/backend/locker/add
@@ -13,4 +13,13 @@ Content-Type: application/json
     "detailLockerCount": 2,
     "lockerLatitude": 123.123123,
     "lockerLongitude": 12.123123
+}
+
+### 4. 접속 위치와 가까운 순으로 보관함 조회
+GET http://localhost:8081/backend/locker/findNearLocker
+Content-Type: application/json
+
+{
+    "userLatitude": 36.3655,
+    "userLongitude": 127.3554
 }

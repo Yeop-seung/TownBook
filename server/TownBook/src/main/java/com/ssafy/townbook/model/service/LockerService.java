@@ -28,5 +28,14 @@ public interface LockerService {
      * @param detailLockerCount
      * @return Boolean
      */
-    SaveOneResponseDto addLocker(String lockerRegion, int detailLockerCount, Double lockerLatitude, Double lockerLongitude);
+    SaveOneResponseDto addLocker(String lockerRegion, int detailLockerCount, Double lockerLatitude,
+            Double lockerLongitude);
+    
+    /**
+     * 이용자의 접속 위치에서 가까운 순서로 보관함을 조회한다.
+     *
+     * @param userLatitude, userLongitude
+     * @return List<LockerDto>
+     */
+    FindListResponseDto findNearLocker(Double userLatitude, Double userLongitude);
 }

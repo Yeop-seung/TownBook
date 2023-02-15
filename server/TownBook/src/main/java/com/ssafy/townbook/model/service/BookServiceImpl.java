@@ -1,9 +1,11 @@
 package com.ssafy.townbook.model.service;
 
 import com.ssafy.townbook.model.dto.BookDto;
-import com.ssafy.townbook.model.dto.response.FindOneResponseDto;
+import com.ssafy.townbook.model.dto.response.FindBookByLockerResponseDto;
 import com.ssafy.townbook.model.dto.response.FindListResponseDto;
+import com.ssafy.townbook.model.dto.response.FindOneResponseDto;
 import com.ssafy.townbook.model.entity.Book;
+import com.ssafy.townbook.model.entity.BookLog;
 import com.ssafy.townbook.model.repository.BookRepository;
 import com.ssafy.townbook.queryrepository.BookQueryRepository;
 import java.io.BufferedReader;
@@ -11,6 +13,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -41,7 +44,7 @@ public class BookServiceImpl implements BookService {
     }
     
     /**
-     * 전체 책 조회
+     * 등록된 전체 도서를 조회
      *
      * @return List<BookDto>
      */
@@ -55,7 +58,7 @@ public class BookServiceImpl implements BookService {
     }
     
     /**
-     * ISBN 으로 도서 조회
+     * 도서의 ISBN으로 단일 도서 조회
      *
      * @param bookIsbn
      * @return BookDto
@@ -70,7 +73,7 @@ public class BookServiceImpl implements BookService {
     
     
     /**
-     * ISBN으로 국립도서관의 도서 정보 조회
+     * 도서의 ISBN으로 국립중앙도서관에서 도서 정보를 가져오고 DB에 등록
      *
      * @param bookIsbn
      * @return BookDto
@@ -101,9 +104,26 @@ public class BookServiceImpl implements BookService {
             book.setBookAuthor((String) jsonObject.get("AUTHOR"));
             book.setBookPublisher((String) jsonObject.get("PUBLISHER"));
             book.setBookPublishPredate(stringToDate((String) jsonObject.get("PUBLISH_PREDATE")));
-            book.setBookIntroductionURL(jsonObject.get("BOOK_INTRODUCTION_URL").equals("") ? "null.png"
-                    : (String) jsonObject.get("BOOK_INTRODUCTION_URL"));
-            book.setBookTitleURL((String) jsonObject.get("TITLE_URL"));
+            
+            String bookTitleURL =
+                    jsonObject.get("TITLE_URL").equals("") ? "null.png" : (String) jsonObject.get("TITLE_URL");
+            book.setBookTitleURL(bookTitleURL);
+            
+            String bookIntroduction = (String) jsonObject.get("BOOK_INTRODUCTION_URL");
+            if (bookIntroduction.equals("")) {
+                book.setBookIntroductionURL("URL이 없습니다.");
+            } else {
+                URL bookIntroductionURL = new URL(bookIntroduction);
+                BufferedReader bookIntroductionURLBr = new BufferedReader(
+                        new InputStreamReader(bookIntroductionURL.openStream(), "euc-kr"));
+                
+                StringBuilder stringBuilder = new StringBuilder();
+                List<String>  newList       = bookIntroductionURLBr.lines().collect(Collectors.toList());
+                for (int i = 0; i < newList.size(); i++) {
+                    stringBuilder.append(newList.get(i));
+                }
+                book.setBookIntroductionURL(String.valueOf(stringBuilder));
+            }
             
             bookRepository.save(book);
             BookDto bookDto = new BookDto(book);
@@ -114,11 +134,17 @@ public class BookServiceImpl implements BookService {
         }
     }
     
+    /**
+     * 단일 보관함에 보관중인 모든 도서 조회
+     *
+     * @param lockerNo
+     * @return List<BookDto>
+     */
     @Override
     public FindListResponseDto findAllBookByLockerNo(Long lockerNo) {
-        List<Book> findBookList = bookQueryRepository.findBookLogByLockerNo(lockerNo).get();
-        List<BookDto> findBookDtoList = findBookList.stream()
-                .map(BookDto::new)
+        List<BookLog> findBookLogList = bookQueryRepository.findBookLogByLockerNo(lockerNo).get();
+        List<FindBookByLockerResponseDto> findBookDtoList = findBookLogList.stream()
+                .map(FindBookByLockerResponseDto::new)
                 .collect(Collectors.toList());
         return new FindListResponseDto(findBookDtoList);
     }

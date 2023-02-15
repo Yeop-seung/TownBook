@@ -1,5 +1,6 @@
 package com.ssafy.townbook.model.service;
 
+import com.ssafy.townbook.model.dto.BookDto;
 import com.ssafy.townbook.model.dto.BookLogDto;
 import com.ssafy.townbook.model.dto.request.DonateBookRequestDto;
 import com.ssafy.townbook.model.dto.request.ReceiveBookRequestDto;
@@ -8,8 +9,18 @@ import com.ssafy.townbook.model.dto.response.DonateBookLogResponseDto;
 import com.ssafy.townbook.model.dto.response.FindListResponseDto;
 import com.ssafy.townbook.model.dto.response.FindOneResponseDto;
 import com.ssafy.townbook.model.dto.response.ReceiveBookLogResponseDto;
-import com.ssafy.townbook.model.entity.*;
-import com.ssafy.townbook.model.repository.*;
+import com.ssafy.townbook.model.entity.Account;
+import com.ssafy.townbook.model.entity.BookLog;
+import com.ssafy.townbook.model.entity.DetailLocker;
+import com.ssafy.townbook.model.entity.Locker;
+import com.ssafy.townbook.model.entity.WishList;
+import com.ssafy.townbook.model.repository.AccountRepository;
+import com.ssafy.townbook.model.repository.AdminRepository;
+import com.ssafy.townbook.model.repository.BookLogRepository;
+import com.ssafy.townbook.model.repository.BookRepository;
+import com.ssafy.townbook.model.repository.DetailLockerRepository;
+import com.ssafy.townbook.model.repository.LockerRepository;
+import com.ssafy.townbook.model.repository.WishListRepository;
 import com.ssafy.townbook.queryrepository.BookLogQueryRepository;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -36,11 +47,13 @@ public class BookLogServiceImpl implements BookLogService {
     private BookRepository         bookRepository;
     private AccountRepository      accountRepository;
     private WishListRepository     wishListRepository;
+    
     @Autowired
     public BookLogServiceImpl(
             BookLogRepository bookLogRepository, BookLogQueryRepository bookLogQueryRepository,
             LockerRepository lockerRepository, DetailLockerRepository detailLockerRepository,
-            AdminRepository adminRepository, BookRepository bookRepository, AccountRepository accountRepository,WishListRepository wishListRepository) {
+            AdminRepository adminRepository, BookRepository bookRepository, AccountRepository accountRepository,
+            WishListRepository wishListRepository) {
         this.bookLogRepository      = bookLogRepository;
         this.bookLogQueryRepository = bookLogQueryRepository;
         this.lockerRepository       = lockerRepository;
@@ -103,14 +116,14 @@ public class BookLogServiceImpl implements BookLogService {
         
         JSONArray jsonArray = new JSONArray();
         for (BookLogDto bookLogDto : findBookLogDtoList) {
-            JSONObject jsonObject             = new JSONObject();
-            String     bookIsbn               = bookLogDto.getBookIsbn();
-            String     bookTitle              = bookRepository.findBookByBookIsbn(bookIsbn).get().getBookTitle();
-            long       detailLockerNo         = bookLogDto.getDetailLockerNo();
-            long       detailLockerNoInLocker = detailLockerRepository.findDetailLockerByDetailLockerNo(detailLockerNo)
+            JSONObject jsonObject     = new JSONObject();
+            String     bookIsbn       = bookLogDto.getBookIsbn();
+            BookDto    bookDto        = new BookDto(bookRepository.findBookByBookIsbn(bookIsbn).get());
+            long       detailLockerNo = bookLogDto.getDetailLockerNo();
+            long detailLockerNoInLocker = detailLockerRepository.findDetailLockerByDetailLockerNo(detailLockerNo)
                     .get().getDetailLockerNoInLocker();
             jsonObject.put("bookLog", bookLogDto);
-            jsonObject.put("bookTitle", bookTitle);
+            jsonObject.put("book", bookDto);
             jsonObject.put("detailLockerNoInLocker", detailLockerNoInLocker);
             jsonArray.add(jsonObject);
         }
@@ -199,6 +212,7 @@ public class BookLogServiceImpl implements BookLogService {
         // locker
         long   lockerNo = receiveBookRequestDto.getLockerNo();
         Locker locker   = lockerRepository.findLockerByLockerNo(lockerNo).get();
+        System.out.println(locker.getLockerBookCnt());
         locker.setLockerBookCnt(locker.getLockerBookCnt() - 1);
         
         // detailLocker
@@ -216,7 +230,7 @@ public class BookLogServiceImpl implements BookLogService {
         
         return new FindOneResponseDto(new ReceiveBookLogResponseDto(account.getAccountPoint()));
     }
-
+    
     /**
      * 책 찜 상태 변경
      *
@@ -228,9 +242,10 @@ public class BookLogServiceImpl implements BookLogService {
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Exception.class}, readOnly = false)
     public FindOneResponseDto changeWishState(ReceiverWishListRequestDto receiverWishListRequestDto) throws Exception {
         Optional<WishList> findWishList = wishListRepository.findByBookLogNo(receiverWishListRequestDto.getBookLogNo());
-
+        
         if (findWishList.isEmpty()) {
-            WishList wishList = new WishList(receiverWishListRequestDto.getAccountNo(), receiverWishListRequestDto.getBookLogNo());
+            WishList wishList = new WishList(receiverWishListRequestDto.getAccountNo(),
+                    receiverWishListRequestDto.getBookLogNo());
             wishListRepository.save(wishList);
             return new FindOneResponseDto(true);
         } else {
