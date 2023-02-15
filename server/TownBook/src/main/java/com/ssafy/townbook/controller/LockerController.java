@@ -74,7 +74,7 @@ public class LockerController {
      * @param findNearLockerRequestDto
      * @return List<LockerDto>
      */
-    @GetMapping("/findNearLocker")
+    @PostMapping("/findNearLocker")
     public ResponseEntity<FindListResponseDto> findNearLocker(
             @RequestBody FindNearLockerRequestDto findNearLockerRequestDto) {
         Double userLatitude  = findNearLockerRequestDto.getUserLatitude();
