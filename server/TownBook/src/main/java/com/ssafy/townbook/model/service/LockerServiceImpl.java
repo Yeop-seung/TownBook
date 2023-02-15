@@ -89,6 +89,12 @@ public class LockerServiceImpl implements LockerService {
         }
     }
     
+    /**
+     * 이용자의 접속 위치에서 가까운 순서로 보관함을 조회한다.
+     *
+     * @param userLatitude, userLongitude
+     * @return List<LockerDto>
+     */
     @Override
     public FindListResponseDto findNearLocker(Double userLatitude, Double userLongitude) {
         List<Locker> findAllLockers = lockerRepository.findAll();
@@ -101,6 +107,7 @@ public class LockerServiceImpl implements LockerService {
         
         Comparator<LockerDto> comparator = Comparator.comparing(LockerDto::getLockerDistance,
                 Comparator.naturalOrder());
+        
         List<LockerDto> findNearLocker = findAllLockersDtos.stream()
                 .sorted(comparator)
                 .collect(Collectors.toList());
