@@ -1,6 +1,7 @@
 package com.ssafy.townbook.controller;
 
 import com.ssafy.townbook.model.dto.request.CreateLockerRequestDto;
+import com.ssafy.townbook.model.dto.request.FindNearLockerRequestDto;
 import com.ssafy.townbook.model.dto.response.FindListResponseDto;
 import com.ssafy.townbook.model.dto.response.FindOneResponseDto;
 import com.ssafy.townbook.model.dto.response.SaveOneResponseDto;
@@ -70,13 +71,14 @@ public class LockerController {
     /**
      * 이용자의 접속 위치에서 가까운 순서로 보관함을 조회한다.
      *
-     * @param userLocate
+     * @param findNearLockerRequestDto
      * @return List<LockerDto>
      */
     @GetMapping("/findNearLocker")
-    public ResponseEntity<FindListResponseDto> findNearLocker(@RequestBody Map<String, Double> userLocate) {
-        Double userLatitude  = userLocate.get("userLatitude");
-        Double userLongitude = userLocate.get("userLongitude");
+    public ResponseEntity<FindListResponseDto> findNearLocker(
+            @RequestBody FindNearLockerRequestDto findNearLockerRequestDto) {
+        Double userLatitude  = findNearLockerRequestDto.getUserLatitude();
+        Double userLongitude = findNearLockerRequestDto.getUserLongitude();
         return new ResponseEntity<>(lockerService.findNearLocker(userLatitude, userLongitude), HttpStatus.OK);
     }
 }

@@ -46,8 +46,7 @@ public class Locker {
     @ColumnDefault("0")
     private Integer lockerBookCnt;
     
-//    @OneToMany(mappedBy = "locker")
-    @OneToMany
+    @OneToMany(mappedBy = "locker")
     private List<DetailLocker> detailLocker = new ArrayList<>();
     
     @Builder
