@@ -2,6 +2,7 @@ package com.ssafy.townbook.model.dto;
 
 
 import com.ssafy.townbook.model.entity.Account;
+import com.ssafy.townbook.model.entity.File;
 import java.util.Set;
 import java.util.stream.Collectors;
 import javax.validation.constraints.NotNull;
