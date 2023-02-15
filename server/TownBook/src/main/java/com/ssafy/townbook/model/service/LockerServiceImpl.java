@@ -6,15 +6,14 @@ import com.ssafy.townbook.model.dto.response.FindOneResponseDto;
 import com.ssafy.townbook.model.dto.response.SaveOneResponseDto;
 import com.ssafy.townbook.model.entity.DetailLocker;
 import com.ssafy.townbook.model.entity.Locker;
-import com.ssafy.townbook.model.repository.BookRepository;
 import com.ssafy.townbook.model.repository.DetailLockerRepository;
 import com.ssafy.townbook.model.repository.LockerRepository;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
-import net.minidev.json.JSONArray;
-import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -88,6 +87,25 @@ public class LockerServiceImpl implements LockerService {
         } catch (Exception e) {
             return new SaveOneResponseDto(e.getMessage());
         }
+    }
+    
+    @Override
+    public FindListResponseDto findNearLocker(Double userLatitude, Double userLongitude) {
+        List<Locker> findAllLockers = lockerRepository.findAll();
+        
+        List<LockerDto> findAllLockersDtos = new ArrayList<>();
+        for (Locker locker : findAllLockers) {
+            LockerDto lockerDto = new LockerDto(locker, userLatitude, userLongitude);
+            findAllLockersDtos.add(lockerDto);
+        }
+        
+        Comparator<LockerDto> comparator = Comparator.comparing(LockerDto::getLockerDistance,
+                Comparator.naturalOrder());
+        List<LockerDto> findNearLocker = findAllLockersDtos.stream()
+                .sorted(comparator)
+                .collect(Collectors.toList());
+        
+        return new FindListResponseDto(findNearLocker);
     }
 }
 
