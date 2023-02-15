@@ -4,12 +4,21 @@ import NoticeDetail from "views/notice/NoticeDetail";
 import { Route, Switch } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBold, faArrowLeft, faBookmark } from "@fortawesome/free-solid-svg-icons";
-import React from "react";
-import { faBookmark as fabookmark } from "@fortawesome/free-solid-svg-icons";
-import axios
- from "axios";
+import {
+  faBold,
+  
+  faBookmark,
+} from "@fortawesome/free-regular-svg-icons";
+import React, { useEffect } from "react";
+import { faBookmark as fabookmark, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
+
+
+
 function LockerBookItem(book) {
+
+
+  console.log('락커프롭리스트',book)
   const [modalSearch, setmodalSearch] = React.useState(false);
   const toggleModalSearch = () => {
     setmodalSearch(!modalSearch);
@@ -19,22 +28,53 @@ function LockerBookItem(book) {
   // console.log(book.id)
   // console.log(book.noticeTitle)
   const [LockerRegion, setLockerRegion] = React.useState([]);
-  const lockerNo = book.lockerNo
+  const lockerNo = book.lockerNo;
+
+
+
   axios
-  .get(`https://i8b201.p.ssafy.io/backend/locker/${lockerNo}`)
-  .then((res) => {
-    console.log("락커액시오스", res);
-    setLockerRegion(res.data.data.lockerRegion);
-  })
-  .catch((error) => {
-    // alert("error")
-  });
+    .get(`https://i8b201.p.ssafy.io/backend/locker/${lockerNo}`)
+    .then((res) => {
+      console.log("락커액시오스", res);
+      setLockerRegion(res.data.data.lockerRegion);
+    })
+    .catch((error) => {
+      // alert("error")
+    });
   // console.log(book.noticeContent)
   // console.log("라커item전달받은값", book);
   const toggleBookmark = () => {
     setbookmark(!bookmark);
   };
+  useEffect(() => {
+    
+      const accountNo = localStorage.getItem("accountNo");
+      const bookLogNo = book.bookLogNo;
+      
+      axios
+        .get(`https://i8b201.p.ssafy.io/backend/myPage/wishList/${accountNo}`)
+        .then((res) => {
+          console.log('찜목록 불러옴', res )
+          let found = false;
+          for (let i = 0; i < res.data.count; i++) {
+            if (res.data.data[i].bookLogNo === bookLogNo) {
+              found = true;
+              
+            }
+          }
+  
+          if (found) {
+            setbookmark(true)
+          } else {
+            setbookmark(false)
+          }
+        });
+    
+  }, []);
+  
+
   function addWishList() {
+    console.log('북로그넘버',book)
     const accountNo = localStorage.getItem("accountNo");
     const bookLogNo = book.bookLogNo;
     axios
@@ -43,7 +83,8 @@ function LockerBookItem(book) {
         bookLogNo,
       })
       .then((res) => {
-        console.log("찜목록추가성공", res);
+        console.log("찜목록변경성공", res);
+
         // console.log(res);
         toggleBookmark();
       })
@@ -70,11 +111,26 @@ function LockerBookItem(book) {
               }}
             />
             <Col>
-              <p style={{ color: "#333333", fontSize: 16, fontWeight: "bold", marginBottom:3 }}>
+              <p
+                style={{
+                  color: "#333333",
+                  fontSize: 16,
+                  fontWeight: "bold",
+                  marginBottom: 3,
+                }}
+              >
                 {book.bookTitle}
               </p>
-              <p style={{ marginBottom:7, fontWeight: "bold"}}>저자: {book.bookAuthor}</p>
-              <p style={{ color: "#ec217b", fontWeight: "bolder", marginBottom:3 }}>
+              <p style={{ marginBottom: 7, fontWeight: "bold" }}>
+                저자: {book.bookAuthor}
+              </p>
+              <p
+                style={{
+                  color: "#ec217b",
+                  fontWeight: "bolder",
+                  marginBottom: 3,
+                }}
+              >
                 동네북 위치: {LockerRegion}
               </p>
             </Col>
@@ -237,7 +293,7 @@ function LockerBookItem(book) {
         <p style={{ color: "white" }}>{book.bookTitle}</p>
         <p style={{ color: "white" }}>{LockerRegion}</p> */}
 
-        {/* <address>{book.noticeContent}</address> */}
+      {/* <address>{book.noticeContent}</address> */}
       {/* </Link> */}
       {/* <div className={classes.actions}>
           <button>To Favorites</button>

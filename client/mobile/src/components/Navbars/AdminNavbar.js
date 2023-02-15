@@ -19,6 +19,7 @@ import {
   faUser,
   faArrowRightFromBracket,
   faHouse,
+  faXmark
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -372,7 +373,12 @@ function AdminNavbar(props) {
           className="close"
           onClick={toggleModalSearch}
         >
-          <i className="tim-icons icon-simple-remove" />
+          <FontAwesomeIcon
+          icon={faXmark}
+          size="xl"
+          color="black"
+          style={{ margin: 0 }}
+        />
         </button>
       </Modal>
     </>

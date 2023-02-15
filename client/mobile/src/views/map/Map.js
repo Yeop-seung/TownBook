@@ -89,6 +89,16 @@ function Map() {
         const locPosition = new kakao.maps.LatLng(lat, lon); // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
         const message = `'<div style="padding:10px;">여기에 계신가요?!</div>'`; // 인포윈도우에 표시될 내용입니다
         map.panTo(locPosition);
+        console.log("위도", lat);
+        const userLatitude = lat;
+        const userLongitude = lon;
+        axios
+          .post("https://i8b201.p.ssafy.io/backend/locker/findNearLocker", {
+            userLatitude, userLongitude
+          })
+          .then((res) => {
+            console.log("줍녀락커", res);
+          });
 
         // 마커와 인포윈도우를 표시합니다
         displayMarker(locPosition, message);
@@ -132,8 +142,8 @@ function Map() {
       //   position: locPosition,
       //   image: markerImage,
       // });
-      const imageSrc =
-          "https://ifh.cc/g/HqQFF7.png", // 마커이미지의 주소입니다
+
+      const imageSrc = "https://ifh.cc/g/HqQFF7.png", // 마커이미지의 주소입니다
         imageSize = new kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
         imageOption = { offset: new kakao.maps.Point(27, 69) }; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
       const markerImage = new kakao.maps.MarkerImage(
@@ -142,8 +152,7 @@ function Map() {
         imageOption
       );
 
-      const imageSrc2 =
-          "https://ifh.cc/g/X5DS1w.png", // 마커이미지의 주소입니다
+      const imageSrc2 = "https://ifh.cc/g/X5DS1w.png", // 마커이미지의 주소입니다
         imageSize2 = new kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
         imageOption2 = { offset: new kakao.maps.Point(27, 69) }; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
       const markerImage2 = new kakao.maps.MarkerImage(
@@ -325,8 +334,8 @@ function Map() {
               style={{
                 width: "40vh",
                 boxShadow: "rgba(0, 0, 0, 0.2) 3px 3px 3px",
-                border:0,
-                height:"5vh"
+                border: 0,
+                height: "5vh",
               }}
             />
             <Button
@@ -340,9 +349,9 @@ function Map() {
                 color: "#ffffff",
                 borderColor: "transparent",
                 boxShadow: "rgba(0, 0, 0, 0.2) 3px 3px 3px",
-                margin:0,
-                height:"5vh",
-                marginLeft:13,
+                margin: 0,
+                height: "5vh",
+                marginLeft: 13,
               }}
             >
               검색
@@ -358,12 +367,14 @@ function Map() {
         modalClassName="modal-search"
         isOpen={modalSearch2}
         toggle={toggleModalSearch2}
-        style={{position: "absolute",
+        style={{
+          position: "absolute",
           bottom: 0,
           left: 0,
           right: 0,
           height: "20%",
-          backgroundColor: "transparent",}}
+          backgroundColor: "transparent",
+        }}
       >
         <button
           aria-label="Close"
@@ -375,13 +386,11 @@ function Map() {
         >
           <i className="tim-icons icon-simple-remove" />
         </button>
-        
-            <BookList
-              // to={{ pathname: `/map/${searchbookRef}` }}
-              bookList={bookList}
-            />
-         
-        
+
+        <BookList
+          // to={{ pathname: `/map/${searchbookRef}` }}
+          bookList={bookList}
+        />
       </Modal>
 
       <Modal

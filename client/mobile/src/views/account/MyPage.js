@@ -83,6 +83,7 @@ function MyPage(props) {
 
   function findRegion() {
     const lockerNo = lockerRegion;
+    console.log('라커리전입니다',lockerNo)
     axios
       .put(`https://i8b201.p.ssafy.io/backend/locker/${lockerNo}`)
       .then((res) => {

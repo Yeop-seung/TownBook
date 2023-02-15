@@ -33,7 +33,7 @@ function LockerBookList(props) {
               bookIntroductionURL = {book.bookIntroductionURL}
               bookPublishPredate = {book.bookPublishPredate}
               lockerNo = {book.lockerNo}
-              booklo
+              bookLogNo = {book.bookLogNo}
 
             />
           </Alert>

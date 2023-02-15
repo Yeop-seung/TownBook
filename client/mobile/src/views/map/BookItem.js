@@ -20,6 +20,34 @@ import React, { useEffect } from "react";
 const { kakao } = window;
 
 function BookItem(props) {
+
+
+  useEffect(() => {
+    
+    const accountNo = localStorage.getItem("accountNo");
+    const bookLogNo = props.bookLogNo;
+    
+    axios
+      .get(`https://i8b201.p.ssafy.io/backend/myPage/wishList/${accountNo}`)
+      .then((res) => {
+        console.log('찜목록 불러옴', res )
+        let found = false;
+        for (let i = 0; i < res.data.count; i++) {
+          if (res.data.data[i].bookLogNo === bookLogNo) {
+            found = true;
+            
+          }
+        }
+
+        if (found) {
+          setbookmark(true)
+        } else {
+          setbookmark(false)
+        }
+      });
+  
+}, []);
+
   // console.log(props.id)
   // console.log(props.noticeTitle)
   let bookTitle;

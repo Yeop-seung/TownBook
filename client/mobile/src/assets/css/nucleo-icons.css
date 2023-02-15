@@ -17,16 +17,16 @@ Created using IcoMoon - icomoon.io
   font-style: normal;
 }
 
-@font-face {
+/* @font-face {
   font-family: "SCD";
   src: url("../fonts/SCDream5.otf");
-  /* src: url("../fonts/nucleo.eot") format("embedded-opentype"),
+  src: url("../fonts/nucleo.eot") format("embedded-opentype"),
     url("../fonts/nucleo.woff2") format("woff2"),
     url("../fonts/nucleo.woff") format("woff"),
-    url("../fonts/nucleo.ttf") format("truetype"); */
+    url("../fonts/nucleo.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
-}
+} */
 /*------------------------
 	base class definition
 -------------------------*/

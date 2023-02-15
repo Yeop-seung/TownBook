@@ -9,9 +9,29 @@ function WishListItem(props) {
   // console.log(props.id)
   // console.log(props.noticeTitle)
   // console.log(props.bookTitle.length)
+  // const enteredBookTitle =/ props.bookTitle
+  // axios
+  // .get(
+  //   `https://i8b201.p.ssafy.io/backend/search/searchTitle/${enteredBookTitle}`
+  // )
+  // .then((res) => {
+  //   console.log("북 res", res);
+  //   const books = [];
+  //   for (let i = 0; i < res.data.count; i++) {
+  //     books.push({ ...res.data.data[i], id: i + 1 });
+  //   }
+  //   setbookList(books);
+  //   console.log("book", books);
+  //   console.log("bookset", bookList);
+  //   toggleModalSearch2();
+  // })
+
+  // .catch((error) => {
+  //   alert("검색어를 입력해주세요.");
+  // });
   let bookTitle;
   if (props.bookTitle.length > 11) {
-    bookTitle = props.bookTitle.substr(0, 11) + "...";
+    bookTitle = props.bookTitle.substr(0, 25) + "...";
   } else {
     bookTitle = props.bookTitle;
   }
@@ -44,14 +64,26 @@ function WishListItem(props) {
         }}
       >
         <Row>
-          <p style={{ color: "white" }}>{props.id}</p>
+          {/* <p style={{ color: "white" }}>{props.bookTitleURL}</p> */}
+          
 
-          <Col >
-            <p style={{ color: "white" }}>{bookTitle}</p>
+          <Col style={{paddingRight:0}}>
+            
+            <img
+              alt="..."
+              // className="avatar"
+              src={props.bookTitleURL}
+              className={"image"}
+              style={{
+                height: "100%",
+                width: "70%",
+                boxShadow: "rgba(0, 0, 0, 0.5) 3px 3px 10px",
+              }}
+            />
           </Col>
           <Col  style={{margin:0, padding:0}}>
-              
-              <p align="right" style={{ color: "white", margin: 0, padding:0}}>{props.bookLogLocker}</p>
+          <p style={{ color: "white" }}>{props.bookTitle}</p>
+            <p align="right" style={{ color: "white", margin: 0, padding:0, display:"flex", color:"#333333"}}>동네북 위치 : {props.bookLogRegion}</p>
           </Col>
         </Row>
 

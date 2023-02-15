@@ -11,7 +11,7 @@ function NoticeItem(props) {
   // console.log(props.bookTitle.length)
   let bookTitle;
   if (props.bookTitle.length > 11) {
-    bookTitle = props.bookTitle.substr(0, 11) + "...";
+    bookTitle = props.bookTitle.substr(0, 9) + "...";
   } else {
     bookTitle = props.bookTitle;
   }
@@ -27,7 +27,7 @@ function NoticeItem(props) {
       {/* <div className={classes.image}>
           <img src={props.image} alt={props.contentTitle} />
         </div> */}
-      <Link
+      {/* <Link
         to={{
           pathname: `/book/${props.id}`,
           state: {
@@ -42,7 +42,7 @@ function NoticeItem(props) {
             MyPageToken: true,
           },
         }}
-      >
+      > */}
         <Row>
           <p style={{ color: "white" }}>{props.id}</p>
 
@@ -53,12 +53,12 @@ function NoticeItem(props) {
               <p align="right" style={{ color: "white", margin: 0, marginRight: 5}}>
                 {donateTime.substr(0, 10)}
               </p>
-              <p align="right" style={{ color: "white", margin: 0, padding:0}}>{props.bookLogLocker}</p>
+              {/* <p align="right" style={{ color: "white", margin: 0, padding:0}}>{props.bookLogLocker}</p> */}
           </Col>
         </Row>
 
         {/* <address>{props.noticeContent}</address> */}
-      </Link>
+      {/* </Link> */}
       {/* <div className={classes.actions}>
           <button>To Favorites</button>
         </div> */}

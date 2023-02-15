@@ -67,7 +67,7 @@ function NoticeList(props) {
 
       {props.Donates.map((donate) => (
         <div>
-          <Alert  hidden={hiddenid}>
+          <Alert  hidden={hiddenid} >
             <MyPageDonateItem
               //   key={donate.id}
               id={donate.id}
@@ -80,7 +80,7 @@ function NoticeList(props) {
       ))}
       {props.Receives.map((receive) => (
         <div>
-          <Alert  hidden={hiddenpassword}>
+          <Alert  hidden={hiddenpassword} style={{margin:0}}>
             <MyPageReceiveItem
               //   key={receive.id}
               id={receive.id}
