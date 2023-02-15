@@ -197,32 +197,41 @@ public class BookLogServiceImpl implements BookLogService {
     @Override
     @Transactional
     public FindOneResponseDto receiveBook(ReceiveBookRequestDto receiveBookRequestDto) throws Exception {
+        long    bookLogNo = receiveBookRequestDto.getBookLogNo();
+        String  status;
+        BookLog bookLog   = bookLogRepository.findBookLogByBookLogNo(bookLogNo).get();
+        if (!bookLog.getBookLogState()) {
+            status = "잘못된 접근입니다.";
+            return new FindOneResponseDto(new ReceiveBookLogResponseDto(status));
+        }
+        
         // Account
         long    accountNo = receiveBookRequestDto.getAccountNo();
         Account account   = accountRepository.findByAccountNo(accountNo).get();
         
         // 포인트가 부족한 경우
         if (account.getAccountPoint() < 200) {
-            String status = "포인트가 부족합니다.";
+            status = "포인트가 부족합니다.";
             return new FindOneResponseDto(new ReceiveBookLogResponseDto(status));
         } else {
-            account.setAccountPoint(account.getAccountPoint() - 200);
+            Integer accountPoint = account.getAccountPoint() - 200;
+            account.setAccountPoint(accountPoint);
+            accountRepository.save(account);
         }
         
         // locker
         long   lockerNo = receiveBookRequestDto.getLockerNo();
         Locker locker   = lockerRepository.findLockerByLockerNo(lockerNo).get();
-        System.out.println(locker.getLockerBookCnt());
         locker.setLockerBookCnt(locker.getLockerBookCnt() - 1);
+        lockerRepository.save(locker);
         
         // detailLocker
         long         detailLockerNo = receiveBookRequestDto.getDetailLockerNo();
         DetailLocker detailLocker   = detailLockerRepository.findDetailLockerByDetailLockerNo(detailLockerNo).get();
         detailLocker.setBookInDetailLocker(null);
+        detailLockerRepository.save(detailLocker);
         
         // bookLog
-        long    bookLogNo = receiveBookRequestDto.getBookLogNo();
-        BookLog bookLog   = bookLogRepository.findBookLogByBookLogNo(bookLogNo).get();
         bookLog.setBookLogReceiverNo(accountNo);
         bookLog.setBookLogReceiveDateTime(LocalDateTime.now());
         bookLog.setBookLogState(false);
