@@ -14,10 +14,13 @@ import {
   Button,
 } from "reactstrap";
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import BookList from "views/map/BookList";
 import { Link, Switch, Route } from "react-router-dom";
 import Notice from "views/notice/Notice";
 import LockerBookList from "views/map/LockerBookList";
+import { func } from "prop-types";
 const { kakao } = window;
 // function submitHandler(event) {
 //   event.preventDefault();
@@ -39,7 +42,10 @@ function Map() {
   const [Lockers, setLockers] = React.useState([]);
   const [modalSearch, setmodalSearch] = React.useState(false);
   const [modalSearch2, setmodalSearch2] = React.useState(false);
-
+  let lat;
+  let lon;
+  var map = null;
+  let go;
   const [count, setCount] = React.useState(0);
   const toggleModalSearch = () => {
     setmodalSearch(!modalSearch);
@@ -80,7 +86,23 @@ function Map() {
       level: 3,
     };
 
-    const map = new kakao.maps.Map(container, options);
+    map = new kakao.maps.Map(container, options);
+    function panTo() {
+      // 이동할 위도 경도 위치를 생성합니다 
+      var moveLatLon = new kakao.maps.LatLng(33.450580, 126.574942);
+      
+      // 지도 중심을 부드럽게 이동시킵니다
+      // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+      map.panTo(moveLatLon);            
+  }        
+    console.log("찐맵", map);
+    
+    navigator.geolocation.getCurrentPosition(function (position) {
+      lat = position.coords.latitude // 위도
+      lon = position.coords.longitude // 경도
+
+      
+    });
 
     if (navigator.geolocation) {
       // GeoLocation을 이용해서 접속 위치를 얻어옵니다
@@ -90,13 +112,19 @@ function Map() {
 
         const locPosition = new kakao.maps.LatLng(lat, lon); // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
         const message = `'<div style="padding:10px;">여기에 계신가요?!</div>'`; // 인포윈도우에 표시될 내용입니다
+        console.log("찐찐맵",map)
         map.panTo(locPosition);
+        // go = map.panTo(locPosition);
+        // function 
+        console.log("위치찐", locPosition);
+
         console.log("위도", lat);
         const userLatitude = lat;
         const userLongitude = lon;
         axios
           .post("https://i8b201.p.ssafy.io/backend/locker/findNearLocker", {
-            userLatitude, userLongitude
+            userLatitude,
+            userLongitude,
           })
           .then((res) => {
             console.log("줍녀락커", res);
@@ -251,6 +279,15 @@ function Map() {
       <p>Loading...</p>
     </section>;
   }
+
+  function panTo(map, lat, lon) {
+    console.log("맵", map);
+    var moveLatLon = new kakao.maps.LatLng(lat, lon);
+
+    // 지도 중심을 이동 시킵니다
+    map.panTo(moveLatLon);
+  }
+
   function searchBook(event) {
     event.preventDefault();
 
@@ -360,7 +397,10 @@ function Map() {
             </Button>
           </div>
         </form>
-        <form className={classes.dlgnone} style={{position:"fixed", top:"35vh", zIndex:-100}}>
+        {/* <form
+          className={classes.dlgnone}
+          style={{ position: "fixed", top: "35vh", zIndex: -100 }}
+        >
           <div
             style={{
               display: "flex",
@@ -402,7 +442,8 @@ function Map() {
               검색
             </Button>
           </div>
-        </form>
+        </form> */}
+        {/* <button onClick={go}>버튼</button> */}
       </div>
       <Card>
         <div id="map" style={{ width: "100%", height: "93vh" }}></div>
@@ -429,7 +470,12 @@ function Map() {
             // handle.clickButton();
           }}
         >
-          <i className="tim-icons icon-simple-remove" />
+          <FontAwesomeIcon
+            icon={faXmark}
+            size="xl"
+            color="black"
+            style={{ margin: 0 }}
+          />
         </button>
 
         <BookList
@@ -458,7 +504,12 @@ function Map() {
             // handle.clickButton();
           }}
         >
-          <i className="tim-icons icon-simple-remove" />
+          <FontAwesomeIcon
+            icon={faXmark}
+            size="xl"
+            color="black"
+            style={{ margin: 0 }}
+          />
         </button>
       </Modal>
     </>

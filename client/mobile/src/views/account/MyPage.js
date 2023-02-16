@@ -1,7 +1,7 @@
 import MyPageDonateList from "views/account/MyPageDonateList";
 import React, { useEffect, useRef } from "react";
 import axios from "axios";
-import "../../assets/css/nucleo-icons.css"
+import "../../assets/css/nucleo-icons.css";
 // reactstrap components
 import AdminPage from "views/account/AdminPage";
 import classes from "./Login.module.css";
@@ -12,6 +12,7 @@ import {
   faArrowLeft,
   faAngleUp,
   faAngleDown,
+  faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   Button,
@@ -83,7 +84,7 @@ function MyPage(props) {
 
   function findRegion() {
     const lockerNo = lockerRegion;
-    console.log('라커리전입니다',lockerNo)
+    console.log("라커리전입니다", lockerNo);
     axios
       .put(`https://i8b201.p.ssafy.io/backend/locker/${lockerNo}`)
       .then((res) => {
@@ -293,11 +294,17 @@ function MyPage(props) {
               </CardBody>
             </Card>
             <Card>
-              <CardHeader style={{paddingTop:0}}>
+              <CardHeader style={{ paddingTop: 0 }}>
                 <Row style={{ justifyContent: "space-between" }}>
                   <CardTitle
                     tag="h4"
-                    style={{ paddingLeft: 15, marginTop: 10, color:"#424A51", fontFamily:"Nanum Gothic", fontWeight:"bold"}}
+                    style={{
+                      paddingLeft: 15,
+                      marginTop: 10,
+                      color: "#424A51",
+                      fontFamily: "Nanum Gothic",
+                      fontWeight: "bold",
+                    }}
                     className="SCD"
                   >
                     내 정보
@@ -324,7 +331,13 @@ function MyPage(props) {
                   /> */}
                 </Row>
               </CardHeader>
-              <CardBody style={{ paddingInline: 0, fontFamily: "Nanum Gothic", fontWeight:400 }}>
+              <CardBody
+                style={{
+                  paddingInline: 0,
+                  fontFamily: "Nanum Gothic",
+                  fontWeight: 400,
+                }}
+              >
                 <Col>내포인트 : {Point}</Col>
 
                 <Col>이름 : {localStorage.getItem("accountName")}</Col>
@@ -438,37 +451,43 @@ function MyPage(props) {
           </Col>
           <Col md="12">
             <Card>
-              <CardHeader  style={{paddingTop:0}}>
+              <CardHeader style={{ paddingTop: 0 }}>
                 <Row style={{ justifyContent: "space-between" }}>
-                <CardTitle
+                  <CardTitle
                     tag="h4"
-                    style={{ paddingLeft: 15, marginTop: 10 ,color:"#424A51",  fontFamily:"Nanum Gothic", fontWeight:"bold"}}
+                    style={{
+                      paddingLeft: 15,
+                      marginTop: 10,
+                      color: "#424A51",
+                      fontFamily: "Nanum Gothic",
+                      fontWeight: "bold",
+                    }}
                   >
                     기부/수령 내역
                   </CardTitle>
-                <FontAwesomeIcon
-                  icon={faAngleUp}
-                  size="xl"
-                  color="#424a51"
-                  position="absolute"
-                  zIndex="2000"
-                  style={{ margin: 15, marginBottom: 5 }}
-                  onClick={toggleDonate}
-                  hidden={!showDonate}
-                />
-                <FontAwesomeIcon
-                  icon={faAngleDown}
-                  size="xl"
-                  color="#424a51"
-                  position="absolute"
-                  zIndex="2000"
-                  style={{ margin: 15, marginBottom: 5 }}
-                  onClick={toggleDonate}
-                  hidden={showDonate}
-                />
+                  <FontAwesomeIcon
+                    icon={faAngleUp}
+                    size="xl"
+                    color="#424a51"
+                    position="absolute"
+                    zIndex="2000"
+                    style={{ margin: 15, marginBottom: 5 }}
+                    onClick={toggleDonate}
+                    hidden={!showDonate}
+                  />
+                  <FontAwesomeIcon
+                    icon={faAngleDown}
+                    size="xl"
+                    color="#424a51"
+                    position="absolute"
+                    zIndex="2000"
+                    style={{ margin: 15, marginBottom: 5 }}
+                    onClick={toggleDonate}
+                    hidden={showDonate}
+                  />
                 </Row>
               </CardHeader>
-              
+
               <CardBody hidden={!showDonate}>
                 <MyPageDonateList Donates={Donates} Receives={Receives} />
               </CardBody>
@@ -476,7 +495,7 @@ function MyPage(props) {
           </Col>
           <Col md="12">
             <Card>
-              <CardHeader  style={{paddingTop:0}}>
+              <CardHeader style={{ paddingTop: 0 }}>
                 {/* <p className="category">
                   Handcrafted by our friends from{" "}
                   <a href="https://nucleoapp.com/?innerRef=1712">NucleoApp</a>
@@ -484,7 +503,13 @@ function MyPage(props) {
                 <Row style={{ justifyContent: "space-between" }}>
                   <CardTitle
                     tag="h4"
-                    style={{ paddingLeft: 15, marginTop: 10,color:"#424A51", fontFamily:"Nanum Gothic", fontWeight:"bold" }}
+                    style={{
+                      paddingLeft: 15,
+                      marginTop: 10,
+                      color: "#424A51",
+                      fontFamily: "Nanum Gothic",
+                      fontWeight: "bold",
+                    }}
                   >
                     찜 목록
                   </CardTitle>
@@ -510,7 +535,7 @@ function MyPage(props) {
                   />
                 </Row>
               </CardHeader>
-              
+
               <CardBody className="all-icons" hidden={!showWish}>
                 <WishList wishList={wishList} />
                 {/* <Row>
@@ -608,7 +633,12 @@ function MyPage(props) {
                 // handle.clickButton();
               }}
             >
-              <i className="tim-icons icon-simple-remove" />
+              <FontAwesomeIcon
+                icon={faXmark}
+                size="xl"
+                color="black"
+                style={{ margin: 0 }}
+              />
             </button>
           </ModalBody>
         </Modal>
@@ -661,7 +691,12 @@ function MyPage(props) {
                 // handle.clickButton();
               }}
             >
-              <i className="tim-icons icon-simple-remove" />
+              <FontAwesomeIcon
+          icon={faXmark}
+          size="xl"
+          color="black"
+          style={{ margin: 0 }}
+        />
             </button>
           </ModalBody>
         </Modal>

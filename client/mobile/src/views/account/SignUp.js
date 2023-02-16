@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { useHistory } from "react-router-dom";
 import classes from "./Login.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 // import { Helmet } from "react-helmet";
 // reactstrap components
@@ -527,7 +527,12 @@ function SignUp(props) {
               handle.clickButton();
             }}
           >
-            <i className="tim-icons icon-simple-remove" />
+            <FontAwesomeIcon
+          icon={faXmark}
+          size="xl"
+          color="black"
+          style={{ margin: 0 }}
+        />
           </button>
         </Modal>
       </div>

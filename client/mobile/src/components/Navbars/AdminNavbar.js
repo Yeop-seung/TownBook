@@ -147,7 +147,6 @@ function AdminNavbar(props) {
 
   const logout = () => {
     let token = localStorage.getItem("TOKEN");
-
     localStorage.clear();
     window.location.replace("/map");
   };
@@ -345,7 +344,7 @@ function AdminNavbar(props) {
       <Navbar
         className={"navbar-abs"}
         expand="lg"
-        style={{ padding: 0, position:"fixed" }}
+        style={{ padding: 0, position:"relative" }}
         hidden={isPc}
       >
         <img
