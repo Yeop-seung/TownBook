@@ -161,9 +161,9 @@ public class MyPageServiceImpl implements MyPageService {
             jsonObject.put("bookTitle", book.getBookTitle());
             jsonObject.put("bookTitleURL", book.getBookTitleURL());
             jsonObject.put("bookLogState", bookLog.getBookLogState());
+            jsonObject.put("lockerRegion", bookLog.getLocker().getLockerRegion());
             
             jsonArray.add(jsonObject);
-            
         }
         return new FindListResponseDto(jsonArray);
     }

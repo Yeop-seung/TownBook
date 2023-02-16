@@ -18,10 +18,10 @@ POST http://localhost:8081/backend/bookLog/donateBook
 Content-Type: application/json
 
 {
-    "lockerNo": {{lockerNo}},
-    "detailLockerNo": {{detailLockerNo}},
-    "accountNo": {{accountNo}},
-    "bookIsbn": {{bookIsbn}}
+    "lockerNo": 3,
+    "detailLockerNo": 1,
+    "accountNo": 2,
+    "bookIsbn": "9788966260959"
 }
 
 ### 7. 북로그 (도서 수령)
@@ -29,13 +29,21 @@ POST http://localhost:8081/backend/bookLog/receiveBook
 Content-Type: application/json
 
 {
-    "bookLogNo": {{bookLogNo}},
-    "accountNo": {{accountNo}},
-    "bookIsbn": {{bookIsbn}},
-    "lockerNo": {{lockerNo}},
-    "detailLockerNo": {{detailLockerNo}}
+    "bookLogNo": 6,
+    "accountNo": 2,
+    "bookIsbn": "9788966260959",
+    "lockerNo": 3,
+    "detailLockerNo": 1
 }
 
+### 8. 위시리스트 추가
+POST http://localhost:8081/backend/bookLog/wishList
+Content-Type: application/json
+
+{
+    "bookLogNo": 1,
+    "accountNo": 2
+}
 
 
 

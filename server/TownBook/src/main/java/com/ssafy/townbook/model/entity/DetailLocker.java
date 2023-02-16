@@ -23,6 +23,7 @@ public class DetailLocker {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long detailLockerNo;
     
+//    @OneToOne(mappedBy = "detailLocker")
     @OneToOne
     private BookLog bookLog;
     
@@ -31,7 +32,7 @@ public class DetailLocker {
     @JoinColumn(name = "`fk-locker-detail_locker`")
     private Locker locker;
     
-    @Column(name = "detail_locker_isEmpty")
+    @Column(name = "book_in_detail_locker")
     private String bookInDetailLocker;
     
     @Column(name = "detail_locker_no_in_locker")

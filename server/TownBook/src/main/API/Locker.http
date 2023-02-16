@@ -16,7 +16,7 @@ Content-Type: application/json
 }
 
 ### 4. 접속 위치와 가까운 순으로 보관함 조회
-GET http://localhost:8081/backend/locker/findNearLocker
+POST http://localhost:8081/backend/locker/findNearLocker
 Content-Type: application/json
 
 {
