@@ -11,32 +11,36 @@ import javax.validation.constraints.NotNull;
 @Getter
 @Setter
 public class NoticeDto {
-
+    
+    @NotNull
+    private Long noticeNo;
+    
     @NotNull
     private String noticeTitle;
-
+    
     @NotNull
     private String noticeContent;
-
+    
     @NotNull
     private Integer noticeCategory;
-
+    
     @NotNull
     private Boolean noticeState;
-
+    
     @NotNull
     private Integer noticeViews;
-
+    
     @NotNull
     private Long accountNo;
-
+    
     @Builder
     public NoticeDto(Notice notice) {
-        this.noticeTitle = notice.getNoticeTitle();
-        this.noticeContent = notice.getNoticeContent();
+        this.noticeNo       = notice.getNoticeNo();
+        this.noticeTitle    = notice.getNoticeTitle();
+        this.noticeContent  = notice.getNoticeContent();
         this.noticeCategory = notice.getNoticeCategory();
-        this.noticeState = notice.getNoticeState();
-        this.noticeViews = notice.getNoticeViews();
-        this.accountNo = notice.getAccountNo();
+        this.noticeState    = notice.getNoticeState();
+        this.noticeViews    = notice.getNoticeViews();
+        this.accountNo      = notice.getAccountNo();
     }
 }
