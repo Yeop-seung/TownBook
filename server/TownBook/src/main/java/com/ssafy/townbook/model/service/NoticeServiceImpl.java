@@ -38,6 +38,19 @@ public class NoticeServiceImpl implements NoticeService {
         return new FindOneResponseDto<NoticeDto>(noticeDto);
     }
     
+    /**
+     * 공지사항/이용안내 전체 조회
+     *
+     * @return List<NoticeDto>
+     */
+    @Override
+    public FindListResponseDto findAllNotice() {
+        List<Notice> findNotice = noticeRepository.findAll();
+        List<NoticeDto> findNoticeDto = findNotice.stream()
+                .map(NoticeDto::new)
+                .collect(Collectors.toList());
+        return new FindListResponseDto(findNoticeDto);
+    }
     
     /**
      * 카테고리(공지사항, 이용안내) 별로 최신 8개 리스트 가져오기

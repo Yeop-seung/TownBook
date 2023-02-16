@@ -18,4 +18,11 @@ public interface NoticeService {
     SaveOneResponseDto writeNotice(WriteNoticeRequestDto writeNoticeRequestDto);
     
     SaveOneResponseDto removeNotice(Long noticeNo);
+    
+    /**
+     * 공지사항/이용안내 전체 조회
+     *
+     * @return List<NoticeDto>
+     */
+    FindListResponseDto findAllNotice();
 }
