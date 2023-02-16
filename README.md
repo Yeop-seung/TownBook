@@ -78,8 +78,6 @@
 <img src="./readmeAsset/kiosk/kiosk (14).png" width="270px">
 </p>
 
-### 전체 기능
-
 # Design
 
 ### 기술 스택
@@ -103,7 +101,7 @@
 ### 요구사항 명세서
 
 <p align="center">
-<img src="./readmeAsset/기능정의서.png" width="800px">
+<img src="./readmeAsset/function.png" width="800px">
 </p>
 
 ### API 명세서
