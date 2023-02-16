@@ -19,7 +19,7 @@ import {
   faUser,
   faArrowRightFromBracket,
   faHouse,
-  faXmark
+  faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -65,7 +65,13 @@ function AdminNavbar(props) {
       to={logo.innerLink}
       className="simple-text logo-mini"
       onClick={props.toggleSidebar}
-      style={{ margin: 0, padding: 0, marginTop: 12, marginLeft: 4, marginBottom:5}}
+      style={{
+        margin: 0,
+        padding: 0,
+        marginTop: 12,
+        marginLeft: 4,
+        marginBottom: 5,
+      }}
     >
       <div className="logo-img">
         <FontAwesomeIcon
@@ -165,7 +171,6 @@ function AdminNavbar(props) {
                 toggled: props.sidebarOpened,
               })}
             >
-              
               <NavbarToggler
                 // onClick={props.toggleSidebar}
                 style={{ padding: 0 }}
@@ -175,9 +180,13 @@ function AdminNavbar(props) {
               </NavbarToggler>
             </div>
           </div>
-          <p className={classes.dlgnone} hidden={collapseOpen}   style={{ marginBottom: 24, marginRight:10 }}>
-                {logoImg}
-              </p>
+          <p
+            className={classes.dlgnone}
+            hidden={collapseOpen}
+            style={{ marginBottom: 24, marginRight: 10 }}
+          >
+            {logoImg}
+          </p>
           <Link
             to="/notice"
             onClick={verify}
@@ -202,6 +211,16 @@ function AdminNavbar(props) {
               color="white"
               onClick={toggleModalSearch}
             />
+             {/* <a
+          href="#"
+          className={classNames("more_link", "aos-init", "aos-animate")}
+          data-aos="fade-up"
+          data-aos-offset="0"
+          data-aos-duration="1500"
+        >
+          <br />
+          &nbsp;&nbsp;&nbsp;MORE
+        </a> */}
           </div>
           <Link
             to="/tables"
@@ -241,7 +260,12 @@ function AdminNavbar(props) {
           {/* 화면 줄였을때 오른쪽  ... 바 */}
           <NavbarToggler
             onClick={toggleCollapse}
-            style={{ padding: 0, marginInline: 7, marginBottom: 2, marginLeft:3 }}
+            style={{
+              padding: 0,
+              marginInline: 7,
+              marginBottom: 2,
+              marginLeft: 3,
+            }}
           >
             <FontAwesomeIcon
               icon={faUser}
@@ -254,8 +278,6 @@ function AdminNavbar(props) {
           {/* 이 Collapse 안에 있으면 모바일 시 토글로 감 */}
           <Collapse navbar isOpen={collapseOpen}>
             <Nav className="mr-auto" navbar>
-              
-
               {/* <Link
                 to="/map"
                 onClick={verify}
@@ -279,8 +301,13 @@ function AdminNavbar(props) {
               <Link
                 to="/login"
                 onClick={verify}
-                style={{ paddingTop: 10, paddingBottom: 10, paddingInline: 10,display: "flex",
-                justifyContent: "end", }}
+                style={{
+                  paddingTop: 10,
+                  paddingBottom: 10,
+                  paddingInline: 10,
+                  display: "flex",
+                  justifyContent: "end",
+                }}
                 hidden={isToken}
               >
                 <div className="logo">
@@ -291,18 +318,20 @@ function AdminNavbar(props) {
                     style={{ marginTop: 5 }}
                     className={classes.dlgnone2}
                   /> */}
-                  <p style={{ marginTop: 5 }}>
-                    로그인
-                  </p>
+                  <p style={{ marginTop: 5 }}>로그인</p>
                 </div>
               </Link>
               <Link
                 to="/myPage"
                 hidden={!isToken}
                 onClick={verify}
-                style={{ paddingTop: 10,
+                style={{
+                  paddingTop: 10,
                   paddingBottom: 10,
-                  paddingInline: 10,display: "flex", justifyContent: "end" }}
+                  paddingInline: 10,
+                  display: "flex",
+                  justifyContent: "end",
+                }}
               >
                 <div className="logo">
                   {/* <FontAwesomeIcon
@@ -344,7 +373,7 @@ function AdminNavbar(props) {
       <Navbar
         className={"navbar-abs"}
         expand="lg"
-        style={{ padding: 0, position:"relative" }}
+        style={{ padding: 0, position: "relative" }}
         hidden={isPc}
       >
         <img
@@ -374,12 +403,13 @@ function AdminNavbar(props) {
           onClick={toggleModalSearch}
         >
           <FontAwesomeIcon
-          icon={faXmark}
-          size="xl"
-          color="black"
-          style={{ margin: 0 }}
-        />
+            icon={faXmark}
+            size="xl"
+            color="black"
+            style={{ margin: 0 }}
+          />
         </button>
+       
       </Modal>
     </>
   );

@@ -20,7 +20,12 @@ import React, { useEffect } from "react";
 const { kakao } = window;
 
 function BookItem(props) {
-
+  let bookIntroductionURL;
+  if (props.bookIntroductionURL.length > 11) {
+    bookIntroductionURL = props.bookIntroductionURL.substr(0, 100) + "...";
+  } else {
+    bookIntroductionURL = props.bookIntroductionURL;
+  }
 
   useEffect(() => {
     
@@ -252,6 +257,10 @@ function BookItem(props) {
 
             <Col style={{ fontSize: "12px" }}>
               <Col>
+              <Row style={{ display: "flex", flexWrap: "wrap", fontSize:15,color: "#ec217b",
+                  fontWeight: "bolder" }}>
+                  동네북 위치 : {LockerNo}
+                </Row>
                 <hr style={{ margin: 2 }} />
                 <Row style={{ display: "flex", flexWrap: "wrap" }}>
                   저자 : {props.bookAuthor}
@@ -266,7 +275,7 @@ function BookItem(props) {
                 </Row>
                 <hr style={{ margin: 2 }} />
                 <Row style={{ display: "flex", flexWrap: "wrap" }}>
-                  소개 : {text}
+                  소개 : {bookIntroductionURL}
                   {/* <img
                     alt="..."
                     // className="avatar"
@@ -274,9 +283,7 @@ function BookItem(props) {
                   /> */}
                 </Row>
                 <hr style={{ margin: 2 }} />
-                <Row style={{ display: "flex", flexWrap: "wrap" }}>
-                  동네북 위치 : {LockerNo}
-                </Row>
+                
               </Col>
             </Col>
 

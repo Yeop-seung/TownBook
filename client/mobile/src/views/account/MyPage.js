@@ -13,6 +13,7 @@ import {
   faAngleUp,
   faAngleDown,
   faXmark,
+  faCoins
 } from "@fortawesome/free-solid-svg-icons";
 import {
   Button,
@@ -309,6 +310,21 @@ function MyPage(props) {
                   >
                     내 정보
                   </CardTitle>
+                  <Card style={{width:"60%", height:"50", margin:0, border:0}}>
+                    <Row style={{ display:"flex", justifyContent:"end"}}>
+                  <FontAwesomeIcon
+                    icon={faCoins}
+                    size="xl"
+                    color="#424a51"
+                    position="absolute"
+                    style={{ margin: 15, marginBottom: 5 }}
+                    
+                    
+                  />
+                    <CardBody style={{paddingLeft:0}}>{Point}</CardBody>
+                    </Row>
+                    
+                  </Card>
                   {/* <FontAwesomeIcon
                     icon={faAngleUp}
                     size="xl"
@@ -338,7 +354,7 @@ function MyPage(props) {
                   fontWeight: 400,
                 }}
               >
-                <Col>내포인트 : {Point}</Col>
+               
 
                 <Col>이름 : {localStorage.getItem("accountName")}</Col>
 

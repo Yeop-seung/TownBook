@@ -47,7 +47,7 @@ function WishListItem(props) {
       {/* <div className={classes.image}>
           <img src={props.image} alt={props.contentTitle} />
         </div> */}
-      <Link
+      {/* <Link
         to={{
           pathname: `/book/${props.id}`,
           state: {
@@ -62,7 +62,7 @@ function WishListItem(props) {
             MyPageToken: true,
           },
         }}
-      >
+      > */}
         <Row>
           {/* <p style={{ color: "white" }}>{props.bookTitleURL}</p> */}
           
@@ -88,7 +88,7 @@ function WishListItem(props) {
         </Row>
 
         {/* <address>{props.noticeContent}</address> */}
-      </Link>
+      {/* </Link> */}
       {/* <div className={classes.actions}>
           <button>To Favorites</button>
         </div> */}

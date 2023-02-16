@@ -17,7 +17,12 @@ import axios from "axios";
 
 function LockerBookItem(book) {
 
-
+  let bookIntroductionURL;
+  if (book.bookIntroductionURL.length > 11) {
+    bookIntroductionURL = book.bookIntroductionURL.substr(0, 100) + "...";
+  } else {
+    bookIntroductionURL = book.bookIntroductionURL;
+  }
   console.log('락커프롭리스트',book)
   const [modalSearch, setmodalSearch] = React.useState(false);
   const toggleModalSearch = () => {
@@ -228,7 +233,12 @@ function LockerBookItem(book) {
 
             <Col style={{ fontSize: "12px" }}>
               <Col>
+              <Row style={{ display: "flex", flexWrap: "wrap", fontSize:15,color: "#ec217b",
+                  fontWeight: "bolder" }}> 
+                  동네북 위치 : {LockerRegion}
+                </Row>
                 <hr style={{ margin: 2 }} />
+                
                 <Row style={{ display: "flex", flexWrap: "wrap" }}>
                   저자 : {book.bookAuthor}
                 </Row>
@@ -242,17 +252,11 @@ function LockerBookItem(book) {
                 </Row>
                 <hr style={{ margin: 2 }} />
                 <Row style={{ display: "flex", flexWrap: "wrap" }}>
-                  {/* 소개 : {text} */}
-                  {/* <img
-                    alt="..."
-                    // className="avatar"
-                    src={book.bookIntroductionURL}
-                  /> */}
+                  소개 : {bookIntroductionURL}
+                  
                 </Row>
                 <hr style={{ margin: 2 }} />
-                <Row style={{ display: "flex", flexWrap: "wrap" }}>
-                  동네북 위치 : {LockerRegion}
-                </Row>
+                
               </Col>
             </Col>
 

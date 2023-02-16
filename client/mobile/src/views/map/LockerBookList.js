@@ -31,7 +31,7 @@ function LockerBookList(props) {
               bookAuthor = {book.bookAuthor}
               bookPublisher = {book.bookPublisher}
               bookIntroductionURL = {book.bookIntroductionURL}
-              bookPublishPredate = {book.bookPublishPredate}
+              bookPublishPredate = {book.bookPublisherPredate}
               lockerNo = {book.lockerNo}
               bookLogNo = {book.bookLogNo}
 
