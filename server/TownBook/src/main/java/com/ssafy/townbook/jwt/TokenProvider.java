@@ -80,14 +80,16 @@ public class TokenProvider implements InitializingBean {
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
-        
+
+        // 권한들을 , 구분자로 통해서 Collection 타입으로 만들기
         Collection<? extends GrantedAuthority> authorities =
                 Arrays.stream(claims.get(AUTHORITIES_KEY).toString().split(","))
                         .map(SimpleGrantedAuthority::new)
                         .collect(Collectors.toList());
         
         User principal = new User(claims.getSubject(), "", authorities);
-        
+
+        // principa 객체에 아이디 정보를 가지고 있다.
         return new UsernamePasswordAuthenticationToken(principal, token, authorities);
     }
     

@@ -17,7 +17,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.filter.CorsFilter;
 
-@EnableWebSecurity
+@EnableWebSecurity // 스프링 시큐리티 필터가 스프링 필터체인에 등록된다.
 @EnableMethodSecurity
 @Configuration
 public class SecurityConfig {
@@ -66,7 +66,8 @@ public class SecurityConfig {
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                
+
+                // antMatchers로 허용하는 api들 설정
                 .and()
                 .authorizeHttpRequests()
                 .antMatchers("/account/authenticate", "/account/signup", "/account/**", "/auth/**", "/**").permitAll()

@@ -8,7 +8,12 @@ import org.springframework.web.filter.CorsFilter;
 
 @Configuration
 public class CorsConfig {
-    
+
+    /**
+     * cors에러를 설정해준다
+     * addAllowedOriginPattern을 이용해서 모든 api요청에 대해서 허용
+     * @return
+     */
     @Bean
     public CorsFilter corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
