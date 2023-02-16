@@ -43,6 +43,8 @@ console.log(props)
     const userInfo = {
       noticeTitle: enteredTitle,
       noticeContent: enteredContent,
+      noticeNo:props.id,
+      noticeCategory: 0,
       // noticeId: Id,
     };
     console.log(userInfo);
@@ -50,7 +52,7 @@ console.log(props)
 
     axios
       .put(
-        `https://react-getting-started-9d228-default-rtdb.firebaseio.com/notices/${props.location.state.id}.json`,userInfo
+        "https://i8b201.p.ssafy.io/backend/notice/modify",userInfo
       )
       // console.log("성공")
         //replace는 뒤로가기 버튼 비활성 이미 양식 제출했으므로

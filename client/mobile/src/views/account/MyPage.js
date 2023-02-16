@@ -321,7 +321,7 @@ function MyPage(props) {
                     
                     
                   />
-                    <CardBody style={{paddingLeft:0}}>{Point}</CardBody>
+                    <div style={{paddingLeft:0, paddingTop:14, marginRight:35}}>{Point}</div>
                     </Row>
                     
                   </Card>

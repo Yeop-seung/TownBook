@@ -23,3 +23,47 @@
         display: none !important;
     }
 }
+
+
+  .searchbar2 {
+      position: absolute;
+      z-index: 100;
+      width: 100%;
+      top: 27vh;
+      padding-inline: 10px;
+      padding-top: 15px;
+      box-shadow: rgba(0, 0, 0, 0.2) 3px 3px 3px,
+  }
+
+
+@media (max-width: 992px) {
+  .searchbar2 {
+      position: absolute;
+      z-index: 100;
+      width: 100%;
+      top: 2vh;
+      padding-inline: 10px;
+      padding-top: 15px;
+      box-shadow: rgba(0, 0, 0, 0.2) 3px 3px 3px,
+  }
+}
+
+
+.searchbar1 {
+  width: 100vh;
+  box-shadow: rgba(0, 0, 0, 0.2) 3px 3px 3px;
+  border: none;
+  height: 5vh;
+
+}
+
+
+@media (max-width: 992px) {
+.searchbar1 {
+  width: 40vh;
+  box-shadow: rgba(0, 0, 0, 0.2) 3px 3px 3px;
+  border: none;
+  height: 5vh;
+
+}
+}

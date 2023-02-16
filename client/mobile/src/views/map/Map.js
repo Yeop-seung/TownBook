@@ -88,20 +88,18 @@ function Map() {
 
     map = new kakao.maps.Map(container, options);
     function panTo() {
-      // 이동할 위도 경도 위치를 생성합니다 
-      var moveLatLon = new kakao.maps.LatLng(33.450580, 126.574942);
-      
+      // 이동할 위도 경도 위치를 생성합니다
+      var moveLatLon = new kakao.maps.LatLng(33.45058, 126.574942);
+
       // 지도 중심을 부드럽게 이동시킵니다
       // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
-      map.panTo(moveLatLon);            
-  }        
+      map.panTo(moveLatLon);
+    }
     console.log("찐맵", map);
-    
-    navigator.geolocation.getCurrentPosition(function (position) {
-      lat = position.coords.latitude // 위도
-      lon = position.coords.longitude // 경도
 
-      
+    navigator.geolocation.getCurrentPosition(function (position) {
+      lat = position.coords.latitude; // 위도
+      lon = position.coords.longitude; // 경도
     });
 
     if (navigator.geolocation) {
@@ -112,10 +110,10 @@ function Map() {
 
         const locPosition = new kakao.maps.LatLng(lat, lon); // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
         const message = `'<div style="padding:10px;">여기에 계신가요?!</div>'`; // 인포윈도우에 표시될 내용입니다
-        console.log("찐찐맵",map)
+        console.log("찐찐맵", map);
         map.panTo(locPosition);
         // go = map.panTo(locPosition);
-        // function 
+        // function
         console.log("위치찐", locPosition);
 
         console.log("위도", lat);
@@ -145,14 +143,6 @@ function Map() {
     function displayMarker(locPosition, message) {
       console.log("찐락", Lockers);
 
-      const iwContent = `<div style=width:"95%",height:"70vh">${message} <div/>`, // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-        iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
-
-      // 인포윈도우를 생성합니다
-      const infowindow = new kakao.maps.InfoWindow({
-        content: iwContent,
-        removable: iwRemoveable,
-      });
       // 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
       // const zoomControl = new kakao.maps.ZoomControl();
 
@@ -209,12 +199,13 @@ function Map() {
             locker.lockerLatitude,
             locker.lockerLongitude
           ),
+          region: locker.lockerRegion,
         });
       }
 
       for (var i = 0; i < positions.length; i++) {
         // const lockerno = position.title;
-        // console.log("이건 진짜 라커넘버", lockerno);
+        console.log("이건 진짜 포지션", Lockers);
 
         // 마커를 생성합니다
         var marker = new kakao.maps.Marker({
@@ -236,6 +227,14 @@ function Map() {
             };
           })(positions[i].title)
         );
+        const iwContent = `<div style=width:"95%",height:"70vh">${positions[i].region} 동네북 <div/>`; // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+        // iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
+
+        // 인포윈도우를 생성합니다
+        const infowindow = new kakao.maps.InfoWindow({
+          content: iwContent,
+          // removable: iwRemoveable,
+        });
         kakao.maps.event.addListener(
           marker,
           "mouseover",
@@ -345,14 +344,15 @@ function Map() {
     <>
       {/* {searchBook} */}
       <div
-        style={{
-          position: "absolute",
-          zIndex: 100,
-          width: "100%",
-          top: 10,
-          paddingInline: 10,
-          paddingTop: 15,
-        }}
+        className={classes.searchbar2}
+        // style={{
+        //   position: "absolute",
+        //   zIndex: 100,
+        //   width: "100%",
+        //   top: "20vh",
+        //   paddingInline: 10,
+        //   paddingTop: 15,
+        // }}
       >
         <form>
           <div
@@ -366,16 +366,12 @@ function Map() {
             <Input
               type="text"
               //   maxLength="20"
-              className="search_input"
+              className={classes.searchbar1}
               name="search"
               placeholder="검색할 도서를 입력해주세요."
               innerRef={searchbookRef}
-              style={{
-                width: "40vh",
-                boxShadow: "rgba(0, 0, 0, 0.2) 3px 3px 3px",
-                border: 0,
-                height: "5vh",
-              }}
+              style={{border:"none",boxShadow: "rgba(0, 0, 0, 0.2) 3px 3px 3px"}}
+              
             />
             <Button
               // className="btn-simple"

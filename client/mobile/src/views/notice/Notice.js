@@ -70,12 +70,13 @@ function Notice(props) {
       icon: "tim-icons icon-bell-55",
       autoDismiss: 7,
     };
-    notificationAlertRef.current.notificationAlert(options);
+    // notificationAlertRef.current.notificationAlert(options);
   };
 
   useEffect(() => {
+    console.log(localStorage.getItem("accountNo"))
     axios
-      .get(`https://i8b201.p.ssafy.io/backend/notice/list/2`)
+      .get(`https://i8b201.p.ssafy.io/backend/notice`)
       // .get("https:///townbook/myPage/receive/${receiverNo}")
       .then((res) => {
         const notices = [];
@@ -136,7 +137,7 @@ function Notice(props) {
                       icon={faPlus}
                       size="xl"
                       color="black"
-                      hidden={localStorage.getItem("accountNO") === 3}
+                      hidden={localStorage.getItem("accountNo") === 3}
                     />
                   </Link>
                 </Row>
