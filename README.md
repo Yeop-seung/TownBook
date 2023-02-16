@@ -12,13 +12,9 @@
 ### 전체 개요
 
 동네북 프로젝트는 웹 페이지로 제공되는 도서 기부, 수령 서비스입니다.
-
 주요 기획 의도는 개발진의 역량 향상과 소외 계층을 위한 도서 전달 서비스 개발입니다.
-
 2권을 기부하면 기부자에게 1권, 소외 계층에게 1권을 돌려주는 서비스로 개발했습니다.
-
 기존 서비스(도서관 등)의 운영시간 제한과 불편한 접근성을 해결하기 위해 24시간 이용 가능한
-
 키오스크를 동네마다 설치하는 방향으로 기획했습니다.
 
 ### 화면 개요
@@ -26,7 +22,7 @@
 #### 키오스크 화면
 
 <p align="center">
-<img src="./readmeAsset/kiosk/kiosk (1).png" width="270px">
+<img src="./readmeAsset/kiosk/kiosk.jpg" height="182px">
 <img src="./readmeAsset/kiosk/kiosk (4).png" width="270px">
 <img src="./readmeAsset/kiosk/kiosk (13).png" width="270px">
 </p>
