@@ -100,7 +100,7 @@ public class NoticeController {
      */
     @Transactional
     @PutMapping("/remove")
-    public ResponseEntity<SaveOneResponseDto> removeNotice(@RequestBody Map<String, Integer> Info) {
+    public ResponseEntity<SaveOneResponseDto> removeNotice(@RequestBody Map<String, Long> Info) {
         long noticeNo = Info.get("noticeNo");
         return new ResponseEntity<SaveOneResponseDto>(noticeService.removeNotice(noticeNo), HttpStatus.OK);
     }

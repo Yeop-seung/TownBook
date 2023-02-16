@@ -45,7 +45,7 @@ public class NoticeServiceImpl implements NoticeService {
      */
     @Override
     public FindListResponseDto findAllNotice() {
-        List<Notice> findNotice = noticeRepository.findAll();
+        List<Notice> findNotice = noticeRepository.findAllByNoticeState(true).get();
         List<NoticeDto> findNoticeDto = findNotice.stream()
                 .map(NoticeDto::new)
                 .collect(Collectors.toList());
