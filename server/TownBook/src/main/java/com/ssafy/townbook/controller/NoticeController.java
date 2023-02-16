@@ -43,6 +43,15 @@ public class NoticeController {
         return new ResponseEntity<FindOneResponseDto>(noticeService.findNoticeByNoticeNo(noticeNo), HttpStatus.OK);
     }
     
+    /**
+     * 공지사항/이용안내 전체 조회
+     *
+     * @return List<NoticeDto>
+     */
+    @GetMapping
+    public ResponseEntity<FindListResponseDto> findAllNotice() {
+        return new ResponseEntity<FindListResponseDto>(noticeService.findAllNotice(), HttpStatus.OK);
+    }
     
     /**
      * 카테고리(공지사항, 이용안내) 별로 최신 8개 리스트 가져오기
