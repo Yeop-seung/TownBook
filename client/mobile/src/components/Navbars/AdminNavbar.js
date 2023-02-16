@@ -176,6 +176,9 @@ function AdminNavbar(props) {
               </NavbarToggler>
             </div>
           </div>
+          <p className={classes.dlgnone} hidden={collapseOpen}   style={{ marginBottom: 24, marginRight:10 }}>
+                {logoImg}
+              </p>
           <Link
             to="/notice"
             onClick={verify}
@@ -188,7 +191,7 @@ function AdminNavbar(props) {
                 color="white"
                 className={classes.dlgnone2}
               />
-              <p style={{ marginTop: 5 }} className={classes.dlgnone}>
+              <p style={{ marginTop: 10 }} className={classes.dlgnone}>
                 공지사항
               </p>
             </div>
@@ -252,9 +255,7 @@ function AdminNavbar(props) {
           {/* 이 Collapse 안에 있으면 모바일 시 토글로 감 */}
           <Collapse navbar isOpen={collapseOpen}>
             <Nav className="mr-auto" navbar>
-              <div className="logo" hidden={collapseOpen}>
-                {logoImg}
-              </div>
+              
 
               {/* <Link
                 to="/map"
@@ -312,7 +313,7 @@ function AdminNavbar(props) {
                     
                     className={classes.dlgnone2}
                   /> */}
-                  <p style={{ marginTop: 5 }}>마이페이지</p>
+                  <p style={{ marginTop: 10 }}>마이페이지</p>
                 </div>
               </Link>
               <Link
@@ -334,7 +335,7 @@ function AdminNavbar(props) {
                   style={{ marginTop: 5 }}
                   className={classes.dlgnone2}
                 /> */}
-                <p style={{ marginTop: 5 }}>로그아웃</p>
+                <p style={{ marginTop: 10 }}>로그아웃</p>
               </Link>
               {/* <li className="separator d-lg-none" /> */}
             </Nav>
@@ -344,7 +345,7 @@ function AdminNavbar(props) {
       <Navbar
         className={"navbar-abs"}
         expand="lg"
-        style={{ padding: 0 }}
+        style={{ padding: 0, position:"fixed" }}
         hidden={isPc}
       >
         <img

@@ -1,6 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import "./Map.css";
 import markerimg from "assets/img/library2.png";
+import classes from "./AdminNavbar.module.css";
+
 import {
   Card,
   CardBody,
@@ -316,6 +318,49 @@ function Map() {
         }}
       >
         <form>
+          <div
+            style={{
+              display: "flex",
+              marginBottom: "10px",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <Input
+              type="text"
+              //   maxLength="20"
+              className="search_input"
+              name="search"
+              placeholder="검색할 도서를 입력해주세요."
+              innerRef={searchbookRef}
+              style={{
+                width: "40vh",
+                boxShadow: "rgba(0, 0, 0, 0.2) 3px 3px 3px",
+                border: 0,
+                height: "5vh",
+              }}
+            />
+            <Button
+              // className="btn-simple"
+              color="info"
+              type="submit"
+              onClick={searchBook}
+              style={{
+                width: "25%",
+                backgroundColor: "#427bf1",
+                color: "#ffffff",
+                borderColor: "transparent",
+                boxShadow: "rgba(0, 0, 0, 0.2) 3px 3px 3px",
+                margin: 0,
+                height: "5vh",
+                marginLeft: 13,
+              }}
+            >
+              검색
+            </Button>
+          </div>
+        </form>
+        <form className={classes.dlgnone} style={{position:"fixed", top:"35vh", zIndex:-100}}>
           <div
             style={{
               display: "flex",
