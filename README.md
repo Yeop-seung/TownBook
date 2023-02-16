@@ -213,20 +213,20 @@
 ### :computer: HardWare
 
 <p align="left">
-<img src="./readmeAsset/김경섭.jpg" width="270px">
+<img src="./readmeAsset/team1.jpg" width="270px">
 </p>
 
 ### :bar_chart: Front-End
 
 <p align="left">
-<img src="./readmeAsset/이기용.jpg" width="270px">
-<img src="./readmeAsset/이영재.jpg" width="270px">
+<img src="./readmeAsset/team2.jpg" width="270px">
+<img src="./readmeAsset/team3.jpg" width="270px">
 </p>
 
 ### :telescope: Back-End
 
 <p align="left">
-<img src="./readmeAsset/곽승엽.jpg" width="270px">
-<img src="./readmeAsset/정현석.jpg" width="270px">
-<img src="./readmeAsset/현승민.jpg" width="270px">
+<img src="./readmeAsset/team4.jpg" width="270px">
+<img src="./readmeAsset/team5.jpg" width="270px">
+<img src="./readmeAsset/team6.jpg" width="270px">
 </p>
