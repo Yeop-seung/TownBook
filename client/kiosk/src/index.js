@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import Start from './Kiosk/start';
 import Main from './Kiosk/Main'
 import Finish from "./Kiosk/Finish";
 import DonateUse from "./Kiosk/Donate/DonateUse";
@@ -24,6 +25,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
     <Routes>
+      <Route path='/Start' element={<Start />}/>
       <Route path='/' element={<Main />}/>
       <Route path='/Finish' element={<Finish />}/>
       <Route path='/MemberSelect' element={<MemberSelect />}/>

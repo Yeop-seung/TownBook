@@ -13,9 +13,9 @@ function ReceiptThanks(props) {
     const User = location.state.User
     const accountPoint = location.state.accountPoint
     
-    console.log(isnavigate)
-    console.log(Locker)
-    console.log(User)
+    // console.log(isnavigate)
+    // console.log(Locker)
+    // console.log(User)
     const data = {isnavigate: isnavigate, Locker :Locker, User: User}
 
 

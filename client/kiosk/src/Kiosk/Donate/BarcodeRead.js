@@ -65,7 +65,7 @@ function BarcodeRead(props) {
                     <div >
                         <div className={styles.buttonOne}>
                             <p className={styles.textAlign}>
-                            위에 있는 바코드 리더기에
+                            우측에 있는 바코드 리더기에
                             <br />
                             도서 바코드를 찍어주세요</p>
                         </div>

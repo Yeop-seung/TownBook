@@ -19,12 +19,12 @@ function DonateComplete(props) {
     const detailLockerNoInLocker = Locker.detailLocker[numbers-1].detailLockerNoInLocker
     // const detailLockerIsEmpty = Locker.detailLocker[LockerNo].detailLockerIsEmpty
 
-    const UrlOneClose = `http://192.168.140.1/servo${numbers}/90` //n번 보관함 닫기
+    const UrlOneClose = `http://192.168.140.1/servo${detailLockerNoInLocker}/90` //n번 보관함 닫기
 
     // const Url = 'http://localhost:3000/'
 
     // console.log('location', location)
-    // console.log(Locker)
+    console.log(numbers)
     // console.log(Locker.lockerNo)
     // console.log(User)
     // console.log(Book)
@@ -36,7 +36,7 @@ function DonateComplete(props) {
     const realData = {
         lockerNo: Locker.lockerNo   , // 동네북 위치
         detailLockerNo: detailLockerNo, // 서랍장
-        accountNo: User, //
+        accountNo: Number(User), //
         bookIsbn: Book.bookIsbn,
     }
     // const realData = {

@@ -9,30 +9,31 @@ import { BiHomeAlt } from 'react-icons/bi';
 function DonateReceipt(props){
     const navigate = useNavigate()
     const location = useLocation()
-    console.log(location)
+    console.log('11111',location)
 
     const isnavigate = location.state.isnavigate   // 기부인지
     const Locker = location.state.Locker           // 락커
     const User = location.state.User               // 유저
     const Book = location.state.Book          // 책정보
-    
+    const bookLog = location.state.bookLog
     
     const detailLocker = location.state.detailLocker
 
     const UrlOneClose = `http://192.168.140.1/servo${detailLocker}/90` //n번 보관함 닫기
 
     console.log(Locker)
-    console.log('2222', Locker.lockerNo.detailLockerNo)
+    // console.log('2222', Locker.lockerNo.detailLockerNo)
     console.log(User)
-    console.log('Book',Book.bookLog.detailLockerNo)
+    // console.log('Book',Locker.detailLocker[detailLocker - 1].detailLockerNo)
     
     const realData = {
         lockerNo: Locker.lockerNo   , // 동네북 위치
-        detailLockerNo: Book.bookLog.detailLockerNo, // 서랍장
-        accountNo: User, // 유저 넘버
-        bookIsbn: Book.bookLog.bookIsbn,  // 책
-        bookLogNo: Book.bookLog.bookLogNo
+        detailLockerNo: Locker.detailLocker[detailLocker - 1].detailLockerNo, // 서랍장
+        accountNo: Number(User), // 유저 넘버
+        bookIsbn: Book.bookIsbn,  // 책
+        bookLogNo: bookLog.bookLogNo
     }
+
     console.log('realData', realData)
     
     const goBack = () => {
@@ -54,6 +55,7 @@ function DonateReceipt(props){
         console.log('postData',postData)
 
         accountPoint = postData.accountPoint // 포인트
+        console.log('accountPoint', accountPoint)
         } catch (error) {
         console.error(error);
         }

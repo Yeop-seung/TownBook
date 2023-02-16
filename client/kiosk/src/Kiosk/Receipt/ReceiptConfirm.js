@@ -1,7 +1,8 @@
-import React, { useMemo, useState, Component, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./ReceiptConfirm.module.css"
 import { useLocation, useNavigate } from "react-router-dom";
 // import { Route } from "react-router-dom";
+import book from "../img/book.jpg"
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { BiHomeAlt } from 'react-icons/bi';
 import axios from "axios";
@@ -17,14 +18,15 @@ function ReceiptConfirm(props) {
     const User = location.state.User
     const detailLocker = location.state.Locker.detailLocker
     
-    console.log('detailLocker', detailLocker)
-    console.log('detailLocker', detailLocker[0].detailLockerNoInLocker)
+    // console.log('detailLocker', detailLocker)
+    // console.log('detailLocker', detailLocker[0].detailLockerNoInLocker)
 
 
 
     const [bookData, setData] = useState([])
     useEffect(() => {
         axios.get(`http://i8b201.p.ssafy.io:8081/backend/bookLog/locker/${lockerNo}`, {
+        // axios.get(`http://i8b201.p.ssafy.io:8081/backend/book/locker/${lockerNo}`, {
         })
         .then((response) => {
             const responseData = response.data.data
@@ -48,9 +50,10 @@ function ReceiptConfirm(props) {
 
     
     function onClickHandlerReceiptComplete (item) {
+        // console.log("selectedItem", selectedItem)
         setSelectedItem(item);
-        console.log('eeeessadfitme',item)
-        const data = {isnavigate: isnavigate, Locker :Locker, User: User, Book: item, detailLocker:item.detailLockerNoInLocker}
+        // console.log('eeeessadfitme',item)
+        const data = {isnavigate: isnavigate, Locker :Locker, User: User, Book: item.book, detailLocker:item.detailLockerNoInLocker, bookLog: item.bookLog }
         navigate('/ReceiptComplete', {state:data})
     }
     return (
@@ -64,9 +67,14 @@ function ReceiptConfirm(props) {
                             <p className={styles.h3Text}>수령하실 책을 선택해주세요</p>
                             <ul className={styles.list}>
                                 {bookData.map(item =>
-                                <p className={styles.bookList} onClick={() => onClickHandlerReceiptComplete(item)} key={item.id}>
-                                {item.detailLockerNoInLocker}.
-                                {item.bookTitle}</p>
+                                <div className={styles.bookList} onClick={() => onClickHandlerReceiptComplete(item)} key={item.id}>
+                                {/* className={styles.bookList} */}
+                                    <p className={styles.textAlignTwo}>
+                                    {item.detailLockerNoInLocker}. {item.book.bookTitle}
+                                    </p>
+                                    <img src={item.book.bookTitleURL} alt={book} className={styles.book}/>
+                                    </div>
+                                
                                 )}
                                 {selectedItem && <p>Selected: {selectedItem}</p>}
                             </ul>

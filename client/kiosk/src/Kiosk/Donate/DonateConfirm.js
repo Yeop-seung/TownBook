@@ -32,13 +32,10 @@ function DonateConfirm(props) {
     // const [detailLockerNo, setDetailLockerNo] = useState()
     // console.log(detailLockerNo)
     console.log(location.state.Book)
-    console.log(location.state.Book.data.bookIntroductionURL)
+    console.log(location.state.Book.data.bookTitleURL)
     console.log(book)
-    let bookURL = location.state.Book.data.bookIntroductionURL
-    if (bookURL === "null.png") {
-        bookURL = book
-        }
-    // 이미지가 없을 때 빈이미지 대신 넣는 이미지
+    const bookURL = location.state.Book.data.bookTitleURL
+    
     const onClickHandlerHome = () => {
         navigate('/')
     }
@@ -58,8 +55,9 @@ function DonateConfirm(props) {
             }}
             
         // console.log('numbers', numbers)
-        
-        const UrlServo = `http://192.168.140.1/servo${numbers}/0`
+        const detailLockerNoInLocker = Locker.detailLocker[numbers-1].detailLockerNoInLocker
+
+        const UrlServo = `http://192.168.140.1/servo${detailLockerNoInLocker}/0`
         // console.log('UrlServo', UrlServo)
         
         const checkTwo = () => {
@@ -100,7 +98,7 @@ function DonateConfirm(props) {
                     </button>
                     <div >
                         <div className={styles.buttonOne}>
-                            <img src={bookURL} className={styles.book}/>
+                            <img src={bookURL} alt={book} className={styles.book}/>
                             <div className={styles.title}>
                                 {title}
                             </div>

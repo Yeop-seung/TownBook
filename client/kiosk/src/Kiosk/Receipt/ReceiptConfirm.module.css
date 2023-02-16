@@ -54,7 +54,6 @@
     background-color: rgb(255, 255, 255);
     text-align: center;
 }
-
 /* 글씨 쓰는 부분 */
 .h3Text{
     position: absolute;
@@ -64,45 +63,34 @@
     top: 3vh;   
     left: 14%;
 }
-.textAlignOne{
-    position: relative;
-    color: #2a2a2a;
-    text-align: center;
-    margin: 0%;
-    font-size: 36px;
-    top: 5vh;
-}
-.table{
-    position: absolute;
-    left: 12%;
-    overflow: hidden;
+.textAlignTwo{
+    margin: 1%;
     text-overflow: ellipsis;
     white-space: nowrap;
-    /* overflow: hidden; */
-    top: 22%;
-    height: 20%;
-    width: 70%;
-    font-size: 200%;
-    border:  #2a2a2a;
+    overflow: hidden; 
+    text-align: left;
 }
 .book{
-    position: absolute;
-    left: 0%;
-    height: 13vh;
-    width: 10vw;
-    font-size: 150%;
-    border:  #2a2a2a;
+    position: relative;
+    left: 25%;
+    height: 85%;
+    width: 50%;
+    margin-top: 0%;
 }
 .list{
+    display: flex;
     position: relative;
     height: 60%;
-    width: 90%;
-    font-size: 250%;
-    border:  #2a2a2a;
+    width: inherit;
+    font-size: 200%;
+    margin: 1%;
+    border: #2a2a2a;
+    padding: 0%;
+    overflow: auto;
 }
 .bookList{
-    width: 80%;
-    height: 15%;
+    width: 100%;
+    height: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap; 

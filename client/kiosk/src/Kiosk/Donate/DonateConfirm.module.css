@@ -38,7 +38,6 @@
 }
 /* 아이콘 스타일*/
 .buttonOne{
-    display: flex;
     flex-direction: row;
     color: #2a2a2a;
     border-radius: 12px;
@@ -83,15 +82,15 @@
     box-shadow: 5px 5px 5px 5px gray;
 }
 .title{
-    align-items: center;
-    justify-content: space-around;
     border: #2a2a2a;
-    position: absolute;
-    width: 100%;
+    display: inline-block;
+    margin: 3%;
+    width: 85%;
     font-size: 300%;
     font-weight: 800;
-    top: 8% ;
-    left: 1%;
+    text-overflow: ellipsis;
+    white-space: nowrap; 
+    overflow: hidden;
 }
 /* 글씨 쓰는 부분 */
 .textAlign{

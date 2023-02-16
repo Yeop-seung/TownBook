@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import styles from "./Main.module.css"
 import Modal from "../ui/Modal.js"
 import axios from "axios"
@@ -11,6 +11,23 @@ function Main(props) {
     const [ReceiptmodalOpen, setReceiptModalOpen] = useState(false);
 
     let isnavigate = true //true 기부 false 수령
+
+    // const timeout = () => {
+    //     setTimeout(() => {
+    //     navigate('/Start');
+    //     }, 20000);
+    // };
+    //   // 컴포넌트가 화면에 다 나타나면 timeout 함수 실행
+    // useEffect(() => {
+    //     timeout();
+    //     return () => {
+    //       // clear 해줌
+    //     clearTimeout(timeout);
+    //     };
+    // });
+
+
+
 
     function onClickHandler() {
         isnavigate = true

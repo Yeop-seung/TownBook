@@ -12,7 +12,7 @@ function ReceiptComplete(props) {
     const navigate = useNavigate()
 
     const location = useLocation()
-    console.log(location)
+    // console.log(location)
     const isnavigate = location.state.isnavigate    //기부 및 수령인지
     const Locker = location.state.Locker
     const lockerNo = location.state.Locker.lockerNo // 락커번호
@@ -20,17 +20,14 @@ function ReceiptComplete(props) {
     const Book = location.state.Book        //isbn
 
     const detailLocker = location.state.detailLocker
+    const bookLog = location.state.bookLog
+
     const title = Book.bookTitle
-    console.log(Book)
-    console.log(Locker)
-    console.log(lockerNo)
+    // console.log(Book)
+    // console.log(Locker)
+    // console.log(lockerNo)
 
-    const data = {isnavigate: isnavigate, Locker :Locker, User: User, Book: Book, detailLocker: detailLocker}
-
-    let bookURL = location.state.bookIntroductionURL
-    if (bookURL === "null.png") {
-        bookURL = book
-    } 
+    const data = {isnavigate: isnavigate, Locker :Locker, User: User, Book: Book, detailLocker: detailLocker, bookLog: bookLog}
 
     const onClickHandlerDonateReceipt =() => {
         

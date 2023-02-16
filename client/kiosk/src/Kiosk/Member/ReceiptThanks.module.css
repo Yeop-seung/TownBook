@@ -13,19 +13,18 @@
 .buttonOne{
     display: flex;
     flex-direction: row;
+    color: #2a2a2a;
     border-radius: 12px;
-    align-items: center;
     position: absolute;
     margin:auto;
     left: 11vw;
     top: 16vh;
-    text-align: center;
-    background-color: rgb(255, 255, 255);
-    border: 1px solid #ffffff;
     width: 78vw;
     height: 70vh;
+    text-align: center;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid #ececec;
     font-weight: 800;
-    border-radius: 12px;
 }
 .buttonTwo{
     text-align: center;
