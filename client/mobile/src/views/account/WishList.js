@@ -25,7 +25,7 @@ function WishList(props) {
     <div>
       {props.wishList.map((wish) => (
         <div>
-          <Alert>
+          <Alert style={{backgroundColor:"white", color:"black", borderColor:"ebecf1"}}>
             <WishListItem
               bookTitleURL = {wish.bookTitleURL}
               bookTitle={wish.bookTitle}

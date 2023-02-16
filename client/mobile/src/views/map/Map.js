@@ -374,7 +374,7 @@ function Map() {
               
             />
             <Button
-              // className="btn-simple"
+              className="btn-simple"
               color="info"
               type="submit"
               onClick={searchBook}
@@ -441,7 +441,7 @@ function Map() {
         </form> */}
         {/* <button onClick={go}>버튼</button> */}
       </div>
-      <Card>
+      <Card style={{padding:0,margin:0}}>
         <div id="map" style={{ width: "100%", height: "93vh" }}></div>
       </Card>
 

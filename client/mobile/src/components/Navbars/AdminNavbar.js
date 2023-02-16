@@ -381,8 +381,9 @@ function AdminNavbar(props) {
           // className="avatar"
           src={require("assets/img/backimg6.png")}
           className={"image"}
+          style={{padding:0, margin:0}}
         />
-        <Navbar className="navbar-abs2">
+        <Navbar className="navbar-abs2" >
           <div className="navbar-abs2">{props.brandText}</div>
         </Navbar>
       </Navbar>

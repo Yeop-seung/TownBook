@@ -460,9 +460,18 @@
 
   > .content {
     position: relative;
-    padding: 20px 50px 50px 50px;
+    padding: 5vh 50px 50px 50px;
     min-height: calc(100vh - 70px);
   }
+
+
+  @media (max-width: 992px) {
+    .content {
+      position: relative;
+      padding: 20px 50px 50px 50px;
+      min-height: calc(100vh - 70px);
+    }
+}
  
   > .navbar {
     margin-bottom: 0;

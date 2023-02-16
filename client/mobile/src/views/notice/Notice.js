@@ -30,6 +30,7 @@ import {
 } from "reactstrap";
 
 function Notice(props) {
+  const [adminId, setadminId] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
   const [loadedMeetups, setLoadedMeetups] = useState([]);
   const notificationAlertRef = useRef(null);
@@ -74,13 +75,18 @@ function Notice(props) {
   };
 
   useEffect(() => {
-    console.log(localStorage.getItem("accountNo"))
+    console.log(localStorage.getItem("accountNo"));
+    if (localStorage.getItem("accountNo") === '3') {
+      setadminId(false);
+    } else {
+      setadminId(true);
+    }
     axios
       .get(`https://i8b201.p.ssafy.io/backend/notice`)
       // .get("https:///townbook/myPage/receive/${receiverNo}")
       .then((res) => {
         const notices = [];
-        console.log(res);
+        console.log("공지액시", res);
         // for (let i = 0; i < res.data.length; i++) {
         //   notices.push({ ...res.data[i], id: i + 1 });
         // }
@@ -101,12 +107,12 @@ function Notice(props) {
         // }
         setIsLoading(false);
         setLoadedMeetups(notices);
-        // console.log(notices)
+        console.log("공지액시넣으넛", notices);
       })
       .catch((error) => {
         alert("글로딩에 실패하였습니다.");
       });
-  }, []);
+  }, [isLoading]);
 
   if (isLoading) {
     <section>
@@ -115,11 +121,18 @@ function Notice(props) {
   }
 
   return (
-    <><Link to={"/map"} >
-    <FontAwesomeIcon icon={faArrowLeft} size="xl" color="black" position="absolute" zIndex="2000" style={{ margin: 15,marginBottom:5 }}/>
-  </Link>
+    <>
+      <Link to={"/map"}>
+        <FontAwesomeIcon
+          icon={faArrowLeft}
+          size="xl"
+          color="black"
+          position="absolute"
+          zIndex="2000"
+          style={{ margin: 15, marginBottom: 5 }}
+        />
+      </Link>
       <div className="content">
-        
         <div className="react-notification-alert-container">
           <NotificationAlert ref={notificationAlertRef} />
         </div>
@@ -137,7 +150,7 @@ function Notice(props) {
                       icon={faPlus}
                       size="xl"
                       color="black"
-                      hidden={localStorage.getItem("accountNo") === 3}
+                      hidden={adminId}
                     />
                   </Link>
                 </Row>

@@ -82,8 +82,8 @@ function WishListItem(props) {
             />
           </Col>
           <Col  style={{margin:0, padding:0}}>
-          <p style={{ color: "white" }}>{props.bookTitle}</p>
-            <p align="right" style={{ color: "white", margin: 0, padding:0, display:"flex", color:"#333333"}}>동네북 위치 : {props.bookLogRegion}</p>
+          <p style={{ color: "#5f5f5f ", fontWeight:"bold" }}>{props.bookTitle}</p>
+            <p align="right" style={{ color: "#5f5f5f ", fontWeight:"bold", margin: 0, padding:0, display:"flex", color:"#333333"}}>동네북 위치 : {props.bookLogRegion}</p>
           </Col>
         </Row>
 

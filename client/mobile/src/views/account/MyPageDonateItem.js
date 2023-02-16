@@ -44,13 +44,13 @@ function NoticeItem(props) {
         }}
       > */}
         <Row>
-          <p style={{ color: "white" }}>{props.id}</p>
+          <p style={{ color: "#5f5f5f ", fontWeight:"bold" }}>{props.id}</p>
 
           <Col >
-            <p style={{ color: "white" }}>{bookTitle}</p>
+            <p style={{ color: "#5f5f5f ", fontWeight:"bold" }}>{bookTitle}</p>
           </Col>
           <Col  style={{margin:0, padding:0}}>
-              <p align="right" style={{ color: "white", margin: 0, marginRight: 5}}>
+              <p align="right" style={{ color: "#5f5f5f ", fontWeight:"bold", margin: 0, marginRight: 5}}>
                 {donateTime.substr(0, 10)}
               </p>
               {/* <p align="right" style={{ color: "white", margin: 0, padding:0}}>{props.bookLogLocker}</p> */}

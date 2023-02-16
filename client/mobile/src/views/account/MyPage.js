@@ -13,7 +13,7 @@ import {
   faAngleUp,
   faAngleDown,
   faXmark,
-  faCoins
+  faCoins,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   Button,
@@ -304,26 +304,34 @@ function MyPage(props) {
                       marginTop: 10,
                       color: "#424A51",
                       fontFamily: "Nanum Gothic",
-                      fontWeight: "bold",
+                      fontWeight: "700",
                     }}
                     className="SCD"
                   >
                     내 정보
                   </CardTitle>
-                  <Card style={{width:"60%", height:"50", margin:0, border:0}}>
-                    <Row style={{ display:"flex", justifyContent:"end"}}>
-                  <FontAwesomeIcon
-                    icon={faCoins}
-                    size="xl"
-                    color="#424a51"
-                    position="absolute"
-                    style={{ margin: 15, marginBottom: 5 }}
-                    
-                    
-                  />
-                    <div style={{paddingLeft:0, paddingTop:14, marginRight:35}}>{Point}</div>
+                  <Card
+                    style={{ width: "60%", height: "50", margin: 0, border: 0 }}
+                  >
+                    <Row style={{ display: "flex", justifyContent: "end" }}>
+                      <FontAwesomeIcon
+                        icon={faCoins}
+                        size="xl"
+                        color="#fae100"
+                        position="absolute"
+                        style={{ margin: 15, marginBottom: 5 }}
+                      />
+                      <div
+                        style={{
+                          paddingLeft: 0,
+                          paddingTop: 14,
+                          marginRight: 35,
+                          fontWeight: "bold",
+                        }}
+                      >
+                        {Point}
+                      </div>
                     </Row>
-                    
                   </Card>
                   {/* <FontAwesomeIcon
                     icon={faAngleUp}
@@ -354,8 +362,6 @@ function MyPage(props) {
                   fontWeight: 400,
                 }}
               >
-               
-
                 <Col>이름 : {localStorage.getItem("accountName")}</Col>
 
                 <Col hidden={!verifiedPassword}>
@@ -432,18 +438,51 @@ function MyPage(props) {
                   </FormGroup>
                 </Col>
                 <Row style={{ justifyContent: "center" }}>
-                  <Button hidden={!verifiedPassword} onClick={modifyMyInfo}>
+                  <button
+                    hidden={!verifiedPassword}
+                    onClick={modifyMyInfo}
+                    style={{
+                      backgroundColor: "#2D9CEE",
+                      border: "none",
+                      color: "white",
+                      padding: "10px 24px",
+                      textAlign: "center",
+                      textDecoration: "none",
+                      display: "inline-block",
+                      fontSize: 16,
+                      margin: "4px 2px",
+                      cursor: "pointer",
+                      borderRadius: 10,
+                      fontWeight: "bold",
+                      boxShadow: "2px 2px 4px rgba(0, 0, 0, 0.2)",
+                    }}
+                  >
                     수정완료
-                  </Button>
-                  <Button
+                  </button>
+                  <button
                     hidden={!verifiedPassword}
                     onClick={() => {
                       setverifiedPassword(false);
                     }}
+                    style={{
+                      backgroundColor: "#2D9CEE",
+                      border: "none",
+                      color: "white",
+                      padding: "10px 24px",
+                      textAlign: "center",
+                      textDecoration: "none",
+                      display: "inline-block",
+                      fontSize: 16,
+                      margin: "4px 2px",
+                      cursor: "pointer",
+                      borderRadius: 10,
+                      fontWeight: "bold",
+                      boxShadow: "2px 2px 4px rgba(0, 0, 0, 0.2)",
+                    }}
                   >
                     취소
-                  </Button>
-                  <Button
+                  </button>
+                  <button
                     onClick={toggleModalSearch}
                     hidden={verifiedPassword}
                     // style={{
@@ -452,15 +491,45 @@ function MyPage(props) {
                     //   paddingTop: 0,
                     //   paddingBottom: 0,
                     // }}
+                    style={{
+                      backgroundColor: "#2D9CEE",
+                      border: "none",
+                      color: "white",
+                      padding: "7px 15px",
+                      textAlign: "center",
+                      textDecoration: "none",
+                      display: "inline-block",
+                      fontSize: 16,
+                      margin: "4px 6px",
+                      cursor: "pointer",
+                      borderRadius: 10,
+                      fontWeight: "bold",
+                      boxShadow: "2px 2px 4px rgba(0, 0, 0, 0.2)",
+                    }}
                   >
                     개인정보수정
-                  </Button>
-                  <Button
+                  </button>
+                  <button
                     onClick={toggleModalSearch2}
                     hidden={verifiedPassword}
+                    style={{
+                      backgroundColor: "#2D9CEE",
+                      border: "none",
+                      color: "white",
+                      padding: "7px 15px",
+                      textAlign: "center",
+                      textDecoration: "none",
+                      display: "inline-block",
+                      fontSize: 16,
+                      margin: "4px 2px",
+                      cursor: "pointer",
+                      borderRadius: 10,
+                      fontWeight: "bold",
+                      boxShadow: "2px 2px 4px rgba(0, 0, 0, 0.2)",
+                    }}
                   >
                     회원탈퇴
-                  </Button>
+                  </button>
                 </Row>
               </CardBody>
             </Card>
@@ -627,7 +696,7 @@ function MyPage(props) {
                 </FormGroup>
               </Col>
               <Row style={{ justifyContent: "center", paddingInline: 30 }}>
-                <Button
+                <button
                   className="btn-login"
                   // color="black"
                   type="submit"
@@ -635,10 +704,25 @@ function MyPage(props) {
                     verifyPassword();
                     toggleModalSearch();
                   }}
+                  style={{
+                    backgroundColor: "#2D9CEE",
+                    border: "none",
+                    color: "white",
+                    padding: "10px 24px",
+                    textAlign: "center",
+                    textDecoration: "none",
+                    display: "inline-block",
+                    fontSize: 16,
+                    margin: "4px 2px",
+                    cursor: "pointer",
+                    borderRadius: 10,
+                    fontWeight: "bold",
+                    boxShadow: "2px 2px 4px rgba(0, 0, 0, 0.2)",
+                  }}
                   className={classes.style}
                 >
                   확인
-                </Button>
+                </button>
               </Row>
             </div>
             <button
@@ -688,15 +772,30 @@ function MyPage(props) {
                 </FormGroup>
               </Col>
               <Row style={{ justifyContent: "center", paddingInline: 30 }}>
-                <Button
+                <button
                   className="btn-login"
                   // color="black"
                   type="submit"
                   onClick={accountRemove}
                   className={classes.style}
+                  style={{
+                    backgroundColor: "#2D9CEE",
+                    border: "none",
+                    color: "white",
+                    padding: "10px 24px",
+                    textAlign: "center",
+                    textDecoration: "none",
+                    display: "inline-block",
+                    fontSize: 16,
+                    margin: "4px 2px",
+                    cursor: "pointer",
+                    borderRadius: 10,
+                    fontWeight: "bold",
+                    boxShadow: "2px 2px 4px rgba(0, 0, 0, 0.2)",
+                  }}
                 >
                   확인
-                </Button>
+                </button>
               </Row>
             </div>
             <button
@@ -708,11 +807,11 @@ function MyPage(props) {
               }}
             >
               <FontAwesomeIcon
-          icon={faXmark}
-          size="xl"
-          color="black"
-          style={{ margin: 0 }}
-        />
+                icon={faXmark}
+                size="xl"
+                color="black"
+                style={{ margin: 0 }}
+              />
             </button>
           </ModalBody>
         </Modal>
