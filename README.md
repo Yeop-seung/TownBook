@@ -103,7 +103,7 @@
 ### 요구사항 명세서
 
 <p align="center">
-<img src="./readmeAsset/erd.png" width="800px">
+<img src="./readmeAsset/기능정의서.png" width="800px">
 </p>
 
 ### API 명세서
@@ -118,15 +118,18 @@
 
 ### 사용한 라이브러리
 
+```markdown
+| name    | description     | version | link                                            |
+| :------ | :-------------- | :------ | :---------------------------------------------- |
+| Rasbian | 라즈베이파이 OS | 1.7.3   | [Rasbian](https://www.raspberrypi.com/software) |
+```
+
 ### 디렉토리 구조
 
-```markdown
-📁AOS
-├──📁api
-├──📁base
-├──📁binding
-├──📁datasource
-│ ├──📁local
+```text
+📁townbook
+├──📁espwifi2
+└──📁servo_ardu
 ```
 
 # :bar_chart: Front-End
@@ -135,13 +138,41 @@
 
 ### 디렉토리 구조
 
-```markdown
-📁AOS
-├──📁api
-├──📁base
-├──📁binding
-├──📁datasource
-│ ├──📁local
+```text
+📁mobile
+├──📁public
+└──📁src
+    ├──📁assets
+    │   ├──📁css
+    │   ├──📁demo
+    │   ├──📁fonts
+    │   ├──📁img
+    │   └──📁scss
+    ├──📁components
+    │   ├──📁BackgroundColorWrapper
+    │   ├──📁FixedPlugin
+    │   ├──📁Footer
+    │   ├──📁Navbars
+    │   ├──📁Sidebar
+    │   └──📁ThemeWrapper
+    ├──📁context
+    ├──📁layouts
+    │   └──📁Admin
+    ├──📁variables
+    └──📁views
+        ├──📁accout
+        ├──📁map
+        └──📁notice
+📁kiosk
+├──📁public
+└──📁src
+    ├──📁Kiosk
+    │   ├──📁Donate
+    │   ├──📁Member
+    │   ├──📁Non-Member
+    │   ├──📁Receipt
+    │   └──📁img
+    └──📁ui
 ```
 
 # :telescope: Back-End
@@ -150,13 +181,17 @@
 
 ### 디렉토리 구조
 
-```markdown
-📁AOS
-├──📁api
-├──📁base
-├──📁binding
-├──📁datasource
-│ ├──📁local
+```text
+📁townbook
+├──📁controller
+├──📁model
+│   ├──📁dto
+│   │   ├──📁request
+│   │   └──📁response
+│   ├──📁entity
+│   ├──📁repository
+│   └──📁service
+└──📁query
 ```
 
 # Team-Member
