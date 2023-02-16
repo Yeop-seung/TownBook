@@ -118,11 +118,11 @@
 
 ### 사용한 라이브러리
 
-```markdown
-| name    | description     | version | link                                            |
-| :------ | :-------------- | :------ | :---------------------------------------------- |
-| Rasbian | 라즈베이파이 OS | 1.7.3   | [Rasbian](https://www.raspberrypi.com/software) |
-```
+| name        | description     | version | link                                                               |
+| :---------- | :-------------- | :------ | :----------------------------------------------------------------- |
+| Rasbian     | 라즈베이파이 OS | 1.7.3   | [Rasbian](https://www.raspberrypi.com/software)                    |
+| Arduino IDE | 아두이노 IDE    | 1.8.19  | [Arduino IDE](https://wiki-content.arduino.cc/en/software)         |
+| WifiESP.h   | 와이파이 통신   |         | [WifiESP.h](https://www.arduinolibraries.info/libraries/wi-fi-esp) |
 
 ### 디렉토리 구조
 
@@ -135,6 +135,9 @@
 # :bar_chart: Front-End
 
 ### 사용한 라이브러리
+
+| name | description | version | link |
+| :--- | :---------- | :------ | :--- |
 
 ### 디렉토리 구조
 
@@ -179,6 +182,17 @@
 
 ### 사용한 라이브러리
 
+| name             | description                   | version | link                                                                                |
+| :--------------- | :---------------------------- | :------ | :---------------------------------------------------------------------------------- |
+| Spring Framework | Java Web Framework            | 5.3.24  | [Spring Framework](https://spring.io/)                                              |
+| Spring Boot      |                               | 2.7.7   | [Spring Boot](https://spring.io/)                                                   |
+| Spring Data Jpa  | Persist Data in SQL           | 2.7.6   | [JPA](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/)          |
+| Query DSL        |                               | 5.0.0   | [Query DSL](http://querydsl.com/static/querydsl/3.6.3/reference/ko-KR/html_single/) |
+| Spring Security  | 인증 및 접근 관리             | 5.7.6   | [Spring Security](https://docs.spring.io/spring-security/reference/index.html)      |
+| MySQL            | Database                      | 8.0.31  | [MySQL](https://dev.mysql.com/doc/)                                                 |
+| Swagger Ui2      | API Document                  | 3.0.0   | [Swagger](https://swagger.io/docs/)                                                 |
+| SMTP             | Simple Mail Transfer Protocol | 1.6.7   |                                                                                     |
+
 ### 디렉토리 구조
 
 ```text
@@ -198,21 +212,21 @@
 
 ### :computer: HardWare
 
-<p align="center">
-<img src="./readmeAsset/null.png" width="270px">
+<p align="left">
+<img src="./readmeAsset/김경섭.jpg" width="270px">
 </p>
 
 ### :bar_chart: Front-End
 
-<p align="center">
-<img src="./readmeAsset/null.png" width="270px">
-<img src="./readmeAsset/null.png" width="270px">
+<p align="left">
+<img src="./readmeAsset/이기용.jpg" width="270px">
+<img src="./readmeAsset/이영재.jpg" width="270px">
 </p>
 
 ### :telescope: Back-End
 
-<p align="center">
-<img src="./readmeAsset/null.png" width="270px">
-<img src="./readmeAsset/null.png" width="270px">
-<img src="./readmeAsset/null.png" width="270px">
+<p align="left">
+<img src="./readmeAsset/곽승엽.jpg" width="270px">
+<img src="./readmeAsset/정현석.jpg" width="270px">
+<img src="./readmeAsset/현승민.jpg" width="270px">
 </p>
