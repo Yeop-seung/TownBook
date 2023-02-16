@@ -27,15 +27,17 @@
 #### 키오스크 화면
 
 <p align="center">
-<img src="./readmeAsset/kiosk.jpg" width="400px">
-<img src="./readmeAsset/view1.png" width="400px">
+<img src="./readmeAsset/kiosk/kiosk (1).png" width="270px">
+<img src="./readmeAsset/kiosk/kiosk (4).png" width="270px">
+<img src="./readmeAsset/kiosk/kiosk (13).png" width="270px">
 </p>
 
 #### 웹 페이지 화면
 
 <p align="center">
-<img src="./readmeAsset/view2.jpg" width="400px">
-<img src="./readmeAsset/view3.jpg" width="400px">
+<img src="./readmeAsset/mobile1.png" width="270px">
+<img src="./readmeAsset/mobile2.png" width="270px">
+<img src="./readmeAsset/mobile3.png" width="270px">
 </p>
 
 # Description
@@ -47,9 +49,9 @@
 바코드 리더기를 이용하여 회원의 QR코드와 도서의 바코드를 인식하여 필요한 정보를 전달할 수 있다.
 
 <p align="center">
-<img src="./readmeAsset/null.png" width="270px">
-<img src="./readmeAsset/null.png" width="270px">
-<img src="./readmeAsset/null.png" width="270px">
+<img src="./readmeAsset/kiosk/kiosk (2).png" width="270px">
+<img src="./readmeAsset/kiosk/kiosk (7).png" width="270px">
+<img src="./readmeAsset/kiosk/kiosk (4).png" width="270px">
 </p>
 
 #### 도서 기부
@@ -59,9 +61,9 @@
 `회원으로 2권 기부시 이용자 1권, 소외 계층 1권 전달`
 
 <p align="center">
-<img src="./readmeAsset/null.png" width="270px">
-<img src="./readmeAsset/null.png" width="270px">
-<img src="./readmeAsset/null.png" width="270px">
+<img src="./readmeAsset/kiosk/kiosk (2).png" width="270px">
+<img src="./readmeAsset/kiosk/kiosk (4).png" width="270px">
+<img src="./readmeAsset/kiosk/kiosk (6).png" width="270px">
 </p>
 
 #### 도서 수령
@@ -71,9 +73,9 @@
 `2권 기부에 해당하는 포인트 차감`
 
 <p align="center">
-<img src="./readmeAsset/null.png" width="270px">
-<img src="./readmeAsset/null.png" width="270px">
-<img src="./readmeAsset/null.png" width="270px">
+<img src="./readmeAsset/kiosk/kiosk (13).png" width="270px">
+<img src="./readmeAsset/kiosk/kiosk (12).png" width="270px">
+<img src="./readmeAsset/kiosk/kiosk (14).png" width="270px">
 </p>
 
 ### 전체 기능
