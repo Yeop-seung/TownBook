@@ -109,7 +109,7 @@ function NoticeList(props) {
       ))}
       {props.Receives.map((receive) => (
         <div>
-          <Alert  hidden={hiddenpassword} style={{margin:0}}>
+          <Alert  hidden={hiddenpassword} style={{backgroundColor:"white", color:"black", borderColor:"ebecf1"}}>
             <MyPageReceiveItem
               //   key={receive.id}
               id={receive.id}

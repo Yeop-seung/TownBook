@@ -36,6 +36,7 @@ function BookList(props) {
               bookIntroductionURL = {book.book.bookIntroductionURL}
               bookPublishPredate = {book.book.bookPublishPredate}
               lockerNo = {book.bookLog.lockerNo}
+              map = {book.map}
             />
           
 

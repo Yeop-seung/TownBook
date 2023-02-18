@@ -4,6 +4,7 @@ import BookDetail from "views/map/BookDetail";
 import { Route, Switch } from "react-router-dom";
 import { Link } from "react-router-dom";
 import axios from "axios";
+// import { map } from './Map.js'
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import {
@@ -16,11 +17,20 @@ import { faBookmark as fabookmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./Map.css";
 import React, { useEffect } from "react";
-
 const { kakao } = window;
 
+
+
+
+
 function BookItem(props) {
+  console.log('북아이템프롭',props)
+  const [LockerLatitude, setLockerLatitude] = React.useState('')
+  const [LockerLongitude, setLockerLongitude] = React.useState('')
+
   let bookIntroductionURL;
+
+
   if (props.bookIntroductionURL.length > 11) {
     bookIntroductionURL = props.bookIntroductionURL.substr(0, 100) + "...";
   } else {
@@ -28,30 +38,27 @@ function BookItem(props) {
   }
 
   useEffect(() => {
-    
     const accountNo = localStorage.getItem("accountNo");
     const bookLogNo = props.bookLogNo;
-    
+
     axios
       .get(`https://i8b201.p.ssafy.io/backend/myPage/wishList/${accountNo}`)
       .then((res) => {
-        console.log('찜목록 불러옴', res )
+        console.log("찜목록 불러옴", res);
         let found = false;
         for (let i = 0; i < res.data.count; i++) {
           if (res.data.data[i].bookLogNo === bookLogNo) {
             found = true;
-            
           }
         }
 
         if (found) {
-          setbookmark(true)
+          setbookmark(true);
         } else {
-          setbookmark(false)
+          setbookmark(false);
         }
       });
-  
-}, []);
+  }, []);
 
   // console.log(props.id)
   // console.log(props.noticeTitle)
@@ -61,19 +68,19 @@ function BookItem(props) {
   } else {
     bookTitle = props.bookTitle;
   }
-  const [text, setText] = React.useState('');
-  useEffect(() => {
-    // const container = document.getElementById("map"); //찾으려는 id
-    // const options = {
-    //   center: new kakao.maps.LatLng(37.49676871972202, 127.02474726969814),
-    //   level: 3,
-    // };
-    // const map = new kakao.maps.Map(container, options);
+  const [text, setText] = React.useState("");
+  // useEffect(() => {
+  //   // const container = document.getElementById("map"); //찾으려는 id
+  //   // const options = {
+  //   //   center: new kakao.maps.LatLng(37.49676871972202, 127.02474726969814),
+  //   //   level: 3,
+  //   // };
+  //   // const map = new kakao.maps.Map(container, options);
 
-    fetch('https://www.nl.go.kr/seoji/fu/ecip/dbfiles/CIP_FILES_TBL/4721454_5.txt')
-      .then((response) => {response.text(); console.log('이건txt',response)})
-      .then(data => setText(data));
-  }, []);
+  //   fetch('https://www.nl.go.kr/seoji/fu/ecip/dbfiles/CIP_FILES_TBL/4721454_5.txt')
+  //     .then((response) => {response.text(); console.log('이건txt',response)})
+  //     .then(data => setText(data));
+  // }, []);
   // FileReader
   // console.log(props.noticeContent)
   console.log("item전달받은값", props);
@@ -88,12 +95,15 @@ function BookItem(props) {
   };
   console.log("라겈넘", props.lockerNo);
 
-  
   const lockerNo = props.lockerNo;
   axios
     .get(`https://i8b201.p.ssafy.io/backend/locker/${lockerNo}`)
     .then((res) => {
       console.log("락커액시오스", res);
+      console.log("락커ㅇ위도", res.data.data.lockerLatitude)
+      setLockerLatitude(res.data.data.lockerLatitude)
+      setLockerLongitude(res.data.data.lockerLongitude)
+
       setLockerNo(res.data.data.lockerRegion);
     })
     .catch((error) => {
@@ -117,6 +127,19 @@ function BookItem(props) {
         alert("error.");
       });
   }
+  const navigateToLockerLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function (position) {
+        const lat = LockerLatitude; // 위도
+        const lng = LockerLongitude; // 경도
+
+        const locPosition = new kakao.maps.LatLng(lat, lng);
+        props.map.panTo(locPosition);
+      });
+    } else {
+      alert("Your browser doesn't support geolocation.");
+    }
+  };
 
   return (
     <div className={classes.item}>
@@ -136,7 +159,7 @@ function BookItem(props) {
             },
           }}
         > */}
-      <Link onClick={toggleModalSearch}>
+      <Link onClick={()=>{toggleModalSearch(); navigateToLockerLocation();}}>
         {/* <p style={{ color: "white" }}>{props.id}</p> */}
         {/* <Card style={{ margin: 0 }}> */}
         <Alert color="#ffffff">
@@ -153,11 +176,26 @@ function BookItem(props) {
               }}
             />
             <Col>
-              <p style={{ color: "#333333", fontSize: 16, fontWeight: "bold", marginBottom:3 }}>
+              <p
+                style={{
+                  color: "#333333",
+                  fontSize: 16,
+                  fontWeight: "bold",
+                  marginBottom: 3,
+                }}
+              >
                 {bookTitle}
               </p>
-              <p style={{ marginBottom:7, fontWeight: "bold"}}>저자: {props.bookAuthor}</p>
-              <p style={{ color: "#ec217b", fontWeight: "bolder", marginBottom:3 }}>
+              <p style={{ marginBottom: 7, fontWeight: "bold" }}>
+                저자: {props.bookAuthor}
+              </p>
+              <p
+                style={{
+                  color: "#ec217b",
+                  fontWeight: "bolder",
+                  marginBottom: 3,
+                }}
+              >
                 동네북 위치: {LockerNo}
               </p>
             </Col>
@@ -205,7 +243,7 @@ function BookItem(props) {
               justifyContent: "space-between",
               marginInline: 15,
                flexWrap: "wrap"
-            }}
+            }}d
           > */}
           <div style={{ display: "block", margin: "auto" }}>
             <img
@@ -257,8 +295,15 @@ function BookItem(props) {
 
             <Col style={{ fontSize: "12px" }}>
               <Col>
-              <Row style={{ display: "flex", flexWrap: "wrap", fontSize:15,color: "#ec217b",
-                  fontWeight: "bolder" }}>
+                <Row
+                  style={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    fontSize: 15,
+                    color: "#ec217b",
+                    fontWeight: "bolder",
+                  }}
+                >
                   동네북 위치 : {LockerNo}
                 </Row>
                 <hr style={{ margin: 2 }} />
@@ -283,7 +328,6 @@ function BookItem(props) {
                   /> */}
                 </Row>
                 <hr style={{ margin: 2 }} />
-                
               </Col>
             </Col>
 
