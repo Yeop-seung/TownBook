@@ -396,7 +396,7 @@ export function Map() {
         My Location
       </button> */}
       {/* {searchBook} */}
-      <a onClick={navigateToCurrentLocation} style={{ width:50,height:50,position: "absolute", zIndex: 20000, bottom: 70, right: 20 }}>
+      <a onClick={navigateToCurrentLocation} style={{ width:50,height:50,position: "absolute", zIndex: 300, bottom: 70, right: 10 }}>
         <img
           alt="..."
           className="avatar"
