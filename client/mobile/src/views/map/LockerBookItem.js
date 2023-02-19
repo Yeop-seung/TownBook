@@ -150,6 +150,7 @@ function LockerBookItem(book) {
         isOpen={modalSearch}
         toggle={toggleModalSearch}
         style={{ height: "100%" }}
+        zIndex={9999}
       >
         <Card style={{ height: "100vh" }}>
           <div style={{ display: "flex" }}>

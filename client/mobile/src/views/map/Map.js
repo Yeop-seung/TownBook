@@ -2,7 +2,9 @@ import React, { useEffect, useState, useRef } from "react";
 import "./Map.css";
 import markerimg from "assets/img/library2.png";
 import classes from "./AdminNavbar.module.css";
+import "./AdminNavbar2.module.css";
 
+import Draggable from "react-draggable";
 import {
   Card,
   CardBody,
@@ -12,10 +14,12 @@ import {
   Modal,
   Input,
   Button,
+  Row,
+  Col,
 } from "reactstrap";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faXmark, faBars } from "@fortawesome/free-solid-svg-icons";
 import BookList from "views/map/BookList";
 import { Link, Switch, Route } from "react-router-dom";
 import Notice from "views/notice/Notice";
@@ -36,6 +40,17 @@ const { kakao } = window;
 // }
 
 export function Map() {
+  const [NearLockerLatitude, setNearLockerLatitude] = React.useState("");
+  const [NearLockerLongitude, setNearLockerLongitude] = React.useState("");
+  const [NearLockerNo, setNearLockerNo] = React.useState("");
+
+  const headerHeight = 50; // CardHeader 요소의 높이
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+
+  const handleDrag = (e, ui) => {
+    const { x, y } = ui;
+    setPosition({ x, y });
+  };
   const [map, setmap] = useState(null);
   // const [state, setState] = useState({
   //   // 지도의 초기 위치
@@ -44,6 +59,39 @@ export function Map() {
   //   isPanto: false,
   // });
   // const [map, setMap] = useState(null);
+  const [isDragging, setIsDragging] = useState(false);
+
+  const handleDragStart = () => {
+    setIsDragging(true);
+  };
+
+  // const handleDragStop = () => {
+  //   setIsDragging(false);
+  // };
+  const handleDragStop = (e, data) => {
+    const target = e.target;
+    const mouseX = e.pageX;
+    const mouseY = e.pageY;
+    const targetRect = target.getBoundingClientRect();
+
+    // window 객체의 너비와 높이를 구합니다.
+    const windowWidth = window.innerWidth;
+    const windowHeight = window.innerHeight;
+    console.log(mouseX);
+    if (
+      mouseX < targetRect.left ||
+      mouseX > targetRect.right ||
+      mouseY < targetRect.top ||
+      mouseY > targetRect.bottom ||
+      mouseX < 0 ||
+      mouseX > windowWidth ||
+      mouseY < 0 ||
+      mouseY > windowHeight
+    ) {
+      // 마우스가 대상 요소를 벗어나거나, 화면을 벗어나면 드래그 중지
+      target.style.transform = "none";
+    }
+  };
   const [lockerList, setlockerList] = useState([]);
   const [bookList, setbookList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -143,7 +191,10 @@ export function Map() {
             userLongitude,
           })
           .then((res) => {
-            // console.log("줍녀락커", res);
+            setNearLockerLatitude(res.data.data[0].lockerLatitude);
+            setNearLockerLongitude(res.data.data[0].lockerLongitude);
+            setNearLockerNo(res.data.data[0].lockerNo);
+            console.log("줍녀락커", res);
           });
 
         // 마커와 인포윈도우를 표시합니다
@@ -325,6 +376,21 @@ export function Map() {
     }
   };
 
+  const navigateToNearLockerLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function (position) {
+        const lat = NearLockerLatitude; // 위도
+        const lng = NearLockerLongitude; // 경도
+
+        const locPosition = new kakao.maps.LatLng(lat, lng);
+        map.panTo(locPosition);
+        searchLocker(NearLockerNo);
+      });
+    } else {
+      alert("Your browser doesn't support geolocation.");
+    }
+  };
+
   function searchBook(event) {
     event.preventDefault();
 
@@ -396,15 +462,41 @@ export function Map() {
         My Location
       </button> */}
       {/* {searchBook} */}
-      <a onClick={navigateToCurrentLocation} style={{ width:50,height:50,position: "absolute", zIndex: 300, bottom: 70, right: 10 }}>
+      <a
+        onClick={navigateToCurrentLocation}
+        style={{
+          width: 50,
+          height: 50,
+          position: "absolute",
+          zIndex: 300,
+          bottom: 70,
+          right: 10,
+        }}
+      >
         <img
           alt="..."
           className="avatar"
           src={require("assets/img/location3.png")}
-          style={{boxShadow: "2px 2px 4px rgba(0, 0, 0, 0.2)",}}
+          style={{ boxShadow: "2px 2px 4px rgba(0, 0, 0, 0.2)" }}
         />
-
-        
+      </a>
+      <a
+        onClick={navigateToNearLockerLocation}
+        style={{
+          width: 50,
+          height: 50,
+          position: "absolute",
+          zIndex: 300,
+          bottom: 130,
+          right: 10,
+        }}
+      >
+        <img
+          alt="..."
+          className="avatar"
+          src={require("assets/img/Lockerlocation2.png")}
+          style={{ boxShadow: "2px 2px 4px rgba(0, 0, 0, 0.2)" }}
+        />
       </a>
       <div
         className={classes.searchbar2}
@@ -510,6 +602,7 @@ export function Map() {
         <div
           id="map"
           style={{ width: "100%", height: "93vh" }}
+
           // center={state.center}
           // isPanto={state.isPanto}
         ></div>
@@ -550,34 +643,83 @@ export function Map() {
         />
       </Modal>
 
-      <Modal
-        modalClassName="modal-search"
-        isOpen={modalSearch}
-        toggle={toggleModalSearch}
-        style={{ dispaly:"none",position:"fixed", bottom:100, zIndex:30000 }}
+      <Draggable
+        axis="y"
+        // handle=".modal-header" // set handle to the header element
+        onStart={handleDragStart}
+        onStop={handleDragStop}
+        // bounds={{ top: 0, bottom:"-10%" }}
+        // bounds={{ top: window.innerHeight*0.1, bottom: window.innerHeight }}
+        handle=".my-handle"
+        onDrag={handleDrag}
+        // bounds="parent"
       >
-        {/* <Input placeholder="QR이미지" type="text" /> */}
-        <Card>
-          <CardBody>
-            <LockerBookList lockerList={lockerList} />
-          </CardBody>
-        </Card>
-        <button
-          aria-label="Close"
-          className="close"
-          onClick={() => {
-            toggleModalSearch();
-            // handle.clickButton();
+        <div
+          modalClassName="modal-search"
+          className="mount2"
+          hidden={!modalSearch}
+          toggle={toggleModalSearch}
+          style={{
+            position: "fixed",
+            // bottom: -100,
+            // bottom:"-5%",
+            top: "70%",
+            // height:"100%",
+            left: 0,
+            right: 0,
+            zIndex: 5000,
+            transition: "bottom 0.3s ease-in-out",
           }}
         >
-          <FontAwesomeIcon
-            icon={faXmark}
-            size="xl"
-            color="black"
-            style={{ margin: 0 }}
-          />
-        </button>
-      </Modal>
+          <Card>
+            <Row
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                height: 50,
+              }}
+              xs="12"
+            >
+              <Col
+                className="my-handle"
+                xs="9"
+                style={{ display: "flex", justifyContent: "center" }}
+              >
+                <CardHeader style={{ padding: 0 }}>
+                  <FontAwesomeIcon
+                    className="my-handle"
+                    icon={faBars}
+                    size="xl"
+                    color="#333333"
+                    style={{ margin: 0 }}
+                  />
+                </CardHeader>
+              </Col>
+
+              <Col xs="2">
+                <button
+                  aria-label="Close"
+                  className="close"
+                  onClick={() => {
+                    toggleModalSearch();
+                  }}
+                >
+                  <FontAwesomeIcon
+                    icon={faXmark}
+                    size="xl"
+                    color="black"
+                    style={{ margin: 0 }}
+                  />
+                </button>
+              </Col>
+            </Row>
+            <CardBody>
+              <LockerBookList lockerList={lockerList} />
+            </CardBody>
+          </Card>
+        </div>
+      </Draggable>
     </>
   );
 }
