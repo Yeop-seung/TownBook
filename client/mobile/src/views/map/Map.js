@@ -469,7 +469,7 @@ export function Map() {
           height: 50,
           position: "absolute",
           zIndex: 300,
-          bottom: "10vh",
+          bottom: 180,
           right: 10,
         }}
       >
@@ -487,7 +487,7 @@ export function Map() {
           height: 50,
           position: "absolute",
           zIndex: 300,
-          bottom: "17vh",
+          bottom: 240,
           right: 10,
         }}
       >
