@@ -19,7 +19,7 @@ function DonateReceipt(props){
     
     const detailLocker = location.state.detailLocker
 
-    const UrlOneClose = `http://192.168.140.1/servo${detailLocker}/90` //n번 보관함 닫기
+    const UrlOneClose = `http://192.168.171.1/servo${detailLocker}/90` //n번 보관함 닫기
 
     console.log(Locker)
     // console.log('2222', Locker.lockerNo.detailLockerNo)

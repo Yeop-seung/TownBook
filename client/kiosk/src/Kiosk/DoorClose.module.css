@@ -19,7 +19,6 @@
     margin:auto;
     left: 11vw;
     top: 16vh;
-    text-align: center;
     background-color: rgb(255, 255, 255);
     border: 1px solid #ffffff;
     width: 78vw;
@@ -45,9 +44,27 @@
     position: absolute;
     color: #2a2a2a;
     text-align: center;
+    width: 100%;
+    margin: 0%;
+    font-size: 500%;
+    top: 8%;
+}
+/* .textAlign{
+    position: absolute;
+    color: #2a2a2a;
+    text-align: center;
     margin: 0%;
     font-size: 500%;
     top: 18%;
     left: 16%;
+} */
+.textAlignTwo{
+    position: absolute;
+    color: #2a2a2a;
+    text-align: center;
+    top: 44%;
+    width: 100%;
+    margin: 0;
+    font-size: 400%;
 }
 /* 텍스트 정렬 */

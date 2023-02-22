@@ -19,7 +19,7 @@ function DonateComplete(props) {
     const detailLockerNoInLocker = Locker.detailLocker[numbers-1].detailLockerNoInLocker
     // const detailLockerIsEmpty = Locker.detailLocker[LockerNo].detailLockerIsEmpty
 
-    const UrlOneClose = `http://192.168.140.1/servo${detailLockerNoInLocker}/90` //n번 보관함 닫기
+    const UrlOneClose = `http://192.168.171.1/servo${detailLockerNoInLocker}/90` //n번 보관함 닫기
 
     // const Url = 'http://localhost:3000/'
 

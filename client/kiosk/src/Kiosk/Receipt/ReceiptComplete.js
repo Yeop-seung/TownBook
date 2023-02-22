@@ -31,7 +31,7 @@ function ReceiptComplete(props) {
 
     const onClickHandlerDonateReceipt =() => {
         
-        const UrlServo = `http://192.168.140.1/servo${detailLocker}/0`
+        const UrlServo = `http://192.168.171.1/servo${detailLocker}/0`
         
         const checkTwo = () => {
             axios.get(UrlServo, {
