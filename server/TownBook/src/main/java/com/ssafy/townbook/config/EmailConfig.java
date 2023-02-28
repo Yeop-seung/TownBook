@@ -8,11 +8,13 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
-
+/**
+ * smpt(Simple Mail Transfer Protocol) 사용
+ */
 @Configuration
 @PropertySource("classpath:email.properties")
 public class EmailConfig {
-    
+    // @Value는 properties에서 설정한 값
     @Value("${mail.smtp.port}")
     private int     port;
     @Value("${mail.smtp.socketFactory.port}")

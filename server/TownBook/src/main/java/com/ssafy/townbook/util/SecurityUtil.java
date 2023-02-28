@@ -22,6 +22,8 @@ public class SecurityUtil {
     
     // SecurityContextHolder.getContext().getAuthentication() 처럼 현재 사용자 정보를 가져와 사용할 수 있다.
     // 현재 아이디 가져오기 메소드
+
+    // Security Session => Authentication => UserDetails(PrincipalDetails) (여기에 계정 정보가 들어있음)
     public static Optional<String> getCurrentUsername() {
         final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         
