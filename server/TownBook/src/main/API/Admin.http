@@ -1,0 +1,6 @@
+### 1. 전체 회원 조회
+GET http://localhost:8081/backend/admin
+
+### 2. 단일 회원 조회
+GET http://localhost:8081/backend/admin/{{accountNo}}
+
