@@ -1,0 +1,83 @@
+{
+  "name": "black-dashboard-react",
+  "version": "1.2.1",
+  "private": true,
+  "homepage": ".",
+  "dependencies": {
+    "@emailjs/browser": "^3.10.0",
+    "@fortawesome/fontawesome-free": "6.1.1",
+    "@fortawesome/fontawesome-svg-core": "^6.2.1",
+    "@fortawesome/free-brands-svg-icons": "^6.2.1",
+    "@fortawesome/free-regular-svg-icons": "^6.2.1",
+    "@fortawesome/free-solid-svg-icons": "^6.2.1",
+    "@fortawesome/react-fontawesome": "^0.2.0",
+<<<<<<< HEAD:client/mobile/package.json
+    "@types/jest": "^29.4.0",
+    "@types/node": "^18.11.18",
+    "@types/react": "^18.0.27",
+    "@types/react-dom": "^18.0.10",
+    "axios": "^1.2.6",
+=======
+    "axios": "^1.3.0",
+>>>>>>> KI:client/black-dashboard-react-master/package.json
+    "bootstrap": "4.5.3",
+    "chart.js": "3.4.1",
+    "classnames": "2.3.1",
+    "http-proxy-middleware": "^2.0.6",
+    "perfect-scrollbar": "1.5.5",
+    "prop-types": "15.8.1",
+    "react": "^18.2.0",
+    "react-chartjs-2": "3.0.4",
+<<<<<<< HEAD:client/mobile/package.json
+    "react-daum-postcode": "^3.1.1",
+    "react-dom": "^18.2.0",
+    "react-draggable": "^4.4.5",
+    "react-helmet": "^6.1.0",
+    "react-notification-alert": "0.0.13",
+    "react-redux": "^8.0.5",
+    "react-resizable": "^3.0.4",
+    "react-responsive": "^9.0.2",
+    "react-router-dom": "^5.3.4",
+=======
+    "react-dom": ">=16.8.0",
+    "react-icons": "^4.7.1",
+    "react-notification-alert": "0.0.13",
+    "react-query": "^3.39.3",
+    "react-router-dom": "^6.8.0",
+>>>>>>> KI:client/black-dashboard-react-master/package.json
+    "react-scripts": "5.0.1",
+    "reactstrap": "^8.7.1",
+    "sass": "1.53.0",
+    "vue": "^3.2.45"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build && gulp licenses",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start",
+    "compile-scss": "sass src/assets/scss/black-dashboard-react.scss src/assets/css/black-dashboard-react.css",
+    "minify-scss": "sass src/assets/scss/black-dashboard-react.scss src/assets/css/black-dashboard-react.min.css --style compressed"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "optionalDependencies": {
+    "eslint-plugin-flowtype": "8.0.3",
+    "jquery": "3.6.0",
+    "typescript": "^4.7.4"
+  },
+  "devDependencies": {
+    "gulp": "4.0.2",
+    "gulp-append-prepend": "1.0.9"
+  },
+  "development": [
+    "ie 11"
+  ]
+}

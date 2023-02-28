@@ -1,0 +1,81 @@
+@media (max-width: 992px) {
+    .dlgnone {
+      display: none !important; }
+    .d-lg-inline {
+      display: inline !important; }
+    .d-lg-inline-block {
+      display: inline-block !important; }
+    .d-lg-block {
+      display: block !important; }
+    .d-lg-table {
+      display: table !important; }
+    .d-lg-table-row {
+      display: table-row !important; }
+    .d-lg-table-cell {
+      display: table-cell !important; }
+    .d-lg-flex {
+      display: flex !important; }
+    .d-lg-inline-flex {
+      display: inline-flex !important; } }
+
+@media (min-width: 992px) {
+    .dlgnone2 {
+        display: none !important;
+    }
+}
+
+
+  .searchbar2 {
+      position: relative;
+      z-index: 10000;
+      width: 100%;
+      top: 0vh;
+      padding-inline: 10px;
+      padding-top: 15px;
+      box-shadow: rgba(0, 0, 0, 0.2) 3px 3px 3px,
+  }
+
+
+@media (max-width: 992px) {
+  .searchbar2 {
+      position: absolute;
+      z-index: 100;
+      width: 100%;
+      top: 2vh;
+      padding-inline: 10px;
+      padding-top: 15px;
+      box-shadow: rgba(0, 0, 0, 0.2) 3px 3px 3px,
+  }
+}
+
+
+.searchbar1 {
+  width: 100%;
+  box-shadow: rgba(0, 0, 0, 0.2) 3px 3px 3px;
+  border: none;
+  height: 5vh;
+
+}
+
+
+@media (max-width: 992px) {
+.searchbar1 {
+  width: 40vh;
+  box-shadow: rgba(0, 0, 0, 0.2) 3px 3px 3px;
+  border: none;
+  height: 5vh;
+
+}
+}
+
+.draggable {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.draggable .modal-header {
+  cursor: move;
+}
