@@ -1,0 +1,17 @@
+### 1. QR
+GET http://localhost:8081/backend/myPage/qr/{{qrSource}}
+
+### 2. 로그인 유저의 포인트 반환
+GET http://localhost:8081/backend/myPage/myPoint/{{accountNo}}
+
+### 3. 로그인 유저의 기부/수령 전체 목록 반환
+GET http://localhost:8081/backend/myPage/log/{{accountNo}}
+
+### 4. 로그인 유저의 기부 목록 반환
+GET http://localhost:8081/backend/myPage/donate/{{accountNo}}
+
+### 5. 로그인 유저의 수령 목록 반환
+GET http://localhost:8081/backend/myPage/receive/{{accountNo}}
+
+### 6. 로그인 유저의 책 찜 목록 반환(구현 안됨)
+GET http://localhost:8081/backend/myPage/wishList/2
