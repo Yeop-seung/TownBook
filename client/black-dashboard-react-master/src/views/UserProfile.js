@@ -29,7 +29,7 @@ import {
   Form,
   Input,
   Row,
-  Col
+  Col,
 } from "reactstrap";
 
 function UserProfile() {
@@ -40,7 +40,7 @@ function UserProfile() {
           <Col md="8">
             <Card>
               <CardHeader>
-                <h5 className="title">Edit Profile</h5>
+                <h5 className="title">마이페이지</h5>
               </CardHeader>
               <CardBody>
                 <Form>
@@ -75,10 +75,11 @@ function UserProfile() {
                       </FormGroup>
                     </Col>
                   </Row>
+
                   <Row>
                     <Col className="pr-md-1" md="6">
                       <FormGroup>
-                        <label>First Name</label>
+                        <label>성</label>
                         <Input
                           defaultValue="Mike"
                           placeholder="Company"
@@ -86,9 +87,10 @@ function UserProfile() {
                         />
                       </FormGroup>
                     </Col>
+
                     <Col className="pl-md-1" md="6">
                       <FormGroup>
-                        <label>Last Name</label>
+                        <label>이름</label>
                         <Input
                           defaultValue="Andrew"
                           placeholder="Last Name"
@@ -97,10 +99,11 @@ function UserProfile() {
                       </FormGroup>
                     </Col>
                   </Row>
+
                   <Row>
                     <Col md="12">
                       <FormGroup>
-                        <label>Address</label>
+                        <label>주소</label>
                         <Input
                           defaultValue="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
                           placeholder="Home Address"
@@ -109,6 +112,7 @@ function UserProfile() {
                       </FormGroup>
                     </Col>
                   </Row>
+
                   <Row>
                     <Col className="pr-md-1" md="4">
                       <FormGroup>
@@ -120,6 +124,7 @@ function UserProfile() {
                         />
                       </FormGroup>
                     </Col>
+
                     <Col className="px-md-1" md="4">
                       <FormGroup>
                         <label>Country</label>
@@ -130,13 +135,15 @@ function UserProfile() {
                         />
                       </FormGroup>
                     </Col>
+
                     <Col className="pl-md-1" md="4">
                       <FormGroup>
-                        <label>Postal Code</label>
-                        <Input placeholder="ZIP Code" type="number" />
+                        <label>QR 코드</label>
+                        {/* <Input placeholder="QR Code" type="number" /> */}
                       </FormGroup>
                     </Col>
                   </Row>
+
                   <Row>
                     <Col md="8">
                       <FormGroup>
@@ -150,6 +157,25 @@ function UserProfile() {
                           type="textarea"
                         />
                       </FormGroup>
+                    </Col>
+                    <Col md="4">
+                      <Card className="card-user">
+                        <CardBody>
+                          {/* <CardText /> */}
+                          <div className="author">
+                            <a
+                              href="#pablo"
+                              onClick={(e) => e.preventDefault()}
+                            >
+                              <img
+                                alt="..."
+                                className="avatar"
+                                src={require("assets/img/qrcode.png")}
+                              />
+                            </a>
+                          </div>
+                        </CardBody>
+                      </Card>
                     </Col>
                   </Row>
                 </Form>
@@ -174,9 +200,9 @@ function UserProfile() {
                     <img
                       alt="..."
                       className="avatar"
-                      src={require("assets/img/emilyz.jpg")}
-                    />
-                    <h5 className="title">Mike Andrew</h5>
+                      src={require("assets/img/anime3.png")} />
+                      
+                    <h5 className="title">이영재</h5>
                   </a>
                   <p className="description">Ceo/Co-Founder</p>
                 </div>

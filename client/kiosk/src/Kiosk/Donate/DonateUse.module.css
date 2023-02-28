@@ -1,0 +1,177 @@
+.myImg {
+    margin: 0%;
+    height : 100vh;
+    width: 100vw;
+    background-image : url('../img/Gradient.png');
+    background-size : cover;
+    background-position : center;
+    background-repeat : no-repeat;
+    background-attachment: fixed;
+    filter: brightness(100%);
+}
+/* 뒷배경 */
+.circle {
+    width : 8vw;
+    height : 12vh;
+    border-radius: 50%;
+    background-color: rgb(255, 255, 255);
+    position: absolute;
+    left: 24px;
+    top: 24px;
+    border: #ffffff;
+}
+/* 뒤로가기 */
+.homeCircle {
+    width : 8vw;
+    height : 12vh;
+    border-radius: 50%;
+    background-color: rgb(255, 255, 255);
+    position: absolute;
+    right: 24px;
+    bottom: 24px;
+    border: #ffffff;
+}
+.circleMain {
+    width : 5%;
+    height : 5%;
+    border-radius: 50%;
+    background-color: rgb(255, 255, 255, 10%);
+    position: absolute;
+    left: 18.5vw;
+    top: 58.5vh;
+    border: 3px solid #ff0202;
+}
+/* 홈버튼 */
+.iconStyle{
+    font-size: 70px;
+    color: #90C6FE;
+}
+/* 아이콘 스타일*/
+.iconStyleTwo{
+    position: absolute;
+    font-size: 800%;
+    left: 19%;
+    top: 65%;
+    color: #ff0202;
+}
+.buttonOne{
+    display: flex;
+    flex-direction: row;
+    color: #2a2a2a;
+    border-radius: 12px;
+    align-items: center;
+    position: absolute;
+    margin:auto;
+    left: 11vw;
+    top: 16vh;
+    width: 78vw;
+    height: 70vh;
+    text-align: center;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid #ececec;
+    font-weight: 800;
+}
+.buttonTwo{
+    border-radius: 12px;
+}
+.buttonThree{
+    display: flex;
+    flex-direction: row;
+    color: #2a2a2a;
+    border-radius: 12px;
+    align-items: center;
+    position: absolute;
+    margin:auto;
+    left: 10vw;
+    top: 38vh;
+    width: 20vw;
+    height: 10vh;
+    text-align: center;
+    font-size: 120%;
+    justify-content: center;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid #040404;
+    font-weight: 800;
+}
+.buttonFour{
+    display: flex;
+    flex-direction: row;
+    color: #2a2a2a;
+    border-radius: 12px;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    margin:auto;
+    left: 50vw;
+    top: 38vh;
+    width: 20vw;
+    height: 10vh;
+    font-size: 120%;
+    text-align: center;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid #040404;
+    font-weight: 800;
+}
+/* 글씨 쓰는 부분 */
+.h3Align{
+    position: absolute;
+    text-align:start;
+    margin: 0%;
+    font-size: 500%;
+    top: 6vh;
+    left: 9vw;
+}
+.h3AlignOne{
+    position: absolute;
+    text-align: center;
+    margin: 0%;
+    font-size: 80px;
+    top: 6vh;
+    left: 50vw;
+}
+.textAlignOne{
+    position: absolute;
+    text-align: center;
+    font-size: 350%;
+    vertical-align: bottom;
+    top: 20vh;
+    left: 1vw;
+}
+.textAlignTwo{
+    position: absolute;
+    text-align: center;
+    font-size: 350%;
+    vertical-align: bottom;
+    top: 20vh;
+    left: 42vw;
+}
+/* 텍스트 정렬 */
+.arrowRight{
+    position: absolute;
+    justify-self: center;
+    top: 8vh;
+    left: 36vw
+}
+/* 오른쪽 화살표 */ 
+.barcode{
+    position: absolute;
+    background: rgba( 255, 255, 255, 0.5 );
+    border: rgba( 255, 255, 255, 0.5 );
+    color: rgba( 255, 255, 255, 0.5 );
+    left: 43vw;
+    top: 82vh
+}
+.firstImg{
+    position: absolute;
+    height: 60%;
+    width: 30%;
+    top: 20vh;
+    left: 8vw;
+}
+.secondImg{
+    position: absolute;
+    height: 60%;
+    width: 30%;
+    top: 20vh;
+    left: 48vw;
+}

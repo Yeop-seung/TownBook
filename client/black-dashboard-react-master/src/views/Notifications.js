@@ -83,7 +83,7 @@ function Notifications() {
           <Col md="6">
             <Card>
               <CardHeader>
-                <CardTitle tag="h4">Notifications Style</CardTitle>
+                <CardTitle tag="h4">공지사항</CardTitle>
               </CardHeader>
               <CardBody>
                 <Alert color="info">
@@ -113,7 +113,7 @@ function Notifications() {
           <Col md="6">
             <Card>
               <CardHeader>
-                <CardTitle tag="h4">Notification states</CardTitle>
+                <CardTitle tag="h4">알람</CardTitle>
               </CardHeader>
               <CardBody>
                 <UncontrolledAlert color="primary">

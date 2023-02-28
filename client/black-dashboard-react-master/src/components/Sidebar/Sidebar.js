@@ -28,23 +28,25 @@ import PerfectScrollbar from "perfect-scrollbar";
 import { Nav, NavLink as ReactstrapNavLink } from "reactstrap";
 import {
   BackgroundColorContext,
-  backgroundColors
+  backgroundColors,
 } from "contexts/BackgroundColorContext";
 
 var ps;
 
 function Sidebar(props) {
+  
   const location = useLocation();
   const sidebarRef = React.useRef(null);
   // verifies if routeName is the one active (in browser input)
   const activeRoute = (routeName) => {
     return location.pathname === routeName ? "active" : "";
   };
+
   React.useEffect(() => {
     if (navigator.platform.indexOf("Win") > -1) {
       ps = new PerfectScrollbar(sidebarRef.current, {
         suppressScrollX: true,
-        suppressScrollY: false
+        suppressScrollY: false,
       });
     }
     // Specify how to clean up after this effect:
@@ -54,13 +56,17 @@ function Sidebar(props) {
       }
     };
   });
+  
   const linkOnClick = () => {
     document.documentElement.classList.remove("nav-open");
   };
+
   const { routes, rtlActive, logo } = props;
   let logoImg = null;
   let logoText = null;
+
   if (logo !== undefined) {
+    
     if (logo.outterLink !== undefined) {
       logoImg = (
         <a
@@ -73,16 +79,17 @@ function Sidebar(props) {
             <img src={logo.imgSrc} alt="react-logo" />
           </div>
         </a>
-      );
+      ); 
       logoText = (
-        <a
-          href={logo.outterLink}
+        <Link
+          // href={logo.outterLink}
+          to={logo.innerLink}
           className="simple-text logo-normal"
           target="_blank"
           onClick={props.toggleSidebar}
         >
           {logo.text}
-        </a>
+        </Link>
       );
     } else {
       logoImg = (
@@ -91,6 +98,7 @@ function Sidebar(props) {
           className="simple-text logo-mini"
           onClick={props.toggleSidebar}
         >
+        
           <div className="logo-img">
             <img src={logo.imgSrc} alt="react-logo" />
           </div>
@@ -107,6 +115,7 @@ function Sidebar(props) {
       );
     }
   }
+
   return (
     <BackgroundColorContext.Consumer>
       {({ color }) => (
@@ -134,18 +143,22 @@ function Sidebar(props) {
                       activeClassName="active"
                       onClick={props.toggleSidebar}
                     >
+
                       <i className={prop.icon} />
                       <p>{rtlActive ? prop.rtlName : prop.name}</p>
+
                     </NavLink>
                   </li>
                 );
               })}
-              <li className="active-pro">
+              
+              {/* 업그레이드 프로 */}
+              {/* <li className="active-pro">
                 <ReactstrapNavLink href="https://www.creative-tim.com/product/black-dashboard-pro-react?ref=bdr-user-archive-sidebar-upgrade-pro">
                   <i className="tim-icons icon-spaceship" />
                   <p>Upgrade to PRO</p>
                 </ReactstrapNavLink>
-              </li>
+              </li> */}
             </Nav>
           </div>
         </div>
@@ -169,8 +182,8 @@ Sidebar.propTypes = {
     // the text of the logo
     text: PropTypes.node,
     // the image src of the logo
-    imgSrc: PropTypes.string
-  })
+    imgSrc: PropTypes.string,
+  }),
 };
 
 export default Sidebar;

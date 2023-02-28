@@ -1,47 +1,65 @@
-/*!
-
-=========================================================
-* Black Dashboard React v1.2.1
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/black-dashboard-react
-* Copyright 2022 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/black-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+// import { QueryClient, QueryClientProvider } from "react-query";
+// import {ReactQueryDevtools} from "react-query/devtools"
+import Main from "Kiosk/Main";
+import Finish from "Kiosk/Finish";
+import DonateUse from "Kiosk/Donate/DonateUse";
+import MemberSelect from "Kiosk/MemberSelect";
+import DonateConfirm from "Kiosk/Donate/DonateConfirm";
+import DonateConfirmError from "Kiosk/Donate/DonateConfirmError";
+import DonateComplete from "Kiosk/Donate/DonateComplete";
+import DonateThanks from "Kiosk/Member/DonateThanks";
+// import DonateThanksNon from "Kiosk/Non-Member/DonateThankNon";
+// import ReceiptThanks from "Kiosk/Member/ReceiptThanks";
+// import DonateReceipt from "Kiosk/Donate/DonateReceipt";
+// import ReceiptConfirm from "Kiosk/Receipt/ReceiptConfirm";
+// import ReceiptComplete from "Kiosk/Receipt/ReceiptComplete";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+// import 'react-app-polyfill/ie11';
+// import 'react-app-polyfill/stable';
 
-import AdminLayout from "layouts/Admin/Admin.js";
-import RTLLayout from "layouts/RTL/RTL.js";
 
-import "assets/scss/black-dashboard-react.scss";
-import "assets/demo/demo.css";
-import "assets/css/nucleo-icons.css";
-import "@fortawesome/fontawesome-free/css/all.min.css";
-
-import ThemeContextWrapper from "./components/ThemeWrapper/ThemeWrapper";
-import BackgroundColorWrapper from "./components/BackgroundColorWrapper/BackgroundColorWrapper";
+// import KioskAdminLayout from "layouts/Admin/KioskAdmin.js";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
-  <ThemeContextWrapper>
-    <BackgroundColorWrapper>
-      <BrowserRouter>
-        <Switch>
-          <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
-          <Route path="/rtl" render={(props) => <RTLLayout {...props} />} />
-          <Redirect from="/" to="/admin/dashboard" />
-        </Switch>
-      </BrowserRouter>
-    </BackgroundColorWrapper>
-  </ThemeContextWrapper>
+            <BrowserRouter>
+                  <Routes>
+                        <Route path="/" element={ <Main/>} />
+                        <Route path="/finish" element={ <Finish/>} />
+                        <Route path="/MemberSelect" element={ <MemberSelect/>} />
+                        <Route path="/DonateUse" element={ <DonateUse/>} />
+                        <Route path="/DonateConfirm" element={ <DonateConfirm/>} />
+                        <Route path="/DonateConfirmError" element={ <DonateConfirmError/>} />
+                        <Route path="/DonateComplete" element={ <DonateComplete/>} />
+                        <Route path="/DonateThanks" element={ <DonateThanks/>} />
+                        {/* <Route path="/DonateThanksNon" element={ <DonateThanksNon/>} /> */}
+                        {/* <Route path="/ReceiptThanks" element={ <ReceiptThanks/>} /> */}
+                        {/* <Route path="/DonateReceipt" element={ <DonateReceipt/>} /> */}
+                        {/* <Route path="/ReceiptConfirm" element={ <ReceiptConfirm/>} /> */}
+                        {/* <Route path="/ReceiptComplete" element={ <ReceiptComplete/>} /> */}
+                        {/* <Route path="/finish">
+                              <Finish />
+                        </Route> */}
+                  </Routes>
+            </BrowserRouter>
+            
+      // <BrowserRouter>
+      // <DonateReceipt/>
+      /* <Finish /> */      
+            
+            // <DonateUse />
+            // <MemberSelect />
+            // <DonateComplete />
+            // <DonateThanksNon />
+            // <ReceiptThanks /> 
+            // <DonateConfirm />
+            // <DonateConfirmError />
+            // <DonateThanks />
+            // <ReceiptConfirm />
+            // <ReceiptComplete />
+            
+      // </BrowserRouter>
 );

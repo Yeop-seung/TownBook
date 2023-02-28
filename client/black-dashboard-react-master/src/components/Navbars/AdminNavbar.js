@@ -18,10 +18,17 @@
 import React from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import { faHeadset } from "@fortawesome/free-solid-svg-icons";
+// import classes from './black-dashboard-react.css';
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faHeadset,
+  faQrcode,
+  faSearch,
+  faComments,
+  faBullhorn,
+} from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 // reactstrap components
 import {
   Button,
@@ -30,16 +37,14 @@ import {
   DropdownMenu,
   DropdownItem,
   UncontrolledDropdown,
-  Input,
   InputGroup,
-  NavbarBrand,
   Navbar,
   NavLink,
   Nav,
   Container,
   Modal,
   NavbarToggler,
-  ModalHeader
+  ModalHeader,
 } from "reactstrap";
 
 function AdminNavbar(props) {
@@ -74,7 +79,8 @@ function AdminNavbar(props) {
     setcollapseOpen(!collapseOpen);
   };
   // this function is to open the Search modal
-  //Search창 열ㄷ고닥기
+
+  // Search창 열고닫기
   const toggleModalSearch = () => {
     setmodalSearch(!modalSearch);
   };
@@ -85,38 +91,68 @@ function AdminNavbar(props) {
           <div className="navbar-wrapper">
             <div
               className={classNames("navbar-toggle d-inline", {
-                toggled: props.sidebarOpened
+                toggled: props.sidebarOpened,
               })}
             >
               <NavbarToggler onClick={props.toggleSidebar}>
+                {/* 각각 짝대기 */}
                 <span className="navbar-toggler-bar bar1" />
                 <span className="navbar-toggler-bar bar2" />
                 <span className="navbar-toggler-bar bar3" />
               </NavbarToggler>
             </div>
-            <NavbarBrand href="#pablo" onClick={(e) => e.preventDefault()}>
-              {props.brandText}
-            </NavbarBrand>
+
+            {/* 왼쪽 상단 이름 */}
           </div>
+
+          {/* 화면 줄였을때 오른쪽  ... 바 */}
           <NavbarToggler onClick={toggleCollapse}>
             <span className="navbar-toggler-bar navbar-kebab" />
             <span className="navbar-toggler-bar navbar-kebab" />
             <span className="navbar-toggler-bar navbar-kebab" />
           </NavbarToggler>
-          <Collapse navbar isOpen={collapseOpen}>
-            <Nav className="ml-auto" navbar>
 
-              {/* 서치바 아이콘*/}
+          <Collapse navbar isOpen={collapseOpen}>
+            <Nav className="mr-auto" navbar>
+              {/* 로고자리 */}
+              {/* <li>
+              <NavbarBrand href="#pablo" onClick={(e) => e.preventDefault()}>
+                {props.brandText}
+              </NavbarBrand>
+              </li> */}
+              
+              {/* 인풋그룹 왜하는지? */}
+              {/* 도서검색 */}
+              {/* <InputGroup className="search-bar">  */}
+              <li>
+                <Link to="/admin/map" className="{classes.}">
+                  <FontAwesomeIcon icon={faSearch} size="xl" color="white" />
+                </Link>
+              </li>
+
+              {/* </InputGroup> */}
+              <li>
+                <Link to="/admin/icons">
+                  <FontAwesomeIcon icon={faComments} size="xl" color="white" />
+                </Link>
+              </li>
+
+              <li>
+                <Link to="/admin/notifications">
+                  <FontAwesomeIcon icon={faBullhorn} size="xl" color="white" />
+                </Link>
+              </li>
+            </Nav>
+            <Nav className="ml-auto" navbar>
+              {/* QR 아이콘*/}
               <InputGroup className="search-bar">
                 <Button color="link" onClick={toggleModalSearch}>
-                <FontAwesomeIcon icon={faSearch}/>
-                  <span className="d-lg-none d-md-block">Search</span>
+                  <FontAwesomeIcon icon={faQrcode} size="xl" />
+                  <span className="d-lg-none d-md-block">QRcode</span>
                 </Button>
               </InputGroup>
 
-
               <UncontrolledDropdown nav>
-
                 {/* 고객센터 */}
                 <DropdownToggle
                   caret
@@ -127,15 +163,13 @@ function AdminNavbar(props) {
                   <div className="notification d-none d-lg-block d-xl-block" />
                   {/* <i className="tim-icons icon-spaceship" /> */}
                   {/* <FontAwesomeIcon icon={faSearch}/> */}
-                  <FontAwesomeIcon icon={faHeadset} size="lg" />
-                  <p className="d-lg-none">Notifications</p>
+                  <FontAwesomeIcon icon={faHeadset} size="xl" />
+                  <p className="d-lg-none">고객센터</p>
                 </DropdownToggle>
 
                 <DropdownMenu className="dropdown-navbar" right tag="ul">
                   <NavLink tag="li">
-                    <DropdownItem className="nav-item">
-                      고객센터
-                    </DropdownItem>
+                    <DropdownItem className="nav-item">고객센터</DropdownItem>
                   </NavLink>
 
                   {/* <NavLink tag="li">
@@ -161,13 +195,10 @@ function AdminNavbar(props) {
                       Another one
                     </DropdownItem>
                   </NavLink> */}
-
                 </DropdownMenu>
-
               </UncontrolledDropdown>
               <UncontrolledDropdown nav>
-
-                  {/* 프로필이미지 칸 */}
+                {/* 프로필이미지 칸 */}
                 <DropdownToggle
                   caret
                   color="default"
@@ -178,14 +209,14 @@ function AdminNavbar(props) {
                     <img alt="..." src={require("assets/img/anime3.png")} />
                   </div>
                   <b className="caret d-none d-lg-block d-xl-block" />
-                  <p className="d-lg-none">Log out</p>
+                  <p className="d-lg-none">Profile</p>
                 </DropdownToggle>
 
-                  {/* 프로필이미지 누르면 나오는 드랍다운 */}
+                {/* 프로필이미지 누르면 나오는 드랍다운 */}
                 <DropdownMenu className="dropdown-navbar" right tag="ul">
-                  <NavLink tag="li">
+                  <Link to="/admin/user-profile">
                     <DropdownItem className="nav-item">마이페이지</DropdownItem>
-                  </NavLink>
+                  </Link>
                   {/* <NavLink tag="li">
                     <DropdownItem className="nav-item">Settings</DropdownItem>
                   </NavLink> */}
@@ -196,7 +227,6 @@ function AdminNavbar(props) {
                     <DropdownItem className="nav-item">로그아웃</DropdownItem>
                   </NavLink>
                 </DropdownMenu>
-
               </UncontrolledDropdown>
               <li className="separator d-lg-none" />
             </Nav>
@@ -204,16 +234,20 @@ function AdminNavbar(props) {
         </Container>
       </Navbar>
 
-
-
-{/* 서치 모달! */}
+      {/* QR 모달! */}
       <Modal
         modalClassName="modal-search"
         isOpen={modalSearch}
         toggle={toggleModalSearch}
       >
         <ModalHeader>
-          <Input placeholder="검색" type="text" />
+          {/* <Input placeholder="QR이미지" type="text" /> */}
+          <img
+            alt="..."
+            className="avatar"
+            src={require("assets/img/qrcode.png")}
+          />
+
           <button
             aria-label="Close"
             className="close"
