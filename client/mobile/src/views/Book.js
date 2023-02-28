@@ -19,7 +19,6 @@ import React from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // react plugin used to create charts
-import { Line, Bar } from "react-chartjs-2";
 
 // reactstrap components
 import {
@@ -44,12 +43,7 @@ import {
 } from "reactstrap";
 
 // core components
-import {
-  chartExample1,
-  chartExample2,
-  chartExample3,
-  chartExample4
-} from "variables/charts.js";
+
 
 
 
@@ -137,10 +131,6 @@ function Book(props) {
               </CardHeader>
               <CardBody>
                 <div className="chart-area">
-                  <Line
-                    data={chartExample1[bigChartData]}
-                    options={chartExample1.options}
-                  />
                 </div>
               </CardBody>
             </Card>
@@ -157,10 +147,7 @@ function Book(props) {
               </CardHeader>
               <CardBody>
                 <div className="chart-area">
-                  <Line
-                    data={chartExample2.data}
-                    options={chartExample2.options}
-                  />
+                  
                 </div>
               </CardBody>
             </Card>
@@ -176,10 +163,7 @@ function Book(props) {
               </CardHeader>
               <CardBody>
                 <div className="chart-area">
-                  <Bar
-                    data={chartExample3.data}
-                    options={chartExample3.options}
-                  />
+                  
                 </div>
               </CardBody>
             </Card>
@@ -194,10 +178,7 @@ function Book(props) {
               </CardHeader>
               <CardBody>
                 <div className="chart-area">
-                  <Line
-                    data={chartExample4.data}
-                    options={chartExample4.options}
-                  />
+                  
                 </div>
               </CardBody>
             </Card>

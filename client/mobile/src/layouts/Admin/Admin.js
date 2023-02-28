@@ -1,4 +1,5 @@
 import React from "react";
+<<<<<<< HEAD:client/mobile/src/layouts/Admin/Admin.js
 import { Route, Switch, useLocation, Redirect } from "react-router-dom";
 // javascript plugin used to create scrollbars on windows
 import PerfectScrollbar from "perfect-scrollbar";
@@ -66,6 +67,15 @@ function Admin(props) {
   //   document.documentElement.classList.toggle("nav-open");
   //   setsidebarOpened(!sidebarOpened);
   // };
+=======
+import { Route, Switch, Redirect, useLocation } from "react-router-dom";
+
+
+import routes from "routes.js";
+
+function Admin(props) {
+
+>>>>>>> KI:client/black-dashboard-react-master/src/layouts/Admin/Admin.js
   const getRoutes = (routes) => {
     return routes.map((prop, key) => {
       if (prop.layout === "/") {
@@ -85,6 +95,7 @@ function Admin(props) {
       }
     });
   };
+<<<<<<< HEAD:client/mobile/src/layouts/Admin/Admin.js
   const getBrandText = (path) => {
     for (let i = 0; i < routes.length; i++) {
       if (location.pathname.indexOf(routes[i].path) !== -1) {
@@ -93,11 +104,12 @@ function Admin(props) {
     }
     return "Brand";
   };
+=======
+>>>>>>> KI:client/black-dashboard-react-master/src/layouts/Admin/Admin.js
 
   return (
-    <BackgroundColorContext.Consumer>
-      {({ color, changeColor }) => (
         <React.Fragment>
+<<<<<<< HEAD:client/mobile/src/layouts/Admin/Admin.js
           <div className="wrapper">
             {/* 사이드바 상단 로고! */}
             {/* <Sidebar
@@ -121,6 +133,9 @@ function Admin(props) {
                 sidebarOpened={sidebarOpened}
               />
 
+=======
+            
+>>>>>>> KI:client/black-dashboard-react-master/src/layouts/Admin/Admin.js
               <Switch>
                 {getRoutes(routes)}
                 {<Route path='/notice/write' component={NoticeWrite}/>}
@@ -139,6 +154,7 @@ function Admin(props) {
 
                 <Redirect from="*" to="/map" />
               </Switch>
+<<<<<<< HEAD:client/mobile/src/layouts/Admin/Admin.js
               {
                 // we don't want the Footer to be rendered on map page
                 location.pathname === "/map" ? null : <Footer fluid />
@@ -146,10 +162,10 @@ function Admin(props) {
             </div>
           </div>
           {/* <FixedPlugin bgColor={color} handleBgClick={changeColor} /> */}
+=======
+              
+>>>>>>> KI:client/black-dashboard-react-master/src/layouts/Admin/Admin.js
         </React.Fragment>
       )}
-    </BackgroundColorContext.Consumer>
-  );
-}
 
 export default Admin;

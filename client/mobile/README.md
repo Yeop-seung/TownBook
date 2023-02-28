@@ -1,3 +1,4 @@
+<<<<<<< HEAD:client/mobile/README.md
 Ctrl + Shift + F 누르면 전체검색
 
 .main-panel 이 배경
@@ -462,3 +463,6 @@ Dribbble: <https://dribbble.com/creativetim>
 Google+: <https://plus.google.com/+CreativetimPage>
 
 Instagram: <https://instagram.com/creativetimofficial>
+=======
+React 
+>>>>>>> KI:client/black-dashboard-react-master/README.md
