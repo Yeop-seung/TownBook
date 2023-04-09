@@ -1,2 +1,0 @@
-### 1. 전체 랭킹, 내 랭킹 조회
-GET http://localhost:8081/backend/account/ranking/1
