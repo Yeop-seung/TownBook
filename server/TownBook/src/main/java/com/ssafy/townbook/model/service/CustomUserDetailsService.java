@@ -1,7 +1,7 @@
-package com.ssafy.townbook.model.service;
+package hide information.townbook.model.service;
 
-import com.ssafy.townbook.model.entity.Account;
-import com.ssafy.townbook.model.repository.AccountRepository;
+import hide information.townbook.model.entity.Account;
+import hide information.townbook.model.repository.AccountRepository;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;

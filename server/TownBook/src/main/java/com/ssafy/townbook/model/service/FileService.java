@@ -1,7 +1,7 @@
-package com.ssafy.townbook.model.service;
+package hide information.townbook.model.service;
 
-import com.ssafy.townbook.model.dto.request.SaveFileRequestDto;
-import com.ssafy.townbook.model.dto.response.SaveOneResponseDto;
+import hide information.townbook.model.dto.request.SaveFileRequestDto;
+import hide information.townbook.model.dto.response.SaveOneResponseDto;
 import org.springframework.web.multipart.MultipartFile;
 
 public interface FileService {

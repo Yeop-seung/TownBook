@@ -1,4 +1,4 @@
-package com.ssafy.townbook.model.service;
+package hide information.townbook.model.service;
 
 import javax.mail.internet.MimeMessage;
 

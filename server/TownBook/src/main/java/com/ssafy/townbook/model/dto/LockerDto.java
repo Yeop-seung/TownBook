@@ -1,7 +1,7 @@
-package com.ssafy.townbook.model.dto;
+package hide information.townbook.model.dto;
 
-import com.ssafy.townbook.model.entity.DetailLocker;
-import com.ssafy.townbook.model.entity.Locker;
+import hide information.townbook.model.entity.DetailLocker;
+import hide information.townbook.model.entity.Locker;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;

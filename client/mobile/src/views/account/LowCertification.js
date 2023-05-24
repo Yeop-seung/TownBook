@@ -36,7 +36,7 @@ function SignUpComplete(props) {
 
   useEffect(() => {
     axios
-      .get(`https://i8b201.p.ssafy.io/backend/notice/list/2`)
+      .get(`https://도메인/backend/notice/list/2`)
       // .get("https:///townbook/myPage/receive/${receiverNo}")
       .then((res) => {
         const notices = [];

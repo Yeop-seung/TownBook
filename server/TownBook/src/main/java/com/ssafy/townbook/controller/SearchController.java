@@ -1,7 +1,7 @@
-package com.ssafy.townbook.controller;
+package hide information.townbook.controller;
 
-import com.ssafy.townbook.model.dto.response.FindListResponseDto;
-import com.ssafy.townbook.model.service.SearchService;
+import hide information.townbook.model.dto.response.FindListResponseDto;
+import hide information.townbook.model.service.SearchService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

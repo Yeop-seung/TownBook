@@ -42,7 +42,7 @@ function BookItem(props) {
     const bookLogNo = props.bookLogNo;
 
     axios
-      .get(`https://i8b201.p.ssafy.io/backend/myPage/wishList/${accountNo}`)
+      .get(`https://도메인/backend/myPage/wishList/${accountNo}`)
       .then((res) => {
         console.log("찜목록 불러옴", res);
         let found = false;
@@ -97,7 +97,7 @@ function BookItem(props) {
 
   const lockerNo = props.lockerNo;
   axios
-    .get(`https://i8b201.p.ssafy.io/backend/locker/${lockerNo}`)
+    .get(`https://도메인/backend/locker/${lockerNo}`)
     .then((res) => {
       console.log("락커액시오스", res);
       console.log("락커ㅇ위도", res.data.data.lockerLatitude)
@@ -114,7 +114,7 @@ function BookItem(props) {
     const accountNo = localStorage.getItem("accountNo");
     const bookLogNo = props.bookLogNo;
     axios
-      .post("https://i8b201.p.ssafy.io/backend/bookLog/wishList", {
+      .post("https://도메인/backend/bookLog/wishList", {
         accountNo,
         bookLogNo,
       })

@@ -1,17 +1,17 @@
-package com.ssafy.townbook;
+package hide information.townbook;
 
-import com.ssafy.townbook.model.entity.Account;
-import com.ssafy.townbook.model.entity.Authority;
-import com.ssafy.townbook.model.entity.Book;
-import com.ssafy.townbook.model.entity.BookLog;
-import com.ssafy.townbook.model.entity.DetailLocker;
-import com.ssafy.townbook.model.entity.Locker;
-import com.ssafy.townbook.model.entity.Notice;
-import com.ssafy.townbook.model.repository.AccountRepository;
-import com.ssafy.townbook.model.repository.BookLogRepository;
-import com.ssafy.townbook.model.repository.BookRepository;
-import com.ssafy.townbook.model.repository.LockerRepository;
-import com.ssafy.townbook.model.service.BookService;
+import hide information.townbook.model.entity.Account;
+import hide information.townbook.model.entity.Authority;
+import hide information.townbook.model.entity.Book;
+import hide information.townbook.model.entity.BookLog;
+import hide information.townbook.model.entity.DetailLocker;
+import hide information.townbook.model.entity.Locker;
+import hide information.townbook.model.entity.Notice;
+import hide information.townbook.model.repository.AccountRepository;
+import hide information.townbook.model.repository.BookLogRepository;
+import hide information.townbook.model.repository.BookRepository;
+import hide information.townbook.model.repository.LockerRepository;
+import hide information.townbook.model.service.BookService;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -130,9 +130,9 @@ public class InitDb {
             account1.setAccountPoint(99999999);
             em.persist(account1);
             
-            Account account2 = createAccount("test@townbook.com", passwordEncoder.encode("password"), "김싸피",
+            Account account2 = createAccount("test@townbook.com", passwordEncoder.encode("password"), "김이름",
                     "대전시 유성구 덕명동",
-                    "01012345678", 0, "내가 바로 김싸피", "951221", authorityRoleUser);
+                    "01012345678", 0, "내가 바로 김이름", "951221", authorityRoleUser);
             account2.setAccountPoint(1000);
             em.persist(account2);
             

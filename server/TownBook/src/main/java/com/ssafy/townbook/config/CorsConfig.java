@@ -1,4 +1,4 @@
-package com.ssafy.townbook.config;
+package hide information.townbook.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

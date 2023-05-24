@@ -15,7 +15,7 @@ module.exports = function(app){
 
   app.use(
     createProxyMiddleware('/server', {
-      target: 'https://i8b201.p.ssafy.io/backend',
+      target: 'https://도메인/backend',
       pathRewrite: {
         '^/server':''
       },

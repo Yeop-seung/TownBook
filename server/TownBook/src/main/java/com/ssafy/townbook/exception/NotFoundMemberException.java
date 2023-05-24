@@ -1,4 +1,4 @@
-package com.ssafy.townbook.exception;
+package hide information.townbook.exception;
 
 public class NotFoundMemberException extends RuntimeException {
     

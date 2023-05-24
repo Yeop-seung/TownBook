@@ -1,6 +1,6 @@
-package com.ssafy.townbook.model.dto;
+package hide information.townbook.model.dto;
 
-import com.ssafy.townbook.model.entity.Book;
+import hide information.townbook.model.entity.Book;
 import java.time.LocalDate;
 import lombok.Builder;
 import lombok.Getter;

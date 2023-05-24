@@ -1,11 +1,11 @@
-package com.ssafy.townbook.controller;
+package hide information.townbook.controller;
 
-import com.ssafy.townbook.model.dto.request.CreateLockerRequestDto;
-import com.ssafy.townbook.model.dto.request.FindNearLockerRequestDto;
-import com.ssafy.townbook.model.dto.response.FindListResponseDto;
-import com.ssafy.townbook.model.dto.response.FindOneResponseDto;
-import com.ssafy.townbook.model.dto.response.SaveOneResponseDto;
-import com.ssafy.townbook.model.service.LockerService;
+import hide information.townbook.model.dto.request.CreateLockerRequestDto;
+import hide information.townbook.model.dto.request.FindNearLockerRequestDto;
+import hide information.townbook.model.dto.response.FindListResponseDto;
+import hide information.townbook.model.dto.response.FindOneResponseDto;
+import hide information.townbook.model.dto.response.SaveOneResponseDto;
+import hide information.townbook.model.service.LockerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

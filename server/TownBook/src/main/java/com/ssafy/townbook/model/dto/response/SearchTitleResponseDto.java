@@ -1,6 +1,6 @@
-package com.ssafy.townbook.model.dto.response;
+package hide information.townbook.model.dto.response;
 
-import com.ssafy.townbook.model.dto.LockerDto;
+import hide information.townbook.model.dto.LockerDto;
 import lombok.Getter;
 import lombok.Setter;
 

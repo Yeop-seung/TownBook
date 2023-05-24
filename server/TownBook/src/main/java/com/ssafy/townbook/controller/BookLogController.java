@@ -1,11 +1,11 @@
-package com.ssafy.townbook.controller;
+package hide information.townbook.controller;
 
-import com.ssafy.townbook.model.dto.request.DonateBookRequestDto;
-import com.ssafy.townbook.model.dto.request.ReceiveBookRequestDto;
-import com.ssafy.townbook.model.dto.request.ReceiverWishListRequestDto;
-import com.ssafy.townbook.model.dto.response.FindListResponseDto;
-import com.ssafy.townbook.model.dto.response.FindOneResponseDto;
-import com.ssafy.townbook.model.service.BookLogService;
+import hide information.townbook.model.dto.request.DonateBookRequestDto;
+import hide information.townbook.model.dto.request.ReceiveBookRequestDto;
+import hide information.townbook.model.dto.request.ReceiverWishListRequestDto;
+import hide information.townbook.model.dto.response.FindListResponseDto;
+import hide information.townbook.model.dto.response.FindOneResponseDto;
+import hide information.townbook.model.service.BookLogService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

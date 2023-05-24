@@ -127,7 +127,7 @@ function AdminNavbar(props) {
     setmodalSearch(!modalSearch);
     axios
       .get(
-        `https://i8b201.p.ssafy.io/backend/myPage/qr/${localStorage.getItem(
+        `https://도메인/backend/myPage/qr/${localStorage.getItem(
           "accountNo"
         )}`,
         {

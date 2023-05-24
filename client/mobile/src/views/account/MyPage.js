@@ -87,7 +87,7 @@ function MyPage(props) {
     const lockerNo = lockerRegion;
     console.log("라커리전입니다", lockerNo);
     axios
-      .put(`https://i8b201.p.ssafy.io/backend/locker/${lockerNo}`)
+      .put(`https://도메인/backend/locker/${lockerNo}`)
       .then((res) => {
         // console.log("변경", res);
         // if (res.)
@@ -119,7 +119,7 @@ function MyPage(props) {
     console.log(userInfo);
 
     axios
-      .put("https://i8b201.p.ssafy.io/backend/account/modify", userInfo)
+      .put("https://도메인/backend/account/modify", userInfo)
       .then((res) => {
         // console.log("변경", res);
         // if (res.)
@@ -149,7 +149,7 @@ function MyPage(props) {
     const accountPw = enteredPw;
 
     axios
-      .post("https://i8b201.p.ssafy.io/backend/auth/login", {
+      .post("https://도메인/backend/auth/login", {
         accountEmail,
         accountPw,
       })
@@ -170,7 +170,7 @@ function MyPage(props) {
     const accountPw = enteredPw;
 
     axios
-      .put("https://i8b201.p.ssafy.io/backend/account/leave", {
+      .put("https://도메인/backend/account/leave", {
         accountEmail,
         accountPw,
       })
@@ -199,16 +199,16 @@ function MyPage(props) {
     }
 
     Promise.all([
-      axios.get(`https://i8b201.p.ssafy.io/backend/myPage/donate/${accountNo}`),
+      axios.get(`https://도메인/backend/myPage/donate/${accountNo}`),
       axios.get(
-        `https://i8b201.p.ssafy.io/backend/myPage/receive/${accountNo}`
+        `https://도메인/backend/myPage/receive/${accountNo}`
       ),
       axios.get(
-        `https://i8b201.p.ssafy.io/backend/myPage/myPoint/${accountNo}`
+        `https://도메인/backend/myPage/myPoint/${accountNo}`
       ),
-      axios.get(`https://i8b201.p.ssafy.io/backend/admin`),
+      axios.get(`https://도메인/backend/admin`),
       axios.get(
-        `https://i8b201.p.ssafy.io/backend/myPage/wishList/${accountNo}`
+        `https://도메인/backend/myPage/wishList/${accountNo}`
       ),
     ])
       .then(([res1, res2, res3, res4, res5]) => {

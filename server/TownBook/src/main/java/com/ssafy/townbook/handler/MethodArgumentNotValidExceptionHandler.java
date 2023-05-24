@@ -1,8 +1,8 @@
-package com.ssafy.townbook.handler;
+package hide information.townbook.handler;
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 
-import com.ssafy.townbook.model.dto.ErrorDto;
+import hide information.townbook.model.dto.ErrorDto;
 import java.util.List;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;

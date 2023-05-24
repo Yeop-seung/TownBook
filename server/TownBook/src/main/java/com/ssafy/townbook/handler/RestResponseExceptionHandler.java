@@ -1,11 +1,11 @@
-package com.ssafy.townbook.handler;
+package hide information.townbook.handler;
 
 import static org.springframework.http.HttpStatus.CONFLICT;
 import static org.springframework.http.HttpStatus.FORBIDDEN;
 
-import com.ssafy.townbook.exception.DuplicateMemberException;
-import com.ssafy.townbook.exception.NotFoundMemberException;
-import com.ssafy.townbook.model.dto.ErrorDto;
+import hide information.townbook.exception.DuplicateMemberException;
+import hide information.townbook.exception.NotFoundMemberException;
+import hide information.townbook.model.dto.ErrorDto;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

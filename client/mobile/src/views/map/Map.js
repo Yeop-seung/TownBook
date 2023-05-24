@@ -128,7 +128,7 @@ export function Map() {
     // const onUnmount = () => setMap(null);
 
     axios
-      .get(`https://i8b201.p.ssafy.io/backend/locker`)
+      .get(`https://도메인/backend/locker`)
       .then((res) => {
         // console.log("락커들", res);
         const lockers = [];
@@ -186,7 +186,7 @@ export function Map() {
         const userLatitude = lat;
         const userLongitude = lon;
         axios
-          .post("https://i8b201.p.ssafy.io/backend/locker/findNearLocker", {
+          .post("https://도메인/backend/locker/findNearLocker", {
             userLatitude,
             userLongitude,
           })
@@ -398,7 +398,7 @@ export function Map() {
 
     axios
       .get(
-        `https://i8b201.p.ssafy.io/backend/search/searchTitle/${enteredBookTitle}`
+        `https://도메인/backend/search/searchTitle/${enteredBookTitle}`
       )
       .then((res) => {
         console.log("북 res", res);
@@ -421,8 +421,8 @@ export function Map() {
 
   function searchLocker(lockerNo) {
     Promise.all([
-      axios.get(`https://i8b201.p.ssafy.io/backend/book/locker/${lockerNo}`),
-      axios.get(`https://i8b201.p.ssafy.io/backend/locker/${lockerNo}`),
+      axios.get(`https://도메인/backend/book/locker/${lockerNo}`),
+      axios.get(`https://도메인/backend/locker/${lockerNo}`),
     ])
 
       .then(([res, res2]) => {

@@ -1,6 +1,6 @@
-package com.ssafy.townbook.model.service;
+package hide information.townbook.model.service;
 
-import com.ssafy.townbook.model.repository.AccountRepository;
+import hide information.townbook.model.repository.AccountRepository;
 import java.util.Random;
 import javax.mail.Message.RecipientType;
 import javax.mail.internet.InternetAddress;

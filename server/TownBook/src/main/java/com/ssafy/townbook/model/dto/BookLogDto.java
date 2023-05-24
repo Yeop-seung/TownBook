@@ -1,7 +1,7 @@
-package com.ssafy.townbook.model.dto;
+package hide information.townbook.model.dto;
 
-import com.ssafy.townbook.model.entity.BookLog;
-import com.ssafy.townbook.model.entity.WishList;
+import hide information.townbook.model.entity.BookLog;
+import hide information.townbook.model.entity.WishList;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;

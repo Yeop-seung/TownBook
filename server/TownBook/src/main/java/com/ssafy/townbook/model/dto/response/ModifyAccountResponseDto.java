@@ -1,6 +1,6 @@
-package com.ssafy.townbook.model.dto.response;
+package hide information.townbook.model.dto.response;
 
-import com.ssafy.townbook.model.entity.Account;
+import hide information.townbook.model.entity.Account;
 import lombok.*;
 
 import javax.validation.constraints.NotNull;

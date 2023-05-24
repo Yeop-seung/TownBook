@@ -1,11 +1,11 @@
-package com.ssafy.townbook.queryrepository;
+package hide information.townbook.queryrepository;
 
-import static com.ssafy.townbook.model.entity.QBookLog.bookLog;
-import static com.ssafy.townbook.model.entity.QWishList.wishList;
+import static hide information.townbook.model.entity.QBookLog.bookLog;
+import static hide information.townbook.model.entity.QWishList.wishList;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.ssafy.townbook.model.entity.BookLog;
-import com.ssafy.townbook.model.entity.WishList;
+import hide information.townbook.model.entity.BookLog;
+import hide information.townbook.model.entity.WishList;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;

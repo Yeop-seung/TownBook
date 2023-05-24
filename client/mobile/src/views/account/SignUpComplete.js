@@ -34,7 +34,7 @@ function SignUpComplete(props) {
 
   useEffect(() => {
     axios
-      .post(`https://i8b201.p.ssafy.io/backend/file`)
+      .post(`https://도메인/backend/file`)
       // .get("https:///townbook/myPage/receive/${receiverNo}")
       .then((res) => {
        

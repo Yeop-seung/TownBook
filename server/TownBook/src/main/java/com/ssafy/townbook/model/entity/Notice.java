@@ -1,7 +1,7 @@
-package com.ssafy.townbook.model.entity;
+package hide information.townbook.model.entity;
 
-import com.ssafy.townbook.model.dto.request.ModifyNoticeRequestDto;
-import com.ssafy.townbook.model.dto.request.WriteNoticeRequestDto;
+import hide information.townbook.model.dto.request.ModifyNoticeRequestDto;
+import hide information.townbook.model.dto.request.WriteNoticeRequestDto;
 import java.time.LocalDateTime;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

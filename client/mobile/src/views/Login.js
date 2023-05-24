@@ -40,7 +40,7 @@ function Login(props) {
 
     axios
       .post(
-        "https://i8b201.p.ssafy.io/backend/auth/login",
+        "https://도메인/backend/auth/login",
         { accountEmail, accountPw }
         // {
         //   method: "POST",

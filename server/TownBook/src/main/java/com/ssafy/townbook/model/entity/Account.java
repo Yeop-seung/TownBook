@@ -1,4 +1,4 @@
-package com.ssafy.townbook.model.entity;
+package hide information.townbook.model.entity;
 
 
 import java.util.ArrayList;

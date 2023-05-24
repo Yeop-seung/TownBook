@@ -1,13 +1,13 @@
-package com.ssafy.townbook.model.service;
+package hide information.townbook.model.service;
 
-import com.ssafy.townbook.model.dto.NoticeDto;
-import com.ssafy.townbook.model.dto.request.ModifyNoticeRequestDto;
-import com.ssafy.townbook.model.dto.request.WriteNoticeRequestDto;
-import com.ssafy.townbook.model.dto.response.FindListResponseDto;
-import com.ssafy.townbook.model.dto.response.FindOneResponseDto;
-import com.ssafy.townbook.model.dto.response.SaveOneResponseDto;
-import com.ssafy.townbook.model.entity.Notice;
-import com.ssafy.townbook.model.repository.NoticeRepository;
+import hide information.townbook.model.dto.NoticeDto;
+import hide information.townbook.model.dto.request.ModifyNoticeRequestDto;
+import hide information.townbook.model.dto.request.WriteNoticeRequestDto;
+import hide information.townbook.model.dto.response.FindListResponseDto;
+import hide information.townbook.model.dto.response.FindOneResponseDto;
+import hide information.townbook.model.dto.response.SaveOneResponseDto;
+import hide information.townbook.model.entity.Notice;
+import hide information.townbook.model.repository.NoticeRepository;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;

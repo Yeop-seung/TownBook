@@ -1,8 +1,8 @@
-package com.ssafy.townbook.controller;
+package hide information.townbook.controller;
 
-import com.ssafy.townbook.model.dto.request.SaveFileRequestDto;
-import com.ssafy.townbook.model.dto.response.SaveOneResponseDto;
-import com.ssafy.townbook.model.service.FileService;
+import hide information.townbook.model.dto.request.SaveFileRequestDto;
+import hide information.townbook.model.dto.response.SaveOneResponseDto;
+import hide information.townbook.model.service.FileService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;

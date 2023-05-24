@@ -1,4 +1,4 @@
-package com.ssafy.townbook.model.dto.response;
+package hide information.townbook.model.dto.response;
 
 import java.util.List;
 import lombok.Builder;

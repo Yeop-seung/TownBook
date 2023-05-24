@@ -1,4 +1,4 @@
-package com.ssafy.townbook.jwt;
+package hide information.townbook.jwt;
 
 import org.springframework.security.config.annotation.SecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

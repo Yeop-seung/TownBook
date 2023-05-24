@@ -1,4 +1,4 @@
-package com.ssafy.townbook.model.dto.response;
+package hide information.townbook.model.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import lombok.Builder;

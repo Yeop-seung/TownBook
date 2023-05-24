@@ -54,7 +54,7 @@ function IdFind(props) {
 
     axios
       .get(
-        `https://i8b201.p.ssafy.io/backend/account/findEmail/${enteredPhoneNumber}`
+        `https://도메인/backend/account/findEmail/${enteredPhoneNumber}`
       )
       // .get("https:///townbook/myPage/receive/${receiverNo}")
       .then((response) => {
@@ -86,7 +86,7 @@ function IdFind(props) {
 
     axios
       .post(
-        `https://i8b201.p.ssafy.io/backend/account/tempPassword`,
+        `https://도메인/backend/account/tempPassword`,
         userInfo
 
         //replace는 뒤로가기 버튼 비활성 이미 양식 제출했으므로

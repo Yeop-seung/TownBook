@@ -82,7 +82,7 @@ function Notice(props) {
       setadminId(true);
     }
     axios
-      .get(`https://i8b201.p.ssafy.io/backend/notice`)
+      .get(`https://도메인/backend/notice`)
       // .get("https:///townbook/myPage/receive/${receiverNo}")
       .then((res) => {
         const notices = [];

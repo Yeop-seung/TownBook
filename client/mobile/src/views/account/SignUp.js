@@ -94,7 +94,7 @@ function SignUp(props) {
     console.log(email);
     // axios.defaults.headers.post['Content-Type'] = 'application/json';
     axios
-      .post("https://i8b201.p.ssafy.io/backend/account/emailConfirm", email)
+      .post("https://도메인/backend/account/emailConfirm", email)
       .then((response) => {
         console.log(response.data);
         setcertifyNumber(response.data);
@@ -123,7 +123,7 @@ function SignUp(props) {
     // console.log(email);
     // // axios.defaults.headers.post['Content-Type'] = 'application/json';
     // axios
-    //   .post("https://i8b201.p.ssafy.io/backend/account/emailConfirm", email)
+    //   .post("https://도메인/backend/account/emailConfirm", email)
     //   .then((response) => {
     //     console.log(response);
     //     // hidden
@@ -192,7 +192,7 @@ function SignUp(props) {
         alert("비밀번호를 확인해주세요");
       } else {
         axios
-          .post("https://i8b201.p.ssafy.io/backend/account/signup", userInfo)
+          .post("https://도메인/backend/account/signup", userInfo)
           // .get("https:///townbook/myPage/receive/${receiverNo}")
           .then((res) => {
             console.log(res);
@@ -291,7 +291,7 @@ function SignUp(props) {
                         <Label>이메일</Label>
 
                       <Input
-                        placeholder="ssafy@email.com"
+                        placeholder="hide information@email.com"
                         type="email"
                         innerRef={emailInputRef}
                         className={classes.style}

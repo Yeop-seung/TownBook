@@ -218,7 +218,7 @@
 ```markdown
 📁backend
 └──📁src/main
-├──📁java/com/ssafy/d101
+├──📁java/com/hide information/d101
 │ ├──📃Gumid101Application.java
 │ ├──📁achievement
 │ ├──📁aop
@@ -310,5 +310,5 @@
 ## 🏷 License
 
 <p>
-This software is licensed under the MIT <a href="https://www.ssafy.com/ksp/jsp/swp/swpMain.jsp" _blank="new">©SSAFY</a>.
+This software is licensed under the MIT <a href="https://www.hide information.com/ksp/jsp/swp/swpMain.jsp" _blank="new">©hide information</a>.
 </p>

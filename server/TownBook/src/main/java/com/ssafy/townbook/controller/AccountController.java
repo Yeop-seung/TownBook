@@ -1,12 +1,12 @@
-package com.ssafy.townbook.controller;
+package hide information.townbook.controller;
 
 
-import com.ssafy.townbook.model.dto.AccountDto;
-import com.ssafy.townbook.model.dto.request.ModifyAccountRequestDto;
-import com.ssafy.townbook.model.dto.response.FindOneResponseDto;
-import com.ssafy.townbook.model.dto.response.SaveOneResponseDto;
-import com.ssafy.townbook.model.service.AccountService;
-import com.ssafy.townbook.model.service.EmailService;
+import hide information.townbook.model.dto.AccountDto;
+import hide information.townbook.model.dto.request.ModifyAccountRequestDto;
+import hide information.townbook.model.dto.response.FindOneResponseDto;
+import hide information.townbook.model.dto.response.SaveOneResponseDto;
+import hide information.townbook.model.service.AccountService;
+import hide information.townbook.model.service.EmailService;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;

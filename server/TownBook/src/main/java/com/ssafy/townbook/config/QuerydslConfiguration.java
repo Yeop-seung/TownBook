@@ -1,4 +1,4 @@
-package com.ssafy.townbook.config;
+package hide information.townbook.config;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import javax.persistence.EntityManager;

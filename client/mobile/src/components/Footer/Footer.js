@@ -27,12 +27,12 @@ function Footer() {
       <Container fluid>
         <Nav>
           <NavItem>
-            <NavLink href="https://www.ssafy.com/">
+            <NavLink href="https://www.hide information.com/">
               UI TEAM
             </NavLink>
           </NavItem>
           <NavItem>
-            <NavLink href="https://www.ssafy.com/">
+            <NavLink href="https://www.hide information.com/">
               HOMEPAGE
             </NavLink>
           </NavItem>
@@ -40,7 +40,7 @@ function Footer() {
         <div className="copyright">
           © {new Date().getFullYear()} made by{" "}
           <a
-            href="https://www.ssafy.com/"
+            href="https://www.hide information.com/"
             target="_blank"
           >
             UI TEAM

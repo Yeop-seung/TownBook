@@ -30,7 +30,7 @@ function BarcodeReadError(props) {
         let event=window.event || e;
 
         if(event.target.value.length === 13){
-            axios.post(`http://i8b201.p.ssafy.io:8081/backend/book/find`, `isbn=${event.target.value}`
+            axios.post(`http://도메인:8081/backend/book/find`, `isbn=${event.target.value}`
             )
             .then((response) => {
                 const data = {isnavigate: isnavigate, Locker :Locker, User: User, Book: response.data}

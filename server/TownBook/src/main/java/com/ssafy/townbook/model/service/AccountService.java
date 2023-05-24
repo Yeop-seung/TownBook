@@ -1,9 +1,9 @@
-package com.ssafy.townbook.model.service;
+package hide information.townbook.model.service;
 
-import com.ssafy.townbook.model.dto.AccountDto;
-import com.ssafy.townbook.model.dto.request.ModifyAccountRequestDto;
-import com.ssafy.townbook.model.dto.response.FindOneResponseDto;
-import com.ssafy.townbook.model.dto.response.SaveOneResponseDto;
+import hide information.townbook.model.dto.AccountDto;
+import hide information.townbook.model.dto.request.ModifyAccountRequestDto;
+import hide information.townbook.model.dto.response.FindOneResponseDto;
+import hide information.townbook.model.dto.response.SaveOneResponseDto;
 import net.minidev.json.JSONArray;
 
 public interface AccountService {

@@ -1,12 +1,12 @@
-package com.ssafy.townbook.model.service;
+package hide information.townbook.model.service;
 
-import com.ssafy.townbook.model.dto.AdminDto;
-import com.ssafy.townbook.model.dto.response.FindListResponseDto;
-import com.ssafy.townbook.model.dto.response.FindOneResponseDto;
-import com.ssafy.townbook.model.entity.Account;
-import com.ssafy.townbook.model.repository.AccountRepository;
-import com.ssafy.townbook.model.repository.AdminRepository;
-import com.ssafy.townbook.queryrepository.AdminQueryRepository;
+import hide information.townbook.model.dto.AdminDto;
+import hide information.townbook.model.dto.response.FindListResponseDto;
+import hide information.townbook.model.dto.response.FindOneResponseDto;
+import hide information.townbook.model.entity.Account;
+import hide information.townbook.model.repository.AccountRepository;
+import hide information.townbook.model.repository.AdminRepository;
+import hide information.townbook.queryrepository.AdminQueryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

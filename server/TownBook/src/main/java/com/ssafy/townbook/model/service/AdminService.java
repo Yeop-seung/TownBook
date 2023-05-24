@@ -1,7 +1,7 @@
-package com.ssafy.townbook.model.service;
+package hide information.townbook.model.service;
 
-import com.ssafy.townbook.model.dto.response.FindListResponseDto;
-import com.ssafy.townbook.model.dto.response.FindOneResponseDto;
+import hide information.townbook.model.dto.response.FindListResponseDto;
+import hide information.townbook.model.dto.response.FindOneResponseDto;
 
 public interface AdminService {
     

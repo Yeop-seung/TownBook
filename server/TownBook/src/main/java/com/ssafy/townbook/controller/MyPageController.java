@@ -1,10 +1,10 @@
-package com.ssafy.townbook.controller;
+package hide information.townbook.controller;
 
 import com.google.zxing.WriterException;
-import com.ssafy.townbook.model.dto.response.FindListResponseDto;
-import com.ssafy.townbook.model.dto.response.FindOneResponseDto;
-import com.ssafy.townbook.model.service.MyPageService;
-import com.ssafy.townbook.model.service.MyPageServiceImpl;
+import hide information.townbook.model.dto.response.FindListResponseDto;
+import hide information.townbook.model.dto.response.FindOneResponseDto;
+import hide information.townbook.model.service.MyPageService;
+import hide information.townbook.model.service.MyPageServiceImpl;
 import java.io.IOException;
 import net.minidev.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,11 +1,11 @@
-package com.ssafy.townbook.controller;
+package hide information.townbook.controller;
 
-import com.ssafy.townbook.model.dto.request.ModifyNoticeRequestDto;
-import com.ssafy.townbook.model.dto.request.WriteNoticeRequestDto;
-import com.ssafy.townbook.model.dto.response.FindListResponseDto;
-import com.ssafy.townbook.model.dto.response.FindOneResponseDto;
-import com.ssafy.townbook.model.dto.response.SaveOneResponseDto;
-import com.ssafy.townbook.model.service.NoticeService;
+import hide information.townbook.model.dto.request.ModifyNoticeRequestDto;
+import hide information.townbook.model.dto.request.WriteNoticeRequestDto;
+import hide information.townbook.model.dto.response.FindListResponseDto;
+import hide information.townbook.model.dto.response.FindOneResponseDto;
+import hide information.townbook.model.dto.response.SaveOneResponseDto;
+import hide information.townbook.model.service.NoticeService;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

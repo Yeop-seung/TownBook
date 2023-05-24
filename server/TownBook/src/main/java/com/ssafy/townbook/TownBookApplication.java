@@ -1,4 +1,4 @@
-package com.ssafy.townbook;
+package hide information.townbook;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

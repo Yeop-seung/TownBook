@@ -1,6 +1,6 @@
-package com.ssafy.townbook.queryrepository;
+package hide information.townbook.queryrepository;
 
-import static com.ssafy.townbook.model.entity.QAccount.account;
+import static hide information.townbook.model.entity.QAccount.account;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import java.util.Optional;

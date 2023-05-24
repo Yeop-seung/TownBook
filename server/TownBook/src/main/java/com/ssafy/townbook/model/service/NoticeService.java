@@ -1,10 +1,10 @@
-package com.ssafy.townbook.model.service;
+package hide information.townbook.model.service;
 
-import com.ssafy.townbook.model.dto.request.ModifyNoticeRequestDto;
-import com.ssafy.townbook.model.dto.request.WriteNoticeRequestDto;
-import com.ssafy.townbook.model.dto.response.FindListResponseDto;
-import com.ssafy.townbook.model.dto.response.FindOneResponseDto;
-import com.ssafy.townbook.model.dto.response.SaveOneResponseDto;
+import hide information.townbook.model.dto.request.ModifyNoticeRequestDto;
+import hide information.townbook.model.dto.request.WriteNoticeRequestDto;
+import hide information.townbook.model.dto.response.FindListResponseDto;
+import hide information.townbook.model.dto.response.FindOneResponseDto;
+import hide information.townbook.model.dto.response.SaveOneResponseDto;
 
 
 public interface NoticeService {

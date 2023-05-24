@@ -1,4 +1,4 @@
-package com.ssafy.townbook.model.dto;
+package hide information.townbook.model.dto;
 
 import lombok.Builder;
 import lombok.Getter;

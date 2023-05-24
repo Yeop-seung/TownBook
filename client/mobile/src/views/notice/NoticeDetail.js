@@ -26,7 +26,7 @@ function NoticeDetail(props) {
 },[]);
   function deleteHandler(params) {
     axios
-      .put("https://i8b201.p.ssafy.io/backend/notice/remove", userInfo)
+      .put("https://도메인/backend/notice/remove", userInfo)
       // console.log("성공")
       //replace는 뒤로가기 버튼 비활성 이미 양식 제출했으므로
       .then((response) => {

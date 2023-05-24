@@ -52,7 +52,7 @@ console.log(props)
 
     axios
       .put(
-        "https://i8b201.p.ssafy.io/backend/notice/modify",userInfo
+        "https://도메인/backend/notice/modify",userInfo
       )
       // console.log("성공")
         //replace는 뒤로가기 버튼 비활성 이미 양식 제출했으므로

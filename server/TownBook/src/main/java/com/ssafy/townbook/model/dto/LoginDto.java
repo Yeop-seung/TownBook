@@ -1,4 +1,4 @@
-package com.ssafy.townbook.model.dto;
+package hide information.townbook.model.dto;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;

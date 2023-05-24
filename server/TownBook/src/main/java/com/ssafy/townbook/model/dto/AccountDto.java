@@ -1,8 +1,8 @@
-package com.ssafy.townbook.model.dto;
+package hide information.townbook.model.dto;
 
 
-import com.ssafy.townbook.model.entity.Account;
-import com.ssafy.townbook.model.entity.File;
+import hide information.townbook.model.entity.Account;
+import hide information.townbook.model.entity.File;
 import java.util.Set;
 import java.util.stream.Collectors;
 import javax.validation.constraints.NotNull;

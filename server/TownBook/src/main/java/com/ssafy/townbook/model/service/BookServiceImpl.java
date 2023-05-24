@@ -1,13 +1,13 @@
-package com.ssafy.townbook.model.service;
+package hide information.townbook.model.service;
 
-import com.ssafy.townbook.model.dto.BookDto;
-import com.ssafy.townbook.model.dto.response.FindBookByLockerResponseDto;
-import com.ssafy.townbook.model.dto.response.FindListResponseDto;
-import com.ssafy.townbook.model.dto.response.FindOneResponseDto;
-import com.ssafy.townbook.model.entity.Book;
-import com.ssafy.townbook.model.entity.BookLog;
-import com.ssafy.townbook.model.repository.BookRepository;
-import com.ssafy.townbook.queryrepository.BookQueryRepository;
+import hide information.townbook.model.dto.BookDto;
+import hide information.townbook.model.dto.response.FindBookByLockerResponseDto;
+import hide information.townbook.model.dto.response.FindListResponseDto;
+import hide information.townbook.model.dto.response.FindOneResponseDto;
+import hide information.townbook.model.entity.Book;
+import hide information.townbook.model.entity.BookLog;
+import hide information.townbook.model.repository.BookRepository;
+import hide information.townbook.queryrepository.BookQueryRepository;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;

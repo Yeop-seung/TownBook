@@ -1,10 +1,10 @@
-package com.ssafy.townbook.model.service;
+package hide information.townbook.model.service;
 
-import com.ssafy.townbook.model.dto.request.DonateBookRequestDto;
-import com.ssafy.townbook.model.dto.request.ReceiveBookRequestDto;
-import com.ssafy.townbook.model.dto.request.ReceiverWishListRequestDto;
-import com.ssafy.townbook.model.dto.response.FindListResponseDto;
-import com.ssafy.townbook.model.dto.response.FindOneResponseDto;
+import hide information.townbook.model.dto.request.DonateBookRequestDto;
+import hide information.townbook.model.dto.request.ReceiveBookRequestDto;
+import hide information.townbook.model.dto.request.ReceiverWishListRequestDto;
+import hide information.townbook.model.dto.response.FindListResponseDto;
+import hide information.townbook.model.dto.response.FindOneResponseDto;
 
 public interface BookLogService {
     

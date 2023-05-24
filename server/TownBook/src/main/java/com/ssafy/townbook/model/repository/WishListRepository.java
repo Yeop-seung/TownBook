@@ -1,6 +1,6 @@
-package com.ssafy.townbook.model.repository;
+package hide information.townbook.model.repository;
 
-import com.ssafy.townbook.model.entity.WishList;
+import hide information.townbook.model.entity.WishList;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

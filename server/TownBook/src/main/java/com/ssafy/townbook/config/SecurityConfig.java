@@ -1,10 +1,10 @@
-package com.ssafy.townbook.config;
+package hide information.townbook.config;
 
 
-import com.ssafy.townbook.jwt.JwtAccessDeniedHandler;
-import com.ssafy.townbook.jwt.JwtAuthenticationEntryPoint;
-import com.ssafy.townbook.jwt.JwtSecurityConfig;
-import com.ssafy.townbook.jwt.TokenProvider;
+import hide information.townbook.jwt.JwtAccessDeniedHandler;
+import hide information.townbook.jwt.JwtAuthenticationEntryPoint;
+import hide information.townbook.jwt.JwtSecurityConfig;
+import hide information.townbook.jwt.TokenProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;

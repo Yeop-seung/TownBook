@@ -1,4 +1,4 @@
-package com.ssafy.townbook.util;
+package hide information.townbook.util;
 
 import java.util.Optional;
 import org.slf4j.Logger;

@@ -1,9 +1,9 @@
-package com.ssafy.townbook.model.service;
+package hide information.townbook.model.service;
 
-import com.ssafy.townbook.model.dto.request.SaveFileRequestDto;
-import com.ssafy.townbook.model.dto.response.SaveOneResponseDto;
-import com.ssafy.townbook.model.entity.File;
-import com.ssafy.townbook.model.repository.FileRepository;
+import hide information.townbook.model.dto.request.SaveFileRequestDto;
+import hide information.townbook.model.dto.response.SaveOneResponseDto;
+import hide information.townbook.model.entity.File;
+import hide information.townbook.model.repository.FileRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;

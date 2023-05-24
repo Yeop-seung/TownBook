@@ -1,4 +1,4 @@
-package com.ssafy.townbook.config;
+package hide information.townbook.config;
 
 import java.util.Properties;
 import org.springframework.beans.factory.annotation.Value;

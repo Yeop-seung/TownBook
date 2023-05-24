@@ -12,7 +12,7 @@ function WishListItem(props) {
   // const enteredBookTitle =/ props.bookTitle
   // axios
   // .get(
-  //   `https://i8b201.p.ssafy.io/backend/search/searchTitle/${enteredBookTitle}`
+  //   `https://도메인/backend/search/searchTitle/${enteredBookTitle}`
   // )
   // .then((res) => {
   //   console.log("북 res", res);

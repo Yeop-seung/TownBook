@@ -53,7 +53,7 @@ function NoticeWrite(props) {
     // props.onAddInfo(userInfo);
 
     axios
-      .post( "https://i8b201.p.ssafy.io/backend/notice/write" , userInfo)
+      .post( "https://도메인/backend/notice/write" , userInfo)
       // console.log("성공")
         //replace는 뒤로가기 버튼 비활성 이미 양식 제출했으므로
       .then((response) => {

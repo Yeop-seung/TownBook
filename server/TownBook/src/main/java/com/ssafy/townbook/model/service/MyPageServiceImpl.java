@@ -1,18 +1,18 @@
-package com.ssafy.townbook.model.service;
+package hide information.townbook.model.service;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
-import com.ssafy.townbook.model.dto.response.FindListResponseDto;
-import com.ssafy.townbook.model.dto.response.FindOneResponseDto;
-import com.ssafy.townbook.model.entity.Book;
-import com.ssafy.townbook.model.entity.BookLog;
-import com.ssafy.townbook.model.entity.WishList;
-import com.ssafy.townbook.model.repository.AccountRepository;
-import com.ssafy.townbook.model.repository.BookRepository;
-import com.ssafy.townbook.queryrepository.MyPageQueryRepository;
+import hide information.townbook.model.dto.response.FindListResponseDto;
+import hide information.townbook.model.dto.response.FindOneResponseDto;
+import hide information.townbook.model.entity.Book;
+import hide information.townbook.model.entity.BookLog;
+import hide information.townbook.model.entity.WishList;
+import hide information.townbook.model.repository.AccountRepository;
+import hide information.townbook.model.repository.BookRepository;
+import hide information.townbook.queryrepository.MyPageQueryRepository;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Optional;
